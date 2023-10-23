@@ -1,0 +1,64 @@
+nodes:
+  category: AC-Node
+  top:
+    conn: []
+  par:
+    Ur: 0
+  lf:
+    res:
+      U:
+        1: 0
+        2: 0
+        3: 0
+        N: 0
+        A: 0
+
+AC-Load:
+  category: AC-LOad
+  top:
+    conn: None
+  par:
+    kw:
+      1: 0
+      2: 0
+      3: 0
+      N: 0
+      A: 0
+
+
+AC-Line:
+  category: AC-Line
+  top:
+    conn: []
+    length: 50.00000074505806
+    lines: 1
+  par:
+    B0: 0.0
+    B1: 0.0
+    Irmax: 409.0000092983246
+    R0: 0.019999999552965164
+    R1: 0.019999999552965164
+    Ur: 1.0
+    X0: 0.019999999552965164
+    X1: 0.019999999552965164
+    sez: 0.0
+  results:
+      I:
+        1: 0
+        2: 0
+        3: 0
+        N: 0
+        A: 0
+      U_0:
+        1: 0
+        2: 0
+        3: 0
+        N: 0
+        A: 0
+      U_1:
+        1: 0
+        2: 0
+        3: 0
+        N: 0
+        A: 0
+

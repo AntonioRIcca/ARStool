@@ -1,0 +1,2004 @@
+ev-charge_ac-load:
+  category: AC-Load
+  lf:
+    i: 58.5671777791568
+    p: 39.99999997144915
+    q: -3.869536868705836e-08
+    v: 394.31660576480505
+  par:
+    P: 40.0
+    Q: 0.0
+    Vn: 0.4
+    f: 1.0
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - ev-charge_bb
+ev-charge_bb:
+  category: Node
+  lf:
+    V: 394.94079567768114
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.6
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ev-charge_line
+    - ev-charge_ac-load
+ev-charge_line:
+  category: AC-Line
+  lf:
+    i:
+      0: 58.56717773853357
+      1: 58.56717773853357
+    p:
+      0: 40.063285552703974
+      1: 39.99999994370367
+    q:
+      0: 0.05145171354276136
+      1: -1.0916299402197182e-09
+    v:
+      0: 394.94079567768114
+      1: 394.31660576480505
+  par:
+    C0: 0.0
+    C1: 0.0
+    In: 400.0
+    R0: 0.369
+    R1: 0.123
+    Vn: 0.6
+    X0: 0.3
+    X1: 0.1
+    length: 0.05
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - rs_bb_04kv
+    - ev-charge_bb
+ev-fast-load_node:
+  category: Node
+  lf:
+    V: 592.4111533329487
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.4
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ev-fast_dc-dc-conv
+    - ev-fast_dc-load
+ev-fast_bb:
+  category: Node
+  lf:
+    V: 394.94079567768114
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.4
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ev-fast_pwm
+    - ev-fast_bess
+    - ev-fast_pv
+    - ev-fast_dc-dc-conv
+ev-fast_bess:
+  category: BESS
+  lf:
+    i: 16.880168337234988
+    p: -9.999999993115743
+    q: 9.476264011709645e-09
+    v: 592.4111533329487
+  par:
+    P: 10.0
+    Vn: 0.6
+    cap: 100
+    eff: 1
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ev-fast_bb
+ev-fast_dc-dc-conv:
+  category: DC-DC-Converter
+  lf:
+    i:
+      0: 84.40179812947534
+      1: 126.60519317533875
+    p:
+      0: 49.99963012100778
+      1: 50.00156770076386
+    q:
+      0: -0.003944392078968235
+      1: 0.0011277938665179477
+    v:
+      0: 592.4111533329487
+      1: 394.94080924665366
+  par:
+    Sr: 300.0
+    Vn0: 0.4
+    Vn1: 0.4
+    XHL: 1.0e-09
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ev-fast_bb
+    - ev-fast-load_node
+ev-fast_dc-load:
+  category: DC-Load
+  lf:
+    i: 126.60124959219365
+    p: 49.99999996557872
+    q: -4.7381319632222584e-08
+    v: 394.94080924665366
+  par:
+    P: 50.0
+    Vn: 0.4
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - ev-fast-load_node
+ev-fast_pv:
+  category: PV
+  lf:
+    i: 50.640505011704974
+    p: -29.99999997934723
+    q: 2.8428792290924324e-08
+    v: 592.4111533329487
+  par:
+    P: 30.0
+    Vn: 0.6
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ev-fast_bb
+ev-fast_pwm:
+  category: PWM
+  lf:
+    i:
+      0: 14.642084038824528
+      1: 16.877088629425064
+    p:
+      0: 10.011111336733821
+      1: 10.000679717301724
+    q:
+      0: 0.004665345763266529
+      1: -0.019032188763014248
+    v:
+      0: 394.94079567768114
+      1: 592.4111533329487
+  par:
+    Sr: 2000.0
+    Vn0: 0.6
+    Vn1: 0.6
+    XHL: 1.0e-09
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - rs_bb_04kv
+    - ev-fast_bb
+pros_1_ac-load:
+  category: AC-Load
+  lf:
+    i: 249.09656067395386
+    p: 149.9999911182356
+    q: 72.64828817088792
+    v: 386.296113663779
+  par:
+    P: 150.0
+    Q: 72.64831572567788
+    Vn: 0.4
+    f: 0.9
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - pros_bb
+pros_bb:
+  category: Node
+  lf:
+    V: 389.94431771205564
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.4
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - pros_line
+    - pros_1_ac-load
+    - pros_bess_pwm
+    - pros_pv_pwm
+pros_bb_dc1:
+  category: Node
+  lf:
+    V: 386.296113663779
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.6
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - pros_bess_pwm
+    - pros_bess
+    - pros_dc-micro-wind
+pros_bb_dc2:
+  category: Node
+  lf:
+    V: 386.296113663779
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.6
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - pros_pv_pwm
+    - pros_pv
+    - pros_dc-load
+pros_bess:
+  category: BESS
+  lf:
+    i: 86.28957984095041
+    p: 49.99999399866728
+    q: -6.2783518905007435e-06
+    v: 579.4441703253639
+  par:
+    P: -50.0
+    Vn: 0.6
+    cap: 100
+    eff: 1
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - pros_bb_dc1
+pros_bess_pwm:
+  category: PWM
+  lf:
+    i:
+      0: 59.78956644266298
+      1: 69.03326514442712
+    p:
+      0: 40.00305749725831
+      1: 40.003662149185885
+    q:
+      0: -0.006490111520890822
+      1: -0.006134939669880622
+    v:
+      0: 386.296113663779
+      1: 579.4441703253639
+  par:
+    Sr: 400.0
+    Vn0: 0.6
+    Vn1: 0.6
+    XHL: 1.0e-09
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - pros_bb
+    - pros_bb_dc1
+pros_dc-load:
+  category: DC-Load
+  lf:
+    i: 51.77374790457025
+    p: 29.999996399200363
+    q: -3.7670111317993364e-06
+    v: 579.4441703253638
+  par:
+    P: 30.0
+    Vn: 0.6
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - pros_bb_dc2
+pros_dc-micro-wind:
+  category: DC-Wind
+  lf:
+    i: 17.25791596819008
+    p: -9.999998799733456
+    q: 1.255670378469631e-06
+    v: 579.4441703253639
+  par:
+    P: 10.0
+    Vn: 0.6
+    eff: 1
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - pros_bb_dc1
+pros_line:
+  category: AC-Line
+  lf:
+    i:
+      0: 276.30705907365785
+      1: 276.30705907365785
+    p:
+      0: 171.40853622362994
+      1: 169.99996007155062
+    q:
+      0: 73.79471511011799
+      1: 72.64953124663887
+    v:
+      0: 389.94431771205564
+      1: 386.296113663779
+  par:
+    C0: 0.0
+    C1: 0.0
+    In: 400.0
+    R0: 0.369
+    R1: 0.123
+    Vn: 0.4
+    X0: 0.3
+    X1: 0.1
+    length: 0.05
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - res_bb
+    - pros_bb
+pros_pv:
+  category: PV
+  lf:
+    i: 86.28957984095041
+    p: -49.99999399866728
+    q: 6.278351887885946e-06
+    v: 579.4441703253638
+  par:
+    P: 50.0
+    Vn: 0.6
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - pros_bb_dc2
+pros_pv_pwm:
+  category: PWM
+  lf:
+    i:
+      0: 29.8849542226787
+      1: 34.514345775676354
+    p:
+      0: -19.997289807503712
+      1: -19.996856203426763
+    q:
+      0: -0.002533308529877985
+      1: -0.0005372001245895888
+    v:
+      0: 386.296113663779
+      1: 579.4441703253638
+  par:
+    Sr: 400.0
+    Vn0: 0.4
+    Vn1: 0.6
+    XHL: 1.0e-09
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - pros_bb
+    - pros_bb_dc2
+res-wpg_bb:
+  category: Node
+  lf:
+    V: 19997.733752486594
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 2.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - res-wpg_line
+    - res_tr
+res-wpg_line:
+  category: AC-Line
+  lf:
+    i:
+      0: 11.543570048177807
+      1: 12.380319248036454
+    p:
+      0: 378.65354770488693
+      1: 378.51366227532594
+    q:
+      0: 128.4136514641101
+      1: 201.1590286780888
+    v:
+      0: 19997.733752486594
+      1: 19989.709651961784
+  par:
+    C0: 241.66667474615676
+    C1: 241.66667474615676
+    In: 400.0
+    R0: 0.805
+    R1: 0.164
+    Vn: 2.0
+    X0: 0.11
+    X1: 0.11
+    length: 2.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - sourcebus
+    - res-wpg_bb
+res_bb:
+  category: Node
+  lf:
+    V: 19989.709651961784
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.4
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - res_tr
+    - user_line
+    - pros_line
+res_tr:
+  category: 2W-Transformer
+  lf:
+    i:
+      0: 12.38031924803177
+      1: 612.9180731367048
+    p:
+      0: 378.5136622752427
+      1: 375.594191146271
+    q:
+      0: 201.15902867801367
+      1: 174.06212879149572
+    v:
+      0: 19989.709651961784
+      1: 389.94431771205564
+  par:
+    Sr: 630.0
+    Vn0: 0.4
+    Vn1: 0.4
+    XHL: 6.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - res-wpg_bb
+    - res_bb
+rs_1_ac-load:
+  category: AC-Load
+  lf:
+    i: 64.97179381605291
+    p: 39.99999999082124
+    q: 19.372884142272255
+    v: 394.94079567768114
+  par:
+    P: 40.0
+    Q: 19.372884193514103
+    Vn: 0.4
+    f: 0.9
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - rs_bb_04kv
+rs_2_ac-load:
+  category: AC-Load
+  lf:
+    i: 97.45769072407934
+    p: 59.99999998623184
+    q: 29.059326213408376
+    v: 394.94079567768114
+  par:
+    P: 60.0
+    Q: 29.05932629027115
+    Vn: 0.4
+    f: 0.9
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - rs_bb_04kv
+rs_bb_04kv:
+  category: Node
+  lf:
+    V: 19993.958125942838
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.6
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - rs_tr
+    - rs_1_ac-load
+    - rs_2_ac-load
+    - ev-charge_line
+    - ev-fast_pwm
+rs_bb_20kv:
+  category: Node
+  lf:
+    V: 19997.733752486594
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 2.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - rs_line
+    - rs_tr
+rs_line:
+  category: AC-Line
+  lf:
+    i:
+      0: 4.590720025077751
+      1: 4.670309514552979
+    p:
+      0: 150.74561082395448
+      1: 150.71763340134981
+    q:
+      0: -50.59196505972731
+      1: 58.67128816873211
+    v:
+      0: 19997.733752486594
+      1: 19993.958125942838
+  par:
+    C0: 241.66667474615676
+    C1: 241.66667474615676
+    In: 400.0
+    R0: 0.805
+    R1: 0.164
+    Vn: 2.0
+    X0: 0.11
+    X1: 0.11
+    length: 3.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - sourcebus
+    - rs_bb_20kv
+rs_tr:
+  category: 2W-Transformer
+  lf:
+    i:
+      0: 4.670309514553728
+      1: 230.54890581394875
+    p:
+      0: 150.7176334012682
+      1: 150.06328537781303
+    q:
+      0: 58.671288168742834
+      1: 48.50574252185738
+    v:
+      0: 19993.958125942838
+      1: 394.94079567768114
+  par:
+    Sr: 400.0
+    Vn0: 0.4
+    Vn1: 0.4
+    XHL: 6.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - rs_bb_20kv
+    - rs_bb_04kv
+source:
+  category: ExternalGrid
+  lf:
+    i: 25.82070804279072
+    p: -894.2998961474703
+    q: -9.804574787531907
+    v: 19997.733752486594
+  par:
+    Vn: 20.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - sourcebus
+    - sourcebus.0.0.0
+sourcebus:
+  category: Node
+  lf:
+    V: 19997.733752486594
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 2.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - source
+    - ug_line
+    - rs_line
+    - res-wpg_line
+    - wpg_tr
+ug_1_tr:
+  category: 2W-Transformer
+  lf:
+    i:
+      0: 8.786694925523411
+      1: 85.84259253880873
+    p:
+      0: 291.0978474998949
+      1: 290.66703852217984
+    q:
+      0: 87.95990192786185
+      1: 55.47160976827635
+    v:
+      0: 19981.393035850306
+      1: 1990.2168636842607
+  par:
+    Sr: 2000.0
+    Vn0: 2.0
+    Vn1: 2.0
+    XHL: 6.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ug_bb_20kv
+    - ug_bb_2kv
+ug_2_tr:
+  category: 2W-Transformer
+  lf:
+    i:
+      0: 8.786694925523411
+      1: 85.84259253880873
+    p:
+      0: 291.0978474998949
+      1: 290.66703852217984
+    q:
+      0: 87.95990192786185
+      1: 55.47160976827635
+    v:
+      0: 19981.393035850306
+      1: 1990.2168636842607
+  par:
+    Sr: 2000.0
+    Vn0: 2.0
+    Vn1: 2.0
+    XHL: 6.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ug_bb_20kv
+    - ug_bb_2kv
+ug_bb_20kv:
+  category: Node
+  lf:
+    V: 19997.733752486594
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 2.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ug_line
+    - ug_1_tr
+    - ug_2_tr
+ug_bb_2kv:
+  category: Node
+  lf:
+    V: 19981.393035850306
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 1.5
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ug_1_tr
+    - ug_2_tr
+    - ug_serv_tr
+    - ug_pwm
+    - ugs_pwm
+ug_bb_lvdc:
+  category: Node
+  lf:
+    V: 1990.2168636842607
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 1.5
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ug_pwm
+    - ug_dc-load
+ug_dc-load:
+  category: DC-Load
+  lf:
+    i: 133.9887482163834
+    p: 199.9999997375793
+    q: -3.12251440846012e-07
+    v: 1492.6626481694639
+  par:
+    P: 200.0
+    Vn: 1.5
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - ug_bb_lvdc
+ug_line:
+  category: AC-Line
+  lf:
+    i:
+      0: 16.931880561853077
+      1: 17.573389851042215
+    p:
+      0: 582.631531405907
+      1: 582.195694999789
+    q:
+      0: 66.99875781154017
+      1: 175.91980385581292
+    v:
+      0: 19997.733752486594
+      1: 19981.393035850306
+  par:
+    C0: 241.66667474615676
+    C1: 241.66667474615676
+    In: 400.0
+    R0: 0.805
+    R1: 0.164
+    Vn: 2.0
+    X0: 0.11
+    X1: 0.11
+    length: 3.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - sourcebus
+    - ug_bb_20kv
+ug_pwm:
+  category: PWM
+  lf:
+    i:
+      0: 58.01953258603009
+      1: 133.99061550187767
+    p:
+      0: 200.00273842154394
+      1: 200.00031130403426
+    q:
+      0: 0.002195601278250024
+      1: -1.648791450270439e-05
+    v:
+      0: 1990.2168636842607
+      1: 1492.6626481694639
+  par:
+    Sr: 800.0
+    Vn0: 1.5
+    Vn1: 1.5
+    XHL: 1.0e-09
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ug_bb_2kv
+    - ug_bb_lvdc
+ug_serv1_ac-load:
+  category: AC-Load
+  lf:
+    i: 131.76303903471435
+    p: 79.99999976329745
+    q: 38.74576737042243
+    v: 389.4872486631952
+  par:
+    P: 80.0
+    Q: 38.74576838702821
+    Vn: 0.4
+    f: 0.9
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - ug_serv_bb
+ug_serv2_ac-load:
+  category: AC-Load
+  lf:
+    i: 197.64455855207152
+    p: 119.9999996449462
+    q: 58.118651055633634
+    v: 389.4872486631952
+  par:
+    P: 120.0
+    Q: 58.1186525805423
+    Vn: 0.4
+    f: 0.9
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - ug_serv_bb
+ug_serv_bb:
+  category: Node
+  lf:
+    V: 1990.2168636842607
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.4
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ug_serv_tr
+    - ug_serv1_ac-load
+    - ug_serv2_ac-load
+ug_serv_tr:
+  category: 2W-Transformer
+  lf:
+    i:
+      0: 66.68537150706433
+      1: 329.407595281298
+    p:
+      0: 201.33407806207538
+      1: 199.99999716974855
+    q:
+      0: 110.93723916246594
+      1: 96.86441947984895
+    v:
+      0: 1990.2168636842607
+      1: 389.4872486631952
+  par:
+    Sr: 400.0
+    Vn0: 1.5
+    Vn1: 0.4
+    XHL: 6.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ug_bb_2kv
+    - ug_serv_bb
+ugs_1_pv:
+  category: PV
+  lf:
+    i: 20.09831223284386
+    p: -14.999999980318446
+    q: 2.3418859143475858e-08
+    v: 746.3313240703906
+  par:
+    P: 15.0
+    Vn: 0.75
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ugs_pv_bb
+ugs_2_pv:
+  category: PV
+  lf:
+    i: 20.09831223284386
+    p: -14.999999980318446
+    q: 2.3418859143475858e-08
+    v: 746.3313240703906
+  par:
+    P: 15.0
+    Vn: 0.75
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ugs_pv_bb
+ugs_bb:
+  category: Node
+  lf:
+    V: 1990.2168636842607
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.75
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ugs_pwm
+    - ugs_dc-load
+    - ugs_bess
+    - ugs_dc-dc-conv
+ugs_bess:
+  category: BESS
+  lf:
+    i: 6.699437410819169
+    p: 9.999999986878965
+    q: -1.5612571573342392e-08
+    v: 1492.6626481694639
+  par:
+    P: -10.0
+    Vn: 1.5
+    cap: 100
+    eff: 1
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ugs_bb
+ugs_dc-dc-conv:
+  category: DC-DC-Converter
+  lf:
+    i:
+      0: 20.09857472025397
+      1: 40.19661375059022
+    p:
+      0: -30.000172607295397
+      1: -29.999738960163242
+    q:
+      0: -0.0009693782616401307
+      1: -0.0001810455408864584
+    v:
+      0: 1492.6626481694639
+      1: 746.3313240703906
+  par:
+    Sr: 50.0
+    Vn0: 0.75
+    Vn1: 0.75
+    XHL: 1.0e-09
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ugs_bb
+    - ugs_pv_bb
+ugs_dc-load:
+  category: DC-Load
+  lf:
+    i: 133.9887482163834
+    p: 199.9999997375793
+    q: -3.1225143618485163e-07
+    v: 1492.6626481694639
+  par:
+    P: 200.0
+    Vn: 1.5
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - ugs_bb
+ugs_pv_bb:
+  category: Node
+  lf:
+    V: 1492.6626481694639
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.75
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ugs_dc-dc-conv
+    - ugs_1_pv
+    - ugs_2_pv
+ugs_pwm:
+  category: PWM
+  lf:
+    i:
+      0: 52.217099609981354
+      1: 120.59312892337718
+    p:
+      0: 179.99618843021835
+      1: 179.99952944038915
+    q:
+      0: 0.008709925587588601
+      1: 0.0056639328460667
+    v:
+      0: 1990.2168636842607
+      1: 1492.6626481694639
+  par:
+    Sr: 800.0
+    Vn0: 1.5
+    Vn1: 1.5
+    XHL: 1.0e-09
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ug_bb_2kv
+    - ugs_bb
+user_ac-load:
+  category: AC-Load
+  lf:
+    i: 336.8002923710998
+    p: 199.999973826908
+    q: 96.86437402284521
+    v: 380.9380137486715
+  par:
+    P: 200.0
+    Q: 96.86442096757051
+    Vn: 0.4
+    f: 0.9
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - user_bb
+user_bb:
+  category: Node
+  lf:
+    V: 389.94431771205564
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.4
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - user_line
+    - user_ac-load
+user_line:
+  category: AC-Line
+  lf:
+    i:
+      0: 336.8002318636127
+      1: 336.8002318636127
+    p:
+      0: 204.18565492264094
+      1: 199.99992570333418
+    q:
+      0: 100.26741368137344
+      1: 96.8643817957582
+    v:
+      0: 389.94431771205564
+      1: 380.9380137486715
+  par:
+    C0: 0.0
+    C1: 0.0
+    In: 400.0
+    R0: 0.369
+    R1: 0.123
+    Vn: 0.4
+    X0: 0.3
+    X1: 0.1
+    length: 0.1
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - res_bb
+    - user_bb
+wpg_1_wind:
+  category: AC-Wind
+  lf:
+    i: 47.412482107271
+    p: -139.99999995155304
+    q: -90.43106624647416
+    v: 2029.5297884338438
+  par:
+    P: 140.0
+    Q: 90.43106644167025
+    Vn: 2.0
+    eff: 1
+    f: 0.84
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - wpg_bb2
+wpg_2_wind:
+  category: AC-Wind
+  lf:
+    i: 45.7775689311582
+    p: -139.9999999423924
+    q: -79.3416561357975
+    v: 2029.5297884338438
+  par:
+    P: 140.0
+    Q: 79.34165632123894
+    Vn: 2.0
+    eff: 1
+    f: 0.87
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - wpg_bb2
+wpg_bb1:
+  category: Node
+  lf:
+    V: 19997.733752486594
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.6
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - wpg_tr
+    - wpg_line
+    - wpg_pwm
+wpg_bb2:
+  category: Node
+  lf:
+    V: 2009.9351060345298
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.6
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - wpg_line
+    - wpg_1_wind
+    - wpg_2_wind
+wpg_bess:
+  category: BESS
+  lf:
+    i: 165.84283344075573
+    p: 99.99999993202715
+    q: -7.320556042600402e-08
+    v: 602.9805319730636
+  par:
+    P: -100.0
+    Vn: 0.6
+    cap: 100
+    eff: 1
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - wpg_pv_bb
+wpg_line:
+  category: AC-Line
+  lf:
+    i:
+      0: 93.20591483755693
+      1: 93.1509885404765
+    p:
+      0: -278.0360710856216
+      1: -279.999999495904
+    q:
+      0: -167.27923488990925
+      1: -169.7727224666758
+    v:
+      0: 2009.9351060345298
+      1: 2029.5297884338438
+  par:
+    C0: 0.0
+    C1: 241.66667474615676
+    In: 400.0
+    R0: 0.2262
+    R1: 0.0754
+    Vn: 0.6
+    X0: 0.33
+    X1: 0.11
+    length: 1.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - wpg_bb1
+    - wpg_bb2
+wpg_pv:
+  category: PV
+  lf:
+    i: 66.33713337630229
+    p: -39.99999997281087
+    q: 2.9282222172355434e-08
+    v: 602.9805319730636
+  par:
+    P: 40.0
+    Vn: 0.6
+    profile:
+      curve: null
+      name: null
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - wpg_pv_bb
+wpg_pv_bb:
+  category: Node
+  lf:
+    V: 2009.9351060345298
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn: 0.6
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - wpg_pwm
+    - wpg_bess
+    - wpg_pv
+wpg_pwm:
+  category: PWM
+  lf:
+    i:
+      0: 17.23475115991817
+      1: 99.50346966545371
+    p:
+      0: 60.00012889142063
+      1: 59.9989303048458
+    q:
+      0: -0.007560394088052093
+      1: -0.002605152592445478
+    v:
+      0: 2009.9351060345298
+      1: 602.9805319730636
+  par:
+    Sr: 2000.0
+    Vn0: 0.6
+    Vn1: 0.6
+    XHL: 1.0e-08
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - wpg_bb1
+    - wpg_pv_bb
+wpg_tr:
+  category: 2W-Transformer
+  lf:
+    i:
+      0: 7.396556676278872
+      1: 78.94064396020958
+    p:
+      0: -217.730793786552
+      1: -218.03607112635484
+    q:
+      0: -135.01586942899286
+      1: -167.28587060641436
+    v:
+      0: 19997.733752486594
+      1: 2009.9351060345298
+  par:
+    Sr: 2000.0
+    Vn0: 2.0
+    Vn1: 2.0
+    XHL: 6.0
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - sourcebus
+    - wpg_bb1

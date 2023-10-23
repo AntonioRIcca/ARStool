@@ -1,0 +1,26 @@
+clear
+New Circuit.wang ! Creates voltage source (Vsource.Source)
+! the load power (node 8) vary following the variation of initial votage
+Edit Vsource.Source BasekV=11 pu=1  Bus1=b1.1.2.3
+
+New Linecode.UG rmatrix="0.000001 | 0.000001 0.000001 | 0.000001 0.000001 0.000001" Units=km
+New Linecode.Racoon rmatrix="0.000001 | 0.000001 0.000001 | 0.000001 0.000001 0.000001" Units=km
+New Linecode.Moon rmatrix="0.000001 | 0.000001 0.000001 | 0.000001 0.000001 0.000001" Units=km
+New Linecode.Tr rmatrix="0.000001 | 0.000001 0.000001 | 0.000001 0.000001 0.000001" Unit=km
+
+New Line.line12 Bus1=b1.1.2.3 Bus2=b2.1.2.3 Linecode=UG Length=0.15 Units=km
+New Line.line23 Bus1=b2.1.2.3 Bus2=b3.1.2.3 Linecode=Racoon Length=2.62 Units=km
+New Line.line34 Bus1=b3.1.2.3 Bus2=b4.1.2.3 Linecode=Moon Length=1.68 Units=km
+New Line.line45 Bus1=b4.1.2.3 Bus2=b5.1.2.3 Linecode=Tr Length=1 Units=km
+New Line.line56 Bus1=b5.1.2.3 Bus2=b6.1.2.3 Linecode=Moon Length=1 Units=km
+New Line.line67 Bus1=b6.1.2.3 Bus2=b7.1.2.3 Linecode=Moon Length=1.2 Units=km
+New Line.line78 Bus1=b7.1.2.3 Bus2=b8.1.2.3 Linecode=Moon Length=0.8 Units=km
+
+//New Load.load3 Bus1=b3 kV=11 kW=700 PF=0.9 Phases=3 model=1
+New Load.load8a Bus1=b8.1 kV=11 kW=2000 PF=1 Phases=1 model=3
+New Load.load8b Bus1=b8.2 kV=11 kW=2000 PF=1 Phases=1 model=1
+New Load.load8c Bus1=b8.3 kV=11 kW=2000 PF=1 Phases=1 model=1
+
+Solve
+Show Powers kVA elements
+Show voltage Ln elements

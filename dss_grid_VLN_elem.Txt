@@ -1,0 +1,395 @@
+
+NODE-GROUND VOLTAGES BY CIRCUIT ELEMENT
+
+Power Delivery Elements
+
+Bus               (node ref)  Phase    Magnitude, kV (pu)    Angle
+
+ELEMENT = "Vsource.SOURCE"
+SOURCEBUS          (  1)    1           11.546 (       0) /_    0.0
+SOURCEBUS          (  2)    2           11.546 (       0) /_ -120.0
+SOURCEBUS          (  3)    3           11.546 (       0) /_  120.0
+------------
+SOURCEBUS          (  0)    0                0 (       0) /_    0.0
+SOURCEBUS          (  0)    0                0 (       0) /_    0.0
+SOURCEBUS          (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Line.UG_LINE"
+SOURCEBUS          (  1)    1           11.546 (       0) /_    0.0
+SOURCEBUS          (  2)    2           11.546 (       0) /_ -120.0
+SOURCEBUS          (  3)    3           11.546 (       0) /_  120.0
+------------
+UG_BB_20KV         (  4)    1           11.536 (       0) /_    0.0
+UG_BB_20KV         (  5)    2           11.536 (       0) /_ -120.0
+UG_BB_20KV         (  6)    3           11.536 (       0) /_  120.0
+
+ELEMENT = "Transformer.UG_1_TR"
+UG_BB_20KV         (  4)    1           11.536 (       0) /_    0.0
+UG_BB_20KV         (  5)    2           11.536 (       0) /_ -120.0
+UG_BB_20KV         (  6)    3           11.536 (       0) /_  120.0
+UG_BB_20KV         (  0)    0                0 (       0) /_    0.0
+------------
+UG_BB_2KV          (  7)    1           1.1491 (       0) /_  -30.5
+UG_BB_2KV          (  8)    2           1.1491 (       0) /_ -150.5
+UG_BB_2KV          (  9)    3           1.1491 (       0) /_   89.5
+UG_BB_2KV          (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Transformer.UG_2_TR"
+UG_BB_20KV         (  4)    1           11.536 (       0) /_    0.0
+UG_BB_20KV         (  5)    2           11.536 (       0) /_ -120.0
+UG_BB_20KV         (  6)    3           11.536 (       0) /_  120.0
+UG_BB_20KV         (  0)    0                0 (       0) /_    0.0
+------------
+UG_BB_2KV          (  7)    1           1.1491 (       0) /_  -30.5
+UG_BB_2KV          (  8)    2           1.1491 (       0) /_ -150.5
+UG_BB_2KV          (  9)    3           1.1491 (       0) /_   89.5
+UG_BB_2KV          (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Transformer.UG_SERV_TR"
+UG_BB_2KV          (  7)    1           1.1491 (       0) /_  -30.5
+UG_BB_2KV          (  8)    2           1.1491 (       0) /_ -150.5
+UG_BB_2KV          (  9)    3           1.1491 (       0) /_   89.5
+UG_BB_2KV          (  0)    0                0 (       0) /_    0.0
+------------
+UG_SERV_BB         ( 10)    1          0.22487 (       0) /_  -62.1
+UG_SERV_BB         ( 11)    2          0.22487 (       0) /_  177.9
+UG_SERV_BB         ( 12)    3          0.22487 (       0) /_   57.9
+UG_SERV_BB         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Transformer.UG_PWM"
+UG_BB_2KV          (  7)    1           1.1491 (       0) /_  -30.5
+UG_BB_2KV          (  8)    2           1.1491 (       0) /_ -150.5
+UG_BB_2KV          (  9)    3           1.1491 (       0) /_   89.5
+UG_BB_2KV          (  0)    0                0 (       0) /_    0.0
+------------
+UG_BB_LVDC         ( 13)    1          0.86179 (       0) /_  -60.5
+UG_BB_LVDC         ( 14)    2          0.86179 (       0) /_  179.5
+UG_BB_LVDC         ( 15)    3          0.86179 (       0) /_   59.5
+UG_BB_LVDC         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Transformer.UGS_PWM"
+UG_BB_2KV          (  7)    1           1.1491 (       0) /_  -30.5
+UG_BB_2KV          (  8)    2           1.1491 (       0) /_ -150.5
+UG_BB_2KV          (  9)    3           1.1491 (       0) /_   89.5
+UG_BB_2KV          (  0)    0                0 (       0) /_    0.0
+------------
+UGS_BB             ( 16)    1          0.86179 (       0) /_  -60.5
+UGS_BB             ( 17)    2          0.86179 (       0) /_  179.5
+UGS_BB             ( 18)    3          0.86179 (       0) /_   59.5
+UGS_BB             (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Transformer.UGS_DC-DC-CONV"
+UGS_BB             ( 16)    1          0.86179 (       0) /_  -60.5
+UGS_BB             ( 17)    2          0.86179 (       0) /_  179.5
+UGS_BB             ( 18)    3          0.86179 (       0) /_   59.5
+UGS_BB             (  0)    0                0 (       0) /_    0.0
+------------
+UGS_PV_BB          ( 19)    1           0.4309 (       0) /_  -90.5
+UGS_PV_BB          ( 20)    2           0.4309 (       0) /_  149.5
+UGS_PV_BB          ( 21)    3           0.4309 (       0) /_   29.5
+UGS_PV_BB          (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Line.RS_LINE"
+SOURCEBUS          (  1)    1           11.546 (       0) /_    0.0
+SOURCEBUS          (  2)    2           11.546 (       0) /_ -120.0
+SOURCEBUS          (  3)    3           11.546 (       0) /_  120.0
+------------
+RS_BB_20KV         ( 22)    1           11.542 (       0) /_    0.0
+RS_BB_20KV         ( 23)    2           11.542 (       0) /_ -120.0
+RS_BB_20KV         ( 24)    3           11.542 (       0) /_  120.0
+
+ELEMENT = "Transformer.RS_TR"
+RS_BB_20KV         ( 22)    1           11.542 (       0) /_    0.0
+RS_BB_20KV         ( 23)    2           11.542 (       0) /_ -120.0
+RS_BB_20KV         ( 24)    3           11.542 (       0) /_  120.0
+RS_BB_20KV         (  0)    0                0 (       0) /_    0.0
+------------
+RS_BB_04KV         ( 25)    1          0.22571 (       0) /_  -31.8
+RS_BB_04KV         ( 26)    2          0.22571 (       0) /_ -151.8
+RS_BB_04KV         ( 27)    3          0.22571 (       0) /_   88.2
+RS_BB_04KV         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Line.EV-CHARGE_LINE"
+RS_BB_04KV         ( 25)    1          0.22571 (       0) /_  -31.8
+RS_BB_04KV         ( 26)    2          0.22571 (       0) /_ -151.8
+RS_BB_04KV         ( 27)    3          0.22571 (       0) /_   88.2
+------------
+EV-CHARGE_BB       ( 28)    1          0.22534 (       0) /_  -31.8
+EV-CHARGE_BB       ( 29)    2          0.22535 (       0) /_ -151.8
+EV-CHARGE_BB       ( 30)    3          0.22535 (       0) /_   88.2
+
+ELEMENT = "Transformer.EV-FAST_PWM"
+RS_BB_04KV         ( 25)    1          0.22571 (       0) /_  -31.8
+RS_BB_04KV         ( 26)    2          0.22571 (       0) /_ -151.8
+RS_BB_04KV         ( 27)    3          0.22571 (       0) /_   88.2
+RS_BB_04KV         (  0)    0                0 (       0) /_    0.0
+------------
+EV-FAST_BB         ( 31)    1          0.33856 (       0) /_   -1.8
+EV-FAST_BB         ( 32)    2          0.33856 (       0) /_ -121.8
+EV-FAST_BB         ( 33)    3          0.33856 (       0) /_  118.2
+EV-FAST_BB         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Transformer.EV-FAST_DC-DC-CONV"
+EV-FAST_BB         ( 31)    1          0.33856 (       0) /_   -1.8
+EV-FAST_BB         ( 32)    2          0.33856 (       0) /_ -121.8
+EV-FAST_BB         ( 33)    3          0.33856 (       0) /_  118.2
+EV-FAST_BB         (  0)    0                0 (       0) /_    0.0
+------------
+EV-FAST-LOAD_NODE  ( 34)    1          0.22571 (       0) /_  -31.8
+EV-FAST-LOAD_NODE  ( 35)    2          0.22571 (       0) /_ -151.8
+EV-FAST-LOAD_NODE  ( 36)    3          0.22571 (       0) /_   88.2
+EV-FAST-LOAD_NODE  (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Line.RES-WPG_LINE"
+SOURCEBUS          (  1)    1           11.546 (       0) /_    0.0
+SOURCEBUS          (  2)    2           11.546 (       0) /_ -120.0
+SOURCEBUS          (  3)    3           11.546 (       0) /_  120.0
+------------
+RES-WPG_BB         ( 37)    1           11.542 (       0) /_    0.0
+RES-WPG_BB         ( 38)    2           11.542 (       0) /_ -120.0
+RES-WPG_BB         ( 39)    3           11.542 (       0) /_  120.0
+
+ELEMENT = "Transformer.RES_TR"
+RES-WPG_BB         ( 37)    1           11.542 (       0) /_    0.0
+RES-WPG_BB         ( 38)    2           11.542 (       0) /_ -120.0
+RES-WPG_BB         ( 39)    3           11.542 (       0) /_  120.0
+RES-WPG_BB         (  0)    0                0 (       0) /_    0.0
+------------
+RES_BB             ( 40)    1          0.22665 (       0) /_  -31.6
+RES_BB             ( 41)    2          0.22665 (       0) /_ -151.6
+RES_BB             ( 42)    3          0.22665 (       0) /_   88.4
+RES_BB             (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Line.USER_LINE"
+RES_BB             ( 40)    1          0.22665 (       0) /_  -31.6
+RES_BB             ( 41)    2          0.22665 (       0) /_ -151.6
+RES_BB             ( 42)    3          0.22665 (       0) /_   88.4
+------------
+USER_BB            ( 43)    1          0.22148 (       0) /_  -31.9
+USER_BB            ( 44)    2          0.22148 (       0) /_ -151.9
+USER_BB            ( 45)    3          0.22148 (       0) /_   88.1
+
+ELEMENT = "Line.PROS_LINE"
+RES_BB             ( 40)    1          0.22665 (       0) /_  -31.6
+RES_BB             ( 41)    2          0.22665 (       0) /_ -151.6
+RES_BB             ( 42)    3          0.22665 (       0) /_   88.4
+------------
+PROS_BB            ( 46)    1          0.22554 (       0) /_  -31.8
+PROS_BB            ( 47)    2          0.22554 (       0) /_ -151.8
+PROS_BB            ( 48)    3          0.22554 (       0) /_   88.2
+
+ELEMENT = "Transformer.PROS_BESS_PWM"
+PROS_BB            ( 46)    1          0.22554 (       0) /_  -31.8
+PROS_BB            ( 47)    2          0.22554 (       0) /_ -151.8
+PROS_BB            ( 48)    3          0.22554 (       0) /_   88.2
+PROS_BB            (  0)    0                0 (       0) /_    0.0
+------------
+PROS_BB_DC1        ( 49)    1           0.3383 (       0) /_   -1.8
+PROS_BB_DC1        ( 50)    2           0.3383 (       0) /_ -121.8
+PROS_BB_DC1        ( 51)    3           0.3383 (       0) /_  118.2
+PROS_BB_DC1        (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Transformer.PROS_PV_PWM"
+PROS_BB            ( 46)    1          0.22554 (       0) /_  -31.8
+PROS_BB            ( 47)    2          0.22554 (       0) /_ -151.8
+PROS_BB            ( 48)    3          0.22554 (       0) /_   88.2
+PROS_BB            (  0)    0                0 (       0) /_    0.0
+------------
+PROS_BB_DC2        ( 52)    1           0.3383 (       0) /_   -1.8
+PROS_BB_DC2        ( 53)    2           0.3383 (       0) /_ -121.8
+PROS_BB_DC2        ( 54)    3           0.3383 (       0) /_  118.2
+PROS_BB_DC2        (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Line.PROS-PROS_DC-LINE"
+PROS_BB_DC1        ( 49)    1           0.3383 (       0) /_   -1.8
+PROS_BB_DC1        ( 50)    2           0.3383 (       0) /_ -121.8
+PROS_BB_DC1        ( 51)    3           0.3383 (       0) /_  118.2
+------------
+PROS_BB_DC2        ( 52)    1           0.3383 (       0) /_   -1.8
+PROS_BB_DC2        ( 53)    2           0.3383 (       0) /_ -121.8
+PROS_BB_DC2        ( 54)    3           0.3383 (       0) /_  118.2
+
+ELEMENT = "Transformer.WPG_TR"
+SOURCEBUS          (  1)    1           11.546 (       0) /_    0.0
+SOURCEBUS          (  2)    2           11.546 (       0) /_ -120.0
+SOURCEBUS          (  3)    3           11.546 (       0) /_  120.0
+SOURCEBUS          (  0)    0                0 (       0) /_    0.0
+------------
+WPG_BB1            ( 55)    1           1.1604 (       0) /_  -29.7
+WPG_BB1            ( 56)    2           1.1604 (       0) /_ -149.7
+WPG_BB1            ( 57)    3           1.1604 (       0) /_   90.3
+WPG_BB1            (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Line.WPG_LINE"
+WPG_BB1            ( 55)    1           1.1604 (       0) /_  -29.7
+WPG_BB1            ( 56)    2           1.1604 (       0) /_ -149.7
+WPG_BB1            ( 57)    3           1.1604 (       0) /_   90.3
+------------
+WPG_BB2            ( 58)    1           1.1718 (       0) /_  -29.4
+WPG_BB2            ( 59)    2           1.1718 (       0) /_ -149.4
+WPG_BB2            ( 60)    3           1.1718 (       0) /_   90.6
+
+ELEMENT = "Transformer.WPG_PWM"
+WPG_BB1            ( 55)    1           1.1604 (       0) /_  -29.7
+WPG_BB1            ( 56)    2           1.1604 (       0) /_ -149.7
+WPG_BB1            ( 57)    3           1.1604 (       0) /_   90.3
+WPG_BB1            (  0)    0                0 (       0) /_    0.0
+------------
+WPG_PV_BB          ( 61)    1          0.34813 (       0) /_  -59.7
+WPG_PV_BB          ( 62)    2          0.34813 (       0) /_ -179.7
+WPG_PV_BB          ( 63)    3          0.34813 (       0) /_   60.3
+WPG_PV_BB          (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Line.PROS-EV_DC-LINE"
+PROS_BB_DC1        ( 49)    1           0.3383 (       0) /_   -1.8
+PROS_BB_DC1        ( 50)    2           0.3383 (       0) /_ -121.8
+PROS_BB_DC1        ( 51)    3           0.3383 (       0) /_  118.2
+------------
+EV-FAST_BB         ( 31)    1          0.33856 (       0) /_   -1.8
+EV-FAST_BB         ( 32)    2          0.33856 (       0) /_ -121.8
+EV-FAST_BB         ( 33)    3          0.33856 (       0) /_  118.2
+
+= = = = = = = = = = = = = = = = = = =  = = = = = = = = = = =  = =
+
+Power Conversion Elements
+
+Bus               (node ref)  Phase    Magnitude, kV (pu)    Angle
+
+ELEMENT = "Load.UG_SERV1_AC-LOAD"
+UG_SERV_BB         ( 10)    1          0.22487 (       0) /_  -62.1
+UG_SERV_BB         ( 11)    2          0.22487 (       0) /_  177.9
+UG_SERV_BB         ( 12)    3          0.22487 (       0) /_   57.9
+UG_SERV_BB         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Load.UG_SERV2_AC-LOAD"
+UG_SERV_BB         ( 10)    1          0.22487 (       0) /_  -62.1
+UG_SERV_BB         ( 11)    2          0.22487 (       0) /_  177.9
+UG_SERV_BB         ( 12)    3          0.22487 (       0) /_   57.9
+UG_SERV_BB         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Load.UG_DC-LOAD"
+UG_BB_LVDC         ( 13)    1          0.86179 (       0) /_  -60.5
+UG_BB_LVDC         ( 14)    2          0.86179 (       0) /_  179.5
+UG_BB_LVDC         ( 15)    3          0.86179 (       0) /_   59.5
+UG_BB_LVDC         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Load.UGS_DC-LOAD"
+UGS_BB             ( 16)    1          0.86179 (       0) /_  -60.5
+UGS_BB             ( 17)    2          0.86179 (       0) /_  179.5
+UGS_BB             ( 18)    3          0.86179 (       0) /_   59.5
+UGS_BB             (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.UGS_BESS"
+UGS_BB             ( 16)    1          0.86179 (       0) /_  -60.5
+UGS_BB             ( 17)    2          0.86179 (       0) /_  179.5
+UGS_BB             ( 18)    3          0.86179 (       0) /_   59.5
+UGS_BB             (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.UGS_1_PV"
+UGS_PV_BB          ( 19)    1           0.4309 (       0) /_  -90.5
+UGS_PV_BB          ( 20)    2           0.4309 (       0) /_  149.5
+UGS_PV_BB          ( 21)    3           0.4309 (       0) /_   29.5
+UGS_PV_BB          (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.UGS_2_PV"
+UGS_PV_BB          ( 19)    1           0.4309 (       0) /_  -90.5
+UGS_PV_BB          ( 20)    2           0.4309 (       0) /_  149.5
+UGS_PV_BB          ( 21)    3           0.4309 (       0) /_   29.5
+UGS_PV_BB          (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Load.RS_1_AC-LOAD"
+RS_BB_04KV         ( 25)    1          0.22571 (       0) /_  -31.8
+RS_BB_04KV         ( 26)    2          0.22571 (       0) /_ -151.8
+RS_BB_04KV         ( 27)    3          0.22571 (       0) /_   88.2
+RS_BB_04KV         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Load.RS_2_AC-LOAD"
+RS_BB_04KV         ( 25)    1          0.22571 (       0) /_  -31.8
+RS_BB_04KV         ( 26)    2          0.22571 (       0) /_ -151.8
+RS_BB_04KV         ( 27)    3          0.22571 (       0) /_   88.2
+RS_BB_04KV         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Load.EV-CHARGE_AC-LOAD"
+EV-CHARGE_BB       ( 28)    1          0.22534 (       0) /_  -31.8
+EV-CHARGE_BB       ( 29)    2          0.22535 (       0) /_ -151.8
+EV-CHARGE_BB       ( 30)    3          0.22535 (       0) /_   88.2
+EV-CHARGE_BB       (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.EV-FAST_BESS"
+EV-FAST_BB         ( 31)    1          0.33856 (       0) /_   -1.8
+EV-FAST_BB         ( 32)    2          0.33856 (       0) /_ -121.8
+EV-FAST_BB         ( 33)    3          0.33856 (       0) /_  118.2
+EV-FAST_BB         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.EV-FAST_PV"
+EV-FAST_BB         ( 31)    1          0.33856 (       0) /_   -1.8
+EV-FAST_BB         ( 32)    2          0.33856 (       0) /_ -121.8
+EV-FAST_BB         ( 33)    3          0.33856 (       0) /_  118.2
+EV-FAST_BB         (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Load.EV-FAST_DC-LOAD"
+EV-FAST-LOAD_NODE  ( 34)    1          0.22571 (       0) /_  -31.8
+EV-FAST-LOAD_NODE  ( 35)    2          0.22571 (       0) /_ -151.8
+EV-FAST-LOAD_NODE  ( 36)    3          0.22571 (       0) /_   88.2
+EV-FAST-LOAD_NODE  (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Load.USER_AC-LOAD"
+USER_BB            ( 43)    1          0.22148 (       0) /_  -31.9
+USER_BB            ( 44)    2          0.22148 (       0) /_ -151.9
+USER_BB            ( 45)    3          0.22148 (       0) /_   88.1
+USER_BB            (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Load.PROS_1_AC-LOAD"
+PROS_BB            ( 46)    1          0.22554 (       0) /_  -31.8
+PROS_BB            ( 47)    2          0.22554 (       0) /_ -151.8
+PROS_BB            ( 48)    3          0.22554 (       0) /_   88.2
+PROS_BB            (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.PROS_BESS"
+PROS_BB_DC1        ( 49)    1           0.3383 (       0) /_   -1.8
+PROS_BB_DC1        ( 50)    2           0.3383 (       0) /_ -121.8
+PROS_BB_DC1        ( 51)    3           0.3383 (       0) /_  118.2
+PROS_BB_DC1        (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.PROS_DC-MICRO-WIND"
+PROS_BB_DC1        ( 49)    1           0.3383 (       0) /_   -1.8
+PROS_BB_DC1        ( 50)    2           0.3383 (       0) /_ -121.8
+PROS_BB_DC1        ( 51)    3           0.3383 (       0) /_  118.2
+PROS_BB_DC1        (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.PROS_PV"
+PROS_BB_DC2        ( 52)    1           0.3383 (       0) /_   -1.8
+PROS_BB_DC2        ( 53)    2           0.3383 (       0) /_ -121.8
+PROS_BB_DC2        ( 54)    3           0.3383 (       0) /_  118.2
+PROS_BB_DC2        (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Load.PROS_DC-LOAD"
+PROS_BB_DC2        ( 52)    1           0.3383 (       0) /_   -1.8
+PROS_BB_DC2        ( 53)    2           0.3383 (       0) /_ -121.8
+PROS_BB_DC2        ( 54)    3           0.3383 (       0) /_  118.2
+PROS_BB_DC2        (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.WPG_1_WIND"
+WPG_BB2            ( 58)    1           1.1718 (       0) /_  -29.4
+WPG_BB2            ( 59)    2           1.1718 (       0) /_ -149.4
+WPG_BB2            ( 60)    3           1.1718 (       0) /_   90.6
+WPG_BB2            (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.WPG_2_WIND"
+WPG_BB2            ( 58)    1           1.1718 (       0) /_  -29.4
+WPG_BB2            ( 59)    2           1.1718 (       0) /_ -149.4
+WPG_BB2            ( 60)    3           1.1718 (       0) /_   90.6
+WPG_BB2            (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.WPG_BESS"
+WPG_PV_BB          ( 61)    1          0.34813 (       0) /_  -59.7
+WPG_PV_BB          ( 62)    2          0.34813 (       0) /_ -179.7
+WPG_PV_BB          ( 63)    3          0.34813 (       0) /_   60.3
+WPG_PV_BB          (  0)    0                0 (       0) /_    0.0
+
+ELEMENT = "Generator.WPG_PV"
+WPG_PV_BB          ( 61)    1          0.34813 (       0) /_  -59.7
+WPG_PV_BB          ( 62)    2          0.34813 (       0) /_ -179.7
+WPG_PV_BB          ( 63)    3          0.34813 (       0) /_   60.3
+WPG_PV_BB          (  0)    0                0 (       0) /_    0.0
+

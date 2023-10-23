@@ -1,0 +1,436 @@
+
+CIRCUIT ELEMENT POWER FLOW
+
+(Power Flow into element from indicated Bus)
+
+Power Delivery Elements
+
+  Bus             Phase     kW     +j   kvar         kVA         PF
+
+ELEMENT = "Vsource.SOURCE"
+SOURCEBUS             1      -298.1 +j     -3.3      298.1       0.9999
+SOURCEBUS             2      -298.1 +j     -3.3      298.1       0.9999
+SOURCEBUS             3      -298.1 +j     -3.3      298.1       0.9999
+   TERMINAL TOTAL .........  -894.3 +j     -9.8      894.3       0.9999
+SOURCEBUS             0         0.0 +j      0.0        0.0       1.0000
+SOURCEBUS             0         0.0 +j      0.0        0.0       1.0000
+SOURCEBUS             0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........     0.0 +j      0.0        0.0       1.0000
+
+ELEMENT = "Line.UG_LINE"
+SOURCEBUS             1       194.2 +j     22.3      195.5       0.9935
+SOURCEBUS             2       194.2 +j     22.3      195.5       0.9935
+SOURCEBUS             3       194.2 +j     22.3      195.5       0.9935
+   TERMINAL TOTAL .........   582.6 +j     67.0      586.5       0.9935
+UG_BB_20KV            1      -194.1 +j    -58.6      202.7       0.9573
+UG_BB_20KV            2      -194.1 +j    -58.6      202.7       0.9573
+UG_BB_20KV            3      -194.1 +j    -58.6      202.7       0.9573
+   TERMINAL TOTAL .........  -582.2 +j   -175.9      608.2       0.9573
+
+ELEMENT = "Transformer.UG_1_TR"
+UG_BB_20KV            1        97.0 +j     29.3      101.4       0.9573
+UG_BB_20KV            2        97.0 +j     29.3      101.4       0.9573
+UG_BB_20KV            3        97.0 +j     29.3      101.4       0.9573
+UG_BB_20KV            0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   291.1 +j     88.0      304.1       0.9573
+UG_BB_2KV             1       -96.9 +j    -18.5       98.6       0.9823
+UG_BB_2KV             2       -96.9 +j    -18.5       98.6       0.9823
+UG_BB_2KV             3       -96.9 +j    -18.5       98.6       0.9823
+UG_BB_2KV             0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........  -290.7 +j    -55.5      295.9       0.9823
+
+ELEMENT = "Transformer.UG_2_TR"
+UG_BB_20KV            1        97.0 +j     29.3      101.4       0.9573
+UG_BB_20KV            2        97.0 +j     29.3      101.4       0.9573
+UG_BB_20KV            3        97.0 +j     29.3      101.4       0.9573
+UG_BB_20KV            0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   291.1 +j     88.0      304.1       0.9573
+UG_BB_2KV             1       -96.9 +j    -18.5       98.6       0.9823
+UG_BB_2KV             2       -96.9 +j    -18.5       98.6       0.9823
+UG_BB_2KV             3       -96.9 +j    -18.5       98.6       0.9823
+UG_BB_2KV             0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........  -290.7 +j    -55.5      295.9       0.9823
+
+ELEMENT = "Transformer.UG_SERV_TR"
+UG_BB_2KV             1        67.1 +j     37.0       76.6       0.8758
+UG_BB_2KV             2        67.1 +j     37.0       76.6       0.8758
+UG_BB_2KV             3        67.1 +j     37.0       76.6       0.8758
+UG_BB_2KV             0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   201.3 +j    110.9      229.9       0.8758
+UG_SERV_BB            1       -66.7 +j    -32.3       74.1       0.9000
+UG_SERV_BB            2       -66.7 +j    -32.3       74.1       0.9000
+UG_SERV_BB            3       -66.7 +j    -32.3       74.1       0.9000
+UG_SERV_BB            0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........  -200.0 +j    -96.9      222.2       0.9000
+
+ELEMENT = "Transformer.UG_PWM"
+UG_BB_2KV             1        66.7 +j      0.0       66.7       1.0000
+UG_BB_2KV             2        66.7 +j      0.0       66.7       1.0000
+UG_BB_2KV             3        66.7 +j      0.0       66.7       1.0000
+UG_BB_2KV             0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   200.0 +j      0.0      200.0       1.0000
+UG_BB_LVDC            1       -66.7 +j     -0.0       66.7       1.0000
+UG_BB_LVDC            2       -66.7 +j     -0.0       66.7       1.0000
+UG_BB_LVDC            3       -66.7 +j     -0.0       66.7       1.0000
+UG_BB_LVDC            0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........  -200.0 +j     -0.0      200.0       1.0000
+
+ELEMENT = "Transformer.UGS_PWM"
+UG_BB_2KV             1        60.0 +j      0.0       60.0       1.0000
+UG_BB_2KV             2        60.0 +j      0.0       60.0       1.0000
+UG_BB_2KV             3        60.0 +j      0.0       60.0       1.0000
+UG_BB_2KV             0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   180.0 +j      0.0      180.0       1.0000
+UGS_BB                1       -60.0 +j     -0.0       60.0       1.0000
+UGS_BB                2       -60.0 +j     -0.0       60.0       1.0000
+UGS_BB                3       -60.0 +j     -0.0       60.0       1.0000
+UGS_BB                0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........  -180.0 +j     -0.0      180.0       1.0000
+
+ELEMENT = "Transformer.UGS_DC-DC-CONV"
+UGS_BB                1       -10.0 +j     -0.0       10.0       1.0000
+UGS_BB                2       -10.0 +j     -0.0       10.0       1.0000
+UGS_BB                3       -10.0 +j     -0.0       10.0       1.0000
+UGS_BB                0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   -30.0 +j     -0.0       30.0       1.0000
+UGS_PV_BB             1        10.0 +j      0.0       10.0       1.0000
+UGS_PV_BB             2        10.0 +j      0.0       10.0       1.0000
+UGS_PV_BB             3        10.0 +j      0.0       10.0       1.0000
+UGS_PV_BB             0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........    30.0 +j      0.0       30.0       1.0000
+
+ELEMENT = "Line.RS_LINE"
+SOURCEBUS             1        50.2 +j    -16.9       53.0      -0.9480
+SOURCEBUS             2        50.2 +j    -16.9       53.0      -0.9480
+SOURCEBUS             3        50.2 +j    -16.9       53.0      -0.9480
+   TERMINAL TOTAL .........   150.7 +j    -50.6      159.0      -0.9480
+RS_BB_20KV            1       -50.2 +j    -19.6       53.9       0.9319
+RS_BB_20KV            2       -50.2 +j    -19.6       53.9       0.9319
+RS_BB_20KV            3       -50.2 +j    -19.6       53.9       0.9319
+   TERMINAL TOTAL .........  -150.7 +j    -58.7      161.7       0.9319
+
+ELEMENT = "Transformer.RS_TR"
+RS_BB_20KV            1        50.2 +j     19.6       53.9       0.9319
+RS_BB_20KV            2        50.2 +j     19.6       53.9       0.9319
+RS_BB_20KV            3        50.2 +j     19.6       53.9       0.9319
+RS_BB_20KV            0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   150.7 +j     58.7      161.7       0.9319
+RS_BB_04KV            1       -50.0 +j    -16.2       52.6       0.9515
+RS_BB_04KV            2       -50.0 +j    -16.2       52.6       0.9515
+RS_BB_04KV            3       -50.0 +j    -16.2       52.6       0.9515
+RS_BB_04KV            0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........  -150.1 +j    -48.5      157.7       0.9515
+
+ELEMENT = "Line.EV-CHARGE_LINE"
+RS_BB_04KV            1        13.4 +j      0.0       13.4       1.0000
+RS_BB_04KV            2        13.4 +j      0.0       13.4       1.0000
+RS_BB_04KV            3        13.4 +j      0.0       13.4       1.0000
+   TERMINAL TOTAL .........    40.1 +j      0.1       40.1       1.0000
+EV-CHARGE_BB          1       -13.3 +j      0.0       13.3      -1.0000
+EV-CHARGE_BB          2       -13.3 +j      0.0       13.3      -1.0000
+EV-CHARGE_BB          3       -13.3 +j      0.0       13.3      -1.0000
+   TERMINAL TOTAL .........   -40.0 +j      0.0       40.0      -1.0000
+
+ELEMENT = "Transformer.EV-FAST_PWM"
+RS_BB_04KV            1         3.3 +j      0.0        3.3       1.0000
+RS_BB_04KV            2         3.3 +j      0.0        3.3       1.0000
+RS_BB_04KV            3         3.3 +j     -0.0        3.3      -1.0000
+RS_BB_04KV            0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........    10.0 +j      0.0       10.0       1.0000
+EV-FAST_BB            1        -3.3 +j     -0.0        3.3       1.0000
+EV-FAST_BB            2        -3.3 +j      0.0        3.3      -1.0000
+EV-FAST_BB            3        -3.3 +j      0.0        3.3      -1.0000
+EV-FAST_BB            0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   -10.0 +j      0.0       10.0      -1.0000
+
+ELEMENT = "Transformer.EV-FAST_DC-DC-CONV"
+EV-FAST_BB            1        16.7 +j     -0.0       16.7      -1.0000
+EV-FAST_BB            2        16.7 +j     -0.0       16.7      -1.0000
+EV-FAST_BB            3        16.7 +j     -0.0       16.7      -1.0000
+EV-FAST_BB            0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........    50.0 +j     -0.0       50.0      -1.0000
+EV-FAST-LOAD_NODE     1       -16.7 +j     -0.0       16.7       1.0000
+EV-FAST-LOAD_NODE     2       -16.7 +j     -0.0       16.7       1.0000
+EV-FAST-LOAD_NODE     3       -16.7 +j     -0.0       16.7       1.0000
+EV-FAST-LOAD_NODE     0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   -50.0 +j     -0.0       50.0       1.0000
+
+ELEMENT = "Line.RES-WPG_LINE"
+SOURCEBUS             1       126.2 +j     42.8      133.3       0.9470
+SOURCEBUS             2       126.2 +j     42.8      133.3       0.9470
+SOURCEBUS             3       126.2 +j     42.8      133.3       0.9470
+   TERMINAL TOTAL .........   378.6 +j    128.4      399.8       0.9470
+RES-WPG_BB            1      -126.2 +j    -67.0      142.9       0.8830
+RES-WPG_BB            2      -126.2 +j    -67.0      142.9       0.8830
+RES-WPG_BB            3      -126.2 +j    -67.0      142.9       0.8831
+   TERMINAL TOTAL .........  -378.5 +j   -201.1      428.6       0.8830
+
+ELEMENT = "Transformer.RES_TR"
+RES-WPG_BB            1       126.2 +j     67.0      142.9       0.8830
+RES-WPG_BB            2       126.2 +j     67.0      142.9       0.8830
+RES-WPG_BB            3       126.2 +j     67.0      142.9       0.8831
+RES-WPG_BB            0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   378.5 +j    201.1      428.6       0.8830
+RES_BB                1      -125.2 +j    -58.0      138.0       0.9073
+RES_BB                2      -125.2 +j    -58.0      138.0       0.9073
+RES_BB                3      -125.2 +j    -58.0      138.0       0.9073
+RES_BB                0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........  -375.6 +j   -174.1      413.9       0.9073
+
+ELEMENT = "Line.USER_LINE"
+RES_BB                1        68.1 +j     33.4       75.8       0.8976
+RES_BB                2        68.1 +j     33.4       75.8       0.8976
+RES_BB                3        68.1 +j     33.4       75.8       0.8976
+   TERMINAL TOTAL .........   204.2 +j    100.3      227.5       0.8976
+USER_BB               1       -66.7 +j    -32.3       74.1       0.9000
+USER_BB               2       -66.7 +j    -32.3       74.1       0.9000
+USER_BB               3       -66.7 +j    -32.3       74.1       0.9000
+   TERMINAL TOTAL .........  -200.0 +j    -96.9      222.2       0.9000
+
+ELEMENT = "Line.PROS_LINE"
+RES_BB                1        57.1 +j     24.6       62.2       0.9185
+RES_BB                2        57.1 +j     24.6       62.2       0.9185
+RES_BB                3        57.1 +j     24.6       62.2       0.9185
+   TERMINAL TOTAL .........   171.4 +j     73.8      186.6       0.9185
+PROS_BB               1       -56.7 +j    -24.2       61.6       0.9196
+PROS_BB               2       -56.7 +j    -24.2       61.6       0.9196
+PROS_BB               3       -56.7 +j    -24.2       61.6       0.9196
+   TERMINAL TOTAL .........  -170.0 +j    -72.6      184.9       0.9196
+
+ELEMENT = "Transformer.PROS_BESS_PWM"
+PROS_BB               1        13.3 +j      0.0       13.3       1.0000
+PROS_BB               2        13.3 +j     -0.0       13.3      -1.0000
+PROS_BB               3        13.3 +j      0.0       13.3       1.0000
+PROS_BB               0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........    40.0 +j      0.0       40.0       1.0000
+PROS_BB_DC1           1       -13.3 +j     -0.0       13.3       1.0000
+PROS_BB_DC1           2       -13.3 +j      0.0       13.3      -1.0000
+PROS_BB_DC1           3       -13.3 +j      0.0       13.3      -1.0000
+PROS_BB_DC1           0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   -40.0 +j      0.0       40.0      -1.0000
+
+ELEMENT = "Transformer.PROS_PV_PWM"
+PROS_BB               1        -6.7 +j     -0.0        6.7       1.0000
+PROS_BB               2        -6.7 +j     -0.0        6.7       1.0000
+PROS_BB               3        -6.7 +j      0.0        6.7      -1.0000
+PROS_BB               0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   -20.0 +j     -0.0       20.0       1.0000
+PROS_BB_DC2           1         6.7 +j     -0.0        6.7      -1.0000
+PROS_BB_DC2           2         6.7 +j      0.0        6.7       1.0000
+PROS_BB_DC2           3         6.7 +j      0.0        6.7       1.0000
+PROS_BB_DC2           0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........    20.0 +j      0.0       20.0       1.0000
+
+ELEMENT = "Line.PROS-PROS_DC-LINE"
+PROS_BB_DC1           1        -0.0 +j     -0.0        0.0       0.0311
+PROS_BB_DC1           2        -0.0 +j     -0.0        0.0       0.0311
+PROS_BB_DC1           3        -0.0 +j     -0.0        0.0       0.0311
+   TERMINAL TOTAL .........    -0.0 +j     -0.0        0.0       0.0311
+PROS_BB_DC2           1         0.0 +j     -0.0        0.0      -0.0289
+PROS_BB_DC2           2         0.0 +j     -0.0        0.0      -0.0289
+PROS_BB_DC2           3         0.0 +j     -0.0        0.0      -0.0289
+   TERMINAL TOTAL .........     0.0 +j     -0.0        0.0      -0.0289
+
+ELEMENT = "Transformer.WPG_TR"
+SOURCEBUS             1       -72.6 +j    -45.0       85.4       0.8499
+SOURCEBUS             2       -72.6 +j    -45.0       85.4       0.8499
+SOURCEBUS             3       -72.6 +j    -45.0       85.4       0.8499
+SOURCEBUS             0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........  -217.7 +j   -135.0      256.2       0.8499
+WPG_BB1               1        72.7 +j     55.8       91.6       0.7934
+WPG_BB1               2        72.7 +j     55.8       91.6       0.7934
+WPG_BB1               3        72.7 +j     55.8       91.6       0.7934
+WPG_BB1               0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   218.0 +j    167.3      274.8       0.7934
+
+ELEMENT = "Line.WPG_LINE"
+WPG_BB1               1       -92.7 +j    -55.8      108.2       0.8569
+WPG_BB1               2       -92.7 +j    -55.8      108.2       0.8569
+WPG_BB1               3       -92.7 +j    -55.8      108.2       0.8569
+   TERMINAL TOTAL .........  -278.0 +j   -167.3      324.5       0.8569
+WPG_BB2               1        93.3 +j     56.6      109.1       0.8551
+WPG_BB2               2        93.3 +j     56.6      109.1       0.8551
+WPG_BB2               3        93.3 +j     56.6      109.1       0.8551
+   TERMINAL TOTAL .........   280.0 +j    169.8      327.4       0.8551
+
+ELEMENT = "Transformer.WPG_PWM"
+WPG_BB1               1        20.0 +j     -0.0       20.0      -1.0000
+WPG_BB1               2        20.0 +j     -0.0       20.0      -1.0000
+WPG_BB1               3        20.0 +j     -0.0       20.0      -1.0000
+WPG_BB1               0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........    60.0 +j     -0.0       60.0      -1.0000
+WPG_PV_BB             1       -20.0 +j      0.0       20.0      -1.0000
+WPG_PV_BB             2       -20.0 +j      0.0       20.0      -1.0000
+WPG_PV_BB             3       -20.0 +j      0.0       20.0      -1.0000
+WPG_PV_BB             0         0.0 +j      0.0        0.0       1.0000
+   TERMINAL TOTAL .........   -60.0 +j      0.0       60.0      -1.0000
+
+= = = = = = = = = = = = = = = = = = =  = = = = = = = = = = =  = =
+
+Power Conversion Elements
+
+  Bus             Phase     kW   +j  kvar         kVA         PF
+
+ELEMENT = "Load.UG_SERV1_AC-LOAD"
+UG_SERV_BB            1      26.7 +j   12.9       29.6       0.9000
+UG_SERV_BB            2      26.7 +j   12.9       29.6       0.9000
+UG_SERV_BB            3      26.7 +j   12.9       29.6       0.9000
+UG_SERV_BB            0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........    80.0 +j     38.7       88.9       0.9000
+
+ELEMENT = "Load.UG_SERV2_AC-LOAD"
+UG_SERV_BB            1      40.0 +j   19.4       44.4       0.9000
+UG_SERV_BB            2      40.0 +j   19.4       44.4       0.9000
+UG_SERV_BB            3      40.0 +j   19.4       44.4       0.9000
+UG_SERV_BB            0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   120.0 +j     58.1      133.3       0.9000
+
+ELEMENT = "Load.UG_DC-LOAD"
+UG_BB_LVDC            1      66.7 +j   -0.0       66.7      -1.0000
+UG_BB_LVDC            2      66.7 +j   -0.0       66.7      -1.0000
+UG_BB_LVDC            3      66.7 +j   -0.0       66.7      -1.0000
+UG_BB_LVDC            0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   200.0 +j     -0.0      200.0      -1.0000
+
+ELEMENT = "Load.UGS_DC-LOAD"
+UGS_BB                1      66.7 +j   -0.0       66.7      -1.0000
+UGS_BB                2      66.7 +j   -0.0       66.7      -1.0000
+UGS_BB                3      66.7 +j   -0.0       66.7      -1.0000
+UGS_BB                0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   200.0 +j     -0.0      200.0      -1.0000
+
+ELEMENT = "Generator.UGS_BESS"
+UGS_BB                1       3.3 +j   -0.0        3.3      -1.0000
+UGS_BB                2       3.3 +j   -0.0        3.3      -1.0000
+UGS_BB                3       3.3 +j   -0.0        3.3      -1.0000
+UGS_BB                0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........    10.0 +j     -0.0       10.0      -1.0000
+
+ELEMENT = "Generator.UGS_1_PV"
+UGS_PV_BB             1      -5.0 +j    0.0        5.0      -1.0000
+UGS_PV_BB             2      -5.0 +j    0.0        5.0      -1.0000
+UGS_PV_BB             3      -5.0 +j    0.0        5.0      -1.0000
+UGS_PV_BB             0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   -15.0 +j      0.0       15.0      -1.0000
+
+ELEMENT = "Generator.UGS_2_PV"
+UGS_PV_BB             1      -5.0 +j    0.0        5.0      -1.0000
+UGS_PV_BB             2      -5.0 +j    0.0        5.0      -1.0000
+UGS_PV_BB             3      -5.0 +j    0.0        5.0      -1.0000
+UGS_PV_BB             0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   -15.0 +j      0.0       15.0      -1.0000
+
+ELEMENT = "Load.RS_1_AC-LOAD"
+RS_BB_04KV            1      13.3 +j    6.5       14.8       0.9000
+RS_BB_04KV            2      13.3 +j    6.5       14.8       0.9000
+RS_BB_04KV            3      13.3 +j    6.5       14.8       0.9000
+RS_BB_04KV            0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........    40.0 +j     19.4       44.4       0.9000
+
+ELEMENT = "Load.RS_2_AC-LOAD"
+RS_BB_04KV            1      20.0 +j    9.7       22.2       0.9000
+RS_BB_04KV            2      20.0 +j    9.7       22.2       0.9000
+RS_BB_04KV            3      20.0 +j    9.7       22.2       0.9000
+RS_BB_04KV            0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........    60.0 +j     29.1       66.7       0.9000
+
+ELEMENT = "Load.EV-CHARGE_AC-LOAD"
+EV-CHARGE_BB          1      13.3 +j   -0.0       13.3      -1.0000
+EV-CHARGE_BB          2      13.3 +j   -0.0       13.3      -1.0000
+EV-CHARGE_BB          3      13.3 +j   -0.0       13.3      -1.0000
+EV-CHARGE_BB          0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........    40.0 +j     -0.0       40.0      -1.0000
+
+ELEMENT = "Generator.EV-FAST_BESS"
+EV-FAST_BB            1      -3.3 +j    0.0        3.3      -1.0000
+EV-FAST_BB            2      -3.3 +j    0.0        3.3      -1.0000
+EV-FAST_BB            3      -3.3 +j    0.0        3.3      -1.0000
+EV-FAST_BB            0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   -10.0 +j      0.0       10.0      -1.0000
+
+ELEMENT = "Generator.EV-FAST_PV"
+EV-FAST_BB            1     -10.0 +j    0.0       10.0      -1.0000
+EV-FAST_BB            2     -10.0 +j    0.0       10.0      -1.0000
+EV-FAST_BB            3     -10.0 +j    0.0       10.0      -1.0000
+EV-FAST_BB            0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   -30.0 +j      0.0       30.0      -1.0000
+
+ELEMENT = "Load.EV-FAST_DC-LOAD"
+EV-FAST-LOAD_NODE     1      16.7 +j   -0.0       16.7      -1.0000
+EV-FAST-LOAD_NODE     2      16.7 +j   -0.0       16.7      -1.0000
+EV-FAST-LOAD_NODE     3      16.7 +j   -0.0       16.7      -1.0000
+EV-FAST-LOAD_NODE     0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........    50.0 +j     -0.0       50.0      -1.0000
+
+ELEMENT = "Load.USER_AC-LOAD"
+USER_BB               1      66.7 +j   32.3       74.1       0.9000
+USER_BB               2      66.7 +j   32.3       74.1       0.9000
+USER_BB               3      66.7 +j   32.3       74.1       0.9000
+USER_BB               0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   200.0 +j     96.9      222.2       0.9000
+
+ELEMENT = "Load.PROS_1_AC-LOAD"
+PROS_BB               1      50.0 +j   24.2       55.6       0.9000
+PROS_BB               2      50.0 +j   24.2       55.6       0.9000
+PROS_BB               3      50.0 +j   24.2       55.6       0.9000
+PROS_BB               0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   150.0 +j     72.6      166.7       0.9000
+
+ELEMENT = "Generator.PROS_BESS"
+PROS_BB_DC1           1      16.7 +j   -0.0       16.7      -1.0000
+PROS_BB_DC1           2      16.7 +j   -0.0       16.7      -1.0000
+PROS_BB_DC1           3      16.7 +j   -0.0       16.7      -1.0000
+PROS_BB_DC1           0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........    50.0 +j     -0.0       50.0      -1.0000
+
+ELEMENT = "Generator.PROS_DC-MICRO-WIND"
+PROS_BB_DC1           1      -3.3 +j    0.0        3.3      -1.0000
+PROS_BB_DC1           2      -3.3 +j    0.0        3.3      -1.0000
+PROS_BB_DC1           3      -3.3 +j    0.0        3.3      -1.0000
+PROS_BB_DC1           0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   -10.0 +j      0.0       10.0      -1.0000
+
+ELEMENT = "Generator.PROS_PV"
+PROS_BB_DC2           1     -16.7 +j    0.0       16.7      -1.0000
+PROS_BB_DC2           2     -16.7 +j    0.0       16.7      -1.0000
+PROS_BB_DC2           3     -16.7 +j    0.0       16.7      -1.0000
+PROS_BB_DC2           0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   -50.0 +j      0.0       50.0      -1.0000
+
+ELEMENT = "Load.PROS_DC-LOAD"
+PROS_BB_DC2           1      10.0 +j   -0.0       10.0      -1.0000
+PROS_BB_DC2           2      10.0 +j   -0.0       10.0      -1.0000
+PROS_BB_DC2           3      10.0 +j   -0.0       10.0      -1.0000
+PROS_BB_DC2           0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........    30.0 +j     -0.0       30.0      -1.0000
+
+ELEMENT = "Generator.WPG_1_WIND"
+WPG_BB2               1     -46.7 +j  -30.1       55.6       0.8400
+WPG_BB2               2     -46.7 +j  -30.1       55.6       0.8400
+WPG_BB2               3     -46.7 +j  -30.1       55.6       0.8400
+WPG_BB2               0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........  -140.0 +j    -90.4      166.7       0.8400
+
+ELEMENT = "Generator.WPG_2_WIND"
+WPG_BB2               1     -46.7 +j  -26.4       53.6       0.8700
+WPG_BB2               2     -46.7 +j  -26.4       53.6       0.8700
+WPG_BB2               3     -46.7 +j  -26.4       53.6       0.8700
+WPG_BB2               0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........  -140.0 +j    -79.3      160.9       0.8700
+
+ELEMENT = "Generator.WPG_BESS"
+WPG_PV_BB             1      33.3 +j   -0.0       33.3      -1.0000
+WPG_PV_BB             2      33.3 +j   -0.0       33.3      -1.0000
+WPG_PV_BB             3      33.3 +j   -0.0       33.3      -1.0000
+WPG_PV_BB             0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   100.0 +j     -0.0      100.0      -1.0000
+
+ELEMENT = "Generator.WPG_PV"
+WPG_PV_BB             1     -13.3 +j    0.0       13.3      -1.0000
+WPG_PV_BB             2     -13.3 +j    0.0       13.3      -1.0000
+WPG_PV_BB             3     -13.3 +j    0.0       13.3      -1.0000
+WPG_PV_BB             0       0.0 +j    0.0        0.0       1.0000
+  TERMINAL TOTAL  .........   -40.0 +j      0.0       40.0      -1.0000
+
+
+Total Circuit Losses =   14.3 +j -135.2

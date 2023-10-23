@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/resize.png</file>
+    <file>icons/back.png</file>
+    <file>icons/unselect.png</file>
+    <file>icons/close2.png</file>
+    <file>icons/maximize.png</file>
+    <file>icons/minimize.png</file>
+    <file>icons/analysis.png</file>
+    <file>icons/close.png</file>
+    <file>icons/dots.png</file>
+    <file>icons/help.png</file>
+    <file>icons/home.png</file>
+    <file>icons/info.png</file>
+    <file>icons/menu.png</file>
+    <file>icons/notifications.png</file>
+    <file>icons/print.png</file>
+    <file>icons/settings.png</file>
+    <file>icons/user.png</file>
+  </qresource>
+  <qresource prefix="images">
+    <file>LogoENEA_eng_200x80.png</file>
+  </qresource>
+</RCC>

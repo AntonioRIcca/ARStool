@@ -1,0 +1,30 @@
+
+CIRCUIT ELEMENT CURRENTS
+
+(Currents into element from indicated bus)
+
+Power Delivery Elements
+
+  Bus Phase    Magnitude, A     Angle      (Real)   +j  (Imag)
+
+ELEMENT = "Vsource.SOURCE"
+MYBB     1            128.3 /_  154.2 =    -115.47 +j     55.93
+MYBB     2            128.3 /_   34.2 =     106.17 +j    72.036
+MYBB     3            128.3 /_  -85.8 =     9.2987 +j   -127.97
+------------
+MYBB     0            128.3 /_  -25.8 =     115.47 +j    -55.93
+MYBB     0            128.3 /_ -145.8 =    -106.17 +j   -72.036
+MYBB     0            128.3 /_   94.2 =    -9.2987 +j    127.97
+
+= = = = = = = = = = = = = = = = = = =  = = = = = = = = = = =  = =
+
+Power Conversion Elements
+
+  Bus Phase    Magnitude, A     Angle      (Real)   +j  (Imag)
+
+ELEMENT = "Load.MYLOAD"
+MYBB     1            128.3 /_  -25.8 =     115.47 +j    -55.93
+MYBB     2            128.3 /_ -145.8 =    -106.17 +j   -72.036
+MYBB     3            128.3 /_   94.2 =    -9.2987 +j    127.97
+MYBB     0      2.5039E-008 /_ -145.8 =  -2.072E-008 +j -1.4058E-008
+
