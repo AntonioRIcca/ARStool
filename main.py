@@ -66,6 +66,9 @@ class Main:
         # self.ui.mainPages.
         # self.ui.mainPages.addWidget()
 
+        Window(list(v.keys())[0])
+        self.ui.rightMenuContainer.expandMenu()
+
         print('exec')
         self.app.exec_()
 
@@ -128,11 +131,13 @@ class Main:
         except:
         # print(self.ui.rightMenuPages.widget(self.ui.rightMenuPages.currentIndex()))
             pass
+
+        self.ui.rightMenuContainer.expandMenu()
+
         self.par_wgt = Window(elem)
         self.ui.rightMenuPages.addWidget(self.par_wgt.mywidget)
 
         self.ui.rightMenuPages.setCurrentIndex(self.ui.rightMenuPages.count() - 1)
-        self.ui.rightMenuContainer.expandMenu()
 
         print(self.ui.rightMenuPages.count())
 
@@ -147,6 +152,8 @@ dss = opendss.OpenDSS()
 filename = 'C:/Users/anton/PycharmProjects/OpenDSS/CityArea.dss'
 
 dss.open(filename)
+
+print(list(v.keys())[0])
 
 dss.write_all()
 

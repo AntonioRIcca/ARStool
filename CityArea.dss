@@ -86,7 +86,7 @@ New transformer.WPG_PWM winding=2 buses=(WPG_BB1 WPG_PV_BB) conns='delta wye' kv
 New generator.WPG_BESS bus1=WPG_PV_BB phases=3 kv=0.6 kw=-100 kvar=0 model=3
 New generator.WPG_PV bus1=WPG_PV_BB phases=3 kv=0.6 kw=40 kvar=0 model=3
 
-//New line.Pros-EV_DC-Line bus1=Pros_BB_DC1 bus2=EV-Fast_BB linecode=DC-Line length=0.02
+New line.Pros-EV_DC-Line bus1=Pros_BB_DC1 bus2=EV-Fast_BB linecode=DC-Line length=0.02
 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

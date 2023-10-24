@@ -42,7 +42,7 @@ par_dict = {
     'AC-Wind': {
         'P': 'kw',
         'Q': 'kvar',
-        'f': 'pf',
+        'cosPhi': 'pf',
         'Vn': 'kv'
     },
 
@@ -72,6 +72,7 @@ par_dict = {
     'AC-Load': {
         'P': 'kw',
         'Q': 'kvar',
+        'cosPhi': 'pf',
     },
     'DC-Load': {
         'P': 'kw',
@@ -79,4 +80,74 @@ par_dict = {
     'Diesel-Motor': {},
     'Node': {},
     'ExternalGrid': {},
+}
+
+
+el_format = {
+    'ExternalGrid': {
+        'Vn': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+    },
+    'Node': {
+        'Vn': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+    },
+    'AC-Line': {
+        'C0': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS'},
+        'C1': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS'},
+        'In': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'A'},
+        'R0': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
+        'R1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
+        'X0': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
+        'X1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
+        'length': {'min': 0, 'max': 9999.999, 'decimal': 3, 'unit': 'Km'},
+    },
+    'DC-Line': {
+        'In': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'A'},
+        'R1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
+        'X1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
+        'length': {'min': 0, 'max': 9999.999, 'decimal': 3, 'unit': 'Km'},
+    },
+    '2W-Transformer': {
+        'Sr': {'min': 0, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA'},
+        'Vn0': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+        'Vn1': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+        'XHL': {'min': 0, 'max': 99.99999, 'decimal': 5, 'unit': '%'},
+    },
+    'PWM': {
+        'Sr': {'min': 0, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA'},
+        'Vn0': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+        'Vn1': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+        'XHL': {'min': 0, 'max': 99.99999, 'decimal': 5, 'unit': '%'},
+    },
+    'DC-DC-Converter': {
+        'Sr': {'min': 0, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA'},
+        'Vn0': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+        'Vn1': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+        'XHL': {'min': 0, 'max': 99.99999, 'decimal': 5, 'unit': '%'},
+    },
+    'AC-Load': {
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'Ohm'},
+        'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'Ohm'},
+        'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': ''},
+    },
+    'DC-Load': {
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'Ohm'},
+    },
+    'PV': {
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'Ohm'},
+    },
+    'AC-Wind': {
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'Ohm'},
+        'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'Ohm'},
+        'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': ''},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+    },
+    'DC-Wind': {
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'Ohm'},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+    },
+    'BESS': {
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'Ohm'},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        'cap': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+    },
 }

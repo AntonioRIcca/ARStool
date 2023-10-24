@@ -58,7 +58,7 @@ class OpenDSS:
 
             elif v[el]['category'] == 'AC-Wind':
                 v[el]['par']['Q'] = self.dss.generators.kvar
-                v[el]['par']['f'] = self.dss.generators.pf
+                v[el]['par']['cosPhi'] = self.dss.generators.pf
                 v[el]['par']['eff'] = 1
                 self.create_profile(el)
 
@@ -85,7 +85,7 @@ class OpenDSS:
 
             if v[el]['category'] == 'AC-Load':
                 v[el]['par']['Q'] = self.dss.loads.kvar
-                v[el]['par']['f'] = self.dss.loads.pf
+                v[el]['par']['cosPhi'] = self.dss.loads.pf
 
         elif mcat == 'Line':
             self.unr_lines.append(el)
@@ -326,7 +326,7 @@ class OpenDSS:
     def create_profile(self, el):
         v[el]['par']['profile'] = dict()
         v[el]['par']['profile']['name'] = None
-        v[el]['par']['profile']['curve'] = None
+        v[el]['par']['profile']['curve'] = 1
 
         # profile = None
         #

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_uitKAWIv.ui'
+## Form generated from reading UI file 'main_uiCjJaeH.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -575,6 +575,7 @@ class Ui_MainWindow(object):
 "border-width: 1px;\n"
 "border-color: rgb(223, 223, 223);")
         self.doubleSpinBox.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.doubleSpinBox.setButtonSymbols(QAbstractSpinBox.NoButtons)
 
         self.verticalLayout_13.addWidget(self.doubleSpinBox)
 
