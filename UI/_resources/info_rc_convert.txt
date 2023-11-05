@@ -1,0 +1,3 @@
+pyrcc5 resources.qrc -o resources_rc.py
+
+Copiare il file generato nella cartella di main.ui

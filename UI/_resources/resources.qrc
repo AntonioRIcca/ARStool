@@ -1,5 +1,11 @@
 <RCC>
   <qresource prefix="icons">
+    <file>icons/gridmanagement.png</file>
+    <file>icons/onr.png</file>
+    <file>icons/opf.png</file>
+    <file>icons/reliability.png</file>
+    <file>icons/reliability2.png</file>
+    <file>icons/loadflow.png</file>
     <file>icons/resize.png</file>
     <file>icons/back.png</file>
     <file>icons/unselect.png</file>
@@ -7,6 +13,7 @@
     <file>icons/maximize.png</file>
     <file>icons/minimize.png</file>
     <file>icons/analysis.png</file>
+    <file>icons/loadflow.png</file>
     <file>icons/close.png</file>
     <file>icons/dots.png</file>
     <file>icons/help.png</file>

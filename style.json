@@ -36,7 +36,7 @@
 				"height": "parent"
 			}],
 			"expandedSize": [{
-				"width": 130,
+				"width": 160,
 				"height": "parent"
 			}],
 			"toggleButton": [{
@@ -135,7 +135,7 @@
 				{
 					"navigationButtons":[
 						{
-							"homeBtn": "page_6",
+							"homeBtn": "home_PG",
 							"dataBtn": "page_7",
 							"reportBtn": "page_8"
 						}

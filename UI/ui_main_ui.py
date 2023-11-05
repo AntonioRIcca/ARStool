@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_uiCjJaeH.ui'
+## Form generated from reading UI file 'main_uiiEWBHD.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -24,7 +24,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(853, 583)
+        MainWindow.resize(1350, 900)
+        MainWindow.setBaseSize(QSize(1200, 800))
         MainWindow.setStyleSheet(u"*{\n"
 "	border: none;\n"
 "	background-color: transparent;\n"
@@ -173,6 +174,91 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addItem(self.verticalSpacer)
 
+        self.frame_11 = QFrame(self.leftMenuSubContainer)
+        self.frame_11.setObjectName(u"frame_11")
+        self.frame_11.setFrameShape(QFrame.StyledPanel)
+        self.frame_11.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_21 = QVBoxLayout(self.frame_11)
+        self.verticalLayout_21.setSpacing(0)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
+        self.loadflow_Btn = QPushButton(self.frame_11)
+        self.loadflow_Btn.setObjectName(u"loadflow_Btn")
+        self.loadflow_Btn.setMinimumSize(QSize(0, 40))
+        self.loadflow_Btn.setMaximumSize(QSize(16777215, 40))
+        self.loadflow_Btn.setFont(font)
+        self.loadflow_Btn.setStyleSheet(u"")
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/icons/loadflow.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.loadflow_Btn.setIcon(icon4)
+        self.loadflow_Btn.setIconSize(QSize(24, 24))
+        self.loadflow_Btn.setFlat(False)
+
+        self.verticalLayout_21.addWidget(self.loadflow_Btn)
+
+
+        self.verticalLayout_2.addWidget(self.frame_11)
+
+        self.opf_Btn = QPushButton(self.leftMenuSubContainer)
+        self.opf_Btn.setObjectName(u"opf_Btn")
+        self.opf_Btn.setMinimumSize(QSize(0, 40))
+        self.opf_Btn.setMaximumSize(QSize(16777215, 40))
+        self.opf_Btn.setFont(font)
+        self.opf_Btn.setStyleSheet(u"")
+        icon5 = QIcon()
+        icon5.addFile(u":/icons/icons/opf.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.opf_Btn.setIcon(icon5)
+        self.opf_Btn.setIconSize(QSize(24, 24))
+        self.opf_Btn.setFlat(False)
+
+        self.verticalLayout_2.addWidget(self.opf_Btn)
+
+        self.reliabilithy_Btn = QPushButton(self.leftMenuSubContainer)
+        self.reliabilithy_Btn.setObjectName(u"reliabilithy_Btn")
+        self.reliabilithy_Btn.setMinimumSize(QSize(0, 40))
+        self.reliabilithy_Btn.setMaximumSize(QSize(16777215, 40))
+        self.reliabilithy_Btn.setFont(font)
+        self.reliabilithy_Btn.setStyleSheet(u"")
+        icon6 = QIcon()
+        icon6.addFile(u":/icons/icons/reliability.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.reliabilithy_Btn.setIcon(icon6)
+        self.reliabilithy_Btn.setIconSize(QSize(24, 24))
+        self.reliabilithy_Btn.setFlat(False)
+
+        self.verticalLayout_2.addWidget(self.reliabilithy_Btn)
+
+        self.gidman_Btn = QPushButton(self.leftMenuSubContainer)
+        self.gidman_Btn.setObjectName(u"gidman_Btn")
+        self.gidman_Btn.setMinimumSize(QSize(0, 40))
+        self.gidman_Btn.setMaximumSize(QSize(16777215, 40))
+        self.gidman_Btn.setFont(font)
+        self.gidman_Btn.setStyleSheet(u"")
+        icon7 = QIcon()
+        icon7.addFile(u":/icons/icons/gridmanagement.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.gidman_Btn.setIcon(icon7)
+        self.gidman_Btn.setIconSize(QSize(24, 24))
+        self.gidman_Btn.setFlat(False)
+
+        self.verticalLayout_2.addWidget(self.gidman_Btn)
+
+        self.onr_Btn = QPushButton(self.leftMenuSubContainer)
+        self.onr_Btn.setObjectName(u"onr_Btn")
+        self.onr_Btn.setMinimumSize(QSize(0, 40))
+        self.onr_Btn.setMaximumSize(QSize(16777215, 40))
+        self.onr_Btn.setFont(font)
+        self.onr_Btn.setStyleSheet(u"")
+        icon8 = QIcon()
+        icon8.addFile(u":/icons/icons/onr.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.onr_Btn.setIcon(icon8)
+        self.onr_Btn.setIconSize(QSize(24, 24))
+        self.onr_Btn.setFlat(False)
+
+        self.verticalLayout_2.addWidget(self.onr_Btn)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer_2)
+
         self.frame_3 = QFrame(self.leftMenuSubContainer)
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setStyleSheet(u"")
@@ -188,9 +274,9 @@ class Ui_MainWindow(object):
         self.settingsBtn.setMaximumSize(QSize(16777215, 40))
         self.settingsBtn.setFont(font)
         self.settingsBtn.setStyleSheet(u"")
-        icon4 = QIcon()
-        icon4.addFile(u":/icons/icons/settings.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.settingsBtn.setIcon(icon4)
+        icon9 = QIcon()
+        icon9.addFile(u":/icons/icons/settings.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.settingsBtn.setIcon(icon9)
         self.settingsBtn.setIconSize(QSize(24, 24))
         self.settingsBtn.setFlat(False)
 
@@ -202,9 +288,9 @@ class Ui_MainWindow(object):
         self.infoBtn.setMaximumSize(QSize(16777215, 40))
         self.infoBtn.setFont(font)
         self.infoBtn.setStyleSheet(u"")
-        icon5 = QIcon()
-        icon5.addFile(u":/icons/icons/info.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.infoBtn.setIcon(icon5)
+        icon10 = QIcon()
+        icon10.addFile(u":/icons/icons/info.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.infoBtn.setIcon(icon10)
         self.infoBtn.setIconSize(QSize(24, 24))
         self.infoBtn.setFlat(False)
 
@@ -216,9 +302,9 @@ class Ui_MainWindow(object):
         self.helpBtn.setMaximumSize(QSize(16777215, 40))
         self.helpBtn.setFont(font)
         self.helpBtn.setStyleSheet(u"")
-        icon6 = QIcon()
-        icon6.addFile(u":/icons/icons/help.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.helpBtn.setIcon(icon6)
+        icon11 = QIcon()
+        icon11.addFile(u":/icons/icons/help.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.helpBtn.setIcon(icon11)
         self.helpBtn.setIconSize(QSize(24, 24))
         self.helpBtn.setFlat(False)
 
@@ -261,9 +347,9 @@ class Ui_MainWindow(object):
 
         self.closeCenterMenuBtn = QPushButton(self.frame_4)
         self.closeCenterMenuBtn.setObjectName(u"closeCenterMenuBtn")
-        icon7 = QIcon()
-        icon7.addFile(u":/icons/icons/close.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.closeCenterMenuBtn.setIcon(icon7)
+        icon12 = QIcon()
+        icon12.addFile(u":/icons/icons/close.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.closeCenterMenuBtn.setIcon(icon12)
         self.closeCenterMenuBtn.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_3.addWidget(self.closeCenterMenuBtn, 0, Qt.AlignRight)
@@ -380,27 +466,27 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.notificationBtn = QPushButton(self.frame_6)
         self.notificationBtn.setObjectName(u"notificationBtn")
-        icon8 = QIcon()
-        icon8.addFile(u":/icons/icons/notifications.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.notificationBtn.setIcon(icon8)
+        icon13 = QIcon()
+        icon13.addFile(u":/icons/icons/notifications.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.notificationBtn.setIcon(icon13)
         self.notificationBtn.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_6.addWidget(self.notificationBtn)
 
         self.moreMenuBtn = QPushButton(self.frame_6)
         self.moreMenuBtn.setObjectName(u"moreMenuBtn")
-        icon9 = QIcon()
-        icon9.addFile(u":/icons/icons/dots.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.moreMenuBtn.setIcon(icon9)
+        icon14 = QIcon()
+        icon14.addFile(u":/icons/icons/dots.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.moreMenuBtn.setIcon(icon14)
         self.moreMenuBtn.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_6.addWidget(self.moreMenuBtn)
 
         self.profileMenuBtn = QPushButton(self.frame_6)
         self.profileMenuBtn.setObjectName(u"profileMenuBtn")
-        icon10 = QIcon()
-        icon10.addFile(u":/icons/icons/user.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.profileMenuBtn.setIcon(icon10)
+        icon15 = QIcon()
+        icon15.addFile(u":/icons/icons/user.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.profileMenuBtn.setIcon(icon15)
         self.profileMenuBtn.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_6.addWidget(self.profileMenuBtn)
@@ -416,25 +502,25 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.minimizeBtn = QPushButton(self.frame_7)
         self.minimizeBtn.setObjectName(u"minimizeBtn")
-        icon11 = QIcon()
-        icon11.addFile(u":/icons/icons/minimize.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.minimizeBtn.setIcon(icon11)
+        icon16 = QIcon()
+        icon16.addFile(u":/icons/icons/minimize.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.minimizeBtn.setIcon(icon16)
 
         self.horizontalLayout_4.addWidget(self.minimizeBtn)
 
         self.restoreBtn = QPushButton(self.frame_7)
         self.restoreBtn.setObjectName(u"restoreBtn")
-        icon12 = QIcon()
-        icon12.addFile(u":/icons/icons/maximize.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.restoreBtn.setIcon(icon12)
+        icon17 = QIcon()
+        icon17.addFile(u":/icons/icons/maximize.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.restoreBtn.setIcon(icon17)
 
         self.horizontalLayout_4.addWidget(self.restoreBtn)
 
         self.closeBtn = QPushButton(self.frame_7)
         self.closeBtn.setObjectName(u"closeBtn")
-        icon13 = QIcon()
-        icon13.addFile(u":/icons/icons/close2.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.closeBtn.setIcon(icon13)
+        icon18 = QIcon()
+        icon18.addFile(u":/icons/icons/close2.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.closeBtn.setIcon(icon18)
 
         self.horizontalLayout_4.addWidget(self.closeBtn)
 
@@ -460,33 +546,30 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.mainPages = QCustomStackedWidget(self.mainContentsContainer)
         self.mainPages.setObjectName(u"mainPages")
-        self.page_6 = QWidget()
-        self.page_6.setObjectName(u"page_6")
-        self.verticalLayout_16 = QVBoxLayout(self.page_6)
-        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
-        self.homeSW = QStackedWidget(self.page_6)
-        self.homeSW.setObjectName(u"homeSW")
+        self.home_PG = QWidget()
+        self.home_PG.setObjectName(u"home_PG")
+        self.home_VL = QVBoxLayout(self.home_PG)
+        self.home_VL.setObjectName(u"home_VL")
+        self.home_WGT = QWidget(self.home_PG)
+        self.home_WGT.setObjectName(u"home_WGT")
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.homeSW.sizePolicy().hasHeightForWidth())
-        self.homeSW.setSizePolicy(sizePolicy3)
-        self.page_9 = QWidget()
-        self.page_9.setObjectName(u"page_9")
-        self.horizontalLayout_13 = QHBoxLayout(self.page_9)
+        sizePolicy3.setHeightForWidth(self.home_WGT.sizePolicy().hasHeightForWidth())
+        self.home_WGT.setSizePolicy(sizePolicy3)
+        self.horizontalLayout_13 = QHBoxLayout(self.home_WGT)
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-        self.label_10 = QLabel(self.page_9)
+        self.label_10 = QLabel(self.home_WGT)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setFont(font1)
         self.label_10.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_13.addWidget(self.label_10)
 
-        self.homeSW.addWidget(self.page_9)
 
-        self.verticalLayout_16.addWidget(self.homeSW)
+        self.home_VL.addWidget(self.home_WGT)
 
-        self.mainPages.addWidget(self.page_6)
+        self.mainPages.addWidget(self.home_PG)
         self.page_7 = QWidget()
         self.page_7.setObjectName(u"page_7")
         self.verticalLayout_17 = QVBoxLayout(self.page_7)
@@ -546,7 +629,7 @@ class Ui_MainWindow(object):
 
         self.closeRightMenuBtn = QPushButton(self.frame_8)
         self.closeRightMenuBtn.setObjectName(u"closeRightMenuBtn")
-        self.closeRightMenuBtn.setIcon(icon7)
+        self.closeRightMenuBtn.setIcon(icon12)
         self.closeRightMenuBtn.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_10.addWidget(self.closeRightMenuBtn, 0, Qt.AlignRight)
@@ -637,7 +720,7 @@ class Ui_MainWindow(object):
 
         self.closeNotificationBtn = QPushButton(self.frame_9)
         self.closeNotificationBtn.setObjectName(u"closeNotificationBtn")
-        self.closeNotificationBtn.setIcon(icon7)
+        self.closeNotificationBtn.setIcon(icon12)
         self.closeNotificationBtn.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_9.addWidget(self.closeNotificationBtn)
@@ -717,6 +800,26 @@ class Ui_MainWindow(object):
         self.reportBtn.setToolTip(QCoreApplication.translate("MainWindow", u"View Report", None))
 #endif // QT_CONFIG(tooltip)
         self.reportBtn.setText(QCoreApplication.translate("MainWindow", u"Report", None))
+#if QT_CONFIG(tooltip)
+        self.loadflow_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"LoadFlow", None))
+#endif // QT_CONFIG(tooltip)
+        self.loadflow_Btn.setText(QCoreApplication.translate("MainWindow", u"LoadFlow", None))
+#if QT_CONFIG(tooltip)
+        self.opf_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"Optimal Power Flow", None))
+#endif // QT_CONFIG(tooltip)
+        self.opf_Btn.setText(QCoreApplication.translate("MainWindow", u"OPF", None))
+#if QT_CONFIG(tooltip)
+        self.reliabilithy_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"Reliability and Adequacy", None))
+#endif // QT_CONFIG(tooltip)
+        self.reliabilithy_Btn.setText(QCoreApplication.translate("MainWindow", u"Reliability", None))
+#if QT_CONFIG(tooltip)
+        self.gidman_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"Grid Management", None))
+#endif // QT_CONFIG(tooltip)
+        self.gidman_Btn.setText(QCoreApplication.translate("MainWindow", u"Grid Management", None))
+#if QT_CONFIG(tooltip)
+        self.onr_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"Optimal Network Reconfiguration", None))
+#endif // QT_CONFIG(tooltip)
+        self.onr_Btn.setText(QCoreApplication.translate("MainWindow", u"ONR", None))
 #if QT_CONFIG(tooltip)
         self.settingsBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Settings", None))
 #endif // QT_CONFIG(tooltip)

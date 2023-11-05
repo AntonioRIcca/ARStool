@@ -38,6 +38,9 @@ class OpenDSS:
                 break
 
         self.dss.circuit.set_active_element(mcat + '.' + el)
+
+        v[el]['par']['out-of-service'] = not self.dss.cktelement.is_enabled
+
         if mcat == 'Vsource':
             v[el]['par']['Vn'] = self.dss.vsources.base_kv
 
@@ -113,6 +116,9 @@ class OpenDSS:
             v[el]['top']['conn'].append(node)
             if v1:
                 v[node]['par']['Vn'] = v1
+
+            self.dss.circuit.set_active_element(node)
+            v[node]['par']['out-of-service'] = not self.dss.cktelement.is_enabled
 
     def node_define(self):
         sourcebus = v['source']['top']['conn'][0]
@@ -279,6 +285,7 @@ class OpenDSS:
 
     def solve(self):
         self.dss.solution.solve()
+        print(self.dss.circuit.total_power)
 
         for el in v.keys():
             self.results_store(el)
@@ -354,7 +361,7 @@ class OpenDSS:
             if v[el]['category'] in mc['Transformer']:
                 self.dss.transformers.name = el
                 self.dss.circuit.set_active_element('transformer.' + el)
-                print(self.dss.cktelement.name + ': ' + str(self.dss.cktelement.losses), str(self.dss.cktelement.phase_losses))
+                # print(self.dss.cktelement.name + ': ' + str(self.dss.cktelement.losses), str(self.dss.cktelement.phase_losses))
 
 
 OpenDSS()

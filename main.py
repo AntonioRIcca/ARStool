@@ -1,9 +1,13 @@
 import py_dss_interface
-from PyQt5.QtCore import QTimer
-from PySide2 import QtGui
+# from PySide2.QtCharts import QChart, QChartView, QBarSet, QPercentBarSeries, QBarCategoryAxis
 
+from functools import partial
 
-from variables import c, vdss, v
+from PySide2 import QtGui, QtCore
+
+from PySide2.QtCharts import *
+
+from variables import c, vdss, v, mc
 import yaml
 # from PySide2 import *
 from PySide2.QtWidgets import *
@@ -18,6 +22,9 @@ from UI.elementProperties import Window
 
 import time
 
+from collections import namedtuple
+Data = namedtuple('Data', ['name', 'value', 'primary_color', 'secondary_color'])
+
 
 class Main:
     def __init__(self):
@@ -29,61 +36,39 @@ class Main:
         # f_main.start()
 
     def interface_open(self):
-        print(1)
         self.mainwindow = MainWindow()
-        print(2)
         self.ui = self.mainwindow.ui
-        print('show)')
         self.mainwindow.show()
 
-        self.ui.label_10.setText('APERTO!!!')
+        # self.ui.label_10.setText('APERTO!!!')
+        #
+        # from UI.table_wgt import Table
+        # self.myform = Table()
+        # mywidget = self.myform.ui.widget
+        #
+        # self.ui.homeSW.removeWidget(self.ui.homeSW.currentWidget())
+        # self.ui.homeSW.addWidget(mywidget)
 
-        from UI.table_wgt import Table
-        self.myform = Table()
-        mywidget = self.myform.ui.widget
-
-        self.ui.homeSW.removeWidget(self.ui.homeSW.currentWidget())
-        self.ui.homeSW.addWidget(mywidget)
+        self.homeWGT_create()
+        self.ui.mainPages.setCurrentIndex(0)
 
         self.elementsTableFill()
 
         self.myform.ui.tableWidget.currentCellChanged.connect(self.test_action)
 
-        # self.myform.ui.label.setText('riuscito! ......................................!')
-        # self.myform.ui.label_2.setText(str(self.ui.homeSW.size()))
-
         self.ui.profileMenuBtn.clicked.connect(self.test_action2)
         self.ui.moreMenuBtn.clicked.connect(self.test_action2)
-
-        # for w in self.ui.mainPages.
-        # mywgt = myform.
-        # a = QtWidgets.QWidget()
-
-        # self.ui.mainPages.widget(0)
-        # for w in self.ui.mainPages.count():
-        #     print(w)
-        # for w in self.ui.mainPages.w
-        # self.ui.mainPages.
-        # self.ui.mainPages.addWidget()
+        self.ui.loadflow_Btn.clicked.connect(self.loadflow)
 
         Window(list(v.keys())[0])
         self.ui.rightMenuContainer.expandMenu()
 
-        print('exec')
         self.app.exec_()
 
     def readsize(self):
         self.par_wgt = Window('rs_line')
         self.ui.rightMenuPages.addWidget(self.par_wgt.mywidget)
         self.ui.rightMenuPages.setCurrentIndex(2)
-
-        # self.ui.rightMenuContainer.expandMenu()
-        # self.myform.ui.label_2.setText(str(self.ui.homeSW.size()))
-        # self.timer = QTimer()
-        # self.timer.setInterval(2000)
-        # self.timer.timeout.connect(self.test_action)
-        # self.timer.start()
-        # self.elementsTableFill()
         pass
 
     def elementsTableFill(self):
@@ -117,50 +102,456 @@ class Main:
         self.myform.ui.tableWidget.setColumnWidth(1, 150)
 
     def test_action(self):
-        # self.myform.ui.label_2.setText(str(self.ui.homeSW.size().height()))
-        # self.myform.ui.tableWidget.setMinimumHeight(self.ui.homeSW.size().height())
-        # self.timer.stop()
         line = self .myform.ui.tableWidget.currentRow()
         elem = self.myform.ui.tableWidget.item(line, 0).text()
         print(elem)
 
         try:
-        # self.ui.rightMenuPages.setCurrentIndex(self.ui.rightMenuPages.count() - 1)
-        #     self.ui.rightMenuPages.removeWidget(self.ui.rightMenuPages.widget(self.ui.rightMenuPages.currentIndex()))
             self.ui.rightMenuPages.removeWidget(self.ui.rightMenuPages.widget(2))
         except:
-        # print(self.ui.rightMenuPages.widget(self.ui.rightMenuPages.currentIndex()))
             pass
 
         self.ui.rightMenuContainer.expandMenu()
 
         self.par_wgt = Window(elem)
-        self.ui.rightMenuPages.addWidget(self.par_wgt.mywidget)
+        self.ui.rightMenuPages.addWidget(self.par_wgt.mainWidget)
 
         self.ui.rightMenuPages.setCurrentIndex(self.ui.rightMenuPages.count() - 1)
 
-        print(self.ui.rightMenuPages.count())
+        self.par_wgt.cancel_BTN.clicked.connect(self.ui.rightMenuContainer.collapseMenu)
+
+        # print(self.ui.rightMenuPages.count())
 
         pass
 
-    def test_action2(self):
-        print(self.ui.rightMenuPages.currentIndex())
+    def test_action2(self, mcat, event=None):
+        # print(self.ui.rightMenuPages.currentIndex())
+        print('azione')
+        # -- Creazione del diagramma delle generazioni ---------------------------
+        # Todo: da definire come gestire i dati  deò diagramma
+        from UI.donutbreakdown2 import DonutBreakdownChart
+        db_graph = DonutBreakdownChart(mcat=mcat, data=self.lf_cat[mcat])
+
+        self.home3_top_WGT.deleteLater()
+        self.home3_top_WGT = QtCharts.QChartView(db_graph)
+        self.home3_VL.insertWidget(0, self.home3_top_WGT)
+        # --------------------------------------------------------------
+
+        self.lf_cat_widget(mcat)
+
+        pass
+
+    def homeWGT_create(self):
+        try:
+            self.ui.home_WGT.deleteLater()
+        except:
+            self.home_WGT.deleteLater()
+        self.home_WGT = QWidget()
+
+        self.homeHBL = QHBoxLayout(self.home_WGT)
+        self.homeHBL.setContentsMargins(0, 0, 0, 0)
+
+        from UI.table_wgt import Table
+        self.myform = Table()
+        self.elemementTableWGT = self.myform.ui.widget
+        self.elemementTableWGT.setMinimumSize(QtCore.QSize(350, 0))
+
+        self.homeHBL.addWidget(self.elemementTableWGT, 0, QtCore.Qt.AlignLeft)
+        # self.homeHBL.addWidget(self.homeDxWGT)
+
+        # self.ui.homeSW.removeWidget(self.ui.homeSW.currentWidget())
+        self.ui.home_VL.addWidget(self.home_WGT)
+        # self.ui.home_SW.insertWidget(0, self.ui.home_WGT)
+        # self.ui.mainPages.setCurrentIndex(1)
+        # print(self.ui.mainPages.currentIndex())
+        # self.ui.mainPages.setCurrentWidget(self.ui.home_WGT)
+
+        # super(lfWGT, self).__init__()
+        # wgt = LFrWGT()
+        # self.lfWGT = wgt.ui.lfres_WGT
+        #
+        # self.homeHBL.addWidget(self.lfWGT)
+
+        # self.widget2 = QWidget()
+        # # self.lbl = QLabel(self.widget2)
+        # # self.lbl.setText('ooooooooooooo')
+        # self.widget2.setStyleSheet("background-color:rgb(255,0,0);")
+        # self.widget2.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+        # self.homeHBL.addWidget(self.widget2)
+        # self.homeDxWGT.setStyleSheet("background-color: rgb(0,255,0);")
+
+        # self.homeHBL.removeWidget(self.homeDxWGT)
+        # self.homeDxWGT = QWidget()
+        self.home2_WGT = QWidget()
+        self.home3_WGT = QWidget()
+        # self.home3_WGT.setStyleSheet("background-color: rgb(0,0,255);")
+        self.home3_WGT.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+
+        self.home3_VL = QVBoxLayout(self.home3_WGT)
+        self.home3_VL.setContentsMargins(0, 0, 0, 0)
+        self.home3_top_WGT = QWidget()
+        self.home3_center_WGT = QWidget()
+        self.home3_bottom_WGT = QWidget()
+        self.home3_bottom_WGT.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
+        self.home3_bottom_WGT.setStyleSheet("background-color: rgb(0,255,255);")
+
+        self.home3_VL.addWidget(self.home3_top_WGT)
+        self.home3_VL.addWidget(self.home3_center_WGT)
+        self.home3_VL.addWidget(self.home3_bottom_WGT)
+
+        # self.homeHBL.deleteLater()
+        self.homeHBL.addWidget(self.home2_WGT)
+        self.homeHBL.addWidget(self.home3_WGT)
+
+        # self.homeDxWGT.deleteLater()
+
+        # self.barchart()
+
+        # -- Creazione del diagramma a torta ---------------------------
+        # Todo: da definire come gestire i dati  deò diagramma
+        # from UI.piechart import PieChart
+        # chart = PieChart()
+        # chart_view = QtCharts.QChartView(chart)
+        #
+        # self.lf_WGT.ui.image_VL.addWidget(chart_view)
+        # --------------------------------------------------------------
+
+
+
+    def barchart(self):
+        # set0 = QtCharts.QBarSet('Parwix')
+        # set1 = QtCharts.QBarSet('Bob')
+        # set2 = QtCharts.QBarSet('Tom')
+        # set3 = QtCharts.QBarSet('Logan')
+        # set4 = QtCharts.QBarSet('Karim')
+        #
+        # set0 << 1 << 2 << 3 << 4 << 5 << 6
+        # set1 << 5 << 0 << 0 << 4 << 0 << 7
+        # set2 << 3 << 5 << 8 << 13 << 8 << 5
+        # set3 << 5 << 6 << 7 << 3 << 4 << 5
+        # set4 << 9 << 7 << 5 << 3 << 1 << 1
+        #
+        # series = QtCharts.QPercentBarSeries()
+        # series.append(set0)
+        # series.append(set1)
+        # series.append(set2)
+        # series.append(set3)
+        # series.append(set4)
+        #
+        # chart = QtCharts.QChart()
+        # chart.addSeries(series)
+        # chart.setTitle('Percent BarChart Example')
+        # chart.setAnimationOptions(QtCharts.QChart.SeriesAnimations)
+        #
+        # categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', ]
+
+        cat = ['External Grid', 'Generation', 'Loads', 'BESS', 'Losses']
+        p = ['eg', 'gen', 'loads', 'bess', 'loss']
+        series = QtCharts.QPercentBarSeries()
+
+        for i in range(5):
+            self.__setattr__('set' + str(i), QtCharts.QBarSet(cat[i]))
+            if cat[i] in ['Generation', 'External Grid']:
+                if self.__getattribute__('p_' + p[i]) >= 0:
+                    self.__getattribute__('set' + str(i)).append([self.__getattribute__('p_' + p[i]), 0])
+                else:
+                    self.__getattribute__('set' + str(i)).append([0, self.__getattribute__('p_' + p[i])])
+            else:
+                if self.__getattribute__('p_' + p[i]) >= 0:
+                    self.__getattribute__('set' + str(i)).append([0, self.__getattribute__('p_' + p[i])])
+                else:
+                    self.__getattribute__('set' + str(i)).append([self.__getattribute__('p_' + p[i]), 0])
+                
+            series.append(self.__getattribute__('set' + str(i)))
+
+        # series = QtCharts.QPercentBarSeries()
+        # set0 = QtCharts.QBarSet('External Grid')
+        # set1 = QtCharts.QBarSet('Generation')
+        # set2 = QtCharts.QBarSet('Loads')
+        # set3 = QtCharts.QBarSet('BESS')
+        # set4 = QtCharts.QBarSet('Losses')
+        #
+        # set0.append([1800, 1000])
+        # set1.append([1500, 0])
+        # set2.append([0, 3200])
+        # set3.append([0, 100])
+        # set4.append([0, 500])
+        # # set4 << 9 << 7 << 5 << 3 << 1 << 1
+        #
+        # series.append(set0)
+        # series.append(set1)
+        # series.append(set2)
+        # series.append(set3)
+        # series.append(set4)
+
+        chart = QtCharts.QChart()
+        chart.addSeries(series)
+        # chart.setTitle('Percent BarChart Example')
+        chart.setAnimationOptions(QtCharts.QChart.SeriesAnimations)
+
+        categories = ['In', 'Cons']
+
+        axis = QtCharts.QBarCategoryAxis()
+        axis.append(categories)
+        chart.createDefaultAxes()
+        chart.setAxisX(axis, series)
+        chart.setBackgroundBrush(QtGui.QBrush(QtGui.QColor('transparent')))
+        chart.legend().setLabelColor('white')
+        chart.setTitleBrush(QtGui.QColor(255, 255, 255))
+        chart.setTitleFont(QtGui.QFont("Arial", 12))
+        chart.axisX().setLabelsColor('white')
+        chart.axisY().setLabelsColor('white')
+        # chart.axisY().__format__("%.0f")
+        chart.axisY().setLabelFormat("%.0f%%")
+        chart.legend().setFont(QtGui.QFont("Arial", 10))
+
+        # self.home3_top_WGT.deleteLater()
+
+        self.lf_WGT.ui.lfres_bottom_WGT.deleteLater()
+
+        lfres_bottom_WGT = QtCharts.QChartView(chart)
+        print('oook')
+        # self.home3_VL.insertWidget(0, self.home3_top_WGT)
+        self.lf_WGT.ui.lfres_VL.insertWidget(3, lfres_bottom_WGT)
+        # self.lf_WGT.ui.image_VL.addWidget(self.home3_top_WGT)
+
+    def loadflow(self):
+
+        self.ui.rightMenuContainer.collapseMenu()
+        self.home2_WGT.deleteLater()
+
+        dss.write_all()
+        print(dss.solve())
+        self.p_loads, self.q_loads = 0, 0
+        self.p_gen, self.q_gen = 0, 0
+        self.p_bess, self.q_bess = 0, 0
+
+        self.lf_cat = dict()
+        for mcat in ['Generators', 'Loads', 'BESS']:
+            self.lf_cat[mcat] = dict()
+        # for cat in ['AC-Load', 'DC-Load', 'PV', 'AC-Wind', 'DC-Wind', 'BESS']:
+        #     lf_cat[cat] = dict()
+
+        for elem in v.keys():
+            cat = v[elem]['category']
+            if v[elem]['category'] in ['AC-Load', 'DC-Load']:
+                self.p_loads += v[elem]['lf']['p']
+                self.q_loads += v[elem]['lf']['q']
+                mcat = 'Loads'
+
+            elif v[elem]['category'] in ['PV', 'AC-Wind', 'DC-Wind']:
+                self.p_gen -= v[elem]['lf']['p']
+                self.q_gen -= v[elem]['lf']['q']
+                mcat = 'Generators'
+
+            elif v[elem]['category'] in ['BESS']:
+                self.p_bess += v[elem]['lf']['p']
+                self.q_bess += v[elem]['lf']['q']
+                mcat = 'BESS'
+
+            if cat in ['AC-Load', 'DC-Load', 'PV', 'AC-Wind', 'DC-Wind', 'BESS']:
+                if cat not in list(self.lf_cat[mcat].keys()):
+                    self.lf_cat[mcat][cat] = dict()
+                self.lf_cat[mcat][cat][elem] = {
+                    'p': abs(v[elem]['lf']['p']),
+                    'q': abs(v[elem]['lf']['q']),
+                }
+
+        self.p_eg, self.q_eg = -v['source']['lf']['p'], -v['source']['lf']['q']
+        self.p_loss = self.p_eg + self.p_gen - self.p_loads - self.p_bess
+        self.q_loss = self.q_eg + self.q_gen - self.q_loads - self.q_bess
+
+        self.lf_WGT = LFrWGT()
+        self.home2_WGT = self.lf_WGT.ui.lfres_WGT
+
+        self.homeHBL.insertWidget(1, self.home2_WGT)
+
+        self.lf_WGT.ui.gen_GB.mouseDoubleClickEvent = partial(self.test_action2, 'Generators')
+        self.lf_WGT.ui.loads_GB.mouseDoubleClickEvent = partial(self.test_action2, 'Loads')
+        self.lf_WGT.ui.bess_GB.mouseDoubleClickEvent = partial(self.test_action2, 'BESS')
+
+        for cat in ['eg', 'loss', 'loads', 'bess', 'gen']:
+            self.lf_WGT.ui.__getattribute__('p_' + cat + '_value_LBL').setText(
+                str(round(self.__getattribute__('p_' + cat), 2)))
+            self.lf_WGT.ui.__getattribute__('q_' + cat + '_value_LBL').setText(
+                str(round(self.__getattribute__('q_' + cat), 2)))
+
+        self.barchart()
+
+        # # -- Creazione del diagramma a torta ---------------------------
+        # eg = Data('External Grid', self.p_eg, QtGui.QColor("#ffc000"), QtGui.QColor("#ffe699"))
+        # gen = Data('Generation', self.p_gen, QtGui.QColor("#ed7d31"), QtGui.QColor("#f8cbad"))
+        # loads = Data('Loads', self.p_loads, QtGui.QColor("#5b9bd5"), QtGui.QColor("#bdd7ee"))
+        # bess = Data('BESS', self.p_bess, QtGui.QColor("#70ad47"), QtGui.QColor("#c5e0b4"))
+        # loss = Data('Losses', self.p_loss, QtGui.QColor("#44546a"), QtGui.QColor("#adb9ca"))
+        # data = [eg, gen, loads, bess, loss]
+        #
+        # from UI.piechart import PieChart
+        # chart = PieChart(data=data)
+        # chart_view = QtCharts.QChartView(chart)
+        #
+        # self.lf_WGT.ui.image_VL.addWidget(chart_view)
+        # chart_view.setAlignment()
+        # # --------------------------------------------------------------
+
+        print('LF done')
+
+    def lf_cat_widget(self, mcat):
+        colors = [QtGui.Qt.red, QtGui.Qt.darkGreen, QtGui.Qt.darkBlue]
+        i = 0
+        mycol = QtGui.Qt.red
+
+        mycolor = 'rgb(100,100,100)'
+        # print(str(a))
+
+        self.home3_center_WGT.deleteLater()
+
+        self.home3_center_WGT = QWidget()
+        # self.home3_center_WGT.setStyleSheet("font: 10pt")
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setPointSize(10)
+        self.home3_center_WGT.setFont(font)
+        # self.home3_center_WGT.setFont(QtGui.QFont().setPointSize(20))
+        self.home3_center_VL = QVBoxLayout(self.home3_center_WGT)
+        self.home3_center_VL.setSpacing(0)
+        # self.home3_center_VL.setContentsMargins()
+        for cat in self.lf_cat[mcat]:
+            self.__setattr__('home3_' + cat + '_top_LN', QFrame())
+            self.__getattribute__('home3_' + cat + '_top_LN').setStyleSheet('border: 1px solid rgb(255, 255, 255);')
+            self.__getattribute__('home3_' + cat + '_top_LN').setFrameShape(QFrame.HLine)
+            # self.__getattribute__('home3_' + cat + '_top_LN').setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Minimum)
+
+            self.__setattr__('home3_' + cat + '_WGT', QWidget())
+
+            # self.__getattribute__('home3_' + cat + '_WGT').setStyleSheet(
+            #     '#home3_' + cat + '_WGT{'
+            #     'border-top: 1px solid rgb(255,255,255);'
+            #     'border-bottom: 1px solid rgb(255,255,255);'
+            #     '}'
+            # )
+
+            # print(self.__getattribute__('home3_' + cat + '_WGT').styleSheet())
+
+            self.__setattr__('home3_' + cat + '_HL', QHBoxLayout(self.__getattribute__('home3_' + cat + '_WGT')))
+            self.__getattribute__('home3_' + cat + '_HL').setContentsMargins(0, 0, 0, 0)
+            self.__setattr__('home3_' + cat + '_sx_LBL', QLabel(cat))
+            self.__setattr__('home3_' + cat + '_ctr_WGT', QWidget())
+            self.__setattr__('home3_' + cat + '_dx_WGT', QWidget())
+            sizepolicy1 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+            # sizepolicy1.setHorizontalStretch(2)
+            sizepolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+            # sizepolicy2.setHorizontalStretch(1)
+            sizepolicy3 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+            # sizepolicy3.setHorizontalStretch(2)
+
+            self.__getattribute__('home3_' + cat + '_sx_LBL').setSizePolicy(sizepolicy1)
+            self.__getattribute__('home3_' + cat + '_sx_LBL').setMinimumSize(80, 0)
+
+            self.__getattribute__('home3_' + cat + '_sx_LBL').setAlignment(QtGui.Qt.AlignRight|QtGui.Qt.AlignVCenter)
+            self.__getattribute__('home3_' + cat + '_sx_LBL').setStyleSheet(u'font: bold 12pt "MS Shell Dlg 2"')
+            self.__getattribute__('home3_' + cat + '_ctr_WGT').setSizePolicy(sizepolicy2)
+            self.__getattribute__('home3_' + cat + '_dx_WGT').setSizePolicy(sizepolicy3)
+            # self.__getattribute__('home3_' + cat + '_dx_WGT').setSizePolicy(QSizePolicy.MinimumExpanding,
+            #                                                                    QSizePolicy.Preferred)
+            self.__getattribute__('home3_' + cat + '_HL').addWidget(self.__getattribute__('home3_' + cat + '_sx_LBL'))
+            self.__getattribute__('home3_' + cat + '_HL').addWidget(self.__getattribute__('home3_' + cat + '_ctr_WGT'))
+            self.__getattribute__('home3_' + cat + '_HL').addWidget(self.__getattribute__('home3_' + cat + '_dx_WGT'))
+
+            self.__setattr__('home3_' + cat + '_VL', QVBoxLayout(self.__getattribute__('home3_' + cat + '_ctr_WGT')))
+            self.__getattribute__('home3_' + cat + '_VL').setSpacing(0)
+            # self.__getattribute__('home3_' + cat + '_VL').setContentsMargins(0, 0, 0, 0)
+
+            # self.__setattr__('home3_' + cat + '_VL', QVBoxLayout(self.__getattribute__('home3_' + cat + '_WGT')))
+
+            self.home3_center_VL.addWidget(self.__getattribute__('home3_' + cat + '_top_LN'))
+            self.home3_center_VL.addWidget(self.__getattribute__('home3_' + cat + '_WGT'))
+            for elem in self.lf_cat[mcat][cat]:
+                self.__setattr__('home3_' + elem + '_WGT', QWidget())
+                print('home3_' + elem + '_WGT')
+                self.__setattr__('home3_' + elem + '_HL', QHBoxLayout(self.__getattribute__('home3_' + elem + '_WGT')))
+                self.__getattribute__('home3_' + elem + '_HL').setContentsMargins(0, 5, 0, 5)
+
+                self.__setattr__('home3_' + elem + '_name_LBL', QLabel(elem + ':'))
+                self.__setattr__('home3_' + elem + '_color_WGT', QWidget())
+                self.__setattr__('home3_' + elem + '_p_LBL', QLabel((f"{self.lf_cat[mcat][cat][elem]['p']:.1f}")))
+                self.__setattr__('home3_' + elem + '_unit_LBL', QLabel('kW'))
+                self.__getattribute__('home3_' + elem + '_HL').addWidget(self.__getattribute__('home3_' + elem + '_name_LBL'))
+                self.__getattribute__('home3_' + elem + '_HL').addWidget(self.__getattribute__('home3_' + elem + '_color_WGT'))
+                self.__getattribute__('home3_' + elem + '_HL').addWidget(self.__getattribute__('home3_' + elem + '_p_LBL'))
+                self.__getattribute__('home3_' + elem + '_HL').addWidget(self.__getattribute__('home3_' + elem + '_unit_LBL'))
+                self.__getattribute__('home3_' + elem + '_name_LBL').setAlignment(QtGui.Qt.AlignRight)
+                self.__getattribute__('home3_' + elem + '_name_LBL').setSizePolicy(QSizePolicy.Preferred,
+                                                                                   QSizePolicy.Preferred)
+                self.__getattribute__('home3_' + elem + '_name_LBL').setMinimumSize(150, 0)
+                # self.__getattribute__('home3_' + elem + '_name_LBL').setMinimumSize(150, 0)
+                self.__getattribute__('home3_' + elem + '_p_LBL').setSizePolicy(QSizePolicy.Fixed,
+                                                                                QSizePolicy.Preferred)
+                self.__getattribute__('home3_' + elem + '_p_LBL').setMinimumSize(50, 0)
+                # self.__getattribute__('home3_' + elem + '_unit_LBL').setSizePolicy(QSizePolicy.MinimumExpanding,
+                #                                                                    QSizePolicy.Preferred)
+                self.__getattribute__('home3_' + elem + '_p_LBL').setAlignment(QtGui.Qt.AlignRight)
+
+                # mycolor = QtGui.QColor(50, 50, 50)
+                self.__getattribute__('home3_' + elem + '_name_LBL').setStyleSheet('color: ' + mycolor)
+
+                self.__getattribute__('home3_' + cat + '_VL').addWidget(self.__getattribute__('home3_' + elem + '_WGT'))
+            i += 1
+
+        self.home3_table_bottom_LN = QFrame()
+        self.home3_table_bottom_LN.setStyleSheet('border: 1px solid rgb(255, 255, 255);')
+        self.home3_table_bottom_LN.setFrameShape(QFrame.HLine)
+        self.home3_center_VL.addWidget(self.home3_table_bottom_LN)
+
+        self.home3_VL.insertWidget(1, self.home3_center_WGT)
+        self.home3_VL.insertWidget(0, self.home3_top_WGT)
+        #
+        # self.home3_PV_WGT.setObjectName(u"#home3_PV_WGT")
+        # self.home3_PV_WGT.setStyleSheet(u"#home3_PV_WGT{\n"
+        #                                 "	border-top: 1px solid rgb(85, 255, 127);\n"
+        #                                 "	border-bottom: 1px solid rgb(255, 255, 0);\n"
+        #                                 "   background-color: rgb(0,255,0);\n"
+        #                                 "}"
+        #                                 )
+        # print(self.home3_PV_WGT.styleSheet())
+        # self.home3_PV_WGT.setStyleSheet(u'border-top: 1px solid rgb(255,255,255);border-bottom: 1px solid rgb(255,255,255);')
+
+
+
+
+class LFrWGT(QMainWindow):
+    def __init__(self):
+        from UI.ui_lfres import Ui_lfres_mainWGT
+
+        super(LFrWGT, self).__init__()
+        self.ui = Ui_lfres_mainWGT()
+        self.ui.setupUi(self)
+
+# if __name__ == '__main__':
+#     app = QApplication(sys.argv)
+#     # mw = QMainWindow()
+#     window = LFrWGT()
+#     # window.ui.setupUi(mw)
+#     window.show()
+#
+#     sys.exit(app.exec_())
 
 
 dss = opendss.OpenDSS()
 
-filename = 'C:/Users/anton/PycharmProjects/OpenDSS/CityArea.dss'
+filename = 'C:/Users/anton/PycharmProjects/ARStool/CityArea.dss'
 
 dss.open(filename)
 
-print(list(v.keys())[0])
 
-dss.write_all()
+# print(list(v.keys())[0])
+
+# dss.write_all()
 
 # dss.solve_profile()
 dss.solve()
 
-dss.losses_calc()
+# dss.losses_calc()
 #
 # print(dss.dss.circuit.total_power)
 #
