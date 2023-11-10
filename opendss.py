@@ -1,7 +1,7 @@
 import py_dss_interface
 from variables import v, c, mc, par_dict
-# import yaml
-# import os
+import yaml
+import os
 
 
 class OpenDSS:
@@ -152,9 +152,9 @@ class OpenDSS:
                     v[bus2]['par']['Vn'] = vn
                     self.unr_lines.remove(el)
 
-    def write_all(self):
+    def write_all(self, t=None):
         for el in v.keys():
-            self.write(el=el)
+            self.write(el=el, t=t)
 
     def write(self, el, t=None):
         mcat = None
@@ -163,13 +163,33 @@ class OpenDSS:
             if cat in mc[m]:
                 mcat = m
                 break
+
         self.dss.circuit.set_active_element(mcat + '.' + el)
 
-        f = 1
+        cat = v[el]['category']
 
+        if cat not in ['AC-Line', 'DC-Line', '2W-Transformer', 'PWM', 'DC-DC-Converter']:
+            self.dss.cktelement.enabled(not v[el]['par']['out-of-service'])
+        elif v[el]['par']['out-of-service']:
+            # self.dss.cktelement.open_terminal(True)
+            # print(self.dss.cktelement.open_terminal(5))
+            # self.dss.cktelement.enabled(0)
+            self.dss.text('Open object=' + mcat + '.' + el + ' term=1')
+            self.dss.text('Open object=' + mcat + '.' + el + ' term=2')
+
+
+        else:
+            # self.dss.cktelement.close_terminal(True)
+            # self.dss.cktelement.close_terminal(5)
+            # self.dss.cktelement.enabled(1)
+            self.dss.text('Close object=' + mcat + '.' + el + ' term=1')
+            self.dss.text('Close object=' + mcat + '.' + el + ' term=2')
+
+
+        f = 1
         if t is not None and cat in mc['Generator'] + mc['Load'] and v[el]['par']['profile']['curve'] is not None:
             self.dss.__getattribute__(mcat.lower() + 's').__setattr__('name', el)
-            f = v[el]['par']['profile']['curve'][int(t * 4)]
+            f = v[el]['par']['profile']['curve'][int(t)]
 
         if cat not in ['ExternalGrid', 'Node']:
             self.dss.__getattribute__(mcat.lower() + 's').__setattr__('name', el)
@@ -290,14 +310,26 @@ class OpenDSS:
         for el in v.keys():
             self.results_store(el)
 
+
+        # self.dss.circuit.set_active_element('line.EV-Charge_Line')
+        self.dss.circuit.set_active_element('transformer.UGS_PWM')
+        print(self.dss.cktelement.name)
+        print('N. terminals: ' + str(self.dss.cktelement.num_terminals))
+        print('Terminal opened: ' + str(bool(self.dss.cktelement.is_terminal_open)))
+        print(self.dss.cktelement.currents_mag_ang)
+        print(self.dss.cktelement.powers)
+
         return self.dss.solution.converged
 
     def solve_profile(self):
         for t in range(0, 96):
+            # for el in v.keys():
+            #     if v[el]['category'] not in mc['Vsource'] + mc['Node']:
+            #         self.write(el=el, t=t/4)
+
+            self.write_all(t/4)
+            self.dss.solution.solve()
             for el in v.keys():
-                if v[el]['category'] not in mc['Vsource'] + mc['Node']:
-                    self.write(el=el, t=t/4)
-                    self.dss.solution.solve()
                 self.results_append(el)
         pass
 
@@ -335,26 +367,27 @@ class OpenDSS:
         v[el]['par']['profile']['name'] = None
         v[el]['par']['profile']['curve'] = 1
 
-        # profile = None
-        #
-        # if v[el]['category'] == 'AC-Load':
-        #     profile = 'AC-Load'
-        # elif v[el]['category'] == 'DC-Load':
-        #     profile = 'DC-Load'
-        # elif v[el]['category'] in ['AC-Wind', 'DC-Wind']:
-        #     profile = 'Wind'
-        # elif v[el]['category'] == 'PV':
-        #     profile = 'PV'
-        #
-        # if profile:
-        #     filename = os.getcwd() + '/_benchmark/_data/_profiles/' + profile + '.yml'
-        #     d = yaml.safe_load(open(filename))
-        #
-        #     v[el]['par']['profile']['name'] = d['name']
-        #     v[el]['par']['profile']['curve'] = d['profile']
-        # else:
-        #     v[el]['par']['profile']['name'] = None
-        #     v[el]['par']['profile']['curve'] = None
+        profile = None
+
+        if v[el]['category'] == 'AC-Load':
+            profile = 'AC-Load'
+        elif v[el]['category'] == 'DC-Load':
+            profile = 'DC-Load'
+        elif v[el]['category'] in ['AC-Wind', 'DC-Wind']:
+            profile = 'Wind'
+        elif v[el]['category'] == 'PV':
+            profile = 'PV'
+
+        if profile:
+            filename = os.getcwd() + '/_benchmark/_data/_profiles/' + profile + '.yml'
+            d = yaml.safe_load(open(filename))
+
+            v[el]['par']['profile']['name'] = d['name']
+            v[el]['par']['profile']['curve'] = d['profile']
+        else:
+            v[el]['par']['profile']['name'] = None
+            v[el]['par']['profile']['curve'] = None
+
 
     def losses_calc(self):
         for el in v.keys():
@@ -365,3 +398,4 @@ class OpenDSS:
 
 
 OpenDSS()
+

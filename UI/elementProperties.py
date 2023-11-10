@@ -135,13 +135,13 @@ class Window(QWidget):
     def save_par(self):
         for par in el_format[self.cat]:
             v[self.elem]['par'][par] = self.__getattribute__(par + '_DSB').value()
-            print(par + ': ' + str(v[self.elem]['par'][par]))
+            # print(par + ': ' + str(v[self.elem]['par'][par]))
 
         if self.cat in ['AC-Load', 'DC-Load', 'AC-Wind', 'DC-Wind', 'BESS', 'PV']:
             if self.scale_RB.isChecked():
                 v[self.elem]['par']['profile']['name'] = None
                 v[self.elem]['par']['profile']['curve'] = self.scale_DSB.value()
-                print('scale' + ': ' + str(v[self.elem]['par']['profile']['curve']))
+                # print('scale' + ': ' + str(v[self.elem]['par']['profile']['curve']))
             else:
                 pass
         v[self.elem]['par']['out-of-service'] = self.out_of_service_CkB.isChecked()

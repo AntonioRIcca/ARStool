@@ -321,7 +321,7 @@ class Main:
         self.home2_WGT.deleteLater()
 
         dss.write_all()
-        print(dss.solve())
+        dss.solve()
         self.p_loads, self.q_loads = 0, 0
         self.p_gen, self.q_gen = 0, 0
         self.p_bess, self.q_bess = 0, 0
@@ -394,7 +394,7 @@ class Main:
         # chart_view.setAlignment()
         # # --------------------------------------------------------------
 
-        print('LF done')
+        # print('LF done')
 
     def lf_cat_widget(self, mcat):
         colors = [QtGui.Qt.red, QtGui.Qt.darkGreen, QtGui.Qt.darkBlue]
