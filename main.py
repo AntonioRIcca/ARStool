@@ -2,6 +2,7 @@ import py_dss_interface
 # from PySide2.QtCharts import QChart, QChartView, QBarSet, QPercentBarSeries, QBarCategoryAxis
 
 from functools import partial
+import xlsxwriter
 
 from PySide2 import QtGui, QtCore
 
@@ -322,6 +323,9 @@ class Main:
 
         dss.write_all()
         dss.solve()
+
+        self.write_excel()
+
         self.p_loads, self.q_loads = 0, 0
         self.p_gen, self.q_gen = 0, 0
         self.p_bess, self.q_bess = 0, 0
@@ -395,6 +399,65 @@ class Main:
         # # --------------------------------------------------------------
 
         # print('LF done')
+
+    def write_excel(self):
+        file_excel = xlsxwriter.Workbook('risultato.xlsx')
+        worksheet = file_excel.add_worksheet()
+        worksheet.write(0, 0, 'Results')
+
+        lf_par = ['v', 'p', 'q', 'i']
+        row, col = 1, 0
+        for cat in ['AC-Load', 'DC-Load', 'BESS', 'PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor']:
+            row += 1
+            worksheet.write(row, col, cat)
+            row += 1
+
+            col = 1
+            for par in lf_par:
+                worksheet.write(row, col, par)
+                col += 1
+            row += 1
+            col = 0
+
+            for el in v:
+                if v[el]['category'] == cat:
+                    worksheet.write(row, col, el)
+                    col = 1
+                    for par in lf_par:
+                        worksheet.write(row, col, v[el]['lf'][par])
+                        col += 1
+                    row += 1
+                    col = 0
+
+        for cat in ['2W-Transformer', 'PWM', 'DC-DC-Converter', 'AC-Line', 'DC-Line']:
+            row += 1
+            worksheet.write(row, col, cat)
+            row += 1
+
+            col = 1
+            for par in lf_par:
+                for i in [0, 1]:
+                    worksheet.write(row, col, par + str(i))
+                    col += 1
+            row += 1
+            col = 0
+            # worksheet.write(2, 10, 'pepe')
+
+            for el in v:
+                # print(el)
+                if v[el]['category'] == cat:
+                    worksheet.write(row, col, el)
+                    col = 1
+                    for par in lf_par:
+                        for i in [0, 1]:
+                            worksheet.write(row, col, v[el]['lf'][par][i])
+                            col += 1
+                    row += 1
+                    col = 0
+
+
+        file_excel.close()
+        pass
 
     def lf_cat_widget(self, mcat):
         colors = [QtGui.Qt.red, QtGui.Qt.darkGreen, QtGui.Qt.darkBlue]

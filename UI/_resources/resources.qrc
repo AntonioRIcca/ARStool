@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>icons/anomaly.png</file>
     <file>icons/gridmanagement.png</file>
     <file>icons/onr.png</file>
     <file>icons/opf.png</file>

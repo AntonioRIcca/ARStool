@@ -76,7 +76,7 @@ New generator.Pros_PV bus1=Pros_BB_DC2 phases=3 kv=0.6 kw=50 kvar=0 model=3
 
 
 // -- WIND GENERAGTOR SECTOR--------------------------------------------------------------------------------------------------------------------------------------------------------------
-New transformer.WPG_TR winding=2 buses=(SourceBus WPG_BB1) conns='delta wye' kvs=(20 2) kvas=(2000 2000) %Rs=(0.93 0) XHL=6 %imag=1.5
+New transformer.WPG_TR winding=2 buses=(Res-WPG_BB WPG_BB1) conns='delta wye' kvs=(20 2) kvas=(2000 2000) %Rs=(0.93 0) XHL=6 %imag=1.5
 //New transformer.ResWPG_TR winding=2 buses=(WPG_BB1 Res_BB) conns='delta wye' kvs=(2 0.4) kvas=(630 630) %Rs=(1 0) XHL=6 %imag=1.6
 
 New line.WPG_Line bus1=WPG_BB1 bus2=WPG_BB2 linecode=3-6_3x1x240Cu length=1
