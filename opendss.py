@@ -319,7 +319,7 @@ class OpenDSS:
             # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
             cf0, cf1 = 1, 1     # fattore di correzione per le parti AC
             if v[el]['category'] in ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'BESS', 'PV', 'DC-Wind']:
-                cf0 = 3**0.5    # fattore di correzione per le porzioni DC a monte
+                cf0 = 3 ** 0.5    # fattore di correzione per le porzioni DC a monte
             if v[el]['category'] in ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'BESS', 'PV', 'DC-Wind', 'PWM']:
                 cf1 = 3 ** 0.5  # fattore di correzione per pe porzioni DC a valle
 

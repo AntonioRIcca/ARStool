@@ -320,7 +320,6 @@ class Main:
 
         self.ui.rightMenuContainer.collapseMenu()
         self.home2_WGT.deleteLater()
-
         dss.write_all()
         dss.solve()
 
