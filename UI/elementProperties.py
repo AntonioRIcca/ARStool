@@ -18,6 +18,8 @@ class Window(QWidget):
         super().__init__(None)
 
         self.elem = elem
+        self.buses = v[elem]['top']['conn']
+        self.cat = v[elem]['category']
 
         # self.title = 'Finestra'
         # self.left = 500
@@ -34,10 +36,18 @@ class Window(QWidget):
         self.mainVBL = QVBoxLayout(self.mainWidget)
         self.mainVBL.setContentsMargins(5, 5, 5, 40)
         self.mainWidget.setMaximumWidth(200)    # Deve avere il valore della larghezza del settore scorrevole
+
         self.bbWidget = QWidget()
-        self.bbWidget.setStyleSheet(u"background-color: rgb(0, 0, 31);")
+        self.bbWidget.setStyleSheet(u"background-color: rgb(0, 0, 31); border-radius: 10px;")
+        self.bbWidget.setMaximumWidth(180)
+
         self.parWidget = QWidget()
+        self.parWidget.setStyleSheet(u"background-color: rgb(0, 31, 0); border-radius: 10px;")
+        self.parWidget.setMaximumWidth(180)
+
         self.bottomWidget = QWidget()
+        self.bottomWidget.setMaximumWidth(180)
+
         self.mainVBL.addWidget(self.bbWidget)
         self.mainVBL.addWidget(self.parWidget)
         self.mainVBL.addWidget(self.bottomWidget, 0, Qt.AlignBottom)
@@ -49,44 +59,62 @@ class Window(QWidget):
 
 
         self.bbFont = QFont()
-        self.bbFont.setPointSize(10)
+        self.bbFont.setPointSize(9)
         self.bbFont.setBold(True)
 
         self.no_LBL = QLabel()
         self.no_LBL.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-        self.no_LBL.setStyleSheet(u"background-color: rgb(0, 255, 31);")
+        # self.no_LBL.setStyleSheet(u"background-color: rgb(0, 255, 31);")
+
+        node_labels = []
+        if v[elem]['category'] == 'PWM':
+            node_labels = ['AC Node', 'DC Node']
+        elif v[elem]['category'] in ['2W-Transformer', 'DC-DC-Converter']:
+            node_labels = ['HV Node', 'LV Node']
+        elif v[elem]['category'] in ['AC-Line', 'DC-Line', 'Node']:
+            for i in range(len(v[elem]['top']['conn'])):
+                node_labels.append('Node ' + str(i))
+        else:
+            node_labels = ['Node', '']
 
         for i in range(len(v[elem]['top']['conn'])):
+            print(elem)
             node = v[elem]['top']['conn'][i]
 
-            self.__setattr__('node' + str(i) + '_LBL', QLabel('Node ' + str(i)))
+            # self.__setattr__('node' + str(i) + '_LBL', QLabel('Node ' + str(i)))
+            self.__setattr__('node' + str(i) + '_LBL', QLabel(node_labels[i]))
+
             self.bbGL.addWidget(self.__getattribute__('node' + str(i) + '_LBL'), i, 0)
+            self.__getattribute__('node' + str(i) + '_LBL').setMinimumSize(QSize(0, 25))
 
             self.__setattr__('node' + str(i) + '_BTN', QPushButton())
-            self.__getattribute__('node' + str(i) + '_BTN').setText(node)
+            self.__setattr__('node' + str(i) + '_CB', QComboBox())
+            # self.__getattribute__('node' + str(i) + '_BTN').setText(node)
             self.bbGL.addWidget(self.__getattribute__('node' + str(i) + '_BTN'), i, 1)
             self.__getattribute__('node' + str(i) + '_BTN').setFont(self.bbFont)
+            self.__getattribute__('node' + str(i) + '_BTN').setStyleSheet(u"text-align: left;")
+            self.__getattribute__('node' + str(i) + '_BTN').clicked.connect(partial(self.bb_selected, i))
 
             self.bbGL.addWidget(self.no_LBL, i, 2)
 
-            self.__setattr__('node' + str(i) + '_CB', QComboBox())
-            nodes = []
+            # nodes = []
+            #
+            # for el in v:
+            #     if v[el]['category'] == 'Node' and el != node:
+            #         nodes.append(el)
+            # nodes.sort()
+            # nodes = [node] + nodes
 
-            for el in v:
-                if v[el]['category'] == 'Node' and el != node:
-                    nodes.append(el)
-            nodes.sort()
-            nodes = [node] + nodes
+            # self.__getattribute__('node' + str(i) + '_CB').clear()
+            # self.__getattribute__('node' + str(i) + '_CB').addItems(nodes)
+            self.bbGL.addWidget(self.__getattribute__('node' + str(i) + '_CB'), i, 1)
+            self.__getattribute__('node' + str(i) + '_CB').activated.connect(partial(self.bb_changed, i, None))
 
-            self.__getattribute__('node' + str(i) + '_CB').clear()
-            self.__getattribute__('node' + str(i) + '_CB').addItems(nodes)
-            self.bbGL.addWidget(self.__getattribute__('node' + str(i) + '_CB'), 0, 1)
-            self.__getattribute__('node' + str(i) + '_CB').hide()
+            # self.__getattribute__('node' + str(i) + '_CB').hide()
 
-            self.__getattribute__('node' + str(i) + '_CB').activated.connect(partial(self.bb_changed,
-                                                                                     'node' + str(i)))
+            # self.__getattribute__('node' + str(i) + '_CB').activated.connect(partial(self.bb_changed, i))
             # TODO generalizzare le funzioni self.bb_changed e self.bb_selected
-
+            self.bb_changed(i=i, node=node)
 
         # self.node0_cap_LBL = QLabel('Node 0: ')
         # # self.node0_LBL = QLabel(v[elem]['top']['conn'][0])
@@ -122,8 +150,34 @@ class Window(QWidget):
         # #     self.node1_LBL.setFont(self.bbFont)
         # #     # self.node1_LBL.mouseDoubleClickEvent = partial(self.bb_selected, 'node1')
 
-        self.cat = v[elem]['category']
         i = 0
+
+        if self.cat not in ['Node', 'ExternalGrid']:
+            for b in range(len(self.buses)):
+                self.__setattr__('v' + str(b) + '_LBL', QLabel('V' + str(b)))
+                self.__setattr__('v' + str(b) + '_DSB', QDoubleSpinBox(None))
+                self.__setattr__('v' + str(b) + '_unit_LBL', QLabel('kV'))
+
+                self.parGL.addWidget(self.__getattribute__('v' + str(b) + '_LBL'), i, 0)
+                self.parGL.addWidget(self.__getattribute__('v' + str(b) + '_DSB'), i, 1)
+                self.parGL.addWidget(self.__getattribute__('v' + str(b) + '_unit_LBL'), i, 2)
+                i += 1
+
+                # formattazione e popolazione dei campi
+                self.dsb_format(self.__getattribute__('v' + str(b) + '_DSB'), decimals=3)
+                self.__getattribute__('v' + str(b) + '_DSB').setValue(v[self.buses[b]]['par']['Vn'])
+                self.__getattribute__('v' + str(b) + '_DSB').setDisabled(True)
+                self.__getattribute__('v' + str(b) + '_DSB').setStyleSheet(u"background-color: rgb(95, 95, 95)")
+
+                self.__getattribute__('v' + str(b) + '_LBL').setAlignment(Qt.AlignRight |
+                                                                          Qt.AlignTrailing | Qt.AlignVCenter)
+                # a = QDoubleSpinBox()
+                # a.setDisabled(True)
+
+            spacer1 = QSpacerItem(20, 20, QSizePolicy.Fixed)
+            self.parGL.addItem(spacer1, i, 0)
+            i += 1
+
         for par in el_format[self.cat]:
             self.__setattr__(par + '_LBL', QLabel(par))
             self.__setattr__(par + '_DSB', QDoubleSpinBox(None))
@@ -214,59 +268,81 @@ class Window(QWidget):
         self.layout.addWidget(self.scroll)
         self.setLayout(self.layout)
 
-    def bb_selected(self, side="", event2=None):
-        print('clicked ', side)
-        node = self.__getattribute__(side + '_BTN').text()
+    def bb_selected(self, i=0, event2=None):
+        print('clicked ', i)
+        # node = self.__getattribute__(side + '_BTN').text()
         # print('bb_selected')
         # self.node0_BTN.deleteLater()
-        self.bbGL.removeWidget(self.node0_BTN)
+        self.__getattribute__('node' + str(i) + '_BTN').hide()
         # self.__getattribute__(side + '_BTN').deleteLater()
         # self.no_LBL.deleteLater()
 
         # nodes = [self.node0_BTN.text()]
-        nodes = []
-        for el in v:
-            if v[el]['category'] == 'Node' and el != node:
-                nodes.append(el)
-
-        print('list: ', nodes)
-        nodes.sort()
-
-        nodes = [node] + nodes
-
-        print('list: ', nodes)
+        # nodes = []
+        # for el in v:
+        #     if v[el]['category'] == 'Node' and el != node:
+        #         nodes.append(el)
+        #
+        # print('list: ', nodes)
+        # nodes.sort()
+        #
+        # nodes = [node] + nodes
+        #
+        # print('list: ', nodes)
 
         # self.node0_CB = QComboBox()
-        self.node0_CB.show()
-        self.node0_CB.clear()
-        self.node0_CB.addItems(nodes)
-        self.bbGL.addWidget(self.node0_CB, 0, 1)
+        self.__getattribute__('node' + str(i) + '_CB').show()
+        # self.node0_CB.clear()
+        # self.node0_CB.addItems(nodes)
+        # self.bbGL.addWidget(self.node0_CB, 0, 1)
 
-        self.node0_CB.activated.connect(partial(self.bb_changed, 'node0'))
+        # self.__getattribute__('node' + str(i) + '_CB').activated.connect(partial(self.bb_changed, i, None))
         # self.node0_CB.item
         pass
 
-    def bb_changed(self, node="node0", event=None):
-        print(self.i)
-        self.i += 1
-        # self.node0_CB.deleteLater()
-        # self.bbGL.removeWidget(self.node0_CB)
-        self.node0_CB.hide()
-        # self.bbGL.removeWidget(self.node0_cap_LBL)
-        print(self.node0_CB.currentText())
-        # v[self.elem]['top']['conn'][0] = self.node0_CB.currentText()  # TODO: da spostare in "salva"
-        # self.node0_BTN = QPushButton()
-        self.node0_BTN.setText(self.node0_CB.currentText())
-        self.bbGL.addWidget(self.node0_BTN, 0, 1)
-        self.node0_BTN.setFont(self.bbFont)
-        self.node0_BTN.clicked.connect(partial(self.bb_selected, node))
+    def bb_changed(self, i=0, node=None, event=None):
+        if not node:
+            node = self.__getattribute__('node' + str(i) + '_CB').currentText()
 
-        # self.no_LBL = QLabel()
-        # self.no_LBL.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-        # self.no_LBL.setStyleSheet(u"background-color: rgb(0, 255, 31);")
-        #
-        # self.bbGL.addWidget(self.no_LBL, 0, 2)
-        pass
+        self.buses[i] = node
+
+        self.__getattribute__('node' + str(i) + '_BTN').setText(node)
+        self.__getattribute__('node' + str(i) + '_BTN').show()
+
+        for j in range(len(self.buses)):
+            nodes = self.bb_list(j, node)
+
+            try:
+                self.__getattribute__('node' + str(j) + '_CB').clear()
+                self.__getattribute__('node' + str(j) + '_CB').addItems(nodes)
+                self.__getattribute__('node' + str(j) + '_CB').hide()
+            except AttributeError:
+                pass
+
+        try:
+            self.__getattribute__('v' + str(i) + '_DSB').setValue(v[node]['par']['Vn'])
+        except AttributeError:
+            pass
+
+    def bb_list(self, i, node):
+        nodes = []
+
+        if self.cat in ['2W-Transformer']:
+            if i == 0:
+                for el in v:
+                    if (v[el]['category'] == 'Node' and el not in self.buses and
+                            v[el]['par']['Vn'] > v[self.buses[1]]['par']['Vn']):
+                        nodes.append(el)
+            else:
+                for el in v:
+                    if (v[el]['category'] == 'Node' and el not in self.buses and
+                            v[el]['par']['Vn'] < v[self.buses[0]]['par']['Vn']):
+                        nodes.append(el)
+        nodes.sort()
+        nodes = [self.buses[i]] + nodes
+
+        print(node, nodes)
+        return nodes
 
     # salvataggio dei dati
     def save_par(self):
