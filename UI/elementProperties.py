@@ -34,16 +34,17 @@ class Window(QWidget):
         #       la stessa tensione del primo. Se quella del primo è cambiata, bisogna riscegliere anche il secondo
 
         self.i = 0
-
         self.mainWidget = QWidget()
         self.mainVBL = QVBoxLayout(self.mainWidget)
         self.mainVBL.setContentsMargins(5, 5, 5, 40)
         self.mainWidget.setMaximumWidth(200)    # Deve avere il valore della larghezza del settore scorrevole
 
+        # Creare widget busbar
         self.bbWidget = QWidget()
         self.bbWidget.setStyleSheet(u"background-color: rgb(0, 0, 31); border-radius: 10px;")
         self.bbWidget.setMaximumWidth(180)
 
+        # -- creare elementi busbar ---------------------------------------------------------------
         self.parWidget = QWidget()
         self.parWidget.setStyleSheet(u"background-color: rgb(0, 31, 0); border-radius: 10px;")
         self.parWidget.setMaximumWidth(180)
@@ -59,7 +60,6 @@ class Window(QWidget):
         self.bbGL = QGridLayout(self.bbWidget)
         self.parGL = QGridLayout(self.parWidget)
         self.bottomHBL = QHBoxLayout(self.bottomWidget)
-
 
         self.bbFont = QFont()
         self.bbFont.setPointSize(9)
@@ -81,10 +81,8 @@ class Window(QWidget):
             node_labels = ['Node', '']
 
         for i in range(len(v[elem]['top']['conn'])):
-            # print(elem)
             node = v[elem]['top']['conn'][i]
 
-            # self.__setattr__('node' + str(i) + '_LBL', QLabel('Node ' + str(i)))
             self.__setattr__('node' + str(i) + '_LBL', QLabel(node_labels[i]))
 
             self.bbGL.addWidget(self.__getattribute__('node' + str(i) + '_LBL'), i, 0)
@@ -92,72 +90,26 @@ class Window(QWidget):
 
             self.__setattr__('node' + str(i) + '_BTN', QPushButton())
             self.__setattr__('node' + str(i) + '_CB', QComboBox())
-            # self.__getattribute__('node' + str(i) + '_BTN').setText(node)
+
             self.bbGL.addWidget(self.__getattribute__('node' + str(i) + '_BTN'), i, 1)
             self.__getattribute__('node' + str(i) + '_BTN').setFont(self.bbFont)
             self.__getattribute__('node' + str(i) + '_BTN').setStyleSheet(u"text-align: left;")
-            self.__getattribute__('node' + str(i) + '_BTN').clicked.connect(partial(self.bb_selected, i))
 
             self.bbGL.addWidget(self.no_LBL, i, 2)
 
-            # nodes = []
-            #
-            # for el in v:
-            #     if v[el]['category'] == 'Node' and el != node:
-            #         nodes.append(el)
-            # nodes.sort()
-            # nodes = [node] + nodes
-
-            # self.__getattribute__('node' + str(i) + '_CB').clear()
-            # self.__getattribute__('node' + str(i) + '_CB').addItems(nodes)
             self.bbGL.addWidget(self.__getattribute__('node' + str(i) + '_CB'), i, 1)
+        # -----------------------------------------------------------------------------------------
+
+        # settare le azioni degli elementi
+            self.__getattribute__('node' + str(i) + '_BTN').clicked.connect(partial(self.bb_selected, i))
             self.__getattribute__('node' + str(i) + '_CB').activated.connect(partial(self.bb_changed, i, None))
-
-            # self.__getattribute__('node' + str(i) + '_CB').hide()
-
-            # self.__getattribute__('node' + str(i) + '_CB').activated.connect(partial(self.bb_changed, i))
-            # TODO generalizzare le funzioni self.bb_changed e self.bb_selected
 
         for i in range(len(v[elem]['top']['conn'])):
             node = v[elem]['top']['conn'][i]
             self.bb_changed(i=i, node=node)
 
-        # self.node0_cap_LBL = QLabel('Node 0: ')
-        # # self.node0_LBL = QLabel(v[elem]['top']['conn'][0])
-        # self.bbGL.addWidget(self.node0_cap_LBL, 0, 0)
-        # # self.bbGL.addWidget(self.node0_LBL, 0,1)
-        # # self.node0_LBL.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-        # # self.node0_LBL.setFont(self.bbFont)
-        # # self.bbWidget.mouseDoubleClickEvent = partial(self.bb_selected, 'node0')
-        # #
-        # #
-        # self.node0_BTN = QPushButton()
-        # self.node0_BTN.setText('mod.')
-        # self.bbGL.addWidget(self.node0_BTN, 0, 1)
-        # # self.node0_BTN.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-        # self.node0_BTN.setFont(self.bbFont)
-        # # self.node0_BTN.ali
-        #
-        # self.node0_BTN.clicked.connect(partial(self.bb_selected, 'node0'))
-        # # self.node0_BTN.mouseDoubleClickEvent = partial(self.bb_selected)
-        # self.no_LBL = QLabel()
-        # self.no_LBL.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-        # self.no_LBL.setStyleSheet(u"background-color: rgb(0, 255, 31);")
-        #
-        # self.bbGL.addWidget(self.no_LBL, 0, 2)
-        # #
-        # # if len(v[elem]['top']['conn']) == 2:
-        # #     self.bbGL.addItem(QSpacerItem(10, 10))
-        # #     self.node1_cap_LBL = QLabel('Node 1: ')
-        # #     self.node1_LBL = QLabel(v[elem]['top']['conn'][1])
-        # #     self.bbGL.addWidget(self.node1_cap_LBL, 2, 0)
-        # #     self.bbGL.addWidget(self.node1_LBL, 2, 1)
-        # #     self.node1_LBL.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-        # #     self.node1_LBL.setFont(self.bbFont)
-        # #     # self.node1_LBL.mouseDoubleClickEvent = partial(self.bb_selected, 'node1')
-
+        # Scrittura dei parametri
         i = 0
-
         if self.cat not in ['AC-Node', 'DC-Node', 'ExternalGrid']:
             for b in range(len(self.buses)):
                 self.__setattr__('v' + str(b) + '_LBL', QLabel('V' + str(b)))
