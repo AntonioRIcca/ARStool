@@ -1423,7 +1423,7 @@ border-radius: 10px;
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_10">
                    <item>
-                    <widget class="QLabel" name="label_7">
+                    <widget class="QLabel" name="rightMenu_LBL">
                      <property name="text">
                       <string>Right Menu</string>
                      </property>

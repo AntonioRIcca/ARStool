@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_uiuanTAc.ui'
+## Form generated from reading UI file 'main_uibDKhhF.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -636,11 +636,11 @@ class Ui_MainWindow(object):
         self.frame_8.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_10 = QHBoxLayout(self.frame_8)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.label_7 = QLabel(self.frame_8)
-        self.label_7.setObjectName(u"label_7")
-        self.label_7.setAlignment(Qt.AlignCenter)
+        self.rightMenu_LBL = QLabel(self.frame_8)
+        self.rightMenu_LBL.setObjectName(u"rightMenu_LBL")
+        self.rightMenu_LBL.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout_10.addWidget(self.label_7)
+        self.horizontalLayout_10.addWidget(self.rightMenu_LBL)
 
         self.closeRightMenuBtn = QPushButton(self.frame_8)
         self.closeRightMenuBtn.setObjectName(u"closeRightMenuBtn")
@@ -885,7 +885,7 @@ class Ui_MainWindow(object):
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Home", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Data Analysis", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Reports", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Right Menu", None))
+        self.rightMenu_LBL.setText(QCoreApplication.translate("MainWindow", u"Right Menu", None))
 #if QT_CONFIG(tooltip)
         self.closeRightMenuBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close Menu", None))
 #endif // QT_CONFIG(tooltip)

@@ -20,16 +20,16 @@ New load.UG_Serv2_AC-Load bus1=UG_Serv_BB phases=3 kv=0.4 kw=120.0 pf=0.9
 
 
 //// -- DC Side ----------------------------------
-New transformer.UG_PWM winding=2 buses=(UG_BB_2kV UG_DC-BB) conns='delta wye' kvs=(2 1.5) kvas=(800 800) %Rs=(0 0) XHL=0.000000001 %imag=0
-New load.UG_DC-Load bus1=UG_DC-BB phases=3 kv=1.5 kw=200 pf=1
+New transformer.UG_PWM winding=2 buses=(UG_BB_2kV UG_BB_LVDC) conns='delta wye' kvs=(2 1.5) kvas=(800 800) %Rs=(0 0) XHL=0.000000001 %imag=0
+New load.UG_DC-Load bus1=UG_BB_LVDC phases=3 kv=1.5 kw=200 pf=1
 
-New transformer.UGS_PWM winding=2 buses=(UG_BB_2kV UGS_DC-BB) conns='delta wye' kvs=(2 1.5) kvas=(800 800) %Rs=(0 0) XHL=0.000000001 %imag=0
-New load.UGS_DC-Load bus1=UGS_DC-BB phases=3 kv=1.5 kw=200 pf=1
-New generator.UGS_BESS bus1=UGS_DC-BB phases=3 kv=1.5 kw=-10 kvar=0 model=3
+New transformer.UGS_PWM winding=2 buses=(UG_BB_2kV UGS_BB) conns='delta wye' kvs=(2 1.5) kvas=(800 800) %Rs=(0 0) XHL=0.000000001 %imag=0
+New load.UGS_DC-Load bus1=UGS_BB phases=3 kv=1.5 kw=200 pf=1
+New generator.UGS_BESS bus1=UGS_BB phases=3 kv=1.5 kw=-10 kvar=0 model=3
 
-New transformer.UGS_DC-DC-Conv winding=2 buses=(UGS_DC-BB UGS_PV_DC-BB) conns='delta wye' kvs=(1.5 0.75) kvas=(50 50) %Rs=(0 0) XHL=0.000000001 %imag=0
-New generator.UGS_1_PV bus1=UGS_PV_DC-BB phases=3 kv=0.75 kw=15 kvar=0 model=3
-New generator.UGS_2_PV bus1=UGS_PV_DC-BB phases=3 kv=0.75 kw=15 kvar=0 model=3
+New transformer.UGS_DC-DC-Conv winding=2 buses=(UGS_BB UGS_PV_BB) conns='delta wye' kvs=(1.5 0.75) kvas=(50 50) %Rs=(0 0) XHL=0.000000001 %imag=0
+New generator.UGS_1_PV bus1=UGS_PV_BB phases=3 kv=0.75 kw=15 kvar=0 model=3
+New generator.UGS_2_PV bus1=UGS_PV_BB phases=3 kv=0.75 kw=15 kvar=0 model=3
 //// -------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -42,12 +42,12 @@ New load.RS_2_AC-Load bus1=RS_BB_04kV phases=3 kv=0.4 kw=60 pf=0.9
 New line.EV-Charge_Line bus1=RS_BB_04kV bus2=EV-Charge_BB linecode=6-12_3x1x150Cu length=0.05
 New load.EV-Charge_AC-Load bus1=EV-Charge_BB phases=3 kv=0.4 kw=40 pf=1
 
-New transformer.EV-Fast_PWM winding=2 buses=(RS_BB_04kV EV-Fast_DC-BB) conns='delta wye' kvs=(0.4 0.6) kvas=(2000 2000) %Rs=(0 0) XHL=0.000000001 %imag=0
-New generator.EV-Fast_BESS bus1=EV-Fast_DC-BB phases=3 kv=0.6 kw=10 kvar=0 model=3
-New generator.EV-Fast_PV bus1=EV-Fast_DC-BB phases=3 kv=0.6 kw=30 kvar=0 model=3
+New transformer.EV-Fast_PWM winding=2 buses=(RS_BB_04kV EV-Fast_BB) conns='delta wye' kvs=(0.4 0.6) kvas=(2000 2000) %Rs=(0 0) XHL=0.000000001 %imag=0
+New generator.EV-Fast_BESS bus1=EV-Fast_BB phases=3 kv=0.6 kw=10 kvar=0 model=3
+New generator.EV-Fast_PV bus1=EV-Fast_BB phases=3 kv=0.6 kw=30 kvar=0 model=3
 
-New transformer.EV-Fast_DC-DC-Conv winding=2 buses=(EV-Fast_DC-BB EV-Fast-Load_DC-Node) conns='delta wye' kvs=(0.6 0.4) kvas=(300 300) %Rs=(0 0) XHL=0.000000001 %imag=0
-New load.EV-Fast_DC-Load bus1=EV-Fast-Load_DC-Node phases=3 kv=0.4 kw=50 pf=1
+New transformer.EV-Fast_DC-DC-Conv winding=2 buses=(EV-Fast_BB EV-Fast-Load_Node) conns='delta wye' kvs=(0.6 0.4) kvas=(300 300) %Rs=(0 0) XHL=0.000000001 %imag=0
+New load.EV-Fast_DC-Load bus1=EV-Fast-Load_Node phases=3 kv=0.4 kw=50 pf=1
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -61,16 +61,16 @@ New load.User_AC-Load bus1=User_BB phases=3 kv=0.4 kw=200 pf=0.9
 New line.Pros_Line bus1=Res_BB bus2=Pros_BB linecode=6-12_3x1x150Cu length=0.05
 New load.Pros_1_AC-Load bus1=Pros_BB phases=3 kv=0.4 kw=150 pf=0.9
 
-New transformer.Pros_BESS_PWM winding=2 buses=(Pros_BB Pros1_DC-BB) conns='delta wye' kvs=(0.4 0.6) kvas=(400 400) %Rs=(0 0) XHL=0.000000001 %imag=0
-New generator.Pros_BESS bus1=Pros1_DC-BB phases=3 kv=0.6 kw=-50 kvar=0 model=3
-New generator.Pros_DC-Micro-Wind bus1=Pros1_DC-BB phases=3 kv=0.6 kw=10 kvar=0 model=3
+New transformer.Pros_BESS_PWM winding=2 buses=(Pros_BB Pros_BB_DC1) conns='delta wye' kvs=(0.4 0.6) kvas=(400 400) %Rs=(0 0) XHL=0.000000001 %imag=0
+New generator.Pros_BESS bus1=Pros_BB_DC1 phases=3 kv=0.6 kw=-50 kvar=0 model=3
+New generator.Pros_DC-Micro-Wind bus1=Pros_BB_DC1 phases=3 kv=0.6 kw=10 kvar=0 model=3
 
-New load.Pros_DC-Load bus1=Pros2_DC-BB phases=3 kv=0.6 kw=30 kvar=0 model=3 //da eliminare
-New transformer.Pros_PV_PWM winding=2 buses=(Pros_BB Pros2_DC-BB) conns='delta wye' kvs=(0.4 0.6) kvas=(400 400) %Rs=(0 0) XHL=0.000000001 %imag=0
-New generator.Pros_PV bus1=Pros2_DC-BB phases=3 kv=0.6 kw=50 kvar=0 model=3
-//New load.Pros_DC-Load bus1=Pros2_DC-BB phases=3 kv=0.6 kw=30 kvar=0 model=3
+New load.Pros_DC-Load bus1=Pros_BB_DC2 phases=3 kv=0.6 kw=30 kvar=0 model=3 //da eliminare
+New transformer.Pros_PV_PWM winding=2 buses=(Pros_BB Pros_BB_DC2) conns='delta wye' kvs=(0.4 0.6) kvas=(400 400) %Rs=(0 0) XHL=0.000000001 %imag=0
+New generator.Pros_PV bus1=Pros_BB_DC2 phases=3 kv=0.6 kw=50 kvar=0 model=3
+//New load.Pros_DC-Load bus1=Pros_BB_DC2 phases=3 kv=0.6 kw=30 kvar=0 model=3
 
-//New line.Pros-Pros_DC-Line bus1=Pros1_DC-BB bus2=Pros2_DC-BB linecode=DC-Line length=0.02
+//New line.Pros-Pros_DC-Line bus1=Pros_BB_DC1 bus2=Pros_BB_DC2 linecode=DC-Line length=0.02
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -83,11 +83,11 @@ New line.WPG_Line bus1=WPG_BB1 bus2=WPG_BB2 linecode=3-6_3x1x240Cu length=1
 New generator.WPG_1_wind bus1=WPG_BB2 phases=3 kv=2 kw=140 pf=0.84
 New generator.WPG_2_wind bus1=WPG_BB2 phases=3 kv=2 kw=140 pf=0.87
 
-New transformer.WPG_PWM winding=2 buses=(WPG_BB1 WPG_PV_DC-BB) conns='delta wye' kvs=(2 0.6) kvas=(2000 2000) %Rs=(0 0) XHL=0.00000001 %imag=0
-New generator.WPG_BESS bus1=WPG_PV_DC-BB phases=3 kv=0.6 kw=-100 kvar=0 model=3
-New generator.WPG_PV bus1=WPG_PV_DC-BB phases=3 kv=0.6 kw=40 kvar=0 model=3
+New transformer.WPG_PWM winding=2 buses=(WPG_BB1 WPG_PV_BB) conns='delta wye' kvs=(2 0.6) kvas=(2000 2000) %Rs=(0 0) XHL=0.00000001 %imag=0
+New generator.WPG_BESS bus1=WPG_PV_BB phases=3 kv=0.6 kw=-100 kvar=0 model=3
+New generator.WPG_PV bus1=WPG_PV_BB phases=3 kv=0.6 kw=40 kvar=0 model=3
 
-New line.Pros-EV_DC-Line bus1=Pros1_DC-BB bus2=EV-Fast_DC-BB linecode=DC-Line length=0.02
+New line.Pros-EV_DC-Line bus1=Pros_BB_DC1 bus2=EV-Fast_BB linecode=DC-Line length=0.02
 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

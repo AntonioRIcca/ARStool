@@ -21,14 +21,17 @@ class Window(QWidget):
         self.buses = v[elem]['top']['conn']
         self.cat = v[elem]['category']
 
-        # self.title = 'Finestra'
-        # self.left = 500
-        # self.top = 200
-        # self.width = 300
-        # self.height = 250
-        #
-        # self.setWindowTitle(self.title)
-        # self.setGeometry(self.left, self.top, self.width, self.height)
+        # Creare widget busbar
+        # creare elementi busbar
+        # settare le azioni degli elementi
+        # popolare caselle busbar
+        # popolare le liste delle busbar alternative
+        #   - Libere per i carichi, i generatori e le BESS, ma devono rispettare le caratteristiche di AC e DC
+        #   - Per i trasformatori, devono essere AC e le HV devono avere tensione maggiore delle LV
+        #   - Per i convertitori DC-DC, devono essere DC e le HV devono avere tensione maggiore delle LV
+        #   - Per i PWM, bisogna rispettare i lati AC e DC
+        #   - Per le linee, devono rispettare le caratteristiche AC e DC; il primo nodo è libero, il secondo deve avere
+        #       la stessa tensione del primo. Se quella del primo è cambiata, bisogna riscegliere anche il secondo
 
         self.i = 0
 
@@ -71,14 +74,14 @@ class Window(QWidget):
             node_labels = ['AC Node', 'DC Node']
         elif v[elem]['category'] in ['2W-Transformer', 'DC-DC-Converter']:
             node_labels = ['HV Node', 'LV Node']
-        elif v[elem]['category'] in ['AC-Line', 'DC-Line', 'Node']:
+        elif v[elem]['category'] in ['AC-Line', 'DC-Line', 'AC-Node', 'DC-Node']:
             for i in range(len(v[elem]['top']['conn'])):
                 node_labels.append('Node ' + str(i))
         else:
             node_labels = ['Node', '']
 
         for i in range(len(v[elem]['top']['conn'])):
-            print(elem)
+            # print(elem)
             node = v[elem]['top']['conn'][i]
 
             # self.__setattr__('node' + str(i) + '_LBL', QLabel('Node ' + str(i)))
@@ -114,6 +117,9 @@ class Window(QWidget):
 
             # self.__getattribute__('node' + str(i) + '_CB').activated.connect(partial(self.bb_changed, i))
             # TODO generalizzare le funzioni self.bb_changed e self.bb_selected
+
+        for i in range(len(v[elem]['top']['conn'])):
+            node = v[elem]['top']['conn'][i]
             self.bb_changed(i=i, node=node)
 
         # self.node0_cap_LBL = QLabel('Node 0: ')
@@ -152,7 +158,7 @@ class Window(QWidget):
 
         i = 0
 
-        if self.cat not in ['Node', 'ExternalGrid']:
+        if self.cat not in ['AC-Node', 'DC-Node', 'ExternalGrid']:
             for b in range(len(self.buses)):
                 self.__setattr__('v' + str(b) + '_LBL', QLabel('V' + str(b)))
                 self.__setattr__('v' + str(b) + '_DSB', QDoubleSpinBox(None))
@@ -269,7 +275,7 @@ class Window(QWidget):
         self.setLayout(self.layout)
 
     def bb_selected(self, i=0, event2=None):
-        print('clicked ', i)
+        # print('clicked ', i)
         # node = self.__getattribute__(side + '_BTN').text()
         # print('bb_selected')
         # self.node0_BTN.deleteLater()
@@ -306,6 +312,12 @@ class Window(QWidget):
 
         self.buses[i] = node
 
+        if self.cat in ['AC-Line', 'DC-Line']:
+            if i == 0 and v[self.buses[0]]['par']['Vn'] != v[self.buses[1]]['par']['Vn']:
+                self.buses[1] = None
+                self.__getattribute__('node1_BTN').setText('-')
+                pass
+
         self.__getattribute__('node' + str(i) + '_BTN').setText(node)
         self.__getattribute__('node' + str(i) + '_BTN').show()
 
@@ -330,18 +342,62 @@ class Window(QWidget):
         if self.cat in ['2W-Transformer']:
             if i == 0:
                 for el in v:
-                    if (v[el]['category'] == 'Node' and el not in self.buses and
+                    if (v[el]['category'] == 'AC-Node' and el not in self.buses and
                             v[el]['par']['Vn'] > v[self.buses[1]]['par']['Vn']):
                         nodes.append(el)
             else:
                 for el in v:
-                    if (v[el]['category'] == 'Node' and el not in self.buses and
+                    if (v[el]['category'] == 'AC-Node' and el not in self.buses and
                             v[el]['par']['Vn'] < v[self.buses[0]]['par']['Vn']):
                         nodes.append(el)
+
+        elif self.cat in ['PWM']:
+            if i == 0:
+                for el in v:
+                    if v[el]['category'] == 'AC-Node' and el not in self.buses:
+                        nodes.append(el)
+            else:
+                for el in v:
+                    if v[el]['category'] == 'DC-Node' and el not in self.buses:
+                        nodes.append(el)
+
+        elif self.cat in ['DC-DC-Converter']:
+            if i == 0:
+                for el in v:
+                    if (v[el]['category'] == 'DC-Node' and el not in self.buses and
+                            v[el]['par']['Vn'] > v[self.buses[1]]['par']['Vn']):
+                        nodes.append(el)
+            else:
+                for el in v:
+                    if (v[el]['category'] == 'DC-Node' and el not in self.buses and
+                            v[el]['par']['Vn'] < v[self.buses[0]]['par']['Vn']):
+                        nodes.append(el)
+
+        elif self.cat in ['AC-Load', 'AC-Wind', 'Diesel-Motor', 'AC-Line']:
+            for el in v:
+                if v[el]['category'] == 'AC-Node' and el not in self.buses:
+                    nodes.append(el)
+
+        elif self.cat in ['DC-Load', 'DC-Wind', 'BESS', 'PV', 'DC-Line']:
+            for el in v:
+                if v[el]['category'] == 'DC-Node' and el not in self.buses:
+                    nodes.append(el)
+
         nodes.sort()
         nodes = [self.buses[i]] + nodes
 
-        print(node, nodes)
+        if i == 1:
+            for cat in ['AC', 'DC']:
+                if self.cat in [cat + '-Line'] and self.__getattribute__('node1_BTN').text() == '-':
+                    nodes = []
+                    for el in v:
+                        if (v[el]['category'] == cat + '-Node' and
+                                v[el]['par']['Vn'] == v[self.buses[0]]['par']['Vn'] and
+                                el not in self.buses):
+                            nodes.append(el)
+                            pass
+
+        # print(node, nodes)
         return nodes
 
     # salvataggio dei dati

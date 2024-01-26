@@ -39,6 +39,7 @@ class OpenDSS:
         # o non connesse a elementi terminali.
         # La funzione self.node_define serve a definire le tensioni HV dei trasformatori delle busbar a monte di essi
         self.node_define()
+        print('none')
 
     def mcat_find(self, el):
         mcat = ''
@@ -135,7 +136,10 @@ class OpenDSS:
         for node in nodes:
             if node not in v.keys():            # se il nodo non è stato già aggiunto al dizionario
                 self.dict_initialize(node)      # viene inizializzato
-                v[node]['category'] = 'Node'    # ""
+                if node.split('_')[len(node.split('_')) - 1] in ['dc-node', 'dc-bb']:
+                    v[node]['category'] = 'DC-Node'  # ""
+                else:
+                    v[node]['category'] = 'AC-Node'  # ""
                 self.rel_initialize(node)       # ""
                 self.lf_initialize(node)        # ""
                 v[node]['par']['Vn'] = None     # ""
@@ -232,7 +236,7 @@ class OpenDSS:
             f = v[el]['par']['profile']['curve'][int(t)]    # il fattore di scala è il punto del profilo relativo a t
 
         # Scrittura dei parametri dell'elemento
-        if cat not in ['ExternalGrid', 'Node']:     # Solo se non sono Source o Nodi
+        if cat not in ['ExternalGrid', 'AC-Node', 'DC-Node']:     # Solo se non sono Source o Nodi
             self.dss.__getattribute__(mcat.lower() + 's').__setattr__('name', el)   # richiamo dell'elemento
             for par in par_dict[cat].keys():
                 if par in ['P', 'Q']:   # solo se il parametro è P o Q bisogna considerare il fattore di scala

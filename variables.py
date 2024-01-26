@@ -7,7 +7,7 @@ mc = {
     'Transformer': ['2W-Transformer', 'PWM', 'DC-DC-Converter'],
     'Load': ['AC-Load', 'DC-Load'],
     'Generator': ['BESS', 'PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor'],
-    'Node': ['Node']
+    'Node': ['AC-Node', 'DC-Node']
 }
 
 c = {
@@ -24,8 +24,10 @@ c = {
     'wind': 'AC-Wind',
     'dc-micro-wind': 'DC-Wind',
     'diesel': 'Diesel-Motor',
-    'bb': 'Node',
-    'node': 'Node'
+    'bb': 'AC-Node',
+    'node': 'AC-Node',
+    'dc-bb': 'DC-Node',
+    'dc-node': 'DC-Node',
 }
 
 par_dict = {
@@ -87,7 +89,10 @@ el_format = {
     'ExternalGrid': {
         'Vn': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
     },
-    'Node': {
+    'AC-Node': {
+        'Vn': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+    },
+    'DC-Node': {
         'Vn': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
     },
     'AC-Line': {

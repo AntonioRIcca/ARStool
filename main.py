@@ -112,6 +112,7 @@ class Main:
         except:
             pass
 
+        self.ui.rightMenu_LBL.setText(elem)
         self.ui.rightMenuContainer.expandMenu()
 
         self.par_wgt = Window(elem)

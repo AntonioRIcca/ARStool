@@ -126,11 +126,11 @@ ev-charge_ac-load:
     conn:
     - ev-charge_bb
 ev-charge_bb:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 59.16057266012713
+    p: 40.06457288426982
+    q: 0.052499488314843294
     v: 390.9920215025131
   par:
     Vn: 0.4
@@ -191,12 +191,12 @@ ev-charge_line:
     conn:
     - rs_bb_04kv
     - ev-charge_bb
-ev-fast-load_node:
-  category: Node
+ev-fast-load_dc-node:
+  category: DC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 49.22054598967765
+    p: 49.99969066422425
+    q: -0.0062575450789889835
     v: 586.4879829573833
   par:
     Vn: 0.4
@@ -216,34 +216,6 @@ ev-fast-load_node:
     conn:
     - ev-fast_dc-dc-conv
     - ev-fast_dc-load
-ev-fast_bb:
-  category: Node
-  lf:
-    i: []
-    p: []
-    q: []
-    v: 390.9920215025131
-  par:
-    Vn: 0.6
-    out-of-service: false
-  rel:
-    par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
-    results:
-      MTBF_anni: null
-      MTBF_ore: null
-      Pi_Si: null
-      lambda: null
-  top:
-    conn:
-    - ev-fast_pwm
-    - ev-fast_bess
-    - ev-fast_pv
-    - ev-fast_dc-dc-conv
-    - pros-ev_dc-line
 ev-fast_bess:
   category: BESS
   lf:
@@ -273,7 +245,35 @@ ev-fast_bess:
       lambda: null
   top:
     conn:
-    - ev-fast_bb
+    - ev-fast_dc-bb
+ev-fast_dc-bb:
+  category: DC-Node
+  lf:
+    i: 133.80338449802008
+    p: 75.2182949705508
+    q: 50.50333516189703
+    v: 390.9920215025131
+  par:
+    Vn: 0.6
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ev-fast_pwm
+    - ev-fast_bess
+    - ev-fast_pv
+    - ev-fast_dc-dc-conv
+    - pros-ev_dc-line
 ev-fast_dc-dc-conv:
   category: DC-DC-Converter
   lf:
@@ -308,8 +308,8 @@ ev-fast_dc-dc-conv:
       lambda: null
   top:
     conn:
-    - ev-fast_bb
-    - ev-fast-load_node
+    - ev-fast_dc-bb
+    - ev-fast-load_dc-node
 ev-fast_dc-load:
   category: DC-Load
   lf:
@@ -434,7 +434,7 @@ ev-fast_dc-load:
       load_rel: null
   top:
     conn:
-    - ev-fast-load_node
+    - ev-fast-load_dc-node
 ev-fast_pv:
   category: PV
   lf:
@@ -558,7 +558,7 @@ ev-fast_pv:
       lambda: null
   top:
     conn:
-    - ev-fast_bb
+    - ev-fast_dc-bb
 ev-fast_pwm:
   category: PWM
   lf:
@@ -594,7 +594,7 @@ ev-fast_pwm:
   top:
     conn:
     - rs_bb_04kv
-    - ev-fast_bb
+    - ev-fast_dc-bb
 pros-ev_dc-line:
   category: DC-Line
   lf:
@@ -630,8 +630,61 @@ pros-ev_dc-line:
       lambda: null
   top:
     conn:
-    - pros_bb_dc1
-    - ev-fast_bb
+    - pros1_dc-bb
+    - ev-fast_dc-bb
+pros1_dc-bb:
+  category: DC-Node
+  lf:
+    i: 83.29330985690835
+    p: -25.158757251522815
+    q: -50.446642877850536
+    v: 390.6949334566526
+  par:
+    Vn: 0.6
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - pros_bess_pwm
+    - pros_bess
+    - pros_dc-micro-wind
+    - pros-ev_dc-line
+pros2_dc-bb:
+  category: DC-Node
+  lf:
+    i: 29.555046112431008
+    p: 29.999999395234937
+    q: -8.783536705436746e-07
+    v: 586.0423178031964
+  par:
+    Vn: 0.6
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - pros_dc-load
+    - pros_pv_pwm
+    - pros_pv
 pros_1_ac-load:
   category: AC-Load
   lf:
@@ -760,11 +813,11 @@ pros_1_ac-load:
     conn:
     - pros_bb
 pros_bb:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 158.36984411065978
+    p: 105.3023662202068
+    q: 22.578818686696287
     v: 392.630725570652
   par:
     Vn: 0.4
@@ -786,59 +839,6 @@ pros_bb:
     - pros_1_ac-load
     - pros_bess_pwm
     - pros_pv_pwm
-pros_bb_dc1:
-  category: Node
-  lf:
-    i: []
-    p: []
-    q: []
-    v: 390.6949334566526
-  par:
-    Vn: 0.6
-    out-of-service: false
-  rel:
-    par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
-    results:
-      MTBF_anni: null
-      MTBF_ore: null
-      Pi_Si: null
-      lambda: null
-  top:
-    conn:
-    - pros_bess_pwm
-    - pros_bess
-    - pros_dc-micro-wind
-    - pros-ev_dc-line
-pros_bb_dc2:
-  category: Node
-  lf:
-    i: []
-    p: []
-    q: []
-    v: 586.0423178031964
-  par:
-    Vn: 0.6
-    out-of-service: false
-  rel:
-    par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
-    results:
-      MTBF_anni: null
-      MTBF_ore: null
-      Pi_Si: null
-      lambda: null
-  top:
-    conn:
-    - pros_dc-load
-    - pros_pv_pwm
-    - pros_pv
 pros_bess:
   category: BESS
   lf:
@@ -868,7 +868,7 @@ pros_bess:
       lambda: null
   top:
     conn:
-    - pros_bb_dc1
+    - pros1_dc-bb
 pros_bess_pwm:
   category: PWM
   lf:
@@ -904,7 +904,7 @@ pros_bess_pwm:
   top:
     conn:
     - pros_bb
-    - pros_bb_dc1
+    - pros1_dc-bb
 pros_dc-load:
   category: DC-Load
   lf:
@@ -1029,7 +1029,7 @@ pros_dc-load:
       load_rel: null
   top:
     conn:
-    - pros_bb_dc2
+    - pros2_dc-bb
 pros_dc-micro-wind:
   category: DC-Wind
   lf:
@@ -1154,7 +1154,7 @@ pros_dc-micro-wind:
       lambda: null
   top:
     conn:
-    - pros_bb_dc1
+    - pros1_dc-bb
 pros_line:
   category: AC-Line
   lf:
@@ -1319,7 +1319,7 @@ pros_pv:
       lambda: null
   top:
     conn:
-    - pros_bb_dc2
+    - pros2_dc-bb
 pros_pv_pwm:
   category: PWM
   lf:
@@ -1355,13 +1355,13 @@ pros_pv_pwm:
   top:
     conn:
     - pros_bb
-    - pros_bb_dc2
+    - pros2_dc-bb
 res-wpg_bb:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 3.2756364776063793
+    p: 93.57218479693776
+    q: -64.1677747988345
     v: 19997.757239626324
   par:
     Vn: 20.0
@@ -1424,11 +1424,11 @@ res-wpg_line:
     - sourcebus
     - res-wpg_bb
 res_bb:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 9.899474712498384
+    p: 311.2948968348108
+    q: 143.70995610837883
     v: 19996.527584319123
   par:
     Vn: 0.4
@@ -1740,11 +1740,11 @@ rs_2_ac-load:
     conn:
     - rs_bb_04kv
 rs_bb_04kv:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 7.074625567814823
+    p: 216.77747664920435
+    q: 114.08675926060752
     v: 19991.440390876567
   par:
     Vn: 0.4
@@ -1768,11 +1768,11 @@ rs_bb_04kv:
     - ev-charge_line
     - ev-fast_pwm
 rs_bb_20kv:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 6.261888108244006
+    p: 216.83968071666072
+    q: 4.860091400329917
     v: 19997.757239626324
   par:
     Vn: 20.0
@@ -1895,11 +1895,11 @@ source:
     - sourcebus
     - sourcebus.0.0.0
 sourcebus:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 25.783800997965916
+    p: -893.0433912507598
+    q: -7.690940583826315
     v: 19997.757239626324
   par:
     Vn: 20.0
@@ -1956,7 +1956,7 @@ ug_1_tr:
   top:
     conn:
     - ug_bb_20kv
-    - ev-charge_bb
+    - ug_bb_2kv
 ug_2_tr:
   category: 2W-Transformer
   lf:
@@ -1994,11 +1994,11 @@ ug_2_tr:
     - ug_bb_20kv
     - ug_bb_2kv
 ug_bb_20kv:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 16.93186000817659
+    p: 582.6315257369653
+    q: 66.998623982542
     v: 19997.757239626324
   par:
     Vn: 20.0
@@ -2020,11 +2020,11 @@ ug_bb_20kv:
     - ug_1_tr
     - ug_2_tr
 ug_bb_2kv:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 8.786685012030956
+    p: 291.09784518372095
+    q: 87.95996414089622
     v: 19981.416542455732
   par:
     Vn: 2.0
@@ -2047,12 +2047,12 @@ ug_bb_2kv:
     - ug_serv_tr
     - ug_pwm
     - ugs_pwm
-ug_bb_lvdc:
-  category: Node
+ug_dc-bb:
+  category: DC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 58.01514330357119
+    p: 199.99436312818096
+    q: 0.006348268891982003
     v: 1990.219221749981
   par:
     Vn: 1.5
@@ -2196,7 +2196,7 @@ ug_dc-load:
       load_rel: null
   top:
     conn:
-    - ug_bb_lvdc
+    - ug_dc-bb
 ug_line:
   category: AC-Line
   lf:
@@ -2273,7 +2273,7 @@ ug_pwm:
   top:
     conn:
     - ug_bb_2kv
-    - ug_bb_lvdc
+    - ug_dc-bb
 ug_serv1_ac-load:
   category: AC-Load
   lf:
@@ -2529,11 +2529,11 @@ ug_serv2_ac-load:
     conn:
     - ug_serv_bb
 ug_serv_bb:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 66.6852909752578
+    p: 201.33407508005234
+    q: 110.93723499752215
     v: 1990.219221749981
   par:
     Vn: 0.4
@@ -2713,7 +2713,7 @@ ugs_1_pv:
       lambda: null
   top:
     conn:
-    - ugs_pv_bb
+    - ugs_pv_dc-bb
 ugs_2_pv:
   category: PV
   lf:
@@ -2837,34 +2837,7 @@ ugs_2_pv:
       lambda: null
   top:
     conn:
-    - ugs_pv_bb
-ugs_bb:
-  category: Node
-  lf:
-    i: []
-    p: []
-    q: []
-    v: 1990.219221749981
-  par:
-    Vn: 1.5
-    out-of-service: false
-  rel:
-    par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
-    results:
-      MTBF_anni: null
-      MTBF_ore: null
-      Pi_Si: null
-      lambda: null
-  top:
-    conn:
-    - ugs_pwm
-    - ugs_dc-load
-    - ugs_bess
-    - ugs_dc-dc-conv
+    - ugs_pv_dc-bb
 ugs_bess:
   category: BESS
   lf:
@@ -2894,7 +2867,34 @@ ugs_bess:
       lambda: null
   top:
     conn:
-    - ugs_bb
+    - ugs_dc-bb
+ugs_dc-bb:
+  category: DC-Node
+  lf:
+    i: 52.21562209227531
+    p: 179.9941523191701
+    q: 0.0029393669664764276
+    v: 1990.219221749981
+  par:
+    Vn: 1.5
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: null
+      Pi_Q: null
+      alfa: null
+      beta: null
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - ugs_pwm
+    - ugs_dc-load
+    - ugs_bess
+    - ugs_dc-dc-conv
 ugs_dc-dc-conv:
   category: DC-DC-Converter
   lf:
@@ -2929,8 +2929,8 @@ ugs_dc-dc-conv:
       lambda: null
   top:
     conn:
-    - ugs_bb
-    - ugs_pv_bb
+    - ugs_dc-bb
+    - ugs_pv_dc-bb
 ugs_dc-load:
   category: DC-Load
   lf:
@@ -3055,13 +3055,13 @@ ugs_dc-load:
       load_rel: null
   top:
     conn:
-    - ugs_bb
-ugs_pv_bb:
-  category: Node
+    - ugs_dc-bb
+ugs_pv_dc-bb:
+  category: DC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 11.60369112799924
+    p: -30.000209641416124
+    q: -0.001134635891084315
     v: 1492.6644222749708
   par:
     Vn: 0.75
@@ -3117,7 +3117,7 @@ ugs_pwm:
   top:
     conn:
     - ug_bb_2kv
-    - ugs_bb
+    - ugs_dc-bb
 user_ac-load:
   category: AC-Load
   lf:
@@ -3246,11 +3246,11 @@ user_ac-load:
     conn:
     - user_bb
 user_bb:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 334.3854571290636
+    p: 204.1258983340154
+    q: 100.2188166816432
     v: 392.630725570652
   par:
     Vn: 0.4
@@ -3566,11 +3566,11 @@ wpg_2_wind:
     conn:
     - wpg_bb2
 wpg_bb1:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 7.397041424311022
+    p: -217.7305242072229
+    q: -135.01884395545488
     v: 19996.527584319123
   par:
     Vn: 2.0
@@ -3592,11 +3592,11 @@ wpg_bb1:
     - wpg_line
     - wpg_pwm
 wpg_bb2:
-  category: Node
+  category: AC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 93.21135910512457
+    p: -278.0358415195804
+    q: -167.27885611020596
     v: 2009.8152816895497
   par:
     Vn: 2.0
@@ -3646,7 +3646,7 @@ wpg_bess:
       lambda: null
   top:
     conn:
-    - wpg_pv_bb
+    - wpg_pv_dc-bb
 wpg_line:
   category: AC-Line
   lf:
@@ -3811,13 +3811,13 @@ wpg_pv:
       lambda: null
   top:
     conn:
-    - wpg_pv_bb
-wpg_pv_bb:
-  category: Node
+    - wpg_pv_dc-bb
+wpg_pv_dc-bb:
+  category: DC-Node
   lf:
-    i: []
-    p: []
-    q: []
+    i: 17.23624520930266
+    p: 59.99987326924993
+    q: -0.004836555941451451
     v: 2009.8152816895497
   par:
     Vn: 0.6
@@ -3873,7 +3873,7 @@ wpg_pwm:
   top:
     conn:
     - wpg_bb1
-    - wpg_pv_bb
+    - wpg_pv_dc-bb
 wpg_tr:
   category: 2W-Transformer
   lf:
