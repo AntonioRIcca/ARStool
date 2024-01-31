@@ -105,7 +105,7 @@ class Main:
     def test_action(self):
         line = self .myform.ui.tableWidget.currentRow()
         elem = self.myform.ui.tableWidget.item(line, 0).text()
-        print(elem)
+        # print(elem)
 
         try:
             self.ui.rightMenuPages.removeWidget(self.ui.rightMenuPages.widget(2))
@@ -630,6 +630,7 @@ Main()
 with open('CityArea.yml', 'w') as file:
     yaml.dump(v, file)
     file.close()
+print('end')
 
 
 # print('end2')

@@ -160,6 +160,7 @@ class OpenDSS:
         # l'OpenDSS connette il "source" a monte con un nodo con desinenza ".0.0.0" (che si vuole eliminare)
         # e a valle con un nodo che deve avere la stessa tensione del source
         sourcebus = v['source']['top']['conn'][0]
+        v['source']['top']['conn'] = [sourcebus]
         v[sourcebus]['par']['Vn'] = v['source']['par']['Vn']
         v.pop(sourcebus + '.0.0.0')
 
