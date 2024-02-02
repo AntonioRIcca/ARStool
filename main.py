@@ -324,6 +324,8 @@ class Main:
         dss.write_all()
         dss.solve()
 
+        dss.dss.text
+
         self.write_excel()
 
         self.p_loads, self.q_loads = 0, 0

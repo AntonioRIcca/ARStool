@@ -40,6 +40,7 @@ class OpenDSS:
         # La funzione self.node_define serve a definire le tensioni HV dei trasformatori delle busbar a monte di essi
         self.node_define()
         print('none')
+        self.dss.text(f"Save Circuit dir=cartella")
 
     def mcat_find(self, el):
         mcat = ''

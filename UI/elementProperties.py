@@ -28,7 +28,7 @@ class Window(QWidget):
 
         spacer = QSpacerItem(20, 20, QSizePolicy.Fixed)
 
-        print(v[elem]['top']['conn'])
+        # print(v[elem]['top']['conn'])
 
         # Creare widget busbar
         # creare elementi busbar
@@ -268,7 +268,6 @@ class Window(QWidget):
             if i == 0 and v[self.buses[0]]['par']['Vn'] != v[self.buses[1]]['par']['Vn']:
                 self.buses[1] = None
                 self.__getattribute__('node1_BTN').setText('-')
-                # TODO: bisogna disabilitare il pulsante SALVA finché non si definisce la seconda busbar
 
         self.__getattribute__('node' + str(i) + '_BTN').setText(node)
         self.__getattribute__('node' + str(i) + '_BTN').show()
@@ -366,8 +365,7 @@ class Window(QWidget):
     # salvataggio dei dati dall'interfaccia al dizionario
     def save_par(self):
         self.bb_fix(self.elem)
-        # TODO: quando si modifica la tensione ad una busbar,
-        #  bisogna modificare in cascata tutte le tensioni direttamente connesse ad essa (e.g. connesse da linee)
+        # TODO: nel caso di variazione di tensione a busbar correlate, bisogna mettere un alert
 
         for par in el_format[self.cat]:
             v[self.elem]['par'][par] = self.__getattribute__(par + '_DSB').value()
@@ -387,16 +385,19 @@ class Window(QWidget):
     def bb_fix(self, elem):
         # Se si modifica la tensione della busbar,
         # bisogna modificare la tensione nominale degli elementi a essa connessa
+
+        # Se l'elemento è un nodo o la rete esterna, e se è cambiata la tensione nomnale
         if self.cat in mc['Node'] + mc['Vsource'] and v[elem]['par']['Vn'] != self.Vn_DSB.value():
-            for el in self.buses:
-                if v[el]['category'] in mc['Transformer']:
-                    for i in range(len(v[el]['top']['conn'])):
-                        if v[el]['top']['conn'][i] == elem:
-                            v[el]['par']['Vn' + str(i)] = self.Vn_DSB.value()
-                    pass
-                else:
-                    v[el]['par']['Vn'] = self.Vn_DSB.value()
-                    pass
+            for el in self.bb_link(elem):
+                for bb in self.buses:
+                    if v[bb]['category'] in mc['Transformer']:
+                        for i in range(len(v[bb]['top']['conn'])):
+                            if v[bb]['top']['conn'][i] == elem:
+                                v[bb]['par']['Vn' + str(i)] = self.Vn_DSB.value()
+                        pass
+                    else:
+                        v[el]['par']['Vn'] = self.Vn_DSB.value()
+                        pass
 
         # Se si modifica la busbar connessa,
         # bisogna modificare anche l'elenco delle connessioni nella vecchia e nella nuova busbar
@@ -435,12 +436,13 @@ class Window(QWidget):
                         for b in v[conn]['top']['conn']:
                             if b != bb and b not in bb_solved:
                                 buses.append(b)
-                    lines_solved.append(conn)
+                        lines_solved.append(conn)
                 bb_solved.append(bb)
                 buses.pop(buses.index(bb))
             print(buses)
             print(bb_solved)
-        bb_solved.pop(busbar)
+        # bb_solved.remove(busbar)
+        print(bb_solved, lines_solved)
         return bb_solved
 
 
