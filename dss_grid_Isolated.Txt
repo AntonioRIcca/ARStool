@@ -1,0 +1,71 @@
+
+ISOLATED CIRCUIT ELEMENT REPORT
+
+
+***  THE FOLLOWING BUSES HAVE NO CONNECTION TO THE SOURCE ***
+
+"ug_bb_2kv"
+"ug_serv_bb"
+"ug_bb_lvdc"
+"ugs_bb"
+"ugs_pv_bb"
+
+***********  THE FOLLOWING SUB NETWORKS ARE ISOLATED ************
+
+*** START SUBAREA ***
+(0) Transformer.ug_serv_tr
+[SHUNT], Load.ug_serv1_ac-load
+[SHUNT], Load.ug_serv2_ac-load
+(1) Transformer.ugs_pwm
+[SHUNT], Load.ugs_dc-load
+[SHUNT], Generator.ugs_bess
+(2) Transformer.ugs_dc-dc-conv
+[SHUNT], Generator.ugs_1_pv
+[SHUNT], Generator.ugs_2_pv
+(1) Transformer.ug_pwm
+[SHUNT], Load.ug_dc-load
+
+
+***********  THE FOLLOWING ENABLED ELEMENTS ARE ISOLATED ************
+
+
+***  THE FOLLOWING BUSES ARE NOT CONNECTED TO ANY POWER DELIVERY ELEMENT ***
+
+
+***********  CONNECTED CIRCUIT ELEMENT TREE ************
+
+(Lexical Level) Element name
+
+(0) Vsource.source
+(1) Line.res-wpg_line
+(2) Transformer.wpg_tr
+(3) Transformer.wpg_pwm
+[SHUNT], Generator.wpg_bess
+[SHUNT], Generator.wpg_pv
+(3) Line.wpg_line
+[SHUNT], Generator.wpg_1_wind
+[SHUNT], Generator.wpg_2_wind
+(2) Transformer.res_tr
+(3) Line.pros_line
+[SHUNT], Load.pros_1_ac-load
+(4) Transformer.pros_pv_pwm
+[SHUNT], Load.pros_dc-load
+[SHUNT], Generator.pros_pv
+(4) Transformer.pros_bess_pwm
+[SHUNT], Generator.pros_bess
+[SHUNT], Generator.pros_dc-micro-wind
+(5) Line.pros-ev_dc-line
+[SHUNT], Generator.ev-fast_bess
+[SHUNT], Generator.ev-fast_pv
+(6) Transformer.ev-fast_dc-dc-conv
+[SHUNT], Load.ev-fast_dc-load
+(6) Transformer.ev-fast_pwm
+[SHUNT], Load.rs_1_ac-load
+[SHUNT], Load.rs_2_ac-load
+(7) Line.ev-charge_line
+[SHUNT], Load.ev-charge_ac-load
+(7) Transformer.rs_tr
+(3) Line.user_line
+[SHUNT], Load.user_ac-load
+(1) Line.rs_line
+(1) Line.ug_line

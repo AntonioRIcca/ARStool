@@ -1,4 +1,4 @@
-import py_dss_interface
+# import py_dss_interface
 # from PySide2.QtCharts import QChart, QChartView, QBarSet, QPercentBarSeries, QBarCategoryAxis
 
 from functools import partial
@@ -8,28 +8,59 @@ from PySide2 import QtGui, QtCore
 
 from PySide2.QtCharts import *
 
-from variables import c, vdss, v, mc
+from variables import v
 import yaml
 # from PySide2 import *
 from PySide2.QtWidgets import *
-import sys
+# import sys
 
 import opendss
-from threading import Thread
+# from threading import Thread
 
 from mainUI import MainWindow
 
 from UI.elementProperties import Window
 
-import time
+# import time
 
 from collections import namedtuple
 Data = namedtuple('Data', ['name', 'value', 'primary_color', 'secondary_color'])
 
 
+# noinspection PyBroadException,PyArgumentList,PyUnusedLocal
 class Main:
     def __init__(self):
-        self.app = QApplication(sys.argv)
+        # variabili globali
+        self.mainwindow = None
+        self.ui = None
+
+        self.lf_cat = None
+        self.p_eg = None
+        self.q_eg = None
+        self.p_loss = None
+        self.q_loss = None
+
+        self.lg_wgt = None
+        self.lf_WGT = None
+        self.par_wgt = None
+        self.home_WGT = None
+        self.home2_WGT = None
+        self.home3_WGT = None
+        self.home3_VL = None
+        self.home3_top_WGT = None
+        self.home3_center_WGT = None
+        self.home3_center_VL = None
+        self.home3_bottom_WGT = None
+        self.homeHBL = None
+        self.p_loads, self.q_loads = None, None
+        self.p_gen, self.q_gen = None, None
+        self.p_bess, self.q_bess = None, None
+        self.home3_table_bottom_LN = None
+        self.myform = None
+        self.elemementTableWGT = None
+
+        self.app = QApplication()
+        # self.app = QApplication(sys.argv)
         self.interface_open()
 
         # f_main = Thread(target=self.interface_open)
@@ -97,7 +128,7 @@ class Main:
 
         for i in range(0, self.myform.ui.tableWidget.rowCount()):
             for j in range(0, self.myform.ui.tableWidget.columnCount()):
-                self.myform.ui.tableWidget.item(i, j).setForeground(QtGui.QColor(255,255,255))
+                self.myform.ui.tableWidget.item(i, j).setForeground(QtGui.QColor(255, 255, 255))
 
         self.myform.ui.tableWidget.setColumnWidth(0, 160)
         self.myform.ui.tableWidget.setColumnWidth(1, 150)
@@ -105,7 +136,7 @@ class Main:
     def test_action(self):
         line = self .myform.ui.tableWidget.currentRow()
         elem = self.myform.ui.tableWidget.item(line, 0).text()
-        # print(elem)
+        print(elem)
 
         try:
             self.ui.rightMenuPages.removeWidget(self.ui.rightMenuPages.widget(2))
@@ -122,6 +153,8 @@ class Main:
 
         self.par_wgt.cancel_BTN.clicked.connect(self.ui.rightMenuContainer.collapseMenu)
 
+        dss.readline(elem)
+
         # print(self.ui.rightMenuPages.count())
 
         pass
@@ -130,7 +163,7 @@ class Main:
         # print(self.ui.rightMenuPages.currentIndex())
         print('azione')
         # -- Creazione del diagramma delle generazioni ---------------------------
-        # Todo: da definire come gestire i dati  deò diagramma
+        # Todo: da definire come gestire i dati  del diagramma
         from UI.donutbreakdown2 import DonutBreakdownChart
         db_graph = DonutBreakdownChart(mcat=mcat, data=self.lf_cat[mcat])
 
@@ -150,7 +183,9 @@ class Main:
             self.home_WGT.deleteLater()
         self.home_WGT = QWidget()
 
-        self.homeHBL = QHBoxLayout(self.home_WGT)
+        # self.homeHBL = QHBoxLayout(self.home_WGT)
+        self.homeHBL = QHBoxLayout()
+        self.home_WGT.setLayout(self.homeHBL)
         self.homeHBL.setContentsMargins(0, 0, 0, 0)
 
         from UI.table_wgt import Table
@@ -217,8 +252,6 @@ class Main:
         #
         # self.lf_WGT.ui.image_VL.addWidget(chart_view)
         # --------------------------------------------------------------
-
-
 
     def barchart(self):
         # set0 = QtCharts.QBarSet('Parwix')
@@ -298,11 +331,12 @@ class Main:
         chart.createDefaultAxes()
         chart.setAxisX(axis, series)
         chart.setBackgroundBrush(QtGui.QBrush(QtGui.QColor('transparent')))
-        chart.legend().setLabelColor('white')
+        # chart.legend().setLabelColor('white')
+        chart.legend().setLabelColor(QtGui.QColor('white'))
         chart.setTitleBrush(QtGui.QColor(255, 255, 255))
         chart.setTitleFont(QtGui.QFont("Arial", 12))
-        chart.axisX().setLabelsColor('white')
-        chart.axisY().setLabelsColor('white')
+        chart.axisX().setLabelsColor(QtGui.QColor(255, 255, 255))
+        chart.axisY().setLabelsColor(QtGui.QColor(255, 255, 255))
         # chart.axisY().__format__("%.0f")
         chart.axisY().setLabelFormat("%.0f%%")
         chart.legend().setFont(QtGui.QFont("Arial", 10))
@@ -311,22 +345,18 @@ class Main:
 
         self.lf_WGT.ui.lfres_bottom_WGT.deleteLater()
 
-        lfres_bottom_WGT = QtCharts.QChartView(chart)
-        print('oook')
-        # self.home3_VL.insertWidget(0, self.home3_top_WGT)
-        self.lf_WGT.ui.lfres_VL.insertWidget(3, lfres_bottom_WGT)
-        # self.lf_WGT.ui.image_VL.addWidget(self.home3_top_WGT)
+        lfres_bottom_wgt = QtCharts.QChartView(chart)
+        self.lf_WGT.ui.lfres_VL.insertWidget(3, lfres_bottom_wgt)
 
     def loadflow(self):
-
         self.ui.rightMenuContainer.collapseMenu()
         self.home2_WGT.deleteLater()
         dss.write_all()
         dss.solve()
 
-        dss.dss.text
+        # write_excel()
 
-        self.write_excel()
+        dss.test()  # TODO: da eliminare, è una prova
 
         self.p_loads, self.q_loads = 0, 0
         self.p_gen, self.q_gen = 0, 0
@@ -402,65 +432,65 @@ class Main:
 
         # print('LF done')
 
-    def write_excel(self):
-        file_excel = xlsxwriter.Workbook('risultato.xlsx')
-        worksheet = file_excel.add_worksheet()
-        worksheet.write(0, 0, 'Results')
-
-        lf_par = ['v', 'p', 'q', 'i']
-        row, col = 1, 0
-        for cat in ['AC-Load', 'DC-Load', 'BESS', 'PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor']:
-            row += 1
-            worksheet.write(row, col, cat)
-            row += 1
-
-            col = 1
-            for par in lf_par:
-                worksheet.write(row, col, par)
-                col += 1
-            row += 1
-            col = 0
-
-            for el in v:
-                if v[el]['category'] == cat:
-                    worksheet.write(row, col, el)
-                    col = 1
-                    for par in lf_par:
-                        worksheet.write(row, col, v[el]['lf'][par])
-                        col += 1
-                    row += 1
-                    col = 0
-
-        for cat in ['2W-Transformer', 'PWM', 'DC-DC-Converter', 'AC-Line', 'DC-Line']:
-            row += 1
-            worksheet.write(row, col, cat)
-            row += 1
-
-            col = 1
-            for par in lf_par:
-                for i in [0, 1]:
-                    worksheet.write(row, col, par + str(i))
-                    col += 1
-            row += 1
-            col = 0
-            # worksheet.write(2, 10, 'pepe')
-
-            for el in v:
-                # print(el)
-                if v[el]['category'] == cat:
-                    worksheet.write(row, col, el)
-                    col = 1
-                    for par in lf_par:
-                        for i in [0, 1]:
-                            worksheet.write(row, col, v[el]['lf'][par][i])
-                            col += 1
-                    row += 1
-                    col = 0
-
-
-        file_excel.close()
-        pass
-
+    # def write_excel(self):
+    #     file_excel = xlsxwriter.Workbook('risultato.xlsx')
+    #     worksheet = file_excel.add_worksheet()
+    #     worksheet.write(0, 0, 'Results')
+    #
+    #     lf_par = ['v', 'p', 'q', 'i']
+    #     row, col = 1, 0
+    #     for cat in ['AC-Load', 'DC-Load', 'BESS', 'PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor']:
+    #         row += 1
+    #         worksheet.write(row, col, cat)
+    #         row += 1
+    #
+    #         col = 1
+    #         for par in lf_par:
+    #             worksheet.write(row, col, par)
+    #             col += 1
+    #         row += 1
+    #         col = 0
+    #
+    #         for el in v:
+    #             if v[el]['category'] == cat:
+    #                 worksheet.write(row, col, el)
+    #                 col = 1
+    #                 for par in lf_par:
+    #                     worksheet.write(row, col, v[el]['lf'][par])
+    #                     col += 1
+    #                 row += 1
+    #                 col = 0
+    #
+    #     for cat in ['2W-Transformer', 'PWM', 'DC-DC-Converter', 'AC-Line', 'DC-Line']:
+    #         row += 1
+    #         worksheet.write(row, col, cat)
+    #         row += 1
+    #
+    #         col = 1
+    #         for par in lf_par:
+    #             for i in [0, 1]:
+    #                 worksheet.write(row, col, par + str(i))
+    #                 col += 1
+    #         row += 1
+    #         col = 0
+    #         # worksheet.write(2, 10, 'pepe')
+    #
+    #         for el in v:
+    #             # print(el)
+    #             if v[el]['category'] == cat:
+    #                 worksheet.write(row, col, el)
+    #                 col = 1
+    #                 for par in lf_par:
+    #                     for i in [0, 1]:
+    #                         worksheet.write(row, col, v[el]['lf'][par][i])
+    #                         col += 1
+    #                 row += 1
+    #                 col = 0
+    #
+    #
+    #     file_excel.close()
+    #     pass
+    #
     def lf_cat_widget(self, mcat):
         colors = [QtGui.Qt.red, QtGui.Qt.darkGreen, QtGui.Qt.darkBlue]
         i = 0
@@ -485,7 +515,6 @@ class Main:
             self.__setattr__('home3_' + cat + '_top_LN', QFrame())
             self.__getattribute__('home3_' + cat + '_top_LN').setStyleSheet('border: 1px solid rgb(255, 255, 255);')
             self.__getattribute__('home3_' + cat + '_top_LN').setFrameShape(QFrame.HLine)
-            # self.__getattribute__('home3_' + cat + '_top_LN').setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Minimum)
 
             self.__setattr__('home3_' + cat + '_WGT', QWidget())
 
@@ -513,7 +542,7 @@ class Main:
             self.__getattribute__('home3_' + cat + '_sx_LBL').setSizePolicy(sizepolicy1)
             self.__getattribute__('home3_' + cat + '_sx_LBL').setMinimumSize(80, 0)
 
-            self.__getattribute__('home3_' + cat + '_sx_LBL').setAlignment(QtGui.Qt.AlignRight|QtGui.Qt.AlignVCenter)
+            self.__getattribute__('home3_' + cat + '_sx_LBL').setAlignment(QtGui.Qt.AlignRight | QtGui.Qt.AlignVCenter)
             self.__getattribute__('home3_' + cat + '_sx_LBL').setStyleSheet(u'font: bold 12pt "MS Shell Dlg 2"')
             self.__getattribute__('home3_' + cat + '_ctr_WGT').setSizePolicy(sizepolicy2)
             self.__getattribute__('home3_' + cat + '_dx_WGT').setSizePolicy(sizepolicy3)
@@ -539,12 +568,23 @@ class Main:
 
                 self.__setattr__('home3_' + elem + '_name_LBL', QLabel(elem + ':'))
                 self.__setattr__('home3_' + elem + '_color_WGT', QWidget())
-                self.__setattr__('home3_' + elem + '_p_LBL', QLabel((f"{self.lf_cat[mcat][cat][elem]['p']:.1f}")))
-                self.__setattr__('home3_' + elem + '_unit_LBL', QLabel('kW'))
-                self.__getattribute__('home3_' + elem + '_HL').addWidget(self.__getattribute__('home3_' + elem + '_name_LBL'))
-                self.__getattribute__('home3_' + elem + '_HL').addWidget(self.__getattribute__('home3_' + elem + '_color_WGT'))
-                self.__getattribute__('home3_' + elem + '_HL').addWidget(self.__getattribute__('home3_' + elem + '_p_LBL'))
-                self.__getattribute__('home3_' + elem + '_HL').addWidget(self.__getattribute__('home3_' + elem + '_unit_LBL'))
+                # self.__setattr__('home3_' + elem + '_p_LBL', QLabel((f"{self.lf_cat[mcat][cat][elem]['p']:.1f}")))
+                self.__setattr__('home3_' + elem + '_p_LBL', QLabel())
+                self.__getattribute__('home3_' + elem + '_p_LBL',).setText(f"{self.lf_cat[mcat][cat][elem]['p']:.1f}")
+
+                # QLabel(QtCore.QObject())
+
+                # self.__setattr__('home3_' + elem + '_unit_LBL', QLabel('kW'))
+                self.__setattr__('home3_' + elem + '_unit_LBL', QLabel())
+                self.__getattribute__('home3_' + elem + '_unit_LBL').setText('kW')
+                self.__getattribute__('home3_' + elem + '_HL').addWidget(
+                    self.__getattribute__('home3_' + elem + '_name_LBL'))
+                self.__getattribute__('home3_' + elem + '_HL').addWidget(
+                    self.__getattribute__('home3_' + elem + '_color_WGT'))
+                self.__getattribute__('home3_' + elem + '_HL').addWidget(
+                    self.__getattribute__('home3_' + elem + '_p_LBL'))
+                self.__getattribute__('home3_' + elem + '_HL').addWidget(
+                    self.__getattribute__('home3_' + elem + '_unit_LBL'))
                 self.__getattribute__('home3_' + elem + '_name_LBL').setAlignment(QtGui.Qt.AlignRight)
                 self.__getattribute__('home3_' + elem + '_name_LBL').setSizePolicy(QSizePolicy.Preferred,
                                                                                    QSizePolicy.Preferred)
@@ -579,18 +619,77 @@ class Main:
         #                                 "}"
         #                                 )
         # print(self.home3_PV_WGT.styleSheet())
-        # self.home3_PV_WGT.setStyleSheet(u'border-top: 1px solid rgb(255,255,255);border-bottom: 1px solid rgb(255,255,255);')
-
-
+        # self.home3_PV_WGT.setStyleSheet(u'border-top: 1px solid rgb(255,255,255);'
+        #                                 u'border-bottom: 1px solid rgb(255,255,255);')
 
 
 class LFrWGT(QMainWindow):
     def __init__(self):
         from UI.ui_lfres import Ui_lfres_mainWGT
 
-        super(LFrWGT, self).__init__()
+        super(LFrWGT, self).__init__(None)
         self.ui = Ui_lfres_mainWGT()
         self.ui.setupUi(self)
+
+
+def write_excel():
+    file_excel = xlsxwriter.Workbook('risultato.xlsx')
+    worksheet = file_excel.add_worksheet()
+    worksheet.write(0, 0, 'Results')
+
+    lf_par = ['v', 'p', 'q', 'i']
+    row, col = 1, 0
+    for cat in ['AC-Load', 'DC-Load', 'BESS', 'PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor']:
+        row += 1
+        worksheet.write(row, col, cat)
+        row += 1
+
+        col = 1
+        for par in lf_par:
+            worksheet.write(row, col, par)
+            col += 1
+        row += 1
+        col = 0
+
+        for el in v:
+            if v[el]['category'] == cat:
+                worksheet.write(row, col, el)
+                col = 1
+                for par in lf_par:
+                    worksheet.write(row, col, v[el]['lf'][par])
+                    col += 1
+                row += 1
+                col = 0
+
+    for cat in ['2W-Transformer', 'PWM', 'DC-DC-Converter', 'AC-Line', 'DC-Line']:
+        row += 1
+        worksheet.write(row, col, cat)
+        row += 1
+
+        col = 1
+        for par in lf_par:
+            for i in [0, 1]:
+                worksheet.write(row, col, par + str(i))
+                col += 1
+        row += 1
+        col = 0
+        # worksheet.write(2, 10, 'pepe')
+
+        for el in v:
+            # print(el)
+            if v[el]['category'] == cat:
+                worksheet.write(row, col, el)
+                col = 1
+                for par in lf_par:
+                    for i in [0, 1]:
+                        worksheet.write(row, col, v[el]['lf'][par][i])
+                        col += 1
+                row += 1
+                col = 0
+
+    file_excel.close()
+    pass
+
 
 # if __name__ == '__main__':
 #     app = QApplication(sys.argv)
@@ -614,7 +713,7 @@ dss.open(filename)
 # dss.write_all()
 
 # dss.solve_profile()
-dss.solve()
+# dss.solve()
 
 # dss.losses_calc()
 #
@@ -669,10 +768,10 @@ print('end')
 #
 # params = ['currents_mag_ang', 'currents', 'variables_values', 'name', 'property_names', 'variables_names',
 #           'cplx_seq_currents', 'cplx_seq_voltages', 'energymeter', 'has_switch_control', 'has_volt_control',
-#           'is_terminal_open', 'losses', 'node_order', 'num_conductors', 'num_controls', 'num_phases', 'num_properties',
-#           'num_terminals', 'ocp_dev_index', 'ocp_dev_type', 'phase_losses', 'powers', 'bus_names', 'display',
-#           'emerg_amps', 'is_enabled', 'norm_amps', 'residuals_currents', 'seq_currents', 'seq_powers', 'seq_voltages',
-#           'voltages', 'voltages_mag_ang', 'y_prim']
+#           'is_terminal_open', 'losses', 'node_order', 'num_conductors', 'num_controls', 'num_phases',
+#           'num_properties', 'num_terminals', 'ocp_dev_index', 'ocp_dev_type', 'phase_losses', 'powers', 'bus_names',
+#           'display', 'emerg_amps', 'is_enabled', 'norm_amps', 'residuals_currents', 'seq_currents', 'seq_powers',
+#           'seq_voltages', 'voltages', 'voltages_mag_ang', 'y_prim']
 # print('\n\n')
 #
 # for e in dss.circuit.elements_names:

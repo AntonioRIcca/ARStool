@@ -30,6 +30,344 @@ c = {
     'dc-node': 'DC-Node',
 }
 
+new_par_dict = {
+    'PV': {
+        'top': {
+            'conn': {
+                'label': 'bus1',
+            },
+        },
+        'par': {
+            'P': {
+                'label': 'kW',
+                'unit': 'kW',
+            },
+            'Vn': {
+                'label': 'kv',
+                'unit': 'kV',
+            },
+            'others': {
+                'phases': '3',
+                'kvar': '0',
+                'model': '3',
+            },
+        },
+    },
+
+    'BESS': {
+        'top': {
+            'conn': {
+                'label': 'bus1',
+            },
+        },
+        'par': {
+            'P': {
+                'label': 'kW',
+                'unit': 'kW',
+            },
+            'Vn': {
+                'label': 'kv',
+                'unit': 'kV',
+            },
+            'others': {
+                'phases': '3',
+                'kvar': '0',
+                'model': '3',
+            },
+        },
+    },
+
+    'DC-Wind': {
+        'top': {
+            'conn': {
+                'label': 'bus1',
+            },
+        },
+        'par': {
+            'P': {
+                'label': 'kW',
+                'unit': 'kW',
+            },
+            'Vn': {
+                'label': 'kv',
+                'unit': 'kV',
+            },
+            'others': {
+                'phases': '3',
+                'kvar': '0',
+                'model': '3',
+            },
+        },
+    },
+
+    'AC-Wind': {
+        'top': {
+            'conn': {
+                'label': 'bus1',
+            },
+        },
+        'par': {
+            'P': {
+                'label': 'kW',
+                'unit': 'kW',
+            },
+            'cosPhi': {
+                'label': 'kW',
+                'unit': '',
+            },
+            'Vn': {
+                'label': 'kv',
+                'unit': 'kV',
+            },
+            'others': {
+                'phases': '3',
+            },
+        },
+    },
+
+    '2W-Transformer': {
+        'top': {
+            'conn': {
+                'label': 'buses',
+            },
+        },
+        'par': {
+            'Sr': {
+                'label': 'kVAs',
+                'unit': 'kVA',
+            },
+            'Vn': {
+                'label': 'kVs',
+                'unit': 'kV',
+            },
+            'Rs': {
+                'label': '%Rs',
+                'unit': '%',
+            },
+            'XHL': {
+                'label': 'XHL',
+                'unit': '',
+            },
+            'imag': {
+                'label': '%imag',
+                'unit': '%',
+            },
+            'others': {
+                'windings': '2',
+                'conns': '[delta, wye, ]',
+            },
+        },
+    },
+
+    'PWM': {
+        'top': {
+            'conn': {
+                'label': 'buses',
+            },
+        },
+        'par': {
+            'Sr': {
+                'label': 'kVAs',
+                'unit': 'kVA',
+            },
+            'Vn': {
+                'label': 'kVs',
+                'unit': 'kV',
+            },
+            'others': {
+                'windings': '2',
+                'conns': '[delta, wye, ]',
+                '%Rs': '[0, 0, ]',
+                'XHL': '1E-009',
+                '%imag': '0'
+            },
+        },
+    },
+
+    'DC-DC-Converter': {
+        'top': {
+            'conn': {
+                'label': 'buses',
+            },
+        },
+        'par': {
+            'Sr': {
+                'label': 'kVAs',
+                'unit': 'kVA',
+            },
+            'Vn': {
+                'label': 'kVs',
+                'unit': 'kV',
+            },
+            'others': {
+                'windings': '2',
+                'conns': '[delta, wye, ]',
+                '%Rs': '[0, 0, ]',
+                'XHL': '1E-009',
+                '%imag': '0'
+            },
+        },
+    },
+
+    'AC-Load': {
+        'top': {
+            'conn': {
+                'label': 'bus1',
+            },
+        },
+        'par': {
+            'P': {
+                'label': 'kW',
+                'unit': 'kW',
+            },
+            'cosPhi': {
+                'label': 'pf',
+                'unit': '',
+            },
+            'Vn': {
+                'label': 'kV',
+                'unit': 'kV',
+            },
+            'others': {
+                'phases': '3',
+            },
+        },
+    },
+
+    'DC-Load': {
+        'top': {
+            'conn': {
+                'label': 'bus1',
+            },
+        },
+        'par': {
+            'P': {
+                'label': 'kW',
+                'unit': 'kW',
+            },
+            'Vn': {
+                'label': 'kV',
+                'unit': 'kV',
+            },
+            'others': {
+                'phases': '3',
+                'pf': '1',
+            },
+        },
+    },
+
+    'AC-LineCode': {
+        'par': {
+            'R1': {
+                'label': 'r1',
+                'unit': 'ohm',
+            },
+            'X1': {
+                'label': 'x1',
+                'unit': 'ohm',
+            },
+            'B1': {
+                'label': 'b1',
+                'unit': 'uS',
+            },
+            'R0': {
+                'label': 'r0',
+                'unit': 'ohm',
+            },
+            'X0': {
+                'label': 'x0',
+                'unit': 'ohm',
+            },
+            'B0': {
+                'label': 'b0',
+                'unit': 'uS',
+            },
+            'others': {
+                'phases': '3',
+            },
+        },
+    },
+
+    'DC-LineCode': {
+        'par': {
+            'R1': {
+                'label': 'r1',
+                'unit': 'ohm',
+            },
+            'X1': {
+                'label': 'x1',
+                'unit': 'ohm',
+            },
+            'others': {
+                'phases': '3',
+            },
+        },
+    },
+
+    'AC-Line': {
+        'top': {
+            'conn': {
+                'label': ['bus1', 'bus2', ],
+            },
+            'linecode': 'linecode',
+        },
+        'par': {
+            'In': {
+                'label': 'normamps',
+                'unit': 'ohm/km',
+            },
+            'length': {
+                'label': 'length',
+                'unit': 'km',
+            },
+            'others': {
+                'Season': '1',
+                'Ratings': '[400,]',
+                'emergamps': '600',
+            },
+        },
+    },
+
+    'DC-Line': {
+        'top': {
+            'conn': {
+                'label': ['bus1', 'bus2', ],
+            },
+            'linecode': 'linecode',
+        },
+        'par': {
+            'In': {
+                'label': 'normamps',
+                'unit': 'ohm/km',
+            },
+            'length': {
+                'label': 'length',
+                'unit': 'km',
+            },
+            'others': {
+                'Season': '1',
+                'Ratings': '[400,]',
+                'emergamps': '600',
+            },
+        },
+    },
+
+    'ExternalGrid': {
+        'top': {
+            'conn': {
+                'label': 'bus1',
+            },
+        },
+        'par': {
+            'Vn': {
+                'label': 'basekv',
+                'unit': 'kV',
+            },
+            'others': {}
+        },
+    },
+}
+
 par_dict = {
     'PV': {
         'P': 'kw',
@@ -83,6 +421,7 @@ par_dict = {
     'Node': {},
     'ExternalGrid': {},
 }
+
 
 
 el_format = {

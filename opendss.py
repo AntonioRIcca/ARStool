@@ -1,7 +1,8 @@
 import py_dss_interface
-from variables import v, c, mc, par_dict
+from variables import v, c, mc, par_dict, new_par_dict
 import yaml
 import os
+from decimal import Decimal, InvalidOperation
 
 
 class OpenDSS:
@@ -28,10 +29,10 @@ class OpenDSS:
                 cat = 'source'
 
             # viene inizializzato il sotto-dizionario dell'elemento
-            self.dict_initialize(el)
+            dict_initialize(el)
             v[el]['category'] = c[cat]  # la nomenclatira esatta della categoria deriva dal dizonario "variables.c"
-            self.rel_initialize(el)     #Todo: forse va spostato in self.dict_initialize
-            self.lf_initialize(el)      #Todo: forse va spostato in self.dict_initialize
+            rel_initialize(el)     # Todo: forse va spostato in self.dict_initialize
+            lf_initialize(el)      # Todo: forse va spostato in self.dict_initialize
 
             self.read(el)               # vengono letti i parametri e la topologia dell'elemento
 
@@ -42,16 +43,8 @@ class OpenDSS:
         print('none')
         self.dss.text(f"Save Circuit dir=cartella")
 
-    def mcat_find(self, el):
-        mcat = ''
-        for m in mc.keys():
-            if v[el]['category'] in mc[m]:
-                mcat = m
-                break
-        return mcat
-
     def read(self, el):
-        mcat = self.mcat_find(el)
+        mcat = mcat_find(el)
         v1 = None   # indica la tensione a cui sono connessi i terminali, o la tensione di bassa dei trasformatori
         #
         # # Viene identificata la macrocategoria a partire dal dizionario "variables.mc"
@@ -76,22 +69,22 @@ class OpenDSS:
             v[el]['par']['Vn'] = self.dss.generators.kv
 
             if v[el]['category'] == 'PV':
-                self.create_profile(el)
+                create_profile(el)
 
             elif v[el]['category'] == 'BESS':   # inizialmente, si ipotizzano i valori per gli elementi BESS
                 v[el]['par']['cap'] = 100
                 v[el]['par']['eff'] = 1
-                self.create_profile(el)
+                create_profile(el)
 
             elif v[el]['category'] == 'AC-Wind':
                 v[el]['par']['Q'] = self.dss.generators.kvar
                 v[el]['par']['cosPhi'] = self.dss.generators.pf
                 v[el]['par']['eff'] = 1
-                self.create_profile(el)
+                create_profile(el)
 
             elif v[el]['category'] == 'DC-Wind':
                 v[el]['par']['eff'] = 1
-                self.create_profile(el)
+                create_profile(el)
 
         elif mcat == 'Transformer':
             self.unr_conv.append(el)
@@ -102,6 +95,8 @@ class OpenDSS:
             v[el]['par']['Vn1'] = self.dss.transformers.kv
             v[el]['par']['Sr'] = self.dss.transformers.kva
             v[el]['par']['XHL'] = self.dss.transformers.xhl
+            v[el]['par']['Rs'] = self.dss.transformers.r
+            # v[el]['par']['imag'] = self.dss.cktelement.losses
 
         elif mcat == 'Load':
             self.dss.loads.name = el
@@ -110,7 +105,7 @@ class OpenDSS:
             # Caratteristiche globali degli elementi nella macrocategoria "Load"
             v[el]['par']['P'] = self.dss.loads.kw
             v[el]['par']['Vn'] = self.dss.loads.kv
-            self.create_profile(el)
+            create_profile(el)
 
             if v[el]['category'] == 'AC-Load':
                 v[el]['par']['Q'] = self.dss.loads.kvar
@@ -136,13 +131,13 @@ class OpenDSS:
 
         for node in nodes:
             if node not in v.keys():            # se il nodo non è stato già aggiunto al dizionario
-                self.dict_initialize(node)      # viene inizializzato
+                dict_initialize(node)      # viene inizializzato
                 if node.split('_')[len(node.split('_')) - 1] in ['dc-node', 'dc-bb']:
                     v[node]['category'] = 'DC-Node'  # ""
                 else:
                     v[node]['category'] = 'AC-Node'  # ""
-                self.rel_initialize(node)       # ""
-                self.lf_initialize(node)        # ""
+                rel_initialize(node)       # ""
+                lf_initialize(node)        # ""
                 v[node]['par']['Vn'] = None     # ""
 
             v[node]['top']['conn'].append(el)   # nella topologia del nodo, viene indicato che è connesso all'elemento
@@ -155,7 +150,7 @@ class OpenDSS:
             # se è possibile leggere la tensione v1 dell'elemento
             # e l'elemento è terminale (esiste un solo nodo) o se ni tratta del secondo nodo di un convertitore...
             if v1 and (len(nodes) == 1 or nodes.index(node) == 1):
-                v[node]['par']['Vn'] = v1   # ... il nodo assume la tensione "v1"
+                v[node]['par']['Vn'] = v1   # ... Il nodo assume la tensione "v1"
 
     def node_define(self):
         # l'OpenDSS connette il "source" a monte con un nodo con desinenza ".0.0.0" (che si vuole eliminare)
@@ -246,7 +241,6 @@ class OpenDSS:
                 else:
                     self.dss.__getattribute__(mcat.lower() + 's').__setattr__(par_dict[cat][par], v[el]['par'][par])
         # TODO: da definire come gestire le variazioni su Source e sui Nodi
-        # TODO: da definire come gestire la variazione della connessione ad un Nodo
 
     # Aggiornamento del dizionario con i profili dei risultati di uno studio temporale
     def results_append(self, el):
@@ -256,7 +250,7 @@ class OpenDSS:
             #     if v[el]['category'] in mc[m]:
             #         mcat = m
             #         break
-            mcat = self.mcat_find(el)
+            mcat = mcat_find(el)
 
             # Le parti DC sono in pratica porzioni AC, di cui si considera la fase globale.
             # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
@@ -319,7 +313,7 @@ class OpenDSS:
             #     if v[el]['category'] in mc[m]:
             #         mcat = m
             #         break
-            mcat = self.mcat_find(el)
+            mcat = mcat_find(el)
 
             # Le parti DC sono in pratica porzioni AC, di cui si considera la fase globale.
             # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
@@ -377,9 +371,19 @@ class OpenDSS:
 
     # Esecuzione del loadflow puntuale. Restituisce un Booleano che indica se il sistema va a convegenza.
     def solve(self):
+        try:
+            self.dss.topology.all_isolated_branches.clear()     # TODO: capire se necessario
+            self.dss.solution.clean_up()
+            print(self.dss.topology.all_isolated_loads)
+            print('clear done')
+        except:
+            print('clear error')
+
         self.dss.solution.solve()       # richiesta di risoluzione del sistema
         print(self.dss.circuit.total_power)
         print(bool(self.dss.solution.converged))
+        self.dss.text(f"Save Circuit dir=cartella")
+
 
         # scrittura dei risultati nel dizionario per ogni elemento
         for el in v.keys():
@@ -406,74 +410,155 @@ class OpenDSS:
                 self.results_append(el)
         pass
 
-    # Inizializzazione dei sottodizionari per l'elemento "el"
-    def dict_initialize(self, el):
-        v[el] = dict()
-        for sub in ['top', 'par', 'lf', 'rel']:
-            v[el][sub] = dict()
-        v[el]['top']['conn'] = []
-
-    # Inizializzazione del sottodizionario rella Reliability ("rel") per l'elemento "el"
-    def rel_initialize(self, el):
-        v[el]['rel']['par'] = dict()
-        for p in ['Pi_E', 'Pi_Q', 'alfa', 'beta']:
-            v[el]['rel']['par'][p] = None
-
-        v[el]['rel']['results'] = dict()
-        if v[el]['category'] in mc['Load']:
-            v[el]['rel']['results']['load_rel'] = None
-        for p in ['lambda', 'MTBF_ore', 'MTBF_anni', 'Pi_Si']:
-            v[el]['rel']['results'][p] = None
-
-    # Inizializzazione del sottodizionario del loadFLow ("lf") per l'elemento "el"
-    def lf_initialize(self, el):
-        params = ['i', 'v', 'p', 'q']
-
-        if v[el]['category'] in mc['Transformer'] + mc['Line']:
-            for p in params:
-                v[el]['lf'][p] = dict()
-                v[el]['lf'][p][0] = []
-                v[el]['lf'][p][1] = []
-        else:
-            for p in params:
-                v[el]['lf'][p] = []
-
-    # importazione del profill caratteristico di carichi e generatori
-    def create_profile(self, el):
-        v[el]['par']['profile'] = dict()
-        # inizialmente si ipotizza l'assenza di profilo, con fattore di scala unitario
-        v[el]['par']['profile']['name'] = None
-        v[el]['par']['profile']['curve'] = 1
-
-        # definizione del profilo da caricare
-        profile = None      # Nome del profilo da caricare
-        if v[el]['category'] == 'AC-Load':
-            profile = 'AC-Load'
-        elif v[el]['category'] == 'DC-Load':
-            profile = 'DC-Load'
-        elif v[el]['category'] in ['AC-Wind', 'DC-Wind']:
-            profile = 'Wind'
-        elif v[el]['category'] == 'PV':
-            profile = 'PV'
-
-        if profile:     # se l'elemento prevede il profilo viene importato dal relativo file
-            filename = os.getcwd() + '/_benchmark/_data/_profiles/' + profile + '.yml'
-            d = yaml.safe_load(open(filename))
-
-            # ... e viene memorizzato nel dizionario
-            v[el]['par']['profile']['name'] = d['name']
-            v[el]['par']['profile']['curve'] = d['profile']
-        # else:
-        #     v[el]['par']['profile']['name'] = None
-        #     v[el]['par']['profile']['curve'] = 1
+    def test(self):
+        print(self.dss.topology.all_isolated_branches)
+        # self.dss.text(f"show isolated")
+        # print(self.dss.topology.active_branch)
+        print(self.dss.topology.all_isolated_loads)
+        pass
 
     # def losses_calc(self):
     #     for el in v.keys():
     #         if v[el]['category'] in mc['Transformer']:
     #             self.dss.transformers.name = el
     #             self.dss.circuit.set_active_element('transformer.' + el)
-    #             # print(self.dss.cktelement.name + ': ' + str(self.dss.cktelement.losses), str(self.dss.cktelement.phase_losses))
+
+    # def compile_element(self, el):
+    #     mcat = mcat_find(el)
+    #     if mcat == 'Vsource':
+    #         text = 'New object=circuit.' + self.network_name + ' baekv=' + str(v[el]['par']['Vn'])
+    #     elif mcat == 'Transformer':
+    #         if v[el]['category'] == '2W-Transformer':
+    #             Rs = 'Rs=[' + ''
+    #
+    #     pass
+
+    def readline(self, el):
+        mcat = mcat_find(el)
+        cat = v[el]['category']
+
+        par = dict()
+        if mcat in ['Generator', 'Line', 'Load', 'Transformer', 'Vsource']:
+            params = []
+            for p in (new_par_dict[cat]['par'].keys() - ['others']):
+                print(p)
+                params.append(new_par_dict[cat]['par'][p]['label'])
+            params = params + list(new_par_dict[cat]['par']['others'].keys())
+
+            print('parametri:', params)
+
+            file = open('cartella/' + mcat + '.dss', 'r')
+            while True:
+                line = file.readline()
+                if line == '':
+                    break
+                elements = line.split('"')
+                if elements[1].lower() == (mcat + '.' + el).lower():
+                    print(line)
+                    line = line.replace('New "' + mcat + '.' + el.lower() + '" ', '').replace('\n', '')
+                    line = line.replace(', ', ',')
+                    # print('fatto', line)
+                    datas = line.split(' ')
+                    # print(datas)
+                    # print('\n')
+
+                    for d_comp in datas:
+                        d = d_comp.split('=')
+                        if d[0] in params:
+                            if d[1][0] == '[':
+                                val = []
+                                d[1] = d[1].replace('[', '').replace(']', '')
+                                for single in d[1].split(','):
+                                    if single:
+                                        try:
+                                            Decimal(single)
+                                            single = float(single)
+                                        except InvalidOperation:
+                                            pass
+                                        val.append(single)
+                            else:
+                                try:
+                                    Decimal(d[1])
+                                    val = float(d[1])
+                                except InvalidOperation:
+                                    val = d[1]
+                            print(d[0], val)
+                            par[d[0]] = val
+                    break
 
 
-OpenDSS()
+def mcat_find(el):
+    mcat = ''
+    for m in mc.keys():
+        if v[el]['category'] in mc[m]:
+            mcat = m
+            break
+    return mcat
 
+
+# Inizializzazione dei sottodizionari per l'elemento "el"
+def dict_initialize(el):
+    v[el] = dict()
+    for sub in ['top', 'par', 'lf', 'rel']:
+        v[el][sub] = dict()
+    v[el]['top']['conn'] = []
+
+
+# Inizializzazione del sottodizionario rella Reliability ("rel") per l'elemento "el"
+def rel_initialize(el):
+    v[el]['rel']['par'] = dict()
+    for p in ['Pi_E', 'Pi_Q', 'alfa', 'beta']:
+        v[el]['rel']['par'][p] = None
+
+    v[el]['rel']['results'] = dict()
+    if v[el]['category'] in mc['Load']:
+        v[el]['rel']['results']['load_rel'] = None
+    for p in ['lambda', 'MTBF_ore', 'MTBF_anni', 'Pi_Si']:
+        v[el]['rel']['results'][p] = None
+
+
+# Inizializzazione del sottodizionario del loadFLow ("lf") per l'elemento "el"
+def lf_initialize(el):
+    params = ['i', 'v', 'p', 'q']
+
+    if v[el]['category'] in mc['Transformer'] + mc['Line']:
+        for p in params:
+            v[el]['lf'][p] = dict()
+            v[el]['lf'][p][0] = []
+            v[el]['lf'][p][1] = []
+    else:
+        for p in params:
+            v[el]['lf'][p] = []
+
+
+# importazione del profill caratteristico di carichi e generatori
+def create_profile(el):
+    v[el]['par']['profile'] = dict()
+    # inizialmente si ipotizza l'assenza di profilo, con fattore di scala unitario
+    v[el]['par']['profile']['name'] = None
+    v[el]['par']['profile']['curve'] = 1
+
+    # definizione del profilo da caricare
+    profile = None      # Nome del profilo da caricare
+    if v[el]['category'] == 'AC-Load':
+        profile = 'AC-Load'
+    elif v[el]['category'] == 'DC-Load':
+        profile = 'DC-Load'
+    elif v[el]['category'] in ['AC-Wind', 'DC-Wind']:
+        profile = 'Wind'
+    elif v[el]['category'] == 'PV':
+        profile = 'PV'
+
+    if profile:     # se l'elemento prevede il profilo viene importato dal relativo file
+        filename = os.getcwd() + '/_benchmark/_data/_profiles/' + profile + '.yml'
+        d = yaml.safe_load(open(filename))
+
+        # viene memorizzato nel dizionario
+        v[el]['par']['profile']['name'] = d['name']
+        v[el]['par']['profile']['curve'] = d['profile']
+    # else:
+    #     v[el]['par']['profile']['name'] = None
+    #     v[el]['par']['profile']['curve'] = 1
+
+
+# OpenDSS()

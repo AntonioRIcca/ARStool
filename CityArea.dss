@@ -10,8 +10,8 @@ New linecode.DC-Line nphases=3 R1=0.123 X1=0.1
 // -- UNDERGROUND SECTOR -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 New line.UG_Line bus1=SourceBus bus2=UG_BB_20kV linecode=12-20_3x1x185Al length=3
 
-New transformer.UG_1_TR windings=2 buses=(UG_BB_20kV UG_BB_2kV) conns='delta wye' kvs=(20 2) kvas=(2000 2000) %Rs=[0.93 0] XHL=6 %imag=1.5
-New transformer.UG_2_TR windings=2 buses=(UG_BB_20kV UG_BB_2kV) conns='delta wye' kvs=(20 2) kvas=(2000 2000) %Rs=[0.93 0] XHL=6 %imag=1.5
+New transformer.UG_1_TR windings=2 buses=(UG_BB_20kV UG_BB_2kV) conns='delta wye' kvs=(20 2) kvas=(2000 2000) %Rs=(0.93 0) XHL=6 %imag=1.5
+New transformer.UG_2_TR windings=2 buses=(UG_BB_20kV UG_BB_2kV) conns='delta wye' kvs=(20 2) kvas=(2000 2000) %Rs=(0.93 0) XHL=6 %imag=1.5
 
 New transformer.UG_Serv_TR windings=2 buses=(UG_BB_2kV UG_Serv_BB) conns='delta wye' kvs=(2 0.4) kvas=(400 400) %Rs=[1 0] XHL=6 %imag=1.6
 
