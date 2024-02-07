@@ -34,14 +34,69 @@ class OpenDSS:
             rel_initialize(el)     # Todo: forse va spostato in self.dict_initialize
             lf_initialize(el)      # Todo: forse va spostato in self.dict_initialize
 
-            self.read(el)               # vengono letti i parametri e la topologia dell'elemento
+            # self.read(el)               # vengono letti i parametri e la topologia dell'elemento
+            self.read_new(el)
 
         # In OpenDSS non è possibile ricavare la tensione delle busbar non sottese a trasformatori,
         # o non connesse a elementi terminali.
         # La funzione self.node_define serve a definire le tensioni HV dei trasformatori delle busbar a monte di essi
-        self.node_define()
+        # self.node_define()
         print('none')
         self.dss.text(f"Save Circuit dir=cartella")
+
+    def read_new(self, el):
+        mcat = mcat_find(el)
+        cat = v[el]['category']
+
+        if mcat not in mc['Node']:
+            self.dss.circuit.set_active_element(mcat + '.' + el)  # viene richiamato l'elemento in OpenDSS
+            v[el]['par']['out-of-service'] = not self.dss.cktelement.is_enabled  # verifica se l'elemento è "enabled"
+
+            # lettura dei parametri dalle righe di dss
+            par = self.readline(el)
+            for p in new_par_dict[cat]['par'].keys() - ['others']:
+                v[el]['par'][p] = par[new_par_dict[cat]['par'][p]['label']]
+
+            if mcat == 'Line':
+                v[el]['top']['conn'] = [par['bus1'], par['bus2']]
+            elif mcat == 'Transformer':
+                v[el]['top']['conn'] = par['buses']
+            else:
+                v[el]['top']['conn'] = [par['bus1']]
+
+            for i in range(len(v[el]['top']['conn'])):
+                node = v[el]['top']['conn'][i]
+
+                if node not in v.keys():
+                    dict_initialize(node)  # viene inizializzato
+                    if node.split('_')[len(node.split('_')) - 1] in ['dc-node', 'dc-bb']:
+                        v[node]['category'] = 'DC-Node'  # ""
+                    else:
+                        v[node]['category'] = 'AC-Node'  # ""
+                    rel_initialize(node)  # ""
+                    lf_initialize(node)  # ""
+                    v[node]['par']['out-of-service'] = False    # il nodo è in servizio di default
+                v[node]['top']['conn'].append(el)
+                if mcat not in ['Line']:
+                    v[node]['par']['Vn'] = [v[el]['par']['Vn'][i]]
+
+            if cat in mc['Line']:
+                linecat = cat.split('-')[0] + '-LineCode'
+                linetype = par['linecode']
+                v[linetype] = dict()
+                v[linetype]['category'] = linecat
+                for p in new_par_dict[linecat]['par'].keys() - ['others']:
+                    par = self.readline(linetype)
+                    print( new_par_dict[linecat]['par'][p]['label'])
+                    v[el]['par'][p] = par[new_par_dict[linecat]['par'][p]['label']]
+                v.pop(linetype)
+
+                    # v[node]['par']['Vn'] = None  # ""
+
+
+
+
+
 
     def read(self, el):
         mcat = mcat_find(el)
@@ -437,13 +492,21 @@ class OpenDSS:
         mcat = mcat_find(el)
         cat = v[el]['category']
 
+        if mcat == 'Line':
+            print('Line')
+
         par = dict()
-        if mcat in ['Generator', 'Line', 'Load', 'Transformer', 'Vsource']:
+        # if mcat in ['Generator', 'Line', 'Load', 'Transformer', 'Vsource']:
+        if cat in new_par_dict:
             params = []
             for p in (new_par_dict[cat]['par'].keys() - ['others']):
-                print(p)
+                # print(p)
                 params.append(new_par_dict[cat]['par'][p]['label'])
-            params = params + list(new_par_dict[cat]['par']['others'].keys())
+            for p in new_par_dict[cat]['top'].keys():
+                params = params + new_par_dict[cat]['top'][p]['label']
+
+            # params = (params + list(new_par_dict[cat]['par']['others'].keys()) +
+            #           new_par_dict[cat]['top']['conn']['label'])
 
             print('parametri:', params)
 
@@ -485,6 +548,13 @@ class OpenDSS:
                             print(d[0], val)
                             par[d[0]] = val
                     break
+            if mcat == 'Generator':
+                par['kv'] = [par['kv']]
+            elif mcat == 'Load':
+                par['kV'] = [par['kV']]
+            elif mcat == 'Vsource':
+                par['basekv'] = [par['basekv']]
+        return par
 
 
 def mcat_find(el):

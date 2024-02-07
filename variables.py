@@ -4,6 +4,7 @@ vdss = dict()
 mc = {
     'Vsource': ['ExternalGrid'],
     'Line': ['AC-Line', 'DC-Line'],
+    'LineCode': ['AC-LineCode', 'DC-LineCode',],
     'Transformer': ['2W-Transformer', 'PWM', 'DC-DC-Converter'],
     'Load': ['AC-Load', 'DC-Load'],
     'Generator': ['BESS', 'PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor'],
@@ -34,7 +35,7 @@ new_par_dict = {
     'PV': {
         'top': {
             'conn': {
-                'label': 'bus1',
+                'label': ['bus1'],
             },
         },
         'par': {
@@ -57,7 +58,7 @@ new_par_dict = {
     'BESS': {
         'top': {
             'conn': {
-                'label': 'bus1',
+                'label': ['bus1'],
             },
         },
         'par': {
@@ -80,7 +81,7 @@ new_par_dict = {
     'DC-Wind': {
         'top': {
             'conn': {
-                'label': 'bus1',
+                'label': ['bus1'],
             },
         },
         'par': {
@@ -103,7 +104,7 @@ new_par_dict = {
     'AC-Wind': {
         'top': {
             'conn': {
-                'label': 'bus1',
+                'label': ['bus1'],
             },
         },
         'par': {
@@ -128,7 +129,7 @@ new_par_dict = {
     '2W-Transformer': {
         'top': {
             'conn': {
-                'label': 'buses',
+                'label': ['buses'],
             },
         },
         'par': {
@@ -162,7 +163,7 @@ new_par_dict = {
     'PWM': {
         'top': {
             'conn': {
-                'label': 'buses',
+                'label': ['buses'],
             },
         },
         'par': {
@@ -187,7 +188,7 @@ new_par_dict = {
     'DC-DC-Converter': {
         'top': {
             'conn': {
-                'label': 'buses',
+                'label': ['buses'],
             },
         },
         'par': {
@@ -212,7 +213,7 @@ new_par_dict = {
     'AC-Load': {
         'top': {
             'conn': {
-                'label': 'bus1',
+                'label': ['bus1'],
             },
         },
         'par': {
@@ -237,7 +238,7 @@ new_par_dict = {
     'DC-Load': {
         'top': {
             'conn': {
-                'label': 'bus1',
+                'label': ['bus1'],
             },
         },
         'par': {
@@ -257,6 +258,7 @@ new_par_dict = {
     },
 
     'AC-LineCode': {
+        'top': {},
         'par': {
             'R1': {
                 'label': 'r1',
@@ -267,7 +269,7 @@ new_par_dict = {
                 'unit': 'ohm',
             },
             'B1': {
-                'label': 'b1',
+                'label': 'B1',
                 'unit': 'uS',
             },
             'R0': {
@@ -279,7 +281,7 @@ new_par_dict = {
                 'unit': 'ohm',
             },
             'B0': {
-                'label': 'b0',
+                'label': 'B0',
                 'unit': 'uS',
             },
             'others': {
@@ -289,6 +291,7 @@ new_par_dict = {
     },
 
     'DC-LineCode': {
+        'top': {},
         'par': {
             'R1': {
                 'label': 'r1',
@@ -309,7 +312,9 @@ new_par_dict = {
             'conn': {
                 'label': ['bus1', 'bus2', ],
             },
-            'linecode': 'linecode',
+            'type': {
+                'label': ['linecode'],
+            },
         },
         'par': {
             'In': {
@@ -333,7 +338,9 @@ new_par_dict = {
             'conn': {
                 'label': ['bus1', 'bus2', ],
             },
-            'linecode': 'linecode',
+            'type': {
+                'label': ['linecode'],
+            },
         },
         'par': {
             'In': {
@@ -355,7 +362,7 @@ new_par_dict = {
     'ExternalGrid': {
         'top': {
             'conn': {
-                'label': 'bus1',
+                'label': ['bus1'],
             },
         },
         'par': {
