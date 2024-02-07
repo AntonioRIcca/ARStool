@@ -89,7 +89,7 @@ class Window(QWidget):
                 self.dsb_format(self.__getattribute__('v' + str(b) + '_DSB'), decimals=3)
                 self.__getattribute__('v' + str(b) + '_LBL').setAlignment(Qt.AlignRight |
                                                                           Qt.AlignTrailing | Qt.AlignVCenter)
-                self.__getattribute__('v' + str(b) + '_DSB').setValue(v[self.buses[b]]['par']['Vn'])
+                self.__getattribute__('v' + str(b) + '_DSB').setValue(v[self.buses[b]]['par']['Vn'][0])
 
                 # Le caselle devono essere disabilitata
                 self.__getattribute__('v' + str(b) + '_DSB').setDisabled(True)
@@ -115,7 +115,10 @@ class Window(QWidget):
                             maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
             self.__getattribute__(par + '_LBL').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
-            self.__getattribute__(par + '_DSB').setValue(v[elem]['par'][par])
+            if isinstance(v[elem]['par'][par], list):
+                self.__getattribute__(par + '_DSB').setValue(v[elem]['par'][par][0])
+            else:
+                self.__getattribute__(par + '_DSB').setValue(v[elem]['par'][par])
         # ------------------------------------------------------------------------------------------------------------
 
         # -- creazione della parte dei profili, se previsto ----------------------------------------------------------
@@ -145,12 +148,14 @@ class Window(QWidget):
             # formattazione e popolazione degli elementi del profilo
             self.dsb_format(self.scale_DSB, 0, 1, 4)
             self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
-            if v[elem]['par']['profile']['name'] is None:
-                self.scale_DSB.setValue(v[elem]['par']['profile']['curve'])
-                self.scale_RB.setChecked(True)
-            else:
-                self.scale_DSB.setDisabled(True)
-                self.profile_RB.setChecked(True)
+
+            # TODO: da implementare nuovamente una volta ripristinata la creazione dei profili
+            # if v[elem]['par']['profile']['name'] is None:
+            #     self.scale_DSB.setValue(v[elem]['par']['profile']['curve'])
+            #     self.scale_RB.setChecked(True)
+            # else:
+            #     self.scale_DSB.setDisabled(True)
+            #     self.profile_RB.setChecked(True)
         # ------------------------------------------------------------------------------------------------------------
 
         # distanziatore
@@ -283,7 +288,7 @@ class Window(QWidget):
         # try:
         if self.cat not in mc['Vsource'] + mc['Node']:
             print(self.elem, i, self.buses)
-            self.__getattribute__('v' + str(i) + '_DSB').setValue(v[node]['par']['Vn'])
+            self.__getattribute__('v' + str(i) + '_DSB').setValue(v[node]['par']['Vn'][0])
         # except AttributeError:
         #     pass
 
@@ -305,12 +310,12 @@ class Window(QWidget):
             if i == 0:
                 for el in v:
                     if (v[el]['category'] == 'AC-Node' and el not in self.buses and
-                            v[el]['par']['Vn'] > v[self.buses[1]]['par']['Vn']):
+                            v[el]['par']['Vn'][0] > v[self.buses[1]]['par']['Vn'][0]):
                         nodes.append(el)
             else:
                 for el in v:
                     if (v[el]['category'] == 'AC-Node' and el not in self.buses and
-                            v[el]['par']['Vn'] < v[self.buses[0]]['par']['Vn']):
+                            v[el]['par']['Vn'][0] < v[self.buses[0]]['par']['Vn'][0]):
                         nodes.append(el)
 
         elif self.cat in ['PWM']:
@@ -327,12 +332,12 @@ class Window(QWidget):
             if i == 0:
                 for el in v:
                     if (v[el]['category'] == 'DC-Node' and el not in self.buses and
-                            v[el]['par']['Vn'] > v[self.buses[1]]['par']['Vn']):
+                            v[el]['par']['Vn'][0] > v[self.buses[1]]['par']['Vn'][0]):
                         nodes.append(el)
             else:
                 for el in v:
                     if (v[el]['category'] == 'DC-Node' and el not in self.buses and
-                            v[el]['par']['Vn'] < v[self.buses[0]]['par']['Vn']):
+                            v[el]['par']['Vn'][0] < v[self.buses[0]]['par']['Vn'][0]):
                         nodes.append(el)
 
         elif self.cat in ['AC-Load', 'AC-Wind', 'Diesel-Motor', 'AC-Line']:

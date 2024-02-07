@@ -153,7 +153,7 @@ class Main:
 
         self.par_wgt.cancel_BTN.clicked.connect(self.ui.rightMenuContainer.collapseMenu)
 
-        dss.readline(elem, v[elem]['category'])
+        # dss.readline(elem, v[elem]['category'])
 
         # print(self.ui.rightMenuPages.count())
 

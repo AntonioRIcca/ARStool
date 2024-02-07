@@ -442,8 +442,8 @@ el_format = {
         'Vn': {'min': 0.001, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
     },
     'AC-Line': {
-        'C0': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS'},
-        'C1': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS'},
+        'B0': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS'},
+        'B1': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS'},
         'In': {'min': 0.001, 'max': 999.9999, 'decimal': 3, 'unit': 'A'},
         'R0': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
         'R1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
@@ -467,17 +467,17 @@ el_format = {
         'Sr': {'min': 0.001, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA'},
         # 'Vn0': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
         # 'Vn1': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
-        'XHL': {'min': 0, 'max': 99.99999, 'decimal': 3, 'unit': '%'},
+        # 'XHL': {'min': 0, 'max': 99.99999, 'decimal': 3, 'unit': '%'},
     },
     'DC-DC-Converter': {
         'Sr': {'min': 0.001, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA'},
         # 'Vn0': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
         # 'Vn1': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
-        'XHL': {'min': 0, 'max': 99.99999, 'decimal': 3, 'unit': '%'},
+        # 'XHL': {'min': 0, 'max': 99.99999, 'decimal': 3, 'unit': '%'},
     },
     'AC-Load': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
-        'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
+        # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
         'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': ''},
     },
     'DC-Load': {
@@ -488,17 +488,17 @@ el_format = {
     },
     'AC-Wind': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
-        'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
+        # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
         'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': ''},
-        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        # 'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
     },
     'DC-Wind': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
-        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        # 'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
     },
     'BESS': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
-        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
-        'cap': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        # 'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        # 'cap': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
     },
 }

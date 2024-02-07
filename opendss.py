@@ -17,6 +17,7 @@ class OpenDSS:
         # TODO: da sostituire con la variabile di configurazione del percorso di OpenDSS
 
         self.dss.text(f"compile [{filename}]")
+        self.dss.text(f"Save Circuit dir=cartella")
 
         # Dato il nome dell'elemento (e.g. "transformer.WPG_TR"), vengono definite:
         # - le categorie dal suffisso del nome dell'elemento, dopo l'ultimo "_" (e.g. "TR")
@@ -42,7 +43,10 @@ class OpenDSS:
         # La funzione self.node_define serve a definire le tensioni HV dei trasformatori delle busbar a monte di essi
         # self.node_define()
         print('none')
-        self.dss.text(f"Save Circuit dir=cartella")
+        with open('CityArea.yml', 'w') as file:
+            yaml.dump(v, file)
+            file.close()
+        print('end')
 
     def read_new(self, el):
         mcat = mcat_find(el)
@@ -58,14 +62,14 @@ class OpenDSS:
                 v[el]['par'][p] = par[new_par_dict[cat]['par'][p]['label']]
 
             if mcat == 'Line':
-                v[el]['top']['conn'] = [par['bus1'], par['bus2']]
+                v[el]['top']['conn'] = [par['bus1'].lower(), par['bus2'].lower()]
             elif mcat == 'Transformer':
                 v[el]['top']['conn'] = par['buses']
             else:
-                v[el]['top']['conn'] = [par['bus1']]
+                v[el]['top']['conn'] = [par['bus1'].lower()]
 
             for i in range(len(v[el]['top']['conn'])):
-                node = v[el]['top']['conn'][i]
+                node = v[el]['top']['conn'][i].lower()
 
                 if node not in v.keys():
                     dict_initialize(node)  # viene inizializzato
