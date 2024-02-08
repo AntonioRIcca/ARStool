@@ -137,6 +137,7 @@ class Main:
         line = self .myform.ui.tableWidget.currentRow()
         elem = self.myform.ui.tableWidget.item(line, 0).text()
         print(elem)
+        dss.writeline(elem)
 
         try:
             self.ui.rightMenuPages.removeWidget(self.ui.rightMenuPages.widget(2))
@@ -351,8 +352,10 @@ class Main:
     def loadflow(self):
         self.ui.rightMenuContainer.collapseMenu()
         self.home2_WGT.deleteLater()
-        dss.write_all()
-        dss.solve()
+
+        dss.full_parse_to_dss()
+        # dss.write_all()
+        # dss.solve()
 
         # write_excel()
 
@@ -562,7 +565,7 @@ class Main:
             self.home3_center_VL.addWidget(self.__getattribute__('home3_' + cat + '_WGT'))
             for elem in self.lf_cat[mcat][cat]:
                 self.__setattr__('home3_' + elem + '_WGT', QWidget())
-                print('home3_' + elem + '_WGT')
+                # print('home3_' + elem + '_WGT')
                 self.__setattr__('home3_' + elem + '_HL', QHBoxLayout(self.__getattribute__('home3_' + elem + '_WGT')))
                 self.__getattribute__('home3_' + elem + '_HL').setContentsMargins(0, 5, 0, 5)
 

@@ -3,12 +3,29 @@ vdss = dict()
 
 mc = {
     'Vsource': ['ExternalGrid'],
+    'LoadShape': [],
+    'GrowthShape': [],
+    'TCC_Curve': [],
+    'Spectrum': [],
     'Line': ['AC-Line', 'DC-Line'],
-    'LineCode': ['AC-LineCode', 'DC-LineCode',],
-    'Transformer': ['2W-Transformer', 'PWM', 'DC-DC-Converter'],
     'Load': ['AC-Load', 'DC-Load'],
+    'Transformer': ['2W-Transformer', 'PWM', 'DC-DC-Converter'],
     'Generator': ['BESS', 'PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor'],
-    'Node': ['AC-Node', 'DC-Node']
+    'LineCode': ['AC-LineCode', 'DC-LineCode', ],
+    'Node': ['AC-Node', 'DC-Node'],
+}
+
+dss_cat = {
+    'Vsource': [],
+    'LineCode': [],
+    'LoadShape': [],
+    'GrowthShape': [],
+    'TCC_Curve': [],
+    'Spectrum': [],
+    'Line': [],
+    'Load': [],
+    'Transformer': [],
+    'Generator': [],
 }
 
 c = {
@@ -285,7 +302,7 @@ new_par_dict = {
                 'unit': 'uS',
             },
             'others': {
-                'phases': '3',
+                'nphases': '3',
             },
         },
     },
@@ -302,7 +319,7 @@ new_par_dict = {
                 'unit': 'ohm',
             },
             'others': {
-                'phases': '3',
+                'nphases': '3',
             },
         },
     },

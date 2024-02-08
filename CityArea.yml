@@ -191,6 +191,7 @@ ev-charge_line:
     conn:
     - rs_bb_04kv
     - ev-charge_bb
+    linetype: 6-12_3x1x150cu
 ev-fast-load_dc-node:
   category: DC-Node
   lf:
@@ -641,6 +642,7 @@ pros-ev_dc-line:
     conn:
     - pros1_dc-bb
     - ev-fast_dc-bb
+    linetype: dc-line
 pros1_dc-bb:
   category: DC-Node
   lf:
@@ -1212,6 +1214,7 @@ pros_line:
     conn:
     - res_bb
     - pros_bb
+    linetype: 6-12_3x1x150cu
 pros_pv:
   category: PV
   lf:
@@ -1443,6 +1446,7 @@ res-wpg_line:
     conn:
     - sourcebus
     - res-wpg_bb
+    linetype: 12-20_3x1x185al
 res_bb:
   category: AC-Node
   lf:
@@ -1862,6 +1866,7 @@ rs_line:
     conn:
     - sourcebus
     - rs_bb_20kv
+    linetype: 12-20_3x1x185al
 rs_tr:
   category: 2W-Transformer
   lf:
@@ -2292,6 +2297,7 @@ ug_line:
     conn:
     - sourcebus
     - ug_bb_20kv
+    linetype: 12-20_3x1x185al
 ug_pwm:
   category: PWM
   lf:
@@ -3387,6 +3393,7 @@ user_line:
     conn:
     - res_bb
     - user_bb
+    linetype: 6-12_3x1x150cu
 wpg_1_wind:
   category: AC-Wind
   lf:
@@ -3766,6 +3773,7 @@ wpg_line:
     conn:
     - wpg_bb1
     - wpg_bb2
+    linetype: 3-6_3x1x240cu
 wpg_pv:
   category: PV
   lf:

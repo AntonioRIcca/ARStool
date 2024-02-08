@@ -1,5 +1,5 @@
 import py_dss_interface
-from variables import v, c, mc, par_dict, new_par_dict
+from variables import v, c, mc, par_dict, new_par_dict, dss_cat
 import yaml
 import os
 from decimal import Decimal, InvalidOperation
@@ -41,12 +41,15 @@ class OpenDSS:
         # In OpenDSS non è possibile ricavare la tensione delle busbar non sottese a trasformatori,
         # o non connesse a elementi terminali.
         # La funzione self.node_define serve a definire le tensioni HV dei trasformatori delle busbar a monte di essi
-        # self.node_define()
-        print('none')
+        # self.node_define()    # TODO: Probabilmente deve essere riattivata
+        # print('none')
+        self.save()
+
+    def save(self):
         with open('CityArea.yml', 'w') as file:
             yaml.dump(v, file)
             file.close()
-        print('end')
+        # print('end')
 
     def read_new(self, el):
         mcat = mcat_find(el)
@@ -89,9 +92,10 @@ class OpenDSS:
                 linetype = par['linecode']
                 v[linetype] = dict()
                 v[linetype]['category'] = linecat
+                v[el]['top']['linetype'] = linetype
                 for p in new_par_dict[linecat]['par'].keys() - ['others']:
                     par = self.readline(linetype)
-                    print( new_par_dict[linecat]['par'][p]['label'])
+                    # print( new_par_dict[linecat]['par'][p]['label'])
                     v[el]['par'][p] = par[new_par_dict[linecat]['par'][p]['label']]
                 v.pop(linetype)
 
@@ -102,13 +106,87 @@ class OpenDSS:
                 if cat == 'BESS':
                     v[el]['par']['cap'] = 0
 
-                # v[node]['par']['Vn'] = None  # ""
+    def writeline(self, el):
+        mcat = mcat_find(el)
+        cat = v[el]['category']
+
+        par = ''
+        buses = ''
+        line = ''
+
+        # print(new_par_dict[cat]['par'].keys() - ['others'])
+        for p in new_par_dict[cat]['par']['others']:
+            par = par + p + '=' + new_par_dict[cat]['par']['others'][p] + ' '
+        for p in new_par_dict[cat]['par'].keys() - ['others']:
+            if p == 'Vn' and mcat != 'Transformer':
+                par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p][0]) + ' '
+            else:
+                par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p]) + ' '
+
+        if len(new_par_dict[cat]['top']['conn']['label']) == len(v[el]['top']['conn']):
+            for i in range(len(new_par_dict[cat]['top']['conn']['label'])):
+                buses = buses + new_par_dict[cat]['top']['conn']['label'][i] + '=' + v[el]['top']['conn'][i] + ' '
+        else:
+            buses = buses + new_par_dict[cat]['top']['conn']['label'][0] + '=' + str(v[el]['top']['conn']) + ' '
+            # buses = buses.replace("'", "")
+        # print(new_par_dict[cat]['top']['conn']['label'])
+        # print(v[el]['top']['conn'])
+
+        if mcat == 'Vsource':
+            line = 'Edit "Vsource.' + el + ' '
+        else:
+            line = 'New "' + mcat + '.' + el + '" '
 
 
 
+        line0 = ''
+        if 'type' in new_par_dict[cat]['top'].keys():
+            line = line + 'linecode=' + v[el]['top']['linetype'] + ' '
 
+            linetype = cat.split('-')[0] + '-LineCode'
+            for p in new_par_dict[linetype]['par']['others']:
+                line0 = line0 + p + '=' + new_par_dict[linetype]['par']['others'][p] + ' '
 
+            for p in new_par_dict[linetype]['par'].keys() - ['others']:
+                line0 = line0 + new_par_dict[linetype]['par'][p]['label'] + '=' + str(v[el]['par'][p]) + ' '
 
+            line0 = 'New "LineCode.' + v[el]['top']['linetype'] + '" ' + line0
+            dss_cat['LineCode'].append(line0)
+            # print(line0)
+
+            line = line + 'linecode=' + v[el]['top']['linetype'] + ' '
+
+        line = line + buses + par
+
+        dss_cat[mcat].append(line)
+
+        # print(line)
+        return line
+
+    def full_parse_to_dss(self):
+        for el in v:
+            mcat = mcat_find(el)
+            if mcat in dss_cat:
+                self.writeline(el)
+
+        self.dss.text('Clear')
+        self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0]))
+
+        for mcat in dss_cat:
+            # print('\n' + mcat)
+            for r in dss_cat[mcat]:
+                self.dss.text(r)
+                print(r)
+
+        self.solve()
+        self.save()
+
+        # print(list(self.dss.loads.))
+        for el in self.dss.loads.names:
+            self.dss.loads.name = el
+            print(el + ': ', self.dss.loads.kw)
+
+    #  TODO: Procedura da dismettere
     def read(self, el):
         mcat = mcat_find(el)
         v1 = None   # indica la tensione a cui sono connessi i terminali, o la tensione di bassa dei trasformatori
@@ -440,14 +518,15 @@ class OpenDSS:
         try:
             self.dss.topology.all_isolated_branches.clear()     # TODO: capire se necessario
             self.dss.solution.clean_up()
-            print(self.dss.topology.all_isolated_loads)
-            print('clear done')
+            # print(self.dss.topology.all_isolated_loads)
+            # print('clear done')
         except:
             print('clear error')
+            pass
 
         self.dss.solution.solve()       # richiesta di risoluzione del sistema
-        print(self.dss.circuit.total_power)
-        print(bool(self.dss.solution.converged))
+        # print(self.dss.circuit.total_power)
+        # print(bool(self.dss.solution.converged))
         self.dss.text(f"Save Circuit dir=cartella")
 
 
@@ -480,7 +559,7 @@ class OpenDSS:
         print(self.dss.topology.all_isolated_branches)
         # self.dss.text(f"show isolated")
         # print(self.dss.topology.active_branch)
-        print(self.dss.topology.all_isolated_loads)
+        # print(self.dss.topology.all_isolated_loads)
         pass
 
     # def losses_calc(self):
@@ -503,8 +582,8 @@ class OpenDSS:
         mcat = mcat_find(el)
         cat = v[el]['category']
 
-        if mcat == 'Line':
-            print('Line')
+        # if mcat == 'Line':
+        #     print('Line')
 
         par = dict()
         # if mcat in ['Generator', 'Line', 'Load', 'Transformer', 'Vsource']:
@@ -519,7 +598,7 @@ class OpenDSS:
             # params = (params + list(new_par_dict[cat]['par']['others'].keys()) +
             #           new_par_dict[cat]['top']['conn']['label'])
 
-            print('parametri:', params)
+            # print('parametri:', params)
 
             file = open('cartella/' + mcat + '.dss', 'r')
             while True:
@@ -528,7 +607,7 @@ class OpenDSS:
                     break
                 elements = line.split('"')
                 if elements[1].lower() == (mcat + '.' + el).lower():
-                    print(line)
+                    # print(line)
                     line = line.replace('New "' + mcat + '.' + el.lower() + '" ', '').replace('\n', '')
                     line = line.replace(', ', ',')
                     # print('fatto', line)
@@ -556,7 +635,7 @@ class OpenDSS:
                                     val = float(d[1])
                                 except InvalidOperation:
                                     val = d[1]
-                            print(d[0], val)
+                            # print(d[0], val)
                             par[d[0]] = val
                     break
             if mcat == 'Generator':
