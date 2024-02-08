@@ -12,6 +12,7 @@ from PySide2.QtWidgets import *
 from variables import v, el_format, mc
 import yaml
 import os
+from datetime import datetime
 
 
 class Window(QWidget):
@@ -149,13 +150,18 @@ class Window(QWidget):
             self.dsb_format(self.scale_DSB, 0, 1, 4)
             self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
-            # TODO: da implementare nuovamente una volta ripristinata la creazione dei profili
-            # if v[elem]['par']['profile']['name'] is None:
-            #     self.scale_DSB.setValue(v[elem]['par']['profile']['curve'])
-            #     self.scale_RB.setChecked(True)
-            # else:
-            #     self.scale_DSB.setDisabled(True)
-            #     self.profile_RB.setChecked(True)
+            if v[elem]['par']['profile']['name'] is None:
+                self.scale_DSB.setValue(v[elem]['par']['profile']['curve'])
+                self.scale_RB.setChecked(True)
+                self.scale_DSB.setStyleSheet(u"background-color: rgb(255, 255, 255)")
+            else:
+                self.scale_DSB.setDisabled(True)
+                self.profile_RB.setChecked(True)
+
+                time = datetime.now().hour * 4 + int(datetime.now().minute/15)
+                print('Time = ', time)
+                self.scale_DSB.setValue(v[elem]['par']['profile']['curve'][time])
+                self.scale_DSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
         # ------------------------------------------------------------------------------------------------------------
 
         # distanziatore

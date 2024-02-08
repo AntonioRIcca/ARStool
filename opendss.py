@@ -95,7 +95,14 @@ class OpenDSS:
                     v[el]['par'][p] = par[new_par_dict[linecat]['par'][p]['label']]
                 v.pop(linetype)
 
-                    # v[node]['par']['Vn'] = None  # ""
+        if cat in mc['Load'] + mc['Generator']:
+            create_profile(el)
+            if cat in mc['Generator']:
+                v[el]['par']['eff'] = 1
+                if cat == 'BESS':
+                    v[el]['par']['cap'] = 0
+
+                # v[node]['par']['Vn'] = None  # ""
 
 
 

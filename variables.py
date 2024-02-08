@@ -490,15 +490,15 @@ el_format = {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
         # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
         'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': ''},
-        # 'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
     },
     'DC-Wind': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
-        # 'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
     },
     'BESS': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
-        # 'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
-        # 'cap': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        'cap': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kWh'},
     },
 }
