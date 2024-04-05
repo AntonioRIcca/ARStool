@@ -17,7 +17,7 @@ class OpenDSS:
         # TODO: da sostituire con la variabile di configurazione del percorso di OpenDSS
 
         self.dss.text(f"compile [{filename}]")
-        self.dss.text(f"Save Circuit dir=cartella")
+        self.dss.text(f"Save Circuit dir=cartella")     # scrittura della cartella degli elementi
 
         # Dato il nome dell'elemento (e.g. "transformer.WPG_TR"), vengono definite:
         # - le categorie dal suffisso del nome dell'elemento, dopo l'ultimo "_" (e.g. "TR")
@@ -35,8 +35,8 @@ class OpenDSS:
             rel_initialize(el)     # Todo: forse va spostato in self.dict_initialize
             lf_initialize(el)      # Todo: forse va spostato in self.dict_initialize
 
-            # self.read(el)               # vengono letti i parametri e la topologia dell'elemento
-            self.read_new(el)
+            # self.read(el)           # vengono letti i parametri e la topologia dell'elemento
+            self.read_new(el)       # lettura di parametri e topologia degli elementi dalla cartella degli elementi
 
         # In OpenDSS non è possibile ricavare la tensione delle busbar non sottese a trasformatori,
         # o non connesse a elementi terminali.
@@ -55,15 +55,17 @@ class OpenDSS:
         mcat = mcat_find(el)
         cat = v[el]['category']
 
+        #
         if mcat not in mc['Node']:
             self.dss.circuit.set_active_element(mcat + '.' + el)  # viene richiamato l'elemento in OpenDSS
             v[el]['par']['out-of-service'] = not self.dss.cktelement.is_enabled  # verifica se l'elemento è "enabled"
 
             # lettura dei parametri dalle righe di dss
-            par = self.readline(el)
-            for p in new_par_dict[cat]['par'].keys() - ['others']:
+            par = self.readline(el)     # TODO: vedi commento in self.readline
+            for p in new_par_dict[cat]['par'].keys() - ['others']:  # todo: forse da modificare in base al TODO precedente
                 v[el]['par'][p] = par[new_par_dict[cat]['par'][p]['label']]
 
+            # definisco la connessione degli elementi come array
             if mcat == 'Line':
                 v[el]['top']['conn'] = [par['bus1'].lower(), par['bus2'].lower()]
             elif mcat == 'Transformer':
@@ -71,58 +73,68 @@ class OpenDSS:
             else:
                 v[el]['top']['conn'] = [par['bus1'].lower()]
 
+            # Definizione delle busbar
             for i in range(len(v[el]['top']['conn'])):
-                node = v[el]['top']['conn'][i].lower()
+                node = v[el]['top']['conn'][i].lower()  # i nomi devono essere in minuscolo
 
-                if node not in v.keys():
+                if node not in v.keys():    # se il nodo non è stato già configurato
                     dict_initialize(node)  # viene inizializzato
+                    # la tipologia del nodo dipende dalla desinenza del nome.
                     if node.split('_')[len(node.split('_')) - 1] in ['dc-node', 'dc-bb']:
                         v[node]['category'] = 'DC-Node'  # ""
                     else:
                         v[node]['category'] = 'AC-Node'  # ""
-                    rel_initialize(node)  # ""
-                    lf_initialize(node)  # ""
+
+                    rel_initialize(node)    # inizializzazione del sottodizionario "rel" del nodo
+                    lf_initialize(node)     # inizializzazione del sottodizionario "lf" del nodo
                     v[node]['par']['out-of-service'] = False    # il nodo è in servizio di default
-                v[node]['top']['conn'].append(el)
+
+                v[node]['top']['conn'].append(el)   # viene aggiunto l'elemento corrente al nodo
+
+                # Scrivo la tensione del nodo, solo se l'elemento di partenza non è una linea
                 if mcat not in ['Line']:
                     v[node]['par']['Vn'] = [v[el]['par']['Vn'][i]]
+            print('done')
 
+            # Per le linee, bisogna importare i parametri da LineCode.dss
             if cat in mc['Line']:
-                linecat = cat.split('-')[0] + '-LineCode'
+                linecat = cat.split('-')[0] + '-LineCode'   # AC-LineCode o DC-LineCode
                 linetype = par['linecode']
-                v[linetype] = dict()
-                v[linetype]['category'] = linecat
+                v[linetype] = dict()                # Necessario per self.readline. Poi verrà elimiato
+                v[linetype]['category'] = linecat   # Necessario per self.readline. Poi verrà elimiato
                 v[el]['top']['linetype'] = linetype
+                par = self.readline(linetype)
                 for p in new_par_dict[linecat]['par'].keys() - ['others']:
-                    par = self.readline(linetype)
                     # print( new_par_dict[linecat]['par'][p]['label'])
                     v[el]['par'][p] = par[new_par_dict[linecat]['par'][p]['label']]
-                v.pop(linetype)
+                v.pop(linetype)                     # Non serve più
 
+        # Imposto inizlalmente il profilo puntuale per carichi e generatori
         if cat in mc['Load'] + mc['Generator']:
             create_profile(el)
             if cat in mc['Generator']:
                 v[el]['par']['eff'] = 1
-                if cat == 'BESS':
+                if cat == 'BESS':   # Si ipotizza che la capacità delle batterie sia inizalmente 0
                     v[el]['par']['cap'] = 0
 
+    # Scrittura della definizione dell'elemento in OpenDSS
     def writeline(self, el):
         mcat = mcat_find(el)
         cat = v[el]['category']
 
         par = ''
         buses = ''
-        line = ''
+        # line = ''
 
-        # print(new_par_dict[cat]['par'].keys() - ['others'])
         for p in new_par_dict[cat]['par']['others']:
             par = par + p + '=' + new_par_dict[cat]['par']['others'][p] + ' '
         for p in new_par_dict[cat]['par'].keys() - ['others']:
-            if p == 'Vn' and mcat != 'Transformer':
+            if p == 'Vn' and mcat != 'Transformer':     # La tensione è memorizzata come array anche se è singola
                 par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p][0]) + ' '
             else:
                 par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p]) + ' '
 
+        # Verifica sel le connessioni sono memorizzzate come array o come due voci singole
         if len(new_par_dict[cat]['top']['conn']['label']) == len(v[el]['top']['conn']):
             for i in range(len(new_par_dict[cat]['top']['conn']['label'])):
                 buses = buses + new_par_dict[cat]['top']['conn']['label'][i] + '=' + v[el]['top']['conn'][i] + ' '
@@ -137,8 +149,7 @@ class OpenDSS:
         else:
             line = 'New "' + mcat + '.' + el + '" '
 
-
-
+        # Nel caso delle linee, bisogna definire anche il LineType
         line0 = ''
         if 'type' in new_par_dict[cat]['top'].keys():
             line = line + 'linecode=' + v[el]['top']['linetype'] + ' '
@@ -151,196 +162,204 @@ class OpenDSS:
                 line0 = line0 + new_par_dict[linetype]['par'][p]['label'] + '=' + str(v[el]['par'][p]) + ' '
 
             line0 = 'New "LineCode.' + v[el]['top']['linetype'] + '" ' + line0
-            dss_cat['LineCode'].append(line0)
+            dss_cat['LineCode'].append(line0)   # Memorizzazione del LineType
             # print(line0)
 
             line = line + 'linecode=' + v[el]['top']['linetype'] + ' '
 
         line = line + buses + par
 
-        dss_cat[mcat].append(line)
+        dss_cat[mcat].append(line)              # Memorizzazione dell'elemento
 
         # print(line)
-        return line
+        return line     # TODO: Perchè?
 
+    # Scrittura di tutti gli elementi in OpenDSS
     def full_parse_to_dss(self):
+        self.dss.text('Clear')
+        self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0]))
+
+        # Popolamento dei comandi pero ogni macrocategoria di OpenDSS
         for el in v:
             mcat = mcat_find(el)
             if mcat in dss_cat:
                 self.writeline(el)
 
-        self.dss.text('Clear')
-        self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0]))
-
+        # Scrittura dei comandi in OpenDSS
         for mcat in dss_cat:
             # print('\n' + mcat)
             for r in dss_cat[mcat]:
                 self.dss.text(r)
                 print(r)
 
+        # TODO: Gestire le casistiche "Out-of-service" (Vedi la procedura in self.write)
+
         self.solve()
         self.save()
 
+        self.dss.text(f"Save Circuit dir=cartella")
+
         # print(list(self.dss.loads.))
-        for el in self.dss.loads.names:
-            self.dss.loads.name = el
-            print(el + ': ', self.dss.loads.kw)
+        # for el in self.dss.loads.names:
+        #     self.dss.loads.name = el
+        #     print(el + ': ', self.dss.loads.kw)
 
     #  TODO: Procedura da dismettere
-    def read(self, el):
-        mcat = mcat_find(el)
-        v1 = None   # indica la tensione a cui sono connessi i terminali, o la tensione di bassa dei trasformatori
-        #
-        # # Viene identificata la macrocategoria a partire dal dizionario "variables.mc"
-        # for m in mc.keys():
-        #     if v[el]['category'] in mc[m]:
-        #         mcat = m
-        #         break
+    # def read(self, el):
+    #     mcat = mcat_find(el)
+    #     v1 = None   # indica la tensione a cui sono connessi i terminali, o la tensione di bassa dei trasformatori
+    #     #
+    #     # # Viene identificata la macrocategoria a partire dal dizionario "variables.mc"
+    #     # for m in mc.keys():
+    #     #     if v[el]['category'] in mc[m]:
+    #     #         mcat = m
+    #     #         break
+    #
+    #     self.dss.circuit.set_active_element(mcat + '.' + el)    # viene richiamato l'elemento in OpenDSS
+    #
+    #     v[el]['par']['out-of-service'] = not self.dss.cktelement.is_enabled     # verifica se l'elemento è "enabled"
+    #
+    #     if mcat == 'Vsource':
+    #         v[el]['par']['Vn'] = self.dss.vsources.base_kv
+    #
+    #     elif mcat == 'Generator':
+    #         self.dss.generators.name = el
+    #         v1 = self.dss.generators.kv
+    #
+    #         # Caratteristiche globali degli elementi nella macrocategoria "Generator"
+    #         v[el]['par']['P'] = self.dss.generators.kw
+    #         v[el]['par']['Vn'] = self.dss.generators.kv
+    #
+    #         if v[el]['category'] == 'PV':
+    #             create_profile(el)
+    #
+    #         elif v[el]['category'] == 'BESS':   # inizialmente, si ipotizzano i valori per gli elementi BESS
+    #             v[el]['par']['cap'] = 100
+    #             v[el]['par']['eff'] = 1
+    #             create_profile(el)
+    #
+    #         elif v[el]['category'] == 'AC-Wind':
+    #             v[el]['par']['Q'] = self.dss.generators.kvar
+    #             v[el]['par']['cosPhi'] = self.dss.generators.pf
+    #             v[el]['par']['eff'] = 1
+    #             create_profile(el)
+    #
+    #         elif v[el]['category'] == 'DC-Wind':
+    #             v[el]['par']['eff'] = 1
+    #             create_profile(el)
+    #
+    #     elif mcat == 'Transformer':
+    #         self.unr_conv.append(el)
+    #         self.dss.transformers.name = el
+    #         v1 = self.dss.transformers.kv
+    #
+    #         # Caratteristiche globali degli elementi nella macrocategoria "Transformer"
+    #         v[el]['par']['Vn1'] = self.dss.transformers.kv
+    #         v[el]['par']['Sr'] = self.dss.transformers.kva
+    #         v[el]['par']['XHL'] = self.dss.transformers.xhl
+    #         v[el]['par']['Rs'] = self.dss.transformers.r
+    #         # v[el]['par']['imag'] = self.dss.cktelement.losses
+    #
+    #     elif mcat == 'Load':
+    #         self.dss.loads.name = el
+    #         v1 = self.dss.loads.kv
+    #
+    #         # Caratteristiche globali degli elementi nella macrocategoria "Load"
+    #         v[el]['par']['P'] = self.dss.loads.kw
+    #         v[el]['par']['Vn'] = self.dss.loads.kv
+    #         create_profile(el)
+    #
+    #         if v[el]['category'] == 'AC-Load':
+    #             v[el]['par']['Q'] = self.dss.loads.kvar
+    #             v[el]['par']['cosPhi'] = self.dss.loads.pf
+    #
+    #     elif mcat == 'Line':
+    #         self.unr_lines.append(el)
+    #         self.dss.lines.name = el
+    #
+    #         # Caratteristiche globali degli elementi nella macrocategoria "Line"
+    #         v[el]['par']['length'] = self.dss.lines.length
+    #         v[el]['par']['R1'] = self.dss.lines.r1
+    #         v[el]['par']['X1'] = self.dss.lines.x1
+    #         v[el]['par']['In'] = self.dss.lines.norm_amps
+    #
+    #         if v[el]['category'] == 'AC-Line':
+    #             v[el]['par']['R0'] = self.dss.lines.r0
+    #             v[el]['par']['X0'] = self.dss.lines.x0
+    #             v[el]['par']['C0'] = self.dss.lines.c0
+    #             v[el]['par']['C1'] = self.dss.lines.c1
+    #
+    #     nodes = self.dss.cktelement.bus_names   # Lista dei nodi a cui l'elemento è connesso
+    #
+    #     for node in nodes:
+    #         if node not in v.keys():            # se il nodo non è stato già aggiunto al dizionario
+    #             dict_initialize(node)      # viene inizializzato
+    #             if node.split('_')[len(node.split('_')) - 1] in ['dc-node', 'dc-bb']:
+    #                 v[node]['category'] = 'DC-Node'  # ""
+    #             else:
+    #                 v[node]['category'] = 'AC-Node'  # ""
+    #             rel_initialize(node)       # ""
+    #             lf_initialize(node)        # ""
+    #             v[node]['par']['Vn'] = None     # ""
+    #
+    #         v[node]['top']['conn'].append(el)   # nella topologia del nodo, viene indicato che è connesso all'elemento
+    #         v[el]['top']['conn'].append(node)   # nella topologia dell'elemento, viene indicato che è connesso al nodo
+    #
+    #         # il nodo viene impostato come "Enabled" di default
+    #         self.dss.circuit.set_active_element(node)
+    #         v[node]['par']['out-of-service'] = not self.dss.cktelement.is_enabled
+    #
+    #         # se è possibile leggere la tensione v1 dell'elemento
+    #         # e l'elemento è terminale (esiste un solo nodo) o se ni tratta del secondo nodo di un convertitore...
+    #         if v1 and (len(nodes) == 1 or nodes.index(node) == 1):
+    #             v[node]['par']['Vn'] = v1   # ... Il nodo assume la tensione "v1"
 
-        self.dss.circuit.set_active_element(mcat + '.' + el)    # viene richiamato l'elemento in OpenDSS
-
-        v[el]['par']['out-of-service'] = not self.dss.cktelement.is_enabled     # verifica se l'elemento è "enabled"
-
-        if mcat == 'Vsource':
-            v[el]['par']['Vn'] = self.dss.vsources.base_kv
-
-        elif mcat == 'Generator':
-            self.dss.generators.name = el
-            v1 = self.dss.generators.kv
-
-            # Caratteristiche globali degli elementi nella macrocategoria "Generator"
-            v[el]['par']['P'] = self.dss.generators.kw
-            v[el]['par']['Vn'] = self.dss.generators.kv
-
-            if v[el]['category'] == 'PV':
-                create_profile(el)
-
-            elif v[el]['category'] == 'BESS':   # inizialmente, si ipotizzano i valori per gli elementi BESS
-                v[el]['par']['cap'] = 100
-                v[el]['par']['eff'] = 1
-                create_profile(el)
-
-            elif v[el]['category'] == 'AC-Wind':
-                v[el]['par']['Q'] = self.dss.generators.kvar
-                v[el]['par']['cosPhi'] = self.dss.generators.pf
-                v[el]['par']['eff'] = 1
-                create_profile(el)
-
-            elif v[el]['category'] == 'DC-Wind':
-                v[el]['par']['eff'] = 1
-                create_profile(el)
-
-        elif mcat == 'Transformer':
-            self.unr_conv.append(el)
-            self.dss.transformers.name = el
-            v1 = self.dss.transformers.kv
-
-            # Caratteristiche globali degli elementi nella macrocategoria "Transformer"
-            v[el]['par']['Vn1'] = self.dss.transformers.kv
-            v[el]['par']['Sr'] = self.dss.transformers.kva
-            v[el]['par']['XHL'] = self.dss.transformers.xhl
-            v[el]['par']['Rs'] = self.dss.transformers.r
-            # v[el]['par']['imag'] = self.dss.cktelement.losses
-
-        elif mcat == 'Load':
-            self.dss.loads.name = el
-            v1 = self.dss.loads.kv
-
-            # Caratteristiche globali degli elementi nella macrocategoria "Load"
-            v[el]['par']['P'] = self.dss.loads.kw
-            v[el]['par']['Vn'] = self.dss.loads.kv
-            create_profile(el)
-
-            if v[el]['category'] == 'AC-Load':
-                v[el]['par']['Q'] = self.dss.loads.kvar
-                v[el]['par']['cosPhi'] = self.dss.loads.pf
-
-        elif mcat == 'Line':
-            self.unr_lines.append(el)
-            self.dss.lines.name = el
-
-            # Caratteristiche globali degli elementi nella macrocategoria "Line"
-            v[el]['par']['length'] = self.dss.lines.length
-            v[el]['par']['R1'] = self.dss.lines.r1
-            v[el]['par']['X1'] = self.dss.lines.x1
-            v[el]['par']['In'] = self.dss.lines.norm_amps
-
-            if v[el]['category'] == 'AC-Line':
-                v[el]['par']['R0'] = self.dss.lines.r0
-                v[el]['par']['X0'] = self.dss.lines.x0
-                v[el]['par']['C0'] = self.dss.lines.c0
-                v[el]['par']['C1'] = self.dss.lines.c1
-
-        nodes = self.dss.cktelement.bus_names   # Lista dei nodi a cui l'elemento è connesso
-
-        for node in nodes:
-            if node not in v.keys():            # se il nodo non è stato già aggiunto al dizionario
-                dict_initialize(node)      # viene inizializzato
-                if node.split('_')[len(node.split('_')) - 1] in ['dc-node', 'dc-bb']:
-                    v[node]['category'] = 'DC-Node'  # ""
-                else:
-                    v[node]['category'] = 'AC-Node'  # ""
-                rel_initialize(node)       # ""
-                lf_initialize(node)        # ""
-                v[node]['par']['Vn'] = None     # ""
-
-            v[node]['top']['conn'].append(el)   # nella topologia del nodo, viene indicato che è connesso all'elemento
-            v[el]['top']['conn'].append(node)   # nella topologia dell'elemento, viene indicato che è connesso al nodo
-
-            # il nodo viene impostato come "Enabled" di default
-            self.dss.circuit.set_active_element(node)
-            v[node]['par']['out-of-service'] = not self.dss.cktelement.is_enabled
-
-            # se è possibile leggere la tensione v1 dell'elemento
-            # e l'elemento è terminale (esiste un solo nodo) o se ni tratta del secondo nodo di un convertitore...
-            if v1 and (len(nodes) == 1 or nodes.index(node) == 1):
-                v[node]['par']['Vn'] = v1   # ... Il nodo assume la tensione "v1"
-
-    def node_define(self):
-        # l'OpenDSS connette il "source" a monte con un nodo con desinenza ".0.0.0" (che si vuole eliminare)
-        # e a valle con un nodo che deve avere la stessa tensione del source
-        sourcebus = v['source']['top']['conn'][0]
-        v['source']['top']['conn'] = [sourcebus]
-        v[sourcebus]['par']['Vn'] = v['source']['par']['Vn']
-        v.pop(sourcebus + '.0.0.0')
-
-        # Questo ciclo deve definire le tensioni degli elementi di conversione e di linea non risolti,
-        # verificando la tensione delle busbar a partire dal feeder in poi.
-        # Si ripete questo ciclo finché ci sono convertitori e nodi non risolti
-        while self.unr_conv + self.unr_lines != []:
-            for el in self.unr_conv:
-                if v[el]['top']['conn'][0] in v.keys():             # se il nodo a monte dell'elemento è nel dizionario
-                    bus = v[el]['top']['conn'][0]
-                    if v[bus]['par']['Vn']:                         # e se ne è stata identificata la tensione
-                        v[el]['par']['Vn0'] = v[bus]['par']['Vn']   # tale valore è la tensione a monte del converitore
-                        self.unr_conv.remove(el)                    # il convertitore è risolto: si elimina dalla lista
-
-            for el in self.unr_lines:
-                vn = None       # tensione di linea (e dei nodi a essa connessi)
-                bus2 = None     # bus a monte o a valle della linea
-                if v[el]['top']['conn'][0] in v.keys():             # se il nodo a monte della linea è nel dizionario
-                    bus = v[el]['top']['conn'][0]
-                    if v[bus]['par']['Vn']:                         # e se ne è stata identificata la tensione
-                        vn = v[bus]['par']['Vn']                    # la tensione di linea è pari a tale valore
-                        bus2 = v[el]['top']['conn'][1]              # bus2 sarà il nodo a valle
-
-                elif v[el]['top']['conn'][1] in v.keys():           # se il nodo a valle della linea è nel dizionario
-                    bus = v[el]['top']['conn'][1]
-                    if v[bus]['par']['Vn']:                         # e se ne è stata identificata la tensione
-                        vn = v[bus]['par']['Vn']                    # la tensione di linea è pari a tale valore
-                        bus2 = v[el]['top']['conn'][0]              # bus2 sarà il nodo a valle
-
-                if vn:                                              # se è stato possibile valutarela tensione di linea
-                    v[el]['par']['Vn'] = vn                         # si inserisce nel sotto-dizionario della linea
-                    v[bus2]['par']['Vn'] = vn                       # si inserisce nel sotto-dizionario del nodo "bus2"
-                    self.unr_lines.remove(el)                       # la linea è risolta: si elimina dalla lista
+    # TODO: non più usato
+    # def node_define(self):
+    #     # l'OpenDSS connette il "source" a monte con un nodo con desinenza ".0.0.0" (che si vuole eliminare)
+    #     # e a valle con un nodo che deve avere la stessa tensione del source
+    #     sourcebus = v['source']['top']['conn'][0]
+    #     v['source']['top']['conn'] = [sourcebus]
+    #     v[sourcebus]['par']['Vn'] = v['source']['par']['Vn']
+    #     v.pop(sourcebus + '.0.0.0')
+    #
+    #     # Questo ciclo deve definire le tensioni degli elementi di conversione e di linea non risolti,
+    #     # verificando la tensione delle busbar a partire dal feeder in poi.
+    #     # Si ripete questo ciclo finché ci sono convertitori e nodi non risolti
+    #     while self.unr_conv + self.unr_lines != []:
+    #         for el in self.unr_conv:
+    #             if v[el]['top']['conn'][0] in v.keys():             # se il nodo a monte dell'elemento è nel dizionario
+    #                 bus = v[el]['top']['conn'][0]
+    #                 if v[bus]['par']['Vn']:                         # e se ne è stata identificata la tensione
+    #                     v[el]['par']['Vn0'] = v[bus]['par']['Vn']   # tale valore è la tensione a monte del converitore
+    #                     self.unr_conv.remove(el)                    # il convertitore è risolto: si elimina dalla lista
+    #
+    #         for el in self.unr_lines:
+    #             vn = None       # tensione di linea (e dei nodi a essa connessi)
+    #             bus2 = None     # bus a monte o a valle della linea
+    #             if v[el]['top']['conn'][0] in v.keys():             # se il nodo a monte della linea è nel dizionario
+    #                 bus = v[el]['top']['conn'][0]
+    #                 if v[bus]['par']['Vn']:                         # e se ne è stata identificata la tensione
+    #                     vn = v[bus]['par']['Vn']                    # la tensione di linea è pari a tale valore
+    #                     bus2 = v[el]['top']['conn'][1]              # bus2 sarà il nodo a valle
+    #
+    #             elif v[el]['top']['conn'][1] in v.keys():           # se il nodo a valle della linea è nel dizionario
+    #                 bus = v[el]['top']['conn'][1]
+    #                 if v[bus]['par']['Vn']:                         # e se ne è stata identificata la tensione
+    #                     vn = v[bus]['par']['Vn']                    # la tensione di linea è pari a tale valore
+    #                     bus2 = v[el]['top']['conn'][0]              # bus2 sarà il nodo a valle
+    #
+    #             if vn:                                              # se è stato possibile valutarela tensione di linea
+    #                 v[el]['par']['Vn'] = vn                         # si inserisce nel sotto-dizionario della linea
+    #                 v[bus2]['par']['Vn'] = vn                       # si inserisce nel sotto-dizionario del nodo "bus2"
+    #                 self.unr_lines.remove(el)                       # la linea è risolta: si elimina dalla lista
 
     # Compilazione di tutti gli elementi in OpenDSS
     def write_all(self, t=None):
         for el in v.keys():
             self.write(el=el, t=t)
 
-    # Compilazione di un elemento in OpenDSS
+    # Compilazione di un elemento in OpenDSS. TODO: Da ridefinire in base alla nuova modalità di scrittura
     def write(self, el, t=None):    # t è il tempo da considerare nel profilo dell'elemento (se presente)
 
         # Viene definita la macrocategoria
@@ -386,7 +405,7 @@ class OpenDSS:
                     self.dss.__getattribute__(mcat.lower() + 's').__setattr__(par_dict[cat][par], v[el]['par'][par])
         # TODO: da definire come gestire le variazioni su Source e sui Nodi
 
-    # Aggiornamento del dizionario con i profili dei risultati di uno studio temporale
+    # Aggiornamento del dizionario con i profili dei risultati di uno studio temporale. TODO Ridefinire
     def results_append(self, el):
         if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
             # mcat = ''
@@ -449,7 +468,7 @@ class OpenDSS:
             self.dss.circuit.set_active_bus(el)
             v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
 
-    # Aggiornamento del dizionario dei risultati di uno studio singolo
+    # Aggiornamento del dizionario dei risultati di uno studio singolo. TODO: Ridefinire
     def results_store(self, el):
         if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
             # mcat = ''
@@ -514,6 +533,7 @@ class OpenDSS:
     # TODO: verificare se è possibile rendere self.results_append e self.results_store come un'unica funzione
 
     # Esecuzione del loadflow puntuale. Restituisce un Booleano che indica se il sistema va a convegenza.
+    # TODO: Forse non più necessario, sostituito da "self.full_parse_to_dss". Almeno da riconfigurare
     def solve(self):
         try:
             self.dss.topology.all_isolated_branches.clear()     # TODO: capire se necessario
@@ -529,7 +549,6 @@ class OpenDSS:
         # print(bool(self.dss.solution.converged))
         self.dss.text(f"Save Circuit dir=cartella")
 
-
         # scrittura dei risultati nel dizionario per ogni elemento
         for el in v.keys():
             self.results_store(el)
@@ -544,7 +563,7 @@ class OpenDSS:
         #
         return bool(self.dss.solution.converged)
 
-    # Esecuzione del loadFlow per un intervallo temporale di 24 ore
+    # Esecuzione del loadFlow per un intervallo temporale di 24 ore TODO: ridefinire
     def solve_profile(self):
         for t in range(0, 96):  # viene ipotizzato un timestep di 15 minuti
             self.write_all(t/4)         # si aggiornano puntualmente i valori degli elementi in OpenDSS
@@ -578,6 +597,7 @@ class OpenDSS:
     #
     #     pass
 
+    # Lettura dei parametri dell'elemento el mediante analisi del testo del codice
     def readline(self, el):
         mcat = mcat_find(el)
         cat = v[el]['category']
@@ -588,7 +608,8 @@ class OpenDSS:
         par = dict()
         # if mcat in ['Generator', 'Line', 'Load', 'Transformer', 'Vsource']:
         if cat in new_par_dict:
-            params = []
+            # -- creo l'elenco delle voci da ricercare nella stringa di codice DSS --------
+            params = []     # Elenco delle voci da ricercare
             for p in (new_par_dict[cat]['par'].keys() - ['others']):
                 # print(p)
                 params.append(new_par_dict[cat]['par'][p]['label'])
@@ -599,31 +620,39 @@ class OpenDSS:
             #           new_par_dict[cat]['top']['conn']['label'])
 
             # print('parametri:', params)
+            # -----------------------------------------------------------------------------
 
             file = open('cartella/' + mcat + '.dss', 'r')
+
+            # -- ricerca dei parametri dell'elemento selezionato -----------------------------------------------------
             while True:
                 line = file.readline()
-                if line == '':
+                if line == '':  # se la linea è una linea vuota, allora il file è finito TODO: è vero????
                     break
+
+                # Il nome dell'elemento è riportato tra due "" (e.g. New "Load.ug_dc-load" bus1=ug_dc-bb...).
+                # Quindi il nome sarà la seconda voce dell'array derivato dalla stringa divisa per l'elemento '"'.
                 elements = line.split('"')
                 if elements[1].lower() == (mcat + '.' + el).lower():
                     # print(line)
+                    # la stringa di riferimento è data solo dalle proprietà dell'elemento
                     line = line.replace('New "' + mcat + '.' + el.lower() + '" ', '').replace('\n', '')
-                    line = line.replace(', ', ',')
+                    line = line.replace(', ', ',')  # elimino lo spazio dopo le virgole
                     # print('fatto', line)
-                    datas = line.split(' ')
+                    datas = line.split(' ')     # Array delle propietà: e.g. [proprietà=valore, ...]
                     # print(datas)
                     # print('\n')
 
+                    # procedura di estrazione delle singole proprietà
                     for d_comp in datas:
-                        d = d_comp.split('=')
-                        if d[0] in params:
-                            if d[1][0] == '[':
+                        d = d_comp.split('=')   # d = [proprietà, valore]
+                        if d[0] in params:      # considreo le sole propietà elencate in params
+                            if d[1][0] == '[':      # se il valore è un insieme di valori tra [], lo scrivo come array
                                 val = []
                                 d[1] = d[1].replace('[', '').replace(']', '')
                                 for single in d[1].split(','):
                                     if single:
-                                        try:
+                                        try:            # converto il valore in formato decimale, se possibile
                                             Decimal(single)
                                             single = float(single)
                                         except InvalidOperation:
@@ -636,8 +665,11 @@ class OpenDSS:
                                 except InvalidOperation:
                                     val = d[1]
                             # print(d[0], val)
-                            par[d[0]] = val
+                            par[d[0]] = val     # scrittura del valore ottenuto nel dizionario "par"
+                            # TODO: perché mi memorizzo tutti i parametri, anche quello che non sono in params???
                     break
+
+            # le tensioni degli elementi devono essere scritte come array, anche se sono singole
             if mcat == 'Generator':
                 par['kv'] = [par['kv']]
             elif mcat == 'Load':

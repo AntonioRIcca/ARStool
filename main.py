@@ -137,7 +137,7 @@ class Main:
         line = self .myform.ui.tableWidget.currentRow()
         elem = self.myform.ui.tableWidget.item(line, 0).text()
         print(elem)
-        dss.writeline(elem)
+        # dss.writeline(elem)   TODO: ???????
 
         try:
             self.ui.rightMenuPages.removeWidget(self.ui.rightMenuPages.widget(2))
