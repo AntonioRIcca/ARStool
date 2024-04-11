@@ -45,7 +45,7 @@ class OpenDSS:
         # print('none')
         self.save()
 
-    def save(self):
+    def  save(self):
         with open('CityArea.yml', 'w') as file:
             yaml.dump(v, file)
             file.close()
@@ -176,16 +176,26 @@ class OpenDSS:
 
     # Scrittura di tutti gli elementi in OpenDSS
     def full_parse_to_dss(self):
+        # # self.dss.dssinterface.clear_all()
+        # self.dss.text('Clear')
+        #
+        # # self.dss.solution.solve()
+        # self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0]))
+
         self.dss.text('Clear')
         self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0]))
+        # self.dss.text(f"Save Circuit dir=cartella")
 
         # Popolamento dei comandi pero ogni macrocategoria di OpenDSS
+        for key in dss_cat.keys():
+            dss_cat[key] = []
         for el in v:
             mcat = mcat_find(el)
             if mcat in dss_cat:
                 self.writeline(el)
 
         # Scrittura dei comandi in OpenDSS
+        print('scrittura')
         for mcat in dss_cat:
             # print('\n' + mcat)
             for r in dss_cat[mcat]:
