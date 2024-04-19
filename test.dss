@@ -6,28 +6,30 @@ Edit Vsource.Source BasekV=0.4 pu=1  Bus1=myBB.1.2.3.0
 New linecode.LineType nphases=3 R1=0.000001 X1=0.000001 B1=0.000001
 //New linecode.LineType nphases=3
 
+New loadshape.myLoadShape npts=10 interval=1 mult = (0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.1)
+
 //New line.myLine bus1=SourceBus bus2=myBB linecode=LineType length=3
 
 //New load.myLoad bus1=myBB phases=3 kv=0.4 kw=100.0 pf=0.9
 
 New load.myLoad1 bus1=myBB.1.0 phases=1 kv=0.4 kw=100 pf=0.9 model=1
 New load.myLoad2 bus1=myBB.2.0 phases=1 kv=0.4 kw=100 pf=0.9 model=1
-New load.myLoad3 bus1=myBB.3.0 phases=1 kv=0.4 kw=100 pf=0.9 model=1
+New load.myLoad3 bus1=myBB.3.0 phases=1 kv=0.4 kw=100 pf=0.9 model=1 daily=myLoadShape
 
 
 //New load.myLoad.1 bus1=myBB.1.0 phases=1 kv=0.4 kw=100 pf=0.99 model=1
 //New load.myLoad.2 bus1=myBB.2.0 phases=1 kv=0.4 kw=150 pf=0.99 model=1
 //New load.myLoad.3 bus1=myBB.3.0 phases=1 kv=0.4 kw=200 pf=0.99 model=1
 
-
+set mode=Daily Number = 1
 
 Solve
 
-Show voltage Ln elements
+//Show voltage Ln elements
 
 //Show Current Elements
 
-Show Powers kVA Elements
+//Show Powers kVA Elements
 
 
 
