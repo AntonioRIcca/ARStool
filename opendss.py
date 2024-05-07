@@ -94,7 +94,7 @@ class OpenDSS:
                 # Scrivo la tensione del nodo, solo se l'elemento di partenza non è una linea
                 if mcat not in ['Line']:
                     v[node]['par']['Vn'] = [v[el]['par']['Vn'][i]]
-            print('done')
+            # print('done')
 
             # Per le linee, bisogna importare i parametri da LineCode.dss
             if cat in mc['Line']:
@@ -125,7 +125,9 @@ class OpenDSS:
         par = ''
         buses = ''
         # line = ''
+        serv = ''
 
+        # Scrittura della parte dei parametri
         for p in new_par_dict[cat]['par']['others']:
             par = par + p + '=' + new_par_dict[cat]['par']['others'][p] + ' '
         for p in new_par_dict[cat]['par'].keys() - ['others']:
@@ -133,6 +135,11 @@ class OpenDSS:
                 par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p][0]) + ' '
             else:
                 par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p]) + ' '
+
+        # Verifica se l'elemento è in servizio
+        serv = ''
+        if 'out-of-service' in v[el]['par'].keys():
+            serv = 'enabled=' + str(not bool(v[el]['par']['out-of-service']))
 
         # Verifica sel le connessioni sono memorizzzate come array o come due voci singole
         if len(new_par_dict[cat]['top']['conn']['label']) == len(v[el]['top']['conn']):
@@ -167,7 +174,7 @@ class OpenDSS:
 
             line = line + 'linecode=' + v[el]['top']['linetype'] + ' '
 
-        line = line + buses + par
+        line = line + buses + par + serv
 
         dss_cat[mcat].append(line)              # Memorizzazione dell'elemento
 
@@ -200,9 +207,7 @@ class OpenDSS:
             # print('\n' + mcat)
             for r in dss_cat[mcat]:
                 self.dss.text(r)
-                print(r)
-
-        # TODO: Gestire le casistiche "Out-of-service" (Vedi la procedura in self.write)
+                # print(r)
 
         self.solve()
         self.save()
@@ -481,61 +486,80 @@ class OpenDSS:
     # Aggiornamento del dizionario dei risultati di uno studio singolo. TODO: Ridefinire
     def results_store(self, el):
         if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
-            # mcat = ''
-            # for m in mc.keys():
-            #     if v[el]['category'] in mc[m]:
-            #         mcat = m
-            #         break
-            mcat = mcat_find(el)
 
-            # Le parti DC sono in pratica porzioni AC, di cui si considera la fase globale.
-            # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
-            cf0, cf1 = 1, 1     # fattore di correzione per le parti AC
-            if v[el]['category'] in ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'BESS', 'PV', 'DC-Wind']:
-                cf0 = 3 ** 0.5    # fattore di correzione per le porzioni DC a monte
-            if v[el]['category'] in ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'BESS', 'PV', 'DC-Wind', 'PWM']:
-                cf1 = 3 ** 0.5  # fattore di correzione per pe porzioni DC a valle
+            if not v[el]['par']['out-of-service']:  # Se l'elemento è in servizio
+                # mcat = ''
+                # for m in mc.keys():
+                #     if v[el]['category'] in mc[m]:
+                #         mcat = m
+                #         break
+                mcat = mcat_find(el)
 
-            self.dss.circuit.set_active_element(mcat + '.' + el)    # l'elemento è selezionato
+                # Le parti DC sono in pratica porzioni AC, di cui si considera la fase globale.
+                # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
+                cf0, cf1 = 1, 1     # fattore di correzione per le parti AC
+                if v[el]['category'] in ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'BESS', 'PV', 'DC-Wind']:
+                    cf0 = 3 ** 0.5    # fattore di correzione per le porzioni DC a monte
+                if v[el]['category'] in ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'BESS', 'PV', 'DC-Wind', 'PWM']:
+                    cf1 = 3 ** 0.5  # fattore di correzione per pe porzioni DC a valle
 
-            if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
-                # le potenza globali sono date dalla somma delle potenze delle singole fasi
-                p, q = 0, 0
-                for i in range(0, 3):
-                    p = p + self.dss.cktelement.powers[2 * i]
-                    q = q + self.dss.cktelement.powers[2 * i + 1]
+                self.dss.circuit.set_active_element(mcat + '.' + el)    # l'elemento è selezionato
 
-                # Accodamento nel vettore dei risultati nel dizionario
-                # dei valori di P, Q, V, i con i relativi fattori di correzione
-                v[el]['lf']['p'] = p
-                v[el]['lf']['q'] = q
-                v[el]['lf']['v'] = self.dss.cktelement.voltages_mag_ang[0] * 3**0.5
-                v[el]['lf']['i'] = self.dss.cktelement.currents_mag_ang[0] * cf0
+                if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
 
-            else:                           # per le linee
-                if v[el]['category'] in mc['Line']:     # per le linee
-                    j = 6
-                else:                                   # per i Transformer
-                    j = 8
+                    # le potenza globali sono date dalla somma delle potenze delle singole fasi
+                    p, q = 0, 0
+                    for i in range(0, 3):
+                        p = p + self.dss.cktelement.powers[2 * i]
+                        q = q + self.dss.cktelement.powers[2 * i + 1]
 
-                # le potenza globali sono date dalla somma delle potenze delle singole fasi
-                p0, q0, p1, q1 = 0, 0, 0, 0
-                for i in range(0, 3):
-                    p0 = p0 + self.dss.cktelement.powers[2 * i]
-                    q0 = q0 + self.dss.cktelement.powers[2 * i + 1]
-                    p1 = p1 - self.dss.cktelement.powers[2 * i + j]
-                    q1 = q1 - self.dss.cktelement.powers[2 * i + j + 1]
+                    # Accodamento nel vettore dei risultati nel dizionario
+                    # dei valori di P, Q, V, i con i relativi fattori di correzione
+                    v[el]['lf']['p'] = p
+                    v[el]['lf']['q'] = q
+                    v[el]['lf']['v'] = self.dss.cktelement.voltages_mag_ang[0] * 3**0.5
+                    v[el]['lf']['i'] = self.dss.cktelement.currents_mag_ang[0] * cf0
 
-                # Inserimento nel dizionario, per ogni lato,
-                # dei valori di P, Q, V, i con i relativi fattori di correzione
-                v[el]['lf']['p'][0] = p0
-                v[el]['lf']['q'][0] = q0
-                v[el]['lf']['p'][1] = p1
-                v[el]['lf']['q'][1] = q1
-                v[el]['lf']['v'][0] = self.dss.cktelement.voltages_mag_ang[0] * 3**0.5
-                v[el]['lf']['v'][1] = self.dss.cktelement.voltages_mag_ang[j] * 3**0.5
-                v[el]['lf']['i'][0] = self.dss.cktelement.currents_mag_ang[0] * cf0
-                v[el]['lf']['i'][1] = self.dss.cktelement.currents_mag_ang[j] * cf1
+                else:                           # per le linee
+                    if v[el]['category'] in mc['Line']:     # per le linee
+                        j = 6
+                    else:                                   # per i Transformer
+                        j = 8
+
+                    # le potenza globali sono date dalla somma delle potenze delle singole fasi
+                    p0, q0, p1, q1 = 0, 0, 0, 0
+                    for i in range(0, 3):
+                        p0 = p0 + self.dss.cktelement.powers[2 * i]
+                        q0 = q0 + self.dss.cktelement.powers[2 * i + 1]
+                        p1 = p1 - self.dss.cktelement.powers[2 * i + j]
+                        q1 = q1 - self.dss.cktelement.powers[2 * i + j + 1]
+
+                    # Inserimento nel dizionario, per ogni lato,
+                    # dei valori di P, Q, V, i con i relativi fattori di correzione
+                    v[el]['lf']['p'][0] = p0
+                    v[el]['lf']['q'][0] = q0
+                    v[el]['lf']['p'][1] = p1
+                    v[el]['lf']['q'][1] = q1
+                    v[el]['lf']['v'][0] = self.dss.cktelement.voltages_mag_ang[0] * 3**0.5
+                    v[el]['lf']['v'][1] = self.dss.cktelement.voltages_mag_ang[j] * 3**0.5
+                    v[el]['lf']['i'][0] = self.dss.cktelement.currents_mag_ang[0] * cf0
+                    v[el]['lf']['i'][1] = self.dss.cktelement.currents_mag_ang[j] * cf1
+
+            else:                                   # se l'elemento non è in servizio
+                if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
+                    v[el]['lf']['p'] = 0
+                    v[el]['lf']['q'] = 0
+                    v[el]['lf']['v'] = 0
+                    v[el]['lf']['i'] = 0
+                else:                                                           # per linee e trasformatori
+                    v[el]['lf']['p'][0] = 0
+                    v[el]['lf']['q'][0] = 0
+                    v[el]['lf']['p'][1] = 0
+                    v[el]['lf']['q'][1] = 0
+                    v[el]['lf']['v'][0] = 0
+                    v[el]['lf']['v'][1] = 0
+                    v[el]['lf']['i'][0] = 0
+                    v[el]['lf']['i'][1] = 0
 
         else:                               # per i nodi e per il Source
             self.dss.circuit.set_active_bus(el)
@@ -585,7 +609,7 @@ class OpenDSS:
         pass
 
     def test(self):
-        print(self.dss.topology.all_isolated_branches)
+        # print(self.dss.topology.all_isolated_branches)
         # self.dss.text(f"show isolated")
         # print(self.dss.topology.active_branch)
         # print(self.dss.topology.all_isolated_loads)

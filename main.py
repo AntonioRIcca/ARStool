@@ -118,6 +118,7 @@ class Main:
         self.elementsTableFormat()
 
     def elementsTableFormat(self):
+        self.myform.ui.tableWidget.setSortingEnabled(True)
         self.myform.ui.tableWidget.setShowGrid(False)
         self.myform.ui.tableWidget.setStyleSheet('QTableView::item {border-top: 1px solid #333333;}')
         self.myform.ui.tableWidget.verticalHeader().setVisible(False)
