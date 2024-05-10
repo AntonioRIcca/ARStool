@@ -1,11 +1,11 @@
-New "Load.ug_serv1_ac-load" bus1=ug_serv_bb phases=3 kV=0.4 kW=80 pf=0.9
-New "Load.ug_serv2_ac-load" bus1=ug_serv_bb phases=3 kV=0.4 kW=120 pf=0.9
-New "Load.ug_dc-load" bus1=ug_dc-bb phases=3 kV=1.5 kW=200 pf=1
-New "Load.ugs_dc-load" bus1=ugs_dc-bb phases=3 kV=1.5 kW=200 pf=1
-New "Load.rs_1_ac-load" bus1=rs_bb_04kv phases=3 kV=0.4 kW=40 pf=0.9
-New "Load.rs_2_ac-load" bus1=rs_bb_04kv phases=3 kV=0.4 kW=60 pf=0.9
-New "Load.ev-charge_ac-load" bus1=ev-charge_bb phases=3 kV=0.4 kW=40 pf=1
-New "Load.ev-fast_dc-load" bus1=ev-fast-load_dc-node phases=3 kV=0.4 kW=50 pf=1
-New "Load.user_ac-load" bus1=user_bb phases=3 kV=0.4 kW=200 pf=0.9
-New "Load.pros_1_ac-load" bus1=pros_bb phases=3 kV=0.4 kW=150 pf=0.9
-New "Load.pros_dc-load" bus1=pros2_dc-bb phases=3 kV=0.6 kW=30 kvar=0 model=3
+New "Load.ug_serv1_ac-load" bus1=ug_serv_bb phases=3 kW=80 kV=0.4 pf=0.9 enabled=true
+New "Load.ug_serv2_ac-load" bus1=ug_serv_bb phases=3 kW=120 kV=0.4 pf=0.9 enabled=true
+New "Load.ug_dc-load" bus1=ug_dc-bb phases=3 pf=1 kW=200 kV=1.5 enabled=true
+New "Load.ugs_dc-load" bus1=ugs_dc-bb phases=3 pf=1 kW=200 kV=1.5 enabled=true
+New "Load.rs_1_ac-load" bus1=rs_bb_04kv phases=3 kW=40 kV=0.4 pf=0.9 enabled=true
+New "Load.rs_2_ac-load" bus1=rs_bb_04kv phases=3 kW=60 kV=0.4 pf=0.9 enabled=true
+New "Load.ev-charge_ac-load" bus1=ev-charge_bb phases=3 kW=40 kV=0.4 pf=1 enabled=true
+New "Load.ev-fast_dc-load" bus1=ev-fast-load_dc-node phases=3 pf=1 kW=50 kV=0.4 enabled=true
+New "Load.user_ac-load" bus1=user_bb phases=3 kW=200 kV=0.4 pf=0.9 enabled=true
+New "Load.pros_1_ac-load" bus1=pros_bb phases=3 kW=150 kV=0.4 pf=0.9 enabled=true
+New "Load.pros_dc-load" bus1=pros2_dc-bb phases=3 pf=1 kW=30 kV=0.6 enabled=true

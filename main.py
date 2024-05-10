@@ -61,7 +61,7 @@ class Main:
 
         self.app = QApplication()
         # self.app = QApplication(sys.argv)
-        self.interface_open()
+        self.interface_open()       # TODO: da elimianre da questa posizione: va dopo la scelta della rete
 
         # f_main = Thread(target=self.interface_open)
         # print('start')
@@ -81,18 +81,18 @@ class Main:
         # self.ui.homeSW.removeWidget(self.ui.homeSW.currentWidget())
         # self.ui.homeSW.addWidget(mywidget)
 
-        self.homeWGT_create()
+        self.homeWGT_create()                                                     # TODO: da riattivare
         self.ui.mainPages.setCurrentIndex(0)
 
-        self.elementsTableFill()
+        self.elementsTableFill()                                                  # TODO: da riattivare
 
-        self.myform.ui.tableWidget.currentCellChanged.connect(self.test_action)
+        self.myform.ui.tableWidget.currentCellChanged.connect(self.test_action)   # TODO: da riattivare
 
         self.ui.profileMenuBtn.clicked.connect(self.test_action2)
         self.ui.moreMenuBtn.clicked.connect(self.test_action2)
         self.ui.loadflow_Btn.clicked.connect(self.loadflow)
 
-        Window(list(v.keys())[0])
+        Window(list(v.keys())[0])                                                 # TODO: da riattivare
         self.ui.rightMenuContainer.expandMenu()
 
         self.app.exec_()
@@ -221,7 +221,7 @@ class Main:
 
         # self.homeHBL.removeWidget(self.homeDxWGT)
         # self.homeDxWGT = QWidget()
-        self.home2_WGT = QWidget()
+        self.home2_WGT = QWidget()          
         self.home3_WGT = QWidget()
         # self.home3_WGT.setStyleSheet("background-color: rgb(0,0,255);")
         self.home3_WGT.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
@@ -232,7 +232,7 @@ class Main:
         self.home3_center_WGT = QWidget()
         self.home3_bottom_WGT = QWidget()
         self.home3_bottom_WGT.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
-        self.home3_bottom_WGT.setStyleSheet("background-color: rgb(0,255,255);")
+        self.home3_bottom_WGT.setStyleSheet("background-color: rgb(255,0,255);")
 
         self.home3_VL.addWidget(self.home3_top_WGT)
         self.home3_VL.addWidget(self.home3_center_WGT)

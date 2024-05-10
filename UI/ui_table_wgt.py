@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'table_wgtWEExEO.ui'
+## Form generated from reading UI file 'table_wgtXbadVg.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -21,7 +21,7 @@ class Ui_Form(object):
         if Form.objectName():
             Form.setObjectName(u"Form")
         Form.resize(796, 667)
-        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
@@ -29,12 +29,7 @@ class Ui_Form(object):
         Form.setStyleSheet(u"background-color: rgb(0, 0, 255);")
         self.widget = QWidget(Form)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(0, 0, 421, 301))
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
-        self.widget.setSizePolicy(sizePolicy1)
+        self.widget.setGeometry(QRect(0, 0, 501, 561))
         self.verticalLayout = QVBoxLayout(self.widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.tableWidget = QTableWidget(self.widget)
@@ -65,15 +60,39 @@ class Ui_Form(object):
         __qtablewidgetitem10 = QTableWidgetItem()
         self.tableWidget.setItem(2, 1, __qtablewidgetitem10)
         self.tableWidget.setObjectName(u"tableWidget")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
-        self.tableWidget.setSizePolicy(sizePolicy2)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
+        self.tableWidget.setSizePolicy(sizePolicy1)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
         self.tableWidget.horizontalHeader().setStretchLastSection(False)
 
         self.verticalLayout.addWidget(self.tableWidget)
+
+        self.buttons_WGT = QWidget(self.widget)
+        self.buttons_WGT.setObjectName(u"buttons_WGT")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Minimum)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.buttons_WGT.sizePolicy().hasHeightForWidth())
+        self.buttons_WGT.setSizePolicy(sizePolicy2)
+        self.buttons_WGT.setStyleSheet(u"border-color: rgb(255, 255, 255);")
+        self.horizontalLayout_2 = QHBoxLayout(self.buttons_WGT)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.buttons_Spc = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.buttons_Spc)
+
+        self.save_Btn = QPushButton(self.buttons_WGT)
+        self.save_Btn.setObjectName(u"save_Btn")
+        self.save_Btn.setMinimumSize(QSize(100, 25))
+        self.save_Btn.setStyleSheet(u"border-color: rgb(255, 255, 255);")
+
+        self.horizontalLayout_2.addWidget(self.save_Btn)
+
+
+        self.verticalLayout.addWidget(self.buttons_WGT)
 
 
         self.retranslateUi(Form)
@@ -110,5 +129,6 @@ class Ui_Form(object):
         ___qtablewidgetitem10.setText(QCoreApplication.translate("Form", u"76ruyt", None));
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
+        self.save_Btn.setText(QCoreApplication.translate("Form", u"Save", None))
     # retranslateUi
 

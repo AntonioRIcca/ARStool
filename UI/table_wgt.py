@@ -19,6 +19,15 @@ class Table(QMainWindow):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
+        self.ui.save_Btn.setStyleSheet(u"QPushButton {"
+                                       u"color: rgb(255, 255, 255);"
+                                       u"background-color: rgb(31, 31, 31); border: solid;" # border-style: outset;"
+                                       u"border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)"
+                                       u"}"
+                                       u"QPushButton:pressed {"
+                                       u"background-color: rgb(64, 64, 64); border-style: inset"
+                                       u"}")
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
