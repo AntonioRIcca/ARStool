@@ -1,5 +1,5 @@
 import py_dss_interface
-from variables import v, c, mc, par_dict, new_par_dict, dss_cat
+from variables import v, c, mc, par_dict, new_par_dict, dss_cat, mainpath
 import yaml
 import os
 from decimal import Decimal, InvalidOperation
@@ -10,6 +10,8 @@ class OpenDSS:
         self.dss = py_dss_interface.DSS()   # sostituisce self.dss = None
         self.unr_conv = []                  # lista dei convertitori non risolti tramite self.node_define
         self.unr_lines = []                 # lista delle linee non risolte tramite self.node_define
+
+        mainpath = 'papap'
 
     # Procedura di connessione con il file di OpenDSS
     def open(self, filename):
@@ -43,13 +45,13 @@ class OpenDSS:
         # La funzione self.node_define serve a definire le tensioni HV dei trasformatori delle busbar a monte di essi
         # self.node_define()    # TODO: Probabilmente deve essere riattivata
         # print('none')
-        self.save()
+        # self.save()
 
-    def  save(self):
-        with open('CityArea.yml', 'w') as file:
-            yaml.dump(v, file)
-            file.close()
-        # print('end')
+    # def save(self):
+    #     with open('CityArea.yml', 'w') as file:
+    #         yaml.dump(v, file)
+    #         file.close()
+    #     # print('end')
 
     def read_new(self, el):
         mcat = mcat_find(el)
@@ -210,7 +212,7 @@ class OpenDSS:
                 # print(r)
 
         self.solve()
-        self.save()
+        # self.save()
 
         self.dss.text(f"Save Circuit dir=cartella")
 
@@ -776,7 +778,7 @@ def create_profile(el):
         profile = 'PV'
 
     if profile:     # se l'elemento prevede il profilo viene importato dal relativo file
-        filename = os.getcwd() + '/_benchmark/_data/_profiles/' + profile + '.yml'
+        filename = mainpath + '/_benchmark/_data/_profiles/' + profile + '.yml'
         d = yaml.safe_load(open(filename))
 
         # viene memorizzato nel dizionario

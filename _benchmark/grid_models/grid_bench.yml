@@ -1,0 +1,9 @@
+CityArea:
+  name: "City Area"
+  description: "Rete urbana ibrida"
+  file: "CityArea.dss"
+
+OtherGrid:
+  name: "other grid"
+  description: "Rete che non esiste"
+  file: "CityArea.dss"

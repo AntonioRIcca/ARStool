@@ -1,3 +1,6 @@
+import os
+mainpath = os.getcwd()
+
 v = dict()
 vdss = dict()
 

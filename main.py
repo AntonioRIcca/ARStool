@@ -1,14 +1,17 @@
 # import py_dss_interface
 # from PySide2.QtCharts import QChart, QChartView, QBarSet, QPercentBarSeries, QBarCategoryAxis
-
+import os.path
 from functools import partial
 import xlsxwriter
 
-from PySide2 import QtGui, QtCore
+from PySide2 import QtGui, QtCore, QtWidgets
 
 from PySide2.QtCharts import *
 
+# import variables
 from variables import v
+from variables import mainpath
+
 import yaml
 # from PySide2 import *
 from PySide2.QtWidgets import *
@@ -33,6 +36,10 @@ class Main:
         # variabili globali
         self.mainwindow = None
         self.ui = None
+
+        self.dsspath = os.getcwd()
+        self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
+        print(self.savepath)
 
         self.lf_cat = None
         self.p_eg = None
@@ -59,6 +66,8 @@ class Main:
         self.myform = None
         self.elemementTableWGT = None
 
+        self.dss = opendss.OpenDSS()
+
         self.app = QApplication()
         # self.app = QApplication(sys.argv)
         self.interface_open()       # TODO: da elimianre da questa posizione: va dopo la scelta della rete
@@ -81,21 +90,203 @@ class Main:
         # self.ui.homeSW.removeWidget(self.ui.homeSW.currentWidget())
         # self.ui.homeSW.addWidget(mywidget)
 
-        self.homeWGT_create()                                                     # TODO: da riattivare
+        self.startWgtCreate()
+        # self.elementsTableWgtCreate()                                               # TODO: da riattivare
+
+        # self.homeWGT_create()                                                     # TODO: da NON riattivare
         self.ui.mainPages.setCurrentIndex(0)
 
-        self.elementsTableFill()                                                  # TODO: da riattivare
+        # self.elementsTableFill()                                                  # TODO: da NON riattivare
 
-        self.myform.ui.tableWidget.currentCellChanged.connect(self.test_action)   # TODO: da riattivare
+        # self.myform.ui.tableWidget.currentCellChanged.connect(self.test_action)   # TODO: da NON riattivare
 
         self.ui.profileMenuBtn.clicked.connect(self.test_action2)
         self.ui.moreMenuBtn.clicked.connect(self.test_action2)
         self.ui.loadflow_Btn.clicked.connect(self.loadflow)
+        self.ui.restartBtn.clicked.connect(self.startWgtCreate)
 
-        Window(list(v.keys())[0])                                                 # TODO: da riattivare
+        # Window(list(v.keys())[0])                                                 # TODO: da NON riattivare
         self.ui.rightMenuContainer.expandMenu()
 
         self.app.exec_()
+
+    def startWgtCreate(self):
+        self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
+
+        try:
+            self.ui.home_WGT.deleteLater()
+        except:
+            self.home_WGT.deleteLater()
+        self.home_WGT = QWidget()
+
+        # self.homeHBL = QHBoxLayout(self.home_WGT)
+        self.homeHBL = QHBoxLayout()
+        self.home_WGT.setLayout(self.homeHBL)
+        self.homeHBL.setContentsMargins(0, 0, 0, 0)
+
+        from UI.start_wgt import StartWGT
+        self.startWGT = StartWGT()
+        # self.startWGT = self.myform.ui.startWgt
+        self.startWGT.ui.startWgt.setMinimumSize(QtCore.QSize(300, 0))
+
+        self.homeHBL.addWidget(self.startWGT.ui.startWgt, 0, QtCore.Qt.AlignLeft)
+
+        self.ui.home_VL.addWidget(self.home_WGT)
+
+        # Si ripete in self.elementsTableWgtCreate() --> self.homeWGT_create()
+        # TODO: Capire se tutto questo può essere messo estermanemte
+        self.home2_WGT = QWidget()
+        self.home3_WGT = QWidget()
+        # self.home3_WGT.setStyleSheet("background-color: rgb(0,0,255);")
+        self.home3_WGT.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+
+        self.home3_VL = QVBoxLayout(self.home3_WGT)
+        self.home3_VL.setContentsMargins(0, 0, 0, 0)
+        self.home3_top_WGT = QWidget()
+        self.home3_center_WGT = QWidget()
+        self.home3_bottom_WGT = QWidget()
+        self.home3_bottom_WGT.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
+        self.home3_bottom_WGT.setStyleSheet("background-color: rgb(255,0,255);")
+
+        self.home3_VL.addWidget(self.home3_top_WGT)
+        self.home3_VL.addWidget(self.home3_center_WGT)
+        self.home3_VL.addWidget(self.home3_bottom_WGT)
+
+        # self.homeHBL.deleteLater()
+        self.homeHBL.addWidget(self.home2_WGT)
+        self.homeHBL.addWidget(self.home3_WGT)
+
+        self.startWGT.ui.benchOpenBtn.clicked.connect(self.benchmarkWGT_create)
+        self.startWGT.ui.openFileBtn.clicked.connect(self.yml_open)
+
+    # Creazione dell'elenco delle reti benchmark
+    def benchmarkWGT_create(self):
+        self.startWGT.ui.benchOpenBtn.setStyleSheet(u"background-color: rgb(63, 63, 63);")
+
+        self.home2_WGT.deleteLater()
+
+        self.home2_WGT = QWidget()
+        self.home2_WGT.setMinimumWidth(250)
+        self.bmWgtVBL = QVBoxLayout()
+        self.bmWgtVBL.setSpacing(20)
+        self.home2_WGT.setLayout(self.bmWgtVBL)
+
+        bm = yaml.safe_load(open(mainpath + '/_benchmark/grid_models/grid_bench.yml'))
+
+        for b in bm.keys():
+
+            self.gridPls = QPushButton()
+            self.gridPls.setText(bm[b]['name'])
+            self.gridPls.setMinimumHeight(50)
+            self.testIco = QtGui.QIcon()
+            self.testIco.addFile(u":/icons/icons/importfile.png",
+                                 QtCore.QSize(100, 100), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.gridPls.setIcon(self.testIco)
+            self.gridPls.setIconSize(QtCore.QSize(30, 30))
+
+            self.gridPls.setStyleSheet(u"QPushButton {"
+                                       u"font: 24px;"
+                                       u"text-align: left;"
+                                       u"padding: 10px 20px;"
+                                       u"color: rgb(255, 255, 255);"
+                                       u"background-color: rgb(31, 31, 31); border: solid;"  # border-style: outset;"
+                                       u"border-width: 2px; border-radius: 10px; border-color: rgb(127, 127, 127)"
+                                       u"}"
+                                       u"QPushButton:pressed {"
+                                       u"background-color: rgb(64, 64, 64); border-style: inset"
+                                       u"}")
+            self.bmWgtVBL.addWidget(self.gridPls)
+            self.gridPls.clicked.connect(partial(self.gridDetailsWgtCreate, bm[b], b))
+
+            # self.test.clicked.connect(self.gridDetailsWgtCreate)
+
+        bm_spacer = QSpacerItem(20, 146, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.bmWgtVBL.addItem(bm_spacer)
+
+        self.homeHBL.insertWidget(1, self.home2_WGT)
+        pass
+
+    def gridDetailsWgtCreate(self, grid, gridname):
+        self.home3_WGT.deleteLater()
+
+        from UI.grid_details_ui import GridDetailsWGT
+
+        self.gridDetailsWgt = GridDetailsWGT()
+        self.home3_WGT = self.gridDetailsWgt.ui.gridDetailsMainWgt
+
+        self.homeHBL.insertWidget(2, self.home3_WGT)
+
+        self.gridDetailsWgt.ui.nameLbl.setText(grid['name'])
+        self.gridDetailsWgt.ui.descLbl.setText(grid['description'])
+        img = mainpath + '/_benchmark/grid_models/images/' + gridname + '.png'
+        self.gridDetailsWgt.ui.imageLbl.setPixmap(QtGui.QPixmap(img))
+
+        self.filepath = mainpath + '/_benchmark/grid_models/' + grid['file']
+        self.dsspath = mainpath + '/_benchmark/grid_models/'
+        self.gridname = gridname
+
+        self.gridDetailsWgt.ui.open.clicked.connect(partial(self.dss_open, self.filepath))
+        # self.main.ui.EV303_img_LBL.setPixmap(QtGui.QPixmap("UI/_resources/arrowSX_20x20.png")
+
+        # self.home3_WGT.setSizePolicy(QSizePolicy.Policy.Minimum)
+
+    # Apertura del file DSS
+    def dss_open(self, filepath):
+        # self.dss = opendss.OpenDSS()
+        self.dss.open(filepath)
+        self.elementsTableWgtCreate()
+        self.yml_bench_save()
+
+    def yml_open(self):
+        print(self.savepath)
+        options = QtWidgets.QFileDialog.Options()
+        options |= QtWidgets.QFileDialog.DontUseNativeDialog
+
+        filename, ext = QtWidgets.QFileDialog.getOpenFileName(caption="Apri file di rete",
+                                                              dir=self.savepath,
+                                                              filter='*.yml')
+        print(filename)
+
+        if filename:
+            name = filename.split('/')
+            self.savepath = filename.removesuffix(name[len(name)-1])
+            self.gridname = name[len(name)-1].split('.')[0]
+            v0 = yaml.safe_load(open(filename))
+            for elem in v0:
+                v[elem] = v0[elem]
+            self.elementsTableWgtCreate()
+
+            # a = 'as'
+            # a.re
+
+    def yml_bench_save(self):
+        filename = self.dsspath + '/' + self.gridname + '.yml'
+        with open(filename, 'w') as file:
+            yaml.dump(v, file)
+            file.close()
+
+    # Salvataggio del file YML della rete
+    def yml_save(self):
+        options = QtWidgets.QFileDialog.Options()
+        options |= QtWidgets.QFileDialog.DontUseNativeDialog
+
+        filename, ext = QtWidgets.QFileDialog.getSaveFileName(caption="Salva configurazione di rete",
+                                                              dir='c:/' + self.gridname,
+                                                              # dir=self.savepath + '/' + self.gridname,
+                                                              filter='*.yml')
+
+        if filename:
+            with open(filename, 'w') as file:
+                yaml.dump(v, file)
+                file.close()
+
+    # Inserimento della tabella degli elementi nel widget principale
+    def elementsTableWgtCreate(self):
+        self.homeWGT_create()
+        self.elementsTableFill()
+        self.myform.ui.tableWidget.currentCellChanged.connect(self.test_action)
+        self.myform.ui.save_Btn.clicked.connect(self.yml_save)
+        Window(list(v.keys())[0])
 
     def readsize(self):
         self.par_wgt = Window('rs_line')
@@ -221,7 +412,7 @@ class Main:
 
         # self.homeHBL.removeWidget(self.homeDxWGT)
         # self.homeDxWGT = QWidget()
-        self.home2_WGT = QWidget()          
+        self.home2_WGT = QWidget()
         self.home3_WGT = QWidget()
         # self.home3_WGT.setStyleSheet("background-color: rgb(0,0,255);")
         self.home3_WGT.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
@@ -298,7 +489,7 @@ class Main:
                     self.__getattribute__('set' + str(i)).append([0, self.__getattribute__('p_' + p[i])])
                 else:
                     self.__getattribute__('set' + str(i)).append([self.__getattribute__('p_' + p[i]), 0])
-                
+
             series.append(self.__getattribute__('set' + str(i)))
 
         # series = QtCharts.QPercentBarSeries()
@@ -352,15 +543,19 @@ class Main:
 
     def loadflow(self):
         self.ui.rightMenuContainer.collapseMenu()
-        self.home2_WGT.deleteLater()
+        try:
+            self.home2_WGT.deleteLater()
+        except RuntimeError:
+            pass
 
-        dss.full_parse_to_dss()
+        self.dss.full_parse_to_dss()
+        # self.yml_bench_save()
         # dss.write_all()
         # dss.solve()
 
         # write_excel()
 
-        dss.test()  # TODO: da eliminare, è una prova
+        self.dss.test()  # TODO: da eliminare, è una prova
 
         self.p_loads, self.q_loads = 0, 0
         self.p_gen, self.q_gen = 0, 0
@@ -704,12 +899,13 @@ def write_excel():
 #
 #     sys.exit(app.exec_())
 
-
-dss = opendss.OpenDSS()
-
-filename = 'C:/Users/anton/PycharmProjects/ARStool/CityArea.dss'
-
-dss.open(filename)
+# TODO: Sosopesi ----------------
+# dss = opendss.OpenDSS()
+#
+# filename = 'C:/Users/anton/PycharmProjects/ARStool/CityArea.dss'
+#
+# dss.open(filename)
+#  -------------------------------
 
 
 # print(list(v.keys())[0])
@@ -732,10 +928,10 @@ dss.open(filename)
 
 Main()
 
-with open('CityArea.yml', 'w') as file:
-    yaml.dump(v, file)
-    file.close()
-print('end')
+# with open('CityArea.yml', 'w') as file:
+#     yaml.dump(v, file)
+#     file.close()
+# print('end')
 
 
 # print('end2')
