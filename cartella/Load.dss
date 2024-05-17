@@ -1,6 +1,6 @@
 New "Load.ev-charge_ac-load" bus1=ev-charge_bb phases=3 kV=0.4 kW=40 pf=1 enabled=true
 New "Load.ev-fast_dc-load" bus1=ev-fast-load_dc-node phases=3 pf=1 kW=50 kV=0.4 enabled=true
-New "Load.pros_1_ac-load" bus1=pros_bb phases=3 kV=0.4 kW=550 pf=0.9 enabled=true
+New "Load.pros_1_ac-load" bus1=pros_bb phases=3 kV=0.4 kW=700 pf=0.9 enabled=true
 New "Load.pros_dc-load" bus1=pros2_dc-bb phases=3 pf=1 kW=30 kV=0.6 enabled=true
 New "Load.rs_1_ac-load" bus1=rs_bb_04kv phases=3 kV=0.4 kW=40 pf=0.9 enabled=true
 New "Load.rs_2_ac-load" bus1=rs_bb_04kv phases=3 kV=0.4 kW=60 pf=0.9 enabled=true

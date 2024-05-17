@@ -9,10 +9,16 @@ from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
                            QRadialGradient)
 from PySide2.QtWidgets import *
 
+from PySide2.QtCharts import *
+
 from variables import v, el_format, mc
 import yaml
 import os
 from datetime import datetime
+
+import matplotlib
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib.pyplot as plt
 
 
 class Window(QWidget):
@@ -28,6 +34,7 @@ class Window(QWidget):
             self.bb_link(self.elem)
 
         spacer = QSpacerItem(20, 20, QSizePolicy.Fixed)
+        bottomSpacer = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         # print(v[elem]['top']['conn'])
 
@@ -61,7 +68,35 @@ class Window(QWidget):
         self.parWidget.setMaximumWidth(180)
         self.parGL = QGridLayout(self.parWidget)
 
-        # Creareo widget dei pulsanti di fondo
+        # # Creare Widget immagine Profilo
+        # profile = False
+        # if 'profile' in v[self.elem]['par']:
+        #     if v[self.elem]['par']['profile']['name']:
+        #         profile = True
+        #         self.profileWidget = QWidget()
+        #         self.profileWidget.setStyleSheet(u"background-color: rgb(31, 0, 0); border-radius: 10px;")
+        #         self.profileWidget.setMaximumHeight(180)
+        #         self.profileWidget.setMaximumWidth(180)
+        #         self.profWgtVBL = QVBoxLayout(self.profileWidget)
+        #         self.profileLbl = QLabel()
+        #         self.profilePlotWgtCreate()
+        #         self.profileLbl.setPixmap(QPixmap("a.jpg"))
+        #         self.profWgtVBL.addWidget(self.profileLbl)
+        #         # self.profWgtVBL.addWidget(self.canvas1)
+        #
+        #         self.profileBtn = QPushButton('Apri profilo')
+        #         self.pb_format(self.profileBtn, min_h=20)
+        #
+        #         self.profWgtVBL.addWidget(self.profileBtn)
+        #         print('done')
+        # else:
+        #     print(1, v[self.elem]['category'])
+        #     print(2, mc['Load'] + mc['Generator'])
+
+
+        # self.profileLbl.setPixmap(QPixmap("_benchmark/grid_models/images/OtherGrid.png"))
+
+        # Creare widget dei pulsanti di fondo
         self.bottomWidget = QWidget()
         self.bottomWidget.setMaximumWidth(180)
         self.bottomHBL = QHBoxLayout(self.bottomWidget)
@@ -69,8 +104,17 @@ class Window(QWidget):
         # Aggiunta dei widget al widget principale
         self.mainVBL.addWidget(self.bbWidget)
         self.mainVBL.addWidget(self.parWidget)
+        if 'profile' in v[self.elem]['par']:
+            if v[self.elem]['par']['profile']['name']:
+                self.profilePlotWgtCreate()
+                print('inserted')
+                self.mainVBL.addWidget(self.profileWidget)
+        else:
+            print(3, v[self.elem]['category'])
+            print(4, mc['Load'] + mc['Generator'])
         self.mainVBL.addWidget(self.bottomWidget, 0, Qt.AlignBottom)
-        self.parWidget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
+        self.mainVBL.addItem(bottomSpacer)
+        # self.parWidget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
 
         # Scrittura dei parametri
         i = 0
@@ -151,9 +195,11 @@ class Window(QWidget):
             self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
             if v[elem]['par']['profile']['name'] is None:
+                print(v[elem]['par']['profile']['curve'])
                 self.scale_DSB.setValue(v[elem]['par']['profile']['curve'])
                 self.scale_RB.setChecked(True)
-                self.scale_DSB.setStyleSheet(u"background-color: rgb(255, 255, 255)")
+                self.scale_DSB.setStyleSheet(u"background-color: rgb(255, 255, 255);"
+                                             u"color: rgb(0, 0, 0);")
             else:
                 self.scale_DSB.setDisabled(True)
                 self.profile_RB.setChecked(True)
@@ -252,6 +298,52 @@ class Window(QWidget):
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.scroll)
         self.setLayout(self.layout)
+
+    def profilePlotWgtCreate(self):
+        font = {
+            'weight': 'normal',
+            'size': 4
+        }
+
+        matplotlib.rc('font', **font)
+        self.canvas1 = FigureCanvas(plt.Figure(figsize=(1.7, 1.4)))
+        self.ax = self.canvas1.figure.subplots()
+
+        # a = range(0, 24)
+        # b = a/4
+        # print('operazione')
+        # print([a/4 for a in range(0, 96)])
+        # print(v[self.elem]['par']['profile']['curve'])
+        self.ax.plot([a/4 for a in range(0, 96)], v[self.elem]['par']['profile']['curve'])  # TODO: da correggere: inserire i dati reali
+
+        self.ax.set_title('Profilo')
+        self.ax.set_ylim([0, 1.05])
+        self.ax.set_xlim([0, 24])
+        self.ax.set_xlabel('Tempo [h]', fontsize=4)
+        self.ax.set_ylabel('Profilo [p.u.]', fontsize=2)
+
+        self.canvas1.draw()
+        self.canvas1.flush_events()
+        self.canvas1.print_jpeg('a.jpg')
+        # self.par_wgt.mainVBL.insertWidget(2, self.canvas)
+        # self.profWgtVBL.addWidget(self.canvas1)
+
+        # Creazione del widget
+        self.profileWidget = QWidget()
+        self.profileWidget.setStyleSheet(u"background-color: rgb(31, 0, 0); border-radius: 10px;")
+        self.profileWidget.setMaximumHeight(180)
+        self.profileWidget.setMaximumWidth(180)
+        self.profWgtVBL = QVBoxLayout(self.profileWidget)
+        self.profileLbl = QLabel()
+
+        self.profileLbl.setPixmap(QPixmap("a.jpg"))
+        self.profWgtVBL.addWidget(self.profileLbl)
+        # self.profWgtVBL.addWidget(self.canvas1)
+
+        self.profileBtn = QPushButton('Apri profilo')
+        self.pb_format(self.profileBtn, min_h=20)
+
+        self.profWgtVBL.addWidget(self.profileBtn)
 
     # azioni da eseguire alla richiesta di modifica del nodo di connessione
     def bb_clicked(self, i=0, event2=None):

@@ -8,6 +8,10 @@ from PySide2 import QtGui, QtCore, QtWidgets
 
 from PySide2.QtCharts import *
 
+# import matplotlib
+# from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+# import matplotlib.pyplot as plt
+
 # import variables
 from variables import v
 from variables import mainpath
@@ -39,7 +43,6 @@ class Main:
 
         self.dsspath = os.getcwd()
         self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
-        print(self.savepath)
 
         self.lf_cat = None
         self.p_eg = None
@@ -77,9 +80,12 @@ class Main:
         # f_main.start()
 
     def interface_open(self):
+        os.chdir(mainpath)
         self.mainwindow = MainWindow()
         self.ui = self.mainwindow.ui
         self.mainwindow.show()
+
+        self.func_disabled()
 
         # self.ui.label_10.setText('APERTO!!!')
         #
@@ -106,9 +112,16 @@ class Main:
         self.ui.restartBtn.clicked.connect(self.startWgtCreate)
 
         # Window(list(v.keys())[0])                                                 # TODO: da NON riattivare
-        self.ui.rightMenuContainer.expandMenu()
+        # self.ui.rightMenuContainer.expandMenu()
 
         self.app.exec_()
+
+    def func_disabled(self):
+        self.ui.loadflow_Btn.setEnabled(False)
+
+    # TODO: deve verificare la disponibilità delle funzioni della rete ed abilitare le funzioni selettivamente
+    def func_enabled(self):
+        self.ui.loadflow_Btn.setEnabled(True)
 
     def startWgtCreate(self):
         self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
@@ -176,7 +189,7 @@ class Main:
         for b in bm.keys():
 
             self.gridPls = QPushButton()
-            self.gridPls.setText(bm[b]['name'])
+            self.gridPls.setText('  ' + bm[b]['name'])
             self.gridPls.setMinimumHeight(50)
             self.testIco = QtGui.QIcon()
             self.testIco.addFile(u":/icons/icons/importfile.png",
@@ -190,7 +203,7 @@ class Main:
                                        u"padding: 10px 20px;"
                                        u"color: rgb(255, 255, 255);"
                                        u"background-color: rgb(31, 31, 31); border: solid;"  # border-style: outset;"
-                                       u"border-width: 2px; border-radius: 10px; border-color: rgb(127, 127, 127)"
+                                       u"border-width: 2px; border-radius: 20px; border-color: rgb(127, 127, 127)"
                                        u"}"
                                        u"QPushButton:pressed {"
                                        u"background-color: rgb(64, 64, 64); border-style: inset"
@@ -235,6 +248,7 @@ class Main:
         # self.dss = opendss.OpenDSS()
         self.dss.open(filepath)
         self.elementsTableWgtCreate()
+        self.func_enabled()
         self.yml_bench_save()
 
     def yml_open(self):
@@ -255,6 +269,7 @@ class Main:
             for elem in v0:
                 v[elem] = v0[elem]
             self.elementsTableWgtCreate()
+            self.func_enabled()
 
             # a = 'as'
             # a.re
@@ -271,8 +286,7 @@ class Main:
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
 
         filename, ext = QtWidgets.QFileDialog.getSaveFileName(caption="Salva configurazione di rete",
-                                                              dir='c:/' + self.gridname,
-                                                              # dir=self.savepath + '/' + self.gridname,
+                                                              dir=self.savepath + '/' + self.gridname,
                                                               filter='*.yml')
 
         if filename:
@@ -340,7 +354,10 @@ class Main:
         self.ui.rightMenuContainer.expandMenu()
 
         self.par_wgt = Window(elem)
+
+        # self.profile_draw()
         self.ui.rightMenuPages.addWidget(self.par_wgt.mainWidget)
+        self.par_wgt.mainWidget.setMinimumHeight(1200)
 
         self.ui.rightMenuPages.setCurrentIndex(self.ui.rightMenuPages.count() - 1)
 
@@ -351,6 +368,32 @@ class Main:
         # print(self.ui.rightMenuPages.count())
 
         pass
+
+    def profile_draw(self, l=180, h=120):
+        font = {
+            'weight': 'normal',
+            'size': 4
+        }
+
+        matplotlib.rc('font', **font)
+        self.canvas = FigureCanvas(plt.Figure(figsize=(2, 1.5)))
+        # self.ax = self.canvas.figure.subplots()
+        self.ax = self.canvas.figure.add_subplot(111)
+        self.ax.plot([0, 12, 24], [0.3, 0.9, 0.6])
+
+        self.ax.set_title('Profilo')
+        self.ax.set_ylim([0, 1.05])
+        self.ax.set_xlim([0, 24])
+        self.ax.set_xlabel('Tempo [h]', fontsize=4)
+        self.ax.set_ylabel('Profilo [p.u.]', fontsize=2)
+
+        # self.line, = self.ax.plot([0,12,24], [0.3, 0.9, 0.6])
+        self.canvas.draw()
+        self.canvas.flush_events()
+        self.canvas.flush_events()
+
+        self.par_wgt.mainVBL.insertWidget(2, self.canvas)
+
 
     def test_action2(self, mcat, event=None):
         # print(self.ui.rightMenuPages.currentIndex())
