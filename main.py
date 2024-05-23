@@ -27,6 +27,7 @@ import opendss
 from mainUI import MainWindow
 
 from UI.elementProperties import Window
+from UI.elementsProfile import ElementsProfile
 
 # import time
 
@@ -169,8 +170,9 @@ class Main:
         self.homeHBL.addWidget(self.home2_WGT)
         self.homeHBL.addWidget(self.home3_WGT)
 
-        self.startWGT.ui.benchOpenBtn.clicked.connect(self.benchmarkWGT_create)
+        self.startWGT.ui.importDssBtn.clicked.connect(self.dss_open)
         self.startWGT.ui.openFileBtn.clicked.connect(self.yml_open)
+        self.startWGT.ui.benchOpenBtn.clicked.connect(self.benchmarkWGT_create)
 
     # Creazione dell'elenco delle reti benchmark
     def benchmarkWGT_create(self):
@@ -239,17 +241,30 @@ class Main:
         self.gridname = gridname
 
         self.gridDetailsWgt.ui.open.clicked.connect(partial(self.dss_open, self.filepath))
+        self.yml_bench_save()
+
         # self.main.ui.EV303_img_LBL.setPixmap(QtGui.QPixmap("UI/_resources/arrowSX_20x20.png")
 
         # self.home3_WGT.setSizePolicy(QSizePolicy.Policy.Minimum)
 
     # Apertura del file DSS
-    def dss_open(self, filepath):
-        # self.dss = opendss.OpenDSS()
-        self.dss.open(filepath)
-        self.elementsTableWgtCreate()
-        self.func_enabled()
-        self.yml_bench_save()
+    def dss_open(self, filename=None):
+        if not filename:
+            options = QtWidgets.QFileDialog.Options()
+            options |= QtWidgets.QFileDialog.DontUseNativeDialog
+
+            filename, ext = QtWidgets.QFileDialog.getOpenFileName(caption="Apri file DSS",
+                                                                  dir=self.savepath,
+                                                                  filter='*.dss')
+
+        if filename:
+            # self.dss = opendss.OpenDSS()
+            try:
+                self.dss.open(filename)
+                self.elementsTableWgtCreate()
+                self.func_enabled()
+            except:
+                QtWidgets.QMessageBox.warning(QtWidgets.QMessageBox(), 'Attenzione', 'Modello DSS non compatibile')
 
     def yml_open(self):
         print(self.savepath)
@@ -341,8 +356,8 @@ class Main:
 
     def test_action(self):
         line = self .myform.ui.tableWidget.currentRow()
-        elem = self.myform.ui.tableWidget.item(line, 0).text()
-        print(elem)
+        self.elem = self.myform.ui.tableWidget.item(line, 0).text()
+        print(self.elem)
         # dss.writeline(elem)   TODO: ???????
 
         try:
@@ -350,10 +365,10 @@ class Main:
         except:
             pass
 
-        self.ui.rightMenu_LBL.setText(elem)
+        self.ui.rightMenu_LBL.setText(self.elem)
         self.ui.rightMenuContainer.expandMenu()
 
-        self.par_wgt = Window(elem)
+        self.par_wgt = Window(self.elem)
 
         # self.profile_draw()
         self.ui.rightMenuPages.addWidget(self.par_wgt.mainWidget)
@@ -362,6 +377,10 @@ class Main:
         self.ui.rightMenuPages.setCurrentIndex(self.ui.rightMenuPages.count() - 1)
 
         self.par_wgt.cancel_BTN.clicked.connect(self.ui.rightMenuContainer.collapseMenu)
+        try:
+            self.par_wgt.profileBtn.clicked.connect(self.profile_open)
+        except AttributeError:
+            pass
 
         # dss.readline(elem, v[elem]['category'])
 
@@ -394,6 +413,12 @@ class Main:
 
         self.par_wgt.mainVBL.insertWidget(2, self.canvas)
 
+    def profile_open(self):
+        popup = ElementsProfile(self.elem)
+
+        if popup.exec_():
+            print('popup')
+            pass
 
     def test_action2(self, mcat, event=None):
         # print(self.ui.rightMenuPages.currentIndex())

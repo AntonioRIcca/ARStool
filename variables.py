@@ -249,6 +249,11 @@ new_par_dict = {
                 'label': 'kV',
                 'unit': 'kV',
             },
+            'Customers': {
+                'label': 'NumCust',
+                'unit': '',
+                'default': 1,
+            },
             'others': {
                 'phases': '3',
             },
@@ -269,6 +274,11 @@ new_par_dict = {
             'Vn': {
                 'label': 'kV',
                 'unit': 'kV',
+            },
+            'Customers': {
+                'label': 'NumCust',
+                'unit': '',
+                'default': 1,
             },
             'others': {
                 'phases': '3',
@@ -499,9 +509,11 @@ el_format = {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
         # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
         'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': ''},
+        'Customers': {'min': 0, 'max': 1000, 'decimal': 0, 'unit': ''},
     },
     'DC-Load': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
+        'Customers': {'min': 0, 'max': 1000, 'decimal': 0, 'unit': ''},
     },
     'PV': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},

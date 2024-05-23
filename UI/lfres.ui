@@ -947,7 +947,7 @@
              </font>
             </property>
             <property name="title">
-             <string>Lossel</string>
+             <string>Losses</string>
             </property>
             <layout class="QGridLayout" name="gridLayout">
              <item row="0" column="0">

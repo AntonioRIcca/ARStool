@@ -33,6 +33,7 @@ class OpenDSS:
 
             # viene inizializzato il sotto-dizionario dell'elemento
             dict_initialize(el)
+            print(el, cat)
             v[el]['category'] = c[cat]  # la nomenclatira esatta della categoria deriva dal dizonario "variables.c"
             rel_initialize(el)     # Todo: forse va spostato in self.dict_initialize
             lf_initialize(el)      # Todo: forse va spostato in self.dict_initialize
@@ -64,8 +65,16 @@ class OpenDSS:
 
             # lettura dei parametri dalle righe di dss
             par = self.readline(el)     # TODO: vedi commento in self.readline
+
+            print(mcat)
+            if mcat == 'Load':
+                print('Load!')
+
             for p in new_par_dict[cat]['par'].keys() - ['others']:  # todo: forse da modificare in base al TODO precedente
-                v[el]['par'][p] = par[new_par_dict[cat]['par'][p]['label']]
+                try:
+                    v[el]['par'][p] = par[new_par_dict[cat]['par'][p]['label']]
+                except:
+                    v[el]['par'][p] = new_par_dict[cat]['par'][p]['default']
 
             # definisco la connessione degli elementi come array
             if mcat == 'Line':

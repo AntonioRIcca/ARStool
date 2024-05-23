@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainDlg</class>
+ <widget class="QDialog" name="mainDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+	color: rgb(255, 255, 255);
+	background-color: rgb(0, 0, 0);
+}
+
+QPushButton{
+	background-color: rgb(31, 31, 31); 
+	border: solid; 
+	border-width: 2px; 
+	border-radius: 10px;
+	border-color: rgb(223, 223, 223);
+}
+
+QPushButton:pressed{
+	background-color: rgb(63, 63, 63);
+}
+</string>
+  </property>
+  <widget class="QLabel" name="nameLbl">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>780</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Nome Profilo</string>
+   </property>
+  </widget>
+  <widget class="Line" name="upLn">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>780</width>
+     <height>3</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 255, 0);
+background-color: rgb(255, 255, 255);
+border: solid;
+</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="profileTW">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>200</width>
+     <height>490</height>
+    </rect>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOn</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="autoScroll">
+    <bool>true</bool>
+   </property>
+   <column>
+    <property name="text">
+     <string>Ora</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Scala [p.u.]</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="Line" name="downLn">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>550</y>
+     <width>780</width>
+     <height>3</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 255, 0);
+background-color: rgb(255, 255, 255);
+border: solid;
+</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="saveBtn">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>560</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Salva</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancelBtn">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>560</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Annulla</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="importBtn">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>560</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Importa</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exportBtn">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>560</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Esporta</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="plotWgt" native="true">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>50</y>
+     <width>570</width>
+     <height>490</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

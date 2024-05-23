@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'lfresStCRLC.ui'
+## Form generated from reading UI file 'lfresfIBoOU.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -508,7 +508,7 @@ class Ui_lfres_mainWGT(object):
         self.q_gen_value_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"2000.00", None))
         self.p_gen_value_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"1258.25", None))
         self.p_gen_unit_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"kW", None))
-        self.loss_GB.setTitle(QCoreApplication.translate("lfres_mainWGT", u"Lossel", None))
+        self.loss_GB.setTitle(QCoreApplication.translate("lfres_mainWGT", u"Losses", None))
         self.p_loss_lbl_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"Active Power:", None))
         self.p_loss_value_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"1258.25", None))
         self.p_loss_unit_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"kW", None))
