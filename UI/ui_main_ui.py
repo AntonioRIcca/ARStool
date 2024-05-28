@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_uiGuXMhO.ui'
+## Form generated from reading UI file 'main_uicliDWT.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -669,28 +669,255 @@ class Ui_MainWindow(object):
 
         self.rightMenuPages = QCustomStackedWidget(self.rightMenuSubContainer)
         self.rightMenuPages.setObjectName(u"rightMenuPages")
+        self.rightMenuPages.setStyleSheet(u"*{}\n"
+"\n"
+"QPushButton {\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(0, 0, 0); border: solid;\n"
+"	border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)\n"
+"}\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(64, 64, 64); border-style: inset\n"
+"}")
         self.page_4 = QWidget()
         self.page_4.setObjectName(u"page_4")
         self.verticalLayout_13 = QVBoxLayout(self.page_4)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
-        self.label_8 = QLabel(self.page_4)
-        self.label_8.setObjectName(u"label_8")
-        self.label_8.setFont(font1)
-        self.label_8.setAlignment(Qt.AlignCenter)
+        self.verticalLayout_13.setContentsMargins(10, 10, 10, 10)
+        self.lfWgt = QWidget(self.page_4)
+        self.lfWgt.setObjectName(u"lfWgt")
+        self.lfWgt.setMaximumSize(QSize(16777215, 35))
+        self.verticalLayout_21 = QVBoxLayout(self.lfWgt)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.verticalLayout_21.setContentsMargins(0, -1, 0, -1)
+        self.lfWgtPls = QPushButton(self.lfWgt)
+        self.lfWgtPls.setObjectName(u"lfWgtPls")
+        self.lfWgtPls.setMinimumSize(QSize(0, 25))
 
-        self.verticalLayout_13.addWidget(self.label_8)
+        self.verticalLayout_21.addWidget(self.lfWgtPls)
 
-        self.doubleSpinBox = QDoubleSpinBox(self.page_4)
+        self.lfParLbl = QLabel(self.lfWgt)
+        self.lfParLbl.setObjectName(u"lfParLbl")
+        font3 = QFont()
+        font3.setBold(True)
+        font3.setItalic(False)
+        font3.setWeight(75)
+        self.lfParLbl.setFont(font3)
+        self.lfParLbl.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_21.addWidget(self.lfParLbl)
+
+        self.lfParWgt = QWidget(self.lfWgt)
+        self.lfParWgt.setObjectName(u"lfParWgt")
+        self.lfParWgt.setStyleSheet(u"*{}\n"
+"\n"
+"QDoubleSpinBox{\n"
+"	border: solid;\n"
+"	border-width: 0.5px;\n"
+"	border-color: rgb(255, 255, 255);\n"
+"}")
+        self.gridLayout = QGridLayout(self.lfParWgt)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setHorizontalSpacing(6)
+        self.gridLayout.setContentsMargins(5, 0, 5, 0)
+        self.label_7 = QLabel(self.lfParWgt)
+        self.label_7.setObjectName(u"label_7")
+
+        self.gridLayout.addWidget(self.label_7, 0, 0, 1, 1)
+
+        self.doubleSpinBox = QDoubleSpinBox(self.lfParWgt)
         self.doubleSpinBox.setObjectName(u"doubleSpinBox")
-        self.doubleSpinBox.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"color: rgb(0, 0, 0);\n"
-"border: solid;\n"
-"border-width: 1px;\n"
-"border-color: rgb(223, 223, 223);")
+        self.doubleSpinBox.setMinimumSize(QSize(60, 0))
         self.doubleSpinBox.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.doubleSpinBox.setButtonSymbols(QAbstractSpinBox.NoButtons)
 
-        self.verticalLayout_13.addWidget(self.doubleSpinBox)
+        self.gridLayout.addWidget(self.doubleSpinBox, 0, 1, 1, 1)
+
+        self.label_8 = QLabel(self.lfParWgt)
+        self.label_8.setObjectName(u"label_8")
+
+        self.gridLayout.addWidget(self.label_8, 0, 2, 1, 1)
+
+
+        self.verticalLayout_21.addWidget(self.lfParWgt)
+
+        self.lfResLbl = QLabel(self.lfWgt)
+        self.lfResLbl.setObjectName(u"lfResLbl")
+        self.lfResLbl.setFont(font3)
+        self.lfResLbl.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_21.addWidget(self.lfResLbl)
+
+        self.lfResWgt = QWidget(self.lfWgt)
+        self.lfResWgt.setObjectName(u"lfResWgt")
+        self.lfResWgt.setStyleSheet(u"*{}\n"
+"\n"
+"QDoubleSpinBox{\n"
+"	border: solid;\n"
+"	border-width: 0.5px;\n"
+"	border-color: rgb(255, 255, 255);\n"
+"}")
+        self.gridLayout_5 = QGridLayout(self.lfResWgt)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.gridLayout_5.setHorizontalSpacing(6)
+        self.gridLayout_5.setContentsMargins(5, 0, 5, 0)
+        self.doubleSpinBox_5 = QDoubleSpinBox(self.lfResWgt)
+        self.doubleSpinBox_5.setObjectName(u"doubleSpinBox_5")
+        self.doubleSpinBox_5.setMinimumSize(QSize(60, 0))
+        self.doubleSpinBox_5.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.doubleSpinBox_5.setButtonSymbols(QAbstractSpinBox.NoButtons)
+
+        self.gridLayout_5.addWidget(self.doubleSpinBox_5, 0, 1, 1, 1)
+
+        self.label_23 = QLabel(self.lfResWgt)
+        self.label_23.setObjectName(u"label_23")
+
+        self.gridLayout_5.addWidget(self.label_23, 0, 2, 1, 1)
+
+        self.label_24 = QLabel(self.lfResWgt)
+        self.label_24.setObjectName(u"label_24")
+
+        self.gridLayout_5.addWidget(self.label_24, 0, 0, 1, 1)
+
+
+        self.verticalLayout_21.addWidget(self.lfResWgt)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Fixed)
+
+        self.verticalLayout_21.addItem(self.verticalSpacer_3)
+
+
+        self.verticalLayout_13.addWidget(self.lfWgt)
+
+        self.relWgt = QWidget(self.page_4)
+        self.relWgt.setObjectName(u"relWgt")
+        self.relWgt.setMaximumSize(QSize(16777215, 35))
+        self.verticalLayout_22 = QVBoxLayout(self.relWgt)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.verticalLayout_22.setContentsMargins(0, -1, 0, -1)
+        self.relWgtPls = QPushButton(self.relWgt)
+        self.relWgtPls.setObjectName(u"relWgtPls")
+        self.relWgtPls.setMinimumSize(QSize(0, 25))
+
+        self.verticalLayout_22.addWidget(self.relWgtPls)
+
+        self.relParLbl = QLabel(self.relWgt)
+        self.relParLbl.setObjectName(u"relParLbl")
+        self.relParLbl.setFont(font3)
+        self.relParLbl.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_22.addWidget(self.relParLbl)
+
+        self.relParWgt = QWidget(self.relWgt)
+        self.relParWgt.setObjectName(u"relParWgt")
+        self.relParWgt.setStyleSheet(u"*{}\n"
+"\n"
+"QDoubleSpinBox{\n"
+"	border: solid;\n"
+"	border-width: 0.5px;\n"
+"	border-color: rgb(255, 255, 255);\n"
+"}")
+        self.gridLayout_2 = QGridLayout(self.relParWgt)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.gridLayout_2.setHorizontalSpacing(6)
+        self.gridLayout_2.setContentsMargins(5, 0, 5, 0)
+        self.label_17 = QLabel(self.relParWgt)
+        self.label_17.setObjectName(u"label_17")
+
+        self.gridLayout_2.addWidget(self.label_17, 0, 0, 1, 1)
+
+        self.doubleSpinBox_2 = QDoubleSpinBox(self.relParWgt)
+        self.doubleSpinBox_2.setObjectName(u"doubleSpinBox_2")
+        self.doubleSpinBox_2.setMinimumSize(QSize(60, 0))
+        self.doubleSpinBox_2.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.doubleSpinBox_2.setButtonSymbols(QAbstractSpinBox.NoButtons)
+
+        self.gridLayout_2.addWidget(self.doubleSpinBox_2, 0, 1, 1, 1)
+
+        self.label_18 = QLabel(self.relParWgt)
+        self.label_18.setObjectName(u"label_18")
+
+        self.gridLayout_2.addWidget(self.label_18, 0, 2, 1, 1)
+
+
+        self.verticalLayout_22.addWidget(self.relParWgt)
+
+        self.relResLbl = QLabel(self.relWgt)
+        self.relResLbl.setObjectName(u"relResLbl")
+        self.relResLbl.setFont(font3)
+        self.relResLbl.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_22.addWidget(self.relResLbl)
+
+        self.relResWgt = QWidget(self.relWgt)
+        self.relResWgt.setObjectName(u"relResWgt")
+        self.relResWgt.setStyleSheet(u"*{}\n"
+"\n"
+"QDoubleSpinBox{\n"
+"	border: solid;\n"
+"	border-width: 0.5px;\n"
+"	border-color: rgb(255, 255, 255);\n"
+"}")
+        self.gridLayout_3 = QGridLayout(self.relResWgt)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.gridLayout_3.setHorizontalSpacing(6)
+        self.gridLayout_3.setContentsMargins(5, 0, 5, 0)
+        self.doubleSpinBox_3 = QDoubleSpinBox(self.relResWgt)
+        self.doubleSpinBox_3.setObjectName(u"doubleSpinBox_3")
+        self.doubleSpinBox_3.setMinimumSize(QSize(60, 0))
+        self.doubleSpinBox_3.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.doubleSpinBox_3.setButtonSymbols(QAbstractSpinBox.NoButtons)
+
+        self.gridLayout_3.addWidget(self.doubleSpinBox_3, 0, 1, 1, 1)
+
+        self.label_20 = QLabel(self.relResWgt)
+        self.label_20.setObjectName(u"label_20")
+
+        self.gridLayout_3.addWidget(self.label_20, 0, 2, 1, 1)
+
+        self.label_19 = QLabel(self.relResWgt)
+        self.label_19.setObjectName(u"label_19")
+
+        self.gridLayout_3.addWidget(self.label_19, 0, 0, 1, 1)
+
+
+        self.verticalLayout_22.addWidget(self.relResWgt)
+
+        self.verticalSpacer_4 = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Fixed)
+
+        self.verticalLayout_22.addItem(self.verticalSpacer_4)
+
+
+        self.verticalLayout_13.addWidget(self.relWgt)
+
+        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_13.addItem(self.verticalSpacer_5)
+
+        self.parPlsWgt = QWidget(self.page_4)
+        self.parPlsWgt.setObjectName(u"parPlsWgt")
+        self.horizontalLayout_14 = QHBoxLayout(self.parPlsWgt)
+        self.horizontalLayout_14.setSpacing(5)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.horizontalLayout_14.setContentsMargins(0, -1, 0, -1)
+        self.pushButton = QPushButton(self.parPlsWgt)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setMinimumSize(QSize(60, 20))
+
+        self.horizontalLayout_14.addWidget(self.pushButton)
+
+        self.horizontalSpacer = QSpacerItem(1, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_14.addItem(self.horizontalSpacer)
+
+        self.pushButton_2 = QPushButton(self.parPlsWgt)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setMinimumSize(QSize(60, 20))
+
+        self.horizontalLayout_14.addWidget(self.pushButton_2)
+
+
+        self.verticalLayout_13.addWidget(self.parPlsWgt)
 
         self.rightMenuPages.addWidget(self.page_4)
         self.page_5 = QWidget()
@@ -741,9 +968,9 @@ class Ui_MainWindow(object):
         self.label_13.setObjectName(u"label_13")
         sizePolicy1.setHeightForWidth(self.label_13.sizePolicy().hasHeightForWidth())
         self.label_13.setSizePolicy(sizePolicy1)
-        font3 = QFont()
-        font3.setPointSize(10)
-        self.label_13.setFont(font3)
+        font4 = QFont()
+        font4.setPointSize(10)
+        self.label_13.setFont(font4)
         self.label_13.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_9.addWidget(self.label_13)
@@ -909,7 +1136,22 @@ class Ui_MainWindow(object):
         self.closeRightMenuBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close Menu", None))
 #endif // QT_CONFIG(tooltip)
         self.closeRightMenuBtn.setText("")
-        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Profile", None))
+        self.lfWgtPls.setText(QCoreApplication.translate("MainWindow", u"LoadFlow", None))
+        self.lfParLbl.setText(QCoreApplication.translate("MainWindow", u"Parameters", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"param", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"unit", None))
+        self.lfResLbl.setText(QCoreApplication.translate("MainWindow", u"Results", None))
+        self.label_23.setText(QCoreApplication.translate("MainWindow", u"unit", None))
+        self.label_24.setText(QCoreApplication.translate("MainWindow", u"param", None))
+        self.relWgtPls.setText(QCoreApplication.translate("MainWindow", u"Reliability", None))
+        self.relParLbl.setText(QCoreApplication.translate("MainWindow", u"Parameters", None))
+        self.label_17.setText(QCoreApplication.translate("MainWindow", u"param", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"unit", None))
+        self.relResLbl.setText(QCoreApplication.translate("MainWindow", u"Results", None))
+        self.label_20.setText(QCoreApplication.translate("MainWindow", u"unit", None))
+        self.label_19.setText(QCoreApplication.translate("MainWindow", u"param", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Salva", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Annulla", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"More...", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Notification", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Notification Message", None))

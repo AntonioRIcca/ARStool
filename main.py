@@ -26,8 +26,10 @@ import opendss
 
 from mainUI import MainWindow
 
+from UI.test_elementProperties import ElementProperties
 from UI.elementProperties import Window
 from UI.elementsProfile import ElementsProfile
+
 
 # import time
 
@@ -368,25 +370,61 @@ class Main:
         self.ui.rightMenu_LBL.setText(self.elem)
         self.ui.rightMenuContainer.expandMenu()
 
-        self.par_wgt = Window(self.elem)
+        # -- Sospeso per prova nuovo layout ----------------------------------------------------
+        # self.par_wgt = Window(self.elem)
+        #
+        # # self.profile_draw()
+        # self.ui.rightMenuPages.addWidget(self.par_wgt.mainWidget)
+        # self.par_wgt.mainWidget.setMinimumHeight(1200)
+        #
+        # self.ui.rightMenuPages.setCurrentIndex(self.ui.rightMenuPages.count() - 1)
+        #
+        # self.par_wgt.cancel_BTN.clicked.connect(self.ui.rightMenuContainer.collapseMenu)
+        # try:
+        #     self.par_wgt.profileBtn.clicked.connect(self.profile_open)
+        # except AttributeError:
+        #     pass
+        #
+        # # dss.readline(elem, v[elem]['category'])
+        #
+        # # print(self.ui.rightMenuPages.count())
+        # --------------------------------------------------------------------------------------
 
-        # self.profile_draw()
-        self.ui.rightMenuPages.addWidget(self.par_wgt.mainWidget)
-        self.par_wgt.mainWidget.setMinimumHeight(1200)
+        # self.ui.lfWgtPls.clicked.connect(self.myaction1)
+        # self.ui.relWgtPls.clicked.connect(self.myaction2)
+        # self.ui.lfWgtPls.clicked.connect(self.ui.lfWgt.expandMenu)
+        # self.ui.relWgtPls.clicked.connect(self.ui.lfWgt.collapseMenu)
+
+        # -- Nuovo richiamo alla form ---------------------------------------------------------- TODO: da riattivare
+        self.elemPropWgt = ElementProperties(self.elem)
+        print('break')
+        self.ui.rightMenuPages.addWidget(self.elemPropWgt.ui.propertiesWgt)
+        # self.par_wgt.mainWidget.setMinimumHeight(1200)
 
         self.ui.rightMenuPages.setCurrentIndex(self.ui.rightMenuPages.count() - 1)
+        self.elemPropWgt.ui.lfPls.clicked.connect(self.myaction1)
+        self.elemPropWgt.ui.relPls.clicked.connect(self.myaction2)
 
-        self.par_wgt.cancel_BTN.clicked.connect(self.ui.rightMenuContainer.collapseMenu)
+        self.elemPropWgt.ui.cancelPLS.clicked.connect(self.ui.rightMenuContainer.collapseMenu)
         try:
-            self.par_wgt.profileBtn.clicked.connect(self.profile_open)
+            self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
         except AttributeError:
             pass
-
-        # dss.readline(elem, v[elem]['category'])
-
-        # print(self.ui.rightMenuPages.count())
-
+        # --------------------------------------------------------------------------------------
         pass
+
+    def myaction1(self):
+        # self.ui.relWgt.collapseMenu()
+        # self.ui.lfWgt.expandMenu()
+        self.elemPropWgt.ui.lfWgt.setMaximumHeight(1500)
+        self.elemPropWgt.ui.relWgt.setMaximumHeight(20)
+        print('clicked')
+
+    def myaction2(self):
+
+        self.elemPropWgt.ui.relWgt.setMaximumHeight(1500)
+        self.elemPropWgt.ui.lfWgt.setMaximumHeight(20)
+        print('clicked')
 
     def profile_draw(self, l=180, h=120):
         font = {
@@ -419,6 +457,10 @@ class Main:
         if popup.exec_():
             print('popup')
             pass
+
+        if popup.refresh:
+            self.elemPropWgt.profileWgtRefresh()
+            self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
 
     def test_action2(self, mcat, event=None):
         # print(self.ui.rightMenuPages.currentIndex())

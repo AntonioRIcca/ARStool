@@ -13,6 +13,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 
 from variables import v
+import copy
 
 
 class ElementsProfile(QtWidgets.QDialog):
@@ -22,6 +23,8 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ui.setupUi(self)
 
         self.elem = elem
+        self.profile = copy.deepcopy(v[elem]['par']['profile']['curve'])
+        self.refresh = False
 
         self.ui.profileTW.setColumnWidth(0, 50)
         self.ui.profileTW.setColumnWidth(1, 100)
@@ -47,6 +50,8 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ui.profileTW.itemChanged.connect(self.tab_value_changed)
         self.ui.importBtn.clicked.connect(self.data_import)
         self.ui.exportBtn.clicked.connect(self.data_export)
+        self.ui.saveBtn.clicked.connect(self.data_save)
+        self.ui.cancelBtn.clicked.connect(self.cancel)
 
     def table_format(self):
         self.ui.profileTW.setShowGrid(False)
@@ -71,11 +76,11 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ui.profileTW.clearContents()
         self.ui.profileTW.model().removeRows(0, self.ui.profileTW.rowCount())
 
-        for r in range (0, len(v[self.elem]['par']['profile']['curve'])):
+        for r in range (0, len(self.profile)):
             self.ui.profileTW.insertRow(r)
             x_item = QtWidgets.QTableWidgetItem(str(r*0.25))
             try:
-                y_item = QtWidgets.QTableWidgetItem('%-5f' % v[self.elem]['par']['profile']['curve'][r])
+                y_item = QtWidgets.QTableWidgetItem('%-5f' % self.profile[r])
             except:
                 y_item = QtWidgets.QTableWidgetItem('')
             x_item.setTextAlignment(QtCore.Qt.AlignCenter)
@@ -88,9 +93,9 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ax.cla()
 
         (x, y) = ([], [])
-        for r in range(0, len(v[self.elem]['par']['profile']['curve'])):
+        for r in range(0, len(self.profile)):
             x.append(r * 0.25)
-            y.append(v[self.elem]['par']['profile']['curve'][r])
+            y.append(self.profile[r])
 
         font = {
             'weight': 'normal',
@@ -119,8 +124,20 @@ class ElementsProfile(QtWidgets.QDialog):
 
     def tab_value_changed(self, q_item):
         c = self.ui.profileTW.currentIndex().column()
-        if c == 0:
-            q_item.setText(self.old_value)
+        r = self.ui.profileTW.currentIndex().row()
+
+        try:
+            value = float(q_item.text())
+        except ValueError:
+            value = -1
+
+        if c == 0 or value < 0 or value > 1:
+            q_item.setText(str(self.old_value))
+        else:
+            self.old_value = value
+            self.profile[r] = value
+            q_item.setText(str(value))
+            self.plot_profile()
 
     def data_import(self):
         try:
@@ -146,7 +163,7 @@ class ElementsProfile(QtWidgets.QDialog):
                         prof.append(float(line))
                         self.ui.profileTW.setItem(len(prof)-1, 1, QtWidgets.QTableWidgetItem('%.5f' % float(line)))
                         i += 1
-                    v[self.elem]['par']['profile']['curve'] = prof
+                    self.profile = prof
                     self.plot_profile()
                 except:
                     QtWidgets.QMessageBox.warning(self, 'Attenzione!', 'File non valido')
@@ -163,7 +180,27 @@ class ElementsProfile(QtWidgets.QDialog):
 
         if filename:
             with open(filename, 'w') as f:
-                for item in v[self.elem]['par']['profile']['curve']:
+                for item in self.profile:
                     f.write(str(item) + '\n')
         print('done')
         pass
+
+    def data_save(self):
+        v[self.elem]['par']['profile']['curve'] = self.profile
+        self.refresh = True
+        self.close()
+
+    def cancel(self):
+        if self.profile != v[self.elem]['par']['profile']['curve']:
+            warning = QtWidgets.QMessageBox()
+            warning.setText('I dati non salvati andranno persi. \n Voler uscire comunque?')
+            warning.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+
+            x = warning.exec_()
+
+            if x == QtWidgets.QMessageBox.Yes:
+                self.close()
+            else:
+                warning.close()
+        else:
+            self.close()

@@ -13,36 +13,76 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(0, 0, 0);</string>
+  </property>
+  <widget class="QWidget" name="propertiesWgt" native="true">
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>50</y>
-     <width>147</width>
-     <height>741</height>
+     <y>40</y>
+     <width>148</width>
+     <height>651</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="styleSheet">
+    <string notr="true">*{
+	color: rgb(255, 255, 255);
+}
+
+QPushButton{
+	border: solid;
+	border-width: 1px;
+	border-color: rgb(223, 223, 223);
+	border-radius: 8px;
+	background-color: rgb(31, 31, 31);
+}</string>
+   </property>
+   <layout class="QVBoxLayout" name="propertiesVL">
     <property name="spacing">
-     <number>10</number>
+     <number>20</number>
+    </property>
+    <property name="leftMargin">
+     <number>5</number>
+    </property>
+    <property name="topMargin">
+     <number>5</number>
+    </property>
+    <property name="rightMargin">
+     <number>5</number>
+    </property>
+    <property name="bottomMargin">
+     <number>5</number>
     </property>
     <item>
-     <widget class="QWidget" name="lfPar" native="true">
+     <widget class="QWidget" name="lfWgt" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>20</height>
+        <height>1000</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <layout class="QVBoxLayout" name="lfVL">
+       <property name="spacing">
+        <number>6</number>
+       </property>
        <property name="leftMargin">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="topMargin">
         <number>0</number>
        </property>
        <property name="rightMargin">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="bottomMargin">
         <number>0</number>
@@ -67,87 +107,38 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_19">
-         <property name="text">
-          <string>Parameters</string>
+        <widget class="QWidget" name="lfNodeWgt" native="true">
+         <property name="styleSheet">
+          <string notr="true">*{
+	background-color: rgb(0, 0, 23);
+	border-radius: 10px;
+	
+	color: rgb(255, 255, 255);
+}
+
+QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(0, 0, 0); border: solid;
+	border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)
+}
+
+QPushButton:pressed {
+	background-color: rgb(64, 64, 64); border-style: inset
+}
+</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="lfParWgt" native="true">
-         <layout class="QGridLayout" name="gridLayout">
+         <layout class="QGridLayout" name="lfNodeGL">
           <item row="0" column="0">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="label_19">
             <property name="text">
-             <string>Power</string>
+             <string>HV Node</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="2">
-           <widget class="QLabel" name="label_6">
+           <widget class="QLineEdit" name="lineEdit">
             <property name="text">
-             <string>unit</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>Power</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>unit</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Power</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>unit</string>
+             <string>Busbar</string>
             </property>
            </widget>
           </item>
@@ -155,120 +146,287 @@
         </widget>
        </item>
        <item>
-        <widget class="Line" name="line">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+        <widget class="QWidget" name="lfParMainWgt" native="true">
+         <property name="styleSheet">
+          <string notr="true">*{
+	background-color: rgb(0, 0, 31);
+	border-radius: 10px;
+	
+	color: rgb(255, 255, 255);
+}
+
+QPushButton, QDoubleSpinBox {
+	color: rgb(255, 255, 255);
+	background-color: rgb(0, 0, 0); border: solid;
+	border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)
+}
+
+QPushButton:pressed {
+	background-color: rgb(64, 64, 64); border-style: inset
+}</string>
          </property>
+         <layout class="QVBoxLayout" name="lfParMainVL">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lfParLbl">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Parameters</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="lfParWgt" native="true">
+            <layout class="QGridLayout" name="lfParGL">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Power</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox">
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>unit</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Power</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>unit</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Power</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>unit</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_20">
-         <property name="text">
-          <string>Results</string>
+        <widget class="QWidget" name="widget" native="true">
+         <property name="styleSheet">
+          <string notr="true">*{
+	background-color: rgb(0, 0, 63);
+	border-radius: 10px;
+	
+	color: rgb(255, 255, 255);
+}
+
+QPushButton, QDoubleSpinBox {
+	color: rgb(255, 255, 255);
+	background-color: rgb(0, 0, 0); border: solid;
+	border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)
+}
+
+QPushButton:pressed {
+	background-color: rgb(64, 64, 64); border-style: inset
+}</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="lfResWgt" native="true">
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_13">
-            <property name="text">
-             <string>Power</string>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="lfResLbl">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_7">
+            <property name="text">
+             <string>Results</string>
+            </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
-          <item row="3" column="2">
-           <widget class="QLabel" name="label_14">
-            <property name="text">
-             <string>unit</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_8">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_9">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_15">
-            <property name="text">
-             <string>Power</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_16">
-            <property name="text">
-             <string>unit</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_17">
-            <property name="text">
-             <string>Power</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="label_18">
-            <property name="text">
-             <string>unit</string>
-            </property>
+          <item>
+           <widget class="QWidget" name="lfResWgt" native="true">
+            <layout class="QGridLayout" name="lfResGL">
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_18">
+               <property name="text">
+                <string>unit</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox_7">
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox_8">
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Power</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox_9">
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_17">
+               <property name="text">
+                <string>Power</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>unit</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="label_16">
+               <property name="text">
+                <string>unit</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_15">
+               <property name="text">
+                <string>Power</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
       </layout>
+      <zorder>lfNodeWgt</zorder>
+      <zorder>lfPls</zorder>
+      <zorder>widget</zorder>
+      <zorder>lfParMainWgt</zorder>
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="relPar" native="true">
+     <widget class="QWidget" name="relWgt" native="true">
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>20</height>
+        <height>500</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="styleSheet">
+       <string notr="true">*{
+	background-color: rgb(0, 31, 0);
+	border-radius: 10px;
+}
+
+QPushButton, QDoubleSpinBox {
+	color: rgb(255, 255, 255);
+	background-color: rgb(0, 0, 0); border: solid;
+	border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)
+}
+
+QPushButton:pressed {
+	background-color: rgb(64, 64, 64); border-style: inset
+}</string>
+      </property>
+      <layout class="QVBoxLayout" name="relVL">
        <property name="leftMargin">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="topMargin">
         <number>0</number>
        </property>
        <property name="rightMargin">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="bottomMargin">
         <number>0</number>
@@ -293,7 +451,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_21">
+        <widget class="QLabel" name="relParLbl">
          <property name="text">
           <string>Parameters</string>
          </property>
@@ -304,7 +462,10 @@
        </item>
        <item>
         <widget class="QWidget" name="reParWgt" native="true">
-         <layout class="QGridLayout" name="gridLayout_2">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <layout class="QGridLayout" name="relParGL">
           <item row="0" column="0">
            <widget class="QLabel" name="label_7">
             <property name="text">
@@ -381,14 +542,23 @@
         </widget>
        </item>
        <item>
-        <widget class="Line" name="line_2">
+        <widget class="Line" name="relLine">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>1</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);</string>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_22">
+        <widget class="QLabel" name="relResLbl">
          <property name="text">
           <string>Results</string>
          </property>
@@ -399,21 +569,39 @@
        </item>
        <item>
         <widget class="QWidget" name="relResWgt" native="true">
-         <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_23">
+         <layout class="QGridLayout" name="relResGL">
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_25">
             <property name="text">
              <string>Power</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_10">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_27">
+            <property name="text">
+             <string>Power</string>
             </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>unit</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_28">
+            <property name="text">
+             <string>unit</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_23">
+            <property name="text">
+             <string>Power</string>
             </property>
            </widget>
           </item>
@@ -434,6 +622,16 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_10">
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="buttonSymbols">
+             <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="1">
            <widget class="QDoubleSpinBox" name="doubleSpinBox_12">
             <property name="alignment">
@@ -444,42 +642,20 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_25">
-            <property name="text">
-             <string>Power</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_26">
-            <property name="text">
-             <string>unit</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_27">
-            <property name="text">
-             <string>Power</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="label_28">
-            <property name="text">
-             <string>unit</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
       </layout>
+      <zorder>relParLbl</zorder>
+      <zorder>reParWgt</zorder>
+      <zorder>relResLbl</zorder>
+      <zorder>relResWgt</zorder>
+      <zorder>relLine</zorder>
+      <zorder>relPls</zorder>
      </widget>
     </item>
     <item>
-     <spacer name="verticalSpacer">
+     <spacer name="propertiesSpc">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -490,6 +666,53 @@
        </size>
       </property>
      </spacer>
+    </item>
+    <item>
+     <widget class="QWidget" name="buttonsWgt" native="true">
+      <layout class="QHBoxLayout" name="buttonsHL">
+       <property name="spacing">
+        <number>30</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="savePLS">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Salva</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="cancelPLS">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Annulla</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>

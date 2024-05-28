@@ -1,11 +1,11 @@
-New "Load.ev-charge_ac-load" bus1=ev-charge_bb phases=3 kV=0.4 pf=1 kW=40 enabled=true
-New "Load.ev-fast_dc-load" bus1=ev-fast-load_dc-node phases=3 pf=1 kV=0.4 kW=50 enabled=true
-New "Load.pros_1_ac-load" bus1=pros_bb phases=3 kV=0.4 pf=0.9 kW=150 enabled=true
-New "Load.pros_dc-load" bus1=pros2_dc-bb phases=3 pf=1 kV=0.6 kW=30 enabled=true
-New "Load.rs_1_ac-load" bus1=rs_bb_04kv phases=3 kV=0.4 pf=0.9 kW=40 enabled=true
-New "Load.rs_2_ac-load" bus1=rs_bb_04kv phases=3 kV=0.4 pf=0.9 kW=60 enabled=true
-New "Load.ug_dc-load" bus1=ug_dc-bb phases=3 pf=1 kV=1.5 kW=200 enabled=true
-New "Load.ug_serv1_ac-load" bus1=ug_serv_bb phases=3 kV=0.4 pf=0.9 kW=80 enabled=true
-New "Load.ug_serv2_ac-load" bus1=ug_serv_bb phases=3 kV=0.4 pf=0.9 kW=120 enabled=true
-New "Load.ugs_dc-load" bus1=ugs_dc-bb phases=3 pf=1 kV=1.5 kW=200 enabled=true
-New "Load.user_ac-load" bus1=user_bb phases=3 kV=0.4 pf=0.9 kW=200 enabled=true
+New "Load.ev-charge_ac-load" bus1=ev-charge_bb phases=3 pf=1 kW=40 NumCust=1 kV=0.4 enabled=true
+New "Load.ev-fast_dc-load" bus1=ev-fast-load_dc-node phases=3 pf=1 kW=50 kV=0.4 NumCust=1.0 enabled=true
+New "Load.pros_1_ac-load" bus1=pros_bb phases=3 pf=0.9 kW=150 NumCust=1 kV=0.4 enabled=true
+New "Load.pros_dc-load" bus1=pros2_dc-bb phases=3 pf=1 kW=30 kV=0.6 NumCust=1 enabled=true
+New "Load.rs_1_ac-load" bus1=rs_bb_04kv phases=3 pf=0.9 kW=40 NumCust=1 kV=0.4 enabled=true
+New "Load.rs_2_ac-load" bus1=rs_bb_04kv phases=3 pf=0.9 kW=60 NumCust=1 kV=0.4 enabled=true
+New "Load.ug_dc-load" bus1=ug_dc-bb phases=3 pf=1 kW=200 kV=1.5 NumCust=1 enabled=true
+New "Load.ug_serv1_ac-load" bus1=ug_serv_bb phases=3 pf=0.9 kW=80 NumCust=1 kV=0.4 enabled=true
+New "Load.ug_serv2_ac-load" bus1=ug_serv_bb phases=3 pf=0.9 kW=120 NumCust=1 kV=0.4 enabled=true
+New "Load.ugs_dc-load" bus1=ugs_dc-bb phases=3 pf=1 kW=200 kV=1.5 NumCust=1 enabled=true
+New "Load.user_ac-load" bus1=user_bb phases=3 pf=0.9 kW=200 NumCust=1 kV=0.4 enabled=true
