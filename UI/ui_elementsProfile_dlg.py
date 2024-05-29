@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'elementsProfile_DlgmbFpEj.ui'
+## Form generated from reading UI file 'elementsProfile_DlgCDVYcG.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -85,12 +85,16 @@ class Ui_mainDlg(object):
         self.importBtn = QPushButton(mainDlg)
         self.importBtn.setObjectName(u"importBtn")
         self.importBtn.setGeometry(QRect(250, 560, 100, 30))
-        self.importBtn_2 = QPushButton(mainDlg)
-        self.importBtn_2.setObjectName(u"importBtn_2")
-        self.importBtn_2.setGeometry(QRect(130, 560, 100, 30))
+        self.exportBtn = QPushButton(mainDlg)
+        self.exportBtn.setObjectName(u"exportBtn")
+        self.exportBtn.setGeometry(QRect(130, 560, 100, 30))
         self.plotWgt = QWidget(mainDlg)
         self.plotWgt.setObjectName(u"plotWgt")
         self.plotWgt.setGeometry(QRect(220, 50, 570, 490))
+        QWidget.setTabOrder(self.profileTW, self.cancelBtn)
+        QWidget.setTabOrder(self.cancelBtn, self.saveBtn)
+        QWidget.setTabOrder(self.saveBtn, self.exportBtn)
+        QWidget.setTabOrder(self.exportBtn, self.importBtn)
 
         self.retranslateUi(mainDlg)
 
@@ -107,6 +111,6 @@ class Ui_mainDlg(object):
         self.saveBtn.setText(QCoreApplication.translate("mainDlg", u"Salva", None))
         self.cancelBtn.setText(QCoreApplication.translate("mainDlg", u"Annulla", None))
         self.importBtn.setText(QCoreApplication.translate("mainDlg", u"Importa", None))
-        self.importBtn_2.setText(QCoreApplication.translate("mainDlg", u"Esporta", None))
+        self.exportBtn.setText(QCoreApplication.translate("mainDlg", u"Esporta", None))
     # retranslateUi
 

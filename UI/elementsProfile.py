@@ -22,8 +22,17 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ui = Ui_mainDlg()
         self.ui.setupUi(self)
 
+        self.name = v[elem]['par']['profile']['name']
         self.elem = elem
         self.profile = copy.deepcopy(v[elem]['par']['profile']['curve'])
+        self.ok_close = True
+
+        if not isinstance(self.profile, list):
+            value = self.profile
+            self.profile = []
+            for i in range(96):
+                self.profile.append(value)
+
         self.refresh = False
 
         self.ui.profileTW.setColumnWidth(0, 50)
@@ -45,6 +54,7 @@ class ElementsProfile(QtWidgets.QDialog):
 
         self.table_fill()
         self.plot_profile()
+        self.ui.nameLbl.setText(self.name)
 
         self.ui.profileTW.cellClicked.connect(self.tab_selected)
         self.ui.profileTW.itemChanged.connect(self.tab_value_changed)
@@ -52,6 +62,7 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ui.exportBtn.clicked.connect(self.data_export)
         self.ui.saveBtn.clicked.connect(self.data_save)
         self.ui.cancelBtn.clicked.connect(self.cancel)
+        self.ui.nameLbl.mouseDoubleClickEvent = self.rename
 
     def table_format(self):
         self.ui.profileTW.setShowGrid(False)
@@ -165,6 +176,7 @@ class ElementsProfile(QtWidgets.QDialog):
                         i += 1
                     self.profile = prof
                     self.plot_profile()
+                    self.name = filename.split('/')[len(filename.split('/')) - 1].removesuffix('.txt')
                 except:
                     QtWidgets.QMessageBox.warning(self, 'Attenzione!', 'File non valido')
 
@@ -186,11 +198,53 @@ class ElementsProfile(QtWidgets.QDialog):
         pass
 
     def data_save(self):
+        print('save clicked')
+        if not self.name:
+            ok = False
+            name = ''
+            while not ok or name == '':
+                name, ok = QtWidgets.QInputDialog.getText(self,
+                                                          "Nome profilo",
+                                                          "inserisci il nome del profilo")
+            self.name = name
+
+        v[self.elem]['par']['profile']['name'] = self.name
         v[self.elem]['par']['profile']['curve'] = self.profile
         self.refresh = True
+        self.ok_close = True
         self.close()
 
+    def rename(self, event=None):
+        name, ok = QtWidgets.QInputDialog.getText(self,
+                                                  'Nome profilo',
+                                                  'inserisci il nome del profilo',
+                                                  text=self.name
+                                                  )
+        if ok and name != '':
+            self.name = name
+            self.ui.nameLbl.setText(name)
+
+
     def cancel(self):
+        # self.closing_check()
+        self.close()
+
+    def keyPressEvent(self, event):
+        if event.key() == QtCore.Qt.Key.Key_Escape:
+            self.close()
+
+    def closeEvent(self, a0):
+        print('finesttra chiusa')
+        # close = self.cancel()
+        self.closing_check()
+
+        if self.ok_close:
+            a0.accept()
+        else:
+            a0.ignore()
+
+    def closing_check(self):
+        self.ok_close = True
         if self.profile != v[self.elem]['par']['profile']['curve']:
             warning = QtWidgets.QMessageBox()
             warning.setText('I dati non salvati andranno persi. \n Voler uscire comunque?')
@@ -199,8 +253,11 @@ class ElementsProfile(QtWidgets.QDialog):
             x = warning.exec_()
 
             if x == QtWidgets.QMessageBox.Yes:
-                self.close()
+                # self.close()
+                pass
             else:
                 warning.close()
+                self.ok_close = False
         else:
-            self.close()
+            # self.close()
+            pass

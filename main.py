@@ -77,6 +77,7 @@ class Main:
         self.app = QApplication()
         # self.app = QApplication(sys.argv)
         self.interface_open()       # TODO: da elimianre da questa posizione: va dopo la scelta della rete
+        print(4)
 
         # f_main = Thread(target=self.interface_open)
         # print('start')
@@ -116,8 +117,11 @@ class Main:
 
         # Window(list(v.keys())[0])                                                 # TODO: da NON riattivare
         # self.ui.rightMenuContainer.expandMenu()
-
+        print(1)
         self.app.exec_()
+        print(2)
+        # exit(self.app.exec_())
+        # print(3)
 
     def func_disabled(self):
         self.ui.loadflow_Btn.setEnabled(False)
@@ -264,6 +268,7 @@ class Main:
             try:
                 self.dss.open(filename)
                 self.elementsTableWgtCreate()
+                print('tabella')
                 self.func_enabled()
             except:
                 QtWidgets.QMessageBox.warning(QtWidgets.QMessageBox(), 'Attenzione', 'Modello DSS non compatibile')
@@ -317,7 +322,7 @@ class Main:
         self.elementsTableFill()
         self.myform.ui.tableWidget.currentCellChanged.connect(self.test_action)
         self.myform.ui.save_Btn.clicked.connect(self.yml_save)
-        Window(list(v.keys())[0])
+        # Window(list(v.keys())[0])
 
     def readsize(self):
         self.par_wgt = Window('rs_line')
@@ -406,7 +411,9 @@ class Main:
         self.elemPropWgt.ui.relPls.clicked.connect(self.myaction2)
 
         self.elemPropWgt.ui.cancelPLS.clicked.connect(self.ui.rightMenuContainer.collapseMenu)
+
         try:
+            self.elemPropWgt.profile_RB.toggled.connect(self.profile_switch)
             self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
         except AttributeError:
             pass
@@ -461,6 +468,36 @@ class Main:
         if popup.refresh:
             self.elemPropWgt.profileWgtRefresh()
             self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
+
+    def profile_switch(self):
+        # self.elemPropWgt.profileCheck()
+        if self.elemPropWgt.profile_RB.isChecked():
+            if not v[self.elem]['par']['profile']['name']:
+                print('apri selezione profilo')
+                popup = ElementsProfile(self.elem)
+
+                if popup.exec_():
+                    pass
+
+                if popup.refresh:
+                    self.elemPropWgt.profilePlotWgtCreate()
+                    self.elemPropWgt.ui.lfVL.insertWidget(3, self.elemPropWgt.profileWidget)
+                    self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
+
+            else:
+                self.elemPropWgt.profilePlotWgtCreate()
+                # self.ui.lfVL.addWidget(self.profileWidget)
+                self.elemPropWgt.ui.lfVL.insertWidget(3, self.elemPropWgt.profileWidget)
+                self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
+                print('profile')
+        else:
+            try:
+                print('delete profile')
+                self.elemPropWgt.profileWidget.deleteLater()
+            except AttributeError:
+                pass
+        self.elemPropWgt.profileCheck()
+
 
     def test_action2(self, mcat, event=None):
         # print(self.ui.rightMenuPages.currentIndex())
@@ -1037,6 +1074,7 @@ def write_excel():
 # print(dss.dss.circuit.total_power)
 
 Main()
+print(300)
 
 # with open('CityArea.yml', 'w') as file:
 #     yaml.dump(v, file)

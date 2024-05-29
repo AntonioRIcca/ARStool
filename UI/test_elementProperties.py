@@ -147,7 +147,7 @@ class ElementProperties(QMainWindow):
                 self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][time])
                 self.scale_DSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
 
-            self.profile_RB.toggled.connect(self.profileCheck)
+            # self.profile_RB.toggled.connect(self.profileCheck)
 
         # ------------------------------------------------------------------------------------------------------------
 
@@ -255,32 +255,73 @@ class ElementProperties(QMainWindow):
         pass
 
     def profileCheck(self):
-        # self.profile_RB.toggled.disconnect()
-        # self.scale_RB.toggled.disconnect()
-        if self.profile_RB.isChecked():
-            if not v[self.elem]['par']['profile']['name']:
-                print('apri selezione profilo')
+        self.dsb_format(self.scale_DSB, 0, 1, 4)
+        self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
-            if 'profile' in v[self.elem]['par']:
-                if v[self.elem]['par']['profile']['name']:
-                    self.profilePlotWgtCreate()
-                    # self.ui.lfVL.addWidget(self.profileWidget)
-                    self.ui.lfVL.insertWidget(3, self.profileWidget)
-                    print('profile')
+        if isinstance(v[self.elem]['par']['profile']['curve'], list):
+            time = datetime.now().hour * 4 + int(datetime.now().minute / 15)
+            value = v[self.elem]['par']['profile']['curve'][time]
         else:
-            # self.ui.lfVL.removeWidget(self.profileWidget)
-            self.ui.lfVL.itemAt(3).widget().deleteLater()
-            self.profileWidget.deleteLater()
-            print('Scale')
+            value = v[self.elem]['par']['profile']['curve']
+        self.scale_DSB.setValue(value)
 
-            # try:
-            #     # self.profileWidget.deleteLater()
-            #     self.ui.lfVL.removeWidget(3)
-            # except:
-            #     print('non riesco a cancellare')
-            #     pass
-        # self.profile_RB.toggled.connect(self.profileCheck)
-        # self.scale_RB.toggled.connect(self.profileCheck)
+        # if v[self.elem]['par']['profile']['name'] is None or self.scale_RB.isChecked():
+        if self.scale_RB.isChecked():
+            # print(v[self.elem]['par']['profile']['curve'])
+            # self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'])
+            # self.scale_RB.setChecked(True)
+            self.scale_DSB.setStyleSheet(u"background-color: rgb(255, 255, 255);"
+                                         u"color: rgb(0, 0, 0);")
+            self.scale_DSB.setDisabled(False)
+        else:
+            self.scale_DSB.setDisabled(True)
+            # self.profile_RB.setChecked(True)
+
+            # time = datetime.now().hour * 4 + int(datetime.now().minute / 15)
+            # print('Time = ', time)
+            # self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][time])
+            self.scale_DSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
+        #
+        # # self.profile_RB.toggled.disconnect()
+        # # self.scale_RB.toggled.disconnect()
+        # if self.profile_RB.isChecked():
+        #     if not v[self.elem]['par']['profile']['name']:
+        #         print('apri selezione profilo')
+        #
+        #     # if 'profile' in v[self.elem]['par']:
+        #     #     if v[self.elem]['par']['profile']['name']:
+        #     else:
+        #         self.profilePlotWgtCreate()
+        #         # self.ui.lfVL.addWidget(self.profileWidget)
+        #         self.ui.lfVL.insertWidget(3, self.profileWidget)
+        #         print('profile')
+        # else:
+        #     # self.ui.lfVL.removeWidget(self.profileWidget)
+        #
+        #     # check = self.ui.lfVL.itemAt(3).widget() == self.profileWidget
+        #     # print(self.profileWidget)
+        #     # print(self.ui.lfVL.itemAt(3))
+        #     # print(self.ui.lfVL.itemAt(3).widget())
+        #     # print(self.ui.lfVL.itemAt(3).widget)
+        #     #
+        #     try:
+        #         self.profileWidget.deleteLater()
+        #     except AttributeError:
+        #         pass
+        #     # print('verifica profile widget', check)
+        #     # if self.profileWidget in self():
+        #     #     self.ui.lfVL.itemAt(3).widget().deleteLater()
+        #     #     self.profileWidget.deleteLater()
+        #     # print('Scale')
+        #
+        #     # try:
+        #     #     # self.profileWidget.deleteLater()
+        #     #     self.ui.lfVL.removeWidget(3)
+        #     # except:
+        #     #     print('non riesco a cancellare')
+        #     #     pass
+        # # self.profile_RB.toggled.connect(self.profileCheck)
+        # # self.scale_RB.toggled.connect(self.profileCheck)
 
     def profilePlotWgtCreate(self):
         font = {
