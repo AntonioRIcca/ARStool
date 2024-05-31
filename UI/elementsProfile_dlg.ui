@@ -182,6 +182,13 @@ border: solid;
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>profileTW</tabstop>
+  <tabstop>cancelBtn</tabstop>
+  <tabstop>saveBtn</tabstop>
+  <tabstop>exportBtn</tabstop>
+  <tabstop>importBtn</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

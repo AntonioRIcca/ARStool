@@ -1,4 +1,4 @@
-New "LineCode.6-12_3x1x150cu" nphases=3 r1=0.123 x1=0.1 B0=0 B1=0 r0=0.369 x0=0.3
+New "LineCode.6-12_3x1x150cu" nphases=3 B0=0 x0=0.3 r0=0.369 r1=0.123 B1=0 x1=0.1
 New "LineCode.dc-line" nphases=3 r1=0.123 x1=0.1
-New "LineCode.12-20_3x1x185al" nphases=3 r1=0.164 x1=0.11 B0=91.106 B1=91.106 r0=0.805 x0=0.11
-New "LineCode.3-6_3x1x240cu" nphases=3 r1=0.0754 x1=0.11 B0=0 B1=91.106 r0=0.2262 x0=0.33
+New "LineCode.12-20_3x1x185al" nphases=3 B0=91.106 x0=0.11 r0=0.805 r1=0.164 B1=91.106 x1=0.11
+New "LineCode.3-6_3x1x240cu" nphases=3 B0=0 x0=0.33 r0=0.2262 r1=0.0754 B1=91.106 x1=0.11

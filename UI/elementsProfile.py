@@ -6,8 +6,6 @@ from UI.elementsProfile_Dlg import Ui_mainDlg
 # from PySide2 import QtGui, QtCore, QtWidgets
 from PyQt5 import QtWidgets, QtGui, QtCore
 
-import PyQt5
-
 import matplotlib
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
@@ -26,6 +24,8 @@ class ElementsProfile(QtWidgets.QDialog):
         self.elem = elem
         self.profile = copy.deepcopy(v[elem]['par']['profile']['curve'])
         self.ok_close = True
+        self.line = []
+        self.old_value = ''
 
         if not isinstance(self.profile, list):
             value = self.profile
@@ -76,7 +76,7 @@ class ElementsProfile(QtWidgets.QDialog):
 
         for i in range(0, self.ui.profileTW.rowCount()):
             for j in range(0, self.ui.profileTW.columnCount()):
-                self.ui.profileTW.item(i, j).setForeground(QtGui.QColor(255,255,255))
+                self.ui.profileTW.item(i, j).setForeground(QtGui.QColor(255, 255, 255))
                 self.ui.profileTW.item(i, j).setTextAlignment(QtCore.Qt.AlignCenter)
 
         self.ui.profileTW.setHorizontalHeaderLabels(['Tempo [h]', 'Prof. [p.u.]'])
@@ -87,7 +87,7 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ui.profileTW.clearContents()
         self.ui.profileTW.model().removeRows(0, self.ui.profileTW.rowCount())
 
-        for r in range (0, len(self.profile)):
+        for r in range(0, len(self.profile)):
             self.ui.profileTW.insertRow(r)
             x_item = QtWidgets.QTableWidgetItem(str(r*0.25))
             try:
@@ -224,7 +224,6 @@ class ElementsProfile(QtWidgets.QDialog):
             self.name = name
             self.ui.nameLbl.setText(name)
 
-
     def cancel(self):
         # self.closing_check()
         self.close()
@@ -261,3 +260,9 @@ class ElementsProfile(QtWidgets.QDialog):
         else:
             # self.close()
             pass
+
+    # TODO: Dare la possibilità di azzerare il profilo (magari inserendo di default il valore 1)
+    # TODO: Il profilo nuovo deve avere solo il primo valore popolato, e deve calcolarsi in automatico gli altri valori
+    #       Vedi ORATool
+    # TODO: La lunghezza dell'array deve dipendere dalla lunghezza dell'intervallo e dal timestep, che devono essere
+    #       parametri globali dello studio
