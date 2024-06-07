@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'start_wgtxvxmFW.ui'
+## Form generated from reading UI file 'start_wgtuNwdvV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -98,6 +98,20 @@ class Ui_Form(object):
 
         self.verticalLayout.addItem(self.startSpacer)
 
+        self.optStorBtn = QPushButton(self.startWgt)
+        self.optStorBtn.setObjectName(u"optStorBtn")
+        self.optStorBtn.setMinimumSize(QSize(0, 80))
+        self.optStorBtn.setMaximumSize(QSize(16777215, 16777215))
+        self.optStorBtn.setFont(font)
+        self.optStorBtn.setStyleSheet(u"")
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/icons/Storage.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.optStorBtn.setIcon(icon3)
+        self.optStorBtn.setIconSize(QSize(50, 50))
+        self.optStorBtn.setFlat(False)
+
+        self.verticalLayout.addWidget(self.optStorBtn)
+
 
         self.retranslateUi(Form)
 
@@ -109,5 +123,6 @@ class Ui_Form(object):
         self.importDssBtn.setText(QCoreApplication.translate("Form", u"  Importa file DSS", None))
         self.openFileBtn.setText(QCoreApplication.translate("Form", u"  Apri rete", None))
         self.benchOpenBtn.setText(QCoreApplication.translate("Form", u"  Benchmark", None))
+        self.optStorBtn.setText(QCoreApplication.translate("Form", u"Optimal Storage", None))
     # retranslateUi
 

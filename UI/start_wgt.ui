@@ -189,6 +189,48 @@ QPushButton:pressed{
       </property>
      </spacer>
     </item>
+    <item>
+     <widget class="QPushButton" name="optStorBtn">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Optimal Storage</string>
+      </property>
+      <property name="icon">
+       <iconset resource="_resources/resources.qrc">
+        <normaloff>:/icons/icons/Storage.png</normaloff>:/icons/icons/Storage.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>50</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>

@@ -459,6 +459,97 @@ par_dict = {
     'ExternalGrid': {},
 }
 
+el_lfresults = {
+    'ExternalGrid': {
+        'Vn': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
+    'AC-Node': {
+        'Vn': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
+    'DC-Node': {
+        'Vn': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
+    'AC-Line': {
+        'P0': {'tag': 'p', 'i': 0, 'decimal': 3, 'unit': 'kW'},
+        'P1': {'tag': 'p', 'i': 1, 'decimal': 3, 'unit': 'kW'},
+        'Q0': {'tag': 'q', 'i': 0, 'decimal': 3, 'unit': 'kVar'},
+        'Q1': {'tag': 'Q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
+        'i': {'tag': 'i', 'i': 0, 'decimal': 3, 'unit': 'A'},
+        'V0': {'tag': 'v', 'i': 0, 'decimal': 3, 'unit': 'kV'},
+        'V1': {'tag': 'v', 'i': 1, 'decimal': 3, 'unit': 'kV'},
+    },
+    'DC-Line': {
+        'P0': {'tag': 'p', 'i': 0, 'decimal': 3, 'unit': 'kW'},
+        'P1': {'tag': 'p', 'i': 1, 'decimal': 3, 'unit': 'kW'},
+        'i': {'tag': 'i', 'i': 0, 'decimal': 3, 'unit': 'A'},
+        'V0': {'tag': 'v', 'i': 0, 'decimal': 3, 'unit': 'kV'},
+        'V1': {'tag': 'v', 'i': 1, 'decimal': 3, 'unit': 'kV'},
+    },
+    '2W-Transformer': {
+        'P0': {'tag': 'p', 'i': 0, 'decimal': 3, 'unit': 'kW'},
+        'P1': {'tag': 'p', 'i': 1, 'decimal': 3, 'unit': 'kW'},
+        'Q0': {'tag': 'q', 'i': 0, 'decimal': 3, 'unit': 'kVar'},
+        'Q1': {'tag': 'Q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
+        'i0': {'tag': 'i', 'i': 0, 'decimal': 3, 'unit': 'A'},
+        'i1': {'tag': 'i', 'i': 1, 'decimal': 3, 'unit': 'A'},
+        'V0': {'tag': 'v', 'i': 0, 'decimal': 3, 'unit': 'kV'},
+        'V1': {'tag': 'v', 'i': 1, 'decimal': 3, 'unit': 'kV'},
+    },
+    'PWM': {
+        'P0': {'tag': 'p', 'i': 0, 'decimal': 3, 'unit': 'kW'},
+        'P1': {'tag': 'p', 'i': 1, 'decimal': 3, 'unit': 'kW'},
+        'Q0': {'tag': 'q', 'i': 0, 'decimal': 3, 'unit': 'kVar'},
+        'Q1': {'tag': 'Q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
+        'i0': {'tag': 'i', 'i': 0, 'decimal': 3, 'unit': 'A'},
+        'i1': {'tag': 'i', 'i': 1, 'decimal': 3, 'unit': 'A'},
+        'V0': {'tag': 'v', 'i': 0, 'decimal': 3, 'unit': 'kV'},
+        'V1': {'tag': 'v', 'i': 1, 'decimal': 3, 'unit': 'kV'},
+    },
+    'DC-DC-Converter': {
+        'P0': {'tag': 'p', 'i': 0, 'decimal': 3, 'unit': 'kW'},
+        'P1': {'tag': 'p', 'i': 1, 'decimal': 3, 'unit': 'kW'},
+        'Q0': {'tag': 'q', 'i': 0, 'decimal': 3, 'unit': 'kVar'},
+        'Q1': {'tag': 'Q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
+        'i0': {'tag': 'i', 'i': 0, 'decimal': 3, 'unit': 'A'},
+        'i1': {'tag': 'i', 'i': 1, 'decimal': 3, 'unit': 'A'},
+        'V0': {'tag': 'v', 'i': 0, 'decimal': 3, 'unit': 'kV'},
+        'V1': {'tag': 'v', 'i': 1, 'decimal': 3, 'unit': 'kV'},
+    },
+    'AC-Load': {
+        'P': {'tag': 'p', 'i': None, 'decimal': 3, 'unit': 'kW'},
+        'Q': {'tag': 'q', 'i': None, 'decimal': 3, 'unit': 'kVar'},
+        'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
+        'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
+    'DC-Load': {
+        'P': {'tag': 'p', 'i': None, 'decimal': 3, 'unit': 'kW'},
+        'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
+        'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
+    'PV': {
+        'P': {'tag': 'p', 'i': None, 'decimal': 3, 'unit': 'kW'},
+        'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
+        'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
+    'AC-Wind': {
+        'P': {'tag': 'p', 'i': None, 'decimal': 3, 'unit': 'kW'},
+        'Q': {'tag': 'q', 'i': None, 'decimal': 3, 'unit': 'kVar'},
+        'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
+        'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
+    'DC-Wind': {
+        'P': {'tag': 'p', 'i': None, 'decimal': 3, 'unit': 'kW'},
+        'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
+        'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
+    'BESS': {
+        'P': {'tag': 'p', 'i': None, 'decimal': 3, 'unit': 'kW'},
+        'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
+        'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
+
+}
+
 
 
 el_format = {

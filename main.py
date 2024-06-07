@@ -179,6 +179,7 @@ class Main:
         self.startWGT.ui.importDssBtn.clicked.connect(self.dss_open)
         self.startWGT.ui.openFileBtn.clicked.connect(self.yml_open)
         self.startWGT.ui.benchOpenBtn.clicked.connect(self.benchmarkWGT_create)
+        self.startWGT.ui.optStorBtn.clicked.connect(self.optstor_create)
 
     # Creazione dell'elenco delle reti benchmark
     def benchmarkWGT_create(self):
@@ -968,6 +969,52 @@ class Main:
         # self.home3_PV_WGT.setStyleSheet(u'border-top: 1px solid rgb(255,255,255);'
         #                                 u'border-bottom: 1px solid rgb(255,255,255);')
 
+    def optstor_create(self):
+        from Functionalities.OptimalStorage.optimalStorage import OptStorWGT
+
+        try:
+            self.ui.home_WGT.deleteLater()
+        except:
+            self.home_WGT.deleteLater()
+
+        self.optStorWgt = OptStorWGT()
+
+        self.home_WGT = self.optStorWgt.ui.optStorWgt
+
+        # # self.homeHBL = QHBoxLayout(self.home_WGT)
+        # self.homeHBL = QHBoxLayout()
+        # self.home_WGT.setLayout(self.homeHBL)
+        # self.homeHBL.setContentsMargins(0, 0, 0, 0)
+        #
+        self.ui.home_VL.addWidget(self.home_WGT)
+        #
+        # self.startWGT.ui.optStorBtn.setStyleSheet(u"background-color: rgb(63, 63, 63);")
+        #
+        # self.home2_WGT.deleteLater()
+        #
+        # self.home2_WGT = QWidget()
+        # self.home2_WGT.setMinimumWidth(250)
+        # self.optStorWgtVBL = QVBoxLayout()
+        # self.optStorWgtVBL.setSpacing(20)
+        # self.home2_WGT.setLayout(self.optStorWgtVBL)
+        #
+        # self.optStorWgt = OptStorWGT()
+        # self.optStorWgt.ui.resultsWgt.setVisible(False)
+        # # self.home2_WGT = self.optStorWgt.ui.optStorWgt
+        # self.OptStorInputWgt = self.optStorWgt.ui.leftWgt
+        # # self.home2_WGT.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        # self.home2_WGT.setStyleSheet(u'background-color: rgb(0, 200, 0);')
+        #
+        # self.homeHBL.insertWidget(0, self.OptStorInputWgt)
+        #
+        # spacer = QSpacerItem(20, 40, QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # spacerWgt = QtWidgets.QWidget()
+        # spacerWgt.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
+        # # spacerWgt.setGeometry(1000, 1000, 1000, 1000)
+        # spacerWgt.setStyleSheet(u'background-color: rgb(0, 0, 200);')
+        # # self.homeHBL.insertItem(1, spacer)
+        # self.homeHBL.insertWidget(2, spacerWgt)
+        # self.optStorWgt.ui.calcPb.clicked.connect(self.optStorWgt.ui.resultsWgt.setVisible(True))
 
 class LFrWGT(QMainWindow):
     def __init__(self):

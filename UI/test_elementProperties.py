@@ -18,7 +18,7 @@ import matplotlib
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 
-from variables import v, el_format, mc
+from variables import v, el_format, mc, el_lfresults
 
 
 class ElementProperties(QMainWindow):
@@ -494,6 +494,34 @@ class ElementProperties(QMainWindow):
                             nodes.append(el)
                             pass
         return nodes
+
+    def fillLfRes(self):
+        spacer = QSpacerItem(10, 10, QSizePolicy.Fixed)
+        line = 0
+        # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
+        for par in el_lfresults[self.cat]:
+            self.__setattr__(par + 'Lbl', QLabel(par))
+            self.__setattr__(par + 'Dsb', QDoubleSpinBox(None))
+            self.__setattr__(par + 'UnitLbl', QLabel(el_format[self.cat][par]['unit']))
+
+            self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Lbl'), line, 0)
+            self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Dsb'), line, 1)
+            self.ui.lfParGL.addWidget(self.__getattribute__(par + 'UnitLbl'), line, 2)
+            # i += 1
+
+            # formattazione e popolazione dei campi
+            self.dsb_format(self.__getattribute__(par + 'Dsb'), minimum=el_format[self.cat][par]['min'],
+                            maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
+            self.__getattribute__(par + 'Lbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+
+            if isinstance(v[self.elem]['par'][par], list):
+                self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par][0])
+            else:
+                self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par])
+
+            line += 1
+        # -------------------------------------------------------------------------------------------------------------
+        pass
 
 
     # formattazione dei DoubleSPinBox

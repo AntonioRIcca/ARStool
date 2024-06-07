@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="icons">
     <file>icons/restart.png</file>
+    <file>icons/Storage.png</file>
     <file>icons/benchmark.png</file>
     <file>icons/importfile.png</file>
     <file>icons/openfile.png</file>
