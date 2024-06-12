@@ -1,6 +1,28 @@
 import os
 mainpath = os.getcwd()
 
+
+def v_initialize():
+    for k in list(v.keys()):
+        del v[k]
+    print(v)
+
+
+fn = {
+    'lf': False,
+    'rel': False,
+    'optstor': False,
+}
+
+fn_en = {
+    'lf': True,
+    'anom': False,
+    'opf': False,
+    'rel': False,
+    'gm': False,
+    'onr': False,
+}
+
 v = dict()
 vdss = dict()
 
@@ -473,7 +495,7 @@ el_lfresults = {
         'P0': {'tag': 'p', 'i': 0, 'decimal': 3, 'unit': 'kW'},
         'P1': {'tag': 'p', 'i': 1, 'decimal': 3, 'unit': 'kW'},
         'Q0': {'tag': 'q', 'i': 0, 'decimal': 3, 'unit': 'kVar'},
-        'Q1': {'tag': 'Q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
+        'Q1': {'tag': 'q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
         'i': {'tag': 'i', 'i': 0, 'decimal': 3, 'unit': 'A'},
         'V0': {'tag': 'v', 'i': 0, 'decimal': 3, 'unit': 'kV'},
         'V1': {'tag': 'v', 'i': 1, 'decimal': 3, 'unit': 'kV'},
@@ -489,7 +511,7 @@ el_lfresults = {
         'P0': {'tag': 'p', 'i': 0, 'decimal': 3, 'unit': 'kW'},
         'P1': {'tag': 'p', 'i': 1, 'decimal': 3, 'unit': 'kW'},
         'Q0': {'tag': 'q', 'i': 0, 'decimal': 3, 'unit': 'kVar'},
-        'Q1': {'tag': 'Q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
+        'Q1': {'tag': 'q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
         'i0': {'tag': 'i', 'i': 0, 'decimal': 3, 'unit': 'A'},
         'i1': {'tag': 'i', 'i': 1, 'decimal': 3, 'unit': 'A'},
         'V0': {'tag': 'v', 'i': 0, 'decimal': 3, 'unit': 'kV'},
@@ -499,7 +521,7 @@ el_lfresults = {
         'P0': {'tag': 'p', 'i': 0, 'decimal': 3, 'unit': 'kW'},
         'P1': {'tag': 'p', 'i': 1, 'decimal': 3, 'unit': 'kW'},
         'Q0': {'tag': 'q', 'i': 0, 'decimal': 3, 'unit': 'kVar'},
-        'Q1': {'tag': 'Q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
+        'Q1': {'tag': 'q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
         'i0': {'tag': 'i', 'i': 0, 'decimal': 3, 'unit': 'A'},
         'i1': {'tag': 'i', 'i': 1, 'decimal': 3, 'unit': 'A'},
         'V0': {'tag': 'v', 'i': 0, 'decimal': 3, 'unit': 'kV'},
@@ -509,7 +531,7 @@ el_lfresults = {
         'P0': {'tag': 'p', 'i': 0, 'decimal': 3, 'unit': 'kW'},
         'P1': {'tag': 'p', 'i': 1, 'decimal': 3, 'unit': 'kW'},
         'Q0': {'tag': 'q', 'i': 0, 'decimal': 3, 'unit': 'kVar'},
-        'Q1': {'tag': 'Q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
+        'Q1': {'tag': 'q', 'i': 1, 'decimal': 3, 'unit': 'kVar'},
         'i0': {'tag': 'i', 'i': 0, 'decimal': 3, 'unit': 'A'},
         'i1': {'tag': 'i', 'i': 1, 'decimal': 3, 'unit': 'A'},
         'V0': {'tag': 'v', 'i': 0, 'decimal': 3, 'unit': 'kV'},
@@ -551,77 +573,76 @@ el_lfresults = {
 }
 
 
-
 el_format = {
     'ExternalGrid': {
-        'Vn': {'min': 0.001, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+        'Vn': {'min': 0.001, 'max': 999.999, 'decimal': 3, 'unit': 'kV', 'default': None},
     },
     'AC-Node': {
-        'Vn': {'min': 0.001, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+        'Vn': {'min': 0.001, 'max': 999.999, 'decimal': 3, 'unit': 'kV', 'default': 0.4},
     },
     'DC-Node': {
-        'Vn': {'min': 0.001, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
+        'Vn': {'min': 0.001, 'max': 999.999, 'decimal': 3, 'unit': 'kV', 'default': 0.4},
     },
     'AC-Line': {
-        'B0': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS'},
-        'B1': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS'},
-        'In': {'min': 0.001, 'max': 999.9999, 'decimal': 3, 'unit': 'A'},
-        'R0': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
-        'R1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
-        'X0': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
-        'X1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
-        'length': {'min': 0, 'max': 9999.999, 'decimal': 3, 'unit': 'Km'},
+        'B0': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS', 'default': 0},
+        'B1': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS', 'default': 0},
+        'In': {'min': 0.001, 'max': 999.9999, 'decimal': 3, 'unit': 'A', 'default': 100},
+        'R0': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
+        'R1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
+        'X0': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
+        'X1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
+        'length': {'min': 0, 'max': 9999.999, 'decimal': 3, 'unit': 'Km', 'default': 1},
     },
     'DC-Line': {
-        'In': {'min': 0.001, 'max': 999.9999, 'decimal': 3, 'unit': 'A'},
-        'R1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
-        'X1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm'},
-        'length': {'min': 0, 'max': 9999.999, 'decimal': 3, 'unit': 'Km'},
+        'In': {'min': 0.001, 'max': 999.9999, 'decimal': 3, 'unit': 'A', 'default': 100},
+        'R1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
+        'X1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
+        'length': {'min': 0, 'max': 9999.999, 'decimal': 3, 'unit': 'Km', 'default': 1},
     },
     '2W-Transformer': {
-        'Sr': {'min': 0.001, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA'},
+        'Sr': {'min': 0.001, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA', 'default': 1000},
         # 'Vn0': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
         # 'Vn1': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
-        'XHL': {'min': 0, 'max': 99.99999, 'decimal': 3, 'unit': '%'},
+        'XHL': {'min': 0, 'max': 99.99999, 'decimal': 3, 'unit': '%', 'default': 0},
     },
     'PWM': {
-        'Sr': {'min': 0.001, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA'},
+        'Sr': {'min': 0.001, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA', 'default': 1000},
         # 'Vn0': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
         # 'Vn1': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
         # 'XHL': {'min': 0, 'max': 99.99999, 'decimal': 3, 'unit': '%'},
     },
     'DC-DC-Converter': {
-        'Sr': {'min': 0.001, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA'},
+        'Sr': {'min': 0.001, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA', 'default': 1000},
         # 'Vn0': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
         # 'Vn1': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},
         # 'XHL': {'min': 0, 'max': 99.99999, 'decimal': 3, 'unit': '%'},
     },
     'AC-Load': {
-        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
         # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
-        'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': ''},
-        'Customers': {'min': 0, 'max': 1000, 'decimal': 0, 'unit': ''},
+        'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+        'Customers': {'min': 0, 'max': 1000, 'decimal': 0, 'unit': '', 'default': 1},
     },
     'DC-Load': {
-        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
-        'Customers': {'min': 0, 'max': 1000, 'decimal': 0, 'unit': ''},
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
+        'Customers': {'min': 0, 'max': 1000, 'decimal': 0, 'unit': '', 'default': 1},
     },
     'PV': {
-        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
     },
     'AC-Wind': {
-        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
         # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
-        'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': ''},
-        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
     },
     'DC-Wind': {
-        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
-        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
     },
     'BESS': {
-        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW'},
-        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': ''},
-        'cap': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kWh'},
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+        'cap': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kWh', 'default': 100},
     },
 }

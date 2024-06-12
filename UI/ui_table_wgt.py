@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'table_wgtXbadVg.ui'
+## Form generated from reading UI file 'table_wgtHgniJP.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -80,6 +80,13 @@ class Ui_Form(object):
         self.buttons_WGT.setStyleSheet(u"border-color: rgb(255, 255, 255);")
         self.horizontalLayout_2 = QHBoxLayout(self.buttons_WGT)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.add_Btn = QPushButton(self.buttons_WGT)
+        self.add_Btn.setObjectName(u"add_Btn")
+        self.add_Btn.setMinimumSize(QSize(100, 25))
+        self.add_Btn.setStyleSheet(u"border-color: rgb(255, 255, 255);")
+
+        self.horizontalLayout_2.addWidget(self.add_Btn)
+
         self.buttons_Spc = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_2.addItem(self.buttons_Spc)
@@ -129,6 +136,7 @@ class Ui_Form(object):
         ___qtablewidgetitem10.setText(QCoreApplication.translate("Form", u"76ruyt", None));
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
-        self.save_Btn.setText(QCoreApplication.translate("Form", u"Save", None))
+        self.add_Btn.setText(QCoreApplication.translate("Form", u"Aggiungi", None))
+        self.save_Btn.setText(QCoreApplication.translate("Form", u"Salva", None))
     # retranslateUi
 

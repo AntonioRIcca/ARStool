@@ -1,14 +1,14 @@
-New "Transformer.ev-fast_dc-dc-conv" buses=[ev-fast_dc-bb, ev-fast-load_dc-node, ] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[0.6, 0.4, ] kVAs=[300, 300, ] enabled=true
-New "Transformer.ev-fast_pwm" buses=[rs_bb_04kv, ev-fast_dc-bb, ] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[0.4, 0.6, ] kVAs=[2000, 2000, ] enabled=true
-New "Transformer.pros_bess_pwm" buses=[pros_bb, pros1_dc-bb, ] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[0.4, 0.6, ] kVAs=[400, 400, ] enabled=true
-New "Transformer.pros_pv_pwm" buses=[pros_bb, pros2_dc-bb, ] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[0.4, 0.6, ] kVAs=[400, 400, ] enabled=true
-New "Transformer.res_tr" buses=[res-wpg_bb, res_bb, ] windings=2 conns=[delta, wye, ] XHL=6 %imag=1.6 kVAs=[630, 630, ] %Rs=[1, 0, ] kVs=[20, 0.4, ] enabled=true
-New "Transformer.rs_tr" buses=[rs_bb_20kv, rs_bb_04kv, ] windings=2 conns=[delta, wye, ] XHL=6 %imag=1.6 kVAs=[400, 400, ] %Rs=[1, 0, ] kVs=[20, 0.4, ] enabled=true
-New "Transformer.ug_1_tr" buses=[ug_bb_20kv, ug_bb_2kv, ] windings=2 conns=[delta, wye, ] XHL=6 %imag=1.5 kVAs=[2000, 2000, ] %Rs=[0.93, 0, ] kVs=[20, 2, ] enabled=true
-New "Transformer.ug_2_tr" buses=[ug_bb_20kv, ug_bb_2kv, ] windings=2 conns=[delta, wye, ] XHL=6 %imag=1.5 kVAs=[2000, 2000, ] %Rs=[0.93, 0, ] kVs=[20, 2, ] enabled=true
-New "Transformer.ug_pwm" buses=[ug_bb_2kv, ug_dc-bb, ] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[2, 1.5, ] kVAs=[800, 800, ] enabled=true
-New "Transformer.ug_serv_tr" buses=[ug_bb_2kv, ug_serv_bb, ] windings=2 conns=[delta, wye, ] XHL=6 %imag=1.6 kVAs=[400, 400, ] %Rs=[1, 0, ] kVs=[2, 0.4, ] enabled=true
-New "Transformer.ugs_dc-dc-conv" buses=[ugs_dc-bb, ugs_pv_dc-bb, ] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[1.5, 0.75, ] kVAs=[50, 50, ] enabled=true
-New "Transformer.ugs_pwm" buses=[ug_bb_2kv, ugs_dc-bb, ] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[2, 1.5, ] kVAs=[800, 800, ] enabled=true
-New "Transformer.wpg_pwm" buses=[wpg_bb1, wpg_pv_dc-bb, ] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[2, 0.6, ] kVAs=[2000, 2000, ] enabled=true
-New "Transformer.wpg_tr" buses=[res-wpg_bb, wpg_bb1, ] windings=2 conns=[delta, wye, ] XHL=6 %imag=1.5 kVAs=[2000, 2000, ] %Rs=[0.93, 0, ] kVs=[20, 2, ] enabled=true
+New "Transformer.ug_1_tr" windings=2 buses=[ug_bb_20kv, ug_bb_2kv, ] conns=[delta, wye, ] kVs=[20, 2, ] kVAs=[2000, 2000, ] %Rs=[0.93, 0, ] XHL=6 %imag=1.5
+New "Transformer.ug_2_tr" windings=2 buses=[ug_bb_20kv, ug_bb_2kv, ] conns=[delta, wye, ] kVs=[20, 2, ] kVAs=[2000, 2000, ] %Rs=[0.93, 0, ] XHL=6 %imag=1.5
+New "Transformer.ug_serv_tr" windings=2 buses=[ug_bb_2kv, ug_serv_bb, ] conns=[delta, wye, ] kVs=[2, 0.4, ] kVAs=[400, 400, ] %Rs=[1, 0, ] XHL=6 %imag=1.6
+New "Transformer.ug_pwm" windings=2 buses=[ug_bb_2kv, ug_dc-bb, ] conns=[delta, wye, ] kVs=[2, 1.5, ] kVAs=[800, 800, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0
+New "Transformer.ugs_pwm" windings=2 buses=[ug_bb_2kv, ugs_dc-bb, ] conns=[delta, wye, ] kVs=[2, 1.5, ] kVAs=[800, 800, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0
+New "Transformer.ugs_dc-dc-conv" windings=2 buses=[ugs_dc-bb, ugs_pv_dc-bb, ] conns=[delta, wye, ] kVs=[1.5, 0.75, ] kVAs=[50, 50, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0
+New "Transformer.rs_tr" windings=2 buses=[rs_bb_20kv, rs_bb_04kv, ] conns=[delta, wye, ] kVs=[20, 0.4, ] kVAs=[400, 400, ] %Rs=[1, 0, ] XHL=6 %imag=1.6
+New "Transformer.ev-fast_pwm" windings=2 buses=[rs_bb_04kv, ev-fast_dc-bb, ] conns=[delta, wye, ] kVs=[0.4, 0.6, ] kVAs=[2000, 2000, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0
+New "Transformer.ev-fast_dc-dc-conv" windings=2 buses=[ev-fast_dc-bb, ev-fast-load_dc-node, ] conns=[delta, wye, ] kVs=[0.6, 0.4, ] kVAs=[300, 300, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0
+New "Transformer.res_tr" windings=2 buses=[res-wpg_bb, res_bb, ] conns=[delta, wye, ] kVs=[20, 0.4, ] kVAs=[630, 630, ] %Rs=[1, 0, ] XHL=6 %imag=1.6
+New "Transformer.pros_bess_pwm" windings=2 buses=[pros_bb, pros1_dc-bb, ] conns=[delta, wye, ] kVs=[0.4, 0.6, ] kVAs=[400, 400, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0
+New "Transformer.pros_pv_pwm" windings=2 buses=[pros_bb, pros2_dc-bb, ] conns=[delta, wye, ] kVs=[0.4, 0.6, ] kVAs=[400, 400, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0
+New "Transformer.wpg_tr" windings=2 buses=[res-wpg_bb, wpg_bb1, ] conns=[delta, wye, ] kVs=[20, 2, ] kVAs=[2000, 2000, ] %Rs=[0.93, 0, ] XHL=6 %imag=1.5
+New "Transformer.wpg_pwm" windings=2 buses=[wpg_bb1, wpg_pv_dc-bb, ] conns=[delta, wye, ] kVs=[2, 0.6, ] kVAs=[2000, 2000, ] %Rs=[0, 0, ] XHL=1E-008 %imag=0

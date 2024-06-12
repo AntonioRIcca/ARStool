@@ -1,8 +1,10 @@
 import py_dss_interface
-from variables import v, c, mc, par_dict, new_par_dict, dss_cat, mainpath
+from variables import *
 import yaml
 import os
 from decimal import Decimal, InvalidOperation
+
+from dictInitialize import *
 
 
 class OpenDSS:
@@ -32,11 +34,12 @@ class OpenDSS:
                 cat = 'source'
 
             # viene inizializzato il sotto-dizionario dell'elemento
-            dict_initialize(el)
-            print(el, cat)
-            v[el]['category'] = c[cat]  # la nomenclatira esatta della categoria deriva dal dizonario "variables.c"
-            rel_initialize(el)     # Todo: forse va spostato in self.dict_initialize
-            lf_initialize(el)      # Todo: forse va spostato in self.dict_initialize
+            dict_initialize(el, cat)
+            # dict_initialize(el)
+            # print(el, cat)
+            # v[el]['category'] = c[cat]  # la nomenclatira esatta della categoria deriva dal dizonario "variables.c"
+            # rel_initialize(el)     # Todo: forse va spostato in self.dict_initialize
+            # lf_initialize(el)      # Todo: forse va spostato in self.dict_initialize
 
             # self.read(el)           # vengono letti i parametri e la topologia dell'elemento
             self.read_new(el)       # lettura di parametri e topologia degli elementi dalla cartella degli elementi
@@ -66,9 +69,10 @@ class OpenDSS:
             # lettura dei parametri dalle righe di dss
             par = self.readline(el)     # TODO: vedi commento in self.readline
 
-            print(mcat)
-            if mcat == 'Load':
-                print('Load!')
+            # print(mcat)
+            # if mcat == 'Load':
+            #     print('Load!')
+            #
 
             for p in new_par_dict[cat]['par'].keys() - ['others']:  # todo: forse da modificare in base al TODO precedente
                 try:
@@ -590,6 +594,7 @@ class OpenDSS:
             pass
 
         self.dss.solution.solve()       # richiesta di risoluzione del sistema
+        fn['lf'] = True
         # print(self.dss.circuit.total_power)
         # print(bool(self.dss.solution.converged))
         self.dss.text(f"Save Circuit dir=cartella")

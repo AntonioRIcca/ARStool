@@ -20,9 +20,14 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ui = Ui_mainDlg()
         self.ui.setupUi(self)
 
-        self.name = v[elem]['par']['profile']['name']
         self.elem = elem
-        self.profile = copy.deepcopy(v[elem]['par']['profile']['curve'])
+        if self.elem:
+            self.profile = copy.deepcopy(v[elem]['par']['profile']['curve'])
+            self.name = v[elem]['par']['profile']['name']
+        else:
+            self.profile = 1
+            self.name = None
+
         self.ok_close = True
         self.line = []
         self.old_value = ''

@@ -18,7 +18,7 @@ import matplotlib
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 
-from variables import v, el_format, mc, el_lfresults
+from variables import *
 
 
 class ElementProperties(QMainWindow):
@@ -45,6 +45,14 @@ class ElementProperties(QMainWindow):
         self.ui.relWgt.setMaximumHeight(20)
 
         self.fillLfPar()
+        # if v[self.elem]['lf']['p']:
+        #     if 0 in v[self.elem]['lf']['p'].keys():
+        #         if
+        #         self.fillLfRes()
+        self.ui.lfResMainWgt.setVisible(fn['lf'])
+        if fn['lf']:
+            self.fillLfRes()
+
 
     def fillLfPar(self):
         for i in range(self.ui.lfParGL.count()):
@@ -498,31 +506,44 @@ class ElementProperties(QMainWindow):
     def fillLfRes(self):
         spacer = QSpacerItem(10, 10, QSizePolicy.Fixed)
         line = 0
+        oldtag = None
         # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
         for par in el_lfresults[self.cat]:
-            self.__setattr__(par + 'Lbl', QLabel(par))
-            self.__setattr__(par + 'Dsb', QDoubleSpinBox(None))
-            self.__setattr__(par + 'UnitLbl', QLabel(el_format[self.cat][par]['unit']))
+            tag = el_lfresults[self.cat][par]['tag']
+            i = el_lfresults[self.cat][par]['i']
 
-            self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Lbl'), line, 0)
-            self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Dsb'), line, 1)
-            self.ui.lfParGL.addWidget(self.__getattribute__(par + 'UnitLbl'), line, 2)
+            if tag != oldtag and line != 0:
+                self.ui.lfResGL.addItem(spacer, line, 0)
+                print('spacer')
+                line += 1
+
+            self.__setattr__(par + 'ResLbl', QLabel(par))
+            self.__setattr__(par + 'ResDsb', QDoubleSpinBox(None))
+            self.__setattr__(par + 'ResUnitLbl', QLabel(el_lfresults[self.cat][par]['unit']))
+
+            self.ui.lfResGL.addWidget(self.__getattribute__(par + 'ResLbl'), line, 0)
+            self.ui.lfResGL.addWidget(self.__getattribute__(par + 'ResDsb'), line, 1)
+            self.ui.lfResGL.addWidget(self.__getattribute__(par + 'ResUnitLbl'), line, 2)
+
+            oldtag = tag
             # i += 1
 
             # formattazione e popolazione dei campi
-            self.dsb_format(self.__getattribute__(par + 'Dsb'), minimum=el_format[self.cat][par]['min'],
-                            maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
-            self.__getattribute__(par + 'Lbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+            self.dsb_format(self.__getattribute__(par + 'ResDsb'), decimals=el_lfresults[self.cat][par]['decimal'],
+                            minimum=-9999999.999, maximum=9999999.999)
+            self.__getattribute__(par + 'ResLbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
-            if isinstance(v[self.elem]['par'][par], list):
-                self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par][0])
+
+            if i in [0, 1]:
+                self.__getattribute__(par + 'ResDsb').setValue(v[self.elem]['lf'][tag][i])
             else:
-                self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par])
+                self.__getattribute__(par + 'ResDsb').setValue(v[self.elem]['lf'][tag])
+            # else:
+            #     self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par])
 
             line += 1
         # -------------------------------------------------------------------------------------------------------------
         pass
-
 
     # formattazione dei DoubleSPinBox
     def dsb_format(self, item, minimum=0, maximum=9999.99, decimals=2, step=0.1):
@@ -567,16 +588,19 @@ class ElementProperties(QMainWindow):
         # bisogna modificare la tensione nominale degli elementi a essa connessa
 
         # Se l'elemento è un nodo o la rete esterna, e se è cambiata la tensione nomnale
-        if self.cat in mc['Node'] + mc['Vsource'] and v[elem]['par']['Vn'] != self.Vn_DSB.value():
+        if self.cat in mc['Node'] + mc['Vsource'] and v[elem]['par']['Vn'] != self.VnDsb.value():
+        # if self.cat in mc['Node'] + mc['Vsource'] and v[elem]['par']['Vn'] != self.Vn_DSB.value():
             for el in self.bb_link(elem):
                 for bb in self.buses:
                     if v[bb]['category'] in mc['Transformer']:
                         for i in range(len(v[bb]['top']['conn'])):
                             if v[bb]['top']['conn'][i] == elem:
-                                v[bb]['par']['Vn' + str(i)] = self.Vn_DSB.value()
+                                v[bb]['par']['Vn' + str(i)] = self.VnDsb.value()
+                                # v[bb]['par']['Vn' + str(i)] = self.Vn_DSB.value()
                         pass
                     else:
-                        v[el]['par']['Vn'] = self.Vn_DSB.value()
+                        v[el]['par']['Vn'] = self.VnDsb.value()
+                        # v[el]['par']['Vn'] = self.Vn_DSB.value()
                         pass
 
         # Se si modifica la busbar connessa,

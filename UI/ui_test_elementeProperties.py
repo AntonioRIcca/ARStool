@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'test_elementePropertiesWyZPbV.ui'
+## Form generated from reading UI file 'test_elementePropertiesllUrpZ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -186,9 +186,9 @@ class Ui_Form(object):
 
         self.lfVL.addWidget(self.lfParMainWgt)
 
-        self.widget = QWidget(self.lfWgt)
-        self.widget.setObjectName(u"widget")
-        self.widget.setStyleSheet(u"*{\n"
+        self.lfResMainWgt = QWidget(self.lfWgt)
+        self.lfResMainWgt.setObjectName(u"lfResMainWgt")
+        self.lfResMainWgt.setStyleSheet(u"*{\n"
 "	background-color: rgb(0, 0, 63);\n"
 "	border-radius: 10px;\n"
 "	\n"
@@ -204,79 +204,28 @@ class Ui_Form(object):
 "QPushButton:pressed {\n"
 "	background-color: rgb(64, 64, 64); border-style: inset\n"
 "}")
-        self.verticalLayout = QVBoxLayout(self.widget)
+        self.verticalLayout = QVBoxLayout(self.lfResMainWgt)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.lfResLbl = QLabel(self.widget)
+        self.lfResLbl = QLabel(self.lfResMainWgt)
         self.lfResLbl.setObjectName(u"lfResLbl")
         self.lfResLbl.setFont(font)
         self.lfResLbl.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout.addWidget(self.lfResLbl)
 
-        self.lfResWgt = QWidget(self.widget)
+        self.lfResWgt = QWidget(self.lfResMainWgt)
         self.lfResWgt.setObjectName(u"lfResWgt")
         self.lfResGL = QGridLayout(self.lfResWgt)
         self.lfResGL.setObjectName(u"lfResGL")
-        self.label_18 = QLabel(self.lfResWgt)
-        self.label_18.setObjectName(u"label_18")
-
-        self.lfResGL.addWidget(self.label_18, 0, 2, 1, 1)
-
-        self.doubleSpinBox_7 = QDoubleSpinBox(self.lfResWgt)
-        self.doubleSpinBox_7.setObjectName(u"doubleSpinBox_7")
-        self.doubleSpinBox_7.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_7.setButtonSymbols(QAbstractSpinBox.NoButtons)
-
-        self.lfResGL.addWidget(self.doubleSpinBox_7, 0, 1, 1, 1)
-
-        self.doubleSpinBox_8 = QDoubleSpinBox(self.lfResWgt)
-        self.doubleSpinBox_8.setObjectName(u"doubleSpinBox_8")
-        self.doubleSpinBox_8.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_8.setButtonSymbols(QAbstractSpinBox.NoButtons)
-
-        self.lfResGL.addWidget(self.doubleSpinBox_8, 3, 1, 1, 1)
-
-        self.label_13 = QLabel(self.lfResWgt)
-        self.label_13.setObjectName(u"label_13")
-
-        self.lfResGL.addWidget(self.label_13, 0, 0, 1, 1)
-
-        self.doubleSpinBox_9 = QDoubleSpinBox(self.lfResWgt)
-        self.doubleSpinBox_9.setObjectName(u"doubleSpinBox_9")
-        self.doubleSpinBox_9.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_9.setButtonSymbols(QAbstractSpinBox.NoButtons)
-
-        self.lfResGL.addWidget(self.doubleSpinBox_9, 1, 1, 1, 1)
-
-        self.label_17 = QLabel(self.lfResWgt)
-        self.label_17.setObjectName(u"label_17")
-
-        self.lfResGL.addWidget(self.label_17, 1, 0, 1, 1)
-
-        self.label_14 = QLabel(self.lfResWgt)
-        self.label_14.setObjectName(u"label_14")
-
-        self.lfResGL.addWidget(self.label_14, 3, 2, 1, 1)
-
-        self.label_16 = QLabel(self.lfResWgt)
-        self.label_16.setObjectName(u"label_16")
-
-        self.lfResGL.addWidget(self.label_16, 1, 2, 1, 1)
-
-        self.label_15 = QLabel(self.lfResWgt)
-        self.label_15.setObjectName(u"label_15")
-
-        self.lfResGL.addWidget(self.label_15, 3, 0, 1, 1)
-
 
         self.verticalLayout.addWidget(self.lfResWgt)
 
 
-        self.lfVL.addWidget(self.widget)
+        self.lfVL.addWidget(self.lfResMainWgt)
 
         self.lfNodeWgt.raise_()
         self.lfPls.raise_()
-        self.widget.raise_()
+        self.lfResMainWgt.raise_()
         self.lfParMainWgt.raise_()
 
         self.propertiesVL.addWidget(self.lfWgt)
@@ -500,12 +449,6 @@ class Ui_Form(object):
         self.label_3.setText(QCoreApplication.translate("Form", u"Power", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"unit", None))
         self.lfResLbl.setText(QCoreApplication.translate("Form", u"Results", None))
-        self.label_18.setText(QCoreApplication.translate("Form", u"unit", None))
-        self.label_13.setText(QCoreApplication.translate("Form", u"Power", None))
-        self.label_17.setText(QCoreApplication.translate("Form", u"Power", None))
-        self.label_14.setText(QCoreApplication.translate("Form", u"unit", None))
-        self.label_16.setText(QCoreApplication.translate("Form", u"unit", None))
-        self.label_15.setText(QCoreApplication.translate("Form", u"Power", None))
         self.relPls.setText(QCoreApplication.translate("Form", u"Reliability", None))
         self.relParLbl.setText(QCoreApplication.translate("Form", u"Parameters", None))
         self.label_7.setText(QCoreApplication.translate("Form", u"Power", None))

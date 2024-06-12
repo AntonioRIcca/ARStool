@@ -116,6 +116,22 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
+        <widget class="QPushButton" name="add_Btn">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Aggiungi</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="buttons_Spc">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -140,7 +156,7 @@
           <string notr="true">border-color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
-          <string>Save</string>
+          <string>Salva</string>
          </property>
         </widget>
        </item>

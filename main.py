@@ -13,8 +13,10 @@ from PySide2.QtCharts import *
 # import matplotlib.pyplot as plt
 
 # import variables
-from variables import v
-from variables import mainpath
+# from variables import v
+# from variables import mainpath
+
+from variables import *
 
 import yaml
 # from PySide2 import *
@@ -29,6 +31,7 @@ from mainUI import MainWindow
 from UI.test_elementProperties import ElementProperties
 from UI.elementProperties import Window
 from UI.elementsProfile import ElementsProfile
+from UI.newItem import NewItem
 
 
 # import time
@@ -89,7 +92,7 @@ class Main:
         self.ui = self.mainwindow.ui
         self.mainwindow.show()
 
-        self.func_disabled()
+        self.func_check()
 
         # self.ui.label_10.setText('APERTO!!!')
         #
@@ -112,7 +115,7 @@ class Main:
 
         self.ui.profileMenuBtn.clicked.connect(self.test_action2)
         self.ui.moreMenuBtn.clicked.connect(self.test_action2)
-        self.ui.loadflow_Btn.clicked.connect(self.loadflow)
+        self.ui.lf_Btn.clicked.connect(self.loadflow)
         self.ui.restartBtn.clicked.connect(self.startWgtCreate)
 
         # Window(list(v.keys())[0])                                                 # TODO: da NON riattivare
@@ -124,11 +127,21 @@ class Main:
         # print(3)
 
     def func_disabled(self):
-        self.ui.loadflow_Btn.setEnabled(False)
+        self.ui.lf_Btn.setEnabled(False)
 
     # TODO: deve verificare la disponibilità delle funzioni della rete ed abilitare le funzioni selettivamente
     def func_enabled(self):
         self.ui.loadflow_Btn.setEnabled(True)
+
+    def func_check(self):
+        # TODO: Da eliminare
+        for btn in fn_en:
+            fn_en[btn] = True
+
+        for btn in fn_en:
+            self.ui.__getattribute__(btn + '_Btn').setVisible(fn_en[btn])
+
+        # self.ui.lf_Btn.setVisible(True)
 
     def startWgtCreate(self):
         self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
@@ -256,6 +269,7 @@ class Main:
 
     # Apertura del file DSS
     def dss_open(self, filename=None):
+        v_initialize()
         if not filename:
             options = QtWidgets.QFileDialog.Options()
             options |= QtWidgets.QFileDialog.DontUseNativeDialog
@@ -270,7 +284,8 @@ class Main:
                 self.dss.open(filename)
                 self.elementsTableWgtCreate()
                 print('tabella')
-                self.func_enabled()
+                # self.func_enabled()
+                self.func_check()
             except:
                 QtWidgets.QMessageBox.warning(QtWidgets.QMessageBox(), 'Attenzione', 'Modello DSS non compatibile')
 
@@ -292,7 +307,8 @@ class Main:
             for elem in v0:
                 v[elem] = v0[elem]
             self.elementsTableWgtCreate()
-            self.func_enabled()
+            # self.func_enabled()
+            self.func_check()
 
             # a = 'as'
             # a.re
@@ -323,7 +339,17 @@ class Main:
         self.elementsTableFill()
         self.myform.ui.tableWidget.currentCellChanged.connect(self.test_action)
         self.myform.ui.save_Btn.clicked.connect(self.yml_save)
+        self.myform.ui.add_Btn.clicked.connect(self.new_item)
         # Window(list(v.keys())[0])
+
+    def new_item(self):
+        popup = NewItem()
+
+        if popup.exec_():
+            print('popup')
+            pass
+        print('popup closed')
+        pass
 
     def readsize(self):
         self.par_wgt = Window('rs_line')
