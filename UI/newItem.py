@@ -23,6 +23,8 @@ class NewItem(QtWidgets.QDialog):
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
 
+        self.created = False
+
         self.ui.nameLE.setVisible(False)
         for w in ['node', 'par', 'pictureProf', 'scaleProf', 'serv']:
             self.ui.__getattribute__(w + 'Wgt').setVisible(False)
@@ -33,6 +35,8 @@ class NewItem(QtWidgets.QDialog):
         self.ui.node2CB.currentIndexChanged.connect(partial(self.bb_changed, j=2))
         self.ui.profScaleProfRB.toggled.connect(self.prof_selected)
         self.ui.profOpenBtn.clicked.connect(self.prof_open)
+        self.ui.saveBtn.clicked.connect(self.save)
+        self.ui.calcelBtn.clicked.connect(self.close)
 
         self.type_populate()
         self.type_selected()
@@ -77,21 +81,21 @@ class NewItem(QtWidgets.QDialog):
 
         # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
         for par in el_format[self.cat]:
-            self.__setattr__(par + 'ParLbl', QtWidgets.QLabel(par))
-            self.__setattr__(par + 'ParDsb', QtWidgets.QDoubleSpinBox(None))
-            self.__setattr__(par + 'ParUnitLbl', QtWidgets.QLabel(el_format[self.cat][par]['unit']))
+            self.ui.__setattr__(par + 'ParLbl', QtWidgets.QLabel(par))
+            self.ui.__setattr__(par + 'ParDsb', QtWidgets.QDoubleSpinBox(None))
+            self.ui.__setattr__(par + 'ParUnitLbl', QtWidgets.QLabel(el_format[self.cat][par]['unit']))
 
-            self.ui.parGL.addWidget(self.__getattribute__(par + 'ParLbl'), line, 1)
-            self.ui.parGL.addWidget(self.__getattribute__(par + 'ParDsb'), line, 2)
-            self.ui.parGL.addWidget(self.__getattribute__(par + 'ParUnitLbl'), line, 3)
+            self.ui.parGL.addWidget(self.ui.__getattribute__(par + 'ParLbl'), line, 1)
+            self.ui.parGL.addWidget(self.ui.__getattribute__(par + 'ParDsb'), line, 2)
+            self.ui.parGL.addWidget(self.ui.__getattribute__(par + 'ParUnitLbl'), line, 3)
 
             # formattazione e popolazione dei campi
-            self.dsb_format(self.__getattribute__(par + 'ParDsb'), minimum=el_format[self.cat][par]['min'],
+            self.dsb_format(self.ui.__getattribute__(par + 'ParDsb'), minimum=el_format[self.cat][par]['min'],
                             maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
-            self.__getattribute__(par + 'ParLbl').setAlignment(QtCore.Qt.AlignRight |
+            self.ui.__getattribute__(par + 'ParLbl').setAlignment(QtCore.Qt.AlignRight |
                                                                QtCore.Qt.AlignTrailing |
                                                                QtCore.Qt.AlignVCenter)
-            self.__getattribute__(par + 'ParDsb').setValue(el_format[self.cat][par]['default'])
+            self.ui.__getattribute__(par + 'ParDsb').setValue(el_format[self.cat][par]['default'])
 
             line += 1
         # -------------------------------------------------------------------------------------------------------------
@@ -300,22 +304,41 @@ class NewItem(QtWidgets.QDialog):
         # self.ui.pictureProfVL.add
 
     def save(self):
-        el = self.ui.nameLBL.text()
-        dict_initialize(el, self.cat)
+        self.el = self.ui.nameLBL.text()
+        dict_initialize(self.el, self.cat)
         if self.cat in mc['Line']:
-            v[el]['top']['conn'] = [self.ui.node1CB.currentText(), self.ui.node2CB.currentText()]
+            v[self.el]['top']['conn'] = [self.ui.node1CB.currentText(), self.ui.node2CB.currentText()]
             # TODO: categoria linea
         elif self.cat in mc['Transformer']:
-            v[el]['top']['conn'] = [self.ui.node1CB.currentText(), self.ui.node2CB.currentText()]
+            v[self.el]['top']['conn'] = [self.ui.node1CB.currentText(), self.ui.node2CB.currentText()]
         elif self.cat in mc['Node']:
             pass
+
         else:
-            v[el]['top']['conn'] = [self.ui.node1CB.currentText()]
+            v[self.el]['top']['conn'] = [self.ui.node1CB.currentText()]
 
         for par in el_format[self.cat]:
-            v[el]['par'][par] = self.ui.__getattribute__(par + 'ParDsb').value()
+            v[self.el]['par'][par] = self.ui.__getattribute__(par + 'ParDsb').value()
 
-        # if  self.cat not in mc['Node']:
+        v[self.el]['par']['out-of-service'] = self.ui.servCkB.isChecked()
+
+        if  self.cat not in mc['Node']:
+            v[self.el]['par']['Vn'] = []
+            for b in v[self.el]['top']['conn']:
+                v[self.el]['par']['Vn'].append(v[b]['par']['Vn'])
+
+        if '_temp' in list(v.keys()):
+            v[self.el]['par']['profile'] = copy.deepcopy(v['_temp']['par']['profile'])
+            if self.ui.constScaleProfRB.isChecked():
+                v[self.el]['par']['profile']['curve'] = self.ui.scaleProfDsb.value()
+            del v['_temp']
+
+        print(v[self.el])
+        self.created = True
+        self.close()
+
+    # def close(self):
+    #     self.close()
 
     # formattazione dei DoubleSPinBox
     def dsb_format(self, item, minimum=0, maximum=9999.99, decimals=2, step=0.1):

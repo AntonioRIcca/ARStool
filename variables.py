@@ -71,6 +71,7 @@ c = {
     'node': 'AC-Node',
     'dc-bb': 'DC-Node',
     'dc-node': 'DC-Node',
+    'sourcebus': 'AC-Node'
 }
 
 new_par_dict = {

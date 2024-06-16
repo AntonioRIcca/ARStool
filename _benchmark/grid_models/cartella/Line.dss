@@ -1,8 +1,8 @@
-New "Line.ug_line" bus1=sourcebus bus2=ug_bb_20kv linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=3
-New "Line.rs_line" bus1=sourcebus bus2=rs_bb_20kv linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=3
-New "Line.ev-charge_line" bus1=rs_bb_04kv bus2=ev-charge_bb linecode=6-12_3x1x150cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.05
+New "Line.ug_line" bus1=sourcebus bus2=ug_20kv_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=3
+New "Line.rs_line" bus1=sourcebus bus2=rs_20kv_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=3
+New "Line.ev-charge_line" bus1=rs_04kv_bb bus2=ev-charge_bb linecode=6-12_3x1x150cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.05
 New "Line.res-wpg_line" bus1=sourcebus bus2=res-wpg_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=2
 New "Line.user_line" bus1=res_bb bus2=user_bb linecode=6-12_3x1x150cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.1
 New "Line.pros_line" bus1=res_bb bus2=pros_bb linecode=6-12_3x1x150cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.05
-New "Line.wpg_line" bus1=wpg_bb1 bus2=wpg_bb2 linecode=3-6_3x1x240cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=1
+New "Line.wpg_line" bus1=wpg_1_bb bus2=wpg_2_bb linecode=3-6_3x1x240cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=1
 New "Line.pros-ev_dc-line" bus1=pros1_dc-bb bus2=ev-fast_dc-bb linecode=dc-line Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.02

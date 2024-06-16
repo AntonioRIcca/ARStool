@@ -478,8 +478,11 @@ class ElementProperties(QMainWindow):
 
         elif self.cat in ['AC-Load', 'AC-Wind', 'Diesel-Motor', 'AC-Line']:
             for el in v:
-                if v[el]['category'] == 'AC-Node' and el not in self.buses:
-                    nodes.append(el)
+                try:
+                    if v[el]['category'] == 'AC-Node' and el not in self.buses:
+                        nodes.append(el)
+                except:
+                    print('Errore elemento', el)
 
         elif self.cat in ['DC-Load', 'DC-Wind', 'BESS', 'PV', 'DC-Line']:
             for el in v:

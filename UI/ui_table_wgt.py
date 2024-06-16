@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'table_wgtHgniJP.ui'
+## Form generated from reading UI file 'table_wgtlZpHgV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -30,6 +30,15 @@ class Ui_Form(object):
         self.widget = QWidget(Form)
         self.widget.setObjectName(u"widget")
         self.widget.setGeometry(QRect(0, 0, 501, 561))
+        self.widget.setStyleSheet(u"*{}\n"
+"QPushButton {\n"
+"color: rgb(255, 255, 255);\n"
+"background-color: rgb(31, 31, 31); border: solid;\n"
+"border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: rgb(64, 64, 64); border-style: inset\n"
+"}")
         self.verticalLayout = QVBoxLayout(self.widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.tableWidget = QTableWidget(self.widget)
@@ -79,21 +88,30 @@ class Ui_Form(object):
         self.buttons_WGT.setSizePolicy(sizePolicy2)
         self.buttons_WGT.setStyleSheet(u"border-color: rgb(255, 255, 255);")
         self.horizontalLayout_2 = QHBoxLayout(self.buttons_WGT)
+        self.horizontalLayout_2.setSpacing(5)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(0, -1, 0, -1)
         self.add_Btn = QPushButton(self.buttons_WGT)
         self.add_Btn.setObjectName(u"add_Btn")
-        self.add_Btn.setMinimumSize(QSize(100, 25))
+        self.add_Btn.setMinimumSize(QSize(80, 25))
         self.add_Btn.setStyleSheet(u"border-color: rgb(255, 255, 255);")
 
         self.horizontalLayout_2.addWidget(self.add_Btn)
 
-        self.buttons_Spc = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.del_Btn = QPushButton(self.buttons_WGT)
+        self.del_Btn.setObjectName(u"del_Btn")
+        self.del_Btn.setMinimumSize(QSize(80, 25))
+        self.del_Btn.setStyleSheet(u"border-color: rgb(255, 255, 255);")
+
+        self.horizontalLayout_2.addWidget(self.del_Btn)
+
+        self.buttons_Spc = QSpacerItem(10, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_2.addItem(self.buttons_Spc)
 
         self.save_Btn = QPushButton(self.buttons_WGT)
         self.save_Btn.setObjectName(u"save_Btn")
-        self.save_Btn.setMinimumSize(QSize(100, 25))
+        self.save_Btn.setMinimumSize(QSize(80, 25))
         self.save_Btn.setStyleSheet(u"border-color: rgb(255, 255, 255);")
 
         self.horizontalLayout_2.addWidget(self.save_Btn)
@@ -137,6 +155,7 @@ class Ui_Form(object):
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
         self.add_Btn.setText(QCoreApplication.translate("Form", u"Aggiungi", None))
+        self.del_Btn.setText(QCoreApplication.translate("Form", u"Elimina", None))
         self.save_Btn.setText(QCoreApplication.translate("Form", u"Salva", None))
     # retranslateUi
 

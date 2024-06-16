@@ -5,7 +5,7 @@ def dict_initialize(el, cat):
     v[el] = dict()
     for sub in ['top', 'par', 'lf', 'rel']:
         v[el][sub] = dict()
-    v[el]['category'] = c[cat]  # la nomenclatira esatta della categoria deriva dal dizonario "variables.c"
+    v[el]['category'] = cat  # la nomenclatira esatta della categoria deriva dal dizonario "variables.c"
     v[el]['top']['conn'] = []
 
     lf_initialize(el)

@@ -1,12 +1,12 @@
-New "Generator.ugs_bess" bus1=UGS_DC-BB phases=3 kv=1.5 kW=-10 kvar=0 model=3
-New "Generator.ugs_1_pv" bus1=UGS_PV_DC-BB phases=3 kv=0.75 kW=15 kvar=0 model=3
-New "Generator.ugs_2_pv" bus1=UGS_PV_DC-BB phases=3 kv=0.75 kW=15 kvar=0 model=3
-New "Generator.ev-fast_bess" bus1=EV-Fast_DC-BB phases=3 kv=0.6 kW=10 kvar=0 model=3
-New "Generator.ev-fast_pv" bus1=EV-Fast_DC-BB phases=3 kv=0.6 kW=30 kvar=0 model=3
-New "Generator.pros_bess" bus1=Pros1_DC-BB phases=3 kv=0.6 kW=-50 kvar=0 model=3
-New "Generator.pros_dc-micro-wind" bus1=Pros1_DC-BB phases=3 kv=0.6 kW=10 kvar=0 model=3
-New "Generator.pros_pv" bus1=Pros2_DC-BB phases=3 kv=0.6 kW=50 kvar=0 model=3
-New "Generator.wpg_1_wind" bus1=WPG_BB2 phases=3 kv=2 kW=140 pf=0.84
-New "Generator.wpg_2_wind" bus1=WPG_BB2 phases=3 kv=2 kW=140 pf=0.87
-New "Generator.wpg_bess" bus1=WPG_PV_DC-BB phases=3 kv=0.6 kW=-100 kvar=0 model=3
-New "Generator.wpg_pv" bus1=WPG_PV_DC-BB phases=3 kv=0.6 kW=40 kvar=0 model=3
+New "Generator.ev-fast_bess" bus1=ev-fast_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=10 enabled=true
+New "Generator.ev-fast_pv" bus1=ev-fast_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=30 enabled=true
+New "Generator.pros_bess" bus1=pros1_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=-50 enabled=true
+New "Generator.pros_dc-micro-wind" bus1=pros1_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=10 enabled=true
+New "Generator.pros_pv" bus1=pros2_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=50 enabled=true
+New "Generator.ugs_1_pv" bus1=ugs_pv_dc-bb phases=3 kvar=0 model=3 kv=0.75 kW=15 enabled=true
+New "Generator.ugs_2_pv" bus1=ugs_pv_dc-bb phases=3 kvar=0 model=3 kv=0.75 kW=15 enabled=true
+New "Generator.ugs_bess" bus1=ugs_dc-bb phases=3 kvar=0 model=3 kv=1.5 kW=-10 enabled=true
+New "Generator.wpg_1_wind" bus1=wpg_bb2 phases=3 kW=140 kv=2 enabled=true
+New "Generator.wpg_2_wind" bus1=wpg_bb2 phases=3 kW=140 kv=2 enabled=true
+New "Generator.wpg_bess" bus1=wpg_pv_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=-100 enabled=true
+New "Generator.wpg_pv" bus1=wpg_pv_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=40 enabled=true

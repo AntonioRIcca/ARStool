@@ -28,10 +28,11 @@ class OpenDSS:
         # - le macrocategorie (viene definito in DSS la paete prima del punto (e.g. "transformer")
         # - il nome dell'elemento (in DSS è la parte dopo il punto e.g. "WPG_TR")
         for item in self.dss.circuit.elements_names:
-            cat = item.split('_')[len(item.split('_')) - 1]
-            [mcat, el] = item.split('.')
-            if mcat == 'Vsource':
-                cat = 'source'
+            [tag, el] = item.split('.')
+            if tag == 'Vsource':
+                cat = 'ExternalGrid'
+            else:
+                cat = c[item.split('_')[len(item.split('_')) - 1]]
 
             # viene inizializzato il sotto-dizionario dell'elemento
             dict_initialize(el, cat)
@@ -93,7 +94,9 @@ class OpenDSS:
                 node = v[el]['top']['conn'][i].lower()  # i nomi devono essere in minuscolo
 
                 if node not in v.keys():    # se il nodo non è stato già configurato
-                    dict_initialize(node)  # viene inizializzato
+                    tag = node.split('_')[len(node.split('_')) - 1]
+                    node_cat = c[tag]
+                    dict_initialize(node, node_cat)  # viene inizializzato
                     # la tipologia del nodo dipende dalla desinenza del nome.
                     if node.split('_')[len(node.split('_')) - 1] in ['dc-node', 'dc-bb']:
                         v[node]['category'] = 'DC-Node'  # ""
@@ -738,39 +741,39 @@ def mcat_find(el):
     return mcat
 
 
-# Inizializzazione dei sottodizionari per l'elemento "el"
-def dict_initialize(el):
-    v[el] = dict()
-    for sub in ['top', 'par', 'lf', 'rel']:
-        v[el][sub] = dict()
-    v[el]['top']['conn'] = []
-
-
-# Inizializzazione del sottodizionario rella Reliability ("rel") per l'elemento "el"
-def rel_initialize(el):
-    v[el]['rel']['par'] = dict()
-    for p in ['Pi_E', 'Pi_Q', 'alfa', 'beta']:
-        v[el]['rel']['par'][p] = None
-
-    v[el]['rel']['results'] = dict()
-    if v[el]['category'] in mc['Load']:
-        v[el]['rel']['results']['load_rel'] = None
-    for p in ['lambda', 'MTBF_ore', 'MTBF_anni', 'Pi_Si']:
-        v[el]['rel']['results'][p] = None
-
-
-# Inizializzazione del sottodizionario del loadFLow ("lf") per l'elemento "el"
-def lf_initialize(el):
-    params = ['i', 'v', 'p', 'q']
-
-    if v[el]['category'] in mc['Transformer'] + mc['Line']:
-        for p in params:
-            v[el]['lf'][p] = dict()
-            v[el]['lf'][p][0] = []
-            v[el]['lf'][p][1] = []
-    else:
-        for p in params:
-            v[el]['lf'][p] = []
+# # Inizializzazione dei sottodizionari per l'elemento "el"
+# def dict_initialize(el):
+#     v[el] = dict()
+#     for sub in ['top', 'par', 'lf', 'rel']:
+#         v[el][sub] = dict()
+#     v[el]['top']['conn'] = []
+#
+#
+# # Inizializzazione del sottodizionario rella Reliability ("rel") per l'elemento "el"
+# def rel_initialize(el):
+#     v[el]['rel']['par'] = dict()
+#     for p in ['Pi_E', 'Pi_Q', 'alfa', 'beta']:
+#         v[el]['rel']['par'][p] = None
+#
+#     v[el]['rel']['results'] = dict()
+#     if v[el]['category'] in mc['Load']:
+#         v[el]['rel']['results']['load_rel'] = None
+#     for p in ['lambda', 'MTBF_ore', 'MTBF_anni', 'Pi_Si']:
+#         v[el]['rel']['results'][p] = None
+#
+#
+# # Inizializzazione del sottodizionario del loadFLow ("lf") per l'elemento "el"
+# def lf_initialize(el):
+#     params = ['i', 'v', 'p', 'q']
+#
+#     if v[el]['category'] in mc['Transformer'] + mc['Line']:
+#         for p in params:
+#             v[el]['lf'][p] = dict()
+#             v[el]['lf'][p][0] = []
+#             v[el]['lf'][p][1] = []
+#     else:
+#         for p in params:
+#             v[el]['lf'][p] = []
 
 
 # importazione del profill caratteristico di carichi e generatori

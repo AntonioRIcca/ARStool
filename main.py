@@ -90,6 +90,11 @@ class Main:
         os.chdir(mainpath)
         self.mainwindow = MainWindow()
         self.ui = self.mainwindow.ui
+        # self.ui.mainBodyContent.setStyleSheet(u'#mainBodyContent{'
+        #                                       u'background-image: url(:/images/ARStool500.png);'
+        #                                       u'background-repeat: no-repeat;'
+        #                                       u'background-position: center;'
+        #                                       u'}')
         self.mainwindow.show()
 
         self.func_check()
@@ -121,6 +126,7 @@ class Main:
         # Window(list(v.keys())[0])                                                 # TODO: da NON riattivare
         # self.ui.rightMenuContainer.expandMenu()
         print(1)
+
         self.app.exec_()
         print(2)
         # exit(self.app.exec_())
@@ -134,10 +140,6 @@ class Main:
         self.ui.loadflow_Btn.setEnabled(True)
 
     def func_check(self):
-        # TODO: Da eliminare
-        for btn in fn_en:
-            fn_en[btn] = True
-
         for btn in fn_en:
             self.ui.__getattribute__(btn + '_Btn').setVisible(fn_en[btn])
 
@@ -151,6 +153,7 @@ class Main:
         except:
             self.home_WGT.deleteLater()
         self.home_WGT = QWidget()
+
 
         # self.homeHBL = QHBoxLayout(self.home_WGT)
         self.homeHBL = QHBoxLayout()
@@ -179,7 +182,10 @@ class Main:
         self.home3_center_WGT = QWidget()
         self.home3_bottom_WGT = QWidget()
         self.home3_bottom_WGT.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
-        self.home3_bottom_WGT.setStyleSheet("background-color: rgb(255,0,255);")
+        # self.home3_bottom_WGT.setStyleSheet("background-color: rgb(255,0,255);")
+        self.home3_bottom_WGT.setStyleSheet(u'background-image: url(ARStool500.png);'
+                                            u'background-repeat: no-repeat;'
+                                            u'background-position: center;')
 
         self.home3_VL.addWidget(self.home3_top_WGT)
         self.home3_VL.addWidget(self.home3_center_WGT)
@@ -193,6 +199,7 @@ class Main:
         self.startWGT.ui.openFileBtn.clicked.connect(self.yml_open)
         self.startWGT.ui.benchOpenBtn.clicked.connect(self.benchmarkWGT_create)
         self.startWGT.ui.optStorBtn.clicked.connect(self.optstor_create)
+
 
     # Creazione dell'elenco delle reti benchmark
     def benchmarkWGT_create(self):
@@ -339,17 +346,29 @@ class Main:
         self.elementsTableFill()
         self.myform.ui.tableWidget.currentCellChanged.connect(self.test_action)
         self.myform.ui.save_Btn.clicked.connect(self.yml_save)
-        self.myform.ui.add_Btn.clicked.connect(self.new_item)
+        self.myform.ui.add_Btn.clicked.connect(self.new_element)
+        self.myform.ui.del_Btn.clicked.connect(self.del_element)
         # Window(list(v.keys())[0])
 
-    def new_item(self):
+    def new_element(self):
         popup = NewItem()
 
         if popup.exec_():
             print('popup')
             pass
         print('popup closed')
-        pass
+
+        if popup.created:
+            self.myform.ui.tableWidget.insertRow(0)
+            self.myform.ui.tableWidget.setItem(0, 0, QTableWidgetItem(popup.el))
+            self.myform.ui.tableWidget.setItem(0, 1, QTableWidgetItem(popup.cat))
+
+    def del_element(self):
+        line = self.myform.ui.tableWidget.currentRow()
+        del v[self.elem]
+        self.myform.ui.tableWidget.removeRow(line)
+        self.ui.rightMenuContainer.collapseMenu()
+        self.myform.ui.del_Btn.setVisible(False)
 
     def readsize(self):
         self.par_wgt = Window('rs_line')
@@ -380,7 +399,6 @@ class Main:
         stylesheet = \
             "QHeaderView::section{color:rgb(251,251,251); Background-color:rgb(1,1,1); border - radius: 14 px;}"
         self.myform.ui.tableWidget.horizontalHeader().setStyleSheet(stylesheet)
-
         for i in range(0, self.myform.ui.tableWidget.rowCount()):
             for j in range(0, self.myform.ui.tableWidget.columnCount()):
                 self.myform.ui.tableWidget.item(i, j).setForeground(QtGui.QColor(255, 255, 255))
@@ -392,6 +410,7 @@ class Main:
         line = self .myform.ui.tableWidget.currentRow()
         self.elem = self.myform.ui.tableWidget.item(line, 0).text()
         print(self.elem)
+        self.myform.ui.del_Btn.setVisible(True)
         # dss.writeline(elem)   TODO: ???????
 
         try:
@@ -558,6 +577,7 @@ class Main:
         from UI.table_wgt import Table
         self.myform = Table()
         self.elemementTableWGT = self.myform.ui.widget
+
         self.elemementTableWGT.setMinimumSize(QtCore.QSize(350, 0))
 
         self.homeHBL.addWidget(self.elemementTableWGT, 0, QtCore.Qt.AlignLeft)
@@ -597,7 +617,7 @@ class Main:
         self.home3_center_WGT = QWidget()
         self.home3_bottom_WGT = QWidget()
         self.home3_bottom_WGT.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
-        self.home3_bottom_WGT.setStyleSheet("background-color: rgb(255,0,255);")
+        # self.home3_bottom_WGT.setStyleSheet("background-color: rgb(255,0,255);")
 
         self.home3_VL.addWidget(self.home3_top_WGT)
         self.home3_VL.addWidget(self.home3_center_WGT)
@@ -729,7 +749,7 @@ class Main:
 
         # write_excel()
 
-        self.dss.test()  # TODO: da eliminare, è una prova
+        # self.dss.test()  # TODO: da eliminare, è una prova
 
         self.p_loads, self.q_loads = 0, 0
         self.p_gen, self.q_gen = 0, 0

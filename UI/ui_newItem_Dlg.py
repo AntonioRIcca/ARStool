@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'newItem_DlgwlYUcY.ui'
+## Form generated from reading UI file 'newItem_DlgsUrUsS.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -332,11 +332,11 @@ class Ui_Dialog(object):
 
         self.gridLayout_3.addItem(self.parRightSpc_2, 0, 2, 1, 1)
 
-        self.checkBox = QCheckBox(self.servWgt)
-        self.checkBox.setObjectName(u"checkBox")
-        self.checkBox.setStyleSheet(u"border: none;")
+        self.servCkB = QCheckBox(self.servWgt)
+        self.servCkB.setObjectName(u"servCkB")
+        self.servCkB.setStyleSheet(u"border: none;")
 
-        self.gridLayout_3.addWidget(self.checkBox, 0, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.servCkB, 0, 1, 1, 1)
 
         self.parLbl_2 = QLabel(self.servWgt)
         self.parLbl_2.setObjectName(u"parLbl_2")
@@ -419,7 +419,7 @@ class Ui_Dialog(object):
         self.profScaleProfRB.setText(QCoreApplication.translate("Dialog", u"Profilo", None))
         self.profImgLbl.setText("")
         self.profOpenBtn.setText(QCoreApplication.translate("Dialog", u"Apri profilo", None))
-        self.checkBox.setText("")
+        self.servCkB.setText("")
         self.parLbl_2.setText(QCoreApplication.translate("Dialog", u"Out of service", None))
         self.calcelBtn.setText(QCoreApplication.translate("Dialog", u"Annulla", None))
         self.saveBtn.setText(QCoreApplication.translate("Dialog", u"Salva", None))
