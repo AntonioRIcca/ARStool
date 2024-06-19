@@ -33,7 +33,6 @@ from UI.elementProperties import Window
 from UI.elementsProfile import ElementsProfile
 from UI.newItem import NewItem
 
-
 # import time
 
 from collections import namedtuple
@@ -90,11 +89,9 @@ class Main:
         os.chdir(mainpath)
         self.mainwindow = MainWindow()
         self.ui = self.mainwindow.ui
-        # self.ui.mainBodyContent.setStyleSheet(u'#mainBodyContent{'
-        #                                       u'background-image: url(:/images/ARStool500.png);'
-        #                                       u'background-repeat: no-repeat;'
-        #                                       u'background-position: center;'
-        #                                       u'}')
+        self.ui.mainBodyContent.setStyleSheet(u'#mainBodyContent{background-image: url(ARStool500_shadow.png);'
+                                              u'background-repeat: no-repeat;'
+                                              u'background-position: center;}')
         self.mainwindow.show()
 
         self.func_check()
@@ -146,6 +143,9 @@ class Main:
         # self.ui.lf_Btn.setVisible(True)
 
     def startWgtCreate(self):
+        for f in fn:
+            fn[f] = False
+            
         self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
 
         try:
@@ -183,9 +183,9 @@ class Main:
         self.home3_bottom_WGT = QWidget()
         self.home3_bottom_WGT.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
         # self.home3_bottom_WGT.setStyleSheet("background-color: rgb(255,0,255);")
-        self.home3_bottom_WGT.setStyleSheet(u'background-image: url(ARStool500.png);'
-                                            u'background-repeat: no-repeat;'
-                                            u'background-position: center;')
+        # self.home3_bottom_WGT.setStyleSheet(u'background-image: url(ARStool500.png);'
+        #                                     u'background-repeat: no-repeat;'
+        #                                     u'background-position: center;')
 
         self.home3_VL.addWidget(self.home3_top_WGT)
         self.home3_VL.addWidget(self.home3_center_WGT)
@@ -287,14 +287,23 @@ class Main:
 
         if filename:
             # self.dss = opendss.OpenDSS()
-            try:
-                self.dss.open(filename)
-                self.elementsTableWgtCreate()
-                print('tabella')
-                # self.func_enabled()
-                self.func_check()
-            except:
-                QtWidgets.QMessageBox.warning(QtWidgets.QMessageBox(), 'Attenzione', 'Modello DSS non compatibile')
+
+            # TODO: Da ripristinare
+            # try:
+            #     self.dss.open(filename)
+            #     self.elementsTableWgtCreate()
+            #     print('tabella')
+            #     # self.func_enabled()
+            #     self.func_check()
+            # except:
+            #     QtWidgets.QMessageBox.warning(QtWidgets.QMessageBox(), 'Attenzione', 'Modello DSS non compatibile')
+
+            # TODO: da eliminare
+            self.dss.open(filename)
+            self.elementsTableWgtCreate()
+            print('tabella')
+            # self.func_enabled()
+            self.func_check()
 
     def yml_open(self):
         print(self.savepath)
@@ -741,6 +750,16 @@ class Main:
             self.home2_WGT.deleteLater()
         except RuntimeError:
             pass
+
+        from UI.lfMod_Dlg import LfModDlg
+        lf_popup = LfModDlg()
+
+        if lf_popup.exec_():
+            print('popup')
+            pass
+        print('popup closed')
+
+
 
         self.dss.full_parse_to_dss()
         # self.yml_bench_save()

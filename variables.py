@@ -16,11 +16,11 @@ fn = {
 
 fn_en = {
     'lf': True,
-    'anom': False,
-    'opf': False,
-    'rel': False,
-    'gm': False,
-    'onr': False,
+    'anom': True,
+    'opf': True,
+    'rel': True,
+    'gm': True,
+    'onr': True,
 }
 
 v = dict()
