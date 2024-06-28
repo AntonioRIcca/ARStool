@@ -109,9 +109,9 @@ class Window(QWidget):
                 self.profilePlotWgtCreate()
                 print('inserted')
                 self.mainVBL.addWidget(self.profileWidget)
-        else:
-            print(3, v[self.elem]['category'])
-            print(4, mc['Load'] + mc['Generator'])
+        # else:
+        #     print(3, v[self.elem]['category'])
+        #     print(4, mc['Load'] + mc['Generator'])
         self.mainVBL.addWidget(self.bottomWidget, 0, Qt.AlignBottom)
         self.mainVBL.addItem(bottomSpacer)
         # self.parWidget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
@@ -195,7 +195,7 @@ class Window(QWidget):
             self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
             if v[elem]['par']['profile']['name'] is None:
-                print(v[elem]['par']['profile']['curve'])
+                # print(v[elem]['par']['profile']['curve'])
                 self.scale_DSB.setValue(v[elem]['par']['profile']['curve'])
                 self.scale_RB.setChecked(True)
                 self.scale_DSB.setStyleSheet(u"background-color: rgb(255, 255, 255);"
@@ -205,7 +205,7 @@ class Window(QWidget):
                 self.profile_RB.setChecked(True)
 
                 time = datetime.now().hour * 4 + int(datetime.now().minute/15)
-                print('Time = ', time)
+                # print('Time = ', time)
                 self.scale_DSB.setValue(v[elem]['par']['profile']['curve'][time])
                 self.scale_DSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
         # ------------------------------------------------------------------------------------------------------------

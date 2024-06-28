@@ -1,3 +1,5 @@
+import copy
+
 import py_dss_interface
 from variables import *
 import yaml
@@ -10,6 +12,10 @@ from dictInitialize import *
 class OpenDSS:
     def __init__(self):
         self.dss = py_dss_interface.DSS()   # sostituisce self.dss = None
+
+        self.unr_nodes = []
+
+        # TODO: non più necessari
         self.unr_conv = []                  # lista dei convertitori non risolti tramite self.node_define
         self.unr_lines = []                 # lista delle linee non risolte tramite self.node_define
 
@@ -32,7 +38,12 @@ class OpenDSS:
             if tag == 'Vsource':
                 cat = 'ExternalGrid'
             else:
-                cat = c[item.split('_')[len(item.split('_')) - 1]]
+                des = item.split('_')[len(item.split('_')) - 1].lower()
+                if des in dsstag[tag.lower()]:
+                    cat = dsstag[tag.lower()][des]
+                else:
+                    cat = dsstag[tag.lower()]['default']
+                # cat = c[item.split('_')[len(item.split('_')) - 1]]
 
             # viene inizializzato il sotto-dizionario dell'elemento
             dict_initialize(el, cat)
@@ -44,6 +55,7 @@ class OpenDSS:
 
             # self.read(el)           # vengono letti i parametri e la topologia dell'elemento
             self.read_new(el)       # lettura di parametri e topologia degli elementi dalla cartella degli elementi
+        self.node_solve()           # risoluzione delle tensioni dei nodi non definiti
 
         # In OpenDSS non è possibile ricavare la tensione delle busbar non sottese a trasformatori,
         # o non connesse a elementi terminali.
@@ -62,7 +74,6 @@ class OpenDSS:
         mcat = mcat_find(el)
         cat = v[el]['category']
 
-        #
         if mcat not in mc['Node']:
             self.dss.circuit.set_active_element(mcat + '.' + el)  # viene richiamato l'elemento in OpenDSS
             v[el]['par']['out-of-service'] = not self.dss.cktelement.is_enabled  # verifica se l'elemento è "enabled"
@@ -70,12 +81,7 @@ class OpenDSS:
             # lettura dei parametri dalle righe di dss
             par = self.readline(el)     # TODO: vedi commento in self.readline
 
-            # print(mcat)
-            # if mcat == 'Load':
-            #     print('Load!')
-            #
-
-            for p in new_par_dict[cat]['par'].keys() - ['others']:  # todo: forse da modificare in base al TODO precedente
+            for p in new_par_dict[cat]['par'].keys() - ['others', 'linecode']:  # todo: forse da modificare in base al TODO precedente
                 try:
                     v[el]['par'][p] = par[new_par_dict[cat]['par'][p]['label']]
                 except:
@@ -95,7 +101,11 @@ class OpenDSS:
 
                 if node not in v.keys():    # se il nodo non è stato già configurato
                     tag = node.split('_')[len(node.split('_')) - 1]
-                    node_cat = c[tag]
+                    if tag in ['dc-bb' or 'dc-node']:
+                        node_cat = 'DC-Node'
+                    else:
+                        node_cat = 'AC-Node'
+                    # node_cat = c[tag]
                     dict_initialize(node, node_cat)  # viene inizializzato
                     # la tipologia del nodo dipende dalla desinenza del nome.
                     if node.split('_')[len(node.split('_')) - 1] in ['dc-node', 'dc-bb']:
@@ -112,20 +122,26 @@ class OpenDSS:
                 # Scrivo la tensione del nodo, solo se l'elemento di partenza non è una linea
                 if mcat not in ['Line']:
                     v[node]['par']['Vn'] = [v[el]['par']['Vn'][i]]
+
+                # TODO: IMPORTANTE: Definire la tensione delle busbar connesse solo a delle linee.
+                #  Probabilmente sarebbe utile creare una "coda" di busbar non risolte, e risolverle singolarmente
+                # elif node not in self.unr_nodes:
+                #     self.unr_nodes.append(node)
             # print('done')
 
             # Per le linee, bisogna importare i parametri da LineCode.dss
             if cat in mc['Line']:
-                linecat = cat.split('-')[0] + '-LineCode'   # AC-LineCode o DC-LineCode
-                linetype = par['linecode']
-                v[linetype] = dict()                # Necessario per self.readline. Poi verrà elimiato
-                v[linetype]['category'] = linecat   # Necessario per self.readline. Poi verrà elimiato
-                v[el]['top']['linetype'] = linetype
-                par = self.readline(linetype)
-                for p in new_par_dict[linecat]['par'].keys() - ['others']:
-                    # print( new_par_dict[linecat]['par'][p]['label'])
-                    v[el]['par'][p] = par[new_par_dict[linecat]['par'][p]['label']]
-                v.pop(linetype)                     # Non serve più
+                if 'linecode' in par:
+                    linecat = cat.split('-')[0] + '-LineCode'   # AC-LineCode o DC-LineCode
+                    linetype = par['linecode']
+                    v[linetype] = dict()                # Necessario per self.readline. Poi verrà elimiato
+                    v[linetype]['category'] = linecat   # Necessario per self.readline. Poi verrà elimiato
+                    v[el]['top']['linetype'] = linetype
+                    par = self.readline(linetype)
+                    for p in new_par_dict[linecat]['par'].keys() - ['others']:
+                        # print( new_par_dict[linecat]['par'][p]['label'])
+                        v[el]['par'][p] = par[new_par_dict[linecat]['par'][p]['label']]
+                    v.pop(linetype)                     # Non serve più
 
         # Imposto inizlalmente il profilo puntuale per carichi e generatori
         if cat in mc['Load'] + mc['Generator']:
@@ -134,6 +150,32 @@ class OpenDSS:
                 v[el]['par']['eff'] = 1
                 if cat == 'BESS':   # Si ipotizza che la capacità delle batterie sia inizalmente 0
                     v[el]['par']['cap'] = 0
+
+    def node_solve(self):
+        for el in v:
+            if v[el]['category'] in mc['Node']:
+                if 'Vn' not in v[el]['par']:
+                    self.unr_nodes.append(el)
+
+        while self.unr_nodes:
+            solv_nodes = []
+            for node in self.unr_nodes:
+                lines = []
+                for conn in v[node]['top']['conn']:
+                    if v[conn]['category'] in mc['Line']:
+                        buses = copy.deepcopy(v[conn]['top']['conn'])
+                        # buses = []
+                        buses.remove(node)
+                        bus = buses[0]
+                        if bus not in self.unr_nodes:
+                            v[node]['par']['Vn'] =[0]
+                            v[node]['par']['Vn'][0] = v[bus]['par']['Vn'][0]
+                            solv_nodes.append(node)
+                            break
+            for node in solv_nodes:
+                self.unr_nodes.remove(node)
+
+        pass
 
     # Scrittura della definizione dell'elemento in OpenDSS
     def writeline(self, el):
@@ -177,6 +219,7 @@ class OpenDSS:
         # Nel caso delle linee, bisogna definire anche il LineType
         line0 = ''
         if 'type' in new_par_dict[cat]['top'].keys():
+            print(el)
             line = line + 'linecode=' + v[el]['top']['linetype'] + ' '
 
             linetype = cat.split('-')[0] + '-LineCode'
@@ -208,16 +251,21 @@ class OpenDSS:
         # self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0]))
 
         self.dss.text('Clear')
-        self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0]))
+        self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0])
+                      + ' bus1=' + str(v['source']['top']['conn'][0]))
         # self.dss.text(f"Save Circuit dir=cartella")
 
         # Popolamento dei comandi pero ogni macrocategoria di OpenDSS
         for key in dss_cat.keys():
             dss_cat[key] = []
+
+        open('lista.txt', 'w').close()
+        f = open('lista.txt', 'a')
         for el in v:
             mcat = mcat_find(el)
             if mcat in dss_cat:
-                self.writeline(el)
+                f.write(self.writeline(el) + '\n')
+        f.close()
 
         # Scrittura dei comandi in OpenDSS
         print('scrittura')

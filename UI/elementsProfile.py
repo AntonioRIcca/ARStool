@@ -193,17 +193,17 @@ class ElementsProfile(QtWidgets.QDialog):
                                                               directory=str(os.path.join(os.environ['USERPROFILE'],
                                                                                          'Desktop')),
                                                               filter='*.txt')
-        print(filename)
+        # print(filename)
 
         if filename:
             with open(filename, 'w') as f:
                 for item in self.profile:
                     f.write(str(item) + '\n')
-        print('done')
+        # print('done')
         pass
 
     def data_save(self):
-        print('save clicked')
+        # print('save clicked')
         if not self.name:
             ok = False
             name = ''
@@ -238,7 +238,7 @@ class ElementsProfile(QtWidgets.QDialog):
             self.close()
 
     def closeEvent(self, a0):
-        print('finesttra chiusa')
+        # print('finesttra chiusa')
         # close = self.cancel()
         self.closing_check()
 

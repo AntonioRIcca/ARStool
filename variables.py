@@ -5,8 +5,6 @@ mainpath = os.getcwd()
 def v_initialize():
     for k in list(v.keys()):
         del v[k]
-    print(v)
-
 
 fn = {
     'lf': False,
@@ -73,6 +71,43 @@ c = {
     'dc-node': 'DC-Node',
     'sourcebus': 'AC-Node'
 }
+
+
+dsstag = {
+    'transformer': {
+        'default': '2W-Transformer',
+        'tr': '2W-Transformer',
+        'pwm': 'PWM',
+        'dc-dc-conv': 'DC-DC-Converter',
+        'pv': 'PV',
+    },
+    'generator': {
+        'default': 'Diesel-Motor',
+        'diesel': 'Diesel-Motor',
+        'pv': 'PV',
+        'ac-wind': 'AC-Wind',
+        'wind': 'AC-Wind',
+        'dc-wind': 'DC-Wind',
+        'dc-micro-wind': 'DC-Wind',
+        'bess': 'BESS',
+    },
+    'load': {
+        'default': 'AC-Load',
+        'ac-load': 'AC-Load',
+        'load': 'AC-Load',
+        'dc-load': 'DC-Load',
+        'bess': 'BESS',
+    },
+    'line': {
+        'default': 'AC-Line',
+        'line': 'AC-Line',
+        'ac-line': 'AC-Line',
+        'dc-line': 'DC-Line',
+        'switch': 'Switch',
+    },
+
+}
+
 
 new_par_dict = {
     'PV': {
@@ -187,14 +222,17 @@ new_par_dict = {
             'Rs': {
                 'label': '%Rs',
                 'unit': '%',
+                'default': 0
             },
             'XHL': {
                 'label': 'XHL',
                 'unit': '',
+                'default': 1E-9
             },
             'imag': {
                 'label': '%imag',
                 'unit': '%',
+                'default': 0,
             },
             'others': {
                 'windings': '2',
@@ -267,6 +305,7 @@ new_par_dict = {
             'cosPhi': {
                 'label': 'pf',
                 'unit': '',
+                'default': 1,
             },
             'Vn': {
                 'label': 'kV',
@@ -365,9 +404,9 @@ new_par_dict = {
             'conn': {
                 'label': ['bus1', 'bus2', ],
             },
-            'type': {
-                'label': ['linecode'],
-            },
+            # 'type': {
+            #     'label': ['linecode'],
+            # },
         },
         'par': {
             'In': {
@@ -378,6 +417,55 @@ new_par_dict = {
                 'label': 'length',
                 'unit': 'km',
             },
+
+            # -- TODO: da verificare -------------
+            'R1': {
+                'label': 'r1',
+                'unit': 'ohm',
+                'default': 0,
+            },
+            'X1': {
+                'label': 'x1',
+                'unit': 'ohm',
+                'default': 1E-9,
+            },
+            'B1': {
+                'label': 'B1',
+                'unit': 'uS',
+                'default': 1E-9,
+            },
+            'C1': {
+                'label': 'C1',
+                'unit': 'uS',
+                'default': 1E-9,
+            },
+            'R0': {
+                'label': 'r0',
+                'unit': 'ohm',
+                'default': 0,
+            },
+            'X0': {
+                'label': 'x0',
+                'unit': 'ohm',
+                'default': 1E-9,
+            },
+            'B0': {
+                'label': 'B0',
+                'unit': 'uS',
+                'default': 1E-9,
+            },
+            'C0': {
+                'label': 'C0',
+                'unit': 'uS',
+                'default': 1E-9,
+            },
+
+            # 'linecode': {
+            #     'label': 'linecode',
+            #     'default': '',
+            # },
+            # ------------------------------------
+
             'others': {
                 'Season': '1',
                 'Ratings': '[400,]',

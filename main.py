@@ -79,7 +79,6 @@ class Main:
         self.app = QApplication()
         # self.app = QApplication(sys.argv)
         self.interface_open()       # TODO: da elimianre da questa posizione: va dopo la scelta della rete
-        print(4)
 
         # f_main = Thread(target=self.interface_open)
         # print('start')
@@ -122,10 +121,8 @@ class Main:
 
         # Window(list(v.keys())[0])                                                 # TODO: da NON riattivare
         # self.ui.rightMenuContainer.expandMenu()
-        print(1)
 
         self.app.exec_()
-        print(2)
         # exit(self.app.exec_())
         # print(3)
 
@@ -284,6 +281,8 @@ class Main:
             filename, ext = QtWidgets.QFileDialog.getOpenFileName(caption="Apri file DSS",
                                                                   dir=self.savepath,
                                                                   filter='*.dss')
+
+            self.gridname = 'externalDSS'
 
         if filename:
             # self.dss = opendss.OpenDSS()
@@ -751,13 +750,13 @@ class Main:
         except RuntimeError:
             pass
 
-        from UI.lfMod_Dlg import LfModDlg
-        lf_popup = LfModDlg()
-
-        if lf_popup.exec_():
-            print('popup')
-            pass
-        print('popup closed')
+        # from UI.lfMod_Dlg import LfModDlg
+        # lf_popup = LfModDlg()
+        #
+        # if lf_popup.exec_():
+        #     print('popup')
+        #     pass
+        # print('popup closed')
 
 
 

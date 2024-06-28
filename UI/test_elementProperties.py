@@ -141,7 +141,7 @@ class ElementProperties(QMainWindow):
             self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
             if v[self.elem]['par']['profile']['name'] is None:
-                print(v[self.elem]['par']['profile']['curve'])
+                # print(v[self.elem]['par']['profile']['curve'])
                 self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'])
                 self.scale_RB.setChecked(True)
                 self.scale_DSB.setStyleSheet(u"background-color: rgb(255, 255, 255);"
@@ -151,7 +151,7 @@ class ElementProperties(QMainWindow):
                 self.profile_RB.setChecked(True)
 
                 time = datetime.now().hour * 4 + int(datetime.now().minute / 15)
-                print('Time = ', time)
+                # print('Time = ', time)
                 self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][time])
                 self.scale_DSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
 
@@ -181,7 +181,7 @@ class ElementProperties(QMainWindow):
                 self.profilePlotWgtCreate()
                 # self.ui.lfVL.addWidget(self.profileWidget)
                 self.ui.lfVL.insertWidget(3, self.profileWidget)
-                print('profile')
+                # print('profile')
         # ------------------------------------------------------------------------------------------------------------
 
         # # -- creazione della sezione dei pulsanti --------------------------------------------------------------------
@@ -405,7 +405,11 @@ class ElementProperties(QMainWindow):
 
         # Se cambio la prima busbar di una linea, verifico se la tensione della seconda busbar è coerente,
         #     altrimenti deve essere cambiata
+        print('\n\n\n')
+        print(self.cat, self.buses)
+
         if self.cat in ['AC-Line', 'DC-Line'] and self.buses[1]:
+        # if self.cat in ['AC-Line', 'DC-Line'] and len(self.buses) >1:
             if i == 0 and v[self.buses[0]]['par']['Vn'] != v[self.buses[1]]['par']['Vn']:
                 self.buses[1] = None
                 self.__getattribute__('node1_BTN').setText('-')
@@ -445,6 +449,7 @@ class ElementProperties(QMainWindow):
         if self.cat in ['2W-Transformer']:
             if i == 0:
                 for el in v:
+                    print(el, self.buses)
                     if (v[el]['category'] == 'AC-Node' and el not in self.buses and
                             v[el]['par']['Vn'][0] > v[self.buses[1]]['par']['Vn'][0]):
                         nodes.append(el)
@@ -612,7 +617,7 @@ class ElementProperties(QMainWindow):
             print('Modifica BusBar')
             for b in range(len(self.buses)):
                 if self.buses[b] != self.old_buses[b]:
-                    v[elem]['par']['Vn' + str(b)] = self.__getattribute__('v' + str(b) + '_DSB').value()
+                    v[elem]['par']['Vn' + str(b)] = self.__getattribute__('v' + str(b) + 'Dsb').value()
                     v[elem]['top']['conn'][b] = self.buses[b]
 
                     v[self.buses[b]]['top']['conn'].append(elem)

@@ -239,7 +239,7 @@ class NewItem(QtWidgets.QDialog):
     def prof_selected(self):
         self.ui.pictureProfWgt.setVisible(self.ui.profScaleProfRB.isChecked())
         self.ui.scaleProfDsb.setEnabled(not self.ui.profScaleProfRB.isChecked())
-        print('Profilo')
+        # print('Profilo')
 
     def prof_open(self):
         if '_temp' not in list(v.keys()):
@@ -248,9 +248,9 @@ class NewItem(QtWidgets.QDialog):
         prof_popup = ElementsProfile('_temp')
 
         if prof_popup.exec_():
-            print('popup')
+            # print('popup')
             pass
-        print(v['_temp']['par']['profile']['curve'])
+        # print(v['_temp']['par']['profile']['curve'])
         if v['_temp']['par']['profile']['name']:
             self.profilePlotWgtCreate()
 

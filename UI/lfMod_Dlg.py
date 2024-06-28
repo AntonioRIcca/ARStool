@@ -35,15 +35,15 @@ class LfModDlg(QtWidgets.QDialog):
         self.ui.datetimeWgt.setVisible(self.ui.punctLfRB.isChecked())
 
     def date_selected(self, event):
-        print('doppio click sulla data')
+        # print('doppio click sulla data')
         self.ui.calendarCWgt.setVisible(True)
 
     def date_modified(self):
-        print('data selezionata')
+        # print('data selezionata')
         self.ui.calendarCWgt.setVisible(False)
-        print(self.ui.calendarCWgt.selectedDate())
+        # print(self.ui.calendarCWgt.selectedDate())
         datesel = self.ui.calendarCWgt.selectedDate()
-        print(datesel.day(), datesel.month(), datesel.year())
+        # print(datesel.day(), datesel.month(), datesel.year())
         self.ui.dateLE.setText(str(datesel.day()) + '/' + str(datesel.month()) + '/' + str(datesel.year()))
 
 

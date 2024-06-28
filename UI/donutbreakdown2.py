@@ -50,7 +50,7 @@ class DonutBreakdownChart(QtCharts.QChart):
 
         for i in range(len(data)):
             cat = list(data.keys())[i]
-            print(cat)
+            # print(cat)
             series = 'series' + str(i+1)
             self.__setattr__(series, QtCharts.QPieSeries())
             self.__getattribute__(series).setName(cat)
