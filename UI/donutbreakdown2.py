@@ -9,7 +9,7 @@ from PySide2.QtCore import Qt, Slot
 from PySide2.QtGui import QColor, QFont, QPainter, QBrush
 from PySide2.QtWidgets import QApplication, QMainWindow
 from PySide2.QtCharts import QtCharts
-colors = [Qt.red, Qt.darkGreen, Qt.darkBlue]
+colors = [Qt.red, Qt.darkGreen, Qt.darkBlue, Qt.darkMagenta, Qt.darkCyan]
 
 
 class MainSlice(QtCharts.QPieSlice):

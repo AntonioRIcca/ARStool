@@ -103,10 +103,9 @@ class NewItem(QtWidgets.QDialog):
         self.ui.parWgt.setVisible(True)
         self.ui.nodeWgt.setVisible(self.cat not in ['AC-Node', 'DC-Node'])
         for elem in ['node2CB', 'node2Lbl', 'vnode2Lbl', 'vnode2Dsb']:
-            self.ui.__getattribute__(elem).setVisible(self.cat not in ['AC-Load', 'DC-Load', 'AC-Wind', 'DC-Wind',
-                                                                       'PV', 'Bess'])
+            self.ui.__getattribute__(elem).setVisible(self.cat not in prof_elem)
         self.ui.servWgt.setVisible(True)
-        self.ui.scaleProfWgt.setVisible(self.cat in ['AC-Load', 'DC-Load', 'AC-Wind', 'DC-Wind', 'PV', 'Bess'])
+        self.ui.scaleProfWgt.setVisible(self.cat in prof_elem)
 
         self.bb_changed(j=1)
         self.bb_changed(j=2)
@@ -148,8 +147,6 @@ class NewItem(QtWidgets.QDialog):
                 self.ui.__getattribute__('vnode' + str(k) + 'Dsb').setValue(0)
 
     def bb_read(self, cat, node1=None, node2=None):
-        print(node1, node2)
-
         v_ac = dict()
         v_dc = dict()
         n_ac = []
@@ -322,10 +319,10 @@ class NewItem(QtWidgets.QDialog):
 
         v[self.el]['par']['out-of-service'] = self.ui.servCkB.isChecked()
 
-        if  self.cat not in mc['Node']:
+        if self.cat not in mc['Node']:
             v[self.el]['par']['Vn'] = []
             for b in v[self.el]['top']['conn']:
-                v[self.el]['par']['Vn'].append(v[b]['par']['Vn'])
+                v[self.el]['par']['Vn'].append(v[b]['par']['Vn'][0])
 
         if '_temp' in list(v.keys()):
             v[self.el]['par']['profile'] = copy.deepcopy(v['_temp']['par']['profile'])

@@ -113,7 +113,7 @@ class ElementProperties(QMainWindow):
         # -------------------------------------------------------------------------------------------------------------
 
         # -- creazione della parte dei profili, se previsto ----------------------------------------------------------
-        if self.cat in ['AC-Load', 'DC-Load', 'AC-Wind', 'DC-Wind', 'BESS', 'PV']:
+        if self.cat in prof_elem:
             # distanziatore
             spacer1 = QSpacerItem(10, 10, QSizePolicy.Fixed)
             self.ui.lfParGL.addItem(spacer1, line, 0)
@@ -405,9 +405,6 @@ class ElementProperties(QMainWindow):
 
         # Se cambio la prima busbar di una linea, verifico se la tensione della seconda busbar è coerente,
         #     altrimenti deve essere cambiata
-        print('\n\n\n')
-        print(self.cat, self.buses)
-
         if self.cat in ['AC-Line', 'DC-Line'] and self.buses[1]:
         # if self.cat in ['AC-Line', 'DC-Line'] and len(self.buses) >1:
             if i == 0 and v[self.buses[0]]['par']['Vn'] != v[self.buses[1]]['par']['Vn']:
@@ -481,7 +478,7 @@ class ElementProperties(QMainWindow):
                             v[el]['par']['Vn'][0] < v[self.buses[0]]['par']['Vn'][0]):
                         nodes.append(el)
 
-        elif self.cat in ['AC-Load', 'AC-Wind', 'Diesel-Motor', 'AC-Line']:
+        elif self.cat in ['AC-Load', 'AC-Wind', 'Diesel-Motor', 'AC-Line', 'AC-BESS', 'AC-PV', 'Turbine']:
             for el in v:
                 try:
                     if v[el]['category'] == 'AC-Node' and el not in self.buses:
@@ -489,7 +486,7 @@ class ElementProperties(QMainWindow):
                 except:
                     print('Errore elemento', el)
 
-        elif self.cat in ['DC-Load', 'DC-Wind', 'BESS', 'PV', 'DC-Line']:
+        elif self.cat in DC_elem:
             for el in v:
                 if v[el]['category'] == 'DC-Node' and el not in self.buses:
                     nodes.append(el)
@@ -522,7 +519,6 @@ class ElementProperties(QMainWindow):
 
             if tag != oldtag and line != 0:
                 self.ui.lfResGL.addItem(spacer, line, 0)
-                print('spacer')
                 line += 1
 
             self.__setattr__(par + 'ResLbl', QLabel(par))
@@ -666,7 +662,7 @@ class ElementProperties(QMainWindow):
             v[self.elem]['par'][par] = self.__getattribute__(par + 'Dsb').value()
 
         # Salvataggio del profilo, dove previsto
-        if self.cat in ['AC-Load', 'DC-Load', 'AC-Wind', 'DC-Wind', 'BESS', 'PV']:
+        if self.cat in prof_elem:
             if self.scale_RB.isChecked():
                 v[self.elem]['par']['profile']['name'] = None
                 v[self.elem]['par']['profile']['curve'] = self.scale_DSB.value()

@@ -1,4 +1,1 @@
-New "LineCode.12-20_3x1x185al" nphases=3 r1=0.164 x1=0.11 B1=91.106 r0=0.805 x0=0.11 B0=91.106
-New "LineCode.6-12_3x1x150cu" nphases=3 r1=0.123 x1=0.1 B1=0 r0=0.369 x0=0.3 B0=0
-New "LineCode.3-6_3x1x240cu" nphases=3 r1=0.0754 x1=0.11 B1=91.106 r0=0.2262 x0=0.33 B0=0
 New "LineCode.dc-line" nphases=3 r1=0.123 x1=0.1

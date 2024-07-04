@@ -38,9 +38,12 @@ class OpenDSS:
             if tag == 'Vsource':
                 cat = 'ExternalGrid'
             else:
+                rad = el.split('_')[0].lower()
                 des = item.split('_')[len(item.split('_')) - 1].lower()
                 if des in dsstag[tag.lower()]:
                     cat = dsstag[tag.lower()][des]
+                elif rad in dsstag[tag.lower()]:
+                    cat = dsstag[tag.lower()][rad]
                 else:
                     cat = dsstag[tag.lower()]['default']
                 # cat = c[item.split('_')[len(item.split('_')) - 1]]
@@ -187,13 +190,16 @@ class OpenDSS:
         # line = ''
         serv = ''
 
+        if el == 'ugs_bess':
+            print('bess')
+
         # Scrittura della parte dei parametri
         for p in new_par_dict[cat]['par']['others']:
             par = par + p + '=' + new_par_dict[cat]['par']['others'][p] + ' '
         for p in new_par_dict[cat]['par'].keys() - ['others']:
             if p == 'Vn' and mcat != 'Transformer':     # La tensione è memorizzata come array anche se è singola
                 par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p][0]) + ' '
-            else:
+            elif p != 'cap':
                 par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p]) + ' '
 
         # Verifica se l'elemento è in servizio
@@ -219,7 +225,6 @@ class OpenDSS:
         # Nel caso delle linee, bisogna definire anche il LineType
         line0 = ''
         if 'type' in new_par_dict[cat]['top'].keys():
-            print(el)
             line = line + 'linecode=' + v[el]['top']['linetype'] + ' '
 
             linetype = cat.split('-')[0] + '-LineCode'
@@ -268,7 +273,6 @@ class OpenDSS:
         f.close()
 
         # Scrittura dei comandi in OpenDSS
-        print('scrittura')
         for mcat in dss_cat:
             # print('\n' + mcat)
             for r in dss_cat[mcat]:
@@ -499,9 +503,9 @@ class OpenDSS:
             # Le parti DC sono in pratica porzioni AC, di cui si considera la fase globale.
             # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
             cf0, cf1 = 1, 1     # fattore di correzione per le parti AC
-            if v[el]['category'] in ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'BESS', 'PV', 'DC-Wind']:
+            if v[el]['category'] in DC_elem:
                 cf0 = 3**0.5    # fattore di correzione per le porzioni DC a monte
-            if v[el]['category'] in ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'BESS', 'PV', 'DC-Wind', 'PWM']:
+            if v[el]['category'] in DC_elem + ['PWM']:
                 cf1 = 3 ** 0.5  # fattore di correzione per pe porzioni DC a valle
 
             self.dss.circuit.set_active_element(mcat + '.' + el)    # l'elemento è selezionato
@@ -564,9 +568,9 @@ class OpenDSS:
                 # Le parti DC sono in pratica porzioni AC, di cui si considera la fase globale.
                 # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
                 cf0, cf1 = 1, 1     # fattore di correzione per le parti AC
-                if v[el]['category'] in ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'BESS', 'PV', 'DC-Wind']:
+                if v[el]['category'] in DC_elem:
                     cf0 = 3 ** 0.5    # fattore di correzione per le porzioni DC a monte
-                if v[el]['category'] in ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'BESS', 'PV', 'DC-Wind', 'PWM']:
+                if v[el]['category'] in DC_elem + ['PWM']:
                     cf1 = 3 ** 0.5  # fattore di correzione per pe porzioni DC a valle
 
                 self.dss.circuit.set_active_element(mcat + '.' + el)    # l'elemento è selezionato
@@ -641,7 +645,6 @@ class OpenDSS:
             # print(self.dss.topology.all_isolated_loads)
             # print('clear done')
         except:
-            print('clear error')
             pass
 
         self.dss.solution.solve()       # richiesta di risoluzione del sistema
@@ -839,7 +842,7 @@ def create_profile(el):
         profile = 'DC-Load'
     elif v[el]['category'] in ['AC-Wind', 'DC-Wind']:
         profile = 'Wind'
-    elif v[el]['category'] == 'PV':
+    elif v[el]['category'] in ['AC-PV', 'DC-PV']:
         profile = 'PV'
 
     if profile:     # se l'elemento prevede il profilo viene importato dal relativo file

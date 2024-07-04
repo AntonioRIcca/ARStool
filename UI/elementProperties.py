@@ -11,7 +11,7 @@ from PySide2.QtWidgets import *
 
 from PySide2.QtCharts import *
 
-from variables import v, el_format, mc
+from variables import *
 import yaml
 import os
 from datetime import datetime
@@ -107,7 +107,6 @@ class Window(QWidget):
         if 'profile' in v[self.elem]['par']:
             if v[self.elem]['par']['profile']['name']:
                 self.profilePlotWgtCreate()
-                print('inserted')
                 self.mainVBL.addWidget(self.profileWidget)
         # else:
         #     print(3, v[self.elem]['category'])
@@ -167,7 +166,8 @@ class Window(QWidget):
         # ------------------------------------------------------------------------------------------------------------
 
         # -- creazione della parte dei profili, se previsto ----------------------------------------------------------
-        if self.cat in ['AC-Load', 'DC-Load', 'AC-Wind', 'DC-Wind', 'BESS', 'PV']:
+        if self.cat in prof_elem:
+        # if self.cat in ['AC-Load', 'DC-Load', 'AC-Wind', 'DC-Wind', 'BESS', 'AC-PV', 'DC-PV']:
             # distanziatore
             # spacer1 = QSpacerItem(20, 20, QSizePolicy.Fixed)
             self.parGL.addItem(spacer, i, 0)
@@ -385,7 +385,6 @@ class Window(QWidget):
         # Scrittura del voltaggio dell'elemento, in base al Nodo a cui è connesso
         # try:
         if self.cat not in mc['Vsource'] + mc['Node']:
-            print(self.elem, i, self.buses)
             self.__getattribute__('v' + str(i) + '_DSB').setValue(v[node]['par']['Vn'][0])
         # except AttributeError:
         #     pass
@@ -443,7 +442,7 @@ class Window(QWidget):
                 if v[el]['category'] == 'AC-Node' and el not in self.buses:
                     nodes.append(el)
 
-        elif self.cat in ['DC-Load', 'DC-Wind', 'BESS', 'PV', 'DC-Line']:
+        elif self.cat in DC_elem:
             for el in v:
                 if v[el]['category'] == 'DC-Node' and el not in self.buses:
                     nodes.append(el)
@@ -474,7 +473,7 @@ class Window(QWidget):
             v[self.elem]['par'][par] = self.__getattribute__(par + '_DSB').value()
 
         # Salvataggio del profilo, dove previsto
-        if self.cat in ['AC-Load', 'DC-Load', 'AC-Wind', 'DC-Wind', 'BESS', 'PV']:
+        if self.cat in prof_elem:
             if self.scale_RB.isChecked():
                 v[self.elem]['par']['profile']['name'] = None
                 v[self.elem]['par']['profile']['curve'] = self.scale_DSB.value()
@@ -483,7 +482,6 @@ class Window(QWidget):
                 # TODO: Impostare il salvataggio del profilo
                 pass
         v[self.elem]['par']['out-of-service'] = self.out_of_service_CkB.isChecked()
-        print('salvato')
 
     def bb_fix(self, elem):
         # Se si modifica la tensione della busbar,
@@ -505,7 +503,6 @@ class Window(QWidget):
         # Se si modifica la busbar connessa,
         # bisogna modificare anche l'elenco delle connessioni nella vecchia e nella nuova busbar
         elif self.buses != self.old_buses:
-            print('Modifica BusBar')
             for b in range(len(self.buses)):
                 if self.buses[b] != self.old_buses[b]:
                     v[elem]['par']['Vn' + str(b)] = self.__getattribute__('v' + str(b) + '_DSB').value()
@@ -542,10 +539,6 @@ class Window(QWidget):
                         lines_solved.append(conn)
                 bb_solved.append(bb)
                 buses.pop(buses.index(bb))
-            print(buses)
-            print(bb_solved)
-        # bb_solved.remove(busbar)
-        print(bb_solved, lines_solved)
         return bb_solved
 
 

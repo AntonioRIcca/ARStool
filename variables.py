@@ -33,7 +33,8 @@ mc = {
     'Line': ['AC-Line', 'DC-Line'],
     'Load': ['AC-Load', 'DC-Load'],
     'Transformer': ['2W-Transformer', 'PWM', 'DC-DC-Converter'],
-    'Generator': ['BESS', 'PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor'],
+    'Generator': ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor', 'Turbine', 'AC-BESS', 'DC-BESS'],
+    'BESS': ['AC-BESS', 'DC-BESS'],
     'LineCode': ['AC-LineCode', 'DC-LineCode', ],
     'Node': ['AC-Node', 'DC-Node'],
 }
@@ -60,11 +61,16 @@ c = {
     'dc-dc-conv': 'DC-DC-Converter',
     'ac-load': 'AC-Load',
     'dc-load': 'DC-Load',
-    'bess': 'BESS',
-    'pv': 'PV',
+    'bess': 'AC-BESS',
+    'ac-bess': 'AC-BESS',
+    'dc-bess': 'DC-BESS',
+    'pv': 'AC-PV',
+    'ac-pv': 'AC-PV',
+    'dc-pv': 'DC-PV',
     'wind': 'AC-Wind',
     'dc-micro-wind': 'DC-Wind',
     'diesel': 'Diesel-Motor',
+    'turb': 'Turbine',
     'bb': 'AC-Node',
     'node': 'AC-Node',
     'dc-bb': 'DC-Node',
@@ -79,24 +85,26 @@ dsstag = {
         'tr': '2W-Transformer',
         'pwm': 'PWM',
         'dc-dc-conv': 'DC-DC-Converter',
-        'pv': 'PV',
     },
     'generator': {
-        'default': 'Diesel-Motor',
+        'default': 'Turbine',
         'diesel': 'Diesel-Motor',
-        'pv': 'PV',
+        'pv': 'AC-PV',
+        'ac-pv': 'AC-PV',
         'ac-wind': 'AC-Wind',
         'wind': 'AC-Wind',
+        'dc-pv': 'DC-PV',
         'dc-wind': 'DC-Wind',
         'dc-micro-wind': 'DC-Wind',
-        'bess': 'BESS',
+        'bess': 'AC-BESS',
+        'ac-bess': 'AC-BESS',
+        'dc-bess': 'DC-BESS',
     },
     'load': {
         'default': 'AC-Load',
         'ac-load': 'AC-Load',
         'load': 'AC-Load',
         'dc-load': 'DC-Load',
-        'bess': 'BESS',
     },
     'line': {
         'default': 'AC-Line',
@@ -110,7 +118,33 @@ dsstag = {
 
 
 new_par_dict = {
-    'PV': {
+    'Turbine': {
+        'top': {
+            'conn': {
+                'label': ['bus1'],
+            },
+        },
+        'par': {
+            'P': {
+                'label': 'kW',
+                'unit': 'kW',
+            },
+            'cosPhi': {
+                'label': 'kW',
+                'unit': '',
+                'default': 1
+            },
+            'Vn': {
+                'label': 'kv',
+                'unit': 'kV',
+            },
+            'others': {
+                'phases': '3',
+            },
+        },
+    },
+
+    'AC-PV': {
         'top': {
             'conn': {
                 'label': ['bus1'],
@@ -133,7 +167,7 @@ new_par_dict = {
         },
     },
 
-    'BESS': {
+    'DC-PV': {
         'top': {
             'conn': {
                 'label': ['bus1'],
@@ -147,6 +181,67 @@ new_par_dict = {
             'Vn': {
                 'label': 'kv',
                 'unit': 'kV',
+            },
+            'others': {
+                'phases': '3',
+                'kvar': '0',
+                'model': '3',
+            },
+        },
+    },
+
+    'AC-BESS': {
+        'top': {
+            'conn': {
+                'label': ['bus1'],
+            },
+        },
+        'par': {
+            'P': {
+                'label': 'kW',
+                'unit': 'kW',
+            },
+            'cosPhi': {
+                'label': 'kW',
+                'unit': '',
+                'default': 1,
+            },
+            'cap': {
+                'label': 'Cap',
+                'unit': 'kVA',
+                'default': 1000,
+            },
+            'Vn': {
+                'label': 'kv',
+                'unit': 'kV',
+            },
+            'others': {
+                'phases': '3',
+                'kvar': '0',
+                'model': '3',
+            },
+        },
+    },
+
+    'DC-BESS': {
+        'top': {
+            'conn': {
+                'label': ['bus1'],
+            },
+        },
+        'par': {
+            'P': {
+                'label': 'kW',
+                'unit': 'kW',
+            },
+            'Vn': {
+                'label': 'kv',
+                'unit': 'kV',
+            },
+            'cap': {
+                'label': 'Cap',
+                'unit': 'kVA',
+                'default': 1000,
             },
             'others': {
                 'phases': '3',
@@ -517,12 +612,22 @@ new_par_dict = {
 }
 
 par_dict = {
-    'PV': {
+    'AC-PV': {
         'P': 'kw',
         'Vn': 'kv'
     },
 
-    'BESS': {
+    'DC-PV': {
+        'P': 'kw',
+        'Vn': 'kv'
+    },
+
+    'AC-BESS': {
+        'P': 'kw',
+        'Vn': 'kv'
+    },
+
+    'DC-BESS': {
         'P': 'kw',
         'Vn': 'kv'
     },
@@ -566,6 +671,7 @@ par_dict = {
         'P': 'kw',
     },
     'Diesel-Motor': {},
+    'Turbine': {},
     'Node': {},
     'ExternalGrid': {},
 }
@@ -637,7 +743,12 @@ el_lfresults = {
         'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
         'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
     },
-    'PV': {
+    'AC-PV': {
+        'P': {'tag': 'p', 'i': None, 'decimal': 3, 'unit': 'kW'},
+        'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
+        'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
+    'DC-PV': {
         'P': {'tag': 'p', 'i': None, 'decimal': 3, 'unit': 'kW'},
         'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
         'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
@@ -653,12 +764,16 @@ el_lfresults = {
         'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
         'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
     },
-    'BESS': {
+    'AC-BESS': {
         'P': {'tag': 'p', 'i': None, 'decimal': 3, 'unit': 'kW'},
         'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
         'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
     },
-
+    'DC-BESS': {
+        'P': {'tag': 'p', 'i': None, 'decimal': 3, 'unit': 'kW'},
+        'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
+        'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
+    },
 }
 
 
@@ -716,10 +831,25 @@ el_format = {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
         'Customers': {'min': 0, 'max': 1000, 'decimal': 0, 'unit': '', 'default': 1},
     },
-    'PV': {
+    'AC-PV': {
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
+    },
+    'DC-PV': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
     },
     'AC-Wind': {
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
+        # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
+        'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+    },
+    'Turbine': {
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
+        # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
+        'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+    },
+    'Diesel-Motor': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
         # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
         'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
@@ -729,9 +859,20 @@ el_format = {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
         'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
     },
-    'BESS': {
+    'AC-BESS': {
+        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
+        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+        'cap': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kWh', 'default': 100},
+    },
+    'DC-BESS': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
         'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
         'cap': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kWh', 'default': 100},
     },
 }
+
+
+DC_elem = ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'DC-BESS', 'DC-PV', 'DC-Wind']
+
+prof_elem = ['AC-Load', 'DC-Load', 'AC-BESS', 'DC-BESS', 'AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor',
+             'Turbine']

@@ -300,19 +300,16 @@ class Main:
             # TODO: da eliminare
             self.dss.open(filename)
             self.elementsTableWgtCreate()
-            print('tabella')
             # self.func_enabled()
             self.func_check()
 
     def yml_open(self):
-        print(self.savepath)
         options = QtWidgets.QFileDialog.Options()
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
 
         filename, ext = QtWidgets.QFileDialog.getOpenFileName(caption="Apri file di rete",
                                                               dir=self.savepath,
                                                               filter='*.yml')
-        print(filename)
 
         if filename:
             name = filename.split('/')
@@ -362,9 +359,7 @@ class Main:
         popup = NewItem()
 
         if popup.exec_():
-            print('popup')
             pass
-        print('popup closed')
 
         if popup.created:
             self.myform.ui.tableWidget.insertRow(0)
@@ -417,7 +412,6 @@ class Main:
     def test_action(self):
         line = self .myform.ui.tableWidget.currentRow()
         self.elem = self.myform.ui.tableWidget.item(line, 0).text()
-        print(self.elem)
         self.myform.ui.del_Btn.setVisible(True)
         # dss.writeline(elem)   TODO: ???????
 
@@ -456,7 +450,6 @@ class Main:
 
         # -- Nuovo richiamo alla form ---------------------------------------------------------- TODO: da riattivare
         self.elemPropWgt = ElementProperties(self.elem)
-        print('break')
         self.ui.rightMenuPages.addWidget(self.elemPropWgt.ui.propertiesWgt)
         # self.par_wgt.mainWidget.setMinimumHeight(1200)
 
@@ -479,13 +472,11 @@ class Main:
         # self.ui.lfWgt.expandMenu()
         self.elemPropWgt.ui.lfWgt.setMaximumHeight(1500)
         self.elemPropWgt.ui.relWgt.setMaximumHeight(20)
-        print('clicked')
 
     def myaction2(self):
 
         self.elemPropWgt.ui.relWgt.setMaximumHeight(1500)
         self.elemPropWgt.ui.lfWgt.setMaximumHeight(20)
-        print('clicked')
 
     def profile_draw(self, l=180, h=120):
         font = {
@@ -516,7 +507,6 @@ class Main:
         popup = ElementsProfile(self.elem)
 
         if popup.exec_():
-            print('popup')
             pass
 
         if popup.refresh:
@@ -527,7 +517,6 @@ class Main:
         # self.elemPropWgt.profileCheck()
         if self.elemPropWgt.profile_RB.isChecked():
             if not v[self.elem]['par']['profile']['name']:
-                print('apri selezione profilo')
                 popup = ElementsProfile(self.elem)
 
                 if popup.exec_():
@@ -543,10 +532,8 @@ class Main:
                 # self.ui.lfVL.addWidget(self.profileWidget)
                 self.elemPropWgt.ui.lfVL.insertWidget(3, self.elemPropWgt.profileWidget)
                 self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
-                print('profile')
         else:
             try:
-                print('delete profile')
                 self.elemPropWgt.profileWidget.deleteLater()
             except AttributeError:
                 pass
@@ -555,7 +542,6 @@ class Main:
 
     def test_action2(self, mcat, event=None):
         # print(self.ui.rightMenuPages.currentIndex())
-        print('azione')
         # -- Creazione del diagramma delle generazioni ---------------------------
         # Todo: da definire come gestire i dati  del diagramma
         from UI.donutbreakdown2 import DonutBreakdownChart
@@ -781,22 +767,22 @@ class Main:
 
         for elem in v.keys():
             cat = v[elem]['category']
-            if v[elem]['category'] in ['AC-Load', 'DC-Load']:
+            if v[elem]['category'] in mc['Load']:
                 self.p_loads += v[elem]['lf']['p']
                 self.q_loads += v[elem]['lf']['q']
                 mcat = 'Loads'
 
-            elif v[elem]['category'] in ['PV', 'AC-Wind', 'DC-Wind']:
-                self.p_gen -= v[elem]['lf']['p']
-                self.q_gen -= v[elem]['lf']['q']
-                mcat = 'Generators'
-
-            elif v[elem]['category'] in ['BESS']:
+            elif v[elem]['category'] in mc['BESS']:
                 self.p_bess += v[elem]['lf']['p']
                 self.q_bess += v[elem]['lf']['q']
                 mcat = 'BESS'
 
-            if cat in ['AC-Load', 'DC-Load', 'PV', 'AC-Wind', 'DC-Wind', 'BESS']:
+            elif v[elem]['category'] in mc['Generator']:
+                self.p_gen -= v[elem]['lf']['p']
+                self.q_gen -= v[elem]['lf']['q']
+                mcat = 'Generators'
+
+            if cat in prof_elem:
                 if cat not in list(self.lf_cat[mcat].keys()):
                     self.lf_cat[mcat][cat] = dict()
                 self.lf_cat[mcat][cat][elem] = {
@@ -1096,7 +1082,7 @@ def write_excel():
 
     lf_par = ['v', 'p', 'q', 'i']
     row, col = 1, 0
-    for cat in ['AC-Load', 'DC-Load', 'BESS', 'PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor']:
+    for cat in prof_elem:
         row += 1
         worksheet.write(row, col, cat)
         row += 1

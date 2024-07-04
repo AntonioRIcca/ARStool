@@ -8,8 +8,20 @@ def dict_initialize(el, cat):
     v[el]['category'] = cat  # la nomenclatira esatta della categoria deriva dal dizonario "variables.c"
     v[el]['top']['conn'] = []
 
+    if cat in mc['Load'] + mc['Generator']:
+        profile_initialize(el)
+
     lf_initialize(el)
     rel_initialize(el)
+
+
+# Inizializzazione del sottodizionario del profilo dei parametri ("Par") per l'elemento "el"
+def profile_initialize(el):
+    v[el]['par']['profile'] = {
+        'curve': 1,
+        'name': None,
+    }
+
 
 
 # Inizializzazione del sottodizionario rella Reliability ("rel") per l'elemento "el"
