@@ -53,7 +53,6 @@ class ElementProperties(QMainWindow):
         if fn['lf']:
             self.fillLfRes()
 
-
     def fillLfPar(self):
         for i in range(self.ui.lfParGL.count()):
             self.ui.lfParGL.itemAt(i).widget().deleteLater()
@@ -660,6 +659,11 @@ class ElementProperties(QMainWindow):
 
         for par in el_format[self.cat]:
             v[self.elem]['par'][par] = self.__getattribute__(par + 'Dsb').value()
+
+        if self.cat in mc['Load'] + mc['Generator']:
+            v[self.elem]['par']['Vn'] = [self.v0Dsb.value()]
+        elif self.cat in mc['Transformer']:
+            v[self.elem]['par']['Vn'] = [self.v0Dsb.value(), self.v1Dsb.value()]
 
         # Salvataggio del profilo, dove previsto
         if self.cat in prof_elem:

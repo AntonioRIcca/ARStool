@@ -3,9 +3,14 @@ import os
 
 
 from UI.ui_main_ui import *
+
 from PySide2 import *
 
 from Custom_Widgets.Widgets import *
+
+from functools import partial
+
+from variables import *
 
 
 class MainWindow(QMainWindow):
@@ -41,6 +46,39 @@ class MainWindow(QMainWindow):
 
         # CLOSE NOTIFICATION WIDGET
         self.ui.closeNotificationBtn.clicked.connect(lambda: self.ui.popupNotificationContainer.collapseMenu())
+    #
+    # def elementRename(self, event):     # TODO: forse da eliminare
+    #     self.ui.elemNameLE.installEventFilter(self)
+    #
+    #     self.ui.elemNameLE.setText(self.ui.rightMenu_LBL.text())
+    #     self.ui.rightMenu_LBL.setVisible(False)
+    #     self.ui.elemNameLE.setVisible(True)
+    #     # self.ui.elemNameTE = QLineEdit()
+    #     # a = QLineEdit()
+    #     # a.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+    #     # self.ui.horizontalLayout_10.insertWidget(0, self.ui.elemNameTE)
+    #     # self.ui.elemNameLE.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+    #     self.ui.elemNameLE.selectAll()
+    #     self.ui.elemNameLE.setFocus()
+    #     # print(self.elem)
+    #
+    # def eventFilter(self, obj, event):
+    #     # print('evento')
+    #     if event.type() == QtCore.QEvent.KeyPress and obj is self.ui.elemNameLE:
+    #         if event.key() == QtCore.Qt.Key_Return and self.ui.elemNameLE.hasFocus():
+    #             if self.ui.elemNameLE.text() in list(v.keys()):
+    #                 QtWidgets.QMessageBox.warning(QtWidgets.QMessageBox(), 'Attenzione',
+    #                                               'Nome elemento già presente')
+    #                 # self.rename(None)
+    #             else:
+    #                 self.ui.rightMenu_LBL.setVisible(True)
+    #                 self.ui.elemNameLE.setVisible(False)
+    #                 self.ui.rightMenu_LBL.setText(self.ui.elemNameLE.text())
+    #         if event.key() == QtCore.Qt.Key_Escape and self.ui.elemNameLE.hasFocus():
+    #             self.ui.rightMenu_LBL.setVisible(True)
+    #             self.ui.elemNameLE.setVisible(False)
+    #     return super().eventFilter(obj, event)
+
 
 
 if __name__ == '__main__':

@@ -6,6 +6,17 @@ def v_initialize():
     for k in list(v.keys()):
         del v[k]
 
+
+grid = {
+    'profile': {
+        'step': None,
+        'start': None,
+        'end': None,
+        'exixst': False,
+    },
+}
+
+
 fn = {
     'lf': False,
     'rel': False,
@@ -14,11 +25,11 @@ fn = {
 
 fn_en = {
     'lf': True,
-    'anom': True,
-    'opf': True,
+    # 'anom': True,
+    # 'opf': True,
     'rel': True,
-    'gm': True,
-    'onr': True,
+    # 'gm': True,
+    # 'onr': True,
 }
 
 v = dict()

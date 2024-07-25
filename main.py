@@ -1,5 +1,6 @@
 # import py_dss_interface
 # from PySide2.QtCharts import QChart, QChartView, QBarSet, QPercentBarSeries, QBarCategoryAxis
+import copy
 import os.path
 from functools import partial
 import xlsxwriter
@@ -116,7 +117,7 @@ class Main:
 
         self.ui.profileMenuBtn.clicked.connect(self.test_action2)
         self.ui.moreMenuBtn.clicked.connect(self.test_action2)
-        self.ui.lf_Btn.clicked.connect(self.loadflow)
+        self.ui.loadflow_Btn.clicked.connect(self.loadflow)
         self.ui.restartBtn.clicked.connect(self.startWgtCreate)
 
         # Window(list(v.keys())[0])                                                 # TODO: da NON riattivare
@@ -135,7 +136,8 @@ class Main:
 
     def func_check(self):
         for btn in fn_en:
-            self.ui.__getattribute__(btn + '_Btn').setVisible(fn_en[btn])
+            self.ui.__getattribute__(btn + 'WgtPls').setVisible(fn_en[btn])
+            self.ui.__getattribute__(btn + 'WgtPls').setEnabled(fn_en[btn])
 
         # self.ui.lf_Btn.setVisible(True)
 
@@ -284,6 +286,8 @@ class Main:
 
             self.gridname = 'externalDSS'
 
+            grid['profile'] = {'step': None, 'start': None, 'end': None, 'exixst': False}
+
         if filename:
             # self.dss = opendss.OpenDSS()
 
@@ -350,9 +354,11 @@ class Main:
         self.homeWGT_create()
         self.elementsTableFill()
         self.myform.ui.tableWidget.currentCellChanged.connect(self.test_action)
+        # self.myform.ui.tableWidget.mouseDoubleClickEvent = self.elementRename
         self.myform.ui.save_Btn.clicked.connect(self.yml_save)
         self.myform.ui.add_Btn.clicked.connect(self.new_element)
         self.myform.ui.del_Btn.clicked.connect(self.del_element)
+        self.myform.ui.ren_Btn.clicked.connect(self.elementRename)
         # Window(list(v.keys())[0])
 
     def new_element(self):
@@ -387,11 +393,14 @@ class Main:
         self.myform.ui.tableWidget.setRowCount(len(v))
 
         i = 0
-        for elem in v:
+        for elem in dict(sorted(v.items())):    # dict(sorted() necessario per ordinare alfabeticamente gli elementi
             self.myform.ui.tableWidget.setItem(i, 0, QTableWidgetItem(elem))
             self.myform.ui.tableWidget.setItem(i, 1, QTableWidgetItem(v[elem]['category']))
             i += 1
         self.elementsTableFormat()
+
+        self.myform.ui.tableWidget.sortByColumn(1, QtCore.Qt.AscendingOrder)
+        print(list(v.keys()))
 
     def elementsTableFormat(self):
         self.myform.ui.tableWidget.setSortingEnabled(True)
@@ -413,6 +422,7 @@ class Main:
         line = self .myform.ui.tableWidget.currentRow()
         self.elem = self.myform.ui.tableWidget.item(line, 0).text()
         self.myform.ui.del_Btn.setVisible(True)
+        self.myform.ui.ren_Btn.setVisible(True)
         # dss.writeline(elem)   TODO: ???????
 
         try:
@@ -420,7 +430,11 @@ class Main:
         except:
             pass
 
+        # self.ui.elemNameLE.setVisible(False)
+        # self.ui.rightMenu_LBL.setVisible(True)
         self.ui.rightMenu_LBL.setText(self.elem)
+        # self.ui.rightMenu_LBL.mouseDoubleClickEvent = self.mainwindow.elementRename
+
         self.ui.rightMenuContainer.expandMenu()
 
         # -- Sospeso per prova nuovo layout ----------------------------------------------------
@@ -466,6 +480,38 @@ class Main:
             pass
         # --------------------------------------------------------------------------------------
         pass
+
+    def elementRename(self):
+        spec_char = '!@#$%^&*()?=,<>/" '     # elenco dei caratteri che non possono essere insereiti nel nome del file
+
+        closed = False  # Variabile necessaria per capire se si può chiudere la finestrsa di dialogo
+        while not closed:
+            text, ok = QInputDialog.getText(None, 'Nuovo nome', 'Inserisci il nuovo nome', QLineEdit.Normal, self.elem)
+
+            if ok:  # Le azioni sottostanti devono essere eseguite se si è premuto OK o il tasto Invio
+
+                # se il nome è nuovo, si sovrascrive
+                if text != '' and text not in v and not any(c in spec_char for c in text):
+                    v[text] = copy.deepcopy(v[self.elem])
+                    del v[self.elem]
+                    for el in v:
+                        for i in range(len(v[el]['top']['conn'])):
+                            if v[el]['top']['conn'][i] == self.elem:
+                                v[el]['top']['conn'][i] = text
+
+                    self.ui.rightMenu_LBL.setText(text)
+                    self.elementsTableWgtCreate()
+                    closed = True
+
+                # se si lascia il vecchio nome si chiude la dialogo senza azioni
+                elif text == self.elem:
+                    closed = True
+
+                # se il nome non è inedito la schermata non si chiude
+            else:
+                closed = True
+            print('closed', closed)
+
 
     def myaction1(self):
         # self.ui.relWgt.collapseMenu()
@@ -730,23 +776,33 @@ class Main:
         self.lf_WGT.ui.lfres_VL.insertWidget(3, lfres_bottom_wgt)
 
     def loadflow(self):
+        print('loadFlow')
         self.ui.rightMenuContainer.collapseMenu()
         try:
             self.home2_WGT.deleteLater()
         except RuntimeError:
             pass
 
-        # from UI.lfMod_Dlg import LfModDlg
-        # lf_popup = LfModDlg()
+        is_profile = False
+        time = None
         #
-        # if lf_popup.exec_():
-        #     print('popup')
-        #     pass
-        # print('popup closed')
+        # for el in v:
+        #     if v[el]['category'] in mc['Load'] + mc['Generator']:
+        #         if v[el]['par']['profile']['name']:
+        #             is_profile = True
+        #             break
+        # print('Profile', is_profile)
 
+        if is_profile:
+            from UI.lfMod_Dlg import LfModDlg
+            lf_popup = LfModDlg()
 
+            if lf_popup.exec_():
+                print('popup')
+                pass
+            print('popup closed')
 
-        self.dss.full_parse_to_dss()
+        self.dss.full_parse_to_dss(is_profile=is_profile, time=time)
         # self.yml_bench_save()
         # dss.write_all()
         # dss.solve()

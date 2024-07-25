@@ -45,7 +45,18 @@ class Table(QMainWindow):
                                       u"QPushButton:pressed {"
                                       u"background-color: rgb(64, 64, 64); border-style: inset"
                                       u"}")
+
+        self.ui.ren_Btn.setStyleSheet(u"QPushButton {"
+                                      u"color: rgb(255, 255, 255);"
+                                      u"background-color: rgb(31, 31, 31); border: solid;" # border-style: outset;"
+                                      u"border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)"
+                                      u"}"
+                                      u"QPushButton:pressed {"
+                                      u"background-color: rgb(64, 64, 64); border-style: inset"
+                                      u"}")
+
         self.ui.del_Btn.setVisible(False)
+        self.ui.ren_Btn.setVisible(False)
 
 
 if __name__ == '__main__':

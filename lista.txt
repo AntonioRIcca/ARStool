@@ -1,0 +1,5 @@
+New "Load.Carico" bus1=bus_n1 phases=3 kW=100.0 pf=1.0 NumCust=1.0 kV=150.0 enabled=True
+New "Line.sbla_1_line" bus1=sourcebus bus2=bus_n1 Season=1 Ratings=[400,] emergamps=600 C0=1e-09 B1=1e-09 B0=1e-09 length=0.01 r0=0 r1=0 C1=1e-09 normamps=313.0 x0=1e-09 x1=1e-09 enabled=True
+Edit "Vsource.source bus1=sourcebus basekv=150.0 enabled=True
+New "Transformer.tra_tr" buses=['bus_n1', 'bus_n3'] windings=2 conns=[delta, wye, ] %imag=0.0 kVs=[150.0, 21.2] kVAs=[30000.0, 30000.0] XHL=9.78 %Rs=[0.375, 0.375] enabled=True
+New "Transformer.trb_tr" buses=['bus_n2', 'bus_n4'] windings=2 conns=[delta, wye, ] %imag=0.0 kVs=[150.0, 20.8] kVAs=[31250.0, 31250.0] XHL=14.59 %Rs=[0.36, 0.36] enabled=True

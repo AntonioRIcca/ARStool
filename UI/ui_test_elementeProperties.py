@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'test_elementePropertiesllUrpZ.ui'
+## Form generated from reading UI file 'test_elementePropertiesynzuur.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -35,6 +35,10 @@ class Ui_Form(object):
 "	border-color: rgb(223, 223, 223);\n"
 "	border-radius: 8px;\n"
 "	background-color: rgb(31, 31, 31);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(64, 64, 64); \n"
+"	border-style: inset\n"
 "}")
         self.propertiesVL = QVBoxLayout(self.propertiesWgt)
         self.propertiesVL.setSpacing(20)

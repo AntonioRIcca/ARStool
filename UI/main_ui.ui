@@ -1482,6 +1482,9 @@ border-radius: 10px;
                      </property>
                     </widget>
                    </item>
+                   <item>
+                    <widget class="QLineEdit" name="elemNameLE"/>
+                   </item>
                    <item alignment="Qt::AlignRight">
                     <widget class="QPushButton" name="closeRightMenuBtn">
                      <property name="toolTip">

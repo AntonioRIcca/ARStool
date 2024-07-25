@@ -25,6 +25,8 @@ class NewItem(QtWidgets.QDialog):
 
         self.created = False
 
+        self.name_check()
+
         self.ui.nameLE.setVisible(False)
         for w in ['node', 'par', 'pictureProf', 'scaleProf', 'serv']:
             self.ui.__getattribute__(w + 'Wgt').setVisible(False)
@@ -41,6 +43,11 @@ class NewItem(QtWidgets.QDialog):
         self.type_populate()
         self.type_selected()
 
+    def name_check(self):
+        while self.ui.nameLBL.text() in v:
+        # if self.ui.nameLBL.text() in v:
+            self.ui.nameLBL.setText(self.ui.nameLBL.text() + ' (1)')
+            # print('nome già esistente')
     def rename(self, event):
         self.ui.nameLBL.setVisible(False)
         self.ui.nameLE.setVisible(True)
@@ -145,6 +152,15 @@ class NewItem(QtWidgets.QDialog):
                     v[self.ui.__getattribute__('node' + str(k) + 'CB').currentText()]['par']['Vn'][0])
             else:
                 self.ui.__getattribute__('vnode' + str(k) + 'Dsb').setValue(0)
+
+        # Verifica che le busbar a cui connettere l'elemento siano selezionate (che esistano...)
+        self.ui.saveBtn.setVisible(False)
+        if self.ui.node1CB.currentText():
+            if self.cat in mc['Transformer'] + mc['Line']:
+                if self.ui.node2CB.currentText():
+                    self.ui.saveBtn.setVisible(True)
+            else:
+                self.ui.saveBtn.setVisible(True)
 
     def bb_read(self, cat, node1=None, node2=None):
         v_ac = dict()
@@ -329,6 +345,10 @@ class NewItem(QtWidgets.QDialog):
             if self.ui.constScaleProfRB.isChecked():
                 v[self.el]['par']['profile']['curve'] = self.ui.scaleProfDsb.value()
             del v['_temp']
+
+        # for self.cat in mc['Generator'] + mc['BESS'] + mc['Load']:
+        for n in v[self.el]['top']['conn']:
+            v[n]['top']['conn'].append(self.el)
 
         print(v[self.el])
         self.created = True

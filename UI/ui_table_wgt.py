@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'table_wgtlZpHgV.ui'
+## Form generated from reading UI file 'table_wgttWsKzU.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -105,6 +105,13 @@ class Ui_Form(object):
 
         self.horizontalLayout_2.addWidget(self.del_Btn)
 
+        self.ren_Btn = QPushButton(self.buttons_WGT)
+        self.ren_Btn.setObjectName(u"ren_Btn")
+        self.ren_Btn.setMinimumSize(QSize(80, 25))
+        self.ren_Btn.setStyleSheet(u"border-color: rgb(255, 255, 255);")
+
+        self.horizontalLayout_2.addWidget(self.ren_Btn)
+
         self.buttons_Spc = QSpacerItem(10, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_2.addItem(self.buttons_Spc)
@@ -156,6 +163,7 @@ class Ui_Form(object):
 
         self.add_Btn.setText(QCoreApplication.translate("Form", u"Aggiungi", None))
         self.del_Btn.setText(QCoreApplication.translate("Form", u"Elimina", None))
+        self.ren_Btn.setText(QCoreApplication.translate("Form", u"Rinomina", None))
         self.save_Btn.setText(QCoreApplication.translate("Form", u"Salva", None))
     # retranslateUi
 

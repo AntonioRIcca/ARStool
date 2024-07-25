@@ -248,7 +248,7 @@ class OpenDSS:
         return line     # TODO: Perchè?
 
     # Scrittura di tutti gli elementi in OpenDSS
-    def full_parse_to_dss(self):
+    def full_parse_to_dss(self, is_profile=False, time=None):
         # # self.dss.dssinterface.clear_all()
         # self.dss.text('Clear')
         #
@@ -651,6 +651,9 @@ class OpenDSS:
         fn['lf'] = True
         # print(self.dss.circuit.total_power)
         # print(bool(self.dss.solution.converged))
+
+        # os.chdir(mainpath)
+        print(os.curdir)
         self.dss.text(f"Save Circuit dir=cartella")
 
         # scrittura dei risultati nel dizionario per ogni elemento
