@@ -33,6 +33,7 @@ from UI.test_elementProperties import ElementProperties
 from UI.elementProperties import Window
 from UI.elementsProfile import ElementsProfile
 from UI.newItem import NewItem
+from UI.gridProfPar_Dlg import GridProfParDlg
 
 # import time
 
@@ -286,7 +287,12 @@ class Main:
 
             self.gridname = 'externalDSS'
 
-            grid['profile'] = {'step': None, 'start': None, 'end': None, 'exixst': False}
+            # TODO: da riattivare
+            grid['profile'] = {'step': None, 'start': None, 'end': None, 'points': None, 'exist': False}
+
+            # TODO: da eliminare
+            # grid['profile'] = {'step': 15, 'start': [2024, 2, 15, 0, 0], 'end': [2024, 2, 18, 23, 45],
+            #                    'points': None, 'exist': True}
 
         if filename:
             # self.dss = opendss.OpenDSS()
@@ -320,16 +326,18 @@ class Main:
             self.savepath = filename.removesuffix(name[len(name)-1])
             self.gridname = name[len(name)-1].split('.')[0]
             v0 = yaml.safe_load(open(filename))
+
+            for par in v0['_grid_']:
+                grid[par] = v0['_grid_'][par]
+            del v0['_grid_']
+
             for elem in v0:
                 v[elem] = v0[elem]
             self.elementsTableWgtCreate()
             # self.func_enabled()
             self.func_check()
 
-            # a = 'as'
-            # a.re
-
-    def yml_bench_save(self):
+    def yml_bench_save(self):   # TODO: non ricordo a che serve salvare la rete
         filename = self.dsspath + '/' + self.gridname + '.yml'
         with open(filename, 'w') as file:
             yaml.dump(v, file)
@@ -345,8 +353,10 @@ class Main:
                                                               filter='*.yml')
 
         if filename:
+            a = {'_grid_': grid}
+
             with open(filename, 'w') as file:
-                yaml.dump(v, file)
+                yaml.dump({**a, **v}, file)
                 file.close()
 
     # Inserimento della tabella degli elementi nel widget principale
@@ -419,7 +429,7 @@ class Main:
         self.myform.ui.tableWidget.setColumnWidth(1, 150)
 
     def test_action(self):
-        line = self .myform.ui.tableWidget.currentRow()
+        line = self.myform.ui.tableWidget.currentRow()
         self.elem = self.myform.ui.tableWidget.item(line, 0).text()
         self.myform.ui.del_Btn.setVisible(True)
         self.myform.ui.ren_Btn.setVisible(True)
@@ -550,8 +560,12 @@ class Main:
         self.par_wgt.mainVBL.insertWidget(2, self.canvas)
 
     def profile_open(self):
-        popup = ElementsProfile(self.elem)
+        # if not grid['profile']['exist']:
+        #     popup1 = GridProfParDlg()
+        #     if popup1.exec_():
+        #         pass
 
+        popup = ElementsProfile(self.elem)
         if popup.exec_():
             pass
 
@@ -560,8 +574,14 @@ class Main:
             self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
 
     def profile_switch(self):
+        popup1 = GridProfParDlg()
+        if not grid['profile']['exist'] and self.elemPropWgt.profile_RB.isChecked():
+            if popup1.exec_():
+                pass
+        print('Profilo default:', popup1.default)
+
         # self.elemPropWgt.profileCheck()
-        if self.elemPropWgt.profile_RB.isChecked():
+        if self.elemPropWgt.profile_RB.isChecked() and grid['profile']['exist']:
             if not v[self.elem]['par']['profile']['name']:
                 popup = ElementsProfile(self.elem)
 
@@ -572,18 +592,26 @@ class Main:
                     self.elemPropWgt.profilePlotWgtCreate()
                     self.elemPropWgt.ui.lfVL.insertWidget(3, self.elemPropWgt.profileWidget)
                     self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
+                    print(1)
+                else:
+                    print('skip')
+                    grid['profile'] = {'points': None, 'step': None, 'start': None, 'end': None, 'exist': False}
 
             else:
                 self.elemPropWgt.profilePlotWgtCreate()
                 # self.ui.lfVL.addWidget(self.profileWidget)
                 self.elemPropWgt.ui.lfVL.insertWidget(3, self.elemPropWgt.profileWidget)
                 self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
+                print(2)
+            # self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
+            print(3)
         else:
             try:
                 self.elemPropWgt.profileWidget.deleteLater()
             except AttributeError:
                 pass
         self.elemPropWgt.profileCheck()
+        self.elemPropWgt.scale_RB.setChecked(v[self.elem]['par']['profile']['name'] is None)
 
 
     def test_action2(self, mcat, event=None):
@@ -786,12 +814,12 @@ class Main:
         is_profile = False
         time = None
         #
-        # for el in v:
-        #     if v[el]['category'] in mc['Load'] + mc['Generator']:
-        #         if v[el]['par']['profile']['name']:
-        #             is_profile = True
-        #             break
-        # print('Profile', is_profile)
+        for el in v:
+            if v[el]['category'] in mc['Load'] + mc['Generator']:
+                if v[el]['par']['profile']['name']:
+                    is_profile = True
+                    break
+        print('Profile', is_profile)
 
         if is_profile:
             from UI.lfMod_Dlg import LfModDlg

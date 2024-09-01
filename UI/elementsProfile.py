@@ -10,7 +10,7 @@ import matplotlib
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 
-from variables import v
+from variables import *
 import copy
 
 
@@ -19,6 +19,9 @@ class ElementsProfile(QtWidgets.QDialog):
         super(ElementsProfile, self).__init__()
         self.ui = Ui_mainDlg()
         self.ui.setupUi(self)
+
+        # for p in grid['profile']:
+        #     print(p, grid['profile'][p])
 
         self.elem = elem
         if self.elem:
@@ -35,7 +38,7 @@ class ElementsProfile(QtWidgets.QDialog):
         if not isinstance(self.profile, list):
             value = self.profile
             self.profile = []
-            for i in range(96):
+            for i in range(grid['profile']['points']):
                 self.profile.append(value)
 
         self.refresh = False
@@ -69,6 +72,8 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ui.cancelBtn.clicked.connect(self.cancel)
         self.ui.nameLbl.mouseDoubleClickEvent = self.rename
 
+        self.default_check()
+
     def table_format(self):
         self.ui.profileTW.setShowGrid(False)
         self.ui.profileTW.setStyleSheet('QTableView::item {border-top: 1px solid #333333;}')
@@ -94,7 +99,7 @@ class ElementsProfile(QtWidgets.QDialog):
 
         for r in range(0, len(self.profile)):
             self.ui.profileTW.insertRow(r)
-            x_item = QtWidgets.QTableWidgetItem(str(r*0.25))
+            x_item = QtWidgets.QTableWidgetItem(str(r))
             try:
                 y_item = QtWidgets.QTableWidgetItem('%-5f' % self.profile[r])
             except:
@@ -110,7 +115,7 @@ class ElementsProfile(QtWidgets.QDialog):
 
         (x, y) = ([], [])
         for r in range(0, len(self.profile)):
-            x.append(r * 0.25)
+            x.append(r)
             y.append(self.profile[r])
 
         font = {
@@ -120,8 +125,8 @@ class ElementsProfile(QtWidgets.QDialog):
         matplotlib.rc('font', **font)
 
         self.ax.set_ylim([0, 1.05])
-        self.ax.set_xlim([0, 24])
-        self.ax.set_xlabel('Tempo [h]', fontsize=10, color=(1, 1, 1))
+        self.ax.set_xlim([0, grid['profile']['points'] - 1])
+        self.ax.set_xlabel('Tempo [h]', fontsize=10, color=(1, 1, 1))   # TODO: da definire l'unità di misura
         self.ax.set_ylabel('Profilo [p.u.]', fontsize=10, color=(1, 1, 1))
 
         self.ax.set_facecolor((0, 0, 0))
@@ -131,6 +136,24 @@ class ElementsProfile(QtWidgets.QDialog):
 
         self.canvas.draw()
         self.canvas.flush_events()
+
+    def x_par(self):    # TODO: per il momento non serve
+        s = grid['profile']['step']
+        p = grid['profile']['points']
+
+        if p < 60:
+            unit = 'min'
+        else:
+            unit = 'h'
+
+        while p > 10:
+            if p < 60:
+                s = s * s / 60
+                p = 60
+                unit = 'h'
+            else:
+                s = s * 5
+                p = p / 5
 
     def tab_selected(self):
         try:
@@ -193,14 +216,12 @@ class ElementsProfile(QtWidgets.QDialog):
                                                               directory=str(os.path.join(os.environ['USERPROFILE'],
                                                                                          'Desktop')),
                                                               filter='*.txt')
-        # print(filename)
 
         if filename:
             with open(filename, 'w') as f:
                 for item in self.profile:
                     f.write(str(item) + '\n')
-        # print('done')
-        pass
+
 
     def data_save(self):
         # print('save clicked')
@@ -265,6 +286,20 @@ class ElementsProfile(QtWidgets.QDialog):
         else:
             # self.close()
             pass
+
+    def default_check(self):
+        y = []
+        f = open(mainpath + '/_benchmark/_data/_profiles/Gen_year.txt')
+        for line in f:
+            try:
+                y.append(int(line.split()[0]))
+            except ValueError:
+                pass
+
+        self.ui.defaultBtn.setVisible(grid['profile']['start'][0] in y and grid['profile']['end'][0] in y)
+
+
+
 
     # TODO: Dare la possibilità di azzerare il profilo (magari inserendo di default il valore 1)
     # TODO: Il profilo nuovo deve avere solo il primo valore popolato, e deve calcolarsi in automatico gli altri valori

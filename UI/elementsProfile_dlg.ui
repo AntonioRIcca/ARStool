@@ -181,6 +181,19 @@ border: solid;
     </rect>
    </property>
   </widget>
+  <widget class="QPushButton" name="defaultBtn">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>560</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Predefinito</string>
+   </property>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>profileTW</tabstop>

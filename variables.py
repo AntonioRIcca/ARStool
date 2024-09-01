@@ -9,10 +9,11 @@ def v_initialize():
 
 grid = {
     'profile': {
+        'points': None,
         'step': None,
         'start': None,
         'end': None,
-        'exixst': False,
+        'exist': False,
     },
 }
 

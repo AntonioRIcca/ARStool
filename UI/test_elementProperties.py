@@ -266,6 +266,7 @@ class ElementProperties(QMainWindow):
         self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
         if isinstance(v[self.elem]['par']['profile']['curve'], list):
+            #TODO: Da cambiare sulla base della nuova definizione dei profili temporali
             time = datetime.now().hour * 4 + int(datetime.now().minute / 15)
             value = v[self.elem]['par']['profile']['curve'][time]
         else:
@@ -345,11 +346,11 @@ class ElementProperties(QMainWindow):
         # print('operazione')
         # print([a/4 for a in range(0, 96)])
         # print(v[self.elem]['par']['profile']['curve'])
-        self.ax.plot([a/4 for a in range(0, 96)], v[self.elem]['par']['profile']['curve'])  # TODO: da correggere: inserire i dati reali
+        self.ax.plot([a for a in range(0, grid['profile']['points'])], v[self.elem]['par']['profile']['curve'])  # TODO: da correggere: inserire i dati reali
 
         self.ax.set_title('Profilo')
         self.ax.set_ylim([0, 1.05])
-        self.ax.set_xlim([0, 24])
+        self.ax.set_xlim([0, grid['profile']['points']])
         self.ax.set_xlabel('Tempo [h]', fontsize=4)
         self.ax.set_ylabel('Profilo [p.u.]', fontsize=2)
 

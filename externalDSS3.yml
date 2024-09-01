@@ -1,20 +1,9 @@
 _grid_:
   profile:
-    end:
-    - 2024
-    - 2
-    - 18
-    - 23
-    - 45
-    exist: true
-    points: null
-    start:
-    - 2024
-    - 2
-    - 15
-    - 0
-    - 0
-    step: 15
+    end: null
+    exist: false
+    start: null
+    step: null
 l_01-02:
   category: AC-Line
   lf:

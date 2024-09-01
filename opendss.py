@@ -146,9 +146,13 @@ class OpenDSS:
                         v[el]['par'][p] = par[new_par_dict[linecat]['par'][p]['label']]
                     v.pop(linetype)                     # Non serve più
 
-        # Imposto inizlalmente il profilo puntuale per carichi e generatori
+        # Imposto inizlalmente il profilo per carichi e generatori
         if cat in mc['Load'] + mc['Generator']:
-            create_profile(el)
+            # create_profile(el)  # Se si vuole creare un profilo in apertura
+
+            v[el]['par']['profile']['curve'] = 1
+            v[el]['par']['profile']['name'] = None
+
             if cat in mc['Generator']:
                 v[el]['par']['eff'] = 1
                 if cat == 'BESS':   # Si ipotizza che la capacità delle batterie sia inizalmente 0
