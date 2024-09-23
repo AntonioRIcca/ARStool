@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'gridProfPar_DlgqNxXcX.ui'
+## Form generated from reading UI file 'gridProfPar_DlgJWoeun.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -20,7 +20,7 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(340, 241)
+        Dialog.resize(340, 280)
         Dialog.setStyleSheet(u"*{\n"
 "	background-color: rgb(0, 0, 0);\n"
 "	color: rgb(191, 191, 191);\n"
@@ -118,10 +118,10 @@ class Ui_Dialog(object):
         self.pointsLbl.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.confirmBtn = QPushButton(Dialog)
         self.confirmBtn.setObjectName(u"confirmBtn")
-        self.confirmBtn.setGeometry(QRect(20, 200, 75, 23))
+        self.confirmBtn.setGeometry(QRect(20, 240, 75, 23))
         self.cancelBtn = QPushButton(Dialog)
         self.cancelBtn.setObjectName(u"cancelBtn")
-        self.cancelBtn.setGeometry(QRect(250, 200, 75, 23))
+        self.cancelBtn.setGeometry(QRect(250, 240, 75, 23))
         self.defaultRB = QCheckBox(Dialog)
         self.defaultRB.setObjectName(u"defaultRB")
         self.defaultRB.setGeometry(QRect(70, 170, 91, 20))

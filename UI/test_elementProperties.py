@@ -140,7 +140,6 @@ class ElementProperties(QMainWindow):
             self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
             if v[self.elem]['par']['profile']['name'] is None:
-                # print(v[self.elem]['par']['profile']['curve'])
                 self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'])
                 self.scale_RB.setChecked(True)
                 self.scale_DSB.setStyleSheet(u"background-color: rgb(255, 255, 255);"
@@ -149,9 +148,7 @@ class ElementProperties(QMainWindow):
                 self.scale_DSB.setDisabled(True)
                 self.profile_RB.setChecked(True)
 
-                time = datetime.now().hour * 4 + int(datetime.now().minute / 15)
-                # print('Time = ', time)
-                self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][time])
+                self.scale_DSB.setValue(0)
                 self.scale_DSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
 
             # self.profile_RB.toggled.connect(self.profileCheck)
@@ -180,7 +177,6 @@ class ElementProperties(QMainWindow):
                 self.profilePlotWgtCreate()
                 # self.ui.lfVL.addWidget(self.profileWidget)
                 self.ui.lfVL.insertWidget(3, self.profileWidget)
-                # print('profile')
         # ------------------------------------------------------------------------------------------------------------
 
         # # -- creazione della sezione dei pulsanti --------------------------------------------------------------------
@@ -267,69 +263,20 @@ class ElementProperties(QMainWindow):
 
         if isinstance(v[self.elem]['par']['profile']['curve'], list):
             #TODO: Da cambiare sulla base della nuova definizione dei profili temporali
-            time = datetime.now().hour * 4 + int(datetime.now().minute / 15)
-            value = v[self.elem]['par']['profile']['curve'][time]
+            # time = datetime.now().hour * 4 + int(datetime.now().minute / 15)
+            value = v[self.elem]['par']['profile']['curve'][0]
         else:
             value = v[self.elem]['par']['profile']['curve']
         self.scale_DSB.setValue(value)
 
         # if v[self.elem]['par']['profile']['name'] is None or self.scale_RB.isChecked():
         if self.scale_RB.isChecked():
-            # print(v[self.elem]['par']['profile']['curve'])
-            # self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'])
-            # self.scale_RB.setChecked(True)
             self.scale_DSB.setStyleSheet(u"background-color: rgb(255, 255, 255);"
                                          u"color: rgb(0, 0, 0);")
             self.scale_DSB.setDisabled(False)
         else:
             self.scale_DSB.setDisabled(True)
-            # self.profile_RB.setChecked(True)
-
-            # time = datetime.now().hour * 4 + int(datetime.now().minute / 15)
-            # print('Time = ', time)
-            # self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][time])
             self.scale_DSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
-        #
-        # # self.profile_RB.toggled.disconnect()
-        # # self.scale_RB.toggled.disconnect()
-        # if self.profile_RB.isChecked():
-        #     if not v[self.elem]['par']['profile']['name']:
-        #         print('apri selezione profilo')
-        #
-        #     # if 'profile' in v[self.elem]['par']:
-        #     #     if v[self.elem]['par']['profile']['name']:
-        #     else:
-        #         self.profilePlotWgtCreate()
-        #         # self.ui.lfVL.addWidget(self.profileWidget)
-        #         self.ui.lfVL.insertWidget(3, self.profileWidget)
-        #         print('profile')
-        # else:
-        #     # self.ui.lfVL.removeWidget(self.profileWidget)
-        #
-        #     # check = self.ui.lfVL.itemAt(3).widget() == self.profileWidget
-        #     # print(self.profileWidget)
-        #     # print(self.ui.lfVL.itemAt(3))
-        #     # print(self.ui.lfVL.itemAt(3).widget())
-        #     # print(self.ui.lfVL.itemAt(3).widget)
-        #     #
-        #     try:
-        #         self.profileWidget.deleteLater()
-        #     except AttributeError:
-        #         pass
-        #     # print('verifica profile widget', check)
-        #     # if self.profileWidget in self():
-        #     #     self.ui.lfVL.itemAt(3).widget().deleteLater()
-        #     #     self.profileWidget.deleteLater()
-        #     # print('Scale')
-        #
-        #     # try:
-        #     #     # self.profileWidget.deleteLater()
-        #     #     self.ui.lfVL.removeWidget(3)
-        #     # except:
-        #     #     print('non riesco a cancellare')
-        #     #     pass
-        # # self.profile_RB.toggled.connect(self.profileCheck)
-        # # self.scale_RB.toggled.connect(self.profileCheck)
 
     def profilePlotWgtCreate(self):
         font = {
@@ -341,11 +288,6 @@ class ElementProperties(QMainWindow):
         self.canvas1 = FigureCanvas(plt.Figure(figsize=(1.7, 1.4)))
         self.ax = self.canvas1.figure.subplots()
 
-        # a = range(0, 24)
-        # b = a/4
-        # print('operazione')
-        # print([a/4 for a in range(0, 96)])
-        # print(v[self.elem]['par']['profile']['curve'])
         self.ax.plot([a for a in range(0, grid['profile']['points'])], v[self.elem]['par']['profile']['curve'])  # TODO: da correggere: inserire i dati reali
 
         self.ax.set_title('Profilo')
@@ -424,7 +366,6 @@ class ElementProperties(QMainWindow):
         # Scrittura del voltaggio dell'elemento, in base al Nodo a cui è connesso
         # try:
         if self.cat not in mc['Vsource'] + mc['Node']:
-            print(self.elem, i, self.buses)
             self.__getattribute__('v' + str(i) + 'Dsb').setValue(v[node]['par']['Vn'][0])
         # except AttributeError:
         #     pass
@@ -446,7 +387,6 @@ class ElementProperties(QMainWindow):
         if self.cat in ['2W-Transformer']:
             if i == 0:
                 for el in v:
-                    print(el, self.buses)
                     if (v[el]['category'] == 'AC-Node' and el not in self.buses and
                             v[el]['par']['Vn'][0] > v[self.buses[1]]['par']['Vn'][0]):
                         nodes.append(el)
@@ -610,7 +550,6 @@ class ElementProperties(QMainWindow):
         # Se si modifica la busbar connessa,
         # bisogna modificare anche l'elenco delle connessioni nella vecchia e nella nuova busbar
         elif self.buses != self.old_buses:
-            print('Modifica BusBar')
             for b in range(len(self.buses)):
                 if self.buses[b] != self.old_buses[b]:
                     v[elem]['par']['Vn' + str(b)] = self.__getattribute__('v' + str(b) + 'Dsb').value()
@@ -647,10 +586,6 @@ class ElementProperties(QMainWindow):
                         lines_solved.append(conn)
                 bb_solved.append(bb)
                 buses.pop(buses.index(bb))
-            print(buses)
-            print(bb_solved)
-        # bb_solved.remove(busbar)
-        print(bb_solved, lines_solved)
         return bb_solved
 
     # salvataggio dei dati dall'interfaccia al dizionario
@@ -671,12 +606,10 @@ class ElementProperties(QMainWindow):
             if self.scale_RB.isChecked():
                 v[self.elem]['par']['profile']['name'] = None
                 v[self.elem]['par']['profile']['curve'] = self.scale_DSB.value()
-                # print('scale' + ': ' + str(v[self.elem]['par']['profile']['curve']))
             else:
                 # TODO: Impostare il salvataggio del profilo
                 pass
         v[self.elem]['par']['out-of-service'] = self.out_of_service_CkB.isChecked()
-        print('salvato')
 
 
 if __name__ == '__main__':

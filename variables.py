@@ -17,6 +17,19 @@ grid = {
     },
 }
 
+bench = {
+    'profiles': {
+        'RES': 'Residenziale',
+        'IND': 'Industriale',
+        'COM': 'Commerciale',
+        'AGR': 'Agricolo',
+        'RLV': 'Rurale - LV',
+        'RMV_CUST1': 'Rurale - MV 1',
+        'RMV_CUST2': 'Rurale - MV 2',
+        'RMV_CUST3': 'Rurale - MV 3',
+    }
+}
+
 
 fn = {
     'lf': False,

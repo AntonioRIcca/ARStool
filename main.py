@@ -79,12 +79,8 @@ class Main:
         self.dss = opendss.OpenDSS()
 
         self.app = QApplication()
-        # self.app = QApplication(sys.argv)
         self.interface_open()       # TODO: da elimianre da questa posizione: va dopo la scelta della rete
 
-        # f_main = Thread(target=self.interface_open)
-        # print('start')
-        # f_main.start()
 
     def interface_open(self):
         os.chdir(mainpath)
@@ -120,13 +116,9 @@ class Main:
         self.ui.moreMenuBtn.clicked.connect(self.test_action2)
         self.ui.loadflow_Btn.clicked.connect(self.loadflow)
         self.ui.restartBtn.clicked.connect(self.startWgtCreate)
-
-        # Window(list(v.keys())[0])                                                 # TODO: da NON riattivare
-        # self.ui.rightMenuContainer.expandMenu()
+        self.ui.loadProfilesBtn.clicked.connect(self.elemProfList)
 
         self.app.exec_()
-        # exit(self.app.exec_())
-        # print(3)
 
     def func_disabled(self):
         self.ui.lf_Btn.setEnabled(False)
@@ -154,15 +146,12 @@ class Main:
             self.home_WGT.deleteLater()
         self.home_WGT = QWidget()
 
-
-        # self.homeHBL = QHBoxLayout(self.home_WGT)
         self.homeHBL = QHBoxLayout()
         self.home_WGT.setLayout(self.homeHBL)
         self.homeHBL.setContentsMargins(0, 0, 0, 0)
 
         from UI.start_wgt import StartWGT
         self.startWGT = StartWGT()
-        # self.startWGT = self.myform.ui.startWgt
         self.startWGT.ui.startWgt.setMinimumSize(QtCore.QSize(300, 0))
 
         self.homeHBL.addWidget(self.startWGT.ui.startWgt, 0, QtCore.Qt.AlignLeft)
@@ -173,7 +162,6 @@ class Main:
         # TODO: Capire se tutto questo può essere messo estermanemte
         self.home2_WGT = QWidget()
         self.home3_WGT = QWidget()
-        # self.home3_WGT.setStyleSheet("background-color: rgb(0,0,255);")
         self.home3_WGT.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
 
         self.home3_VL = QVBoxLayout(self.home3_WGT)
@@ -182,16 +170,11 @@ class Main:
         self.home3_center_WGT = QWidget()
         self.home3_bottom_WGT = QWidget()
         self.home3_bottom_WGT.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
-        # self.home3_bottom_WGT.setStyleSheet("background-color: rgb(255,0,255);")
-        # self.home3_bottom_WGT.setStyleSheet(u'background-image: url(ARStool500.png);'
-        #                                     u'background-repeat: no-repeat;'
-        #                                     u'background-position: center;')
 
         self.home3_VL.addWidget(self.home3_top_WGT)
         self.home3_VL.addWidget(self.home3_center_WGT)
         self.home3_VL.addWidget(self.home3_bottom_WGT)
 
-        # self.homeHBL.deleteLater()
         self.homeHBL.addWidget(self.home2_WGT)
         self.homeHBL.addWidget(self.home3_WGT)
 
@@ -290,10 +273,6 @@ class Main:
             # TODO: da riattivare
             grid['profile'] = {'step': None, 'start': None, 'end': None, 'points': None, 'exist': False}
 
-            # TODO: da eliminare
-            # grid['profile'] = {'step': 15, 'start': [2024, 2, 15, 0, 0], 'end': [2024, 2, 18, 23, 45],
-            #                    'points': None, 'exist': True}
-
         if filename:
             # self.dss = opendss.OpenDSS()
 
@@ -301,7 +280,6 @@ class Main:
             # try:
             #     self.dss.open(filename)
             #     self.elementsTableWgtCreate()
-            #     print('tabella')
             #     # self.func_enabled()
             #     self.func_check()
             # except:
@@ -410,7 +388,6 @@ class Main:
         self.elementsTableFormat()
 
         self.myform.ui.tableWidget.sortByColumn(1, QtCore.Qt.AscendingOrder)
-        print(list(v.keys()))
 
     def elementsTableFormat(self):
         self.myform.ui.tableWidget.setSortingEnabled(True)
@@ -464,7 +441,6 @@ class Main:
         #
         # # dss.readline(elem, v[elem]['category'])
         #
-        # # print(self.ui.rightMenuPages.count())
         # --------------------------------------------------------------------------------------
 
         # self.ui.lfWgtPls.clicked.connect(self.myaction1)
@@ -475,7 +451,6 @@ class Main:
         # -- Nuovo richiamo alla form ---------------------------------------------------------- TODO: da riattivare
         self.elemPropWgt = ElementProperties(self.elem)
         self.ui.rightMenuPages.addWidget(self.elemPropWgt.ui.propertiesWgt)
-        # self.par_wgt.mainWidget.setMinimumHeight(1200)
 
         self.ui.rightMenuPages.setCurrentIndex(self.ui.rightMenuPages.count() - 1)
         self.elemPropWgt.ui.lfPls.clicked.connect(self.myaction1)
@@ -520,7 +495,6 @@ class Main:
                 # se il nome non è inedito la schermata non si chiude
             else:
                 closed = True
-            print('closed', closed)
 
 
     def myaction1(self):
@@ -574,17 +548,35 @@ class Main:
             self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
 
     def profile_switch(self):
-        popup1 = GridProfParDlg()
+        default, cat = False, None
+        gp = copy.deepcopy(grid['profile'])
+
         if not grid['profile']['exist'] and self.elemPropWgt.profile_RB.isChecked():
-            if popup1.exec_():
-                pass
-        print('Profilo default:', popup1.default)
+            prof, default, cat = True, True, None
+            popup1 = GridProfParDlg(self.elem)
 
-        # self.elemPropWgt.profileCheck()
+            while prof and default and cat is None:
+                if popup1.exec_():
+                    pass
+                default = popup1.default
+                prof = popup1.confirmed
+
+                if default and grid['profile']['exist']:
+                    from UI.elemProfCat_Dlg import ElemProfCatDlg
+                    dlg = ElemProfCatDlg()
+                    for pcat in bench['profiles']:
+                        dlg.ui.profCatCB.addItem(bench['profiles'][pcat])
+                    dlg.exec_()
+                    if dlg.ok:
+                        cat = dlg.ui.profCatCB.currentText()
+                    else:
+                        default, cat = True, None
+
         if self.elemPropWgt.profile_RB.isChecked() and grid['profile']['exist']:
-            if not v[self.elem]['par']['profile']['name']:
-                popup = ElementsProfile(self.elem)
+            # gp = copy.deepcopy(grid['profile'])
 
+            if not v[self.elem]['par']['profile']['name']:
+                popup = ElementsProfile(self.elem, default, cat)
                 if popup.exec_():
                     pass
 
@@ -592,19 +584,14 @@ class Main:
                     self.elemPropWgt.profilePlotWgtCreate()
                     self.elemPropWgt.ui.lfVL.insertWidget(3, self.elemPropWgt.profileWidget)
                     self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
-                    print(1)
                 else:
-                    print('skip')
-                    grid['profile'] = {'points': None, 'step': None, 'start': None, 'end': None, 'exist': False}
+                    grid['profile'] = gp
 
             else:
                 self.elemPropWgt.profilePlotWgtCreate()
                 # self.ui.lfVL.addWidget(self.profileWidget)
                 self.elemPropWgt.ui.lfVL.insertWidget(3, self.elemPropWgt.profileWidget)
                 self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
-                print(2)
-            # self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
-            print(3)
         else:
             try:
                 self.elemPropWgt.profileWidget.deleteLater()
@@ -615,7 +602,6 @@ class Main:
 
 
     def test_action2(self, mcat, event=None):
-        # print(self.ui.rightMenuPages.currentIndex())
         # -- Creazione del diagramma delle generazioni ---------------------------
         # Todo: da definire come gestire i dati  del diagramma
         from UI.donutbreakdown2 import DonutBreakdownChart
@@ -649,34 +635,11 @@ class Main:
         self.elemementTableWGT.setMinimumSize(QtCore.QSize(350, 0))
 
         self.homeHBL.addWidget(self.elemementTableWGT, 0, QtCore.Qt.AlignLeft)
-        # self.homeHBL.addWidget(self.homeDxWGT)
 
-        # self.ui.homeSW.removeWidget(self.ui.homeSW.currentWidget())
         self.ui.home_VL.addWidget(self.home_WGT)
-        # self.ui.home_SW.insertWidget(0, self.ui.home_WGT)
-        # self.ui.mainPages.setCurrentIndex(1)
-        # print(self.ui.mainPages.currentIndex())
-        # self.ui.mainPages.setCurrentWidget(self.ui.home_WGT)
 
-        # super(lfWGT, self).__init__()
-        # wgt = LFrWGT()
-        # self.lfWGT = wgt.ui.lfres_WGT
-        #
-        # self.homeHBL.addWidget(self.lfWGT)
-
-        # self.widget2 = QWidget()
-        # # self.lbl = QLabel(self.widget2)
-        # # self.lbl.setText('ooooooooooooo')
-        # self.widget2.setStyleSheet("background-color:rgb(255,0,0);")
-        # self.widget2.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-        # self.homeHBL.addWidget(self.widget2)
-        # self.homeDxWGT.setStyleSheet("background-color: rgb(0,255,0);")
-
-        # self.homeHBL.removeWidget(self.homeDxWGT)
-        # self.homeDxWGT = QWidget()
         self.home2_WGT = QWidget()
         self.home3_WGT = QWidget()
-        # self.home3_WGT.setStyleSheet("background-color: rgb(0,0,255);")
         self.home3_WGT.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
 
         self.home3_VL = QVBoxLayout(self.home3_WGT)
@@ -685,22 +648,16 @@ class Main:
         self.home3_center_WGT = QWidget()
         self.home3_bottom_WGT = QWidget()
         self.home3_bottom_WGT.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
-        # self.home3_bottom_WGT.setStyleSheet("background-color: rgb(255,0,255);")
 
         self.home3_VL.addWidget(self.home3_top_WGT)
         self.home3_VL.addWidget(self.home3_center_WGT)
         self.home3_VL.addWidget(self.home3_bottom_WGT)
 
-        # self.homeHBL.deleteLater()
         self.homeHBL.addWidget(self.home2_WGT)
         self.homeHBL.addWidget(self.home3_WGT)
 
-        # self.homeDxWGT.deleteLater()
-
-        # self.barchart()
-
         # -- Creazione del diagramma a torta ---------------------------
-        # Todo: da definire come gestire i dati  deò diagramma
+        # Todo: da definire come gestire i dati  del diagramma
         # from UI.piechart import PieChart
         # chart = PieChart()
         # chart_view = QtCharts.QChartView(chart)
@@ -709,32 +666,6 @@ class Main:
         # --------------------------------------------------------------
 
     def barchart(self):
-        # set0 = QtCharts.QBarSet('Parwix')
-        # set1 = QtCharts.QBarSet('Bob')
-        # set2 = QtCharts.QBarSet('Tom')
-        # set3 = QtCharts.QBarSet('Logan')
-        # set4 = QtCharts.QBarSet('Karim')
-        #
-        # set0 << 1 << 2 << 3 << 4 << 5 << 6
-        # set1 << 5 << 0 << 0 << 4 << 0 << 7
-        # set2 << 3 << 5 << 8 << 13 << 8 << 5
-        # set3 << 5 << 6 << 7 << 3 << 4 << 5
-        # set4 << 9 << 7 << 5 << 3 << 1 << 1
-        #
-        # series = QtCharts.QPercentBarSeries()
-        # series.append(set0)
-        # series.append(set1)
-        # series.append(set2)
-        # series.append(set3)
-        # series.append(set4)
-        #
-        # chart = QtCharts.QChart()
-        # chart.addSeries(series)
-        # chart.setTitle('Percent BarChart Example')
-        # chart.setAnimationOptions(QtCharts.QChart.SeriesAnimations)
-        #
-        # categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', ]
-
         cat = ['External Grid', 'Generation', 'Loads', 'BESS', 'Losses']
         p = ['eg', 'gen', 'loads', 'bess', 'loss']
         series = QtCharts.QPercentBarSeries()
@@ -754,29 +685,8 @@ class Main:
 
             series.append(self.__getattribute__('set' + str(i)))
 
-        # series = QtCharts.QPercentBarSeries()
-        # set0 = QtCharts.QBarSet('External Grid')
-        # set1 = QtCharts.QBarSet('Generation')
-        # set2 = QtCharts.QBarSet('Loads')
-        # set3 = QtCharts.QBarSet('BESS')
-        # set4 = QtCharts.QBarSet('Losses')
-        #
-        # set0.append([1800, 1000])
-        # set1.append([1500, 0])
-        # set2.append([0, 3200])
-        # set3.append([0, 100])
-        # set4.append([0, 500])
-        # # set4 << 9 << 7 << 5 << 3 << 1 << 1
-        #
-        # series.append(set0)
-        # series.append(set1)
-        # series.append(set2)
-        # series.append(set3)
-        # series.append(set4)
-
         chart = QtCharts.QChart()
         chart.addSeries(series)
-        # chart.setTitle('Percent BarChart Example')
         chart.setAnimationOptions(QtCharts.QChart.SeriesAnimations)
 
         categories = ['In', 'Cons']
@@ -786,17 +696,13 @@ class Main:
         chart.createDefaultAxes()
         chart.setAxisX(axis, series)
         chart.setBackgroundBrush(QtGui.QBrush(QtGui.QColor('transparent')))
-        # chart.legend().setLabelColor('white')
         chart.legend().setLabelColor(QtGui.QColor('white'))
         chart.setTitleBrush(QtGui.QColor(255, 255, 255))
         chart.setTitleFont(QtGui.QFont("Arial", 12))
         chart.axisX().setLabelsColor(QtGui.QColor(255, 255, 255))
         chart.axisY().setLabelsColor(QtGui.QColor(255, 255, 255))
-        # chart.axisY().__format__("%.0f")
         chart.axisY().setLabelFormat("%.0f%%")
         chart.legend().setFont(QtGui.QFont("Arial", 10))
-
-        # self.home3_top_WGT.deleteLater()
 
         self.lf_WGT.ui.lfres_bottom_WGT.deleteLater()
 
@@ -804,7 +710,6 @@ class Main:
         self.lf_WGT.ui.lfres_VL.insertWidget(3, lfres_bottom_wgt)
 
     def loadflow(self):
-        print('loadFlow')
         self.ui.rightMenuContainer.collapseMenu()
         try:
             self.home2_WGT.deleteLater()
@@ -819,16 +724,13 @@ class Main:
                 if v[el]['par']['profile']['name']:
                     is_profile = True
                     break
-        print('Profile', is_profile)
 
         if is_profile:
             from UI.lfMod_Dlg import LfModDlg
             lf_popup = LfModDlg()
 
             if lf_popup.exec_():
-                print('popup')
                 pass
-            print('popup closed')
 
         self.dss.full_parse_to_dss(is_profile=is_profile, time=time)
         # self.yml_bench_save()
@@ -911,8 +813,6 @@ class Main:
         # chart_view.setAlignment()
         # # --------------------------------------------------------------
 
-        # print('LF done')
-
     # def write_excel(self):
     #     file_excel = xlsxwriter.Workbook('risultato.xlsx')
     #     worksheet = file_excel.add_worksheet()
@@ -957,7 +857,6 @@ class Main:
     #         # worksheet.write(2, 10, 'pepe')
     #
     #         for el in v:
-    #             # print(el)
     #             if v[el]['category'] == cat:
     #                 worksheet.write(row, col, el)
     #                 col = 1
@@ -978,20 +877,16 @@ class Main:
         mycol = QtGui.Qt.red
 
         mycolor = 'rgb(100,100,100)'
-        # print(str(a))
 
         self.home3_center_WGT.deleteLater()
 
         self.home3_center_WGT = QWidget()
-        # self.home3_center_WGT.setStyleSheet("font: 10pt")
         font = QtGui.QFont()
         font.setBold(True)
         font.setPointSize(10)
         self.home3_center_WGT.setFont(font)
-        # self.home3_center_WGT.setFont(QtGui.QFont().setPointSize(20))
         self.home3_center_VL = QVBoxLayout(self.home3_center_WGT)
         self.home3_center_VL.setSpacing(0)
-        # self.home3_center_VL.setContentsMargins()
         for cat in self.lf_cat[mcat]:
             self.__setattr__('home3_' + cat + '_top_LN', QFrame())
             self.__getattribute__('home3_' + cat + '_top_LN').setStyleSheet('border: 1px solid rgb(255, 255, 255);')
@@ -999,26 +894,14 @@ class Main:
 
             self.__setattr__('home3_' + cat + '_WGT', QWidget())
 
-            # self.__getattribute__('home3_' + cat + '_WGT').setStyleSheet(
-            #     '#home3_' + cat + '_WGT{'
-            #     'border-top: 1px solid rgb(255,255,255);'
-            #     'border-bottom: 1px solid rgb(255,255,255);'
-            #     '}'
-            # )
-
-            # print(self.__getattribute__('home3_' + cat + '_WGT').styleSheet())
-
             self.__setattr__('home3_' + cat + '_HL', QHBoxLayout(self.__getattribute__('home3_' + cat + '_WGT')))
             self.__getattribute__('home3_' + cat + '_HL').setContentsMargins(0, 0, 0, 0)
             self.__setattr__('home3_' + cat + '_sx_LBL', QLabel(cat))
             self.__setattr__('home3_' + cat + '_ctr_WGT', QWidget())
             self.__setattr__('home3_' + cat + '_dx_WGT', QWidget())
             sizepolicy1 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-            # sizepolicy1.setHorizontalStretch(2)
             sizepolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-            # sizepolicy2.setHorizontalStretch(1)
             sizepolicy3 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-            # sizepolicy3.setHorizontalStretch(2)
 
             self.__getattribute__('home3_' + cat + '_sx_LBL').setSizePolicy(sizepolicy1)
             self.__getattribute__('home3_' + cat + '_sx_LBL').setMinimumSize(80, 0)
@@ -1027,35 +910,25 @@ class Main:
             self.__getattribute__('home3_' + cat + '_sx_LBL').setStyleSheet(u'font: bold 12pt "MS Shell Dlg 2"')
             self.__getattribute__('home3_' + cat + '_ctr_WGT').setSizePolicy(sizepolicy2)
             self.__getattribute__('home3_' + cat + '_dx_WGT').setSizePolicy(sizepolicy3)
-            # self.__getattribute__('home3_' + cat + '_dx_WGT').setSizePolicy(QSizePolicy.MinimumExpanding,
-            #                                                                    QSizePolicy.Preferred)
             self.__getattribute__('home3_' + cat + '_HL').addWidget(self.__getattribute__('home3_' + cat + '_sx_LBL'))
             self.__getattribute__('home3_' + cat + '_HL').addWidget(self.__getattribute__('home3_' + cat + '_ctr_WGT'))
             self.__getattribute__('home3_' + cat + '_HL').addWidget(self.__getattribute__('home3_' + cat + '_dx_WGT'))
 
             self.__setattr__('home3_' + cat + '_VL', QVBoxLayout(self.__getattribute__('home3_' + cat + '_ctr_WGT')))
             self.__getattribute__('home3_' + cat + '_VL').setSpacing(0)
-            # self.__getattribute__('home3_' + cat + '_VL').setContentsMargins(0, 0, 0, 0)
-
-            # self.__setattr__('home3_' + cat + '_VL', QVBoxLayout(self.__getattribute__('home3_' + cat + '_WGT')))
 
             self.home3_center_VL.addWidget(self.__getattribute__('home3_' + cat + '_top_LN'))
             self.home3_center_VL.addWidget(self.__getattribute__('home3_' + cat + '_WGT'))
             for elem in self.lf_cat[mcat][cat]:
                 self.__setattr__('home3_' + elem + '_WGT', QWidget())
-                # print('home3_' + elem + '_WGT')
                 self.__setattr__('home3_' + elem + '_HL', QHBoxLayout(self.__getattribute__('home3_' + elem + '_WGT')))
                 self.__getattribute__('home3_' + elem + '_HL').setContentsMargins(0, 5, 0, 5)
 
                 self.__setattr__('home3_' + elem + '_name_LBL', QLabel(elem + ':'))
                 self.__setattr__('home3_' + elem + '_color_WGT', QWidget())
-                # self.__setattr__('home3_' + elem + '_p_LBL', QLabel((f"{self.lf_cat[mcat][cat][elem]['p']:.1f}")))
                 self.__setattr__('home3_' + elem + '_p_LBL', QLabel())
                 self.__getattribute__('home3_' + elem + '_p_LBL',).setText(f"{self.lf_cat[mcat][cat][elem]['p']:.1f}")
 
-                # QLabel(QtCore.QObject())
-
-                # self.__setattr__('home3_' + elem + '_unit_LBL', QLabel('kW'))
                 self.__setattr__('home3_' + elem + '_unit_LBL', QLabel())
                 self.__getattribute__('home3_' + elem + '_unit_LBL').setText('kW')
                 self.__getattribute__('home3_' + elem + '_HL').addWidget(
@@ -1070,15 +943,11 @@ class Main:
                 self.__getattribute__('home3_' + elem + '_name_LBL').setSizePolicy(QSizePolicy.Preferred,
                                                                                    QSizePolicy.Preferred)
                 self.__getattribute__('home3_' + elem + '_name_LBL').setMinimumSize(150, 0)
-                # self.__getattribute__('home3_' + elem + '_name_LBL').setMinimumSize(150, 0)
                 self.__getattribute__('home3_' + elem + '_p_LBL').setSizePolicy(QSizePolicy.Fixed,
                                                                                 QSizePolicy.Preferred)
                 self.__getattribute__('home3_' + elem + '_p_LBL').setMinimumSize(50, 0)
-                # self.__getattribute__('home3_' + elem + '_unit_LBL').setSizePolicy(QSizePolicy.MinimumExpanding,
-                #                                                                    QSizePolicy.Preferred)
                 self.__getattribute__('home3_' + elem + '_p_LBL').setAlignment(QtGui.Qt.AlignRight)
 
-                # mycolor = QtGui.QColor(50, 50, 50)
                 self.__getattribute__('home3_' + elem + '_name_LBL').setStyleSheet('color: ' + mycolor)
 
                 self.__getattribute__('home3_' + cat + '_VL').addWidget(self.__getattribute__('home3_' + elem + '_WGT'))
@@ -1091,17 +960,6 @@ class Main:
 
         self.home3_VL.insertWidget(1, self.home3_center_WGT)
         self.home3_VL.insertWidget(0, self.home3_top_WGT)
-        #
-        # self.home3_PV_WGT.setObjectName(u"#home3_PV_WGT")
-        # self.home3_PV_WGT.setStyleSheet(u"#home3_PV_WGT{\n"
-        #                                 "	border-top: 1px solid rgb(85, 255, 127);\n"
-        #                                 "	border-bottom: 1px solid rgb(255, 255, 0);\n"
-        #                                 "   background-color: rgb(0,255,0);\n"
-        #                                 "}"
-        #                                 )
-        # print(self.home3_PV_WGT.styleSheet())
-        # self.home3_PV_WGT.setStyleSheet(u'border-top: 1px solid rgb(255,255,255);'
-        #                                 u'border-bottom: 1px solid rgb(255,255,255);')
 
     def optstor_create(self):
         from Functionalities.OptimalStorage.optimalStorage import OptStorWGT
@@ -1115,40 +973,62 @@ class Main:
 
         self.home_WGT = self.optStorWgt.ui.optStorWgt
 
-        # # self.homeHBL = QHBoxLayout(self.home_WGT)
-        # self.homeHBL = QHBoxLayout()
-        # self.home_WGT.setLayout(self.homeHBL)
-        # self.homeHBL.setContentsMargins(0, 0, 0, 0)
-        #
         self.ui.home_VL.addWidget(self.home_WGT)
-        #
-        # self.startWGT.ui.optStorBtn.setStyleSheet(u"background-color: rgb(63, 63, 63);")
-        #
-        # self.home2_WGT.deleteLater()
-        #
-        # self.home2_WGT = QWidget()
-        # self.home2_WGT.setMinimumWidth(250)
-        # self.optStorWgtVBL = QVBoxLayout()
-        # self.optStorWgtVBL.setSpacing(20)
-        # self.home2_WGT.setLayout(self.optStorWgtVBL)
-        #
-        # self.optStorWgt = OptStorWGT()
-        # self.optStorWgt.ui.resultsWgt.setVisible(False)
-        # # self.home2_WGT = self.optStorWgt.ui.optStorWgt
-        # self.OptStorInputWgt = self.optStorWgt.ui.leftWgt
-        # # self.home2_WGT.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
-        # self.home2_WGT.setStyleSheet(u'background-color: rgb(0, 200, 0);')
-        #
-        # self.homeHBL.insertWidget(0, self.OptStorInputWgt)
-        #
-        # spacer = QSpacerItem(20, 40, QSizePolicy.Expanding, QSizePolicy.Expanding)
-        # spacerWgt = QtWidgets.QWidget()
-        # spacerWgt.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
-        # # spacerWgt.setGeometry(1000, 1000, 1000, 1000)
-        # spacerWgt.setStyleSheet(u'background-color: rgb(0, 0, 200);')
-        # # self.homeHBL.insertItem(1, spacer)
-        # self.homeHBL.insertWidget(2, spacerWgt)
-        # self.optStorWgt.ui.calcPb.clicked.connect(self.optStorWgt.ui.resultsWgt.setVisible(True))
+
+    def elemProfList(self):
+        print('lista')
+        try:
+            self.home2_WGT.deleteLater()
+        except RuntimeError:
+            pass
+
+        from UI.elementsProfile_wgt import ElemProfListWgt
+        self.elemProfListWgt = ElemProfListWgt()
+
+        # self.home2_WGT = self.elemProfListWgt()
+        # self.homeHBL.insertWidget(1, self.home2_WGT)
+
+        self.homeHBL.insertWidget(1, self.elemProfListWgt.ui.mainWgt)
+
+
+
+        pt = dict()
+        for cat in ['AC-Load', 'DC-Load', 'AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor', 'Turbine']:
+            pt[cat] = {'elements': [],}
+            for el in v:
+                if v[el]['category'] == cat:
+                    pt[cat]['elements'].append(el)
+            if pt[cat]['elements']:
+                self.__setattr__(cat + 'GB', QtWidgets.QGroupBox())
+                self.__setattr__(cat + 'GL', QtWidgets.QGridLayout())
+                self.__getattribute__(cat + 'GB').setLayout(self.__getattribute__(cat + 'GL'))
+                self.__getattribute__(cat + 'GB').setTitle(cat)
+
+                line = 0
+                for el in pt[cat]['elements']:
+                    self.__setattr__(el + 'Lbl', QtWidgets.QLabel(el))
+                    self.__setattr__(el + 'CB', QtWidgets.QComboBox())
+                    self.__getattribute__(cat + 'GL').addWidget(self.__getattribute__(el + 'Lbl'), line, 0)
+                    self.__getattribute__(cat + 'GL').addWidget(self.__getattribute__(el + 'CB'), line, 1)
+                    line += 1
+
+                    print(line)
+
+                self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.__getattribute__(cat + 'GB'))
+
+                    # a = QtWidgets.QGridLayout()
+                    # a.wid
+            else:
+                pt.pop(cat)
+
+        for cat in pt:
+            print(cat, pt[cat]['elements'])
+                # self.homeHBL = QHBoxLayout()
+                # self.home_WGT.setLayout(self.homeHBL)
+
+        # self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.TurbineGB)
+
+        pass
 
 class LFrWGT(QMainWindow):
     def __init__(self):
@@ -1200,10 +1080,8 @@ def write_excel():
                 col += 1
         row += 1
         col = 0
-        # worksheet.write(2, 10, 'pepe')
 
         for el in v:
-            # print(el)
             if v[el]['category'] == cat:
                 worksheet.write(row, col, el)
                 col = 1
@@ -1218,378 +1096,5 @@ def write_excel():
     pass
 
 
-# if __name__ == '__main__':
-#     app = QApplication(sys.argv)
-#     # mw = QMainWindow()
-#     window = LFrWGT()
-#     # window.ui.setupUi(mw)
-#     window.show()
-#
-#     sys.exit(app.exec_())
-
-# TODO: Sosopesi ----------------
-# dss = opendss.OpenDSS()
-#
-# filename = 'C:/Users/anton/PycharmProjects/ARStool/CityArea.dss'
-#
-# dss.open(filename)
-#  -------------------------------
-
-
-# print(list(v.keys())[0])
-
-# dss.write_all()
-
-# dss.solve_profile()
-# dss.solve()
-
-# dss.losses_calc()
-#
-# print(dss.dss.circuit.total_power)
-#
-# el = 'pros_pv'
-# v[el]['par']['P'] = 200
-# dss.write('pros_pv')
-# dss.solve()
-#
-# print(dss.dss.circuit.total_power)
-
 Main()
-print(300)
 
-# with open('CityArea.yml', 'w') as file:
-#     yaml.dump(v, file)
-#     file.close()
-# print('end')
-
-
-# print('end2')
-
-# Apri file
-
-#
-#
-# # -- VECCHIO CODICE -------------------------------------------------------------------------------------------------
-#
-# dss = py_dss_interface.DSS(r"C:\Program Files\OpenDSS")
-# dss_file = r"C:\Users\anton\PycharmProjects\OpenDSS\CityArea.dss"
-#
-# dss.text(f"compile [{dss_file}")
-#
-# dss.solution.solve()
-#
-# converged = dss.solution.converged
-#
-# # dss.text('Show voltage LN node')
-#
-# bus = dict()
-#
-# buses = dss.circuit.buses_names
-#
-# bus_V = dss.circuit.buses_vmag
-#
-# # dss.circuit_set_active_element('Load.UG_SERV_AC-LOAD1')
-# # print(dss.cktelement_currents())
-# # print(dss.cktelement_currents_mag_ang())
-#
-# print('\n\n')
-# # print('Load.UG_SERV_AC-LOAD1')
-#
-# params = ['currents_mag_ang', 'currents', 'variables_values', 'name', 'property_names', 'variables_names',
-#           'cplx_seq_currents', 'cplx_seq_voltages', 'energymeter', 'has_switch_control', 'has_volt_control',
-#           'is_terminal_open', 'losses', 'node_order', 'num_conductors', 'num_controls', 'num_phases',
-#           'num_properties', 'num_terminals', 'ocp_dev_index', 'ocp_dev_type', 'phase_losses', 'powers', 'bus_names',
-#           'display', 'emerg_amps', 'is_enabled', 'norm_amps', 'residuals_currents', 'seq_currents', 'seq_powers',
-#           'seq_voltages', 'voltages', 'voltages_mag_ang', 'y_prim']
-# print('\n\n')
-#
-# for e in dss.circuit.elements_names:
-#     print(e)
-#     vdss[e] = dict()
-#     dss.circuit.set_active_element(e)
-#     for p in params:
-#         # print(p + ' = ' + str(dss.cktelement_currents_mag_ang()))
-#         # dss.cktelement_currents_mag_ang()
-#         print(p)
-#         print(p + ' = ' + str(dss.cktelement.__getattribute__('_' + p)()))
-#         # dss.cktelement._is
-#         vdss[e][p] = dss.cktelement.__getattribute__('_' + p)()
-#
-#     print('\n')
-#
-# # print('kW = ' + str(dss.dssproperties_read_value('kW')))
-# # print('kW = ' + str(dss.dssproperties_read_value('Load.UG_SERV_AC-LOAD1')))
-#
-#
-# print(dss.circuit.elements_names)
-#
-# i = 0
-# for i in range(0, len(buses)):
-#     bus[buses[i]] = dict()
-#     for j in range(0, 3):
-#         bus[buses[i]][j + 1] = dict()
-#         bus[buses[i]][j + 1]['V'] = bus_V[3 * i + j]
-#
-# elem = dict()
-# elem_names = dss.circuit.elements_names
-#
-# bus_names = dss.circuit.nodes_names
-#
-# # for el in elem_names:
-# #     elem[el] = dict()
-# #     dss.circuit.set_active_element(el)
-# #     curr = dss.cktelement._currents_mag_ang()
-# #     elem[el]['i'] = dict()
-# #     for i in range(0, 3):
-# #         elem[el]['i'][i] = curr[i * 2]
-# #     elem[el]['i']['n'] = curr[6]
-#
-# for el in elem_names:
-#     [macro_cat, name] = el.split('.')
-#     # c = name.split('_')[len(name.split('_'))-1]
-#     # print(c, mc[macro_cat])
-#     try:
-#         cat = c[name.split('_')[len(name.split('_'))-1]]
-#     except KeyError:
-#         cat = 'undefined'
-#
-#     print(name + ': ' + cat)
-#
-#     # print(el, dss.cktelement._property_names())
-#
-# # for el in elem_names:
-# #     if
-#
-# with open('grid.yml', 'w') as file:
-#     yaml.dump(vdss, file)
-#     file.close()
-# # print('here')
-#
-# dss.circuit.set_active_element('Load.rs_2_ac-load')
-# print('\n\n\n\n')
-# print(dss.loads.name)
-# print(dss.loads.kw)
-# print(dss.loads.names)
-#
-# dss.circuit.set_active_element('Vsource.source')
-# # nodes = dss.cktelement.bus_names
-# for node in dss.cktelement.bus_names:
-#     if node not in elem.keys():
-#         elem[node] = dict()
-#         elem[node]['category'] = 'AC-Node'
-#         elem[node]['par'] = dict()
-#         elem[node]['par']['Vn'] = dss.vsources.base_kv
-#         elem[node]['top'] = dict()
-#         elem[node]['top']['conn'] = ['source']
-#
-# unr_conv = []
-# unr_line = []
-#
-# for el in elem_names:
-#     dss.circuit.set_active_element(el)
-#
-#     mcat = str(el).split('.')[0]
-#     name = str(el).removeprefix(mcat + '.')
-#     cat = name.split('_')[len(name.split('_')) - 1]
-#     # if str(el).split('.')[0] == 'Generator':
-#     # print(el, mcat, name, cat)
-#     if mcat == 'Load':
-#         print('break')
-#
-#     elem[name] = dict()
-#     elem[name]['top'] = dict()
-#     elem[name]['par'] = dict()
-#     elem[name]['top']['conn'] = dss.cktelement.bus_names
-#
-#     # -- verifica e inizializzazione della busbar ------------
-#     for i in [0, len(elem[name]['top']['conn']) - 1]:
-#         bus = elem[name]['top']['conn'][i]
-#         if bus not in elem.keys():
-#             elem[bus] = dict()
-#             elem[bus]['category'] = bus
-#             elem[bus]['par'] = dict()
-#             elem[bus]['par']['Vn'] = None
-#             # elem[elem[name]['top']['conn'][1]]['par']['Vn'] = elem[name]['par']['Vn1']
-#             elem[bus]['top'] = dict()
-#             elem[bus]['top']['conn'] = [name]
-#         elif name not in elem[bus]['top']['conn']:
-#             elem[bus]['top']['conn'].append(name)
-#     # --------------------------------------------------------
-#
-#     if mcat == 'Generator':
-#         dss.generators.name = name
-#
-#         if cat == 'pv':
-#             # print(el, name, dss.generators.name)
-#             elem[name]['category'] = 'PV'
-#             elem[name]['par']['P'] = dss.generators.kw
-#             elem[name]['par']['Vn'] = dss.generators.kv
-#             elem[name]['par']['profile'] = dict()
-#             elem[name]['par']['profile']['name'] = None
-#             elem[name]['par']['profile']['curve'] = 1
-#
-#         elif cat == 'bess':
-#             elem[name]['category'] = 'BESS'
-#             elem[name]['par']['Vn'] = dss.generators.kv
-#             elem[name]['par']['P'] = dss.generators.kw
-#             elem[name]['par']['cap'] = 100
-#             elem[name]['par']['eff'] = 1
-#
-#         elif cat == 'wind':
-#             elem[name]['category'] = 'Wind'
-#             elem[name]['par']['Vn'] = dss.generators.kv
-#             elem[name]['par']['P'] = dss.generators.kw
-#             elem[name]['par']['Q'] = dss.generators.kvar
-#             elem[name]['par']['f'] = dss.generators.pf
-#             elem[name]['par']['eff'] = 1
-#             elem[name]['par']['profile'] = dict()
-#             elem[name]['par']['profile']['name'] = None
-#             elem[name]['par']['profile']['curve'] = 1
-#
-#         elif cat == 'dc-micro-wind':
-#             elem[name]['category'] = 'DC-micro-Wind'
-#             elem[name]['par']['Vn'] = dss.generators.kv
-#             elem[name]['par']['P'] = dss.generators.kw
-#             elem[name]['par']['eff'] = 1
-#             elem[name]['par']['profile'] = dict()
-#             elem[name]['par']['profile']['name'] = None
-#             elem[name]['par']['profile']['curve'] = 1
-#
-#     elif mcat == 'Transformer':
-#         dss.transformers.name = name
-#         unr_conv.append(name)
-#
-#         if cat == 'tr':       # no
-#             elem[name]['category'] = '2W-Transformer'
-#             bus = 'AC-Node'
-#         elif cat == 'pwm':       # no
-#             elem[name]['category'] = 'PWM'
-#             bus = 'DC-Node'
-#         elif cat == 'dc-dc-conv':       # no
-#             elem[name]['category'] = '2W-Transformer'
-#             bus = 'DC-Node'
-#
-#         elem[name]['par']['Vn1'] = dss.transformers.kv
-#         elem[name]['par']['Sr'] = dss.transformers.kva
-#         # elem[name]['par']['Rs'] = dss.transformers.r
-#         # elem[name]['par']['Rn'] = dss.transformers.r_neut
-#         elem[name]['par']['XHL'] = dss.transformers.xhl
-#         # elem[name]['par']['XHT'] = dss.transformers.xht
-#         # elem[name]['par']['XLT'] = dss.transformers.xlt
-#         elem[elem[name]['top']['conn'][1]]['par']['Vn'] = elem[name]['par']['Vn1']
-#
-#         # if elem[name]['top']['conn'][1] not in elem.keys():
-#         #     elem[elem[name]['top']['conn'][1]] = dict()
-#         #     elem[elem[name]['top']['conn'][1]]['category'] = bus
-#         #     elem[elem[name]['top']['conn'][1]]['par'] = dict()
-#         #     elem[elem[name]['top']['conn'][1]]['top'] = dict()
-#         #     elem[elem[name]['top']['conn'][1]]['par']['conn'] = [name]
-#         # else:
-#         #     elem[elem[name]['top']['conn'][1]]['par']['conn'].append(name)
-#
-#     elif mcat == 'Load':
-#         if cat == 'ac-load':  # ok
-#             elem[name]['category'] = 'AC-Load'
-#             elem[name]['par']['Q'] = dss.loads.kvar
-#             elem[name]['par']['f'] = dss.loads.pf
-#
-#         elif cat == 'dc-load':
-#             elem[name]['category'] = 'DC-Load'
-#
-#         elem[name]['par']['P'] = dss.loads.kw
-#         elem[name]['par']['Vn'] = dss.loads.kv
-#         elem[name]['par']['profile'] = dict()
-#         elem[name]['par']['profile']['name'] = None
-#         elem[name]['par']['profile']['curve'] = 1
-#
-#     elif mcat == 'Line':     # ok
-#         unr_line.append(name)
-#
-#         if cat == 'line':
-#             elem[name]['category'] = 'AC-Load'
-#             elem[name]['par']['R0'] = dss.lines.r0
-#             elem[name]['par']['X0'] = dss.lines.x0
-#             elem[name]['par']['c0'] = dss.lines.c0
-#             elem[name]['par']['c1'] = dss.lines.c1
-#
-#         elif cat == 'dc-line':
-#             elem[name]['category'] = 'DC-Load'
-#
-#         elem[name]['par']['length'] = dss.lines.length
-#         elem[name]['par']['R1'] = dss.lines.r1
-#         elem[name]['par']['X1'] = dss.lines.x1
-#         elem[name]['par']['In'] = dss.lines.norm_amps
-#
-#         # for i in [0, 1]:
-#         #     bus = elem[name]['top']['conn'][i]
-#         #     if bus not in elem.keys():
-#         #         elem[bus] = dict()
-#         #         elem[bus]['category'] = bus
-#         #         elem[bus]['par'] = dict()
-#         #         # elem[elem[name]['top']['conn'][1]]['par']['Vn'] = elem[name]['par']['Vn1']
-#         #         elem[bus]['top'] = dict()
-#         #         elem[bus]['par']['conn'] = [name]
-#         #     else:
-#         #         elem[bus]['par']['conn'].append(name)
-#
-# while unr_conv + unr_line != []:
-#     print(unr_conv, unr_line)
-#
-#     for name in unr_conv:
-#         if elem[name]['top']['conn'][0] in elem.keys():
-#             bus = elem[name]['top']['conn'][0]
-#             if elem[bus]['par']['Vn']:
-#                 elem[name]['par']['Vn0'] = elem[bus]['par']['Vn']
-#                 unr_conv.remove(name)
-#
-#     for name in unr_line:
-#         v = None
-#         bus2 = None
-#         if elem[name]['top']['conn'][0] in elem.keys():
-#             bus = elem[name]['top']['conn'][0]
-#             if elem[bus]['par']['Vn']:
-#                 v = elem[bus]['par']['Vn']
-#                 bus2 = elem[name]['top']['conn'][1]
-#
-#         elif elem[name]['top']['conn'][1] in elem.keys():
-#             bus = elem[name]['top']['conn'][1]
-#             if elem[bus]['par']['Vn']:
-#                 v = elem[bus]['par']['Vn']
-#                 bus2 = elem[name]['top']['conn'][0]
-#
-#         if v:
-#             elem[name]['par']['Vn'] = v
-#             elem[bus2]['par']['Vn'] = v
-#             unr_line.remove(name)
-#
-# print('done')
-#
-# with open('CityArea.yml', 'w') as file:
-#     yaml.dump(elem, file)
-#     file.close()
-#
-# dss.circuit.set_active_element('Load.ug_dc-load')
-# print(dss.cktelement.name)
-# dss.cktelement.enabled(False)
-# print(dss.cktelement.has_switch_control)
-#
-#
-# dss.circuit.set_active_element('Transformer.ugs_pwm')
-# print(dss.cktelement.name)
-# dss.cktelement.enabled(True)
-# print(dss.cktelement.has_switch_control)
-#
-# print(dss.cktelement.is_enabled)
-#
-# dss.circuit.set_active_element('Line.ug_line')
-#
-# print(dss.cktelement.name, dss.cktelement.has_switch_control, dss.lines.geometry)
-#
-# dss.solution.solve()
-#
-# dss.circuit.set_active_element('Vsource.source')
-# print(dss.cktelement.powers)
-#
-# # -------------------------------------------------------------------------------------------------------------------
-#
-#

@@ -15,16 +15,39 @@ import copy
 
 
 class ElementsProfile(QtWidgets.QDialog):
-    def __init__(self, elem):
+    def __init__(self, elem, default=False, cat=None):
         super(ElementsProfile, self).__init__()
         self.ui = Ui_mainDlg()
         self.ui.setupUi(self)
 
-        # for p in grid['profile']:
-        #     print(p, grid['profile'][p])
-
+        self.default = default
         self.elem = elem
-        if self.elem:
+        # self.prof_cat = None
+        self.cat = cat
+        #
+        # for k in bench['profiles']:
+        #     if cat == bench['profiles'][k]:
+        #         self.prof_cat = k
+        #         break
+
+        self.timesteps = {
+            15: {'jump': 1, 'unit': 'h', 'scale': 4},
+            30: {'jump': 2, 'unit': 'h', 'scale': 2},
+            60: {'jump': 4, 'unit': 'h', 'scale': 1},
+            180: {'jump': 12, 'unit': 'day', 'scale': 8},
+            360: {'jump': 24, 'unit': 'day', 'scale': 4},
+            1440: {'jump': 96, 'unit': 'day', 'scale': 1},
+        }
+
+        # self.timesteps = [1, 5, 10, 15, 30, 60, 180, 360, 1440]
+
+        if self.default:
+            self.profile = 1
+            self.name = None
+
+            self.default_import()
+
+        elif self.elem:
             self.profile = copy.deepcopy(v[elem]['par']['profile']['curve'])
             self.name = v[elem]['par']['profile']['name']
         else:
@@ -71,6 +94,7 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ui.saveBtn.clicked.connect(self.data_save)
         self.ui.cancelBtn.clicked.connect(self.cancel)
         self.ui.nameLbl.mouseDoubleClickEvent = self.rename
+        self.ui.defaultBtn.clicked.connect(self.default_import)
 
         self.default_check()
 
@@ -89,17 +113,22 @@ class ElementsProfile(QtWidgets.QDialog):
                 self.ui.profileTW.item(i, j).setForeground(QtGui.QColor(255, 255, 255))
                 self.ui.profileTW.item(i, j).setTextAlignment(QtCore.Qt.AlignCenter)
 
-        self.ui.profileTW.setHorizontalHeaderLabels(['Tempo [h]', 'Prof. [p.u.]'])
+        self.ui.profileTW.setHorizontalHeaderLabels(['Tempo [' + self.timesteps[grid['profile']['step']]['unit'] + ']',
+                                                     'Prof. [p.u.]'])
         self.ui.profileTW.setColumnWidth(0, 75)
         self.ui.profileTW.setColumnWidth(1, 75)
 
     def table_fill(self):
+        try:
+            self.ui.profileTW.itemChanged.disconnect()
+        except: pass
+
         self.ui.profileTW.clearContents()
         self.ui.profileTW.model().removeRows(0, self.ui.profileTW.rowCount())
 
         for r in range(0, len(self.profile)):
             self.ui.profileTW.insertRow(r)
-            x_item = QtWidgets.QTableWidgetItem(str(r))
+            x_item = QtWidgets.QTableWidgetItem(str(r / self.timesteps[grid['profile']['step']]['scale']))
             try:
                 y_item = QtWidgets.QTableWidgetItem('%-5f' % self.profile[r])
             except:
@@ -109,13 +138,14 @@ class ElementsProfile(QtWidgets.QDialog):
             self.ui.profileTW.setItem(r, 0, x_item)
             self.ui.profileTW.setItem(r, 1, y_item)
         self.table_format()
+        self.ui.profileTW.itemChanged.connect(self.tab_value_changed)
 
     def plot_profile(self):
         self.ax.cla()
 
         (x, y) = ([], [])
         for r in range(0, len(self.profile)):
-            x.append(r)
+            x.append(r / self.timesteps[grid['profile']['step']]['scale'])
             y.append(self.profile[r])
 
         font = {
@@ -124,9 +154,10 @@ class ElementsProfile(QtWidgets.QDialog):
         }
         matplotlib.rc('font', **font)
 
-        self.ax.set_ylim([0, 1.05])
-        self.ax.set_xlim([0, grid['profile']['points'] - 1])
-        self.ax.set_xlabel('Tempo [h]', fontsize=10, color=(1, 1, 1))   # TODO: da definire l'unità di misura
+        self.ax.set_ylim([0, 1.05 * max(self.profile)])
+        self.ax.set_xlim([0, len(self.profile) / self.timesteps[grid['profile']['step']]['scale']])
+        self.ax.set_xlabel('Tempo [' + self.timesteps[grid['profile']['step']]['unit'] + ']',
+                           fontsize=10, color=(1, 1, 1))  # TODO: da definire l'unità di misura
         self.ax.set_ylabel('Profilo [p.u.]', fontsize=10, color=(1, 1, 1))
 
         self.ax.set_facecolor((0, 0, 0))
@@ -137,7 +168,7 @@ class ElementsProfile(QtWidgets.QDialog):
         self.canvas.draw()
         self.canvas.flush_events()
 
-    def x_par(self):    # TODO: per il momento non serve
+    def x_par(self):  # TODO: per il momento non serve
         s = grid['profile']['step']
         p = grid['profile']['points']
 
@@ -178,6 +209,97 @@ class ElementsProfile(QtWidgets.QDialog):
             q_item.setText(str(value))
             self.plot_profile()
 
+    def default_import(self):
+        import datetime
+        # from UI.elemProfCat_Dlg import ElemProfCatDlg
+
+        mcat = ''
+        # Seleziona la categoria del profilo
+        if v[self.elem]['category'] in mc['Load']:
+            mcat = 'Load'
+        elif v[self.elem]['category'] in mc['Load']:
+            mcat = 'Gen'
+
+        file = open(mainpath + '/_benchmark/_data/_profiles/' + mcat + '_year.txt')
+        head = file.readline().removesuffix('\n').split('\t')
+
+        if not self.cat:
+            prof_cat = None
+            from UI.elemProfCat_Dlg import ElemProfCatDlg
+            dlg = ElemProfCatDlg()
+            for pcat in bench['profiles']:
+                dlg.ui.profCatCB.addItem(bench['profiles'][pcat])
+            dlg.exec_()
+            if dlg.ok:
+                self.cat = dlg.ui.profCatCB.currentText()
+            else:
+                self.cat = None
+
+        if self.cat:
+            for k in bench['profiles']:
+                if self.cat == bench['profiles'][k]:
+                    prof_cat = k
+                    break
+
+            data = {
+                'year': [],
+                'month': [],
+                'weekday': [],
+                'day': [],
+            }
+
+            col = head.index(prof_cat) - 1
+            for line in file.readlines():
+                data['year'].append(float(line.split('\t')[col + 1]))
+
+            for p in ['month', 'weekday', 'day']:
+                file = open(mainpath + '/_benchmark/_data/_profiles/' + mcat + '_' + p + '.txt')
+                line = file.readline()
+                for line in file.readlines():
+                    data[p].append(float(line.split('\t')[col]))
+
+            # m, i = 0, 0
+            # m = 0
+            # file = open(mainpath + '/_benchmark/_data/_profiles/' + mcat + '_day.txt')
+            # line = file.readline()
+            # for line in file.readlines():
+            #     m += float(line.split('\t')[col])
+            #     i += 1
+            #     if i == self.timesteps[grid['profile']['step']]['jump']:
+            #         data['day'].append(m / self.timesteps[grid['profile']['step']]['jump'])
+            #         m, i = 0, 0
+
+            datastart = datetime.datetime(grid['profile']['start'][0], grid['profile']['start'][1],
+                                          grid['profile']['start'][2], grid['profile']['start'][3],
+                                          grid['profile']['start'][4])
+            dataend = datetime.datetime(grid['profile']['end'][0], grid['profile']['end'][1],
+                                        grid['profile']['end'][2], grid['profile']['end'][3],
+                                        grid['profile']['end'][4])
+
+            t = datastart
+            self.profile = []
+            m, i, j = 0, 0, 0
+            while t <= dataend:
+                m += (data['year'][t.year - 2010] * data['month'][t.month - 1] * data['weekday'][t.weekday()]
+                      * data['day'][int(t.hour * 4 + t.minute / 15)])
+                t = t + datetime.timedelta(minutes=15)
+                i += 1
+                if i == self.timesteps[grid['profile']['step']]['jump']:
+                    self.profile.append(m / self.timesteps[grid['profile']['step']]['jump'])
+                    m, i = 0, 0
+            if i != 0:
+                self.profile.append(m / i)
+
+            print(self.name)
+            print('righe', self.ui.profileTW.rowCount())
+            if self.ui.profileTW.rowCount() > 0:
+                print('agg')
+                self.plot_profile()
+                self.table_fill()
+                self.cat = None
+
+            self.name = self.elem + '_' + prof_cat
+
     def data_import(self):
         try:
             self.ui.profileTW.cellClicked.disconnect()
@@ -200,11 +322,18 @@ class ElementsProfile(QtWidgets.QDialog):
                 try:
                     for line in f.readlines():
                         prof.append(float(line))
-                        self.ui.profileTW.setItem(len(prof)-1, 1, QtWidgets.QTableWidgetItem('%.5f' % float(line)))
                         i += 1
-                    self.profile = prof
-                    self.plot_profile()
-                    self.name = filename.split('/')[len(filename.split('/')) - 1].removesuffix('.txt')
+                    print(len(prof))
+                    print(grid['profile']['points'])
+                    if len(prof) == grid['profile']['points']:
+                        self.profile = prof
+                        self.plot_profile()
+                        self.table_fill()
+                        self.name = filename.split('/')[len(filename.split('/')) - 1].removesuffix('.txt')
+                    else:
+                        s = 'Numero di punti non valido.\nCaricare file con ' + str(grid['profile']['points']) + ' punti'
+                        QtWidgets.QMessageBox.warning(self, 'Attenzione!', s)
+                        # QtWidgets.QMessageBox.warning(self, 'Attenzione!', 'Numero di punti non valido.')
                 except:
                     QtWidgets.QMessageBox.warning(self, 'Attenzione!', 'File non valido')
 
@@ -222,9 +351,7 @@ class ElementsProfile(QtWidgets.QDialog):
                 for item in self.profile:
                     f.write(str(item) + '\n')
 
-
     def data_save(self):
-        # print('save clicked')
         if not self.name:
             ok = False
             name = ''
@@ -259,8 +386,6 @@ class ElementsProfile(QtWidgets.QDialog):
             self.close()
 
     def closeEvent(self, a0):
-        # print('finesttra chiusa')
-        # close = self.cancel()
         self.closing_check()
 
         if self.ok_close:
@@ -297,9 +422,6 @@ class ElementsProfile(QtWidgets.QDialog):
                 pass
 
         self.ui.defaultBtn.setVisible(grid['profile']['start'][0] in y and grid['profile']['end'][0] in y)
-
-
-
 
     # TODO: Dare la possibilità di azzerare il profilo (magari inserendo di default il valore 1)
     # TODO: Il profilo nuovo deve avere solo il primo valore popolato, e deve calcolarsi in automatico gli altri valori

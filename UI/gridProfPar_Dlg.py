@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 
 from variables import *
 from dictInitialize import *
+
+from variables import *
+import datetime
 import copy
 from functools import partial
 
@@ -16,7 +19,7 @@ from datetime import datetime as dt
 
 
 class GridProfParDlg(QtWidgets.QDialog):
-    def __init__(self):
+    def __init__(self, elem):
         super(GridProfParDlg, self).__init__()
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
@@ -33,9 +36,10 @@ class GridProfParDlg(QtWidgets.QDialog):
         self.ui.startDte.timeChanged.connect(self.datefix)
         self.ui.endDte.dateChanged.connect(self.lenfix)
         self.ui.endDte.timeChanged.connect(self.lenfix)
-        self.ui.stepCB.currentTextChanged.connect(self.lenfix)
+        self.ui.stepCB.currentTextChanged.connect(self.datefix)
         self.ui.confirmBtn.clicked.connect(self.store)
-        self.ui.cancelBtn.clicked.connect(self.close)
+        self.ui.cancelBtn.clicked.connect(self.closeBtn)
+        self.ui.defaultRB.clicked.connect(self.default_click)
 
         self.def_years = []
         f = open(mainpath + '/_benchmark/_data/_profiles/Gen_year.txt')
@@ -44,6 +48,14 @@ class GridProfParDlg(QtWidgets.QDialog):
                 self.def_years.append(int(line.split()[0]))
             except ValueError:
                 pass
+
+
+        today = [datetime.date.today().year, datetime.date.today().month, datetime.date.today().day]
+
+        self.ui.startDte.setDateTime(QtCore.QDateTime(today[0], today[1], today[2], 0, 0, 0))
+        self.ui.endDte.setDateTime(QtCore.QDateTime(today[0], today[1], today[2], 23, 0, 0))
+
+        self.datefix()
 
         # self.ui.datetimeWgt.setVisible(False)
         # self.ui.calendarCWgt.setVisible(False)
@@ -75,15 +87,13 @@ class GridProfParDlg(QtWidgets.QDialog):
             self.ui.startDte.setDateTime(QtCore.QDateTime(2024, 1, 1, 0, 0, 0))
 
     def datefix(self):
-        # print(self.ui.startDte.dateTime())
-        # date = self.ui.startDte.date()
-        # time = self.ui.startDte.time()
         i = self.ui.stepCB.currentIndex()
-        # print(date, time)
-        # self.ui.endDte.setDateTime()
         self.ui.endDte.setDateTime(self.ui.startDte.dateTime().addSecs(self.steps[i] * 60 * (self.len - 1)))
 
-        self.ui.endDte.setMinimumDateTime(self.ui.startDte.dateTime())
+        t = (self.ui.startDte.dateTime().toPython()
+             + datetime.timedelta(minutes=self.steps[self.ui.stepCB.currentIndex()]))
+
+        self.ui.endDte.setMinimumDateTime(QtCore.QDateTime(t))
 
         self.lenfix()
 
@@ -96,9 +106,22 @@ class GridProfParDlg(QtWidgets.QDialog):
         self.default_check()
 
     def default_check(self):
-        self.ui.defaultRB.setVisible(self.ui.startDte.dateTime().date().year() in self.def_years and
-                                     self.ui.endDte.dateTime().date().year() in self.def_years)
-        self.default = self.ui.defaultRB.isChecked() and self.ui.defaultRB.isVisible()
+        # È possibile importare i dati di default solo se l'intervallo temporale rientra nel range di dati disponibili
+        range_ok = (self.ui.startDte.dateTime().date().year() in self.def_years and
+                    self.ui.endDte.dateTime().date().year() in self.def_years)
+        self.ui.defaultRB.setVisible(range_ok)
+
+        # Lo stato di default è vero se la casella è spuntata e se è visibile (se il timerange è appropriato)
+        self.default = self.ui.defaultRB.isChecked() and range_ok
+
+        # Nel caso di verifica, la casella deve essere attivata se lo era precedentemente e se il timestep è 1 ora
+        self.ui.defaultRB.setChecked(self.ui.stepCB.currentIndex() > 2 and self.default)
+
+    # Azioni da compiere quando cambia lo stato della casella Default
+    def default_click(self):
+        if self.ui.defaultRB.isChecked():
+            # Se bisogna usare i dati di default, il timestep deve essere di 1 ora
+            self.ui.stepCB.setCurrentIndex(5)
 
     def store(self):
         self.default_check()
@@ -115,26 +138,10 @@ class GridProfParDlg(QtWidgets.QDialog):
         grid['profile']['step'] = self.steps[self.ui.stepCB.currentIndex()]
         grid['profile']['points'] = self.len
         grid['profile']['exist'] = True
-
+        self.confirmed = True
         self.close()
 
-    def prova(self):
-        print('cambiato')
-
-    # def punct_selected(self):
-    #     self.ui.datetimeWgt.setVisible(self.ui.punctLfRB.isChecked())
-    #
-    # def date_selected(self, event):
-    #     # print('doppio click sulla data')
-    #     self.ui.calendarCWgt.setVisible(True)
-    #
-    # def date_modified(self):
-    #     # print('data selezionata')
-    #     self.ui.calendarCWgt.setVisible(False)
-    #     # print(self.ui.calendarCWgt.selectedDate())
-    #     datesel = self.ui.calendarCWgt.selectedDate()
-    #     # print(datesel.day(), datesel.month(), datesel.year())
-    #     self.ui.dateLE.setText(str(datesel.day()) + '/' + str(datesel.month()) + '/' + str(datesel.year()))
-
-
-
+    def closeBtn(self):
+        self.default = False
+        grid['profile'] = {'step': None, 'start': None, 'end': None, 'points': None, 'exist': False}
+        self.close()
