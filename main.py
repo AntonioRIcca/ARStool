@@ -1003,10 +1003,13 @@ class Main:
                 self.__setattr__(cat + 'GL', QtWidgets.QGridLayout())
                 self.__getattribute__(cat + 'GB').setLayout(self.__getattribute__(cat + 'GL'))
                 self.__getattribute__(cat + 'GB').setTitle(cat)
+                self.__getattribute__(cat + 'GL').setContentsMargins(10, 30, 10, 10)
 
                 line = 0
                 for el in pt[cat]['elements']:
                     self.__setattr__(el + 'Lbl', QtWidgets.QLabel(el))
+                    self.__getattribute__(el + 'Lbl').setMinimumHeight(30)
+                    self.__getattribute__(el + 'Lbl').setMaximumHeight(30)
                     self.__setattr__(el + 'CB', QtWidgets.QComboBox())
                     self.__getattribute__(cat + 'GL').addWidget(self.__getattribute__(el + 'Lbl'), line, 0)
                     self.__getattribute__(cat + 'GL').addWidget(self.__getattribute__(el + 'CB'), line, 1)
@@ -1015,11 +1018,14 @@ class Main:
                     print(line)
 
                 self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.__getattribute__(cat + 'GB'))
+                # self.__getattribute__(cat + 'GB').setContentsMargins(20, 130, 20, 10)
 
-                    # a = QtWidgets.QGridLayout()
-                    # a.wid
+                # a = QtWidgets.QGridLayout()
+                # a.setVerticalSpacing()
             else:
                 pt.pop(cat)
+
+            # self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.__getattribute__(cat + 'GB'))
 
         for cat in pt:
             print(cat, pt[cat]['elements'])
