@@ -989,8 +989,14 @@ class Main:
         # self.homeHBL.insertWidget(1, self.home2_WGT)
 
         self.homeHBL.insertWidget(1, self.elemProfListWgt.ui.mainWgt)
+        self.elemProfListWgt.ui.mainSaWgtGL.setVerticalSpacing(0)
 
-
+        lblfont = QtGui.QFont()
+        lblfont.setFamily(u"MS Shell Dlg 2")
+        lblfont.setPointSize(12)
+        lblfont.setBold(True)
+        lblfont.setItalic(False)
+        lblfont.setWeight(75)
 
         pt = dict()
         for cat in ['AC-Load', 'DC-Load', 'AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor', 'Turbine']:
@@ -999,11 +1005,40 @@ class Main:
                 if v[el]['category'] == cat:
                     pt[cat]['elements'].append(el)
             if pt[cat]['elements']:
-                self.__setattr__(cat + 'GB', QtWidgets.QGroupBox())
+                self.__setattr__(cat + 'Lbl', QtWidgets.QLabel(cat))
+                self.__getattribute__(cat + 'Lbl').setMinimumHeight(30)
+                self.__getattribute__(cat + 'Lbl').setMaximumHeight(30)
+                self.__getattribute__(cat + 'Lbl').setFont(lblfont)
+                self.__getattribute__(cat + 'Lbl').setAlignment(QtGui.Qt.AlignCenter)
+                self.__getattribute__(cat + 'Lbl').setStyleSheet(u"border-top-left-radius: 15px;\n"
+                                                                 u"border-top-right-radius: 15px;\n"
+                                                                 u"padding: 5px 150px;\n"
+                                                                 u"background-color: rgb(127, 127, 127);\n"
+                                                                 u"color: rgb(255, 255, 255);\n")
+
+                self.__setattr__(cat + 'VSpc', QSpacerItem(20, 30, QSizePolicy.Minimum, QSizePolicy.Fixed))
+
+                self.__setattr__(cat + 'Frm', QtWidgets.QFrame())
+                self.__getattribute__(cat + 'Frm').setStyleSheet(u"*{\n"
+                                                                 u"background-color: rgb(0, 0, 0);\n"
+                                                                 u"color: rgb(255, 255, 255)\n"
+                                                                 u"}\n\n"
+                                                                 u"QFrame {\n"
+                                                                 u"border: solid;\n"
+                                                                 u"border-width: 2px;\n"
+                                                                 u"border-color: rgb(127, 127, 127);\n"
+                                                                 u"border-bottom-left-radius: 15px;\n"
+                                                                 u"border-bottom-right-radius: 15px;\n"
+                                                                 u"}\n\n"
+                                                                 u"QLabel {\n"
+                                                                 u"border-width: 0px;\n"
+                                                                 u"border-radius: 0px;\n"
+                                                                 u"}")
+
                 self.__setattr__(cat + 'GL', QtWidgets.QGridLayout())
-                self.__getattribute__(cat + 'GB').setLayout(self.__getattribute__(cat + 'GL'))
-                self.__getattribute__(cat + 'GB').setTitle(cat)
-                self.__getattribute__(cat + 'GL').setContentsMargins(10, 30, 10, 10)
+                self.__getattribute__(cat + 'Frm').setLayout(self.__getattribute__(cat + 'GL'))
+                # self.__getattribute__(cat + 'GB').setTitle(cat)
+                self.__getattribute__(cat + 'GL').setContentsMargins(10, 10, 10, 10)
 
                 line = 0
                 for el in pt[cat]['elements']:
@@ -1015,17 +1050,12 @@ class Main:
                     self.__getattribute__(cat + 'GL').addWidget(self.__getattribute__(el + 'CB'), line, 1)
                     line += 1
 
-                    print(line)
+                self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.__getattribute__(cat + 'Lbl'))
+                self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.__getattribute__(cat + 'Frm'))
+                self.elemProfListWgt.ui.mainSaWgtGL.addItem(self.__getattribute__(cat + 'VSpc'))
 
-                self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.__getattribute__(cat + 'GB'))
-                # self.__getattribute__(cat + 'GB').setContentsMargins(20, 130, 20, 10)
-
-                # a = QtWidgets.QGridLayout()
-                # a.setVerticalSpacing()
             else:
                 pt.pop(cat)
-
-            # self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.__getattribute__(cat + 'GB'))
 
         for cat in pt:
             print(cat, pt[cat]['elements'])

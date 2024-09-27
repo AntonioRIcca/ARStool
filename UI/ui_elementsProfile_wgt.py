@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'elementsProfile_wgtpZFhAo.ui'
+## Form generated from reading UI file 'elementsProfile_wgtQzjEoE.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -23,7 +23,7 @@ class Ui_elemProfWgt(object):
         elemProfWgt.resize(721, 716)
         self.mainWgt = QWidget(elemProfWgt)
         self.mainWgt.setObjectName(u"mainWgt")
-        self.mainWgt.setGeometry(QRect(30, 20, 531, 641))
+        self.mainWgt.setGeometry(QRect(30, 20, 581, 661))
         self.mainWgt.setStyleSheet(u"*{\n"
 "	background-color: rgb(0, 0, 0);\n"
 "	color: rgb(191, 191, 191);\n"
@@ -34,9 +34,15 @@ class Ui_elemProfWgt(object):
 "	font: 75 12pt \"MS Shell Dlg 2\";\n"
 "}\n"
 "\n"
-"QLabel{\n"
-"	font: 10pt \"MS Shell Dlg 2\";\n"
+"QGroupBox::title  {\n"
+"    subcontrol-origin: margin;\n"
+"    subcontrol-position: top center;\n"
+"    padding: 5px 50 5px 50px;\n"
+"    background-color: rgb(0, 0, 21);\n"
+"	border-color: rgb(255, 255, 255);\n"
+"    color: rgb(255, 255, 255);\n"
 "}\n"
+"\n"
 "")
         self.verticalLayout = QVBoxLayout(self.mainWgt)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -48,182 +54,146 @@ class Ui_elemProfWgt(object):
         self.mainSA.setWidgetResizable(True)
         self.mainSaWgt = QWidget()
         self.mainSaWgt.setObjectName(u"mainSaWgt")
-        self.mainSaWgt.setGeometry(QRect(0, 0, 511, 621))
+        self.mainSaWgt.setGeometry(QRect(0, 0, 561, 641))
         self.mainSaWgtGL = QGridLayout(self.mainSaWgt)
         self.mainSaWgtGL.setObjectName(u"mainSaWgtGL")
-        self.MainSaWgtGB = QGroupBox(self.mainSaWgt)
-        self.MainSaWgtGB.setObjectName(u"MainSaWgtGB")
+        self.mainSaWgtGL.setVerticalSpacing(0)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.mainSaWgtGL.addItem(self.verticalSpacer, 3, 0, 1, 1)
+
+        self.ACLoadLbl = QLabel(self.mainSaWgt)
+        self.ACLoadLbl.setObjectName(u"ACLoadLbl")
+        self.ACLoadLbl.setMinimumSize(QSize(0, 30))
+        self.ACLoadLbl.setBaseSize(QSize(0, 30))
         font = QFont()
         font.setFamily(u"MS Shell Dlg 2")
         font.setPointSize(12)
-        font.setBold(False)
+        font.setBold(True)
         font.setItalic(False)
-        font.setWeight(9)
-        self.MainSaWgtGB.setFont(font)
-        self.gridLayout_2 = QGridLayout(self.MainSaWgtGB)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.gridLayout_2.setContentsMargins(-1, 30, 9, -1)
-        self.catLbl_7 = QLabel(self.MainSaWgtGB)
-        self.catLbl_7.setObjectName(u"catLbl_7")
+        font.setWeight(75)
+        self.ACLoadLbl.setFont(font)
+        self.ACLoadLbl.setStyleSheet(u"border-top-left-radius: 15px;\n"
+"    border-top-right-radius: 15px;\n"
+"    padding: 5px 150px;\n"
+"    background-color: rgb(127, 127, 127);\n"
+"    color: rgb(255, 255, 255);\n"
+"")
+        self.ACLoadLbl.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout_2.addWidget(self.catLbl_7, 6, 1, 1, 1)
+        self.mainSaWgtGL.addWidget(self.ACLoadLbl, 1, 0, 1, 1)
 
-        self.elemLbl_3 = QLabel(self.MainSaWgtGB)
-        self.elemLbl_3.setObjectName(u"elemLbl_3")
+        self.frame = QFrame(self.mainSaWgt)
+        self.frame.setObjectName(u"frame")
+        self.frame.setMinimumSize(QSize(0, 100))
+        self.frame.setStyleSheet(u"*{\n"
+"	background-color: rgb(0, 0, 0);\n"
+"	color: rgb(255, 255, 255)\n"
+"}\n"
+"\n"
+"QFrame {\n"
+"	border: solid;\n"
+"	border-width: 2px;\n"
+"	border-color: rgb(127, 127, 127);\n"
+"	border-bottom-left-radius: 15px;\n"
+"    border-bottom-right-radius: 15px;\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"	border-width: 0px;\n"
+"	border-radius: 0px;\n"
+"}\n"
+"\n"
+"")
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout = QGridLayout(self.frame)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.elemLbl = QLabel(self.frame)
+        self.elemLbl.setObjectName(u"elemLbl")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.elemLbl_3.sizePolicy().hasHeightForWidth())
-        self.elemLbl_3.setSizePolicy(sizePolicy)
-        self.elemLbl_3.setMinimumSize(QSize(0, 30))
-        self.elemLbl_3.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_2.addWidget(self.elemLbl_3, 2, 0, 1, 1)
-
-        self.catLbl_4 = QLabel(self.MainSaWgtGB)
-        self.catLbl_4.setObjectName(u"catLbl_4")
-
-        self.gridLayout_2.addWidget(self.catLbl_4, 3, 1, 1, 1)
-
-        self.catLbl = QLabel(self.MainSaWgtGB)
-        self.catLbl.setObjectName(u"catLbl")
-
-        self.gridLayout_2.addWidget(self.catLbl, 0, 1, 1, 1)
-
-        self.catLbl_2 = QLabel(self.MainSaWgtGB)
-        self.catLbl_2.setObjectName(u"catLbl_2")
-
-        self.gridLayout_2.addWidget(self.catLbl_2, 1, 1, 1, 1)
-
-        self.typeCB_3 = QComboBox(self.MainSaWgtGB)
-        self.typeCB_3.setObjectName(u"typeCB_3")
-
-        self.gridLayout_2.addWidget(self.typeCB_3, 3, 2, 1, 1)
-
-        self.catLbl_3 = QLabel(self.MainSaWgtGB)
-        self.catLbl_3.setObjectName(u"catLbl_3")
-
-        self.gridLayout_2.addWidget(self.catLbl_3, 2, 1, 1, 1)
-
-        self.typeCB_7 = QComboBox(self.MainSaWgtGB)
-        self.typeCB_7.setObjectName(u"typeCB_7")
-
-        self.gridLayout_2.addWidget(self.typeCB_7, 4, 2, 1, 1)
-
-        self.elemLbl_8 = QLabel(self.MainSaWgtGB)
-        self.elemLbl_8.setObjectName(u"elemLbl_8")
-        sizePolicy.setHeightForWidth(self.elemLbl_8.sizePolicy().hasHeightForWidth())
-        self.elemLbl_8.setSizePolicy(sizePolicy)
-        self.elemLbl_8.setMinimumSize(QSize(0, 30))
-        self.elemLbl_8.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_2.addWidget(self.elemLbl_8, 6, 0, 1, 1)
-
-        self.elemLbl_4 = QLabel(self.MainSaWgtGB)
-        self.elemLbl_4.setObjectName(u"elemLbl_4")
-        sizePolicy.setHeightForWidth(self.elemLbl_4.sizePolicy().hasHeightForWidth())
-        self.elemLbl_4.setSizePolicy(sizePolicy)
-        self.elemLbl_4.setMinimumSize(QSize(0, 30))
-        self.elemLbl_4.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_2.addWidget(self.elemLbl_4, 3, 0, 1, 1)
-
-        self.catLbl_8 = QLabel(self.MainSaWgtGB)
-        self.catLbl_8.setObjectName(u"catLbl_8")
-
-        self.gridLayout_2.addWidget(self.catLbl_8, 4, 1, 1, 1)
-
-        self.typeCB_4 = QComboBox(self.MainSaWgtGB)
-        self.typeCB_4.setObjectName(u"typeCB_4")
-
-        self.gridLayout_2.addWidget(self.typeCB_4, 2, 2, 1, 1)
-
-        self.typeCB_2 = QComboBox(self.MainSaWgtGB)
-        self.typeCB_2.setObjectName(u"typeCB_2")
-
-        self.gridLayout_2.addWidget(self.typeCB_2, 1, 2, 1, 1)
-
-        self.elemLbl_6 = QLabel(self.MainSaWgtGB)
-        self.elemLbl_6.setObjectName(u"elemLbl_6")
-        sizePolicy.setHeightForWidth(self.elemLbl_6.sizePolicy().hasHeightForWidth())
-        self.elemLbl_6.setSizePolicy(sizePolicy)
-        self.elemLbl_6.setMinimumSize(QSize(0, 30))
-        self.elemLbl_6.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_2.addWidget(self.elemLbl_6, 7, 0, 1, 1)
-
-        self.elemLbl_5 = QLabel(self.MainSaWgtGB)
-        self.elemLbl_5.setObjectName(u"elemLbl_5")
-        sizePolicy.setHeightForWidth(self.elemLbl_5.sizePolicy().hasHeightForWidth())
-        self.elemLbl_5.setSizePolicy(sizePolicy)
-        self.elemLbl_5.setMinimumSize(QSize(0, 30))
-        self.elemLbl_5.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_2.addWidget(self.elemLbl_5, 5, 0, 1, 1)
-
-        self.typeCB_6 = QComboBox(self.MainSaWgtGB)
-        self.typeCB_6.setObjectName(u"typeCB_6")
-
-        self.gridLayout_2.addWidget(self.typeCB_6, 6, 2, 1, 1)
-
-        self.elemLbl_7 = QLabel(self.MainSaWgtGB)
-        self.elemLbl_7.setObjectName(u"elemLbl_7")
-        sizePolicy.setHeightForWidth(self.elemLbl_7.sizePolicy().hasHeightForWidth())
-        self.elemLbl_7.setSizePolicy(sizePolicy)
-        self.elemLbl_7.setMinimumSize(QSize(0, 30))
-        self.elemLbl_7.setMaximumSize(QSize(16777215, 30))
-
-        self.gridLayout_2.addWidget(self.elemLbl_7, 4, 0, 1, 1)
-
-        self.typeCB_5 = QComboBox(self.MainSaWgtGB)
-        self.typeCB_5.setObjectName(u"typeCB_5")
-
-        self.gridLayout_2.addWidget(self.typeCB_5, 5, 2, 1, 1)
-
-        self.elemLbl = QLabel(self.MainSaWgtGB)
-        self.elemLbl.setObjectName(u"elemLbl")
         sizePolicy.setHeightForWidth(self.elemLbl.sizePolicy().hasHeightForWidth())
         self.elemLbl.setSizePolicy(sizePolicy)
         self.elemLbl.setMinimumSize(QSize(0, 30))
         self.elemLbl.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_2.addWidget(self.elemLbl, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.elemLbl, 0, 0, 1, 1)
 
-        self.elemLbl_2 = QLabel(self.MainSaWgtGB)
+        self.catLbl = QLabel(self.frame)
+        self.catLbl.setObjectName(u"catLbl")
+
+        self.gridLayout.addWidget(self.catLbl, 0, 1, 1, 1)
+
+        self.typeCB = QComboBox(self.frame)
+        self.typeCB.setObjectName(u"typeCB")
+
+        self.gridLayout.addWidget(self.typeCB, 0, 2, 1, 1)
+
+        self.elemLbl_2 = QLabel(self.frame)
         self.elemLbl_2.setObjectName(u"elemLbl_2")
         sizePolicy.setHeightForWidth(self.elemLbl_2.sizePolicy().hasHeightForWidth())
         self.elemLbl_2.setSizePolicy(sizePolicy)
         self.elemLbl_2.setMinimumSize(QSize(0, 30))
         self.elemLbl_2.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_2.addWidget(self.elemLbl_2, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.elemLbl_2, 1, 0, 1, 1)
 
-        self.catLbl_5 = QLabel(self.MainSaWgtGB)
-        self.catLbl_5.setObjectName(u"catLbl_5")
+        self.catLbl_2 = QLabel(self.frame)
+        self.catLbl_2.setObjectName(u"catLbl_2")
 
-        self.gridLayout_2.addWidget(self.catLbl_5, 5, 1, 1, 1)
+        self.gridLayout.addWidget(self.catLbl_2, 1, 1, 1, 1)
 
-        self.catLbl_6 = QLabel(self.MainSaWgtGB)
-        self.catLbl_6.setObjectName(u"catLbl_6")
+        self.typeCB_2 = QComboBox(self.frame)
+        self.typeCB_2.setObjectName(u"typeCB_2")
 
-        self.gridLayout_2.addWidget(self.catLbl_6, 7, 1, 1, 1)
+        self.gridLayout.addWidget(self.typeCB_2, 1, 2, 1, 1)
 
-        self.typeCB_8 = QComboBox(self.MainSaWgtGB)
-        self.typeCB_8.setObjectName(u"typeCB_8")
+        self.elemLbl_3 = QLabel(self.frame)
+        self.elemLbl_3.setObjectName(u"elemLbl_3")
+        sizePolicy.setHeightForWidth(self.elemLbl_3.sizePolicy().hasHeightForWidth())
+        self.elemLbl_3.setSizePolicy(sizePolicy)
+        self.elemLbl_3.setMinimumSize(QSize(0, 30))
+        self.elemLbl_3.setMaximumSize(QSize(16777215, 30))
 
-        self.gridLayout_2.addWidget(self.typeCB_8, 7, 2, 1, 1)
+        self.gridLayout.addWidget(self.elemLbl_3, 2, 0, 1, 1)
 
-        self.typeCB = QComboBox(self.MainSaWgtGB)
-        self.typeCB.setObjectName(u"typeCB")
+        self.catLbl_3 = QLabel(self.frame)
+        self.catLbl_3.setObjectName(u"catLbl_3")
 
-        self.gridLayout_2.addWidget(self.typeCB, 0, 2, 1, 1)
+        self.gridLayout.addWidget(self.catLbl_3, 2, 1, 1, 1)
+
+        self.typeCB_4 = QComboBox(self.frame)
+        self.typeCB_4.setObjectName(u"typeCB_4")
+
+        self.gridLayout.addWidget(self.typeCB_4, 2, 2, 1, 1)
+
+        self.elemLbl_4 = QLabel(self.frame)
+        self.elemLbl_4.setObjectName(u"elemLbl_4")
+        sizePolicy.setHeightForWidth(self.elemLbl_4.sizePolicy().hasHeightForWidth())
+        self.elemLbl_4.setSizePolicy(sizePolicy)
+        self.elemLbl_4.setMinimumSize(QSize(0, 30))
+        self.elemLbl_4.setMaximumSize(QSize(16777215, 30))
+
+        self.gridLayout.addWidget(self.elemLbl_4, 3, 0, 1, 1)
+
+        self.catLbl_4 = QLabel(self.frame)
+        self.catLbl_4.setObjectName(u"catLbl_4")
+
+        self.gridLayout.addWidget(self.catLbl_4, 3, 1, 1, 1)
+
+        self.typeCB_3 = QComboBox(self.frame)
+        self.typeCB_3.setObjectName(u"typeCB_3")
+
+        self.gridLayout.addWidget(self.typeCB_3, 3, 2, 1, 1)
 
 
-        self.mainSaWgtGL.addWidget(self.MainSaWgtGB, 0, 0, 1, 1)
+        self.mainSaWgtGL.addWidget(self.frame, 2, 0, 1, 1)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_2 = QSpacerItem(20, 10, QSizePolicy.Minimum, QSizePolicy.Fixed)
 
-        self.mainSaWgtGL.addItem(self.verticalSpacer, 1, 0, 1, 1)
+        self.mainSaWgtGL.addItem(self.verticalSpacer_2, 0, 0, 1, 1)
 
         self.mainSA.setWidget(self.mainSaWgt)
 
@@ -237,22 +207,14 @@ class Ui_elemProfWgt(object):
 
     def retranslateUi(self, elemProfWgt):
         elemProfWgt.setWindowTitle(QCoreApplication.translate("elemProfWgt", u"Form", None))
-        self.MainSaWgtGB.setTitle(QCoreApplication.translate("elemProfWgt", u"AC Load", None))
-        self.catLbl_7.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
-        self.elemLbl_3.setText(QCoreApplication.translate("elemProfWgt", u"Nome elemento", None))
-        self.catLbl_4.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
-        self.catLbl.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
-        self.catLbl_2.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
-        self.catLbl_3.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
-        self.elemLbl_8.setText(QCoreApplication.translate("elemProfWgt", u"Nome elemento", None))
-        self.elemLbl_4.setText(QCoreApplication.translate("elemProfWgt", u"Nome elemento", None))
-        self.catLbl_8.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
-        self.elemLbl_6.setText(QCoreApplication.translate("elemProfWgt", u"Nome elemento", None))
-        self.elemLbl_5.setText(QCoreApplication.translate("elemProfWgt", u"Nome elemento", None))
-        self.elemLbl_7.setText(QCoreApplication.translate("elemProfWgt", u"Nome elemento", None))
+        self.ACLoadLbl.setText(QCoreApplication.translate("elemProfWgt", u"AC Load", None))
         self.elemLbl.setText(QCoreApplication.translate("elemProfWgt", u"Nome elemento", None))
+        self.catLbl.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
         self.elemLbl_2.setText(QCoreApplication.translate("elemProfWgt", u"Nome elemento", None))
-        self.catLbl_5.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
-        self.catLbl_6.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
+        self.catLbl_2.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
+        self.elemLbl_3.setText(QCoreApplication.translate("elemProfWgt", u"Nome elemento", None))
+        self.catLbl_3.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
+        self.elemLbl_4.setText(QCoreApplication.translate("elemProfWgt", u"Nome elemento", None))
+        self.catLbl_4.setText(QCoreApplication.translate("elemProfWgt", u"Categoria", None))
     # retranslateUi
 
