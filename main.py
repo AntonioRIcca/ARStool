@@ -564,8 +564,8 @@ class Main:
                 if default and grid['profile']['exist']:
                     from UI.elemProfCat_Dlg import ElemProfCatDlg
                     dlg = ElemProfCatDlg()
-                    for pcat in bench['profiles']:
-                        dlg.ui.profCatCB.addItem(bench['profiles'][pcat])
+                    for pcat in bench['profiles']['load']:
+                        dlg.ui.profCatCB.addItem(bench['profiles']['load'][pcat])
                     dlg.exec_()
                     if dlg.ok:
                         cat = dlg.ui.profCatCB.currentText()
@@ -982,14 +982,41 @@ class Main:
         except RuntimeError:
             pass
 
-        from UI.elementsProfile_wgt import ElemProfListWgt
-        self.elemProfListWgt = ElemProfListWgt()
+        # from UI.elementsProfile_wgt import ElemProfListWgt
+        # self.elemProfListWgt = ElemProfListWgt()
+
+        self.home2_WGT = QWidget()
+        self.home2_WGT.setMinimumWidth(450)
+
+        self.home2_WGT.setStyleSheet(u"*{\n"
+                                           u"background-color: rgb(0, 0, 0);\n"
+                                           u"color: rgb(191, 191, 191);\n"
+                                           u"}\n\n"
+                                           u"QGroupBox{\n"
+                                           u"font: 75 12pt \"MS Shell Dlg 2\";\n\n"
+                                           u"QGroupBox::title  {\n"
+                                           u"subcontrol-origin: margin;\nsubcontrol-position: top center;\n"
+                                           u"padding: 5px 50 5px 50px;\n"
+                                           u"background-color: rgb(0, 0, 21);\n"
+                                           u"border-color: rgb(255, 255, 255);\n"
+                                           u"color: rgb(255, 255, 255);\n"
+                                           u"}\n")
+
+        self.elemProfListWgtVL = QVBoxLayout(self.home2_WGT)
+        self.elemProfListSA = QScrollArea(self.home2_WGT)
+        self.elemProfListSA.setWidgetResizable(True)
+        self.elemProfListSAWgt = QWidget()
+        # self.elemProfListSAWgt.setGeometry(0, 0, 560, 641)
+        self.elemProfListSAWgtGL = QGridLayout(self.elemProfListSAWgt)
+        self.elemProfListSAWgtGL.setVerticalSpacing(0)
+        self.elemProfListSA.setWidget(self.elemProfListSAWgt)
+        self.elemProfListWgtVL.addWidget(self.elemProfListSA)
 
         # self.home2_WGT = self.elemProfListWgt()
         # self.homeHBL.insertWidget(1, self.home2_WGT)
 
-        self.homeHBL.insertWidget(1, self.elemProfListWgt.ui.mainWgt)
-        self.elemProfListWgt.ui.mainSaWgtGL.setVerticalSpacing(0)
+        self.homeHBL.insertWidget(1, self.home2_WGT)
+        # self.elemProfListWgt.ui.mainSaWgtGL.setVerticalSpacing(0)
 
         lblfont = QtGui.QFont()
         lblfont.setFamily(u"MS Shell Dlg 2")
@@ -999,7 +1026,7 @@ class Main:
         lblfont.setWeight(75)
 
         pt = dict()
-        for cat in ['AC-Load', 'DC-Load', 'AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor', 'Turbine']:
+        for cat in list(bench['categories'].keys()):
             pt[cat] = {'elements': [],}
             for el in v:
                 if v[el]['category'] == cat:
@@ -1048,14 +1075,72 @@ class Main:
                     self.__setattr__(el + 'CB', QtWidgets.QComboBox())
                     self.__getattribute__(cat + 'GL').addWidget(self.__getattribute__(el + 'Lbl'), line, 0)
                     self.__getattribute__(cat + 'GL').addWidget(self.__getattribute__(el + 'CB'), line, 1)
+
+                    proflist = []
+                    if isinstance(bench['categories'][cat], list):
+                        for t in bench['categories'][cat]:
+                            for mt in bench['profiles']:
+                                try:
+                                    proflist.append(bench['profiles'][mt][t])
+                                    break
+                                except:
+                                    pass
+                    elif bench['categories'][cat] in bench['profiles']:
+                        for t in bench['profiles'][bench['categories'][cat]]:
+                            proflist.append(bench['profiles'][bench['categories'][cat]][t])
+                        # proflist = list(bench['profiles'][bench['categories'][cat]].keys())
+
+                    else:
+                        for mt in bench['profiles']:
+                            try:
+                                proflist.append(bench['profiles'][mt][bench['categories'][cat]])
+                                break
+                            except:
+                                pass
+
+                    self.__getattribute__(el + 'CB').clear()
+                    self.__getattribute__(el + 'CB').addItems(proflist)
+
+                    # a = QtWidgets.QComboBox()
+                    # a.clear()
+                    # a.addItems()
                     line += 1
 
-                self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.__getattribute__(cat + 'Lbl'))
-                self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.__getattribute__(cat + 'Frm'))
-                self.elemProfListWgt.ui.mainSaWgtGL.addItem(self.__getattribute__(cat + 'VSpc'))
+                self.elemProfListSAWgtGL.addWidget(self.__getattribute__(cat + 'Lbl'))
+                self.elemProfListSAWgtGL.addWidget(self.__getattribute__(cat + 'Frm'))
+                self.elemProfListSAWgtGL.addItem(self.__getattribute__(cat + 'VSpc'))
 
             else:
                 pt.pop(cat)
+
+        self.elemProfListPlsWgt = QWidget()
+        self.elemProfListPlsWgtHL = QtWidgets.QHBoxLayout(self.elemProfListPlsWgt)
+        self.elemProfListPlsWgtHL.setContentsMargins(50, 10, 50, 10)
+        self.elemProfListSaveBtn = QtWidgets.QPushButton()
+        self.elemProfListSaveBtn.setText('Salva')
+        self.elemProfListSaveBtn.setMinimumSize(100, 25)
+        self.elemProfListCancelBtn = QtWidgets.QPushButton()
+        self.elemProfListCancelBtn.setText('Annulla')
+        self.elemProfListCancelBtn.setMinimumSize(100, 25)
+        self.elemProfListBtnSpc = QtWidgets.QSpacerItem(20, 50, QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
+        self.elemProfListPlsWgtHL.addWidget(self.elemProfListSaveBtn)
+        self.elemProfListPlsWgtHL.addItem(self.elemProfListBtnSpc)
+        self.elemProfListPlsWgtHL.addWidget(self.elemProfListCancelBtn)
+        self.elemProfListWgtVL.addWidget(self.elemProfListPlsWgt)
+        self.elemProfListPlsWgt.setStyleSheet(u"*{\n"
+                                              u"}\n\n"
+                                              u"QPushButton {\n"
+                                              u"border: solid;\n"
+                                              u"border-width: 2px;\n"
+                                              u"border-color: rgb(127, 127, 127);\n"
+                                              u"border-radius: 10px;\n"
+                                              u"}\n\n"
+                                              u"QPushButton:pressed {"
+                                              u"background-color: rgb(64, 64, 64); border-style: inset"
+                                              u"}")
+
+        self.elemProfListCancelBtn.clicked.connect(self.elemProfListCancel)
+        self.elemProfListSaveBtn.clicked.connect(partial(self.elemProfListSave, pt))
 
         for cat in pt:
             print(cat, pt[cat]['elements'])
@@ -1065,6 +1150,30 @@ class Main:
         # self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.TurbineGB)
 
         pass
+
+    def elemProfListSave(self, pt):
+        #
+        # default, cat = False, None
+        # gp = copy.deepcopy(grid['profile'])
+
+        prof = False
+        if not grid['profile']['exist']:
+            popup1 = GridProfParDlg()
+            if popup1.exec_():
+                pass
+            prof = popup1.confirmed
+
+        if prof:
+            import defProfImport as dpi
+            for mcat in pt:
+                for el in pt[mcat]['elements']:
+                    v[el]['par']['profile']['name'], v[el]['par']['profile']['curve'] = (
+                        dpi.defaultProfileImport(el, self.__getattribute__(el + 'CB').currentText()))
+            self.home2_WGT.deleteLater()
+
+    def elemProfListCancel(self):
+        self.home2_WGT.deleteLater()
+
 
 class LFrWGT(QMainWindow):
     def __init__(self):

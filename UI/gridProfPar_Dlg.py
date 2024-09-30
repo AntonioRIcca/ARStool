@@ -19,7 +19,7 @@ from datetime import datetime as dt
 
 
 class GridProfParDlg(QtWidgets.QDialog):
-    def __init__(self, elem):
+    def __init__(self):
         super(GridProfParDlg, self).__init__()
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)

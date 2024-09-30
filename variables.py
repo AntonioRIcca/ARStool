@@ -19,15 +19,33 @@ grid = {
 
 bench = {
     'profiles': {
-        'RES': 'Residenziale',
-        'IND': 'Industriale',
-        'COM': 'Commerciale',
-        'AGR': 'Agricolo',
-        'RLV': 'Rurale - LV',
-        'RMV_CUST1': 'Rurale - MV 1',
-        'RMV_CUST2': 'Rurale - MV 2',
-        'RMV_CUST3': 'Rurale - MV 3',
-    }
+        'load': {
+            'RES': 'Residenziale',
+            'IND': 'Industriale',
+            'COM': 'Commerciale',
+            'AGR': 'Agricolo',
+            'RLV': 'Rurale - LV',
+            'RMV_CUST1': 'Rurale - MV 1',
+            'RMV_CUST2': 'Rurale - MV 2',
+            'RMV_CUST3': 'Rurale - MV 3',
+        },
+        'gen': {
+            'HYDRO': 'Idroelettrico',
+            'PV': 'Fotovoltaico',
+            'CHP': 'Cogeneratore',
+        },
+    },
+    'categories': {
+        'AC-Load': 'load',
+        'DC-Load': 'load',
+        'AC-PV': 'PV',
+        'DC-PV': 'PV',
+        # 'AC-Wind': None,
+        # 'DC-Wind': None,
+        'Diesel-Motor': 'CHP',
+        'Turbine': 'HYDRO',
+    },
+
 }
 
 

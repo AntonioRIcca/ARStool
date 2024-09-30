@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'elementsProfile_wgtQzjEoE.ui'
+## Form generated from reading UI file 'elementsProfile_wgtMZkZtu.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -62,10 +62,14 @@ class Ui_elemProfWgt(object):
 
         self.mainSaWgtGL.addItem(self.verticalSpacer, 3, 0, 1, 1)
 
+        self.verticalSpacer_2 = QSpacerItem(20, 10, QSizePolicy.Minimum, QSizePolicy.Fixed)
+
+        self.mainSaWgtGL.addItem(self.verticalSpacer_2, 0, 0, 1, 1)
+
         self.ACLoadLbl = QLabel(self.mainSaWgt)
         self.ACLoadLbl.setObjectName(u"ACLoadLbl")
         self.ACLoadLbl.setMinimumSize(QSize(0, 30))
-        self.ACLoadLbl.setBaseSize(QSize(0, 30))
+        self.ACLoadLbl.setBaseSize(QSize(0, 0))
         font = QFont()
         font.setFamily(u"MS Shell Dlg 2")
         font.setPointSize(12)
@@ -190,10 +194,6 @@ class Ui_elemProfWgt(object):
 
 
         self.mainSaWgtGL.addWidget(self.frame, 2, 0, 1, 1)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 10, QSizePolicy.Minimum, QSizePolicy.Fixed)
-
-        self.mainSaWgtGL.addItem(self.verticalSpacer_2, 0, 0, 1, 1)
 
         self.mainSA.setWidget(self.mainSaWgt)
 

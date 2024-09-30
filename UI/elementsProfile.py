@@ -213,16 +213,6 @@ class ElementsProfile(QtWidgets.QDialog):
         import datetime
         # from UI.elemProfCat_Dlg import ElemProfCatDlg
 
-        mcat = ''
-        # Seleziona la categoria del profilo
-        if v[self.elem]['category'] in mc['Load']:
-            mcat = 'Load'
-        elif v[self.elem]['category'] in mc['Load']:
-            mcat = 'Gen'
-
-        file = open(mainpath + '/_benchmark/_data/_profiles/' + mcat + '_year.txt')
-        head = file.readline().removesuffix('\n').split('\t')
-
         if not self.cat:
             prof_cat = None
             from UI.elemProfCat_Dlg import ElemProfCatDlg
@@ -235,60 +225,73 @@ class ElementsProfile(QtWidgets.QDialog):
             else:
                 self.cat = None
 
+        mcat = ''
+        # Seleziona la categoria del profilo
+        if v[self.elem]['category'] in mc['Load']:
+            mcat = 'Load'
+        elif v[self.elem]['category'] in mc['Load']:
+            mcat = 'Gen'
+
+        file = open(mainpath + '/_benchmark/_data/_profiles/' + mcat + '_year.txt')
+        head = file.readline().removesuffix('\n').split('\t')
+
         if self.cat:
-            for k in bench['profiles']:
-                if self.cat == bench['profiles'][k]:
-                    prof_cat = k
-                    break
-
-            data = {
-                'year': [],
-                'month': [],
-                'weekday': [],
-                'day': [],
-            }
-
-            col = head.index(prof_cat) - 1
-            for line in file.readlines():
-                data['year'].append(float(line.split('\t')[col + 1]))
-
-            for p in ['month', 'weekday', 'day']:
-                file = open(mainpath + '/_benchmark/_data/_profiles/' + mcat + '_' + p + '.txt')
-                line = file.readline()
-                for line in file.readlines():
-                    data[p].append(float(line.split('\t')[col]))
-
-            # m, i = 0, 0
-            # m = 0
-            # file = open(mainpath + '/_benchmark/_data/_profiles/' + mcat + '_day.txt')
-            # line = file.readline()
+            # for k in bench['profiles']['load']:
+            #     if self.cat == bench['profiles']['load'][k]:
+            #         prof_cat = k
+            #         break
+            #
+            # data = {
+            #     'year': [],
+            #     'month': [],
+            #     'weekday': [],
+            #     'day': [],
+            # }
+            #
+            # col = head.index(prof_cat) - 1
             # for line in file.readlines():
-            #     m += float(line.split('\t')[col])
+            #     data['year'].append(float(line.split('\t')[col + 1]))
+            #
+            # for p in ['month', 'weekday', 'day']:
+            #     file = open(mainpath + '/_benchmark/_data/_profiles/' + mcat + '_' + p + '.txt')
+            #     line = file.readline()
+            #     for line in file.readlines():
+            #         data[p].append(float(line.split('\t')[col]))
+            #
+            # # m, i = 0, 0
+            # # m = 0
+            # # file = open(mainpath + '/_benchmark/_data/_profiles/' + mcat + '_day.txt')
+            # # line = file.readline()
+            # # for line in file.readlines():
+            # #     m += float(line.split('\t')[col])
+            # #     i += 1
+            # #     if i == self.timesteps[grid['profile']['step']]['jump']:
+            # #         data['day'].append(m / self.timesteps[grid['profile']['step']]['jump'])
+            # #         m, i = 0, 0
+            #
+            # datastart = datetime.datetime(grid['profile']['start'][0], grid['profile']['start'][1],
+            #                               grid['profile']['start'][2], grid['profile']['start'][3],
+            #                               grid['profile']['start'][4])
+            # dataend = datetime.datetime(grid['profile']['end'][0], grid['profile']['end'][1],
+            #                             grid['profile']['end'][2], grid['profile']['end'][3],
+            #                             grid['profile']['end'][4])
+            #
+            # t = datastart
+            # self.profile = []
+            # m, i, j = 0, 0, 0
+            # while t <= dataend:
+            #     m += (data['year'][t.year - 2010] * data['month'][t.month - 1] * data['weekday'][t.weekday()]
+            #           * data['day'][int(t.hour * 4 + t.minute / 15)])
+            #     t = t + datetime.timedelta(minutes=15)
             #     i += 1
             #     if i == self.timesteps[grid['profile']['step']]['jump']:
-            #         data['day'].append(m / self.timesteps[grid['profile']['step']]['jump'])
+            #         self.profile.append(m / self.timesteps[grid['profile']['step']]['jump'])
             #         m, i = 0, 0
+            # if i != 0:
+            #     self.profile.append(m / i)
 
-            datastart = datetime.datetime(grid['profile']['start'][0], grid['profile']['start'][1],
-                                          grid['profile']['start'][2], grid['profile']['start'][3],
-                                          grid['profile']['start'][4])
-            dataend = datetime.datetime(grid['profile']['end'][0], grid['profile']['end'][1],
-                                        grid['profile']['end'][2], grid['profile']['end'][3],
-                                        grid['profile']['end'][4])
-
-            t = datastart
-            self.profile = []
-            m, i, j = 0, 0, 0
-            while t <= dataend:
-                m += (data['year'][t.year - 2010] * data['month'][t.month - 1] * data['weekday'][t.weekday()]
-                      * data['day'][int(t.hour * 4 + t.minute / 15)])
-                t = t + datetime.timedelta(minutes=15)
-                i += 1
-                if i == self.timesteps[grid['profile']['step']]['jump']:
-                    self.profile.append(m / self.timesteps[grid['profile']['step']]['jump'])
-                    m, i = 0, 0
-            if i != 0:
-                self.profile.append(m / i)
+            import defProfImport as dpi
+            self.name, self.profile = dpi.defaultProfileImport(self.elem, self.cat)
 
             print(self.name)
             print('righe', self.ui.profileTW.rowCount())
@@ -298,7 +301,9 @@ class ElementsProfile(QtWidgets.QDialog):
                 self.table_fill()
                 self.cat = None
 
-            self.name = self.elem + '_' + prof_cat
+            self.name = self.elem + '_' + self.cat
+
+
 
     def data_import(self):
         try:
