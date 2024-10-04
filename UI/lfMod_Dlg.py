@@ -14,6 +14,8 @@ from functools import partial
 
 from datetime import datetime as dt
 
+# print(datestart, dateend)
+
 
 class LfModDlg(QtWidgets.QDialog):
     def __init__(self):
@@ -21,30 +23,53 @@ class LfModDlg(QtWidgets.QDialog):
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
 
-        self.ui.datetimeWgt.setVisible(False)
-        self.ui.calendarCWgt.setVisible(False)
+        self.confirm = False
+        self.profile = False
+
+        self.datestart = dt(grid['profile']['start'][0], grid['profile']['start'][1], grid['profile']['start'][2],
+                       grid['profile']['start'][3], grid['profile']['start'][4])
+        self.dateend = dt(grid['profile']['end'][0], grid['profile']['end'][1], grid['profile']['end'][2],
+                     grid['profile']['end'][3], grid['profile']['end'][4])
+
+        self.ui.endWgt.setVisible(False)
+
+        self.limits_reset()
+
+        self.ui.punctLfRB.setChecked(True)
 
         self.ui.punctLfRB.toggled.connect(self.punct_selected)
-        self.ui.datetimeWgt.mouseDoubleClickEvent = self.date_selected
-        self.ui.calendarCWgt.selectionChanged.connect(self.date_modified)
-        # self.ui.calendarCWgt.mouseDoubleClickEvent = self.date_modified
+        self.ui.startDte.dateTimeChanged.connect(self.date_modified)
+        self.ui.endDte.dateTimeChanged.connect(self.date_modified)
 
-        self.ui.dateLE.setText(str(dt.now().day) + '/' + str(dt.now().month) + '/' + str(dt.now().year))
+        self.ui.calcPls.clicked.connect(self.calculate)
 
     def punct_selected(self):
-        self.ui.datetimeWgt.setVisible(self.ui.punctLfRB.isChecked())
+        self.ui.endWgt.setVisible(self.ui.profLfRB.isChecked())
+        pass
 
     def date_selected(self, event):
         # print('doppio click sulla data')
-        self.ui.calendarCWgt.setVisible(True)
+        # self.ui.calendarCWgt.setVisible(True)
+        pass
 
     def date_modified(self):
-        # print('data selezionata')
-        self.ui.calendarCWgt.setVisible(False)
-        # print(self.ui.calendarCWgt.selectedDate())
-        datesel = self.ui.calendarCWgt.selectedDate()
-        # print(datesel.day(), datesel.month(), datesel.year())
-        self.ui.dateLE.setText(str(datesel.day()) + '/' + str(datesel.month()) + '/' + str(datesel.year()))
+        self.ui.startDte.setMaximumDateTime(QtCore.QDateTime(self.ui.endDte.dateTime().toPython()))
 
+    def limits_reset(self):
+        self.ui.startDte.setMinimumDateTime(QtCore.QDateTime(self.datestart))
+        self.ui.startDte.setMaximumDateTime(QtCore.QDateTime(self.dateend))
+        self.ui.endDte.setMinimumDateTime(QtCore.QDateTime(self.datestart))
+        self.ui.endDte.setMaximumDateTime(QtCore.QDateTime(self.dateend))
 
+        self.ui.startDte.setDateTime(QtCore.QDateTime(self.datestart))
+        self.ui.endDte.setDateTime(QtCore.QDateTime(self.dateend))
+        pass
 
+    def calculate(self):
+        self.i_start = int(QtCore.QDateTime(self.datestart).msecsTo(self.ui.startDte.dateTime()) / (60000) /
+                           grid['profile']['step'])
+        self.i_steps = int((self.ui.startDte.dateTime().msecsTo(self.ui.endDte.dateTime()) / (60000) /
+                            grid['profile']['step'])) + 1
+        self.confirm = True
+        self.profile = self.ui.profLfRB.isChecked()
+        self.close()

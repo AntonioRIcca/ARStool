@@ -479,9 +479,9 @@ class ElementProperties(QMainWindow):
 
 
             if i in [0, 1]:
-                self.__getattribute__(par + 'ResDsb').setValue(v[self.elem]['lf'][tag][i])
+                self.__getattribute__(par + 'ResDsb').setValue(v[self.elem]['lf'][tag][i][0])
             else:
-                self.__getattribute__(par + 'ResDsb').setValue(v[self.elem]['lf'][tag])
+                self.__getattribute__(par + 'ResDsb').setValue(v[self.elem]['lf'][tag][0])
             # else:
             #     self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par])
 

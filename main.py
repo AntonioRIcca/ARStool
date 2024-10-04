@@ -1,6 +1,7 @@
 # import py_dss_interface
 # from PySide2.QtCharts import QChart, QChartView, QBarSet, QPercentBarSeries, QBarCategoryAxis
 import copy
+import datetime
 import os.path
 from functools import partial
 import xlsxwriter
@@ -34,6 +35,7 @@ from UI.elementProperties import Window
 from UI.elementsProfile import ElementsProfile
 from UI.newItem import NewItem
 from UI.gridProfPar_Dlg import GridProfParDlg
+import dictInitialize
 
 # import time
 
@@ -553,7 +555,7 @@ class Main:
 
         if not grid['profile']['exist'] and self.elemPropWgt.profile_RB.isChecked():
             prof, default, cat = True, True, None
-            popup1 = GridProfParDlg(self.elem)
+            popup1 = GridProfParDlg()
 
             while prof and default and cat is None:
                 if popup1.exec_():
@@ -716,23 +718,56 @@ class Main:
         except RuntimeError:
             pass
 
-        is_profile = False
+        print('Grid profile', grid['profile']['exist'])
+
+        # is_profile = False
         time = None
         #
-        for el in v:
-            if v[el]['category'] in mc['Load'] + mc['Generator']:
-                if v[el]['par']['profile']['name']:
-                    is_profile = True
-                    break
+        # for el in v:
+        #     if v[el]['category'] in mc['Load'] + mc['Generator']:
+        #         if v[el]['par']['profile']['name']:
+        #             is_profile = True
+        #             break
+        #
+        # print(grid['profile']['start'])
+        # print(grid['profile']['end'])
 
-        if is_profile:
+        s, t0 = None, None
+        if grid['profile']['exist']:
             from UI.lfMod_Dlg import LfModDlg
             lf_popup = LfModDlg()
 
             if lf_popup.exec_():
                 pass
 
-        self.dss.full_parse_to_dss(is_profile=is_profile, time=time)
+            if lf_popup.confirm:
+                # Reset dei risultati
+                for el in v:
+                    dictInitialize.lf_initialize(el)
+
+                if lf_popup.profile:
+                    ts = datetime.datetime.now()
+                    self.dss.full_parse_profil_to_dss_polars(t0=lf_popup.i_start, steps=lf_popup.i_steps)   # Polars
+
+
+                    # self.dss.full_parse_profil_to_dss_array(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Array
+                    # self.dss.full_parse_profil_to_dss(t0=lf_popup.i_start, steps=lf_popup.i_steps)          # PandaFrame
+                    # for i in range(lf_popup.i_steps):                                                       # Dizionario
+                    #     self.dss.full_parse_to_dss(time=lf_popup.i_start + i)
+                    nts = datetime.datetime.now() - ts
+
+                    print('Elaboration time:', nts.total_seconds())
+                else:
+                    print('single')
+                    self.dss.full_parse_to_dss(time=lf_popup.i_start)
+                    self.loadlfow_results()
+        else:
+            print('no-profile')
+            self.dss.full_parse_to_dss(time=None)
+            self.loadlfow_results()
+
+        # if s:
+        # self.dss.full_parse_to_dss(is_profile=True, time=time)
         # self.yml_bench_save()
         # dss.write_all()
         # dss.solve()
@@ -741,6 +776,7 @@ class Main:
 
         # self.dss.test()  # TODO: da eliminare, è una prova
 
+    def loadlfow_results(self):
         self.p_loads, self.q_loads = 0, 0
         self.p_gen, self.q_gen = 0, 0
         self.p_bess, self.q_bess = 0, 0
@@ -754,29 +790,29 @@ class Main:
         for elem in v.keys():
             cat = v[elem]['category']
             if v[elem]['category'] in mc['Load']:
-                self.p_loads += v[elem]['lf']['p']
-                self.q_loads += v[elem]['lf']['q']
+                self.p_loads += v[elem]['lf']['p'][0]
+                self.q_loads += v[elem]['lf']['q'][0]
                 mcat = 'Loads'
 
             elif v[elem]['category'] in mc['BESS']:
-                self.p_bess += v[elem]['lf']['p']
-                self.q_bess += v[elem]['lf']['q']
+                self.p_bess += v[elem]['lf']['p'][0]
+                self.q_bess += v[elem]['lf']['q'][0]
                 mcat = 'BESS'
 
             elif v[elem]['category'] in mc['Generator']:
-                self.p_gen -= v[elem]['lf']['p']
-                self.q_gen -= v[elem]['lf']['q']
+                self.p_gen -= v[elem]['lf']['p'][0]
+                self.q_gen -= v[elem]['lf']['q'][0]
                 mcat = 'Generators'
 
             if cat in prof_elem:
                 if cat not in list(self.lf_cat[mcat].keys()):
                     self.lf_cat[mcat][cat] = dict()
                 self.lf_cat[mcat][cat][elem] = {
-                    'p': abs(v[elem]['lf']['p']),
-                    'q': abs(v[elem]['lf']['q']),
+                    'p': abs(v[elem]['lf']['p'][0]),
+                    'q': abs(v[elem]['lf']['q'][0]),
                 }
 
-        self.p_eg, self.q_eg = -v['source']['lf']['p'], -v['source']['lf']['q']
+        self.p_eg, self.q_eg = -v['source']['lf']['p'][0], -v['source']['lf']['q'][0]
         self.p_loss = self.p_eg + self.p_gen - self.p_loads - self.p_bess
         self.q_loss = self.q_eg + self.q_gen - self.q_loads - self.q_bess
 
@@ -1086,6 +1122,7 @@ class Main:
                                 except:
                                     pass
                     elif bench['categories'][cat] in bench['profiles']:
+                        mt = bench['categories'][cat]
                         for t in bench['profiles'][bench['categories'][cat]]:
                             proflist.append(bench['profiles'][bench['categories'][cat]][t])
                         # proflist = list(bench['profiles'][bench['categories'][cat]].keys())
@@ -1100,6 +1137,15 @@ class Main:
 
                     self.__getattribute__(el + 'CB').clear()
                     self.__getattribute__(el + 'CB').addItems(proflist)
+
+                    if v[el]['par']['profile']['name']:
+                        if '_(' in v[el]['par']['profile']['name']:
+                            a = v[el]['par']['profile']['name'].split('_(')
+                            prof_cat = a[len(a) - 1].removesuffix(')')
+                            prof_name = bench['profiles'][mt][prof_cat]
+                            self.__getattribute__(el + 'CB').setCurrentText(prof_name)
+
+                    # self.__getattribute__(el + 'CB').setCurrentText(v[el]['par']['profile']['name'])
 
                     # a = QtWidgets.QComboBox()
                     # a.clear()
@@ -1152,16 +1198,15 @@ class Main:
         pass
 
     def elemProfListSave(self, pt):
-        #
-        # default, cat = False, None
-        # gp = copy.deepcopy(grid['profile'])
-
         prof = False
         if not grid['profile']['exist']:
             popup1 = GridProfParDlg()
             if popup1.exec_():
                 pass
             prof = popup1.confirmed
+
+        print(grid['profile']['start'])
+        print(grid['profile']['end'])
 
         if prof:
             import defProfImport as dpi

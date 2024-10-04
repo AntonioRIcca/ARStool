@@ -81,5 +81,5 @@ def defaultProfileImport(elem, prof_name):
     #     self.table_fill()
     #     self.cat = None
 
-    name = elem + '_' + prof_cat
+    name = elem + '_(' + prof_cat + ')'
     return name, prof

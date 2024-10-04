@@ -4,6 +4,8 @@ import py_dss_interface
 from variables import *
 import yaml
 import os
+import pandas as pd
+import polars as pl
 from decimal import Decimal, InvalidOperation
 
 from dictInitialize import *
@@ -175,7 +177,7 @@ class OpenDSS:
         pass
 
     # Scrittura della definizione dell'elemento in OpenDSS
-    def writeline(self, el):
+    def writeline(self, el, time):
         mcat = mcat_find(el)
         cat = v[el]['category']
 
@@ -188,8 +190,15 @@ class OpenDSS:
         for p in new_par_dict[cat]['par'].keys() - ['others']:
             if p == 'Vn' and mcat != 'Transformer':     # La tensione è memorizzata come array anche se è singola
                 par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p][0]) + ' '
+            elif p =='P':
+                if v[el]['par']['profile']['name']:
+                    f = v[el]['par']['profile']['curve'][time]
+                else:
+                    f = v[el]['par']['profile']['curve']
+                par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p] * f) + ' '
             elif p != 'cap':
                 par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p]) + ' '
+        #     TODO: da implementare la gestione della capacità della batteria
 
         # Verifica se l'elemento è in servizio
         serv = ''
@@ -231,8 +240,71 @@ class OpenDSS:
 
         return line     # TODO: Perchè?
 
+    def full_parse_profil_to_dss(self, t0=None, steps=None):
+        print('start')
+        for el in v:
+            self.__setattr__(el + '_pd', pd.DataFrame(index=list(range(steps)),
+                                                      columns=['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']))
+
+        for i in range(steps):
+            self.full_parse_to_dss(t0 + i)
+
+            for el in v:
+                self.results_store_pd(el, i)
+
+    def full_parse_profil_to_dss_polars(self, t0=None, steps=None):
+        print('start')
+        for el in v:
+            self.__setattr__(el + '_pl', pl.DataFrame({
+                'i0': list(float(0) for i in range(steps)),
+                'p0': list(float(0) for i in range(steps)),
+                'q0': list(float(0) for i in range(steps)),
+                'v0': list(float(0) for i in range(steps)),
+                'i1': list(float(0) for i in range(steps)),
+                'p1': list(float(0) for i in range(steps)),
+                'q1': list(float(0) for i in range(steps)),
+                'v1': list(float(0) for i in range(steps))
+            }))
+            # 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']))
+
+        for i in range(steps):
+            self.full_parse_to_dss(t0 + i)
+
+            for el in v:
+                self.results_store_pl(el, i)
+
+        path = str(mainpath) + '/_temp/elements/'
+        for el in v:
+            self.__getattribute__(el + '_pl').write_csv(path + el + '.csv', separator='\t')
+
+        # print(self.__getattribute__('a_24_ac-load_pl'))
+
+
+    def full_parse_profil_to_dss_array(self, t0=None, steps=None):
+        print('start')
+        for el in v:
+            for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
+                self.__setattr__(el + '_' + p, [])
+            self.__setattr__(el + '_pd', pd.DataFrame(index=list(range(steps)),
+                                                      columns=['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']))
+
+        for i in range(steps):
+            self.full_parse_to_dss(t0 + i)
+
+            for el in v:
+                self.results_store_arr(el, i)
+
+        for el in v:
+            for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
+                if self.__getattribute__(el + '_' + p):
+                    # print(el, p)
+                    self.__getattribute__(el + '_pd')[p] = self.__getattribute__(el + '_' + p)
+
+        print(self.__getattribute__('a_24_ac-load_pd'))
+        print(self.__getattribute__('a_24_ac-load_p0'))
+
     # Scrittura di tutti gli elementi in OpenDSS
-    def full_parse_to_dss(self, is_profile=False, time=None):
+    def full_parse_to_dss(self, time=None):
 
         self.dss.text('Clear')
         self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0])
@@ -247,7 +319,7 @@ class OpenDSS:
         for el in v:
             mcat = mcat_find(el)
             if mcat in dss_cat:
-                f.write(self.writeline(el) + '\n')
+                f.write(self.writeline(el, time) + '\n')
         f.close()
 
         # Scrittura dei comandi in OpenDSS
@@ -256,6 +328,8 @@ class OpenDSS:
                 self.dss.text(r)
 
         self.solve()
+
+        # print(v['a_10_ac-load']['lf']['i'])
 
         self.dss.text(f"Save Circuit dir=cartella")
 
@@ -310,64 +384,6 @@ class OpenDSS:
                     self.dss.__getattribute__(mcat.lower() + 's').__setattr__(par_dict[cat][par], v[el]['par'][par])
         # TODO: da definire come gestire le variazioni su Source e sui Nodi
 
-    # Aggiornamento del dizionario con i profili dei risultati di uno studio temporale. TODO Ridefinire
-    def results_append(self, el):
-        if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
-            mcat = mcat_find(el)
-
-            # Le parti DC sono in pratica porzioni AC, di cui si considera la fase globale.
-            # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
-            cf0, cf1 = 1, 1     # fattore di correzione per le parti AC
-            if v[el]['category'] in DC_elem:
-                cf0 = 3**0.5    # fattore di correzione per le porzioni DC a monte
-            if v[el]['category'] in DC_elem + ['PWM']:
-                cf1 = 3 ** 0.5  # fattore di correzione per pe porzioni DC a valle
-
-            self.dss.circuit.set_active_element(mcat + '.' + el)    # l'elemento è selezionato
-
-            if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
-                # le potenza globali sono date dalla somma delle potenze delle singole fasi
-                p, q = 0, 0
-                for i in range(0, 3):
-                    p = p + self.dss.cktelement.powers[2 * i]
-                    q = q + self.dss.cktelement.powers[2 * i + 1]
-
-                # Accodamento nel vettore dei risultati nel dizionario
-                # dei valori di P, Q, V, i con i relativi fattori di correzione
-                v[el]['lf']['p'].append(p)
-                v[el]['lf']['q'].append(q)
-                v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3**0.5)
-                v[el]['lf']['i'].append(self.dss.cktelement.currents_mag_ang[0] * cf0)
-
-            else:                           # per le linee
-                if v[el]['category'] in mc['Line']:     # per le linee
-                    j = 6
-                else:                                   # per i Transformer
-                    j = 8
-
-                # le potenza globali sono date dalla somma delle potenze delle singole fasi
-                p0, q0, p1, q1 = 0, 0, 0, 0
-                for i in range(0, 3):
-                    p0 = p0 + self.dss.cktelement.powers[2 * i]
-                    q0 = q0 + self.dss.cktelement.powers[2 * i + 1]
-                    p1 = p1 - self.dss.cktelement.powers[2 * i + j]
-                    q1 = q1 - self.dss.cktelement.powers[2 * i + j + 1]
-
-                # Accodamento nel vettore dei risultati nel dizionario, per ogni lato,
-                # dei valori di P, Q, V, i con i relativi fattori di correzione
-                v[el]['lf']['p'][0].append(p0)
-                v[el]['lf']['q'][0].append(q0)
-                v[el]['lf']['p'][1].append(p1)
-                v[el]['lf']['q'][1].append(q1)
-                v[el]['lf']['v'][0].append(self.dss.cktelement.voltages_mag_ang[0] * 3**0.5)
-                v[el]['lf']['v'][1].append(self.dss.cktelement.voltages_mag_ang[j] * 3**0.5)
-                v[el]['lf']['i'][0].append(self.dss.cktelement.currents_mag_ang[0] * cf0)
-                v[el]['lf']['i'][1].append(self.dss.cktelement.currents_mag_ang[j] * cf1)
-
-        else:                               # per i nodi
-            self.dss.circuit.set_active_bus(el)
-            v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
-
     # Aggiornamento del dizionario dei risultati di uno studio singolo. TODO: Ridefinire
     def results_store(self, el):
         if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
@@ -400,10 +416,10 @@ class OpenDSS:
 
                     # Accodamento nel vettore dei risultati nel dizionario
                     # dei valori di P, Q, V, i con i relativi fattori di correzione
-                    v[el]['lf']['p'] = p
-                    v[el]['lf']['q'] = q
-                    v[el]['lf']['v'] = self.dss.cktelement.voltages_mag_ang[0] * 3**0.5
-                    v[el]['lf']['i'] = self.dss.cktelement.currents_mag_ang[0] * cf0
+                    v[el]['lf']['p'].append(p)
+                    v[el]['lf']['q'].append(q)
+                    v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3**0.5)
+                    v[el]['lf']['i'].append(self.dss.cktelement.currents_mag_ang[0] * cf0)
 
                 else:                           # per le linee
                     if v[el]['category'] in mc['Line']:     # per le linee
@@ -421,34 +437,268 @@ class OpenDSS:
 
                     # Inserimento nel dizionario, per ogni lato,
                     # dei valori di P, Q, V, i con i relativi fattori di correzione
-                    v[el]['lf']['p'][0] = p0
-                    v[el]['lf']['q'][0] = q0
-                    v[el]['lf']['p'][1] = p1
-                    v[el]['lf']['q'][1] = q1
-                    v[el]['lf']['v'][0] = self.dss.cktelement.voltages_mag_ang[0] * 3**0.5
-                    v[el]['lf']['v'][1] = self.dss.cktelement.voltages_mag_ang[j] * 3**0.5
-                    v[el]['lf']['i'][0] = self.dss.cktelement.currents_mag_ang[0] * cf0
-                    v[el]['lf']['i'][1] = self.dss.cktelement.currents_mag_ang[j] * cf1
+                    v[el]['lf']['p'][0].append(p0)
+                    v[el]['lf']['q'][0].append(q0)
+                    v[el]['lf']['p'][1].append(p1)
+                    v[el]['lf']['q'][1].append(q1)
+                    v[el]['lf']['v'][0].append(self.dss.cktelement.voltages_mag_ang[0] * 3**0.5)
+                    v[el]['lf']['v'][1].append(self.dss.cktelement.voltages_mag_ang[j] * 3**0.5)
+                    v[el]['lf']['i'][0].append(self.dss.cktelement.currents_mag_ang[0] * cf0)
+                    v[el]['lf']['i'][1].append(self.dss.cktelement.currents_mag_ang[j] * cf1)
 
             else:                                   # se l'elemento non è in servizio
                 if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
-                    v[el]['lf']['p'] = 0
-                    v[el]['lf']['q'] = 0
-                    v[el]['lf']['v'] = 0
-                    v[el]['lf']['i'] = 0
+                    v[el]['lf']['p'].append(0)
+                    v[el]['lf']['q'].append(0)
+                    v[el]['lf']['v'].append(0)
+                    v[el]['lf']['i'].append(0)
                 else:                                                           # per linee e trasformatori
-                    v[el]['lf']['p'][0] = 0
-                    v[el]['lf']['q'][0] = 0
-                    v[el]['lf']['p'][1] = 0
-                    v[el]['lf']['q'][1] = 0
-                    v[el]['lf']['v'][0] = 0
-                    v[el]['lf']['v'][1] = 0
-                    v[el]['lf']['i'][0] = 0
-                    v[el]['lf']['i'][1] = 0
+                    v[el]['lf']['p'][0].append(0)
+                    v[el]['lf']['q'][0].append(0)
+                    v[el]['lf']['p'][1].append(0)
+                    v[el]['lf']['q'][1].append(0)
+                    v[el]['lf']['v'][0].append(0)
+                    v[el]['lf']['v'][1].append(0)
+                    v[el]['lf']['i'][0].append(0)
+                    v[el]['lf']['i'][1].append(0)
 
         else:                               # per i nodi e per il Source
             self.dss.circuit.set_active_bus(el)
-            v[el]['lf']['v'] = self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5
+            v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
+    # TODO: verificare se è possibile rendere self.results_append e self.results_store come un'unica funzione
+
+    # Test storing con Pandas
+    def results_store_pd(self, el, row):
+        if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
+
+            if not v[el]['par']['out-of-service']:  # Se l'elemento è in servizio
+                mcat = mcat_find(el)
+
+                # Le parti DC sono in pratica porzioni AC, di cui si considera la fase globale.
+                # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
+                cf0, cf1 = 1, 1     # fattore di correzione per le parti AC
+                if v[el]['category'] in DC_elem:
+                    cf0 = 3 ** 0.5    # fattore di correzione per le porzioni DC a monte
+                if v[el]['category'] in DC_elem + ['PWM']:
+                    cf1 = 3 ** 0.5  # fattore di correzione per pe porzioni DC a valle
+
+                self.dss.circuit.set_active_element(mcat + '.' + el)    # l'elemento è selezionato
+
+                if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
+
+                    # le potenza globali sono date dalla somma delle potenze delle singole fasi
+                    p, q = 0, 0
+                    for i in range(0, 3):
+                        p = p + self.dss.cktelement.powers[2 * i]
+                        q = q + self.dss.cktelement.powers[2 * i + 1]
+
+                    # Accodamento nel vettore dei risultati nel dizionario
+                    # dei valori di P, Q, V, i con i relativi fattori di correzione
+                    self.__getattribute__(el + '_pd').loc[row, 'p0'] = p
+                    self.__getattribute__(el + '_pd').loc[row, 'q0'] = q
+                    self.__getattribute__(el + '_pd').loc[row, 'v0'] = self.dss.cktelement.voltages_mag_ang[0] * 3**0.5
+                    self.__getattribute__(el + '_pd').loc[row, 'i0'] = self.dss.cktelement.currents_mag_ang[0] * cf0
+
+                else:                           # per le linee
+                    if v[el]['category'] in mc['Line']:     # per le linee
+                        j = 6
+                    else:                                   # per i Transformer
+                        j = 8
+
+                    # le potenza globali sono date dalla somma delle potenze delle singole fasi
+                    p0, q0, p1, q1 = 0, 0, 0, 0
+                    for i in range(0, 3):
+                        p0 = p0 + self.dss.cktelement.powers[2 * i]
+                        q0 = q0 + self.dss.cktelement.powers[2 * i + 1]
+                        p1 = p1 - self.dss.cktelement.powers[2 * i + j]
+                        q1 = q1 - self.dss.cktelement.powers[2 * i + j + 1]
+
+                    # Inserimento nel dizionario, per ogni lato,
+                    # dei valori di P, Q, V, i con i relativi fattori di correzione
+                    self.__getattribute__(el + '_pd').loc[row, 'p0'] = p0
+                    self.__getattribute__(el + '_pd').loc[row, 'q0'] = q0
+                    self.__getattribute__(el + '_pd').loc[row, 'p1'] = p1
+                    self.__getattribute__(el + '_pd').loc[row, 'q1'] = q1
+                    self.__getattribute__(el + '_pd').loc[row, 'v0'] = self.dss.cktelement.voltages_mag_ang[0] * 3**0.5
+                    self.__getattribute__(el + '_pd').loc[row, 'v1'] = self.dss.cktelement.voltages_mag_ang[j] * 3**0.5
+                    self.__getattribute__(el + '_pd').loc[row, 'i0'] = self.dss.cktelement.currents_mag_ang[0] * cf0
+                    self.__getattribute__(el + '_pd').loc[row, 'i1'] = self.dss.cktelement.currents_mag_ang[j] * cf1
+
+            else:                                   # se l'elemento non è in servizio
+                if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
+                    self.__getattribute__(el + '_pd').loc[row, 'p0'] = 0
+                    self.__getattribute__(el + '_pd').loc[row, 'q0'] = 0
+                    self.__getattribute__(el + '_pd').loc[row, 'v0'] = 0
+                    self.__getattribute__(el + '_pd').loc[row, 'i0'] = 0
+                else:                                                           # per linee e trasformatori
+                    self.__getattribute__(el + '_pd').loc[row, 'p0'] = 0
+                    self.__getattribute__(el + '_pd').loc[row, 'q0'] = 0
+                    self.__getattribute__(el + '_pd').loc[row, 'p1'] = 0
+                    self.__getattribute__(el + '_pd').loc[row, 'q1'] = 0
+                    self.__getattribute__(el + '_pd').loc[row, 'v0'] = 0
+                    self.__getattribute__(el + '_pd').loc[row, 'v1'] = 0
+                    self.__getattribute__(el + '_pd').loc[row, 'i0'] = 0
+                    self.__getattribute__(el + '_pd').loc[row, 'i1'] = 0
+
+        else:                               # per i nodi e per il Source
+            self.dss.circuit.set_active_bus(el)
+            v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
+    # TODO: verificare se è possibile rendere self.results_append e self.results_store come un'unica funzione
+
+    # Test storing con Polars
+    def results_store_pl(self, el, row):
+        if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
+
+            if not v[el]['par']['out-of-service']:  # Se l'elemento è in servizio
+                mcat = mcat_find(el)
+
+                # Le parti DC sono in pratica porzioni AC, di cui si considera la fase globale.
+                # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
+                cf0, cf1 = 1, 1     # fattore di correzione per le parti AC
+                if v[el]['category'] in DC_elem:
+                    cf0 = 3 ** 0.5    # fattore di correzione per le porzioni DC a monte
+                if v[el]['category'] in DC_elem + ['PWM']:
+                    cf1 = 3 ** 0.5  # fattore di correzione per pe porzioni DC a valle
+
+                self.dss.circuit.set_active_element(mcat + '.' + el)    # l'elemento è selezionato
+
+                if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
+
+                    # le potenza globali sono date dalla somma delle potenze delle singole fasi
+                    p, q = 0, 0
+                    for i in range(0, 3):
+                        p = p + self.dss.cktelement.powers[2 * i]
+                        q = q + self.dss.cktelement.powers[2 * i + 1]
+
+                    # Accodamento nel vettore dei risultati nel dizionario
+                    # dei valori di P, Q, V, i con i relativi fattori di correzione
+                    self.__getattribute__(el + '_pl')[row, 'p0'] = p
+                    self.__getattribute__(el + '_pl')[row, 'q0'] = q
+                    self.__getattribute__(el + '_pl')[row, 'v0'] = self.dss.cktelement.voltages_mag_ang[0] * 3**0.5
+                    self.__getattribute__(el + '_pl')[row, 'i0'] = self.dss.cktelement.currents_mag_ang[0] * cf0
+
+                else:                           # per le linee
+                    if v[el]['category'] in mc['Line']:     # per le linee
+                        j = 6
+                    else:                                   # per i Transformer
+                        j = 8
+
+                    # le potenza globali sono date dalla somma delle potenze delle singole fasi
+                    p0, q0, p1, q1 = 0, 0, 0, 0
+                    for i in range(0, 3):
+                        p0 = p0 + self.dss.cktelement.powers[2 * i]
+                        q0 = q0 + self.dss.cktelement.powers[2 * i + 1]
+                        p1 = p1 - self.dss.cktelement.powers[2 * i + j]
+                        q1 = q1 - self.dss.cktelement.powers[2 * i + j + 1]
+
+                    # Inserimento nel dizionario, per ogni lato,
+                    # dei valori di P, Q, V, i con i relativi fattori di correzione
+                    self.__getattribute__(el + '_pl')[row, 'p0'] = p0
+                    self.__getattribute__(el + '_pl')[row, 'q0'] = q0
+                    self.__getattribute__(el + '_pl')[row, 'p1'] = p1
+                    self.__getattribute__(el + '_pl')[row, 'q1'] = q1
+                    self.__getattribute__(el + '_pl')[row, 'v0'] = self.dss.cktelement.voltages_mag_ang[0] * 3**0.5
+                    self.__getattribute__(el + '_pl')[row, 'v1'] = self.dss.cktelement.voltages_mag_ang[j] * 3**0.5
+                    self.__getattribute__(el + '_pl')[row, 'i0'] = self.dss.cktelement.currents_mag_ang[0] * cf0
+                    self.__getattribute__(el + '_pl')[row, 'i1'] = self.dss.cktelement.currents_mag_ang[j] * cf1
+
+            else:                                   # se l'elemento non è in servizio
+                if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
+                    self.__getattribute__(el + '_pl')[row, 'p0'] = 0
+                    self.__getattribute__(el + '_pl')[row, 'q0'] = 0
+                    self.__getattribute__(el + '_pl')[row, 'v0'] = 0
+                    self.__getattribute__(el + '_pl')[row, 'i0'] = 0
+                else:                                                           # per linee e trasformatori
+                    self.__getattribute__(el + '_pl')[row, 'p0'] = 0
+                    self.__getattribute__(el + '_pl')[row, 'q0'] = 0
+                    self.__getattribute__(el + '_pl')[row, 'p1'] = 0
+                    self.__getattribute__(el + '_pl')[row, 'q1'] = 0
+                    self.__getattribute__(el + '_pl')[row, 'v0'] = 0
+                    self.__getattribute__(el + '_pl')[row, 'v1'] = 0
+                    self.__getattribute__(el + '_pl')[row, 'i0'] = 0
+                    self.__getattribute__(el + '_pl')[row, 'i1'] = 0
+
+        else:                               # per i nodi e per il Source
+            self.dss.circuit.set_active_bus(el)
+            v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
+    # TODO: verificare se è possibile rendere self.results_append e self.results_store come un'unica funzione
+
+    # Test storing con Pandas
+    def results_store_arr(self, el, row):
+        if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
+
+            if not v[el]['par']['out-of-service']:  # Se l'elemento è in servizio
+                mcat = mcat_find(el)
+
+                # Le parti DC sono in pratica porzioni AC, di cui si considera la fase globale.
+                # Per questo, per la corrente bisogna usare un fattore di correzione "cf"
+                cf0, cf1 = 1, 1     # fattore di correzione per le parti AC
+                if v[el]['category'] in DC_elem:
+                    cf0 = 3 ** 0.5    # fattore di correzione per le porzioni DC a monte
+                if v[el]['category'] in DC_elem + ['PWM']:
+                    cf1 = 3 ** 0.5  # fattore di correzione per pe porzioni DC a valle
+
+                self.dss.circuit.set_active_element(mcat + '.' + el)    # l'elemento è selezionato
+
+                if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
+
+                    # le potenza globali sono date dalla somma delle potenze delle singole fasi
+                    p, q = 0, 0
+                    for i in range(0, 3):
+                        p = p + self.dss.cktelement.powers[2 * i]
+                        q = q + self.dss.cktelement.powers[2 * i + 1]
+
+                    # Accodamento nel vettore dei risultati nel dizionario
+                    # dei valori di P, Q, V, i con i relativi fattori di correzione
+                    self.__getattribute__(el + '_p0').append(p)
+                    self.__getattribute__(el + '_q0').append(q)
+                    self.__getattribute__(el + '_v0').append(self.dss.cktelement.voltages_mag_ang[0] * 3**0.5)
+                    self.__getattribute__(el + '_i0').append(self.dss.cktelement.currents_mag_ang[0] * cf0)
+
+                else:                           # per le linee
+                    if v[el]['category'] in mc['Line']:     # per le linee
+                        j = 6
+                    else:                                   # per i Transformer
+                        j = 8
+
+                    # le potenza globali sono date dalla somma delle potenze delle singole fasi
+                    p0, q0, p1, q1 = 0, 0, 0, 0
+                    for i in range(0, 3):
+                        p0 = p0 + self.dss.cktelement.powers[2 * i]
+                        q0 = q0 + self.dss.cktelement.powers[2 * i + 1]
+                        p1 = p1 - self.dss.cktelement.powers[2 * i + j]
+                        q1 = q1 - self.dss.cktelement.powers[2 * i + j + 1]
+
+                    # Inserimento nel dizionario, per ogni lato,
+                    # dei valori di P, Q, V, i con i relativi fattori di correzione
+                    self.__getattribute__(el + '_p0').append(p0)
+                    self.__getattribute__(el + '_q0').append(q0)
+                    self.__getattribute__(el + '_p1').append(p1)
+                    self.__getattribute__(el + '_q1').append(q1)
+                    self.__getattribute__(el + '_v0').append(self.dss.cktelement.voltages_mag_ang[0] * 3**0.5)
+                    self.__getattribute__(el + '_v1').append(self.dss.cktelement.voltages_mag_ang[j] * 3**0.5)
+                    self.__getattribute__(el + '_i0').append(self.dss.cktelement.currents_mag_ang[0] * cf0)
+                    self.__getattribute__(el + '_i1').append(self.dss.cktelement.currents_mag_ang[j] * cf1)
+
+            else:                                   # se l'elemento non è in servizio
+                if v[el]['category'] not in mc['Line'] + mc['Transformer']:     # per gli elemnenti terminali
+                    self.__getattribute__(el + '_p0').append(0)
+                    self.__getattribute__(el + '_q0').append(0)
+                    self.__getattribute__(el + '_v0').append(0)
+                    self.__getattribute__(el + '_i0').append(0)
+                else:                                                           # per linee e trasformatori
+                    self.__getattribute__(el + '_p0').append(0)
+                    self.__getattribute__(el + '_q0').append(0)
+                    self.__getattribute__(el + '_p1').append(0)
+                    self.__getattribute__(el + '_q1').append(0)
+                    self.__getattribute__(el + '_v0').append(0)
+                    self.__getattribute__(el + '_v1').append(0)
+                    self.__getattribute__(el + '_i0').append(0)
+                    self.__getattribute__(el + '_i1').append(0)
+
+        else:                               # per i nodi e per il Source
+            self.dss.circuit.set_active_bus(el)
+            v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
     # TODO: verificare se è possibile rendere self.results_append e self.results_store come un'unica funzione
 
     # Esecuzione del loadflow puntuale. Restituisce un Booleano che indica se il sistema va a convegenza.
@@ -465,22 +715,15 @@ class OpenDSS:
 
         self.dss.text(f"Save Circuit dir=cartella")
 
-        # scrittura dei risultati nel dizionario per ogni elemento
-        for el in v.keys():
-            self.results_store(el)
+        self.results_store_all()
 
         return bool(self.dss.solution.converged)
 
-    # Esecuzione del loadFlow per un intervallo temporale di 24 ore TODO: ridefinire
-    def solve_profile(self):
-        for t in range(0, 96):  # viene ipotizzato un timestep di 15 minuti
-            self.write_all(t/4)         # si aggiornano puntualmente i valori degli elementi in OpenDSS
-            self.dss.solution.solve()   # richiesta di risoluzione del sistema
-
-            # accodamento dei risultati nel dizionario degli elementi
-            for el in v.keys():
-                self.results_append(el)
-        pass
+    # scrittura dei risultati nel dizionario per ogni elemento
+    def results_store_all(self):
+        # print('store all')
+        for el in v.keys():
+            self.results_store(el)
 
     def test(self):
         pass

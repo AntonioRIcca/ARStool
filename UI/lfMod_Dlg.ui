@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>340</width>
-    <height>330</height>
+    <height>160</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -88,19 +88,6 @@ QPushButton:pressed {
     <string>LoadFlow nell'intero intervallo di tempo</string>
    </property>
   </widget>
-  <widget class="QCalendarWidget" name="calendarCWgt">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>130</y>
-     <width>320</width>
-     <height>191</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-  </widget>
   <widget class="QPushButton" name="calcPls">
    <property name="geometry">
     <rect>
@@ -114,47 +101,40 @@ QPushButton:pressed {
     <string>Calcola</string>
    </property>
   </widget>
-  <widget class="QWidget" name="datetimeWgt" native="true">
+  <widget class="QWidget" name="startWgt" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>80</y>
-     <width>181</width>
+     <width>200</width>
      <height>25</height>
     </rect>
    </property>
-   <widget class="QLabel" name="timeSepLbl">
+   <widget class="QDateTimeEdit" name="startDte">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>70</x>
       <y>0</y>
-      <width>10</width>
+      <width>130</width>
       <height>25</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
-    <property name="text">
-     <string>:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
+    <property name="calendarPopup">
+     <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLineEdit" name="dateLE">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
+   <widget class="QLabel" name="startLbl">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>90</width>
+      <width>60</width>
       <height>25</height>
      </rect>
     </property>
@@ -166,110 +146,59 @@ QPushButton:pressed {
      </font>
     </property>
     <property name="text">
-     <string>21/12/2002</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     <string>Inizio</string>
     </property>
    </widget>
-   <widget class="QLabel" name="sepLbl">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>0</y>
-      <width>20</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>-</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="minuteDsb">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>0</y>
-      <width>30</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="buttonSymbols">
-     <enum>QAbstractSpinBox::NoButtons</enum>
-    </property>
-    <property name="decimals">
-     <number>0</number>
-    </property>
-    <property name="singleStep">
-     <double>15.000000000000000</double>
-    </property>
-    <property name="value">
-     <double>30.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="hourDsb">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>0</y>
-      <width>30</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="buttonSymbols">
-     <enum>QAbstractSpinBox::NoButtons</enum>
-    </property>
-    <property name="decimals">
-     <number>0</number>
-    </property>
-    <property name="maximum">
-     <double>23.000000000000000</double>
-    </property>
-    <property name="value">
-     <double>23.000000000000000</double>
-    </property>
-   </widget>
-   <zorder>timeSepLbl</zorder>
-   <zorder>sepLbl</zorder>
-   <zorder>minuteDsb</zorder>
-   <zorder>hourDsb</zorder>
-   <zorder>dateLE</zorder>
   </widget>
-  <zorder>punctLfRB</zorder>
-  <zorder>profLfRB</zorder>
-  <zorder>calcPls</zorder>
-  <zorder>datetimeWgt</zorder>
-  <zorder>calendarCWgt</zorder>
+  <widget class="QWidget" name="endWgt" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>200</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QDateTimeEdit" name="endDte">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>0</y>
+      <width>130</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="calendarPopup">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="endLbl">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>60</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Fine</string>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>
