@@ -334,10 +334,14 @@ class Main:
 
         if filename:
             a = {'_grid_': grid}
+            ts = datetime.datetime.now()
 
             with open(filename, 'w') as file:
                 yaml.dump({**a, **v}, file)
                 file.close()
+            nts = datetime.datetime.now() - ts
+
+            print('Save time:', nts.total_seconds())
 
     # Inserimento della tabella degli elementi nel widget principale
     def elementsTableWgtCreate(self):
@@ -754,16 +758,22 @@ class Main:
                     # self.dss.full_parse_profil_to_dss(t0=lf_popup.i_start, steps=lf_popup.i_steps)          # PandaFrame
                     # for i in range(lf_popup.i_steps):                                                       # Dizionario
                     #     self.dss.full_parse_to_dss(time=lf_popup.i_start + i)
+                    #     self.dss.solve()
+                    #     self.dss.results_store_all()
                     nts = datetime.datetime.now() - ts
 
                     print('Elaboration time:', nts.total_seconds())
                 else:
                     print('single')
                     self.dss.full_parse_to_dss(time=lf_popup.i_start)
+                    self.dss.solve()
+                    self.dss.results_store_all()
                     self.loadlfow_results()
         else:
             print('no-profile')
             self.dss.full_parse_to_dss(time=None)
+            self.dss.solve()
+            self.dss.results_store_all()
             self.loadlfow_results()
 
         # if s:

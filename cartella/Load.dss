@@ -1,11 +1,3 @@
-New "Load.ev-charge_load" bus1=ev-charge_bb phases=3 NumCust=1 pf=1 kW=19.5408647 kV=0.4 enabled=true
-New "Load.ev-fast_load" bus1=ev-fast_load_node phases=3 NumCust=1 pf=1 kW=24.426080875 kV=0.4 enabled=true
-New "Load.pros_ac-load1" bus1=pros_bb phases=3 NumCust=1 pf=0.9 kW=73.278242625 kV=0.4 enabled=true
-New "Load.pros_dc-load" bus1=pros_bb_dc2 phases=3 pf=1 NumCust=1 kW=14.655648525 kV=0.6 enabled=true
-New "Load.rs_ac-load1" bus1=rs_bb_04kv phases=3 NumCust=1 pf=0.9 kW=19.5408647 kV=0.4 enabled=true
-New "Load.rs_ac-load2" bus1=rs_bb_04kv phases=3 NumCust=1 pf=0.9 kW=29.31129705 kV=0.4 enabled=true
-New "Load.ug_load" bus1=ug_bb_lvdc phases=3 NumCust=1 pf=1 kW=97.7043235 kV=1.5 enabled=true
-New "Load.ug_serv_ac-load1" bus1=ug_serv_bb phases=3 NumCust=1 pf=0.9 kW=39.0817294 kV=0.4 enabled=true
-New "Load.ug_serv_ac-load2" bus1=ug_serv_bb phases=3 NumCust=1 pf=0.9 kW=58.6225941 kV=0.4 enabled=true
-New "Load.ugs_load" bus1=ugs_bb phases=3 NumCust=1 pf=1 kW=97.7043235 kV=1.5 enabled=true
-New "Load.user_ac-load" bus1=user_bb phases=3 NumCust=1 pf=0.9 kW=97.7043235 kV=0.4 enabled=true
+New "Load.load8a" bus1=b8.1 kV=11 kW=2000 pf=1 phases=1 model=3
+New "Load.load8b" bus1=b8.2 kV=11 kW=2000 pf=1 phases=1 model=1
+New "Load.load8c" bus1=b8.3 kV=11 kW=2000 pf=1 phases=1 model=1

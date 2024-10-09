@@ -269,13 +269,16 @@ class OpenDSS:
 
         for i in range(steps):
             self.full_parse_to_dss(t0 + i)
+            self.solve()
 
+        # TODO: da riattivare -----------------
             for el in v:
                 self.results_store_pl(el, i)
 
         path = str(mainpath) + '/_temp/elements/'
         for el in v:
             self.__getattribute__(el + '_pl').write_csv(path + el + '.csv', separator='\t')
+        # TODO ---------------------------------
 
         # print(self.__getattribute__('a_24_ac-load_pl'))
 
@@ -327,7 +330,7 @@ class OpenDSS:
             for r in dss_cat[mcat]:
                 self.dss.text(r)
 
-        self.solve()
+        # self.solve()
 
         # print(v['a_10_ac-load']['lf']['i'])
 
@@ -715,7 +718,7 @@ class OpenDSS:
 
         self.dss.text(f"Save Circuit dir=cartella")
 
-        self.results_store_all()
+        # self.results_store_all()
 
         return bool(self.dss.solution.converged)
 

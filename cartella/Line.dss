@@ -1,9 +1,7 @@
-New "Line.ev-charge_line" bus1=rs_bb_04kv bus2=ev-charge_bb Seasons=1 Ratings=[400,] emergamps=600 length=0.05 x1=1E-009 normamps=400.0 B0=3.141593E-010 x0=1E-009 B1=3.141593E-010 C0=1E-009 r1=0 r0=0 C1=1E-009 enabled=true
-New "Line.pros-ev_dc-line" linecode=dc-line bus1=pros_bb_dc1 bus2=ev-fast_bb Seasons=1 Ratings=[400,] emergamps=600 length=0.02 normamps=400.0 enabled=true
-New "Line.pros-pros_dc-line" linecode=dc-line bus1=pros_bb_dc1 bus2=pros_bb_dc2 Seasons=1 Ratings=[400,] emergamps=600 length=0.02 normamps=400.0 enabled=true
-New "Line.pros_line" bus1=res_bb bus2=pros_bb Seasons=1 Ratings=[400,] emergamps=600 length=0.05 x1=1E-009 normamps=400.0 B0=3.141593E-010 x0=1E-009 B1=3.141593E-010 C0=1E-009 r1=0 r0=0 C1=1E-009 enabled=true
-New "Line.res-wpg_line" bus1=sourcebus bus2=res-wpg_bb Seasons=1 Ratings=[400,] emergamps=600 length=2 x1=1E-009 normamps=400.0 B0=3.141593E-010 x0=1E-009 B1=3.141593E-010 C0=1E-009 r1=0 r0=0 C1=1E-009 enabled=true
-New "Line.rs_line" bus1=sourcebus bus2=rs_bb_20kv Seasons=1 Ratings=[400,] emergamps=600 length=3 x1=1E-009 normamps=400.0 B0=3.141593E-010 x0=1E-009 B1=3.141593E-010 C0=1E-009 r1=0 r0=0 C1=1E-009 enabled=true
-New "Line.ug_line" bus1=sourcebus bus2=ug_bb_20kv Seasons=1 Ratings=[400,] emergamps=600 length=3 x1=1E-009 normamps=400.0 B0=3.141593E-010 x0=1E-009 B1=3.141593E-010 C0=1E-009 r1=0 r0=0 C1=1E-009 enabled=true
-New "Line.user_line" bus1=res_bb bus2=user_bb Seasons=1 Ratings=[400,] emergamps=600 length=0.1 x1=1E-009 normamps=400.0 B0=3.141593E-010 x0=1E-009 B1=3.141593E-010 C0=1E-009 r1=0 r0=0 C1=1E-009 enabled=true
-New "Line.wpg_line" bus1=wpg_bb1 bus2=wpg_bb2 Seasons=1 Ratings=[400,] emergamps=600 length=1 x1=1E-009 normamps=400.0 B0=3.141593E-010 x0=1E-009 B1=3.141593E-010 C0=1E-009 r1=0 r0=0 C1=1E-009 enabled=true
+New "Line.line12" bus1=b1.1.2.3 bus2=b2.1.2.3 linecode=ug Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.15 units=km
+New "Line.line23" bus1=b2.1.2.3 bus2=b3.1.2.3 linecode=racoon Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=2.62 units=km
+New "Line.line34" bus1=b3.1.2.3 bus2=b4.1.2.3 linecode=moon Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=1.68 units=km
+New "Line.line45" bus1=b4.1.2.3 bus2=b5.1.2.3 linecode=tr Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=1 units=km
+New "Line.line56" bus1=b5.1.2.3 bus2=b6.1.2.3 linecode=moon Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=1 units=km
+New "Line.line67" bus1=b6.1.2.3 bus2=b7.1.2.3 linecode=moon Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=1.2 units=km
+New "Line.line78" bus1=b7.1.2.3 bus2=b8.1.2.3 linecode=moon Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.8 units=km
