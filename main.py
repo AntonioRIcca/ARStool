@@ -751,8 +751,9 @@ class Main:
 
                 if lf_popup.profile:
                     ts = datetime.datetime.now()
-                    self.dss.full_parse_profil_to_dss_polars(t0=lf_popup.i_start, steps=lf_popup.i_steps)   # Polars
-
+                    self.dss.full_parse_profil_to_dss_csv(t0=lf_popup.i_start, steps=lf_popup.i_steps)      # csv
+                    # self.dss.full_parse_profil_to_dss_polars(t0=lf_popup.i_start, steps=lf_popup.i_steps)   # Polars
+                    # self.dss.full_parse_profil_to_dss_numpy(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Numpy
 
                     # self.dss.full_parse_profil_to_dss_array(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Array
                     # self.dss.full_parse_profil_to_dss(t0=lf_popup.i_start, steps=lf_popup.i_steps)          # PandaFrame
