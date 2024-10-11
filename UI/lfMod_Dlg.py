@@ -72,4 +72,21 @@ class LfModDlg(QtWidgets.QDialog):
                             grid['profile']['step'])) + 1
         self.confirm = True
         self.profile = self.ui.profLfRB.isChecked()
+
+        grid['lf']['start'] = [self.ui.startDte.dateTime().date().year(),
+                               self.ui.startDte.dateTime().date().month(),
+                               self.ui.startDte.dateTime().date().day(),
+                               self.ui.startDte.dateTime().time().hour(),
+                               self.ui.startDte.dateTime().time().minute()]
+        if self.profile:
+            grid['lf']['end'] = [self.ui.endDte.dateTime().date().year(),
+                                 self.ui.endDte.dateTime().date().month(),
+                                 self.ui.endDte.dateTime().date().day(),
+                                 self.ui.endDte.dateTime().time().hour(),
+                                 self.ui.endDte.dateTime().time().minute()]
+            grid['lf']['points'] = self.i_steps
+        else:
+            grid['lf']['end'] = copy.deepcopy(grid['lf']['start'])
+            grid['lf']['points'] = 1
+
         self.close()

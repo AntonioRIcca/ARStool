@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'lfresfIBoOU.ui'
+## Form generated from reading UI file 'lfresvsbXzl.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -29,7 +29,7 @@ class Ui_lfres_mainWGT(object):
         lfres_mainWGT.setStyleSheet(u"")
         self.lfres_WGT = QWidget(lfres_mainWGT)
         self.lfres_WGT.setObjectName(u"lfres_WGT")
-        self.lfres_WGT.setGeometry(QRect(30, 30, 480, 811))
+        self.lfres_WGT.setGeometry(QRect(30, 30, 480, 700))
         self.lfres_WGT.setMinimumSize(QSize(480, 700))
         self.lfres_WGT.setMaximumSize(QSize(600, 16777215))
         self.lfres_WGT.setStyleSheet(u"#lfres_WGT{\n"
@@ -452,7 +452,65 @@ class Ui_lfres_mainWGT(object):
         self.lfres_center_WGT.setObjectName(u"lfres_center_WGT")
         self.lfres_center_WGT.setMinimumSize(QSize(0, 20))
         self.lfres_center_WGT.setMaximumSize(QSize(16777215, 300))
-        self.lfres_center_WGT.setStyleSheet(u"background-color: rgb(255, 255, 127);")
+        self.lfres_center_WGT.setStyleSheet(u"*{\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QPushButton{\n"
+"	border: solid;\n"
+"	border-width: 2px;\n"
+"	border-radius: 5px;\n"
+"	border-color:rgb(255, 170, 127);\n"
+"	color: rgb(0, 0, 0);\n"
+"	background-color: rgb(255, 255, 127);\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	background-color:rgb(255, 170, 127);\n"
+"}\n"
+"")
+        self.lfres_center_Wgt_HL = QHBoxLayout(self.lfres_center_WGT)
+        self.lfres_center_Wgt_HL.setObjectName(u"lfres_center_Wgt_HL")
+        self.horizontalSpacer = QSpacerItem(77, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.lfres_center_Wgt_HL.addItem(self.horizontalSpacer)
+
+        self.pushButton = QPushButton(self.lfres_center_WGT)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setMinimumSize(QSize(30, 30))
+        font4 = QFont()
+        font4.setPointSize(13)
+        font4.setBold(True)
+        font4.setWeight(75)
+        self.pushButton.setFont(font4)
+        self.pushButton.setStyleSheet(u"")
+
+        self.lfres_center_Wgt_HL.addWidget(self.pushButton)
+
+        self.lfresDte = QDateTimeEdit(self.lfres_center_WGT)
+        self.lfresDte.setObjectName(u"lfresDte")
+        self.lfresDte.setMinimumSize(QSize(200, 30))
+        self.lfresDte.setFont(font2)
+        self.lfresDte.setStyleSheet(u"background-color: rgb(0, 0, 0);\n"
+"color: rgb(255, 255, 127);")
+        self.lfresDte.setAlignment(Qt.AlignCenter)
+        self.lfresDte.setButtonSymbols(QAbstractSpinBox.NoButtons)
+
+        self.lfres_center_Wgt_HL.addWidget(self.lfresDte)
+
+        self.pushButton_2 = QPushButton(self.lfres_center_WGT)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setMinimumSize(QSize(30, 30))
+        self.pushButton_2.setFont(font4)
+        self.pushButton_2.setStyleSheet(u"")
+
+        self.lfres_center_Wgt_HL.addWidget(self.pushButton_2)
+
+        self.horizontalSpacer_2 = QSpacerItem(77, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.lfres_center_Wgt_HL.addItem(self.horizontalSpacer_2)
+
 
         self.lfres_VL.addWidget(self.lfres_center_WGT)
 
@@ -515,5 +573,7 @@ class Ui_lfres_mainWGT(object):
         self.q_loss_lbl_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"Reactive Power:", None))
         self.q_loss_value_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"2000.00", None))
         self.q_loss_unit_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"kVar", None))
+        self.pushButton.setText(QCoreApplication.translate("lfres_mainWGT", u"-", None))
+        self.pushButton_2.setText(QCoreApplication.translate("lfres_mainWGT", u"+", None))
     # retranslateUi
 

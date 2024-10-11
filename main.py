@@ -1,7 +1,7 @@
 # import py_dss_interface
 # from PySide2.QtCharts import QChart, QChartView, QBarSet, QPercentBarSeries, QBarCategoryAxis
 import copy
-import datetime
+import datetime as dt
 import os.path
 from functools import partial
 import xlsxwriter
@@ -334,12 +334,12 @@ class Main:
 
         if filename:
             a = {'_grid_': grid}
-            ts = datetime.datetime.now()
+            ts = dt.datetime.now()
 
             with open(filename, 'w') as file:
                 yaml.dump({**a, **v}, file)
                 file.close()
-            nts = datetime.datetime.now() - ts
+            nts = dt.datetime.now() - ts
 
             print('Save time:', nts.total_seconds())
 
@@ -613,7 +613,9 @@ class Main:
         from UI.donutbreakdown2 import DonutBreakdownChart
         db_graph = DonutBreakdownChart(mcat=mcat, data=self.lf_cat[mcat])
 
-        self.home3_top_WGT.deleteLater()
+        try:
+            self.home3_top_WGT.deleteLater()
+        except: pass
         self.home3_top_WGT = QtCharts.QChartView(db_graph)
         self.home3_VL.insertWidget(0, self.home3_top_WGT)
         # --------------------------------------------------------------
@@ -710,10 +712,28 @@ class Main:
         chart.axisY().setLabelFormat("%.0f%%")
         chart.legend().setFont(QtGui.QFont("Arial", 10))
 
-        self.lf_WGT.ui.lfres_bottom_WGT.deleteLater()
+        try:
+            self.lf_WGT.ui.lfres_bottom_WGT.deleteLater()
+        except: pass
 
-        lfres_bottom_wgt = QtCharts.QChartView(chart)
-        self.lf_WGT.ui.lfres_VL.insertWidget(3, lfres_bottom_wgt)
+        try:
+            self.lfres_bottom_wgt.deleteLater()
+        except: pass
+        try:
+            self.home3_center_WGT.deleteLater()
+            self.home3_top_WGT.deleteLater()
+        except: pass
+
+        self.lfres_bottom_wgt = QtCharts.QChartView(chart)
+
+        # try:
+        #     self.lf_WGT.ui.lfres_VL.removeWidget(self.lfres_bottom_wgt)
+        # except:
+        #     print('non riesco')
+        self.lf_WGT.ui.lfres_VL.insertWidget(3, self.lfres_bottom_wgt)
+
+        a = QtWidgets.QVBoxLayout()
+
 
     def loadflow(self):
         self.ui.rightMenuContainer.collapseMenu()
@@ -745,23 +765,31 @@ class Main:
                 pass
 
             if lf_popup.confirm:
+                self.datestart = dt.datetime(grid['lf']['start'][0], grid['lf']['start'][1], grid['lf']['start'][2],
+                                             grid['lf']['start'][3], grid['lf']['start'][4])
+                self.dateend = dt.datetime(grid['lf']['end'][0], grid['lf']['end'][1], grid['lf']['end'][2],
+                                           grid['lf']['end'][3], grid['lf']['end'][4])
+                self.loadflow_results_init()
+                self.lf_WGT.ui.lfres_center_WGT.setVisible(lf_popup.profile)
+
                 # Reset dei risultati
                 for el in v:
                     dictInitialize.lf_initialize(el)
 
                 if lf_popup.profile:
-                    ts = datetime.datetime.now()
-                    self.dss.full_parse_profil_to_dss_csv(t0=lf_popup.i_start, steps=lf_popup.i_steps)      # csv
+
+                    ts = dt.datetime.now()
+                    # self.dss.full_parse_profil_to_dss_csv(t0=lf_popup.i_start, steps=lf_popup.i_steps)      # csv
                     # self.dss.full_parse_profil_to_dss_polars(t0=lf_popup.i_start, steps=lf_popup.i_steps)   # Polars
                     # self.dss.full_parse_profil_to_dss_numpy(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Numpy
 
                     # self.dss.full_parse_profil_to_dss_array(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Array
                     # self.dss.full_parse_profil_to_dss(t0=lf_popup.i_start, steps=lf_popup.i_steps)          # PandaFrame
-                    # for i in range(lf_popup.i_steps):                                                       # Dizionario
-                    #     self.dss.full_parse_to_dss(time=lf_popup.i_start + i)
-                    #     self.dss.solve()
-                    #     self.dss.results_store_all()
-                    nts = datetime.datetime.now() - ts
+                    for i in range(lf_popup.i_steps):                                                       # Dizionario
+                        self.dss.full_parse_to_dss(time=lf_popup.i_start + i)
+                        self.dss.solve()
+                        self.dss.results_store_all()
+                    nts = dt.datetime.now() - ts
 
                     print('Elaboration time:', nts.total_seconds())
                 else:
@@ -769,13 +797,19 @@ class Main:
                     self.dss.full_parse_to_dss(time=lf_popup.i_start)
                     self.dss.solve()
                     self.dss.results_store_all()
-                    self.loadlfow_results()
+                    # self.loadflow_results_init()
+                    # self.lf_WGT.ui.lfres_center_WGT.setVisible(lf_popup.profile)
+                self.loadflow_results_refresh(t=0)
+
         else:
             print('no-profile')
             self.dss.full_parse_to_dss(time=None)
             self.dss.solve()
             self.dss.results_store_all()
-            self.loadlfow_results()
+            self.loadflow_results_init()
+            self.lf_WGT.ui.lfres_center_WGT.setVisible(False)
+
+            self.loadflow_results_refresh(t=0)
 
         # if s:
         # self.dss.full_parse_to_dss(is_profile=True, time=time)
@@ -787,7 +821,12 @@ class Main:
 
         # self.dss.test()  # TODO: da eliminare, è una prova
 
-    def loadlfow_results(self):
+    def loadflow_results_refresh(self, t=0):
+        self.loadflow_results(t=t)
+        self.loadflow_table_compile()
+        self.barchart()
+
+    def loadflow_results(self, t=0):
         self.p_loads, self.q_loads = 0, 0
         self.p_gen, self.q_gen = 0, 0
         self.p_bess, self.q_bess = 0, 0
@@ -801,32 +840,33 @@ class Main:
         for elem in v.keys():
             cat = v[elem]['category']
             if v[elem]['category'] in mc['Load']:
-                self.p_loads += v[elem]['lf']['p'][0]
-                self.q_loads += v[elem]['lf']['q'][0]
+                self.p_loads += v[elem]['lf']['p'][t]
+                self.q_loads += v[elem]['lf']['q'][t]
                 mcat = 'Loads'
 
             elif v[elem]['category'] in mc['BESS']:
-                self.p_bess += v[elem]['lf']['p'][0]
-                self.q_bess += v[elem]['lf']['q'][0]
+                self.p_bess += v[elem]['lf']['p'][t]
+                self.q_bess += v[elem]['lf']['q'][t]
                 mcat = 'BESS'
 
             elif v[elem]['category'] in mc['Generator']:
-                self.p_gen -= v[elem]['lf']['p'][0]
-                self.q_gen -= v[elem]['lf']['q'][0]
+                self.p_gen -= v[elem]['lf']['p'][t]
+                self.q_gen -= v[elem]['lf']['q'][t]
                 mcat = 'Generators'
 
             if cat in prof_elem:
                 if cat not in list(self.lf_cat[mcat].keys()):
                     self.lf_cat[mcat][cat] = dict()
                 self.lf_cat[mcat][cat][elem] = {
-                    'p': abs(v[elem]['lf']['p'][0]),
-                    'q': abs(v[elem]['lf']['q'][0]),
+                    'p': abs(v[elem]['lf']['p'][t]),
+                    'q': abs(v[elem]['lf']['q'][t]),
                 }
 
-        self.p_eg, self.q_eg = -v['source']['lf']['p'][0], -v['source']['lf']['q'][0]
+        self.p_eg, self.q_eg = -v['source']['lf']['p'][t], -v['source']['lf']['q'][t]
         self.p_loss = self.p_eg + self.p_gen - self.p_loads - self.p_bess
         self.q_loss = self.q_eg + self.q_gen - self.q_loads - self.q_bess
 
+    def loadflow_results_init(self):
         self.lf_WGT = LFrWGT()
         self.home2_WGT = self.lf_WGT.ui.lfres_WGT
 
@@ -836,13 +876,32 @@ class Main:
         self.lf_WGT.ui.loads_GB.mouseDoubleClickEvent = partial(self.test_action2, 'Loads')
         self.lf_WGT.ui.bess_GB.mouseDoubleClickEvent = partial(self.test_action2, 'BESS')
 
+        try:
+            self.lf_WGT.ui.lfresDte.setMinimumDateTime(QtCore.QDateTime(self.datestart))
+            self.lf_WGT.ui.lfresDte.setMaximumDateTime(QtCore.QDateTime(self.dateend))
+        except: pass
+
+        self.lf_WGT.ui.lfresDte.dateChanged.connect(self.loafdlow_date_change)
+        self.lf_WGT.ui.lfresDte.timeChanged.connect(self.loafdlow_date_change)
+
+
+    def loafdlow_date_change(self):
+        step = int(QtCore.QDateTime(self.datestart).secsTo(self.lf_WGT.ui.lfresDte.dateTime()) / 60 /
+                   grid['profile']['step'])
+
+        self.loadflow_results_refresh(t=step)
+        print(step)
+
+        # self.len = int(gap / self.steps[self.ui.stepCB.currentIndex()]) + 1
+        pass
+
+    def loadflow_table_compile(self):
         for cat in ['eg', 'loss', 'loads', 'bess', 'gen']:
             self.lf_WGT.ui.__getattribute__('p_' + cat + '_value_LBL').setText(
                 str(round(self.__getattribute__('p_' + cat), 2)))
             self.lf_WGT.ui.__getattribute__('q_' + cat + '_value_LBL').setText(
                 str(round(self.__getattribute__('q_' + cat), 2)))
 
-        self.barchart()
 
         # # -- Creazione del diagramma a torta ---------------------------
         # eg = Data('External Grid', self.p_eg, QtGui.QColor("#ffc000"), QtGui.QColor("#ffe699"))
@@ -924,8 +983,9 @@ class Main:
         mycol = QtGui.Qt.red
 
         mycolor = 'rgb(100,100,100)'
-
-        self.home3_center_WGT.deleteLater()
+        try:
+            self.home3_center_WGT.deleteLater()
+        except: pass
 
         self.home3_center_WGT = QWidget()
         font = QtGui.QFont()

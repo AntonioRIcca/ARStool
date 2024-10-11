@@ -15,6 +15,11 @@ grid = {
         'end': None,
         'exist': False,
     },
+    'lf':{
+        'start': None,
+        'end': None,
+        'points': None,
+    },
 }
 
 bench = {
