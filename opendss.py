@@ -273,7 +273,7 @@ class OpenDSS:
             self.full_parse_to_dss(t0 + i)
             self.solve()
 
-        # TODO: da riattivare -----------------
+            # TODO: da riattivare -----------------
             for el in v:
                 self.results_store_pl(el, i)
 
@@ -316,6 +316,8 @@ class OpenDSS:
         for el in v:
             # for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
             self.__setattr__(el + '_np', np.zeros((steps, 8)))
+
+            # self.load_np = np.zeros((steps, 8))
             # self.__setattr__(el + '_pd', pd.DataFrame(index=list(range(steps)),
             #                                           columns=['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']))
 
@@ -325,6 +327,62 @@ class OpenDSS:
 
             for el in v:
                 self.results_store_np(el, i)
+
+        path = str(mainpath) + '/_temp/elements/'
+        for el in v:
+            np.savetxt(path + el + '.csv', self.__getattribute__(el + '_np'), delimiter='\t')
+            # self.__getattribute__(el + '_np').savetxt(path + el + '.csv', separator='\t')
+
+        # for el in v:
+        #     for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
+        #         if self.__getattribute__(el + '_' + p):
+        #             # print(el, p)
+        #             self.__getattribute__(el + '_pd')[p] = self.__getattribute__(el + '_' + p)
+
+    def full_parse_profil_to_dss_numpy_chatGPT(self, t0=None, steps=None):
+        print('start')
+        for el in v:
+            # for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
+            self.__setattr__(el + '_np', np.zeros((steps, 8)))
+
+            # self.load_np = np.zeros((steps, 8))
+            # self.__setattr__(el + '_pd', pd.DataFrame(index=list(range(steps)),
+            #                                           columns=['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']))
+
+        for i in range(steps):
+            self.full_parse_to_dss(t0 + i)
+            self.solve()
+
+            for el in v:
+                self.results_store_np_chatGPT(el, i)
+
+        path = str(mainpath) + '/_temp/elements/'
+        for el in v:
+            np.savetxt(path + el + '.csv', self.__getattribute__(el + '_np'), delimiter='\t')
+            # self.__getattribute__(el + '_np').savetxt(path + el + '.csv', separator='\t')
+
+        # for el in v:
+        #     for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
+        #         if self.__getattribute__(el + '_' + p):
+        #             # print(el, p)
+        #             self.__getattribute__(el + '_pd')[p] = self.__getattribute__(el + '_' + p)
+
+    def full_parse_profil_to_dss_numpy_chatGPT_nodata(self, t0=None, steps=None):
+        print('start')
+        for el in v:
+            # for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
+            self.__setattr__(el + '_np', np.zeros((steps, 8)))
+
+            # self.load_np = np.zeros((steps, 8))
+            # self.__setattr__(el + '_pd', pd.DataFrame(index=list(range(steps)),
+            #                                           columns=['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']))
+
+        for i in range(steps):
+            self.full_parse_to_dss(t0 + i)
+            self.solve()
+
+            for el in v:
+                self.results_store_np_chatGPT_nodata(el, i)
 
         path = str(mainpath) + '/_temp/elements/'
         for el in v:
@@ -758,6 +816,85 @@ class OpenDSS:
             v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
     # TODO: verificare se è possibile rendere self.results_append e self.results_store come un'unica funzione
 
+    def results_store_np_chatGPT(self, el, row):
+        sqrt3 = 3 ** 0.5  # Precompute sqrt(3)
+        el_np = self.__getattribute__(el + '_np')  # Cache access to the numpy array
+
+        if v[el]['category'] != 'Node':  # For all elements except Nodes
+            if not v[el]['par']['out-of-service']:  # If the element is in service
+                mcat = mcat_find(el)
+                cf0, cf1 = 1, 1  # Correction factor for AC parts
+
+                if v[el]['category'] in DC_elem:
+                    cf0 = sqrt3  # Correction factor for DC portions upstream
+                if v[el]['category'] in DC_elem + ['PWM']:
+                    cf1 = sqrt3  # Correction factor for DC portions downstream
+
+                self.dss.circuit.set_active_element(mcat + '.' + el)  # Activate the element
+
+
+                if v[el]['category'] not in mc['Line'] + mc['Transformer']:  # For terminal elements
+                    powers = self.dss.cktelement.powers  # Cache access to powers
+
+                    p = sum(powers[2 * i] for i in range(3))  # Sum powers for p
+                    q = sum(powers[2 * i + 1] for i in range(3))  # Sum powers for q
+
+                    # Update numpy array with P, Q, V, I values
+                    el_np[row, 1] = p
+                    el_np[row, 2] = q
+                    el_np[row, 3] = self.dss.cktelement.voltages_mag_ang[0] * sqrt3
+                    el_np[row, 0] = self.dss.cktelement.currents_mag_ang[0] * cf0
+
+                else:  # For lines or transformers
+                    j = 6 if v[el]['category'] in mc['Line'] else 8  # Set offset for line/transformer
+
+                    powers = self.dss.cktelement.powers  # Cache access to powers
+
+                    # Calculate power for each side
+                    p0 = sum(powers[2 * i] for i in range(3))
+                    q0 = sum(powers[2 * i + 1] for i in range(3))
+                    p1 = sum(-powers[2 * i + j] for i in range(3))
+                    q1 = sum(-powers[2 * i + j + 1] for i in range(3))
+
+                    # Update numpy array with side-specific values
+                    el_np[row, 1] = p0
+                    el_np[row, 2] = q0
+                    el_np[row, 5] = p1
+                    el_np[row, 6] = q1
+                    el_np[row, 3] = self.dss.cktelement.voltages_mag_ang[0] * sqrt3
+                    el_np[row, 7] = self.dss.cktelement.voltages_mag_ang[j] * sqrt3
+                    el_np[row, 0] = self.dss.cktelement.currents_mag_ang[0] * cf0
+                    el_np[row, 4] = self.dss.cktelement.currents_mag_ang[j] * cf1
+
+            else:  # If the element is not in service
+                # Set all relevant numpy array values to 0 for non-service elements
+                if v[el]['category'] not in mc['Line'] + mc['Transformer']:  # For terminal elements
+                    el_np[row, 1:4] = 0
+                    el_np[row, 0] = 0
+                else:  # For lines and transformers
+                    el_np[row, [1, 2, 5, 6, 3, 7, 0, 4]] = 0
+
+        else:  # For nodes and sources
+            self.dss.circuit.set_active_bus(el)
+            v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * sqrt3)
+    # TODO: verificare se è possibile rendere self.results_append e self.results_store come un'unica funzione
+
+    def results_store_np_chatGPT_nodata(self, el, row):
+        sqrt3 = 3 ** 0.5  # Precompute sqrt(3)
+        el_np = self.__getattribute__(el + '_np')  # Cache access to the numpy array
+
+        el_np[row, 1] = 1
+        el_np[row, 2] = 2
+        el_np[row, 5] = 3
+        el_np[row, 6] = 4
+        el_np[row, 3] = 5
+        el_np[row, 7] = 6
+        el_np[row, 0] = 7
+        el_np[row, 4] = 8
+
+    # TODO: verificare se è possibile rendere self.results_append e self.results_store come un'unica funzione
+
+
     def results_store_csv(self, el, row):
         if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
 
@@ -994,6 +1131,7 @@ class OpenDSS:
             if mcat == 'Generator':
                 par['kv'] = [par['kv']]
             elif mcat == 'Load':
+                print(el)
                 par['kV'] = [par['kV']]
             elif mcat == 'Vsource':
                 par['basekv'] = [par['basekv']]

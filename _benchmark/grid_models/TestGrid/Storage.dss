@@ -1,0 +1,2 @@
+New Generator.Stor_039_G1 bus1=N_039 phases=3 model=1 kw=6000.000000 kvar=6000.000000 kv=20.000000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Load.Stor_039_L1 bus1=N_039 phases=3 model=1 kw=6000.000000 kvar=6000.000000 kv=20.000000 conn=wye vmaxpu=1.2 vminpu=0.8
