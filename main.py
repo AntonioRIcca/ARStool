@@ -782,8 +782,8 @@ class Main:
                     # self.dss.full_parse_profil_to_dss_csv(t0=lf_popup.i_start, steps=lf_popup.i_steps)      # csv
                     # self.dss.full_parse_profil_to_dss_polars(t0=lf_popup.i_start, steps=lf_popup.i_steps)   # Polars
                     # self.dss.full_parse_profil_to_dss_numpy(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Numpy
-                    # self.dss.full_parse_profil_to_dss_numpy_chatGPT(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Numpy
-                    self.dss.full_parse_profil_to_dss_numpy_chatGPT_nodata(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Numpy
+                    self.dss.full_parse_profil_to_dss_numpy_chatGPT(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # chatGPT
+                    # self.dss.full_parse_profil_to_dss_numpy_chatGPT_nodata(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # chatGPT No Data
 
                     # self.dss.full_parse_profil_to_dss_array(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Array
                     # self.dss.full_parse_profil_to_dss(t0=lf_popup.i_start, steps=lf_popup.i_steps)          # PandaFrame
@@ -801,7 +801,7 @@ class Main:
                     self.dss.results_store_all()
                     # self.loadflow_results_init()
                     # self.lf_WGT.ui.lfres_center_WGT.setVisible(lf_popup.profile)
-                self.loadflow_results_refresh(t=0)
+                # self.loadflow_results_refresh(t=0)
 
         else:
             print('no-profile')
