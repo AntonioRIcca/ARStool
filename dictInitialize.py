@@ -1,5 +1,9 @@
+import yaml
+
 from variables import *
 
+
+attr_dict = yaml.safe_load(open(mainpath + "/attributes_template.yml"))
 
 def dict_initialize(el, cat):
     v[el] = dict()
@@ -28,7 +32,8 @@ def profile_initialize(el):
 def rel_initialize(el):
     v[el]['rel']['par'] = dict()
     for p in ['Pi_E', 'Pi_Q', 'alfa', 'beta']:
-        v[el]['rel']['par'][p] = None
+        #v[el]['rel']['par'][p] = None
+        v[el]['rel']['par'][p] = attr_dict[v[el]['category']]['reliability'][p]
 
     v[el]['rel']['results'] = dict()
     if v[el]['category'] in mc['Load']:

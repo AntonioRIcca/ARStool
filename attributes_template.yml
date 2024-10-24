@@ -1,0 +1,739 @@
+ExternalGrid:
+  category: 'ExternalGrid'
+  conn: [ ]
+  parameters:
+    Sr: 0                                       # Potenza nominale [kVA]
+    efficiency: 1
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: None
+      alfa: None
+      beta: None
+      Pi_E: None
+      Pi_Q: None
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    in: ''
+    out: ''
+    cap_pwr: 0
+    max_outin: 1
+    max_inout: 1
+    etaoutin: 1
+    etainout: 1
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
+AC-Load:                                        # Nome dell'elemento
+  category: 'AC-Load'                           # Categoria dell'elemento
+  conn: []          # lista degli elementi connessi all'elemento. Per ogni elemento, il valore True indica che è connesso (interruttore chiuso), False indica che è disconnesso (interruttore aperto)
+  parameters:
+    control: 0                                # Tipo di controllo [0 = PQ, 1 = PC, 2 = SC, 3 = IC, 4 = SC] (serve ai software)
+    P: 0                                        # Potenza attiva di set [kW]
+    Q: 0                                        # Potenza reattiva di set [kVA]
+    S: 0                                        # Potenza apparente di set ]kVA]
+    I: 0                                        # Corrente di set [A]
+    cosPhi: 0                                   # Fasatura di set [-]
+    profile:        # indica il fattore di scala dei parametri di set (il valore realmente settato sarà il valore indicato sopra moltiplicato per il fattore di scala. Può essere una costante o un valore variabile nel tempo
+      constant: True                            # "True" se il fattore di scala è costante, "False" se è un profilo variabile nel tempo
+      curve: 1                                  # fattore di scala [p.u.] - valore costante o lista di 96 valori (nel caso di profilo variabile, si considera l'arco di una giornata con timestep = 0.25 h
+      name: ''                                  # (eventuale) nome del profilo
+  results: {}       # dizionario dei risultati (da definire) sarà suddiviso in sottodizionari in base alla funzione (e.g. 'LoadFlow', 'Reliability', 'EMS'?', etc...
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:              # dizionario dei parametri necessari al modulo di EMS (definiti da UNIPI)
+    type: load
+    unmet_cost: 6
+    profile:
+      load: 0
+
+DC-Load:
+  category: 'DC-Load'
+  conn: []
+  parameters:
+    control: 0                                  # Tipo di controllo [0 = P, 1 = I, 2 = R] (serve ai software)
+    P: 0                                        # Potenza attiva di set [kW]
+    I: 0                                        # Corrente di set [A]
+    R: 0                                        # Resistenza di set [Ohm]
+    efficiency: 1
+    profile:
+      constant: True
+      curve: 1
+      name: ''
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    type: load
+    unmet_cost: 7
+    profile:
+      load: 0
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
+2W-Transformer:
+  category: '2W-Transformer'
+  conn: []
+  parameters:
+    Sr: 0                                       # Potenza nominale [kVA]
+    UnHV: 0                                     # Voltaggio connessione 1 [kV]
+    UnLV: 0                                     # Voltaggio connessione 2 [kV]
+    URr1: 0                                     # Perdita nominale degli avvolgimenti 1 e 2 (% rispetto a Sr) (positive sequence) [%]
+    Ukr1: 0                                     # Tensione nominale di corti circuito (% rispetto a Ur1) (positive sequence) [%]
+    URr0: 0                                     # Perdita nominale degli avvolgimenti 1 e 2 (% rispetto a Sr) (zero sequence) [%]
+    Ukr0: 0                                     # Tensione nominale di corti circuito (% rispetto a Ur1) (zero sequence) [%]
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 3  # todo: riportare a 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    in: ''
+    out: ''
+    cap_pwr: 0
+    max_outin: 1
+    max_inout: 1
+    etaoutin: 1
+    etainout: 1
+
+PWM:
+  category: 'PWM'
+  conn: [ ]
+  parameters:
+    Sr: 0                                       # Potenza Nominale [kVA]
+    Ur: 0                                       # Tensione nomniale AC [kV]
+    S_loss_idle: 0                              # Perdite in idle [kW]
+    Sw_loss: 0                                  # Switching losses [kW/A]
+    R_loss: 0                                   # Resistive losses [Ohm]
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    in: 0
+    out: 0
+    cap_pwr: 0
+    max_outin: 1
+    max_inout: 1
+    etaoutin: 1
+    etainout: 1
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
+DC-DC_Conv:
+  category: 'DC-DC_Conv'
+  conn: [ ]
+  parameters:
+    Sr: 0                                       # Potenza nominale [kVA]
+    efficiency: 1
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    in: ''
+    out: ''
+    cap_pwr: 0
+    max_outin: 1
+    max_inout: 1
+    etaoutin: 1
+    etainout: 1
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
+AC-Wind:
+  category: 'AC-Wind'
+  conn: [ ]
+  parameters:
+    units: 1                                    # Numero di unità installate
+    Sr: 0                                       # Potenza nominale [kVA]
+    control: 0                                  # Tipo di controllo [...] (serve ai software)
+    P: 0                                        # Potenza attiva di set [kW]
+    Q: 0                                        # Potenza reattiva di set [kVA]
+    S: 0                                        # Potenza apparente di set [kVA]
+    cosPhi: 0                                   # Fasatura di set
+    profile:
+      constant: True
+      curve: 1
+      name: ''
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    type: renewable
+    cap_pwr: 0
+    profile:
+      ren: 0
+
+DC-Wind:
+  category: 'DC-Wind'
+  conn: [ ]
+  parameters:
+    Pr: 0                                       # Potenza attiva nominale [kW]
+    Ir: 0                                       # Corrente nominale [kVA]
+    Ur: 0                                       # Tensione nominale [kV]
+    P: 0                                        # Potenza attiva di set [kW]
+    efficiency: 1
+    profile:
+      constant: True
+      curve: 1
+      name: ''
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    type: renewable
+    cap_pwr: 0
+    profile:
+      ren: 0
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
+AC-PV:
+  category: 'PV'
+  conn: [ ]
+  parameters:
+    Sr: 0                                       # Potenza nominale [kW]
+    efficiency: 0
+    profile:
+      constant: True
+      curve: 1
+      name: ''
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    type: renewable
+    cap_pwr: 0
+    profile:
+      ren: 0
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
+DC-PV:
+  category: 'PV'
+  conn: [ ]
+  parameters:
+    Sr: 0                                       # Potenza nominale [kW]
+    efficiency: 0
+    profile:
+      constant: True
+      curve: 1
+      name: ''
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    type: renewable
+    cap_pwr: 0
+    profile:
+      ren: 0
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
+Turbine:
+  category: 'Turbine'
+  conn: [ ]
+  parameters:
+    Sr: 0                                       # Potenza nominale [kW]
+    efficiency: 0
+    profile:
+      constant: True
+      curve: 1
+      name: ''
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    type: renewable
+    cap_pwr: 0
+    profile:
+      ren: 0
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
+Battery:
+  category: 'Battery'
+  conn: [ ]
+  parameters:
+    cap_en: 0                                   # Taglia della batteria [kWh]
+    efficiency: 1
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    type: battery
+    cap_en: 100
+    init_SOC: 0.5                               # stato di carica iniziale [p.u.]
+    max_SOC: 0.9                                # stato di carica massimo [p.u.]
+    min_SOC: 0.1                                # stato di carica minimo [p.u.]
+    final_SOC: 0.2
+    max_dch: 1
+    max_ch: 1
+    cost_dch: 0.001
+    cost_ch: 00.001
+    eta_dch: 1
+    eta_ch: 1
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
+AC-Line:
+  category: 'AC-Line'
+  conn: [ ]
+  parameters:
+    length: 0                                   # lunghezza della linea [m]
+    lines: 0                                    # Numero di linee in parallelo
+    R1: 0                                       # Positive sequence resistance [Ohm/km]
+    X1: 0                                       # Positive sequence reactance [Ohm/km]
+    B1: 0                                       # Positive sequence admittance [micro_S/km]
+    R0: 0                                       # Zero sequence resistance [Ohm/km]
+    X0: 0                                       # Zero sequence reactance [Ohm/km]
+    B0: 0                                       # Zero sequence admittancve [micro_S/km]
+    Irmax: 0                                    # maximum rated current [A]
+    Ur: 0                                       # tensione nominale [kV]
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    in: ''
+    out: ''
+    cap_pwr: 0
+    max_outin: 1
+    max_inout: 1
+    etaoutin: 1
+    etainout: 1
+
+DC-Line:
+  category: 'DC-Line'
+  conn: [ ]
+  parameters:
+    length: 0                                   # lunghezza della linea [m]
+    lines: 0                                    # Numero di linee in parallelo
+    R: 0                                        # Positive sequence resistance [Ohm/km]
+    L: 0                                        # Inductance [mH/km]
+    C: 0                                        # Capacitance [F/km]
+    Irmax: 0                                    # maximum rated current [A]
+    Ur: 0                                       # tensione nominale [kV]
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    in: ''
+    out: ''
+    cap_pwr: 0
+    max_outin: 1
+    max_inout: 1
+    etaoutin: 1
+    etainout: 1
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
+AC-Node:
+  category: 'AC-Node'
+  conn: [ ]
+  parameters:
+    Ur: 0                                       # tensione nominale [kV]
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems: {}
+
+DC-Node:
+  category: 'DC-Node'
+  conn: [ ]
+  parameters:
+    Ur: 0                                       # tensione nominale [kV]
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems: {}
+
+Ext-Grid:
+  category: 'Ext-Grid'
+  conn: [ ]
+  parameters:
+    control: 0                                  # tipo di controllo (8)serve al software)
+    U: 0                                        # tensione rete esterna [%]
+    Uangle: 0                                   # fasatura rete esterna [-]
+    P: 0                                        # Potenza attiva di set della rete esterna [kW]
+    Q: 0                                        # Potenza reattiva di set della rete esterna [kVA]
+    slack: 0                                    # Slack portion [%]
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    type: grid
+    profile:
+      price_buy:
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+        - 0.18
+      price_sell:
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+        - 0.05
+    cap_pwr: 20000
+    max_supply: 1
+    max_load: 1
+    peak_cost: 2.5
+    base_peak: 800
+  protections: { }

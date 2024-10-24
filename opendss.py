@@ -33,6 +33,8 @@ class OpenDSS:
         self.dss.text(f"compile [{filename}]")
         self.dss.text(f"Save Circuit dir=cartella")     # scrittura della cartella degli elementi
 
+
+
         # Dato il nome dell'elemento (e.g. "transformer.WPG_TR"), vengono definite:
         # - le categorie dal suffisso del nome dell'elemento, dopo l'ultimo "_" (e.g. "TR")
         # - le macrocategorie (viene definito in DSS la paete prima del punto (e.g. "transformer")
