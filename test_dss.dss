@@ -1,0 +1,16 @@
+Clear
+New Circuit.ReteTest basekV=20.000000 pu=1 MVAsc1=10000000 MVAsc3=10000000 bus1=mainBB phases=3
+
+New Loadshape.LD1 npts=24 interval=1.000000 mult=[0.61332     0.47576     0.39923     0.36406     0.35372     0.35889     0.39716     0.54609      0.7064     0.71364     0.70123     0.67848      0.7002     0.73329     0.75088     0.74674     0.70537     0.71675     0.77984     0.89567      1.0053      1.0343     0.95152     0.79742     0.61332]
+New Loadshape.G2 npts=24 interval=1.000000 mult=[0           0           0           0           0           0           0           0    0.011699    0.039736    0.058497    0.086533     0.10529     0.10529    0.081896    0.046798    0.028036    0.011699           0           0           0           0           0           0]
+
+New Line.Line1 bus1=mainBB bus2=N01 phases=3 R1=0.254000 X1=0.125538 C1=314.999000 normamps=260.000000 units=km length=1.370000
+New Load.Load1 bus1=N01 model=1 kw=68.000000 kvar=33.000000 kv=20.000000 conn=wye daily=LD1 vmaxpu=1.2 vminpu=0.8
+new Generator.PV bus1=N01 phases=3 model=1 kw=100.000000 kvar=0.000000 kv=20.000000 conn=wye daily=G2 vmaxpu=1.2 vminpu=0.8
+
+new energymeter.EM1 element=Line.Line1 terminal=1
+new monitor.MV_Load1 element=Load.Load1 terminal=1 vipolar=no mode=0
+new monitor.MP_Load1 element=Load.Load1 terminal=1 ppolar=no mode=1
+
+Set mode=daily stepsize=1.000000h number=24
+Solve
