@@ -1,295 +1,240 @@
-New "Load.a_10_ac-load" bus1=bus_n15 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_10_line" bus1=bus_n12 bus2=bus_n13 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_11_ac-load" bus1=bus_n16 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_11_line" bus1=bus_n13 bus2=bus_n14 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_12_ac-load" bus1=bus_n17 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_12_line" bus1=bus_n14 bus2=bus_n15 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_13_ac-load" bus1=bus_n18 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_13_line" bus1=bus_n16 bus2=bus_n17 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_14_ac-load" bus1=bus_n19 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_14_line" bus1=bus_n17 bus2=bus_n18 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_15_ac-load" bus1=bus_n20 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_15_line" bus1=bus_n17 bus2=bus_n19 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_16_ac-load" bus1=bus_n21 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_16_line" bus1=bus_n19 bus2=bus_n20 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.4226 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_17_ac-load" bus1=bus_n22 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_17_line" bus1=bus_n20 bus2=bus_n21 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_18_ac-load" bus1=bus_n23 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_18_line" bus1=bus_n21 bus2=bus_n22 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.304 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_19_ac-load" bus1=bus_n24 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_19_line" bus1=bus_n22 bus2=bus_n23 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.21 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_1_ac-load" bus1=bus_n6 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Load.a_20_ac-load" bus1=bus_n25 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_20_line" bus1=bus_n23 bus2=bus_n24 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.53 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_21_ac-load" bus1=bus_n26 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_21_line" bus1=bus_n24 bus2=bus_n25 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_22_ac-load" bus1=bus_n27 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_22_line" bus1=bus_n21 bus2=bus_n26 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.2052 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_23_ac-load" bus1=bus_n28 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_23_line" bus1=bus_n19 bus2=bus_n27 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.0725 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_24_ac-load" bus1=bus_n29 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_24_line" bus1=bus_n27 bus2=bus_n28 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.3865 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_25_ac-load" bus1=bus_n30 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_25_line" bus1=bus_n28 bus2=bus_n29 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.376 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_26_ac-load" bus1=bus_n31 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_26_line" bus1=bus_n30 bus2=bus_n31 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_27_ac-load" bus1=bus_n32 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_27_line" bus1=bus_n31 bus2=bus_n32 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_28_ac-load" bus1=bus_n33 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_28_line" bus1=bus_n32 bus2=bus_n33 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_29_ac-load" bus1=bus_n34 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_29_line" bus1=bus_n33 bus2=bus_n34 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.471 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_2_ac-load" bus1=bus_n7 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Load.a_30_ac-load" bus1=bus_n35 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_30_line" bus1=bus_n35 bus2=bus_n36 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_31_ac-load" bus1=bus_n36 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_31_line" bus1=bus_n35 bus2=bus_n37 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_32_ac-load" bus1=bus_n37 phases=3 pf=0.9936 NumCust=1.0 kV=20.0 kW=33.21946999 enabled=True
-New "Line.a_32_line" bus1=bus_n37 bus2=bus_n38 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_33_ac-load" bus1=bus_n38 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_33_line" bus1=bus_n38 bus2=bus_n39 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_34_ac-load" bus1=bus_n39 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_34_line" bus1=bus_n39 bus2=bus_n40 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_35_ac-load" bus1=bus_n40 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=10.552066938000001 enabled=True
-New "Line.a_35_line" bus1=bus_n40 bus2=bus_n41 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_36_ac-load" bus1=bus_n41 phases=3 pf=0.9938 NumCust=1.0 kV=20.0 kW=16.85399580375 enabled=True
-New "Line.a_36_line" bus1=bus_n41 bus2=bus_n42 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_37_ac-load" bus1=bus_n42 phases=3 pf=0.9938 NumCust=1.0 kV=20.0 kW=16.85399580375 enabled=True
-New "Line.a_37_line" bus1=bus_n29 bus2=bus_n43 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_38_ac-load" bus1=bus_n43 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_38_line" bus1=bus_n43 bus2=bus_n44 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_39_ac-load" bus1=bus_n44 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=52.76033469 enabled=True
-New "Line.a_39_line" bus1=bus_n45 bus2=bus_n5 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=1.0 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_3_ac-load" bus1=bus_n8 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_3_line" bus1=bus_n5 bus2=bus_n6 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.137 normamps=278.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_4_ac-load" bus1=bus_n9 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_4_line" bus1=bus_n6 bus2=bus_n7 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.2755 normamps=278.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_5_ac-load" bus1=bus_n10 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_5_line" bus1=bus_n7 bus2=bus_n8 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_6_ac-load" bus1=bus_n11 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.380167345 enabled=True
-New "Line.a_6_line" bus1=bus_n8 bus2=bus_n9 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_7_ac-load" bus1=bus_n12 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_7_line" bus1=bus_n8 bus2=bus_n10 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.a_815s_line" bus1=bus_n3 bus2=bus_n45 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.001 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.a_816s_line" bus1=bus_n7 bus2=bus_n60 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.a_817s_line" bus1=bus_n7 bus2=bus_n48 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.287 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.a_818s_line" bus1=bus_n9 bus2=bus_n110 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.007 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.a_819s_line" bus1=bus_n12 bus2=bus_n164 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.5 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.a_820s_line" bus1=bus_n15 bus2=bus_n16 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.a_821s_line" bus1=bus_n15 bus2=bus_n136 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.a_822s_line" bus1=bus_n28 bus2=bus_n36 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.25 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.a_823s_line" bus1=bus_n29 bus2=bus_n30 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.221 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.a_825s_line" bus1=bus_n34 bus2=bus_n161 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.132 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_8_ac-load" bus1=bus_n13 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_8_line" bus1=bus_n10 bus2=bus_n11 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.a_9_ac-load" bus1=bus_n14 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=42.208267752000005 enabled=True
-New "Line.a_9_line" bus1=bus_n11 bus2=bus_n12 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_100_ac-load" bus1=bus_n92 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Load.c_59_ac-load" bus1=bus_n68 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=86.17521332700001 enabled=True
-New "Load.c_60_ac-load" bus1=bus_n96 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_60_line" bus1=bus_n67 bus2=bus_n68 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.344 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_61_ac-load" bus1=bus_n97 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_61_line" bus1=bus_n69 bus2=bus_n70 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_62_ac-load" bus1=bus_n98 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_62_line" bus1=bus_n70 bus2=bus_n71 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_63_ac-load" bus1=bus_n99 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_63_line" bus1=bus_n71 bus2=bus_n72 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_64_ac-load" bus1=bus_n100 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_64_line" bus1=bus_n72 bus2=bus_n73 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_65_ac-load" bus1=bus_n101 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_65_line" bus1=bus_n73 bus2=bus_n74 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_66_ac-load" bus1=bus_n102 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_66_line" bus1=bus_n74 bus2=bus_n75 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_67_ac-load" bus1=bus_n103 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_67_line" bus1=bus_n75 bus2=bus_n76 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_68_ac-load" bus1=bus_n104 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_68_line" bus1=bus_n71 bus2=bus_n77 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_69_ac-load" bus1=bus_n105 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_69_line" bus1=bus_n77 bus2=bus_n78 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_70_ac-load" bus1=bus_n106 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_70_line" bus1=bus_n78 bus2=bus_n79 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.308 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_71_ac-load" bus1=bus_n107 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_71_line" bus1=bus_n78 bus2=bus_n80 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_72_ac-load" bus1=bus_n69 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_72_line" bus1=bus_n80 bus2=bus_n81 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_73_ac-load" bus1=bus_n70 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_73_line" bus1=bus_n81 bus2=bus_n82 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_74_ac-load" bus1=bus_n71 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_74_line" bus1=bus_n82 bus2=bus_n83 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.175 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_75_ac-load" bus1=bus_n72 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_75_line" bus1=bus_n84 bus2=bus_n85 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_76_ac-load" bus1=bus_n73 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_76_line" bus1=bus_n85 bus2=bus_n86 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.38 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_77_ac-load" bus1=bus_n74 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_77_line" bus1=bus_n84 bus2=bus_n87 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_78_ac-load" bus1=bus_n75 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_78_line" bus1=bus_n87 bus2=bus_n88 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.294 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_79_ac-load" bus1=bus_n76 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_79_line" bus1=bus_n87 bus2=bus_n89 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_80_ac-load" bus1=bus_n77 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_80_line" bus1=bus_n89 bus2=bus_n90 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_81_ac-load" bus1=bus_n78 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_81_line" bus1=bus_n89 bus2=bus_n91 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_82_ac-load" bus1=bus_n79 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_82_line" bus1=bus_n91 bus2=bus_n92 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.27 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.c_831s_line" bus1=bus_n3 bus2=bus_n109 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.001 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.c_832s_line" bus1=bus_n68 bus2=bus_n69 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.c_833s_line" bus1=bus_n68 bus2=bus_n96 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.c_834s_line" bus1=bus_n79 bus2=bus_n86 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.314 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.c_837s_line" bus1=bus_n95 bus2=bus_n110 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.14 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.c_838s_line" bus1=bus_n110 bus2=bus_n153 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.c_839s_line" bus1=bus_n110 bus2=bus_n177 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_83_ac-load" bus1=bus_n80 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_83_line" bus1=bus_n92 bus2=bus_n93 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.16 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_84_ac-load" bus1=bus_n81 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_84_line" bus1=bus_n91 bus2=bus_n94 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_85_ac-load" bus1=bus_n82 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_85_line" bus1=bus_n94 bus2=bus_n95 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_86_ac-load" bus1=bus_n83 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_86_line" bus1=bus_n96 bus2=bus_n97 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_87_ac-load" bus1=bus_n84 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_87_line" bus1=bus_n97 bus2=bus_n98 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_88_ac-load" bus1=bus_n85 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_88_line" bus1=bus_n98 bus2=bus_n99 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_89_ac-load" bus1=bus_n86 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_89_line" bus1=bus_n99 bus2=bus_n100 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_90_ac-load" bus1=bus_n87 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_90_line" bus1=bus_n100 bus2=bus_n101 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_91_ac-load" bus1=bus_n88 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_91_line" bus1=bus_n99 bus2=bus_n102 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_92_ac-load" bus1=bus_n89 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_92_line" bus1=bus_n102 bus2=bus_n103 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_93_ac-load" bus1=bus_n90 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_93_line" bus1=bus_n103 bus2=bus_n104 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_94_ac-load" bus1=bus_n91 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_94_line" bus1=bus_n104 bus2=bus_n105 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_95_ac-load" bus1=bus_n93 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=26.929754164687502 enabled=True
-New "Line.c_95_line" bus1=bus_n105 bus2=bus_n106 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_96_ac-load" bus1=bus_n94 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_96_line" bus1=bus_n106 bus2=bus_n107 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_97_ac-load" bus1=bus_n95 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_97_line" bus1=bus_n102 bus2=bus_n108 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.081 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_98_ac-load" bus1=bus_n110 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.c_98_line" bus1=bus_n109 bus2=bus_n67 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=1.0 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.c_99_ac-load" bus1=bus_n108 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=43.087606663500004 enabled=True
-New "Line.d_100_line" bus1=bus_n112 bus2=bus_n113 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.161 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_101_ac-load" bus1=bus_n112 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=9.03764992375 enabled=True
-New "Line.d_101_line" bus1=bus_n113 bus2=bus_n114 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.313 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_102_ac-load" bus1=bus_n113 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_102_line" bus1=bus_n114 bus2=bus_n115 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.05 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_103_ac-load" bus1=bus_n116 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=9.03764992375 enabled=True
-New "Line.d_103_line" bus1=bus_n115 bus2=bus_n116 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.05 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_104_ac-load" bus1=bus_n117 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=9.03764992375 enabled=True
-New "Line.d_104_line" bus1=bus_n115 bus2=bus_n117 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.005 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_105_ac-load" bus1=bus_n119 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=14.411387716250001 enabled=True
-New "Line.d_105_line" bus1=bus_n114 bus2=bus_n118 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.05 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_106_ac-load" bus1=bus_n147 phases=3 pf=0.8944 NumCust=1.0 kV=20.0 kW=12.2130404375 enabled=True
-New "Line.d_106_line" bus1=bus_n118 bus2=bus_n119 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.03 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_107_ac-load" bus1=bus_n126 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=14.411387716250001 enabled=True
-New "Line.d_107_line" bus1=bus_n118 bus2=bus_n120 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_108_ac-load" bus1=bus_n129 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=3.60528953715 enabled=True
-New "Line.d_108_line" bus1=bus_n121 bus2=bus_n122 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.045 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_109_ac-load" bus1=bus_n134 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_109_line" bus1=bus_n121 bus2=bus_n123 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.07 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_110_ac-load" bus1=bus_n135 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_110_line" bus1=bus_n123 bus2=bus_n124 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.001 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_111_ac-load" bus1=bus_n136 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_111_line" bus1=bus_n124 bus2=bus_n125 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.12 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_112_ac-load" bus1=bus_n137 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_112_line" bus1=bus_n125 bus2=bus_n126 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.04 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_113_ac-load" bus1=bus_n138 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_113_line" bus1=bus_n127 bus2=bus_n128 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.4 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_114_ac-load" bus1=bus_n139 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_114_line" bus1=bus_n128 bus2=bus_n129 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.13 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_115_ac-load" bus1=bus_n140 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_115_line" bus1=bus_n128 bus2=bus_n130 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.45 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_116_ac-load" bus1=bus_n141 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_116_line" bus1=bus_n130 bus2=bus_n131 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.06 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_117_ac-load" bus1=bus_n142 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_117_line" bus1=bus_n131 bus2=bus_n132 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.22 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_118_ac-load" bus1=bus_n143 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=9.03764992375 enabled=True
-New "Line.d_118_line" bus1=bus_n132 bus2=bus_n133 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.018 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_119_ac-load" bus1=bus_n144 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_119_line" bus1=bus_n134 bus2=bus_n135 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_120_ac-load" bus1=bus_n145 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_120_line" bus1=bus_n135 bus2=bus_n136 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.2 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_121_ac-load" bus1=bus_n146 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=9.03764992375 enabled=True
-New "Line.d_121_line" bus1=bus_n134 bus2=bus_n137 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_122_ac-load" bus1=bus_n149 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=14.411387716250001 enabled=True
-New "Line.d_122_line" bus1=bus_n137 bus2=bus_n138 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_123_ac-load" bus1=bus_n150 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_123_line" bus1=bus_n138 bus2=bus_n139 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.461 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_124_ac-load" bus1=bus_n151 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=9.03764992375 enabled=True
-New "Line.d_124_line" bus1=bus_n137 bus2=bus_n140 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=1.158 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_125_ac-load" bus1=bus_n152 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_125_line" bus1=bus_n140 bus2=bus_n141 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_126_ac-load" bus1=bus_n153 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_126_line" bus1=bus_n140 bus2=bus_n142 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.529 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_127_ac-load" bus1=bus_n154 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=72.105790743 enabled=True
-New "Line.d_127_line" bus1=bus_n142 bus2=bus_n143 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.416 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_128_ac-load" bus1=bus_n155 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_128_line" bus1=bus_n143 bus2=bus_n144 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.736 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_129_ac-load" bus1=bus_n156 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_129_line" bus1=bus_n144 bus2=bus_n145 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.405 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_130_ac-load" bus1=bus_n157 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_130_line" bus1=bus_n130 bus2=bus_n146 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.002 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_131_ac-load" bus1=bus_n158 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_131_line" bus1=bus_n118 bus2=bus_n147 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.05 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_132_ac-load" bus1=bus_n159 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_132_line" bus1=bus_n148 bus2=bus_n149 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=1.02 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_133_ac-load" bus1=bus_n160 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_133_line" bus1=bus_n149 bus2=bus_n150 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.465 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_134_ac-load" bus1=bus_n161 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_134_line" bus1=bus_n150 bus2=bus_n151 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.345 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_135_ac-load" bus1=bus_n162 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_135_line" bus1=bus_n151 bus2=bus_n152 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.293 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_136_ac-load" bus1=bus_n163 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_136_line" bus1=bus_n153 bus2=bus_n154 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_137_ac-load" bus1=bus_n164 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_137_line" bus1=bus_n153 bus2=bus_n155 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.107 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_138_ac-load" bus1=bus_n177 phases=3 pf=0.8944 NumCust=1.0 kV=20.0 kW=12.2130404375 enabled=True
-New "Line.d_138_line" bus1=bus_n155 bus2=bus_n156 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.125 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_139_ac-load" bus1=bus_n166 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_139_line" bus1=bus_n156 bus2=bus_n157 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=250.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_140_ac-load" bus1=bus_n167 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=22.5330596071875 enabled=True
-New "Line.d_140_line" bus1=bus_n157 bus2=bus_n158 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.473 normamps=250.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_141_ac-load" bus1=bus_n169 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=14.411387716250001 enabled=True
-New "Line.d_141_line" bus1=bus_n158 bus2=bus_n159 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.039 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_142_ac-load" bus1=bus_n170 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_142_line" bus1=bus_n159 bus2=bus_n160 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.194 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_143_ac-load" bus1=bus_n171 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=36.0528953715 enabled=True
-New "Line.d_143_line" bus1=bus_n160 bus2=bus_n161 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_144_ac-load" bus1=bus_n172 phases=3 pf=0.8944 NumCust=1.0 kV=20.0 kW=7.3278242625 enabled=True
-New "Line.d_144_line" bus1=bus_n161 bus2=bus_n162 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.414 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_145_ac-load" bus1=bus_n173 phases=3 pf=0.8944 NumCust=1.0 kV=20.0 kW=19.5408647 enabled=True
-New "Line.d_145_line" bus1=bus_n162 bus2=bus_n163 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.196 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Load.d_146_ac-load" bus1=bus_n122 phases=3 pf=0.9939 NumCust=1.0 kV=20.0 kW=3.60528953715 enabled=True
-New "Line.d_146_line" bus1=bus_n163 bus2=bus_n164 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.5 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_147_line" bus1=bus_n165 bus2=bus_n166 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=1.388 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_148_line" bus1=bus_n166 bus2=bus_n167 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.08 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_149_line" bus1=bus_n167 bus2=bus_n168 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.179 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_150_line" bus1=bus_n168 bus2=bus_n169 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.03 normamps=117.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_151_line" bus1=bus_n167 bus2=bus_n170 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_152_line" bus1=bus_n170 bus2=bus_n171 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.001 normamps=166.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_153_line" bus1=bus_n170 bus2=bus_n172 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.113 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_154_line" bus1=bus_n172 bus2=bus_n173 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.039 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_155_line" bus1=bus_n174 bus2=bus_n111 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=1.0 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_156_line" bus1=bus_n175 bus2=bus_n148 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=1.0 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_157_line" bus1=bus_n176 bus2=bus_n165 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=1.0 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_840s_line" bus1=bus_n3 bus2=bus_n900 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.001 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_841s_line" bus1=bus_n900 bus2=bus_n174 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_842s_line" bus1=bus_n120 bus2=bus_n121 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.04 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_843s_line" bus1=bus_n123 bus2=bus_n127 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.2 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_844s_line" bus1=bus_n131 bus2=bus_n134 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_845s_line" bus1=bus_n135 bus2=bus_n177 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.23 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_846s_line" bus1=bus_n900 bus2=bus_n175 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_847s_line" bus1=bus_n901 bus2=bus_n153 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_848s_line" bus1=bus_n152 bus2=bus_n901 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.465 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_849s_line" bus1=bus_n901 bus2=bus_n110 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_851s_line" bus1=bus_n900 bus2=bus_n176 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.1 normamps=400.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.d_99_line" bus1=bus_n111 bus2=bus_n112 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.12 normamps=244.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.sbla_1_line" bus1=sourcebus bus2=bus_n1 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.01 normamps=313.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-New "Line.sblb_2_line" bus1=sourcebus bus2=bus_n2 Season=1 Ratings=[400,] emergamps=600 C1=1e-09 x0=1e-09 r0=0 x1=1e-09 length=0.01 normamps=313.0 r1=0 B1=1e-09 B0=1e-09 C0=1e-09 enabled=True
-Edit "Vsource.source bus1=sourcebus basekv=150.0 enabled=True
-New "Transformer.tra_tr" buses=['bus_n1', 'bus_n3'] windings=2 conns=[delta, wye, ] kVAs=[30000.0, 30000.0] %Rs=[0.375, 0.375] %imag=0.0 kVs=[150.0, 21.2] XHL=9.78 enabled=True
-New "Transformer.trb_tr" buses=['bus_n2', 'bus_n4'] windings=2 conns=[delta, wye, ] kVAs=[31250.0, 31250.0] %Rs=[0.36, 0.36] %imag=0.0 kVs=[150.0, 20.8] XHL=14.59 enabled=True
+New "Line.l_002-015" bus1=n_002 bus2=n_015 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.125547 r0=0 C0=1e-09 C1=314.999 normamps=260.0 B0=1e-09 r1=0.254014 length=1.37 B1=1e-09 enabled=True
+New "Line.l_002-029_tr2" bus1=n_002 bus2=n_029 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.370493 r0=0 C0=1e-09 C1=26.20347 normamps=235.0 B0=1e-09 r1=0.343449 length=2.875 B1=1e-09 enabled=True
+New "Line.l_002-034_tr2" bus1=n_002 bus2=n_034 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.370543 r0=0 C0=1e-09 C1=21.07562 normamps=190.0 B0=1e-09 r1=0.498243 length=6.14 B1=1e-09 enabled=True
+New "Line.l_002-086" bus1=n_002 bus2=n_086 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.135591 r0=0 C0=1e-09 C1=339.8902 normamps=280.0 B0=1e-09 r1=0.2034 length=1.173 B1=1e-09 enabled=True
+New "Line.l_004-025" bus1=n_004 bus2=n_025 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=0.345 B1=1e-09 enabled=True
+New "Line.l_005-016" bus1=n_005 bus2=n_016 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.40715 r0=0 C0=1e-09 C1=7.9577 normamps=140.0 B0=1e-09 r1=0.7214 length=1.333 B1=1e-09 enabled=True
+New "Line.l_007-013" bus1=n_007 bus2=n_013 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=1.79 B1=1e-09 enabled=True
+New "Line.l_007-024" bus1=n_007 bus2=n_024 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.68 B1=1e-09 enabled=True
+New "Line.l_008-020" bus1=n_008 bus2=n_020 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=0.47 B1=1e-09 enabled=True
+New "Line.l_009-010" bus1=n_009 bus2=n_010 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=0.98 B1=1e-09 enabled=True
+New "Line.l_010-019" bus1=n_010 bus2=n_019 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=0.78 B1=1e-09 enabled=True
+New "Line.l_012-005" bus1=n_012 bus2=n_005 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.40715 r0=0 C0=1e-09 C1=7.9577 normamps=140.0 B0=1e-09 r1=0.7214 length=1.3 B1=1e-09 enabled=True
+New "Line.l_013-003" bus1=n_013 bus2=n_003 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=1.2 B1=1e-09 enabled=True
+New "Line.l_014-022" bus1=n_014 bus2=n_022 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=0.8 B1=1e-09 enabled=True
+New "Line.l_015-014" bus1=n_015 bus2=n_014 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.110344 r0=0 C0=1e-09 C1=350.1409 normamps=330.0 B0=1e-09 r1=0.165517 length=3.07 B1=1e-09 enabled=True
+New "Line.l_020-004" bus1=n_020 bus2=n_004 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.385 B1=1e-09 enabled=True
+New "Line.l_020-009" bus1=n_020 bus2=n_009 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=2.4 B1=1e-09 enabled=True
+New "Line.l_021-007" bus1=n_021 bus2=n_007 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.35 B1=1e-09 enabled=True
+New "Line.l_021-012" bus1=n_021 bus2=n_012 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=1.4 B1=1e-09 enabled=True
+New "Line.l_022-006" bus1=n_022 bus2=n_006 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=0.9 B1=1e-09 enabled=True
+New "Line.l_022-008" bus1=n_022 bus2=n_008 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.33 B1=1e-09 enabled=True
+New "Line.l_022-026" bus1=n_022 bus2=n_026 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=1.13 B1=1e-09 enabled=True
+New "Line.l_024-023" bus1=n_024 bus2=n_023 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=1.0 B1=1e-09 enabled=True
+New "Line.l_025-018" bus1=n_025 bus2=n_018 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=3.12 B1=1e-09 enabled=True
+New "Line.l_025-021" bus1=n_025 bus2=n_021 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.85 B1=1e-09 enabled=True
+New "Line.l_026-011" bus1=n_026 bus2=n_011 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=2.25 B1=1e-09 enabled=True
+New "Line.l_026-017" bus1=n_026 bus2=n_017 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.40715 r0=0 C0=1e-09 C1=7.9577 normamps=140.0 B0=1e-09 r1=0.7214 length=1.8 B1=1e-09 enabled=True
+New "Line.l_027-028_tr1" bus1=n_027 bus2=n_028 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.3884 r0=0 C0=1e-09 C1=8.909995 normamps=140.0 B0=1e-09 r1=0.528611 length=0.76 B1=1e-09 enabled=True
+New "Line.l_029-031" bus1=n_029 bus2=n_031 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.384311 r0=0 C0=1e-09 C1=8.998 normamps=235.0 B0=1e-09 r1=0.3529 length=1.53 B1=1e-09 enabled=True
+New "Line.l_029-033" bus1=n_029 bus2=n_033 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=0.85 B1=1e-09 enabled=True
+New "Line.l_030-027" bus1=n_030 bus2=n_027 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.384311 r0=0 C0=1e-09 C1=8.998 normamps=235.0 B0=1e-09 r1=0.3529 length=3.0 B1=1e-09 enabled=True
+New "Line.l_031-030" bus1=n_031 bus2=n_030 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.384311 r0=0 C0=1e-09 C1=8.998 normamps=235.0 B0=1e-09 r1=0.3529 length=13.42 B1=1e-09 enabled=True
+New "Line.l_033-032" bus1=n_033 bus2=n_032 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.110333 r0=0 C0=1e-09 C1=350.1409 normamps=330.0 B0=1e-09 r1=0.1655 length=0.885 B1=1e-09 enabled=True
+New "Line.l_034-049_tr3" bus1=n_034 bus2=n_049 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.355824 r0=0 C0=1e-09 C1=32.29472 normamps=190.0 B0=1e-09 r1=0.480911 length=4.6 B1=1e-09 enabled=True
+New "Line.l_035-044" bus1=n_035 bus2=n_044 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.356 B1=1e-09 enabled=True
+New "Line.l_036-043" bus1=n_036 bus2=n_043 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.40715 r0=0 C0=1e-09 C1=7.9577 normamps=140.0 B0=1e-09 r1=0.7214 length=2.856 B1=1e-09 enabled=True
+New "Line.l_036-050" bus1=n_036 bus2=n_050 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.2 B1=1e-09 enabled=True
+New "Line.l_038-045" bus1=n_038 bus2=n_045 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.38 B1=1e-09 enabled=True
+New "Line.l_038-052" bus1=n_038 bus2=n_052 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=1.5 B1=1e-09 enabled=True
+New "Line.l_039-048" bus1=n_039 bus2=n_048 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.92 B1=1e-09 enabled=True
+New "Line.l_042-040" bus1=n_042 bus2=n_040 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.40715 r0=0 C0=1e-09 C1=7.9577 normamps=140.0 B0=1e-09 r1=0.7214 length=1.464 B1=1e-09 enabled=True
+New "Line.l_045-041" bus1=n_045 bus2=n_041 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.40715 r0=0 C0=1e-09 C1=7.9577 normamps=140.0 B0=1e-09 r1=0.7214 length=3.006 B1=1e-09 enabled=True
+New "Line.l_045-051" bus1=n_045 bus2=n_051 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.44 B1=1e-09 enabled=True
+New "Line.l_049-055" bus1=n_049 bus2=n_055 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.40715 r0=0 C0=1e-09 C1=7.9577 normamps=140.0 B0=1e-09 r1=0.7214 length=1.56 B1=1e-09 enabled=True
+New "Line.l_050-037" bus1=n_050 bus2=n_037 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.2 B1=1e-09 enabled=True
+New "Line.l_050-047" bus1=n_050 bus2=n_047 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=1.152 B1=1e-09 enabled=True
+New "Line.l_051-036" bus1=n_051 bus2=n_036 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=2.1372 B1=1e-09 enabled=True
+New "Line.l_051-046" bus1=n_051 bus2=n_046 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.40715 r0=0 C0=1e-09 C1=7.9577 normamps=140.0 B0=1e-09 r1=0.7214 length=1.5132 B1=1e-09 enabled=True
+New "Line.l_053-035" bus1=n_053 bus2=n_035 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.86 B1=1e-09 enabled=True
+New "Line.l_053-038" bus1=n_053 bus2=n_038 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=0.96 B1=1e-09 enabled=True
+New "Line.l_053-039" bus1=n_053 bus2=n_039 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.7 B1=1e-09 enabled=True
+New "Line.l_055-042" bus1=n_055 bus2=n_042 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.992 B1=1e-09 enabled=True
+New "Line.l_055-053" bus1=n_055 bus2=n_053 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.8 B1=1e-09 enabled=True
+New "Line.l_055-054" bus1=n_055 bus2=n_054 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=2.64 B1=1e-09 enabled=True
+New "Line.l_078-077" bus1=n_078 bus2=n_077 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.114291 r0=0 C0=1e-09 C1=192.1228 normamps=165.0 B0=1e-09 r1=0.4 length=0.001 B1=1e-09 enabled=True
+New "Line.l_080-096" bus1=n_080 bus2=n_096 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.48 B1=1e-09 enabled=True
+New "Line.l_081-092" bus1=n_081 bus2=n_092 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=0.9 B1=1e-09 enabled=True
+New "Line.l_081-094" bus1=n_081 bus2=n_094 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=0.8 B1=1e-09 enabled=True
+New "Line.l_082-080" bus1=n_082 bus2=n_080 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.2 B1=1e-09 enabled=True
+New "Line.l_082-088" bus1=n_082 bus2=n_088 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=2.4 B1=1e-09 enabled=True
+New "Line.l_083-101" bus1=n_083 bus2=n_101 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=0.45 B1=1e-09 enabled=True
+New "Line.l_084-081" bus1=n_084 bus2=n_081 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.84 B1=1e-09 enabled=True
+New "Line.l_085-099" bus1=n_085 bus2=n_099 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=0.52 B1=1e-09 enabled=True
+New "Line.l_086-083" bus1=n_086 bus2=n_083 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.37 B1=1e-09 enabled=True
+New "Line.l_088-090" bus1=n_088 bus2=n_090 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.40715 r0=0 C0=1e-09 C1=7.9577 normamps=140.0 B0=1e-09 r1=0.7214 length=3.86 B1=1e-09 enabled=True
+New "Line.l_088-098" bus1=n_088 bus2=n_098 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.63 B1=1e-09 enabled=True
+New "Line.l_089-078" bus1=n_089 bus2=n_078 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=2.9 B1=1e-09 enabled=True
+New "Line.l_089-087" bus1=n_089 bus2=n_087 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=2.082 B1=1e-09 enabled=True
+New "Line.l_094-085" bus1=n_094 bus2=n_085 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.58 B1=1e-09 enabled=True
+New "Line.l_094-093" bus1=n_094 bus2=n_093 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=0.75 B1=1e-09 enabled=True
+New "Line.l_095_076" bus1=n_095 bus2=n_076 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.114291 r0=0 C0=1e-09 C1=192.1228 normamps=165.0 B0=1e-09 r1=0.4 length=0.001 B1=1e-09 enabled=True
+New "Line.l_096-091" bus1=n_096 bus2=n_091 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=1.0 B1=1e-09 enabled=True
+New "Line.l_096-095" bus1=n_096 bus2=n_095 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.413339 r0=0 C0=1e-09 C1=7.9577 normamps=105.0 B0=1e-09 r1=1.12 length=0.4 B1=1e-09 enabled=True
+New "Line.l_097-089" bus1=n_097 bus2=n_089 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.114291 r0=0 C0=1e-09 C1=192.1228 normamps=165.0 B0=1e-09 r1=0.4 length=1.0 B1=1e-09 enabled=True
+New "Line.l_098-100" bus1=n_098 bus2=n_100 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.114291 r0=0 C0=1e-09 C1=192.1228 normamps=165.0 B0=1e-09 r1=0.4 length=1.2 B1=1e-09 enabled=True
+New "Line.l_099-103" bus1=n_099 bus2=n_103 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=3.8 B1=1e-09 enabled=True
+New "Line.l_100-102" bus1=n_100 bus2=n_102 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.114291 r0=0 C0=1e-09 C1=192.1228 normamps=165.0 B0=1e-09 r1=0.4 length=0.9 B1=1e-09 enabled=True
+New "Line.l_101-079" bus1=n_101 bus2=n_079 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=0.86 B1=1e-09 enabled=True
+New "Line.l_101-084" bus1=n_101 bus2=n_084 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.67 B1=1e-09 enabled=True
+New "Line.l_102-097" bus1=n_102 bus2=n_097 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.114291 r0=0 C0=1e-09 C1=192.1228 normamps=165.0 B0=1e-09 r1=0.4 length=0.74 B1=1e-09 enabled=True
+New "Line.l_103-082" bus1=n_103 bus2=n_082 Season=1 Ratings=[400,] emergamps=600 x0=1e-09 x1=0.387358 r0=0 C0=1e-09 C1=8.9629 normamps=190.0 B0=1e-09 r1=0.5179 length=1.4 B1=1e-09 enabled=True
+New "Load.load_003_1" bus1=n_003 phases=3 pf=1 kW=27.568746041205596 NumCust=1 kV=20.0 enabled=True
+New "Load.load_003_2" bus1=n_003 phases=3 pf=1 kW=27.568746041205596 NumCust=1 kV=20.0 enabled=True
+New "Load.load_003_3" bus1=n_003 phases=3 pf=1 kW=43.7830113537432 NumCust=1 kV=20.0 enabled=True
+New "Load.load_004" bus1=n_004 phases=3 pf=1 kW=27.568746041205596 NumCust=1 kV=20.0 enabled=True
+New "Load.load_005" bus1=n_005 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_006_1" bus1=n_006 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_006_2" bus1=n_006 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_006_3" bus1=n_006 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_008" bus1=n_008 phases=3 pf=1 kW=27.568746041205596 NumCust=1 kV=20.0 enabled=True
+New "Load.load_009_1" bus1=n_009 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_009_2" bus1=n_009 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_010_1" bus1=n_010 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_010_2" bus1=n_010 phases=3 pf=1 kW=2.5403383378296 NumCust=1 kV=20.0 enabled=True
+New "Load.load_011" bus1=n_011 phases=3 pf=1 kW=41.37927214430393 NumCust=1 kV=20.0 enabled=True
+New "Load.load_012" bus1=n_012 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_013_1" bus1=n_013 phases=3 pf=1 kW=27.568746041205596 NumCust=1 kV=20.0 enabled=True
+New "Load.load_013_2" bus1=n_013 phases=3 pf=1 kW=27.568746041205596 NumCust=1 kV=20.0 enabled=True
+New "Load.load_013_3" bus1=n_013 phases=3 pf=1 kW=27.568746041205596 NumCust=1 kV=20.0 enabled=True
+New "Load.load_014_1" bus1=n_014 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_014_2" bus1=n_014 phases=3 pf=1 kW=49.48784487717839 NumCust=1 kV=20.0 enabled=True
+New "Load.load_014_3" bus1=n_014 phases=3 pf=1 kW=49.48784487717839 NumCust=1 kV=20.0 enabled=True
+New "Load.load_015_1" bus1=n_015 phases=3 pf=1 kW=179.4090115030752 NumCust=1 kV=20.0 enabled=True
+New "Load.load_015_2" bus1=n_015 phases=3 pf=1 kW=43.7830113537432 NumCust=1 kV=20.0 enabled=True
+New "Load.load_016" bus1=n_016 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_017" bus1=n_017 phases=3 pf=1 kW=49.48784487717839 NumCust=1 kV=20.0 enabled=True
+New "Load.load_018_1" bus1=n_018 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_018_2" bus1=n_018 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_018_3" bus1=n_018 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_019" bus1=n_019 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_020" bus1=n_020 phases=3 pf=1 kW=27.568746041205596 NumCust=1 kV=20.0 enabled=True
+New "Load.load_021_1" bus1=n_021 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_021_2" bus1=n_021 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_022" bus1=n_022 phases=3 pf=1 kW=49.48784487717839 NumCust=1 kV=20.0 enabled=True
+New "Load.load_023" bus1=n_023 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_024_1" bus1=n_024 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_024_2" bus1=n_024 phases=3 pf=1 kW=31.159016268811197 NumCust=1 kV=20.0 enabled=True
+New "Load.load_025" bus1=n_025 phases=3 pf=1 kW=43.7830113537432 NumCust=1 kV=20.0 enabled=True
+New "Load.load_026" bus1=n_026 phases=3 pf=1 kW=77.43931863544799 NumCust=1 kV=20.0 enabled=True
+New "Load.load_027_1" bus1=n_027 phases=3 pf=1 kW=28.867911958670398 NumCust=1 kV=20.0 enabled=True
+New "Load.load_027_2" bus1=n_027 phases=3 pf=1 kW=439.20168470307357 NumCust=1 kV=20.0 enabled=True
+New "Load.load_027_3" bus1=n_027 phases=3 pf=1 kW=169.1140528799568 NumCust=1 kV=20.0 enabled=True
+New "Load.load_028" bus1=n_028 phases=3 pf=1 kW=46.2802964938776 NumCust=1 kV=20.0 enabled=True
+New "Load.load_030" bus1=n_030 phases=3 pf=1 kW=28.867911958670398 NumCust=1 kV=20.0 enabled=True
+New "Load.load_031" bus1=n_031 phases=3 pf=1 kW=46.2802964938776 NumCust=1 kV=20.0 enabled=True
+New "Load.load_032_1" bus1=n_032 phases=3 pf=1 kW=28.867911958670398 NumCust=1 kV=20.0 enabled=True
+New "Load.load_032_2" bus1=n_032 phases=3 pf=1 kW=2.1774311830656 NumCust=1 kV=20.0 enabled=True
+New "Load.load_032_3" bus1=n_032 phases=3 pf=1 kW=28.867911958670398 NumCust=1 kV=20.0 enabled=True
+New "Load.load_033_1" bus1=n_033 phases=3 pf=1 kW=28.867911958670398 NumCust=1 kV=20.0 enabled=True
+New "Load.load_033_2" bus1=n_033 phases=3 pf=1 kW=28.867911958670398 NumCust=1 kV=20.0 enabled=True
+New "Load.load_034" bus1=n_034 phases=3 pf=1 kW=0.40590162486719994 NumCust=1 kV=20.0 enabled=True
+New "Load.load_035" bus1=n_035 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_036_1" bus1=n_036 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_036_2" bus1=n_036 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_037_1" bus1=n_037 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_037_2" bus1=n_037 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_038" bus1=n_038 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_040_1" bus1=n_040 phases=3 pf=1 kW=94.86892210062959 NumCust=1 kV=20.0 enabled=True
+New "Load.load_040_2" bus1=n_040 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_040_3" bus1=n_040 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_041_1" bus1=n_041 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_041_2" bus1=n_041 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_042_1" bus1=n_042 phases=3 pf=1 kW=2.4354156219623997 NumCust=1 kV=20.0 enabled=True
+New "Load.load_042_2" bus1=n_042 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_042_3" bus1=n_042 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_043_1" bus1=n_043 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_043_2" bus1=n_043 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_044" bus1=n_044 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_045_1" bus1=n_045 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_045_2" bus1=n_045 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_046" bus1=n_046 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_047" bus1=n_047 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_048_1" bus1=n_048 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_048_2" bus1=n_048 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_048_3" bus1=n_048 phases=3 pf=1 kW=60.81341401230479 NumCust=1 kV=20.0 enabled=True
+New "Load.load_049_1" bus1=n_049 phases=3 pf=1 kW=0.40590162486719994 NumCust=1 kV=20.0 enabled=True
+New "Load.load_049_2" bus1=n_049 phases=3 pf=1 kW=1.0887155915328 NumCust=1 kV=20.0 enabled=True
+New "Load.load_049_3" bus1=n_049 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_050" bus1=n_050 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_051" bus1=n_051 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_052" bus1=n_052 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_054_1" bus1=n_054 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_054_2" bus1=n_054 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_055_1" bus1=n_055 phases=3 pf=1 kW=38.1097380382488 NumCust=1 kV=20.0 enabled=True
+New "Load.load_055_2" bus1=n_055 phases=3 pf=1 kW=43.07275398333599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_076_1" bus1=n_076 phases=3 pf=1 kW=6.8733129304224 NumCust=1 kV=20.0 enabled=True
+New "Load.load_076_2" bus1=n_076 phases=3 pf=1 kW=13.7843700842232 NumCust=1 kV=20.0 enabled=True
+New "Load.load_077_1" bus1=n_077 phases=3 pf=1 kW=6.8733129304224 NumCust=1 kV=20.0 enabled=True
+New "Load.load_077_2" bus1=n_077 phases=3 pf=1 kW=13.7843700842232 NumCust=1 kV=20.0 enabled=True
+New "Load.load_078_1" bus1=n_078 phases=3 pf=1 kW=22.452821064827997 NumCust=1 kV=20.0 enabled=True
+New "Load.load_078_2" bus1=n_078 phases=3 pf=1 kW=55.8874727960472 NumCust=1 kV=20.0 enabled=True
+New "Load.load_079_1" bus1=n_079 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_079_2" bus1=n_079 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_079_3" bus1=n_079 phases=3 pf=1 kW=22.452821064827997 NumCust=1 kV=20.0 enabled=True
+New "Load.load_080_1" bus1=n_080 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_080_2" bus1=n_080 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_081_1" bus1=n_081 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_081_2" bus1=n_081 phases=3 pf=1 kW=22.452821064827997 NumCust=1 kV=20.0 enabled=True
+New "Load.load_083_1" bus1=n_083 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_083_2" bus1=n_083 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_083_3" bus1=n_083 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_084_1" bus1=n_084 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_084_2" bus1=n_084 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_085_1" bus1=n_085 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_085_2" bus1=n_085 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_085_3" bus1=n_085 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_086_1" bus1=n_086 phases=3 pf=1 kW=49.866996083889596 NumCust=1 kV=20.0 enabled=True
+New "Load.load_086_2" bus1=n_086 phases=3 pf=1 kW=33.75023031959039 NumCust=1 kV=20.0 enabled=True
+New "Load.load_087_1" bus1=n_087 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_087_2" bus1=n_087 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_087_3" bus1=n_087 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_088" bus1=n_088 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_089" bus1=n_089 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_090" bus1=n_090 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_091" bus1=n_091 phases=3 pf=1 kW=6.8733129304224 NumCust=1 kV=20.0 enabled=True
+New "Load.load_092" bus1=n_092 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_093" bus1=n_093 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_094_1" bus1=n_094 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_094_2" bus1=n_094 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_095" bus1=n_095 phases=3 pf=1 kW=22.452821064827997 NumCust=1 kV=20.0 enabled=True
+New "Load.load_096" bus1=n_096 phases=3 pf=1 kW=6.8733129304224 NumCust=1 kV=20.0 enabled=True
+New "Load.load_097_1" bus1=n_097 phases=3 pf=1 kW=19.8655946175456 NumCust=1 kV=20.0 enabled=True
+New "Load.load_097_2" bus1=n_097 phases=3 pf=1 kW=19.8655946175456 NumCust=1 kV=20.0 enabled=True
+New "Load.load_098_1" bus1=n_098 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_098_2" bus1=n_098 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_098_3" bus1=n_098 phases=3 pf=1 kW=12.5681040356256 NumCust=1 kV=20.0 enabled=True
+New "Load.load_099_1" bus1=n_099 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_099_2" bus1=n_099 phases=3 pf=1 kW=17.4194729555616 NumCust=1 kV=20.0 enabled=True
+New "Load.load_099_3" bus1=n_099 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_099_4" bus1=n_099 phases=3 pf=1 kW=17.4194729555616 NumCust=1 kV=20.0 enabled=True
+New "Load.load_100_1" bus1=n_100 phases=3 pf=1 kW=19.8655946175456 NumCust=1 kV=20.0 enabled=True
+New "Load.load_100_2" bus1=n_100 phases=3 pf=1 kW=31.2175441869984 NumCust=1 kV=20.0 enabled=True
+New "Load.load_101_1" bus1=n_101 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_101_2" bus1=n_101 phases=3 pf=1 kW=22.452821064827997 NumCust=1 kV=20.0 enabled=True
+New "Load.load_102_1" bus1=n_102 phases=3 pf=1 kW=19.8655946175456 NumCust=1 kV=20.0 enabled=True
+New "Load.load_102_2" bus1=n_102 phases=3 pf=1 kW=31.2175441869984 NumCust=1 kV=20.0 enabled=True
+New "Load.load_103_1" bus1=n_103 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Load.load_103_2" bus1=n_103 phases=3 pf=1 kW=14.204842024665599 NumCust=1 kV=20.0 enabled=True
+New "Generator.pv_003" bus1=n_003 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_005" bus1=n_005 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_010" bus1=n_010 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_011" bus1=n_011 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_030" bus1=n_030 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_032" bus1=n_032 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_034" bus1=n_034 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_036" bus1=n_036 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_042" bus1=n_042 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_046" bus1=n_046 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_047" bus1=n_047 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_049" bus1=n_049 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_054" bus1=n_054 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_076" bus1=n_076 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_077" bus1=n_077 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_080" bus1=n_080 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_084" bus1=n_084 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+New "Generator.pv_100" bus1=n_100 phases=3 kvar=0 model=3 kv=20.0 kW=0.0 enabled=True
+Edit "Vsource.source bus1=n_001 basekv=150.0 enabled=True
+New "Generator.stor_039_g1" bus1=n_039 phases=3 kW=6000.0 kv=20.0 kW=3271.9179345360003 enabled=True
+New "Load.stor_039_l1" bus1=n_039 phases=3 pf=1 kW=3523.65552 NumCust=1 kV=20.0 enabled=True
+New "Transformer.trf1" buses=['n_001', 'n_002'] windings=2 conns=[delta, wye, ] %Rs=0 kVAs=[25000.0, 25000.0] %imag=0 XHL=12.01 kVs=[150.0, 20.8] enabled=True

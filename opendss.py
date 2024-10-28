@@ -31,7 +31,8 @@ class OpenDSS:
         # TODO: da sostituire con la variabile di configurazione del percorso di OpenDSS
 
         self.dss.text(f"compile [{filename}]")
-        self.dss.text(f"Save Circuit dir=cartella")     # scrittura della cartella degli elementi
+        # txt =
+        self.dss.text(f"Save Circuit dir=" + mainpath + "/cartella")     # scrittura della cartella degli elementi
 
 
 
@@ -151,8 +152,11 @@ class OpenDSS:
 
             if cat in mc['Generator']:
                 v[el]['par']['eff'] = 1
-                if cat == 'BESS':   # Si ipotizza che la capacità delle batterie sia inizalmente 0
-                    v[el]['par']['cap'] = 0
+                if cat in ['AC-BESS', 'DC-BESS']:   # Si ipotizza che la capacità delle batterie sia inizalmente 0
+                    v[el]['par']['cap'] = 2 * v[el]['par']['P']
+                    v[el]['par']['profile']['curve'] = 0
+                    v[el]['par']['SOC'] = 50
+                    print('BESS', el)
 
     def node_solve(self):
         for el in v:
@@ -448,7 +452,7 @@ class OpenDSS:
 
         # print(v['a_10_ac-load']['lf']['i'])
 
-        self.dss.text(f"Save Circuit dir=cartella")
+        self.dss.text(f"Save Circuit dir=" + mainpath + "/cartella")
 
     # Compilazione di tutti gli elementi in OpenDSS
     def write_all(self, t=None):
@@ -1180,6 +1184,7 @@ class OpenDSS:
             # -----------------------------------------------------------------------------
 
             file = open('cartella/' + mcat + '.dss', 'r')
+            # file = open(mainpath + '/cartella/' + mcat + '.dss', 'r')
 
             # -- ricerca dei parametri dell'elemento selezionato -----------------------------------------------------
             while True:
@@ -1224,7 +1229,7 @@ class OpenDSS:
             if mcat == 'Generator':
                 par['kv'] = [par['kv']]
             elif mcat == 'Load':
-                print(el)
+                # print(el)
                 par['kV'] = [par['kV']]
             elif mcat == 'Vsource':
                 par['basekv'] = [par['basekv']]

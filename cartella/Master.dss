@@ -10,6 +10,7 @@ Redirect Spectrum.dss
 Redirect Line.dss
 Redirect Load.dss
 Redirect Transformer.dss
+Redirect Generator.dss
 MakeBusList
 Redirect BusVoltageBases.dss  ! set voltage bases
 Buscoords BusCoords.dss

@@ -246,19 +246,24 @@ new_par_dict = {
         },
         'par': {
             'P': {
-                'label': 'kW',
+                'label': 'kVA',
                 'unit': 'kW',
             },
             'cosPhi': {
-                'label': 'kW',
+                'label': 'pf',
                 'unit': '',
                 'default': 1,
             },
             'cap': {
                 'label': 'Cap',
-                'unit': 'kVA',
+                'unit': 'kVAh',
                 'default': 1000,
             },
+            # 'SOC': {
+            #     'label': 'SOC',
+            #     'unit': '-',
+            #     'default': 50,
+            # },
             'Vn': {
                 'label': 'kv',
                 'unit': 'kV',
@@ -279,7 +284,7 @@ new_par_dict = {
         },
         'par': {
             'P': {
-                'label': 'kW',
+                'label': 'kVA',
                 'unit': 'kW',
             },
             'Vn': {
@@ -288,8 +293,13 @@ new_par_dict = {
             },
             'cap': {
                 'label': 'Cap',
-                'unit': 'kVA',
+                'unit': 'kWh',
                 'default': 1000,
+            },
+            'SOC': {
+                'label': 'SOC',
+                'unit': '-',
+                'default': 50,
             },
             'others': {
                 'phases': '3',
@@ -911,6 +921,7 @@ el_format = {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
         'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
         'cap': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kWh', 'default': 100},
+        'SOC': {'min': 0, 'max': 100, 'decimal': 2, 'unit': '%', 'default': 50},
     },
     'DC-BESS': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},

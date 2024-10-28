@@ -782,15 +782,15 @@ class Main:
                     # self.dss.full_parse_profil_to_dss_csv(t0=lf_popup.i_start, steps=lf_popup.i_steps)      # csv
                     # self.dss.full_parse_profil_to_dss_polars(t0=lf_popup.i_start, steps=lf_popup.i_steps)   # Polars
                     # self.dss.full_parse_profil_to_dss_numpy(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Numpy
-                    self.dss.full_parse_profil_to_dss_numpy_chatGPT(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # chatGPT
+                    # self.dss.full_parse_profil_to_dss_numpy_chatGPT(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # chatGPT
                     # self.dss.full_parse_profil_to_dss_numpy_chatGPT_nodata(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # chatGPT No Data
 
                     # self.dss.full_parse_profil_to_dss_array(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Array
                     # self.dss.full_parse_profil_to_dss(t0=lf_popup.i_start, steps=lf_popup.i_steps)          # PandaFrame
-                    # for i in range(lf_popup.i_steps):                                                       # Dizionario
-                    #     self.dss.full_parse_to_dss(time=lf_popup.i_start + i)
-                    #     self.dss.solve()
-                    #     self.dss.results_store_all()
+                    for i in range(lf_popup.i_steps):                                                       # Dizionario
+                        self.dss.full_parse_to_dss(time=lf_popup.i_start + i)
+                        self.dss.solve()
+                        self.dss.results_store_all()
                     nts = dt.datetime.now() - ts
 
                     print('Elaboration time:', nts.total_seconds())

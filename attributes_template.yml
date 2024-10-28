@@ -365,8 +365,8 @@ Turbine:
     Vn: 0
     results: {}
 
-Battery:
-  category: 'Battery'
+AC-BESS:
+  category: 'AC-BESS'
   conn: [ ]
   parameters:
     cap_en: 0                                   # Taglia della batteria [kWh]
@@ -401,6 +401,44 @@ Battery:
     In: 0
     Vn: 0
     results: {}
+
+DC-BESS:
+  category: 'DC-BESS'
+  conn: [ ]
+  parameters:
+    cap_en: 0                                   # Taglia della batteria [kWh]
+    efficiency: 1
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      T0: 30
+      alfa: 438000
+      beta: 1
+      Pi_E: 1
+      Pi_Q: 5.5
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    type: battery
+    cap_en: 100
+    init_SOC: 0.5                               # stato di carica iniziale [p.u.]
+    max_SOC: 0.9                                # stato di carica massimo [p.u.]
+    min_SOC: 0.1                                # stato di carica minimo [p.u.]
+    final_SOC: 0.2
+    max_dch: 1
+    max_ch: 1
+    cost_dch: 0.001
+    cost_ch: 00.001
+    eta_dch: 1
+    eta_ch: 1
+  protections:
+    Pn: 0
+    In: 0
+    Vn: 0
+    results: {}
+
 
 AC-Line:
   category: 'AC-Line'

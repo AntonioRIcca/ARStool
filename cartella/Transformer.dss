@@ -1,2 +1,1 @@
-New "Transformer.tra_tr" buses=[bus_n1, bus_n3, ] windings=2 conns=[delta, wye, ] kVAs=[30000, 30000, ] %Rs=[0.375, 0.375, ] %imag=0 kVs=[150, 21.2, ] XHL=9.78 enabled=true
-New "Transformer.trb_tr" buses=[bus_n2, bus_n4, ] windings=2 conns=[delta, wye, ] kVAs=[31250, 31250, ] %Rs=[0.36, 0.36, ] %imag=0 kVs=[150, 20.8, ] XHL=14.59 enabled=true
+New "Transformer.trf1" buses=[n_001, n_002, ] windings=2 conns=[delta, wye, ] %Rs=[0, 0.2, ] %imag=0 kVAs=[25000, 25000, ] XHL=12.01 kVs=[150, 20.8, ] enabled=true

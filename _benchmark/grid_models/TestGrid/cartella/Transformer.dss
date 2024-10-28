@@ -1,1 +1,1 @@
-New "Transformer.trf1" phases=3 windings=2 XHL=12.01 sub=y buses=[n_001, n_002, ] conns=[wye, wye, ] kVs=[150, 20.8, ] kVAs=[25000, 25000, ] taps=[1, 1, ] wdg=1 %R=0.225 RdcOhms=0.57375 wdg=2 %R=0.225 RdcOhms=0.01103232 NumTaps=20 MaxTap=1.1 MinTap=0.9
+New "Transformer.trf1" buses=[n_001, n_002, ] windings=2 conns=[delta, wye, ] %Rs=[0, 0.2, ] %imag=0 kVAs=[25000, 25000, ] XHL=12.01 kVs=[150, 20.8, ] enabled=true
