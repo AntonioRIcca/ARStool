@@ -18,6 +18,7 @@ import matplotlib
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 
+import variables
 from variables import *
 
 
@@ -42,9 +43,16 @@ class ElementProperties(QMainWindow):
         self.old_buses = copy.deepcopy(v[elem]['top']['conn'])
         self.buses = copy.deepcopy(v[elem]['top']['conn'])
 
-        self.ui.relWgt.setMaximumHeight(20)
+        # self.ui.relWgt.setMaximumHeight(20)
+        self.__getattribute__(variables.visualpar + '_show')()
+
+
+        self.ui.lfPls.clicked.connect(self.lf_show)
+        self.ui.relPls.clicked.connect(self.rel_show)
 
         self.fillLfPar()
+
+        self.fillRelPar()
         # if v[self.elem]['lf']['p']:
         #     if 0 in v[self.elem]['lf']['p'].keys():
         #         if
@@ -52,6 +60,51 @@ class ElementProperties(QMainWindow):
         self.ui.lfResMainWgt.setVisible(fn['lf'])
         if fn['lf']:
             self.fillLfRes()
+
+    def lf_show(self):
+        self.ui.lfWgt.setMaximumHeight(1500)
+        self.ui.relWgt.setMaximumHeight(20)
+        variables.visualpar = 'lf'
+
+    def rel_show(self):
+        self.ui.lfWgt.setMaximumHeight(20)
+        self.ui.relWgt.setMaximumHeight(1500)
+        variables.visualpar = 'rel'
+
+    def fillRelPar(self):
+        # for i in range(self.ui.relParGL.count()):
+        #     self.ui.relParGL.itemAt(i).widget().deleteLater()
+
+        # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
+        print(self.cat)
+        if self.cat != 'ExternalGrid':
+            for par in ['alfa', 'beta', 'Pi_E', 'Pi_Q']:
+                self.ui.__getattribute__(par + 'Dsb').setValue(v[self.elem]['rel']['par'][par])
+        else:
+            self.ui.relWgt.setVisible(False)
+
+            #
+            # self.__setattr__(par + 'Lbl', QLabel(par))
+            # self.__setattr__(par + 'Dsb', QDoubleSpinBox(None))
+            # self.__setattr__(par + 'UnitLbl', QLabel(el_format[self.cat][par]['unit']))
+            #
+            # self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Lbl'), line, 0)
+            # self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Dsb'), line, 1)
+            # self.ui.lfParGL.addWidget(self.__getattribute__(par + 'UnitLbl'), line, 2)
+            # i += 1
+            #
+            # # formattazione e popolazione dei campi
+            # self.dsb_format(self.__getattribute__(par + 'Dsb'), minimum=el_format[self.cat][par]['min'],
+            #                 maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
+            # self.__getattribute__(par + 'Lbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+            #
+            # if isinstance(v[self.elem]['par'][par], list):
+            #     self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par][0])
+            # else:
+            #     self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par])
+            #
+            # line += 1
+        # -------------------------------------------------------------------------------------------------------------
 
     def fillLfPar(self):
         for i in range(self.ui.lfParGL.count()):

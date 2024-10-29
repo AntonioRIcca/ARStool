@@ -27,6 +27,9 @@ for i in [1, 3, 5]:
     print(dss.monitors.channel(i))
 # dss.monitors.show()
 
+print(dss.meters.all_pce_in_zone)
+print(dss.meters.all_branches_in_zone)
+
 
 
 # Dato il nome dell'elemento (e.g. "transformer.WPG_TR"), vengono definite:

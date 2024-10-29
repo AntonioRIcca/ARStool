@@ -15,7 +15,7 @@ grid = {
         'end': None,
         'exist': False,
     },
-    'lf':{
+    'lf': {
         'start': None,
         'end': None,
         'points': None,
@@ -60,6 +60,7 @@ fn = {
     'optstor': False,
 }
 
+
 fn_en = {
     'lf': True,
     # 'anom': True,
@@ -68,6 +69,10 @@ fn_en = {
     # 'gm': True,
     # 'onr': True,
 }
+
+
+visualpar = 'lf'
+
 
 v = dict()
 vdss = dict()

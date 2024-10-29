@@ -42,23 +42,24 @@ class OpenDSS:
         # - il nome dell'elemento (in DSS è la parte dopo il punto e.g. "WPG_TR")
         for item in self.dss.circuit.elements_names:
             [tag, el] = item.split('.')
-            if tag == 'Vsource':
-                cat = 'ExternalGrid'
-            else:
-                rad = el.split('_')[0].lower()
-                des = item.split('_')[len(item.split('_')) - 1].lower()
-                if des in dsstag[tag.lower()]:
-                    cat = dsstag[tag.lower()][des]
-                elif rad in dsstag[tag.lower()]:
-                    cat = dsstag[tag.lower()][rad]
+            if tag.lower() != 'energymeter':
+                if tag == 'Vsource':
+                    cat = 'ExternalGrid'
                 else:
-                    cat = dsstag[tag.lower()]['default']
+                    rad = el.split('_')[0].lower()
+                    des = item.split('_')[len(item.split('_')) - 1].lower()
+                    if des in dsstag[tag.lower()]:
+                        cat = dsstag[tag.lower()][des]
+                    elif rad in dsstag[tag.lower()]:
+                        cat = dsstag[tag.lower()][rad]
+                    else:
+                        cat = dsstag[tag.lower()]['default']
 
-            # viene inizializzato il sotto-dizionario dell'elemento
-            dict_initialize(el, cat)
+                # viene inizializzato il sotto-dizionario dell'elemento
+                dict_initialize(el, cat)
 
-            # self.read(el)           # vengono letti i parametri e la topologia dell'elemento
-            self.read_new(el)       # lettura di parametri e topologia degli elementi dalla cartella degli elementi
+                # self.read(el)           # vengono letti i parametri e la topologia dell'elemento
+                self.read_new(el)       # lettura di parametri e topologia degli elementi dalla cartella degli elementi
         self.node_solve()           # risoluzione delle tensioni dei nodi non definiti
 
         # In OpenDSS non è possibile ricavare la tensione delle busbar non sottese a trasformatori,
@@ -71,10 +72,25 @@ class OpenDSS:
     #     with open('CityArea.yml', 'w') as file:
     #         yaml.dump(v, file)
     #         file.close()
+    #     print('meters', self.dss.meters.names)
+
+        # -- Metodo per definire le zone -----------------------------------------------------------------------
+        if self.dss.meters.names != ['NONE']:
+            for i in range(len(self.dss.meters.names)):
+                meter = self.dss.meters.names[i]
+                print(meter)
+                self.dss.meters.name = meter
+                print(self.dss.meters.all_pce_in_zone)
+                print(self.dss.meters.all_branches_in_zone)
+                print()
+
 
     def read_new(self, el):
         mcat = mcat_find(el)
         cat = v[el]['category']
+
+        if cat == 'AC-PV':
+            print('ACPV')
 
         if mcat not in mc['Node']:
             self.dss.circuit.set_active_element(mcat + '.' + el)  # viene richiamato l'elemento in OpenDSS
@@ -198,7 +214,7 @@ class OpenDSS:
         for p in new_par_dict[cat]['par'].keys() - ['others']:
             if p == 'Vn' and mcat != 'Transformer':     # La tensione è memorizzata come array anche se è singola
                 par = par + new_par_dict[cat]['par'][p]['label'] + '=' + str(v[el]['par'][p][0]) + ' '
-            elif p =='P':
+            elif p == 'P':
                 if v[el]['par']['profile']['name']:
                     f = v[el]['par']['profile']['curve'][time]
                 else:
@@ -1183,7 +1199,7 @@ class OpenDSS:
                 params = params + new_par_dict[cat]['top'][p]['label']
             # -----------------------------------------------------------------------------
 
-            file = open('cartella/' + mcat + '.dss', 'r')
+            file = open(mainpath + '/cartella/' + mcat + '.dss', 'r')
             # file = open(mainpath + '/cartella/' + mcat + '.dss', 'r')
 
             # -- ricerca dei parametri dell'elemento selezionato -----------------------------------------------------

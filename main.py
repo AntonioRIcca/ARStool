@@ -459,8 +459,8 @@ class Main:
         self.ui.rightMenuPages.addWidget(self.elemPropWgt.ui.propertiesWgt)
 
         self.ui.rightMenuPages.setCurrentIndex(self.ui.rightMenuPages.count() - 1)
-        self.elemPropWgt.ui.lfPls.clicked.connect(self.myaction1)
-        self.elemPropWgt.ui.relPls.clicked.connect(self.myaction2)
+        # self.elemPropWgt.ui.lfPls.clicked.connect(self.myaction1)
+        # self.elemPropWgt.ui.relPls.clicked.connect(self.myaction2)
 
         self.elemPropWgt.ui.cancelPLS.clicked.connect(self.ui.rightMenuContainer.collapseMenu)
 
@@ -503,16 +503,16 @@ class Main:
                 closed = True
 
 
-    def myaction1(self):
-        # self.ui.relWgt.collapseMenu()
-        # self.ui.lfWgt.expandMenu()
-        self.elemPropWgt.ui.lfWgt.setMaximumHeight(1500)
-        self.elemPropWgt.ui.relWgt.setMaximumHeight(20)
-
-    def myaction2(self):
-
-        self.elemPropWgt.ui.relWgt.setMaximumHeight(1500)
-        self.elemPropWgt.ui.lfWgt.setMaximumHeight(20)
+    # def myaction1(self):
+    #     # self.ui.relWgt.collapseMenu()
+    #     # self.ui.lfWgt.expandMenu()
+    #     self.elemPropWgt.ui.lfWgt.setMaximumHeight(1500)
+    #     self.elemPropWgt.ui.relWgt.setMaximumHeight(20)
+    #
+    # def myaction2(self):
+    #
+    #     self.elemPropWgt.ui.relWgt.setMaximumHeight(1500)
+    #     self.elemPropWgt.ui.lfWgt.setMaximumHeight(20)
 
     def profile_draw(self, l=180, h=120):
         font = {
@@ -799,6 +799,8 @@ class Main:
                     self.dss.full_parse_to_dss(time=lf_popup.i_start)
                     self.dss.solve()
                     self.dss.results_store_all()
+                    self.loadflow_results_refresh()
+
                     # self.loadflow_results_init()
                     # self.lf_WGT.ui.lfres_center_WGT.setVisible(lf_popup.profile)
                 # self.loadflow_results_refresh(t=0)
@@ -811,7 +813,7 @@ class Main:
             self.loadflow_results_init()
             self.lf_WGT.ui.lfres_center_WGT.setVisible(False)
 
-            self.loadflow_results_refresh(t=0)
+        self.loadflow_results_refresh(t=0)
 
         # if s:
         # self.dss.full_parse_to_dss(is_profile=True, time=time)
@@ -827,6 +829,7 @@ class Main:
         self.loadflow_results(t=t)
         self.loadflow_table_compile()
         self.barchart()
+        pass
 
     def loadflow_results(self, t=0):
         self.p_loads, self.q_loads = 0, 0
@@ -868,7 +871,11 @@ class Main:
         self.p_loss = self.p_eg + self.p_gen - self.p_loads - self.p_bess
         self.q_loss = self.q_eg + self.q_gen - self.q_loads - self.q_bess
 
+        # TODO: Da rivedere come sommare gli elementi negativi nel diagramma a barre successivo
+
+
     def loadflow_results_init(self):
+        # pasqu
         self.lf_WGT = LFrWGT()
         self.home2_WGT = self.lf_WGT.ui.lfres_WGT
 

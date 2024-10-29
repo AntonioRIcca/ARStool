@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'test_elementePropertiesynzuur.ui'
+## Form generated from reading UI file 'test_elementePropertiesabkaIW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -268,64 +268,90 @@ class Ui_Form(object):
 
         self.relVL.addWidget(self.relParLbl)
 
-        self.reParWgt = QWidget(self.relWgt)
-        self.reParWgt.setObjectName(u"reParWgt")
-        self.reParWgt.setStyleSheet(u"")
-        self.relParGL = QGridLayout(self.reParWgt)
+        self.relParWgt = QWidget(self.relWgt)
+        self.relParWgt.setObjectName(u"relParWgt")
+        self.relParWgt.setStyleSheet(u"")
+        self.relParGL = QGridLayout(self.relParWgt)
         self.relParGL.setObjectName(u"relParGL")
-        self.label_7 = QLabel(self.reParWgt)
-        self.label_7.setObjectName(u"label_7")
+        self.betaDsb = QDoubleSpinBox(self.relParWgt)
+        self.betaDsb.setObjectName(u"betaDsb")
+        self.betaDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.betaDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.betaDsb.setDecimals(3)
+        self.betaDsb.setMaximum(1.000000000000000)
+        self.betaDsb.setSingleStep(0.100000000000000)
 
-        self.relParGL.addWidget(self.label_7, 0, 0, 1, 1)
+        self.relParGL.addWidget(self.betaDsb, 1, 1, 1, 1)
 
-        self.doubleSpinBox_4 = QDoubleSpinBox(self.reParWgt)
-        self.doubleSpinBox_4.setObjectName(u"doubleSpinBox_4")
-        self.doubleSpinBox_4.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_4.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.betaUnitLbl = QLabel(self.relParWgt)
+        self.betaUnitLbl.setObjectName(u"betaUnitLbl")
 
-        self.relParGL.addWidget(self.doubleSpinBox_4, 0, 1, 1, 1)
+        self.relParGL.addWidget(self.betaUnitLbl, 1, 2, 1, 1)
 
-        self.label_8 = QLabel(self.reParWgt)
-        self.label_8.setObjectName(u"label_8")
+        self.alfaLbl = QLabel(self.relParWgt)
+        self.alfaLbl.setObjectName(u"alfaLbl")
 
-        self.relParGL.addWidget(self.label_8, 3, 2, 1, 1)
+        self.relParGL.addWidget(self.alfaLbl, 0, 0, 1, 1)
 
-        self.doubleSpinBox_5 = QDoubleSpinBox(self.reParWgt)
-        self.doubleSpinBox_5.setObjectName(u"doubleSpinBox_5")
-        self.doubleSpinBox_5.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_5.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.alfaDsb = QDoubleSpinBox(self.relParWgt)
+        self.alfaDsb.setObjectName(u"alfaDsb")
+        self.alfaDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.alfaDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.alfaDsb.setDecimals(0)
+        self.alfaDsb.setMaximum(100000000.000000000000000)
 
-        self.relParGL.addWidget(self.doubleSpinBox_5, 3, 1, 1, 1)
+        self.relParGL.addWidget(self.alfaDsb, 0, 1, 1, 1)
 
-        self.doubleSpinBox_6 = QDoubleSpinBox(self.reParWgt)
-        self.doubleSpinBox_6.setObjectName(u"doubleSpinBox_6")
-        self.doubleSpinBox_6.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_6.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.Pi_EUnitLbl = QLabel(self.relParWgt)
+        self.Pi_EUnitLbl.setObjectName(u"Pi_EUnitLbl")
 
-        self.relParGL.addWidget(self.doubleSpinBox_6, 1, 1, 1, 1)
+        self.relParGL.addWidget(self.Pi_EUnitLbl, 3, 2, 1, 1)
 
-        self.label_9 = QLabel(self.reParWgt)
-        self.label_9.setObjectName(u"label_9")
+        self.betaLbl = QLabel(self.relParWgt)
+        self.betaLbl.setObjectName(u"betaLbl")
 
-        self.relParGL.addWidget(self.label_9, 3, 0, 1, 1)
+        self.relParGL.addWidget(self.betaLbl, 1, 0, 1, 1)
 
-        self.label_10 = QLabel(self.reParWgt)
-        self.label_10.setObjectName(u"label_10")
+        self.Pi_ELBL = QLabel(self.relParWgt)
+        self.Pi_ELBL.setObjectName(u"Pi_ELBL")
 
-        self.relParGL.addWidget(self.label_10, 1, 2, 1, 1)
+        self.relParGL.addWidget(self.Pi_ELBL, 3, 0, 1, 1)
 
-        self.label_11 = QLabel(self.reParWgt)
-        self.label_11.setObjectName(u"label_11")
+        self.alfaUnitLbl = QLabel(self.relParWgt)
+        self.alfaUnitLbl.setObjectName(u"alfaUnitLbl")
 
-        self.relParGL.addWidget(self.label_11, 1, 0, 1, 1)
+        self.relParGL.addWidget(self.alfaUnitLbl, 0, 2, 1, 1)
 
-        self.label_12 = QLabel(self.reParWgt)
-        self.label_12.setObjectName(u"label_12")
+        self.Pi_EDsb = QDoubleSpinBox(self.relParWgt)
+        self.Pi_EDsb.setObjectName(u"Pi_EDsb")
+        self.Pi_EDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.Pi_EDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.Pi_EDsb.setMaximum(999.990000000000009)
+        self.Pi_EDsb.setSingleStep(0.100000000000000)
 
-        self.relParGL.addWidget(self.label_12, 0, 2, 1, 1)
+        self.relParGL.addWidget(self.Pi_EDsb, 3, 1, 1, 1)
+
+        self.Pi_QLbl = QLabel(self.relParWgt)
+        self.Pi_QLbl.setObjectName(u"Pi_QLbl")
+
+        self.relParGL.addWidget(self.Pi_QLbl, 4, 0, 1, 1)
+
+        self.Pi_QDsb = QDoubleSpinBox(self.relParWgt)
+        self.Pi_QDsb.setObjectName(u"Pi_QDsb")
+        self.Pi_QDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.Pi_QDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.Pi_QDsb.setMaximum(999.990000000000009)
+        self.Pi_QDsb.setSingleStep(0.100000000000000)
+
+        self.relParGL.addWidget(self.Pi_QDsb, 4, 1, 1, 1)
+
+        self.Pi_QUnitLbl = QLabel(self.relParWgt)
+        self.Pi_QUnitLbl.setObjectName(u"Pi_QUnitLbl")
+
+        self.relParGL.addWidget(self.Pi_QUnitLbl, 4, 2, 1, 1)
 
 
-        self.relVL.addWidget(self.reParWgt)
+        self.relVL.addWidget(self.relParWgt)
 
         self.relLine = QFrame(self.relWgt)
         self.relLine.setObjectName(u"relLine")
@@ -401,7 +427,7 @@ class Ui_Form(object):
         self.relVL.addWidget(self.relResWgt)
 
         self.relParLbl.raise_()
-        self.reParWgt.raise_()
+        self.relParWgt.raise_()
         self.relResLbl.raise_()
         self.relResWgt.raise_()
         self.relLine.raise_()
@@ -455,12 +481,14 @@ class Ui_Form(object):
         self.lfResLbl.setText(QCoreApplication.translate("Form", u"Results", None))
         self.relPls.setText(QCoreApplication.translate("Form", u"Reliability", None))
         self.relParLbl.setText(QCoreApplication.translate("Form", u"Parameters", None))
-        self.label_7.setText(QCoreApplication.translate("Form", u"Power", None))
-        self.label_8.setText(QCoreApplication.translate("Form", u"unit", None))
-        self.label_9.setText(QCoreApplication.translate("Form", u"Power", None))
-        self.label_10.setText(QCoreApplication.translate("Form", u"unit", None))
-        self.label_11.setText(QCoreApplication.translate("Form", u"Power", None))
-        self.label_12.setText(QCoreApplication.translate("Form", u"unit", None))
+        self.betaUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
+        self.alfaLbl.setText(QCoreApplication.translate("Form", u"alfa", None))
+        self.Pi_EUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
+        self.betaLbl.setText(QCoreApplication.translate("Form", u"beta", None))
+        self.Pi_ELBL.setText(QCoreApplication.translate("Form", u"Pi_E", None))
+        self.alfaUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
+        self.Pi_QLbl.setText(QCoreApplication.translate("Form", u"Pi_Q", None))
+        self.Pi_QUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
         self.relResLbl.setText(QCoreApplication.translate("Form", u"Results", None))
         self.label_25.setText(QCoreApplication.translate("Form", u"Power", None))
         self.label_27.setText(QCoreApplication.translate("Form", u"Power", None))

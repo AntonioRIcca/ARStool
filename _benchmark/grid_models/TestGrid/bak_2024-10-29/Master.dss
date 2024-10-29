@@ -14,7 +14,22 @@ Redirect Loads.dss
 Redirect PV.dss
 Redirect Storage.dss
 
+
+
 Set voltagebases=[150.000000  20.000000]
 Calcvoltagebases 
 
+BusCoords XY.dss 
+
+!Plot type=circuit quantity=voltage max=0 dots=y labels=y subs=y c1=navy c2=green c3=red 
+
+!Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_Monitor.dss 
+
+!Set mode=yearly stepsize=1.000000h number=8760.000000 
+
+!New energymeter.EM_015 element=line.L_002-015
+!New energymeter.EM_008 element=line.L_022-008
+
+
 Solve 
+

@@ -1,0 +1,13 @@
+New Generator.Stor_003_AC-BESS bus1=N_003 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=3000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_010_AC-BESS bus1=N_010 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=1000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_011_AC-BESS bus1=N_011 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=2000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_032_AC-BESS bus1=N_032 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=1747 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_034_AC-BESS bus1=N_034 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=3000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_036_AC-BESS bus1=N_036 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=1000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_042_AC-BESS bus1=N_042 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=1000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_046_AC-BESS bus1=N_046 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=1000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_049_AC-BESS bus1=N_049 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=1000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_076_AC-BESS bus1=N_076 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=1748 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_077_AC-BESS bus1=N_077 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=2000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.Stor_080_AC-BESS bus1=N_080 phases=3 model=1 kw=0 pf=1 kv=20.000000 kva=1000 conn=wye vmaxpu=1.2 vminpu=0.8
+

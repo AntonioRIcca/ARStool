@@ -1,5 +1,5 @@
-New Generator.PV_003 bus1=N_003 phases=3 model=1 kW=3000.000000 kvar=0.000000 kv=20.000000 conn=wye vmaxpu=1.2 vminpu=0.8 
-New Generator.PV_005 bus1=N_005 phases=3 model=1 kW=3000.000000 kvar=0.000000 kv=20.000000 conn=wye vmaxpu=1.2 vminpu=0.8
+New Generator.PV_003 bus1=N_003 phases=3 model=1 kw=3000.000000 kvar=0.000000 kv=20.000000 conn=wye vmaxpu=1.2 vminpu=0.8 
+New Generator.PV_005 bus1=N_005 phases=3 model=1 kw=3000.000000 kvar=0.000000 kv=20.000000 conn=wye vmaxpu=1.2 vminpu=0.8
 New Generator.PV_010 bus1=N_010 phases=3 model=1 kw=998.000000 kvar=0.000000 kv=20.000000 conn=wye vmaxpu=1.2 vminpu=0.8
 New Generator.PV_011 bus1=N_011 phases=3 model=1 kw=2000.000000 kvar=0.000000 kv=20.000000 conn=wye vmaxpu=1.2 vminpu=0.8
 New Generator.PV_030 bus1=N_030 phases=3 model=1 kw=5000.000000 kvar=0.000000 kv=20.000000 conn=wye vmaxpu=1.2 vminpu=0.8
