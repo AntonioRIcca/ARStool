@@ -530,7 +530,6 @@ class ElementProperties(QMainWindow):
                             minimum=-9999999.999, maximum=9999999.999)
             self.__getattribute__(par + 'ResLbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
-
             if i in [0, 1]:
                 self.__getattribute__(par + 'ResDsb').setValue(v[self.elem]['lf'][tag][i][0])
             else:
@@ -543,7 +542,7 @@ class ElementProperties(QMainWindow):
         pass
 
     # formattazione dei DoubleSPinBox
-    def dsb_format(self, item, minimum=0, maximum=9999.99, decimals=2, step=0.1):
+    def dsb_format(self, item, minimum=0.00, maximum=9999.99, decimals=2, step=0.1):
         item.setMinimum(minimum)
         item.setMaximum(maximum)
         item.setDecimals(decimals)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'test_elementePropertiesabkaIW.ui'
+## Form generated from reading UI file 'test_elementePropertiessqfntS.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -278,7 +278,8 @@ class Ui_Form(object):
         self.betaDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.betaDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.betaDsb.setDecimals(3)
-        self.betaDsb.setMaximum(1.000000000000000)
+        self.betaDsb.setMinimum(1.000000000000000)
+        self.betaDsb.setMaximum(10.000000000000000)
         self.betaDsb.setSingleStep(0.100000000000000)
 
         self.relParGL.addWidget(self.betaDsb, 1, 1, 1, 1)
@@ -297,8 +298,8 @@ class Ui_Form(object):
         self.alfaDsb.setObjectName(u"alfaDsb")
         self.alfaDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.alfaDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.alfaDsb.setDecimals(0)
-        self.alfaDsb.setMaximum(100000000.000000000000000)
+        self.alfaDsb.setDecimals(1)
+        self.alfaDsb.setMaximum(999999.900000000023283)
 
         self.relParGL.addWidget(self.alfaDsb, 0, 1, 1, 1)
 
@@ -326,7 +327,8 @@ class Ui_Form(object):
         self.Pi_EDsb.setObjectName(u"Pi_EDsb")
         self.Pi_EDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.Pi_EDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.Pi_EDsb.setMaximum(999.990000000000009)
+        self.Pi_EDsb.setDecimals(3)
+        self.Pi_EDsb.setMaximum(50.000000000000000)
         self.Pi_EDsb.setSingleStep(0.100000000000000)
 
         self.relParGL.addWidget(self.Pi_EDsb, 3, 1, 1, 1)
@@ -340,7 +342,8 @@ class Ui_Form(object):
         self.Pi_QDsb.setObjectName(u"Pi_QDsb")
         self.Pi_QDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.Pi_QDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.Pi_QDsb.setMaximum(999.990000000000009)
+        self.Pi_QDsb.setDecimals(3)
+        self.Pi_QDsb.setMaximum(20.000000000000000)
         self.Pi_QDsb.setSingleStep(0.100000000000000)
 
         self.relParGL.addWidget(self.Pi_QDsb, 4, 1, 1, 1)
@@ -372,20 +375,44 @@ class Ui_Form(object):
         self.relResWgt.setObjectName(u"relResWgt")
         self.relResGL = QGridLayout(self.relResWgt)
         self.relResGL.setObjectName(u"relResGL")
-        self.label_25 = QLabel(self.relResWgt)
-        self.label_25.setObjectName(u"label_25")
-
-        self.relResGL.addWidget(self.label_25, 3, 0, 1, 1)
-
-        self.label_27 = QLabel(self.relResWgt)
-        self.label_27.setObjectName(u"label_27")
-
-        self.relResGL.addWidget(self.label_27, 1, 0, 1, 1)
-
+        self.relResGL.setContentsMargins(0, -1, 0, -1)
         self.label_26 = QLabel(self.relResWgt)
         self.label_26.setObjectName(u"label_26")
 
         self.relResGL.addWidget(self.label_26, 1, 2, 1, 1)
+
+        self.doubleSpinBox_11 = QDoubleSpinBox(self.relResWgt)
+        self.doubleSpinBox_11.setObjectName(u"doubleSpinBox_11")
+        self.doubleSpinBox_11.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.doubleSpinBox_11.setReadOnly(True)
+        self.doubleSpinBox_11.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.doubleSpinBox_11.setDecimals(1)
+        self.doubleSpinBox_11.setMaximum(999999.900000000023283)
+
+        self.relResGL.addWidget(self.doubleSpinBox_11, 3, 1, 1, 1)
+
+        self.doubleSpinBox_10 = QDoubleSpinBox(self.relResWgt)
+        self.doubleSpinBox_10.setObjectName(u"doubleSpinBox_10")
+        self.doubleSpinBox_10.setAcceptDrops(True)
+        self.doubleSpinBox_10.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.doubleSpinBox_10.setReadOnly(True)
+        self.doubleSpinBox_10.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.doubleSpinBox_10.setDecimals(4)
+        self.doubleSpinBox_10.setMaximum(1000.000000000000000)
+        self.doubleSpinBox_10.setValue(0.000000000000000)
+
+        self.relResGL.addWidget(self.doubleSpinBox_10, 0, 1, 1, 1)
+
+        self.label_24 = QLabel(self.relResWgt)
+        self.label_24.setObjectName(u"label_24")
+
+        self.relResGL.addWidget(self.label_24, 3, 2, 1, 1)
+
+        self.label_27 = QLabel(self.relResWgt)
+        self.label_27.setObjectName(u"label_27")
+        self.label_27.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.relResGL.addWidget(self.label_27, 1, 0, 1, 1)
 
         self.label_28 = QLabel(self.relResWgt)
         self.label_28.setObjectName(u"label_28")
@@ -394,34 +421,42 @@ class Ui_Form(object):
 
         self.label_23 = QLabel(self.relResWgt)
         self.label_23.setObjectName(u"label_23")
+        self.label_23.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.relResGL.addWidget(self.label_23, 0, 0, 1, 1)
-
-        self.label_24 = QLabel(self.relResWgt)
-        self.label_24.setObjectName(u"label_24")
-
-        self.relResGL.addWidget(self.label_24, 3, 2, 1, 1)
-
-        self.doubleSpinBox_11 = QDoubleSpinBox(self.relResWgt)
-        self.doubleSpinBox_11.setObjectName(u"doubleSpinBox_11")
-        self.doubleSpinBox_11.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_11.setButtonSymbols(QAbstractSpinBox.NoButtons)
-
-        self.relResGL.addWidget(self.doubleSpinBox_11, 3, 1, 1, 1)
-
-        self.doubleSpinBox_10 = QDoubleSpinBox(self.relResWgt)
-        self.doubleSpinBox_10.setObjectName(u"doubleSpinBox_10")
-        self.doubleSpinBox_10.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_10.setButtonSymbols(QAbstractSpinBox.NoButtons)
-
-        self.relResGL.addWidget(self.doubleSpinBox_10, 0, 1, 1, 1)
 
         self.doubleSpinBox_12 = QDoubleSpinBox(self.relResWgt)
         self.doubleSpinBox_12.setObjectName(u"doubleSpinBox_12")
         self.doubleSpinBox_12.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.doubleSpinBox_12.setReadOnly(True)
         self.doubleSpinBox_12.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.doubleSpinBox_12.setDecimals(5)
+        self.doubleSpinBox_12.setMinimum(1.000000000000000)
+        self.doubleSpinBox_12.setMaximum(10.000000000000000)
+        self.doubleSpinBox_12.setSingleStep(0.100000000000000)
 
         self.relResGL.addWidget(self.doubleSpinBox_12, 1, 1, 1, 1)
+
+        self.label_25 = QLabel(self.relResWgt)
+        self.label_25.setObjectName(u"label_25")
+        self.label_25.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.relResGL.addWidget(self.label_25, 3, 0, 1, 1)
+
+        self.doubleSpinBox_13 = QDoubleSpinBox(self.relResWgt)
+        self.doubleSpinBox_13.setObjectName(u"doubleSpinBox_13")
+        self.doubleSpinBox_13.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.doubleSpinBox_13.setReadOnly(True)
+        self.doubleSpinBox_13.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.doubleSpinBox_13.setDecimals(5)
+        self.doubleSpinBox_13.setMaximum(99.000000000000000)
+
+        self.relResGL.addWidget(self.doubleSpinBox_13, 4, 1, 1, 1)
+
+        self.label_29 = QLabel(self.relResWgt)
+        self.label_29.setObjectName(u"label_29")
+
+        self.relResGL.addWidget(self.label_29, 4, 2, 1, 1)
 
 
         self.relVL.addWidget(self.relResWgt)
@@ -486,16 +521,35 @@ class Ui_Form(object):
         self.Pi_EUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
         self.betaLbl.setText(QCoreApplication.translate("Form", u"beta", None))
         self.Pi_ELBL.setText(QCoreApplication.translate("Form", u"Pi_E", None))
-        self.alfaUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
+        self.alfaUnitLbl.setText(QCoreApplication.translate("Form", u"h", None))
+#if QT_CONFIG(tooltip)
+        self.Pi_EDsb.setToolTip(QCoreApplication.translate("Form", u"Fattore di Stress Ambientale ", None))
+#endif // QT_CONFIG(tooltip)
         self.Pi_QLbl.setText(QCoreApplication.translate("Form", u"Pi_Q", None))
+#if QT_CONFIG(tooltip)
+        self.Pi_QDsb.setToolTip(QCoreApplication.translate("Form", u"Fattore di Qialit\u00e0", None))
+#endif // QT_CONFIG(tooltip)
         self.Pi_QUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
         self.relResLbl.setText(QCoreApplication.translate("Form", u"Results", None))
-        self.label_25.setText(QCoreApplication.translate("Form", u"Power", None))
-        self.label_27.setText(QCoreApplication.translate("Form", u"Power", None))
-        self.label_26.setText(QCoreApplication.translate("Form", u"unit", None))
-        self.label_28.setText(QCoreApplication.translate("Form", u"unit", None))
-        self.label_23.setText(QCoreApplication.translate("Form", u"Power", None))
-        self.label_24.setText(QCoreApplication.translate("Form", u"unit", None))
+        self.label_26.setText(QCoreApplication.translate("Form", u"-", None))
+#if QT_CONFIG(tooltip)
+        self.doubleSpinBox_11.setToolTip(QCoreApplication.translate("Form", u"Tempo medio tra i guasti", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.doubleSpinBox_10.setToolTip(QCoreApplication.translate("Form", u"Tasso di guasto", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_24.setText(QCoreApplication.translate("Form", u"h", None))
+        self.label_27.setText(QCoreApplication.translate("Form", u"R", None))
+        self.label_28.setText(QCoreApplication.translate("Form", u"f/h", None))
+        self.label_23.setText(QCoreApplication.translate("Form", u"lambda", None))
+#if QT_CONFIG(tooltip)
+        self.doubleSpinBox_12.setToolTip(QCoreApplication.translate("Form", u"Affidabilit\u00e0", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_25.setText(QCoreApplication.translate("Form", u"MTBF", None))
+#if QT_CONFIG(tooltip)
+        self.doubleSpinBox_13.setToolTip(QCoreApplication.translate("Form", u"Tempo medio tra i guasti", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_29.setText(QCoreApplication.translate("Form", u"yr", None))
         self.savePLS.setText(QCoreApplication.translate("Form", u"Salva", None))
         self.cancelPLS.setText(QCoreApplication.translate("Form", u"Annulla", None))
     # retranslateUi

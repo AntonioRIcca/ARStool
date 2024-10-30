@@ -16,15 +16,3 @@ New "Generator.pv_077" bus1=n_077 phases=3 kvar=0 model=3 kv=20 kW=0 enabled=tru
 New "Generator.pv_080" bus1=n_080 phases=3 kvar=0 model=3 kv=20 kW=0 enabled=true
 New "Generator.pv_084" bus1=n_084 phases=3 kvar=0 model=3 kv=20 kW=0 enabled=true
 New "Generator.pv_100" bus1=n_100 phases=3 kvar=0 model=3 kv=20 kW=0 enabled=true
-New "Generator.stor_003_ac-bess" bus1=n_003 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_010_ac-bess" bus1=n_010 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_011_ac-bess" bus1=n_011 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_032_ac-bess" bus1=n_032 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_034_ac-bess" bus1=n_034 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_036_ac-bess" bus1=n_036 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_042_ac-bess" bus1=n_042 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_046_ac-bess" bus1=n_046 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_049_ac-bess" bus1=n_049 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_076_ac-bess" bus1=n_076 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_077_ac-bess" bus1=n_077 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true
-New "Generator.stor_080_ac-bess" bus1=n_080 phases=3 kvar=0 model=3 kv=20 kVA=0 pf=1 enabled=true

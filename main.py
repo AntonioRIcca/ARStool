@@ -684,12 +684,12 @@ class Main:
                 if self.__getattribute__('p_' + p[i]) >= 0:
                     self.__getattribute__('set' + str(i)).append([self.__getattribute__('p_' + p[i]), 0])
                 else:
-                    self.__getattribute__('set' + str(i)).append([0, self.__getattribute__('p_' + p[i])])
+                    self.__getattribute__('set' + str(i)).append([0, - self.__getattribute__('p_' + p[i])])
             else:
                 if self.__getattribute__('p_' + p[i]) >= 0:
                     self.__getattribute__('set' + str(i)).append([0, self.__getattribute__('p_' + p[i])])
                 else:
-                    self.__getattribute__('set' + str(i)).append([self.__getattribute__('p_' + p[i]), 0])
+                    self.__getattribute__('set' + str(i)).append([- self.__getattribute__('p_' + p[i]), 0])
 
             series.append(self.__getattribute__('set' + str(i)))
 
@@ -870,9 +870,6 @@ class Main:
         self.p_eg, self.q_eg = -v['source']['lf']['p'][t], -v['source']['lf']['q'][t]
         self.p_loss = self.p_eg + self.p_gen - self.p_loads - self.p_bess
         self.q_loss = self.q_eg + self.q_gen - self.q_loads - self.q_bess
-
-        # TODO: Da rivedere come sommare gli elementi negativi nel diagramma a barre successivo
-
 
     def loadflow_results_init(self):
         # pasqu
