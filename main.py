@@ -30,8 +30,8 @@ import opendss
 
 from mainUI import MainWindow
 
-from UI.test_elementProperties import ElementProperties
-from UI.elementProperties import Window
+from UI.elementProperties import ElementProperties
+
 from UI.elementsProfile import ElementsProfile
 from UI.newItem import NewItem
 from UI.gridProfPar_Dlg import GridProfParDlg
@@ -93,7 +93,7 @@ class Main:
                                               u'background-position: center;}')
         self.mainwindow.show()
 
-        self.func_check()
+        # self.func_check()
 
         # self.ui.label_10.setText('APERTO!!!')
         #
@@ -130,11 +130,11 @@ class Main:
         self.ui.loadflow_Btn.setEnabled(True)
 
     def func_check(self):
-        for btn in fn_en:
-            self.ui.__getattribute__(btn + 'WgtPls').setVisible(fn_en[btn])
-            self.ui.__getattribute__(btn + 'WgtPls').setEnabled(fn_en[btn])
-
+        # for btn in fn_en:
+        #     self.ui.__getattribute__(btn + 'WgtPls').setVisible(fn_en[btn])
+        #     self.ui.__getattribute__(btn + 'WgtPls').setEnabled(fn_en[btn])
         # self.ui.lf_Btn.setVisible(True)
+        pass
 
     def startWgtCreate(self):
         for f in fn:
@@ -188,6 +188,7 @@ class Main:
 
     # Creazione dell'elenco delle reti benchmark
     def benchmarkWGT_create(self):
+        grid['benchmark'] = True
         self.startWGT.ui.benchOpenBtn.setStyleSheet(u"background-color: rgb(63, 63, 63);")
 
         self.home2_WGT.deleteLater()
@@ -253,7 +254,7 @@ class Main:
         self.gridname = gridname
 
         self.gridDetailsWgt.ui.open.clicked.connect(partial(self.dss_open, self.filepath))
-        self.yml_bench_save()
+        # self.yml_bench_save()
 
         # self.main.ui.EV303_img_LBL.setPixmap(QtGui.QPixmap("UI/_resources/arrowSX_20x20.png")
 
@@ -276,6 +277,7 @@ class Main:
             grid['profile'] = {'step': None, 'start': None, 'end': None, 'points': None, 'exist': False}
 
         if filename:
+            grid['behcnmark'] = '_benchmark' in filename.split('/')
             # self.dss = opendss.OpenDSS()
 
             # TODO: Da ripristinare
@@ -292,8 +294,10 @@ class Main:
             self.elementsTableWgtCreate()
             # self.func_enabled()
             self.func_check()
+            grid['name'] = filename.split('/')[len(filename.split('/')) - 1].removesuffix('.dss')
 
     def yml_open(self):
+        grid['behcnmark'] = False
         options = QtWidgets.QFileDialog.Options()
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
 
@@ -372,12 +376,6 @@ class Main:
         self.myform.ui.tableWidget.removeRow(line)
         self.ui.rightMenuContainer.collapseMenu()
         self.myform.ui.del_Btn.setVisible(False)
-
-    def readsize(self):
-        self.par_wgt = Window('rs_line')
-        self.ui.rightMenuPages.addWidget(self.par_wgt.mywidget)
-        self.ui.rightMenuPages.setCurrentIndex(2)
-        pass
 
     def elementsTableFill(self):
         self.myform.ui.tableWidget.clear()
@@ -746,6 +744,11 @@ class Main:
 
         # is_profile = False
         time = None
+
+        # Reset dei risultati
+        for el in v:
+            dictInitialize.lf_initialize(el)
+
         #
         # for el in v:
         #     if v[el]['category'] in mc['Load'] + mc['Generator']:
@@ -772,9 +775,8 @@ class Main:
                 self.loadflow_results_init()
                 self.lf_WGT.ui.lfres_center_WGT.setVisible(lf_popup.profile)
 
-                # Reset dei risultati
-                for el in v:
-                    dictInitialize.lf_initialize(el)
+                grid['current'] = copy.deepcopy(grid['lf']['start'])
+
 
                 if lf_popup.profile:
 
@@ -807,6 +809,7 @@ class Main:
 
         else:
             print('no-profile')
+            grid['current'] = None
             self.dss.full_parse_to_dss(time=None)
             self.dss.solve()
             self.dss.results_store_all()
@@ -890,15 +893,32 @@ class Main:
         self.lf_WGT.ui.lfresDte.dateChanged.connect(self.loafdlow_date_change)
         self.lf_WGT.ui.lfresDte.timeChanged.connect(self.loafdlow_date_change)
 
-
     def loafdlow_date_change(self):
-        step = int(QtCore.QDateTime(self.datestart).secsTo(self.lf_WGT.ui.lfresDte.dateTime()) / 60 /
+        sel_time = self.lf_WGT.ui.lfresDte.dateTime()
+        step = int(QtCore.QDateTime(self.datestart).secsTo(sel_time) / 60 /
                    grid['profile']['step'])
 
         self.loadflow_results_refresh(t=step)
-        print(step)
 
-        # self.len = int(gap / self.steps[self.ui.stepCB.currentIndex()]) + 1
+        sel_time = sel_time.toPython()
+
+        grid['current'] = [sel_time.year, sel_time.month, sel_time.day, sel_time.hour, sel_time.minute]
+
+        # -- Procedura di aggiornamento del valore di Scala nella finiestra degli elementi -------------------------
+        timestart = dt.datetime(grid['profile']['start'][0], grid['profile']['start'][1],
+                                grid['profile']['start'][2], grid['profile']['start'][3],
+                                grid['profile']['start'][4])
+        currenttime = dt.datetime(grid['current'][0], grid['current'][1], grid['current'][2],
+                                  grid['current'][3], grid['current'][4])
+        i = int((currenttime - timestart).total_seconds() / (60 * grid['profile']['step']))
+
+        if v[self.elem]['category'] in (mc['Load'] + mc['Generator']) and v[self.elem]['par']['profile']['name']:
+            print('forse profili')
+            self.elemPropWgt.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][i])
+            self.elemPropWgt.PeffDSB.setValue(v[self.elem]['par']['profile']['curve'][i] * v[self.elem]['par']['P'])
+
+        self.elemPropWgt.fillLfRes(i)
+        # ----------------------------------------------------------------------------------------------------------
         pass
 
     def loadflow_table_compile(self):
@@ -1272,9 +1292,20 @@ class Main:
 
         # self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.TurbineGB)
 
+        if grid['benchmark']:
+            filepath = mainpath + '/_benchmark/grid_models/' + grid['name'] + '_ProfCat.yml'
+            if os.path.exists(filepath):
+                print(grid['name'])
+                pl = yaml.safe_load(open(filepath))
+                for el in pl:
+                    # self.__getattribute__(el + 'CB').setCurrentText('Agricolo')
+                    self.__getattribute__(el + 'CB').setCurrentText(pl[el])
+
         pass
 
     def elemProfListSave(self, pt):
+        pl = self.elemProfListCopmile(pt)
+
         prof = False
         if not grid['profile']['exist']:
             popup1 = GridProfParDlg()
@@ -1287,11 +1318,21 @@ class Main:
 
         if prof:
             import defProfImport as dpi
-            for mcat in pt:
-                for el in pt[mcat]['elements']:
-                    v[el]['par']['profile']['name'], v[el]['par']['profile']['curve'] = (
-                        dpi.defaultProfileImport(el, self.__getattribute__(el + 'CB').currentText()))
+            for el in pl:
+                v[el]['par']['profile']['name'], v[el]['par']['profile']['curve'] = (
+                        dpi.defaultProfileImport(el, pl[el]))
+
+                # print(el, )
+
             self.home2_WGT.deleteLater()
+
+    def elemProfListCopmile(self, pt):
+        pl = dict()
+        for mcat in pt:
+            for el in pt[mcat]['elements']:
+                pl[el] = self.__getattribute__(el + 'CB').currentText()
+        return pl
+
 
     def elemProfListCancel(self):
         self.home2_WGT.deleteLater()

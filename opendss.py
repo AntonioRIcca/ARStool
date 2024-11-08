@@ -1,6 +1,8 @@
 import copy
 
 import py_dss_interface
+
+import dictInitialize
 from variables import *
 import yaml
 import os
@@ -89,8 +91,8 @@ class OpenDSS:
         mcat = mcat_find(el)
         cat = v[el]['category']
 
-        if cat == 'AC-PV':
-            print('ACPV')
+        if cat == 'AC-BESS':
+            print('Stop')
 
         if mcat not in mc['Node']:
             self.dss.circuit.set_active_element(mcat + '.' + el)  # viene richiamato l'elemento in OpenDSS
@@ -100,6 +102,7 @@ class OpenDSS:
             par = self.readline(el)     # TODO: vedi commento in self.readline
 
             for p in new_par_dict[cat]['par'].keys() - ['others', 'linecode']:  # todo: forse da modificare in base al TODO precedente
+                # print(cat, p, new_par_dict[cat]['par'])
                 try:
                     v[el]['par'][p] = par[new_par_dict[cat]['par'][p]['label']]
                 except:
@@ -456,7 +459,9 @@ class OpenDSS:
         for el in v:
             mcat = mcat_find(el)
             if mcat in dss_cat:
+                # myline = self.writeline(el, time)
                 f.write(self.writeline(el, time) + '\n')
+                print('done')
         f.close()
 
         # Scrittura dei comandi in OpenDSS
@@ -523,6 +528,9 @@ class OpenDSS:
 
     # Aggiornamento del dizionario dei risultati di uno studio singolo. TODO: Ridefinire
     def results_store(self, el):
+        if v[el]['category'] in mc['Load']:
+            print('break')
+
         if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
 
             if not v[el]['par']['out-of-service']:  # Se l'elemento è in servizio
@@ -1168,6 +1176,13 @@ class OpenDSS:
 
         self.dss.solution.solve()       # richiesta di risoluzione del sistema
         fn['lf'] = True
+
+        for el in v:
+            if v[el]['category'] in mc['Load']:
+                self.dss.circuit.set_active_element('load.' + el)
+
+                print(el, self.dss.cktelement.powers)
+
 
         self.dss.text(f"Save Circuit dir=cartella")
 

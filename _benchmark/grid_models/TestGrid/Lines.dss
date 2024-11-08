@@ -1,9 +1,10 @@
 !Feeder 1
+!New "Line.l_002-015" bus1=n_002 bus2=n_015 Season=1 Ratings=[400,] emergamps=600 normamps=260.0 r0=0.0 x0=0.0 B0=0.0 C1=314.999 x1=0.12555 length=1.37 C0=1e-09 B1=0.0 r1=0.25401 enabled=False
+New "Line.l_015-014" bus1=n_015 bus2=n_014 Season=1 Ratings=[400,] emergamps=600 normamps=330.0 r0=0 x0=1e-09 B0=1e-09 C1=350.1409 x1=0.110344 length=3.07 C0=1e-09 B1=1e-09 r1=0.165517 enabled=True
+
 New Line.L_002-015 bus1=N_002 bus2=N_015 phases=3 R1=0.254014 X1=0.125547 C1=314.999000 normamps=260.000000 units=km length=1.370000
-
-
 !Lines 1
-New Line.L_015-014 bus1=N_015 bus2=N_014 phases=3 R1=0.165517 X1=0.110344 C1=350.140900 normamps=330.000000 units=km length=3.070000
+!New Line.L_015-014 bus1=N_015 bus2=N_014 phases=3 R1=0.165517 X1=0.110344 C1=350.140900 normamps=330.000000 units=km length=3.070000
 New Line.L_014-022 bus1=N_014 bus2=N_022 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.800000
 
 New Line.L_022-006 bus1=N_022 bus2=N_006 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.900000

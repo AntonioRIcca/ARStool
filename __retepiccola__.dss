@@ -1,0 +1,23 @@
+clear
+
+New object=circuit.dss_grid basekv=20
+
+New linecode.12-20_3x1x185Al nphases=3 R1=0.164 X1=0.11 B1=91.10619 R0=0.805 X0=0.11 B0=91.10619
+New linecode.6-12_3x1x150Cu nphases=3 R1=0.123 X1=0.1 B1=0 R0=0.369 X0=0.3 B0=0
+New linecode.3-6_3x1x240Cu nphases=3 R1=0.0754 X1=0.11 B1=91.10619 R0=0.2262 X0=0.33 B0=0
+New linecode.DC-Line nphases=3 R1=0.123 X1=0.1
+
+// -- UNDERGROUND SECTOR -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+New line.UG_Line bus1=SourceBus bus2=UG_BB_20kV linecode=12-20_3x1x185Al length=3
+
+New transformer.UG_1_TR windings=2 buses=(UG_BB_20kV UG_BB_2kV) conns='delta wye' kvs=(20 2) kvas=(2000 2000) %Rs=(0.93 0) XHL=6 %imag=1.5
+New transformer.UG_2_TR windings=2 buses=(UG_BB_20kV UG_BB_2kV) conns='delta wye' kvs=(20 2) kvas=(2000 2000) %Rs=(0.93 0) XHL=6 %imag=1.5
+
+New transformer.UG_Serv_TR windings=2 buses=(UG_BB_2kV UG_Serv_BB) conns='delta wye' kvs=(2 0.4) kvas=(400 400) %Rs=[1 0] XHL=6 %imag=1.6
+
+New load.UG_Serv1_AC-Load bus1=UG_Serv_BB phases=3 kv=0.4 kw=380.0 pf=0.9 
+New load.UG_Serv2_AC-Load bus1=UG_Serv_BB phases=3 kv=0.4 kw=120.0 pf=0.9
+!New Storage.mybess bus1=SourceBus phases=3 kV=20 kwrated=1000 kWHrated=200 pf=1 state=charging kW=-200
+
+
+solve

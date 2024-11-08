@@ -1,1 +1,1 @@
-Edit "Vsource.source" basekv=150.0 bus1=n_001
+Edit "Vsource.source" basekv=20.0 bus1=sourcebus

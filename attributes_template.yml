@@ -165,7 +165,7 @@ PWM:
     Vn: 0
     results: {}
 
-DC-DC_Conv:
+DC-DC-Converter:
   category: 'DC-DC_Conv'
   conn: [ ]
   parameters:

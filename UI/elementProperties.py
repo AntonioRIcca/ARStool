@@ -1,177 +1,223 @@
-import copy
-import sys
-from functools import partial
+import yaml
+
+try:
+    from UI.ui_elementProperties import *
+except:
+    from ui_elementProperties import *
+
+from UI.anomWgt import AnomWgt
 
 from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
-                            QRect, QSize, QUrl, Qt)
+    QRect, QSize, QUrl, Qt)
 from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-                           QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
-                           QRadialGradient)
+    QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
+    QRadialGradient)
 from PySide2.QtWidgets import *
 
-from PySide2.QtCharts import *
-
-from variables import *
-import yaml
-import os
+import sys
+import copy
 from datetime import datetime
-
+from functools import partial
 import matplotlib
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 
+import variables
+from variables import *
 
-class Window(QWidget):
+import datetime as dt
+
+
+class ElementProperties(QMainWindow):
     def __init__(self, elem):
-        super().__init__(None)
+        super(ElementProperties, self).__init__()
+        self.ui = Ui_Form()
+        self.ui.setupUi(self)
 
+        # self.ui.startWgt.setStyleSheet(u"QPushButton {"
+        #                                u"text-align: left;"
+        #                                u"padding: 10px 40px;"
+        #                                u"color: rgb(255, 255, 255);"
+        #                                u"background-color: rgb(31, 31, 31); border: solid;" # border-style: outset;"
+        #                                u"border-width: 3px; border-radius: 30px; border-color: rgb(127, 127, 127)"
+        #                                u"}"
+        #                                u"QPushButton:pressed {"
+        #                                u"background-color: rgb(64, 64, 64); border-style: inset"
+        #                                u"}")
         self.elem = elem
+        self.cat = v[self.elem]['category']
         self.old_buses = copy.deepcopy(v[elem]['top']['conn'])
         self.buses = copy.deepcopy(v[elem]['top']['conn'])
-        self.cat = v[elem]['category']
+        self.n_anom = 0
+        self.anomWgt = []
 
-        if self.cat in mc['Node']:
-            self.bb_link(self.elem)
+        # self.ui.relWgt.setMaximumHeight(20)
+        self.__getattribute__(variables.visualpar + '_show')()
 
-        spacer = QSpacerItem(20, 20, QSizePolicy.Fixed)
-        bottomSpacer = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        all_an_def = yaml.safe_load(open(mainpath + '/Functionalities/Anomalies/default.yml'))
+        if self.cat in all_an_def.keys():
+            self.anom_def = all_an_def[self.cat]
+            self.anom_avail = list(self.anom_def.keys())
 
-        # print(v[elem]['top']['conn'])
+            self.anomalies = dict()
 
-        # Creare widget busbar
-        # creare elementi busbar
-        # settare le azioni degli elementi
-        # popolare caselle busbar
-        # popolare le liste delle busbar alternative
-        #   - Libere per i carichi, i generatori e le BESS, ma devono rispettare le caratteristiche di AC e DC
-        #   - Per i trasformatori, devono essere AC e le HV devono avere tensione maggiore delle LV
-        #   - Per i convertitori DC-DC, devono essere DC e le HV devono avere tensione maggiore delle LV
-        #   - Per i PWM, bisogna rispettare i lati AC e DC
-        #   - Per le linee, devono rispettare le caratteristiche AC e DC; il primo nodo è libero, il secondo deve avere
-        #       la stessa tensione del primo. Se quella del primo è cambiata, bisogna riscegliere anche il secondo
+        else:
+            self.anom_def, self.anom_avail = None, []
 
-        # Creazione del widget principale
-        self.mainWidget = QWidget()
-        self.mainVBL = QVBoxLayout(self.mainWidget)
-        self.mainVBL.setContentsMargins(5, 5, 5, 40)
-        self.mainWidget.setMaximumWidth(200)    # Deve avere il valore della larghezza del settore scorrevole
+        self.ui.lfPls.clicked.connect(self.lf_show)
+        self.ui.relPls.clicked.connect(self.rel_show)
+        self.ui.anomPls.clicked.connect(self.anom_show)
+        self.ui.anomAddPls.clicked.connect(self.anom_add)
 
-        # Creare widget busbar
-        self.bbWidget = QWidget()
-        self.bbWidget.setStyleSheet(u"background-color: rgb(0, 0, 31); border-radius: 10px;")
-        self.bbWidget.setMaximumWidth(180)
-        self.bbGL = QGridLayout(self.bbWidget)
+        self.fillLfPar()
 
-        # Creare widget Parametri
-        self.parWidget = QWidget()
-        self.parWidget.setStyleSheet(u"background-color: rgb(0, 31, 0); border-radius: 10px;")
-        self.parWidget.setMaximumWidth(180)
-        self.parGL = QGridLayout(self.parWidget)
+        self.fillRelPar()
+        # if v[self.elem]['lf']['p']:
+        #     if 0 in v[self.elem]['lf']['p'].keys():
+        #         if
+        #         self.fillLfRes()
+        self.ui.lfResMainWgt.setVisible(fn['lf'])
+        if fn['lf']:
+            self.formatLfRes()
 
-        # # Creare Widget immagine Profilo
-        # profile = False
-        # if 'profile' in v[self.elem]['par']:
-        #     if v[self.elem]['par']['profile']['name']:
-        #         profile = True
-        #         self.profileWidget = QWidget()
-        #         self.profileWidget.setStyleSheet(u"background-color: rgb(31, 0, 0); border-radius: 10px;")
-        #         self.profileWidget.setMaximumHeight(180)
-        #         self.profileWidget.setMaximumWidth(180)
-        #         self.profWgtVBL = QVBoxLayout(self.profileWidget)
-        #         self.profileLbl = QLabel()
-        #         self.profilePlotWgtCreate()
-        #         self.profileLbl.setPixmap(QPixmap("a.jpg"))
-        #         self.profWgtVBL.addWidget(self.profileLbl)
-        #         # self.profWgtVBL.addWidget(self.canvas1)
-        #
-        #         self.profileBtn = QPushButton('Apri profilo')
-        #         self.pb_format(self.profileBtn, min_h=20)
-        #
-        #         self.profWgtVBL.addWidget(self.profileBtn)
-        #         print('done')
-        # else:
-        #     print(1, v[self.elem]['category'])
-        #     print(2, mc['Load'] + mc['Generator'])
+        self.func_check()
 
+    def func_check(self):
+        for f in fn_en:
+            self.ui.__getattribute__(f + 'Wgt').setVisible(fn_en[f])
+        self.ui.anomWgt.setVisible(self.anom_def is not None and fn_en['anom'])
 
-        # self.profileLbl.setPixmap(QPixmap("_benchmark/grid_models/images/OtherGrid.png"))
+    def lf_show(self):
+        self.ui.lfWgt.setMaximumHeight(1500)
+        self.ui.relWgt.setMaximumHeight(20)
+        self.ui.anomWgt.setMaximumHeight(20)
+        variables.visualpar = 'lf'
 
-        # Creare widget dei pulsanti di fondo
-        self.bottomWidget = QWidget()
-        self.bottomWidget.setMaximumWidth(180)
-        self.bottomHBL = QHBoxLayout(self.bottomWidget)
+    def rel_show(self):
+        self.ui.lfWgt.setMaximumHeight(20)
+        self.ui.relWgt.setMaximumHeight(1500)
+        self.ui.anomWgt.setMaximumHeight(20)
+        variables.visualpar = 'rel'
 
-        # Aggiunta dei widget al widget principale
-        self.mainVBL.addWidget(self.bbWidget)
-        self.mainVBL.addWidget(self.parWidget)
-        if 'profile' in v[self.elem]['par']:
-            if v[self.elem]['par']['profile']['name']:
-                self.profilePlotWgtCreate()
-                self.mainVBL.addWidget(self.profileWidget)
-        # else:
-        #     print(3, v[self.elem]['category'])
-        #     print(4, mc['Load'] + mc['Generator'])
-        self.mainVBL.addWidget(self.bottomWidget, 0, Qt.AlignBottom)
-        self.mainVBL.addItem(bottomSpacer)
-        # self.parWidget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
+    def anom_show(self):
+        self.ui.lfWgt.setMaximumHeight(20)
+        self.ui.relWgt.setMaximumHeight(20)
+        self.ui.anomWgt.setMaximumHeight(1500)
+        variables.visualpar = 'anom'
 
-        # Scrittura dei parametri
-        i = 0
-        # -- Preparazione delle caselle V0 e V1 quando serve ---------------------------------------------------------
+    def fillRelPar(self):
+        # for i in range(self.ui.relParGL.count()):
+        #     self.ui.relParGL.itemAt(i).widget().deleteLater()
+
+        # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
+        print(self.cat)
+        if self.cat != 'ExternalGrid':
+            for par in ['alfa', 'beta', 'Pi_E', 'Pi_Q']:
+                self.ui.__getattribute__(par + 'Dsb').setValue(v[self.elem]['rel']['par'][par])
+        else:
+            self.ui.relWgt.setVisible(False)
+
+            #
+            # self.__setattr__(par + 'Lbl', QLabel(par))
+            # self.__setattr__(par + 'Dsb', QDoubleSpinBox(None))
+            # self.__setattr__(par + 'UnitLbl', QLabel(el_format[self.cat][par]['unit']))
+            #
+            # self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Lbl'), line, 0)
+            # self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Dsb'), line, 1)
+            # self.ui.lfParGL.addWidget(self.__getattribute__(par + 'UnitLbl'), line, 2)
+            # i += 1
+            #
+            # # formattazione e popolazione dei campi
+            # self.dsb_format(self.__getattribute__(par + 'Dsb'), minimum=el_format[self.cat][par]['min'],
+            #                 maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
+            # self.__getattribute__(par + 'Lbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+            #
+            # if isinstance(v[self.elem]['par'][par], list):
+            #     self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par][0])
+            # else:
+            #     self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par])
+            #
+            # line += 1
+        # -------------------------------------------------------------------------------------------------------------
+
+    def fillLfPar(self):
+        for i in range(self.ui.lfParGL.count()):
+            self.ui.lfParGL.itemAt(i).widget().deleteLater()
+
+        spacer = QSpacerItem(10,10, QSizePolicy.Fixed)
+        line = 0
+
         if self.cat not in ['AC-Node', 'DC-Node', 'ExternalGrid']:
+            # -- Preparazione delle caselle V0 e V1 quando serve ------------------------------------------------------
             for b in range(len(self.buses)):
-                self.__setattr__('v' + str(b) + '_LBL', QLabel('V' + str(b)))
-                self.__setattr__('v' + str(b) + '_DSB', QDoubleSpinBox(None))
-                self.__setattr__('v' + str(b) + '_unit_LBL', QLabel('kV'))
+                self.__setattr__('v' + str(b) + 'Lbl', QLabel('V' + str(b)))
+                self.__setattr__('v' + str(b) + 'Dsb', QDoubleSpinBox(None))
+                self.__setattr__('v' + str(b) + 'UnitLbl', QLabel('kV'))
 
-                self.parGL.addWidget(self.__getattribute__('v' + str(b) + '_LBL'), i, 0)
-                self.parGL.addWidget(self.__getattribute__('v' + str(b) + '_DSB'), i, 1)
-                self.parGL.addWidget(self.__getattribute__('v' + str(b) + '_unit_LBL'), i, 2)
-                i += 1
+                self.ui.lfParGL.addWidget(self.__getattribute__('v' + str(b) + 'Lbl'), b, 0)
+                self.ui.lfParGL.addWidget(self.__getattribute__('v' + str(b) + 'Dsb'), b, 1)
+                self.ui.lfParGL.addWidget(self.__getattribute__('v' + str(b) + 'UnitLbl'), b, 2)
 
                 # formattazione e popolazione dei campi
-                self.dsb_format(self.__getattribute__('v' + str(b) + '_DSB'), decimals=3)
-                self.__getattribute__('v' + str(b) + '_LBL').setAlignment(Qt.AlignRight |
-                                                                          Qt.AlignTrailing | Qt.AlignVCenter)
-                self.__getattribute__('v' + str(b) + '_DSB').setValue(v[self.buses[b]]['par']['Vn'][0])
+                self.dsb_format(self.__getattribute__('v' + str(b) + 'Dsb'), decimals=3)
+                self.__getattribute__('v' + str(b) + 'Lbl').setAlignment(Qt.AlignRight |
+                                                                         Qt.AlignTrailing | Qt.AlignVCenter)
+                self.__getattribute__('v' + str(b) + 'Dsb').setValue(v[self.buses[b]]['par']['Vn'][0])
 
                 # Le caselle devono essere disabilitata
-                self.__getattribute__('v' + str(b) + '_DSB').setDisabled(True)
-                self.__getattribute__('v' + str(b) + '_DSB').setStyleSheet(u"background-color: rgb(95, 95, 95)")
-        # ------------------------------------------------------------------------------------------------------------
+                self.__getattribute__('v' + str(b) + 'Dsb').setDisabled(True)
+                self.__getattribute__('v' + str(b) + 'Dsb').setStyleSheet(u"background-color: rgb(95, 95, 95)")
 
-            self.parGL.addItem(spacer, i, 0)
-            i += 1
+                line += 1
+            # ---------------------------------------------------------------------------------------------------------
 
-        # -- Preparazione delle caselle dei paramerti ------ ---------------------------------------------------------
+            self.ui.lfParGL.addItem(spacer, line, 0)
+            line += 1
+
+        # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
         for par in el_format[self.cat]:
-            self.__setattr__(par + '_LBL', QLabel(par))
-            self.__setattr__(par + '_DSB', QDoubleSpinBox(None))
-            self.__setattr__(par + '_unit_LBL', QLabel(el_format[self.cat][par]['unit']))
+            self.__setattr__(par + 'Lbl', QLabel(par))
+            self.__setattr__(par + 'Dsb', QDoubleSpinBox(None))
+            self.__setattr__(par + 'UnitLbl', QLabel(el_format[self.cat][par]['unit']))
 
-            self.parGL.addWidget(self.__getattribute__(par + '_LBL'), i, 0)
-            self.parGL.addWidget(self.__getattribute__(par + '_DSB'), i, 1)
-            self.parGL.addWidget(self.__getattribute__(par + '_unit_LBL'), i, 2)
+            self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Lbl'), line, 0)
+            self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Dsb'), line, 1)
+            self.ui.lfParGL.addWidget(self.__getattribute__(par + 'UnitLbl'), line, 2)
             i += 1
 
             # formattazione e popolazione dei campi
-            self.dsb_format(self.__getattribute__(par + '_DSB'), minimum=el_format[self.cat][par]['min'],
+            self.dsb_format(self.__getattribute__(par + 'Dsb'), minimum=el_format[self.cat][par]['min'],
                             maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
-            self.__getattribute__(par + '_LBL').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+            self.__getattribute__(par + 'Lbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
-            if isinstance(v[elem]['par'][par], list):
-                self.__getattribute__(par + '_DSB').setValue(v[elem]['par'][par][0])
+            if isinstance(v[self.elem]['par'][par], list):
+                self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par][0])
             else:
-                self.__getattribute__(par + '_DSB').setValue(v[elem]['par'][par])
-        # ------------------------------------------------------------------------------------------------------------
+                self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par])
+
+            line += 1
+
+            if self.cat in (mc['Load'] + mc['Generator']) and par == 'P':
+                self.PeffDSB = QDoubleSpinBox()
+                self.PeffDSB.setEnabled(True)
+                self.dsb_format(self.PeffDSB, decimals=3)
+                self.PeffDSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
+
+                self.PeffunitLbl = QLabel('kW')
+
+                self.ui.lfParGL.addWidget(self.PeffDSB, line, 1)
+                self.ui.lfParGL.addWidget(self.PeffunitLbl, line, 2)
+
+                line += 1
+                pass
+        # -------------------------------------------------------------------------------------------------------------
 
         # -- creazione della parte dei profili, se previsto ----------------------------------------------------------
         if self.cat in prof_elem:
-        # if self.cat in ['AC-Load', 'DC-Load', 'AC-Wind', 'DC-Wind', 'BESS', 'AC-PV', 'DC-PV']:
             # distanziatore
-            # spacer1 = QSpacerItem(20, 20, QSizePolicy.Fixed)
-            self.parGL.addItem(spacer, i, 0)
-            i += 1
+            spacer1 = QSpacerItem(10, 10, QSizePolicy.Fixed)
+            self.ui.lfParGL.addItem(spacer1, line, 0)
+            line += 1
 
             # -- creazione ed inserimento degli elementi ----
             self.scale_LBL = QLabel('Scala')
@@ -180,65 +226,84 @@ class Window(QWidget):
 
             self.profile_RB = QRadioButton('Profilo')
 
-            self.parGL.addWidget(self.scale_LBL, i, 0)
-            self.parGL.addWidget(self.scale_DSB, i, 1)
+            self.ui.lfParGL.addWidget(self.scale_LBL, i, 0)
+            self.ui.lfParGL.addWidget(self.scale_DSB, i, 1)
             i += 1
 
-            self.parGL.addWidget(self.scale_RB, i, 1)
+            self.ui.lfParGL.addWidget(self.scale_RB, i, 1)
             i += 1
 
-            self.parGL.addWidget(self.profile_RB, i, 1)
+            self.ui.lfParGL.addWidget(self.profile_RB, i, 1)
             i += 1
 
             # formattazione e popolazione degli elementi del profilo
             self.dsb_format(self.scale_DSB, 0, 1, 4)
             self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
-            if v[elem]['par']['profile']['name'] is None:
-                # print(v[elem]['par']['profile']['curve'])
-                self.scale_DSB.setValue(v[elem]['par']['profile']['curve'])
+            if v[self.elem]['par']['profile']['name'] is None:
+                self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'])
                 self.scale_RB.setChecked(True)
                 self.scale_DSB.setStyleSheet(u"background-color: rgb(255, 255, 255);"
                                              u"color: rgb(0, 0, 0);")
             else:
+                if grid['current']:
+                    timestart = dt.datetime(grid['profile']['start'][0], grid['profile']['start'][1],
+                                            grid['profile']['start'][2], grid['profile']['start'][3],
+                                            grid['profile']['start'][4])
+                    currenttime = dt.datetime(grid['current'][0], grid['current'][1], grid['current'][2],
+                                              grid['current'][3], grid['current'][4])
+                    t = int((currenttime - timestart).total_seconds() / (60 * grid['profile']['step']))
+                else:
+                    t = 0
+
                 self.scale_DSB.setDisabled(True)
                 self.profile_RB.setChecked(True)
 
-                time = datetime.now().hour * 4 + int(datetime.now().minute/15)
-                # print('Time = ', time)
-                self.scale_DSB.setValue(v[elem]['par']['profile']['curve'][time])
+                self.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][t])
+
+                self.PeffDSB.setValue(v[self.elem]['par']['profile']['curve'][t] * v[self.elem]['par']['P'])
+
                 self.scale_DSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
+
+            # self.profile_RB.toggled.connect(self.profileCheck)
+
         # ------------------------------------------------------------------------------------------------------------
 
-        # distanziatore
-        # spacer1 = QSpacerItem(20, 20, QSizePolicy.Fixed)
-        self.parGL.addItem(spacer, i, 0)
-        i += 1
+        spacer2 = QSpacerItem(10, 10, QSizePolicy.Fixed)
+        self.ui.lfParGL.addItem(spacer2, line, 0)
 
         # casella Out-of-service
         self.out_of_service_LBL = QLabel('OutOfServ')
         self.out_of_service_CkB = QCheckBox()
-        self.parGL.addWidget(self.out_of_service_LBL, i, 0)
-        self.parGL.addWidget(self.out_of_service_CkB, i, 1)
-        self.out_of_service_CkB.setChecked(v[elem]['par']['out-of-service'])
+        self.ui.lfParGL.addWidget(self.out_of_service_LBL, i, 0)
+        self.ui.lfParGL.addWidget(self.out_of_service_CkB, i, 1)
+        self.out_of_service_CkB.setChecked(v[self.elem]['par']['out-of-service'])
         i += 1
 
         # distanziatore necessario per riempire il vuoto tra i parametri e i pulsanti
         spacer_wgt = QWidget()
-        self.parGL.addWidget(spacer_wgt, i, 0)
+        self.ui.lfParGL.addWidget(spacer_wgt, i, 0)
         i += 1
 
-        # -- creazione della sezione dei pulsanti --------------------------------------------------------------------
-        self.save_BTN = QPushButton('Salva')
-        self.cancel_BTN = QPushButton('Annulla')
-        self.pb_format(self.save_BTN, min_h=25)
-        self.pb_format(self.cancel_BTN, min_h=25)
-        self.save_BTN.clicked.connect(self.save_par)
+        # -- verifica esistanza profili ------------------------------------------------------------------------------
+        if 'profile' in v[self.elem]['par']:
+            if v[self.elem]['par']['profile']['name']:
+                self.profilePlotWgtCreate()
+                # self.ui.lfVL.addWidget(self.profileWidget)
+                self.ui.lfVL.insertWidget(3, self.profileWidget)
+        # ------------------------------------------------------------------------------------------------------------
 
-        self.bottomHBL.addWidget(self.save_BTN)
-        spacer2 = QSpacerItem(20, 20, QSizePolicy.Fixed)
-        self.bottomHBL.addItem(spacer2)
-        self.bottomHBL.addWidget(self.cancel_BTN)
+        # # -- creazione della sezione dei pulsanti --------------------------------------------------------------------
+        # self.save_BTN = QPushButton('Salva')
+        # self.cancel_BTN = QPushButton('Annulla')
+        # self.pb_format(self.save_BTN, min_h=25)
+        # self.pb_format(self.cancel_BTN, min_h=25)
+        # self.save_BTN.clicked.connect(self.save_par)
+        #
+        # self.bottomHBL.addWidget(self.save_BTN)
+        # spacer2 = QSpacerItem(20, 20, QSizePolicy.Fixed)
+        # self.bottomHBL.addItem(spacer2)
+        # self.bottomHBL.addWidget(self.cancel_BTN)
         # ------------------------------------------------------------------------------------------------------------
 
         # -- creazione della sezione delle BusBar --------------------------------------------------------------------
@@ -251,34 +316,34 @@ class Window(QWidget):
 
         # definizione dei Label delle busbar
         node_labels = []
-        if v[elem]['category'] == 'PWM':
+        if v[self.elem]['category'] == 'PWM':
             node_labels = ['AC Node', 'DC Node']
-        elif v[elem]['category'] in ['2W-Transformer', 'DC-DC-Converter']:
+        elif v[self.elem]['category'] in ['2W-Transformer', 'DC-DC-Converter']:
             node_labels = ['HV Node', 'LV Node']
-        elif v[elem]['category'] in ['AC-Line', 'DC-Line', 'AC-Node', 'DC-Node']:
-            for i in range(len(v[elem]['top']['conn'])):
+        elif v[self.elem]['category'] in ['AC-Line', 'DC-Line', 'AC-Node', 'DC-Node']:
+            for i in range(len(v[self.elem]['top']['conn'])):
                 node_labels.append('Node ' + str(i))
         else:
             node_labels = ['Node', '']
 
         # -- Settaggio dei campi della sezione Busbar  ------------------------------------
-        for i in range(len(v[elem]['top']['conn'])):
+        for i in range(len(v[self.elem]['top']['conn'])):
             self.__setattr__('node' + str(i) + '_LBL', QLabel(node_labels[i]))
 
-            self.bbGL.addWidget(self.__getattribute__('node' + str(i) + '_LBL'), i, 0)
+            self.ui.lfNodeGL.addWidget(self.__getattribute__('node' + str(i) + '_LBL'), i, 0)
             self.__getattribute__('node' + str(i) + '_LBL').setMinimumSize(QSize(0, 25))
 
             self.__setattr__('node' + str(i) + '_BTN', QPushButton())
             self.__setattr__('node' + str(i) + '_CB', QComboBox())
 
-            self.bbGL.addWidget(self.__getattribute__('node' + str(i) + '_BTN'), i, 1)
+            self.ui.lfNodeGL.addWidget(self.__getattribute__('node' + str(i) + '_BTN'), i, 1)
             self.__getattribute__('node' + str(i) + '_BTN').setFont(self.bbFont)
-            self.__getattribute__('node' + str(i) + '_BTN').setStyleSheet(u"text-align: left;")
+            self.__getattribute__('node' + str(i) + '_BTN').setStyleSheet(u"text-align: left; border-width: 0px;")
 
-            self.bbGL.addWidget(self.no_LBL, i, 2)
+            self.ui.lfNodeGL.addWidget(self.no_LBL, i, 2)
 
-            self.bbGL.addWidget(self.__getattribute__('node' + str(i) + '_CB'), i, 1)
-        # ---------------------------------------------------------------------------------
+            self.ui.lfNodeGL.addWidget(self.__getattribute__('node' + str(i) + '_CB'), i, 1)
+            # ---------------------------------------------------------------------------------
 
             # settare le azioni degli elementi (se non sono Node o Source)
             if self.cat not in mc['Node'] + mc['Vsource']:
@@ -287,17 +352,45 @@ class Window(QWidget):
                                                                                          None))
 
         # Scrittura dei campi node0 e node1
-        for i in range(len(v[elem]['top']['conn'])):
-            self.bb_changed(i=i, node=v[elem]['top']['conn'][i])
+        for i in range(len(v[self.elem]['top']['conn'])):
+            self.bb_changed(i=i, node=v[self.elem]['top']['conn'][i])
         # ------------------------------------------------------------------------------------------------------------
 
         # creazione della scrollbar, se il settore fosse troppo lungo
-        self.scroll = QScrollArea()
-        self.scroll.setWidget(self.mainWidget)
-        self.scroll.setWidgetResizable(True)
-        self.layout = QVBoxLayout()
-        self.layout.addWidget(self.scroll)
-        self.setLayout(self.layout)
+        # self.scroll = QScrollArea()
+        # self.scroll.setWidget(self.ui.propertiesWgt)
+        # self.scroll.setWidgetResizable(True)
+        # self.layout = QVBoxLayout()
+        # self.layout.addWidget(self.scroll)
+        # self.setLayout(self.layout)
+
+        # self.profile_RB.clicked.connect(self.profileCheck)
+        # self.scale_RB.toggled.connect(self.profileCheck)
+
+        self.ui.savePLS.clicked.connect(self.save_par)
+
+        pass
+
+    def profileCheck(self):
+        self.dsb_format(self.scale_DSB, 0, 1, 4)
+        self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+
+        if isinstance(v[self.elem]['par']['profile']['curve'], list):
+            #TODO: Da cambiare sulla base della nuova definizione dei profili temporali
+            # time = datetime.now().hour * 4 + int(datetime.now().minute / 15)
+            value = v[self.elem]['par']['profile']['curve'][0]
+        else:
+            value = v[self.elem]['par']['profile']['curve']
+        self.scale_DSB.setValue(value)
+
+        # if v[self.elem]['par']['profile']['name'] is None or self.scale_RB.isChecked():
+        if self.scale_RB.isChecked():
+            self.scale_DSB.setStyleSheet(u"background-color: rgb(255, 255, 255);"
+                                         u"color: rgb(0, 0, 0);")
+            self.scale_DSB.setDisabled(False)
+        else:
+            self.scale_DSB.setDisabled(True)
+            self.scale_DSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
 
     def profilePlotWgtCreate(self):
         font = {
@@ -309,16 +402,11 @@ class Window(QWidget):
         self.canvas1 = FigureCanvas(plt.Figure(figsize=(1.7, 1.4)))
         self.ax = self.canvas1.figure.subplots()
 
-        # a = range(0, 24)
-        # b = a/4
-        # print('operazione')
-        # print([a/4 for a in range(0, 96)])
-        # print(v[self.elem]['par']['profile']['curve'])
-        self.ax.plot([a/4 for a in range(0, 96)], v[self.elem]['par']['profile']['curve'])  # TODO: da correggere: inserire i dati reali
+        self.ax.plot([a for a in range(0, grid['profile']['points'])], v[self.elem]['par']['profile']['curve'])  # TODO: da correggere: inserire i dati reali
 
         self.ax.set_title('Profilo')
         self.ax.set_ylim([0, 1.05])
-        self.ax.set_xlim([0, 24])
+        self.ax.set_xlim([0, grid['profile']['points']])
         self.ax.set_xlabel('Tempo [h]', fontsize=4)
         self.ax.set_ylabel('Profilo [p.u.]', fontsize=2)
 
@@ -330,7 +418,7 @@ class Window(QWidget):
 
         # Creazione del widget
         self.profileWidget = QWidget()
-        self.profileWidget.setStyleSheet(u"background-color: rgb(31, 0, 0); border-radius: 10px;")
+        self.profileWidget.setStyleSheet(u"background-color: rgb(0, 0, 48); border-radius: 10px;")
         self.profileWidget.setMaximumHeight(180)
         self.profileWidget.setMaximumWidth(180)
         self.profWgtVBL = QVBoxLayout(self.profileWidget)
@@ -344,6 +432,12 @@ class Window(QWidget):
         self.pb_format(self.profileBtn, min_h=20)
 
         self.profWgtVBL.addWidget(self.profileBtn)
+
+    def profileWgtRefresh(self):
+        self.ui.lfVL.itemAt(3).widget().deleteLater()
+        self.profileWidget.deleteLater()
+        self.profilePlotWgtCreate()
+        self.ui.lfVL.insertWidget(3, self.profileWidget)
 
     # azioni da eseguire alla richiesta di modifica del nodo di connessione
     def bb_clicked(self, i=0, event2=None):
@@ -368,6 +462,7 @@ class Window(QWidget):
         # Se cambio la prima busbar di una linea, verifico se la tensione della seconda busbar è coerente,
         #     altrimenti deve essere cambiata
         if self.cat in ['AC-Line', 'DC-Line'] and self.buses[1]:
+        # if self.cat in ['AC-Line', 'DC-Line'] and len(self.buses) >1:
             if i == 0 and v[self.buses[0]]['par']['Vn'] != v[self.buses[1]]['par']['Vn']:
                 self.buses[1] = None
                 self.__getattribute__('node1_BTN').setText('-')
@@ -385,19 +480,19 @@ class Window(QWidget):
         # Scrittura del voltaggio dell'elemento, in base al Nodo a cui è connesso
         # try:
         if self.cat not in mc['Vsource'] + mc['Node']:
-            self.__getattribute__('v' + str(i) + '_DSB').setValue(v[node]['par']['Vn'][0])
+            self.__getattribute__('v' + str(i) + 'Dsb').setValue(v[node]['par']['Vn'][0])
         # except AttributeError:
         #     pass
 
         if self.cat in mc['Line']:
-            self.save_BTN.setEnabled(self.__getattribute__('node1_BTN').text() != '-')
-            if self.save_BTN.isEnabled():
+            self.ui.savePLS.setEnabled(self.__getattribute__('node1_BTN').text() != '-')
+            if self.ui.savePLS.isEnabled():
                 # self.save_BTN.setStyleSheet(u"background-color: rgb(255, 255, 255)")
-                self.pb_format(self.save_BTN, min_h=25)
+                self.pb_format(self.ui.savePLS, min_h=25)
 
             else:
                 # self.save_BTN.setStyleSheet(u"background-color: rgb(95, 95, 95)")
-                self.pb_disabled(self.save_BTN, min_h=25)
+                self.pb_disabled(self.ui.savePLS, min_h=25)
 
     # Definizione dell'elenco delle BusBar ammissibili
     def bb_list(self, i, node):
@@ -437,10 +532,13 @@ class Window(QWidget):
                             v[el]['par']['Vn'][0] < v[self.buses[0]]['par']['Vn'][0]):
                         nodes.append(el)
 
-        elif self.cat in ['AC-Load', 'AC-Wind', 'Diesel-Motor', 'AC-Line']:
+        elif self.cat in ['AC-Load', 'AC-Wind', 'Diesel-Motor', 'AC-Line', 'AC-BESS', 'AC-PV', 'Turbine']:
             for el in v:
-                if v[el]['category'] == 'AC-Node' and el not in self.buses:
-                    nodes.append(el)
+                try:
+                    if v[el]['category'] == 'AC-Node' and el not in self.buses:
+                        nodes.append(el)
+                except:
+                    print('Errore elemento', el)
 
         elif self.cat in DC_elem:
             for el in v:
@@ -464,40 +562,106 @@ class Window(QWidget):
                             pass
         return nodes
 
-    # salvataggio dei dati dall'interfaccia al dizionario
-    def save_par(self):
-        self.bb_fix(self.elem)
-        # TODO: nel caso di variazione di tensione a busbar correlate, bisogna mettere un alert
+    def formatLfRes(self):
+        spacer = QSpacerItem(10, 10, QSizePolicy.Fixed)
+        line = 0
+        oldtag = None
+        # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
+        for par in el_lfresults[self.cat]:
+            tag = el_lfresults[self.cat][par]['tag']
+            i = el_lfresults[self.cat][par]['i']
 
-        for par in el_format[self.cat]:
-            v[self.elem]['par'][par] = self.__getattribute__(par + '_DSB').value()
+            if tag != oldtag and line != 0:
+                self.ui.lfResGL.addItem(spacer, line, 0)
+                line += 1
 
-        # Salvataggio del profilo, dove previsto
-        if self.cat in prof_elem:
-            if self.scale_RB.isChecked():
-                v[self.elem]['par']['profile']['name'] = None
-                v[self.elem]['par']['profile']['curve'] = self.scale_DSB.value()
-                # print('scale' + ': ' + str(v[self.elem]['par']['profile']['curve']))
+            self.__setattr__(par + 'ResLbl', QLabel(par))
+            self.__setattr__(par + 'ResDsb', QDoubleSpinBox(None))
+            self.__setattr__(par + 'ResUnitLbl', QLabel(el_lfresults[self.cat][par]['unit']))
+
+            self.ui.lfResGL.addWidget(self.__getattribute__(par + 'ResLbl'), line, 0)
+            self.ui.lfResGL.addWidget(self.__getattribute__(par + 'ResDsb'), line, 1)
+            self.ui.lfResGL.addWidget(self.__getattribute__(par + 'ResUnitLbl'), line, 2)
+
+            oldtag = tag
+            # i += 1
+
+            # formattazione e popolazione dei campi
+            self.dsb_format(self.__getattribute__(par + 'ResDsb'), decimals=el_lfresults[self.cat][par]['decimal'],
+                            minimum=-9999999.999, maximum=9999999.999)
+            self.__getattribute__(par + 'ResLbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+
+            line += 1
+        # -------------------------------------------------------------------------------------------------------------
+        self.fillLfRes()
+        pass
+
+    def fillLfRes(self, t=0):
+        for par in el_lfresults[self.cat]:
+            tag = el_lfresults[self.cat][par]['tag']
+            i = el_lfresults[self.cat][par]['i']
+            if i in [0, 1]:
+                self.__getattribute__(par + 'ResDsb').setValue(v[self.elem]['lf'][tag][i][t])
             else:
-                # TODO: Impostare il salvataggio del profilo
-                pass
-        v[self.elem]['par']['out-of-service'] = self.out_of_service_CkB.isChecked()
+                self.__getattribute__(par + 'ResDsb').setValue(v[self.elem]['lf'][tag][t])
+        pass
+
+    # formattazione dei DoubleSPinBox
+    def dsb_format(self, item, minimum=0.00, maximum=9999.99, decimals=2, step=0.1):
+        item.setMinimum(minimum)
+        item.setMaximum(maximum)
+        item.setDecimals(decimals)
+        item.setSingleStep(step)
+
+        item.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        item.setStyleSheet(u"background-color: rgb(255, 255, 255);"
+                           u"color: rgb(0, 0, 0);"
+                           u"border: solid;"
+                           u"border-width: 1px;"
+                           u"border-color: rgb(223, 223, 223);")
+        item.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+
+    # formattazione dei pushbutton
+    def pb_format(self, item, min_w=0, min_h=0):
+        item.setStyleSheet(u"QPushButton {"
+                           u"color: rgb(255, 255, 255);"
+                           u"background-color: rgb(0, 0, 0); border: solid;"  # border-style: outset;"
+                           u"border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)"
+                           u"}"
+                           u"QPushButton:pressed {"
+                           u"background-color: rgb(64, 64, 64); border-style: inset"
+                           u"}")
+        item.setMinimumSize(QSize(min_w, min_h))
+
+    def pb_disabled(self, item, min_w=0, min_h=0):
+        item.setStyleSheet(u"QPushButton {"
+                           u"color: rgb(63, 63, 63);"
+                           u"background-color: rgb(31, 31, 31); border: solid;"  # border-style: outset;"
+                           u"border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)"
+                           u"}"
+                           u"QPushButton:pressed {"
+                           u"background-color: rgb(64, 64, 64); border-style: inset"
+                           u"}")
+        item.setMinimumSize(QSize(min_w, min_h))
 
     def bb_fix(self, elem):
         # Se si modifica la tensione della busbar,
         # bisogna modificare la tensione nominale degli elementi a essa connessa
 
         # Se l'elemento è un nodo o la rete esterna, e se è cambiata la tensione nomnale
-        if self.cat in mc['Node'] + mc['Vsource'] and v[elem]['par']['Vn'] != self.Vn_DSB.value():
+        if self.cat in mc['Node'] + mc['Vsource'] and v[elem]['par']['Vn'] != self.VnDsb.value():
+        # if self.cat in mc['Node'] + mc['Vsource'] and v[elem]['par']['Vn'] != self.Vn_DSB.value():
             for el in self.bb_link(elem):
                 for bb in self.buses:
                     if v[bb]['category'] in mc['Transformer']:
                         for i in range(len(v[bb]['top']['conn'])):
                             if v[bb]['top']['conn'][i] == elem:
-                                v[bb]['par']['Vn' + str(i)] = self.Vn_DSB.value()
+                                v[bb]['par']['Vn' + str(i)] = self.VnDsb.value()
+                                # v[bb]['par']['Vn' + str(i)] = self.Vn_DSB.value()
                         pass
                     else:
-                        v[el]['par']['Vn'] = self.Vn_DSB.value()
+                        v[el]['par']['Vn'] = self.VnDsb.value()
+                        # v[el]['par']['Vn'] = self.Vn_DSB.value()
                         pass
 
         # Se si modifica la busbar connessa,
@@ -505,7 +669,7 @@ class Window(QWidget):
         elif self.buses != self.old_buses:
             for b in range(len(self.buses)):
                 if self.buses[b] != self.old_buses[b]:
-                    v[elem]['par']['Vn' + str(b)] = self.__getattribute__('v' + str(b) + '_DSB').value()
+                    v[elem]['par']['Vn' + str(b)] = self.__getattribute__('v' + str(b) + 'Dsb').value()
                     v[elem]['top']['conn'][b] = self.buses[b]
 
                     v[self.buses[b]]['top']['conn'].append(elem)
@@ -541,49 +705,138 @@ class Window(QWidget):
                 buses.pop(buses.index(bb))
         return bb_solved
 
+    def anom_add(self):
+        self.anom_avail = list(self.anom_def.keys())
+        for an in self.anomWgt:
+            self.anom_avail.remove(an.ui.anomLbl.text())
 
-    # formattazione dei DoubleSPinBox
-    def dsb_format(self, item, minimum=0, maximum=9999.99, decimals=2, step=0.1):
-        item.setMinimum(minimum)
-        item.setMaximum(maximum)
-        item.setDecimals(decimals)
-        item.setSingleStep(step)
+        print('available anomalies:', self. anom_avail)
 
-        item.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        item.setStyleSheet(u"background-color: rgb(255, 255, 255);"
-                           u"color: rgb(0, 0, 0);"
-                           u"border: solid;"
-                           u"border-width: 1px;"
-                           u"border-color: rgb(223, 223, 223);")
-        item.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+        self.ui.anomAddPls.setVisible(len(self.anom_avail) > 1)
 
-    # formattazione dei pushbutton
-    def pb_format(self, item, min_w=0, min_h=0):
-        item.setStyleSheet(u"QPushButton {"
-                           u"color: rgb(255, 255, 255);"
-                           u"background-color: rgb(0, 0, 0); border: solid;" # border-style: outset;"
-                           u"border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)"
-                           u"}"
-                           u"QPushButton:pressed {"
-                           u"background-color: rgb(64, 64, 64); border-style: inset"
-                           u"}")
-        item.setMinimumSize(QSize(min_w, min_h))
+        # from UI.anomWgt import AnomWgt
+        self.anomWgt.append(AnomWgt(self.cat))
+        n = len(self.anomWgt) - 1
 
-    def pb_disabled(self, item, min_w=0, min_h=0):
-        item.setStyleSheet(u"QPushButton {"
-                           u"color: rgb(63, 63, 63);"
-                           u"background-color: rgb(31, 31, 31); border: solid;" # border-style: outset;"
-                           u"border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)"
-                           u"}"
-                           u"QPushButton:pressed {"
-                           u"background-color: rgb(64, 64, 64); border-style: inset"
-                           u"}")
-        item.setMinimumSize(QSize(min_w, min_h))
+        self.ui.anomVL.insertWidget(1 + n, self.anomWgt[n].ui.anomWgt)
+        self.anomWgt[n].ui_actions()
+        self.anomWgt[n].ui.catCB.insertItems(1, self.anom_avail)
+
+        self.anom_view_update(n)
+        # for i in range(len(self.anomWgt)):
+        #     self.anomWgt[i].ui.detailsWgt.setVisible(i == n)
+
+        self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anom_view_update, n))
+        self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anom_up, n))
+        # self.anomWgt1.ui.catCB.currentTextChanged.connect(self.test)
+        # self.anomWgt1.ui.catCB.currentTextChanged.connect(self.anomWgt1.type_changed)
+        #
+        # self.anomWgt1.ui.pushButton.clicked.connect(self.test)
+
+    def anom_view_update(self, n):
+        for i in range(len(self.anomWgt)):
+            self.anomWgt[i].ui.detailsWgt.setVisible(i == n)
+            self.anomWgt[i].ui.detailsPbWgt.setVisible(i != n)
+
+    def anom_up(self, n):
+        # anom_temp = []
+        # for i in range(len(self.anomWgt)):
+        #     anom_temp.append(None)
+        #
+        # for i in range(len(self.anomWgt)):
+        #     # self.ui.anomVL.removeWidget(self.anomWgt[i])
+        #     if i == n:
+        #         new_i = i - 1
+        #     elif i == n - 1:
+        #         new_i = i + 1
+        #     else:
+        #         new_i = i
+        #     anom_temp[new_i] = self.anomWgt[i]
+        # self.anomWgt = anom_temp
+
+
+        # for i in range(len(self.anomWgt)):
+            # self.ui.anomVL.removeWidget(self.anomWgt[i])
+            # print('rimozione widget N.', i + 1, 'di', len(self.anomWgt))
+            # wgt = self.ui.anomVL.itemAt(1).widget()
+            # self.ui.anomVL.removeWidget(self.ui.anomVL.itemAt(i+1).widget())
+            # self.ui.anomVL.removeWidget(1)
+            # self.ui.anomVL.removeWidget(self.anomWgt[0])
+        # print(self.ui.anomVL.count())
+        # self.ui.anomVL.removeWidget(self.ui.anomVL.itemAt(1).widget())
+        for i in range(self.ui.anomVL.count() - 1, 0, -1):
+            print(i, self.ui.anomVL.itemAt(i).widget().objectName())
+            if self.ui.anomVL.itemAt(i).widget().objectName() != 'anomParWgt':
+                self.ui.anomVL.removeWidget(self.ui.anomVL.itemAt(i).widget())
+        # self.ui.anomVL.removeWidget(self.anomWgt[1])
+        #
+        # for i in range(len(self.anomWgt)):
+        #     self.ui.anomVL.insertWidget(new_i + i, self.anomWgt[new_i])
+
+    def test(self):
+        self.anomWgt1.type_changed()
+        print('cliccato')
+
+
+
+        # an_dict = {'mainWgt': QWidget(), 'mainGL': QGridLayout(),
+        #            'catCB': QComboBox(), 'catLbl': QLabel('Cat.:'),
+        #            'typeCB': QComboBox(), 'typeLbl': QLabel('Tipol.:')}
+        # an_dict['mainWgt'].setLayout(an_dict['mainGL'])
+        # self.ui.anomVL.insertWidget(1, an_dict['mainWgt'])
+        #
+        # an_dict['mainGL'].addWidget(an_dict['catLbl'], 0, 0)
+        # an_dict['mainGL'].addWidget(an_dict['catCB'], 0, 1)
+        # an_dict['catCB'].insertItems(0, self.anom_avail)
+        #
+        # an_dict['mainGL'].addWidget(an_dict['typeLbl'], 1, 0)
+        # an_dict['mainGL'].addWidget(an_dict['typeCB'], 1, 1)
+        # an_dict['typeCB'].insertItems(0, ['uno', 'due', 'tre'])
+        #
+        # an_dict['parWgt'] = QWidget()
+        # an_dict['parGL'] = QGridLayout()
+        # an_
+
+
+        # a = QGridLayout()
+        # a.
+
+        # a = QComboBox()
+        # a.insertItems(0, self.anom_avail)
+        # # a.layou
+
+        print('done')
+        pass
+
+    # salvataggio dei dati dall'interfaccia al dizionario
+    def save_par(self):
+        self.bb_fix(self.elem)
+        # TODO: nel caso di variazione di tensione a busbar correlate, bisogna mettere un alert
+
+        for par in el_format[self.cat]:
+            v[self.elem]['par'][par] = self.__getattribute__(par + 'Dsb').value()
+
+        if self.cat in mc['Load'] + mc['Generator']:
+            v[self.elem]['par']['Vn'] = [self.v0Dsb.value()]
+        elif self.cat in mc['Transformer']:
+            v[self.elem]['par']['Vn'] = [self.v0Dsb.value(), self.v1Dsb.value()]
+
+        # Salvataggio del profilo, dove previsto
+        if self.cat in prof_elem:
+            if self.scale_RB.isChecked():
+                v[self.elem]['par']['profile']['name'] = None
+                v[self.elem]['par']['profile']['curve'] = self.scale_DSB.value()
+            else:
+                # TODO: Impostare il salvataggio del profilo
+                pass
+        v[self.elem]['par']['out-of-service'] = self.out_of_service_CkB.isChecked()
+
 
 if __name__ == '__main__':
-    v = yaml.safe_load(open('C:/Users/anton/PycharmProjects/ARStool/CityArea.yml'))
-
-    App = QApplication()
-    window = Window('rs_line')
+    app = QApplication(sys.argv)
+    # mw = QMainWindow()
+    window = ElementProperties()
+    # window.ui.setupUi(mw)
     window.show()
-    sys.exit(App.exec_())
+
+    sys.exit(app.exec_())

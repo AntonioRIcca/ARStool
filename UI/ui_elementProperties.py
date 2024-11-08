@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'test_elementePropertiessqfntS.ui'
+## Form generated from reading UI file 'elementPropertiesHGumVi.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -47,7 +47,7 @@ class Ui_Form(object):
         self.lfWgt = QWidget(self.propertiesWgt)
         self.lfWgt.setObjectName(u"lfWgt")
         self.lfWgt.setMinimumSize(QSize(0, 0))
-        self.lfWgt.setMaximumSize(QSize(16777215, 1000))
+        self.lfWgt.setMaximumSize(QSize(16777215, 20))
         self.lfWgt.setStyleSheet(u"")
         self.lfVL = QVBoxLayout(self.lfWgt)
         self.lfVL.setSpacing(6)
@@ -461,14 +461,64 @@ class Ui_Form(object):
 
         self.relVL.addWidget(self.relResWgt)
 
+        self.relLine.raise_()
         self.relParLbl.raise_()
         self.relParWgt.raise_()
         self.relResLbl.raise_()
         self.relResWgt.raise_()
-        self.relLine.raise_()
         self.relPls.raise_()
 
         self.propertiesVL.addWidget(self.relWgt)
+
+        self.anomWgt = QWidget(self.propertiesWgt)
+        self.anomWgt.setObjectName(u"anomWgt")
+        self.anomWgt.setMaximumSize(QSize(16777215, 500))
+        self.anomWgt.setStyleSheet(u"*{\n"
+"	background-color: rgb(0, 31, 0);\n"
+"	border-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton, QDoubleSpinBox {\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(0, 0, 0); border: solid;\n"
+"	border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(64, 64, 64); border-style: inset\n"
+"}")
+        self.anomVL = QVBoxLayout(self.anomWgt)
+        self.anomVL.setSpacing(15)
+        self.anomVL.setObjectName(u"anomVL")
+        self.anomVL.setContentsMargins(2, 0, 2, 0)
+        self.anomPls = QPushButton(self.anomWgt)
+        self.anomPls.setObjectName(u"anomPls")
+        sizePolicy.setHeightForWidth(self.anomPls.sizePolicy().hasHeightForWidth())
+        self.anomPls.setSizePolicy(sizePolicy)
+        self.anomPls.setMinimumSize(QSize(0, 20))
+
+        self.anomVL.addWidget(self.anomPls)
+
+        self.anomParWgt = QWidget(self.anomWgt)
+        self.anomParWgt.setObjectName(u"anomParWgt")
+        self.anomParWgt.setStyleSheet(u"")
+        self.relParGL_3 = QGridLayout(self.anomParWgt)
+        self.relParGL_3.setObjectName(u"relParGL_3")
+        self.relParGL_3.setContentsMargins(-1, 0, -1, -1)
+        self.anomAddPls = QPushButton(self.anomParWgt)
+        self.anomAddPls.setObjectName(u"anomAddPls")
+
+        self.relParGL_3.addWidget(self.anomAddPls, 2, 0, 1, 1)
+
+        self.verticalSpacer = QSpacerItem(20, 5, QSizePolicy.Minimum, QSizePolicy.MinimumExpanding)
+
+        self.relParGL_3.addItem(self.verticalSpacer, 3, 0, 1, 1)
+
+
+        self.anomVL.addWidget(self.anomParWgt)
+
+
+        self.propertiesVL.addWidget(self.anomWgt)
 
         self.propertiesSpc = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -550,6 +600,8 @@ class Ui_Form(object):
         self.doubleSpinBox_13.setToolTip(QCoreApplication.translate("Form", u"Tempo medio tra i guasti", None))
 #endif // QT_CONFIG(tooltip)
         self.label_29.setText(QCoreApplication.translate("Form", u"yr", None))
+        self.anomPls.setText(QCoreApplication.translate("Form", u"Anomaly Generation", None))
+        self.anomAddPls.setText(QCoreApplication.translate("Form", u"Nuova anomalia", None))
         self.savePLS.setText(QCoreApplication.translate("Form", u"Salva", None))
         self.cancelPLS.setText(QCoreApplication.translate("Form", u"Annulla", None))
     # retranslateUi

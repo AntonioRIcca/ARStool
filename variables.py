@@ -8,6 +8,8 @@ def v_initialize():
 
 
 grid = {
+    'benchmark': False,
+    'current': None,
     'profile': {
         'points': None,
         'step': None,
@@ -45,8 +47,8 @@ bench = {
         'DC-Load': 'load',
         'AC-PV': 'PV',
         'DC-PV': 'PV',
-        # 'AC-Wind': None,
-        # 'DC-Wind': None,
+        'AC-Wind': 'CHP',
+        'DC-Wind': 'CHP',
         'Diesel-Motor': 'CHP',
         'Turbine': 'HYDRO',
     },
@@ -63,7 +65,7 @@ fn = {
 
 fn_en = {
     'lf': True,
-    # 'anom': True,
+    'anom': True,
     # 'opf': True,
     'rel': True,
     # 'gm': True,
@@ -301,11 +303,11 @@ new_par_dict = {
                 'unit': 'kWh',
                 'default': 1000,
             },
-            'SOC': {
-                'label': 'SOC',
-                'unit': '-',
-                'default': 50,
-            },
+            # 'SOC': {
+            #     'label': 'SOC',
+            #     'unit': '-',
+            #     'default': 50,
+            # },
             'others': {
                 'phases': '3',
                 'kvar': '0',
@@ -529,10 +531,12 @@ new_par_dict = {
             'X0': {
                 'label': 'x0',
                 'unit': 'ohm',
+                'default': 1e-9,
             },
             'B0': {
                 'label': 'B0',
                 'unit': 'uS',
+                'default': 1e-9,
             },
             'others': {
                 'nphases': '3',
@@ -851,13 +855,13 @@ el_format = {
         'Vn': {'min': 0.001, 'max': 999.999, 'decimal': 3, 'unit': 'kV', 'default': 0.4},
     },
     'AC-Line': {
-        'B0': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS', 'default': 0},
-        'B1': {'min': 0, 'max': 999.9999, 'decimal': 3, 'unit': 'uS', 'default': 0},
+        'B0': {'min': 0.001, 'max': 999.9999, 'decimal': 3, 'unit': 'uS', 'default': 0},
+        'B1': {'min': 0.001, 'max': 999.9999, 'decimal': 3, 'unit': 'uS', 'default': 0},
         'In': {'min': 0.001, 'max': 999.9999, 'decimal': 3, 'unit': 'A', 'default': 100},
-        'R0': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
+        'R0': {'min': 0.001, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
         'R1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
-        'X0': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
-        'X1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
+        'X0': {'min': 0.00001, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
+        'X1': {'min': 0.00001, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
         'length': {'min': 0, 'max': 9999.999, 'decimal': 3, 'unit': 'Km', 'default': 1},
     },
     'DC-Line': {
