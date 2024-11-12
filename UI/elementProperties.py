@@ -55,8 +55,12 @@ class ElementProperties(QMainWindow):
         self.__getattribute__(variables.visualpar + '_show')()
 
         all_an_def = yaml.safe_load(open(mainpath + '/Functionalities/Anomalies/default.yml'))
+
         if self.cat in all_an_def.keys():
             self.anom_def = all_an_def[self.cat]
+            self.aging_rate_def = all_an_def[self.cat]['Hourly_Degradation']['rate']
+            self.anom_def.pop('Hourly_Degradation')
+
             self.anom_avail = list(self.anom_def.keys())
 
             self.anomalies = dict()
@@ -64,14 +68,21 @@ class ElementProperties(QMainWindow):
         else:
             self.anom_def, self.anom_avail = None, []
 
+        self.ui.agingParWgt.setVisible(False)
+
+
         self.ui.lfPls.clicked.connect(self.lf_show)
         self.ui.relPls.clicked.connect(self.rel_show)
         self.ui.anomPls.clicked.connect(self.anom_show)
         self.ui.anomAddPls.clicked.connect(self.anom_add)
+        self.ui.agingCkB.clicked.connect(self.anom_aging)
 
         self.fillLfPar()
 
         self.fillRelPar()
+
+        if self.cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind']:
+            self.fillAnomPar()
         # if v[self.elem]['lf']['p']:
         #     if 0 in v[self.elem]['lf']['p'].keys():
         #         if
@@ -371,12 +382,87 @@ class ElementProperties(QMainWindow):
 
         pass
 
+    def fillAnomPar(self):
+        self.ui.agingParWgt.setVisible('Hourly_Degradation'in list(v[self.elem]['anom']['par'].keys()))
+        self.ui.agingCkB.setChecked('Hourly_Degradation'in list(v[self.elem]['anom']['par'].keys()))
+        if self.ui.agingCkB.isChecked():
+            self.ui.agingRateDsb.setValue(v[self.elem]['anom']['par']['Hourly_Degradation']['rate'])
+
+        for n in v[self.elem]['anom']['par']['anomalies']:
+            for cat in v[self.elem]['anom']['par']['anomalies'][n]:
+                for typol in v[self.elem]['anom']['par']['anomalies'][n][cat]:
+                    self.anomWgt.append(AnomWgt(self.cat))  # creazione della classe dell'anomalia, aggiunta all'elenco
+                    # n = len(self.anomWgt) - 1  # la sua posizione sarà l'ultima
+
+                    self.ui.anomListVL.insertWidget(1 + n, self.anomWgt[n].ui.anomWgt)  # viene inserito il widget
+                    self.anomWgt[n].ui.catCB.insertItems(1, self.anom_avail)
+                    # self.anomWgt[n].ui_actions()
+                    self.anomWgt[n].ui.catCB.setCurrentText(cat)
+                    self.anomWgt[n].ui.typeCB.setCurrentText(typol)
+
+                    col = 39 + 16 * n
+                    self.anomWgt[n].ui.anomWgt.setStyleSheet('*{background-color: rgb(' + str(col) + ', 0, 0);'
+                                                             'border-radius: 10px;}'
+                                                             'QPushButton, QDoubleSpinBox {'
+                                                             'color: rgb(255, 255, 255); '
+                                                             'background-color: rgb(0, 0, 0);'
+                                                             'border: solid;border-width: 1px; border-radius: 5px; '
+                                                             'border-color: rgb(127, 127, 127)}'
+                                                             'QPushButton:pressed {background-color: rgb(64, 64, 64); '
+                                                             'border-style: inset}')
+
+                    # anom_typol_par = {
+                    #     'scale': 'value',
+                    #     '(1-exp) decrease': 'alpha',
+                    #     '(-x+1) decrease': 'alpha'
+                    # }
+                    self.anomWgt[n].ui.lbdaDsb.setValue(
+                        v[self.elem]['anom']['par']['anomalies'][n][cat][typol]['lambda_a'])
+                    self.anomWgt[n].ui.lbddurDsb.setValue(
+                        v[self.elem]['anom']['par']['anomalies'][n][cat][typol]['lambda_duration'])
+                    self.anomWgt[n].ui.fixCkb.setChecked(
+                        v[self.elem]['anom']['par']['anomalies'][n][cat][typol]['is_fixed'])
+                    self.anomWgt[n].ui.parDsb.setValue(
+                        v[self.elem]['anom']['par']['anomalies'][n][cat][typol][anom_typol_par[typol]])
+
+                    # vengono compresse le altre anomaliem e resa vilibile solo quella corrente
+                    self.anom_view_update(n)
+
+                    # Inizializzazione delle azioni sui pulsanti
+                    self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anom_view_update, n))
+                    self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anom_move, n, 'up'))
+                    self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anom_move, n, 'down'))
+                    self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anom_del, n))
+
+                    # pulsante "up" disabilitato per il primo widget
+                    self.anomWgt[n].ui.upPb.setEnabled(n != 0)
+                    # pulsante "down" disabilitato per l'ultimo widget
+                    self.anomWgt[n].ui.downPb.setEnabled(n != len(self.anomWgt) - 1)
+
+        # Aggiorno l'elenco delle anomalie disponibili in self.anom_avail
+        for anomaly in self.anomWgt:
+            cat = anomaly.ui.catCB.currentText()
+            typol = anomaly.ui.typeCB.currentText()
+            self.anom_avail = list(self.anom_def.keys())
+            for an in self.anomWgt:
+                if an != anomaly:
+                    self.anom_avail.remove(an.ui.catCB.currentText())
+            anomaly.ui.catCB.clear()
+            anomaly.ui.catCB.insertItems(1, self.anom_avail)
+            anomaly.ui_actions()
+            anomaly.ui.catCB.setCurrentText(cat)
+            anomaly.cat_changed()
+            anomaly.ui.typeCB.setCurrentText(typol)
+
+
+
+
     def profileCheck(self):
         self.dsb_format(self.scale_DSB, 0, 1, 4)
         self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
         if isinstance(v[self.elem]['par']['profile']['curve'], list):
-            #TODO: Da cambiare sulla base della nuova definizione dei profili temporali
+            # TODO: Da cambiare sulla base della nuova definizione dei profili temporali
             # time = datetime.now().hour * 4 + int(datetime.now().minute / 15)
             value = v[self.elem]['par']['profile']['curve'][0]
         else:
@@ -705,73 +791,166 @@ class ElementProperties(QMainWindow):
                 buses.pop(buses.index(bb))
         return bb_solved
 
+    def anom_aging(self):
+        self.ui.agingParWgt.setVisible(self.ui.agingCkB.isChecked())
+        if 'Hourly_Degradation' in list(v[self.elem]['anom']['par'].keys()):
+            self.ui.agingRateDsb.setValue(v[self.elem]['anom']['par']['Hourly_Degradation']['rate'])
+        else:
+            self.ui.agingRateDsb.setValue(self.aging_rate_def)
+
     def anom_add(self):
+        # Aggiorno l'elenco delle anomalie disponibili in self.anom_avail
         self.anom_avail = list(self.anom_def.keys())
         for an in self.anomWgt:
             self.anom_avail.remove(an.ui.anomLbl.text())
 
-        print('available anomalies:', self. anom_avail)
-
+        # Se l'elenco delle anomalie disponibile contiene almeno una voce, sarà possibile aggiungere una nuova anomalia
         self.ui.anomAddPls.setVisible(len(self.anom_avail) > 1)
 
-        # from UI.anomWgt import AnomWgt
-        self.anomWgt.append(AnomWgt(self.cat))
-        n = len(self.anomWgt) - 1
+        self.anomWgt.append(AnomWgt(self.cat))  # viene creata la classe della nuova anomalia, ed aggiunta all'elenco
+        n = len(self.anomWgt) - 1               # la sua posizione sarà l'ultima
 
-        self.ui.anomVL.insertWidget(1 + n, self.anomWgt[n].ui.anomWgt)
-        self.anomWgt[n].ui_actions()
+        self.ui.anomListVL.insertWidget(1 + n, self.anomWgt[n].ui.anomWgt)  # viene inserito il widget
+        self.anomWgt[n].ui_actions()                                        # attivazione delle azioni sui combo-box
+        # viene aggiornato il Combobox delle anomalie disponibili
         self.anomWgt[n].ui.catCB.insertItems(1, self.anom_avail)
 
-        self.anom_view_update(n)
-        # for i in range(len(self.anomWgt)):
-        #     self.anomWgt[i].ui.detailsWgt.setVisible(i == n)
+        # Formattazione Widget
+        col = 39 + 16 * n
+        self.anomWgt[n].ui.anomWgt.setStyleSheet('*{background-color: rgb(' + str(col) + ', 0, 0);'
+                                                 'border-radius: 10px;}'
+                                                 'QPushButton, QDoubleSpinBox {'
+                                                 'color: rgb(255, 255, 255);background-color: rgb(0, 0, 0); '
+                                                 'border: solid;border-width: 1px; border-radius: 5px; '
+                                                 'border-color: rgb(127, 127, 127)}'
+                                                 'QPushButton:pressed {background-color: rgb(64, 64, 64); '
+                                                 'border-style: inset}')
+        self.anomWgt[n].ui.detailsWgt.setStyleSheet('*{background-color: rgb(' + str(col) + ', 0, 0);'
+                                                    'border-radius: 10px;}'
+                                                    'QPushButton, QDoubleSpinBox {'
+                                                    'color: rgb(255, 255, 255);background-color: rgb(0, 0, 0); '
+                                                    'border: solid;border-width: 1px; border-radius: 5px; '
+                                                    'border-color: rgb(127, 127, 127)}'
+                                                    'QPushButton:pressed {background-color: rgb(64, 64, 64); '
+                                                    'border-style: inset}')
 
+        # vengono compresse le altre anomaliem e resa vilibile solo quella corrente
+        self.anom_view_update(n)
+
+        # Inizializzazione delle azioni sui pulsanti
         self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anom_view_update, n))
-        self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anom_up, n))
-        # self.anomWgt1.ui.catCB.currentTextChanged.connect(self.test)
-        # self.anomWgt1.ui.catCB.currentTextChanged.connect(self.anomWgt1.type_changed)
-        #
-        # self.anomWgt1.ui.pushButton.clicked.connect(self.test)
+        self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anom_move, n, 'up'))
+        self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anom_move, n, 'down'))
+        self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anom_del, n))
 
     def anom_view_update(self, n):
+        # Viene esploso il dettaglio dell'anomalia "n", le altre sono nascoste
         for i in range(len(self.anomWgt)):
             self.anomWgt[i].ui.detailsWgt.setVisible(i == n)
             self.anomWgt[i].ui.detailsPbWgt.setVisible(i != n)
 
-    def anom_up(self, n):
-        # anom_temp = []
-        # for i in range(len(self.anomWgt)):
-        #     anom_temp.append(None)
-        #
-        # for i in range(len(self.anomWgt)):
-        #     # self.ui.anomVL.removeWidget(self.anomWgt[i])
-        #     if i == n:
-        #         new_i = i - 1
-        #     elif i == n - 1:
-        #         new_i = i + 1
-        #     else:
-        #         new_i = i
-        #     anom_temp[new_i] = self.anomWgt[i]
-        # self.anomWgt = anom_temp
+    def anom_move(self, n, move):
+        anom_temp = []      # variabile d'apoggio dei widget delle anomalie
 
+        for i in range(len(self.anomWgt)):
+            anom_temp.append(None)      # l'array anom_temp deve avere la stessa dimensione di self.anomWgt
+            # # disattivo momentaneamente tutti i pulsanti del widget
+            # self.anomWgt[i].ui.detailsPb.clicked.disconnect()
+            # self.anomWgt[i].ui.upPb.clicked.disconnect()
+            # self.anomWgt[i].ui.downPb.clicked.disconnect()
+            # self.anomWgt[i].ui.cancPb.clicked.disconnect()
 
-        # for i in range(len(self.anomWgt)):
-            # self.ui.anomVL.removeWidget(self.anomWgt[i])
-            # print('rimozione widget N.', i + 1, 'di', len(self.anomWgt))
-            # wgt = self.ui.anomVL.itemAt(1).widget()
-            # self.ui.anomVL.removeWidget(self.ui.anomVL.itemAt(i+1).widget())
-            # self.ui.anomVL.removeWidget(1)
-            # self.ui.anomVL.removeWidget(self.anomWgt[0])
-        # print(self.ui.anomVL.count())
-        # self.ui.anomVL.removeWidget(self.ui.anomVL.itemAt(1).widget())
-        for i in range(self.ui.anomVL.count() - 1, 0, -1):
-            print(i, self.ui.anomVL.itemAt(i).widget().objectName())
-            if self.ui.anomVL.itemAt(i).widget().objectName() != 'anomParWgt':
-                self.ui.anomVL.removeWidget(self.ui.anomVL.itemAt(i).widget())
-        # self.ui.anomVL.removeWidget(self.anomWgt[1])
-        #
-        # for i in range(len(self.anomWgt)):
-        #     self.ui.anomVL.insertWidget(new_i + i, self.anomWgt[new_i])
+        # Riordino i widget mediante l'array d'appoggio
+        for i in range(len(self.anomWgt)):
+            if i == n:
+                # Per il widget selezionato,
+                # se l'azione è "up", devo salire di una posizione (-1), se è "down" devo scendere (+1)
+                new_i = i - int(move == 'up') + int(move == 'down')
+
+            elif i == n - int(move == 'up') + int(move == 'down'):
+                # ... e l'altro deve prendere il psoto del selezionato
+                new_i = i + int(move == 'up') - int(move == 'down')
+
+            else: # altrimenti non deve cambiare niente
+                new_i = i
+            anom_temp[new_i] = self.anomWgt[i]  # riscrivo i widget nell'array temporaneo con le nuove posizioni
+        self.anomWgt = anom_temp                # riporto tutto nellarray dei widget effettivo
+
+        self.anom_populate()
+
+    def anom_populate(self):
+        # Cancellazione di tutti i widget dei dettagloi delle anomalie
+        for i in range(self.ui.anomListVL.count() - 1, -1, -1):
+            self.ui.anomListVL.removeWidget(self.ui.anomListVL.itemAt(i).widget())
+
+            # disattivo momentaneamente tutti i pulsanti del widget
+            self.anomWgt[i].ui.detailsPb.clicked.disconnect()
+            self.anomWgt[i].ui.upPb.clicked.disconnect()
+            self.anomWgt[i].ui.downPb.clicked.disconnect()
+            self.anomWgt[i].ui.cancPb.clicked.disconnect()
+
+        # Riscrittura Widget dei dettagli delle anomalie
+        for n in range(len(self.anomWgt)):
+            self.ui.anomListVL.insertWidget(n, self.anomWgt[n].ui.anomWgt)
+            self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anom_move, n, 'up'))
+            self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anom_move, n, 'down'))
+            self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anom_view_update, n))
+            self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anom_del, n))
+
+            col = 39 + 16 * n
+            self.anomWgt[n].ui.anomWgt.setStyleSheet('*{background-color: rgb(' + str(col) + ', 0, 0);'
+                                                     'border-radius: 10px;}'
+                                                     'QPushButton, QDoubleSpinBox {'
+                                                     'color: rgb(255, 255, 255);background-color: rgb(0, 0, 0); '
+                                                     'border: solid;border-width: 1px; border-radius: 5px; '
+                                                     'border-color: rgb(127, 127, 127)}'                                   
+                                                     'QPushButton:pressed {background-color: rgb(64, 64, 64); '
+                                                     'border-style: inset}')
+
+            # pulsante "up" disabilitato per il primo widget
+            self.anomWgt[n].ui.upPb.setEnabled(n != 0)
+            # pulsante "down" disabilitato per l'ultimo widget
+            self.anomWgt[n].ui.downPb.setEnabled(n != len(self.anomWgt) - 1)
+
+    def anom_del(self, n):
+        print('eliminazione del widget', n)
+        # anon_temp = self.anomWgt
+        # self.anom_avail.append(self.anomWgt[n].ui.anomLbl.text())
+
+        self.ui.anomListVL.removeWidget(self.ui.anomListVL.itemAt(n).widget())
+
+        self.anomWgt[n].ui.anomWgt.deleteLater()
+        # self.ui.anomListVL.update()
+        self.anomWgt.pop(n)
+        self.anom_populate()
+        self.ui.anomAddPls.setVisible(True)
+
+    def anom_save(self):
+        if self.ui.agingCkB.isChecked():
+            v[self.elem]['anom']['par']['Hourly_Degradation'] = {'rate': self.ui.agingRateDsb.value()}
+        elif 'Hourly_Degradation' in list(v[self.elem]['anom']['par'].keys()):
+            v[self.elem]['anom']['par'].pop('Hourly_Degradation')
+
+        i = 0
+        v[self.elem]['anom']['par']['anomalies'] = dict()
+        for anomaly in self.anomWgt:
+            cat = anomaly.ui.catCB.currentText()
+            typol = anomaly.ui.typeCB.currentText()
+            v[self.elem]['anom']['par']['anomalies'][i] = {cat: {typol: {}}}
+
+            int_par = {
+                'scale': 'value',
+                '(1-exp) decrease': 'alpha',
+                '(-x+1) decrease': 'alpha'
+            }
+            v[self.elem]['anom']['par']['anomalies'][i][cat][typol]['lambda_a'] = anomaly.ui.lbdaDsb.value()
+            v[self.elem]['anom']['par']['anomalies'][i][cat][typol]['lambda_duration'] = anomaly.ui.lbddurDsb.value()
+            v[self.elem]['anom']['par']['anomalies'][i][cat][typol]['is_fixed'] = anomaly.ui.fixCkb.isChecked()
+            v[self.elem]['anom']['par']['anomalies'][i][cat][typol][int_par[typol]] = anomaly.ui.parDsb.value()
+            i += 1
+
+                # a = QVBoxLayout()
+        # a.upda
 
     def test(self):
         self.anomWgt1.type_changed()
@@ -830,6 +1009,10 @@ class ElementProperties(QMainWindow):
                 # TODO: Impostare il salvataggio del profilo
                 pass
         v[self.elem]['par']['out-of-service'] = self.out_of_service_CkB.isChecked()
+
+        # salvataggio dei dati di anomalia
+        if self.cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind']:
+            self.anom_save()
 
 
 if __name__ == '__main__':

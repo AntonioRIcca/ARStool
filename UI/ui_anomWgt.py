@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'anomWgtZbmGnK.ui'
+## Form generated from reading UI file 'anomWgtWyyEKU.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -31,7 +31,29 @@ class Ui_mainAnomWgt(object):
         sizePolicy.setHeightForWidth(self.anomWgt.sizePolicy().hasHeightForWidth())
         self.anomWgt.setSizePolicy(sizePolicy)
         self.anomWgt.setMaximumSize(QSize(16777215, 500))
-        self.anomWgt.setStyleSheet(u"QPushButton{\n"
+        self.anomWgt.setStyleSheet(u"*{\n"
+"	background-color: rgb(0, 0, 0);\n"
+"	border-radius: 5px;\n"
+"	color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"QLabel{\n"
+"	border: none;\n"
+"}\n"
+"\n"
+"#AgingTopWgt, #agingParWgt, #agingCkB{\n"
+"	border: none;\n"
+"}\n"
+"\n"
+"\n"
+"#anomWgt{\n"
+"	border: none;\n"
+"	border-width: 1px;\n"
+"	border-color: rgb(128, 128, 128);\n"
+"}\n"
+"\n"
+"\n"
+"QPushButton{\n"
 "	color: rgb(255, 255, 255);\n"
 "	border: solid;\n"
 "	border-width: 1px;\n"
@@ -44,12 +66,6 @@ class Ui_mainAnomWgt(object):
 "	border-style: inset\n"
 "}\n"
 "\n"
-"*{\n"
-"	background-color: rgb(0, 31, 31);\n"
-"	border-radius: 5px;\n"
-"   \n"
-"	color: rgb(255, 255, 255);\n"
-"}\n"
 "\n"
 "QDoubleSpinBox {\n"
 "	color: rgb(255, 255, 255);\n"
@@ -63,7 +79,7 @@ class Ui_mainAnomWgt(object):
         self.relVL = QVBoxLayout(self.anomWgt)
         self.relVL.setSpacing(0)
         self.relVL.setObjectName(u"relVL")
-        self.relVL.setContentsMargins(2, 0, 2, 0)
+        self.relVL.setContentsMargins(2, 5, 2, 5)
         self.anomLbl = QLabel(self.anomWgt)
         self.anomLbl.setObjectName(u"anomLbl")
         font = QFont()
@@ -125,33 +141,6 @@ class Ui_mainAnomWgt(object):
 
 
         self.verticalLayout.addWidget(self.typeWgt)
-
-        self.anomRateWgt = QWidget(self.detailsWgt)
-        self.anomRateWgt.setObjectName(u"anomRateWgt")
-        self.anomRateWgt.setStyleSheet(u"")
-        self.relParGL_2 = QGridLayout(self.anomRateWgt)
-        self.relParGL_2.setObjectName(u"relParGL_2")
-        self.rateDsb = QDoubleSpinBox(self.anomRateWgt)
-        self.rateDsb.setObjectName(u"rateDsb")
-        self.rateDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.rateDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.rateDsb.setDecimals(4)
-        self.rateDsb.setMaximum(999999.900000000023283)
-
-        self.relParGL_2.addWidget(self.rateDsb, 0, 1, 1, 1)
-
-        self.rateUnitLbl = QLabel(self.anomRateWgt)
-        self.rateUnitLbl.setObjectName(u"rateUnitLbl")
-
-        self.relParGL_2.addWidget(self.rateUnitLbl, 0, 2, 1, 1)
-
-        self.rateLbl = QLabel(self.anomRateWgt)
-        self.rateLbl.setObjectName(u"rateLbl")
-
-        self.relParGL_2.addWidget(self.rateLbl, 0, 0, 1, 1)
-
-
-        self.verticalLayout.addWidget(self.anomRateWgt)
 
         self.anomParWgt = QWidget(self.detailsWgt)
         self.anomParWgt.setObjectName(u"anomParWgt")
@@ -270,7 +259,7 @@ class Ui_mainAnomWgt(object):
         self.horizontalLayout_4 = QHBoxLayout(self.detailsPbWgt)
         self.horizontalLayout_4.setSpacing(0)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 10)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_4.addItem(self.horizontalSpacer)
@@ -288,17 +277,6 @@ class Ui_mainAnomWgt(object):
 
         self.relVL.addWidget(self.detailsPbWgt)
 
-        self.line = QFrame(self.anomWgt)
-        self.line.setObjectName(u"line")
-        self.line.setStyleSheet(u"border: solid;\n"
-"border-width: 1px;\n"
-"color: rgb(255, 255, 255);\n"
-"border-color: rgb(255, 255, 255);")
-        self.line.setFrameShape(QFrame.HLine)
-        self.line.setFrameShadow(QFrame.Sunken)
-
-        self.relVL.addWidget(self.line)
-
 
         self.retranslateUi(mainAnomWgt)
 
@@ -310,8 +288,6 @@ class Ui_mainAnomWgt(object):
         self.anomLbl.setText(QCoreApplication.translate("mainAnomWgt", u"Anomalia 1", None))
         self.catLbl.setText(QCoreApplication.translate("mainAnomWgt", u"Cat.:", None))
         self.typeLbl.setText(QCoreApplication.translate("mainAnomWgt", u"Tipol.:", None))
-        self.rateUnitLbl.setText(QCoreApplication.translate("mainAnomWgt", u"1/y", None))
-        self.rateLbl.setText(QCoreApplication.translate("mainAnomWgt", u"rate", None))
         self.parLbl.setText(QCoreApplication.translate("mainAnomWgt", u"valore", None))
         self.lbddurUnitLbl.setText(QCoreApplication.translate("mainAnomWgt", u"h", None))
         self.fixLbl.setText(QCoreApplication.translate("mainAnomWgt", u"is fixed", None))

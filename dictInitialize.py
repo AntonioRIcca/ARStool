@@ -5,6 +5,7 @@ from variables import *
 
 attr_dict = yaml.safe_load(open(mainpath + "/attributes_template.yml"))
 
+
 def dict_initialize(el, cat):
     v[el] = dict()
     for sub in ['top', 'par', 'lf', 'rel']:
@@ -17,6 +18,8 @@ def dict_initialize(el, cat):
 
     lf_initialize(el)
     rel_initialize(el)
+    if cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind']:
+        anom_initialize(el)
 
 
 # Inizializzazione del sottodizionario del profilo dei parametri ("Par") per l'elemento "el"
@@ -25,7 +28,6 @@ def profile_initialize(el):
         'curve': 1,
         'name': None,
     }
-
 
 
 # Inizializzazione del sottodizionario rella Reliability ("rel") per l'elemento "el"
@@ -41,6 +43,8 @@ def rel_initialize(el):
     for p in ['lambda', 'MTBF_ore', 'MTBF_anni', 'Pi_Si']:
         v[el]['rel']['results'][p] = None
 
+def anom_initialize(el):
+    v[el]['anom'] = {'par': {'anomalies': {}}, 'res': {}}
 
 # Inizializzazione del sottodizionario del loadFLow ("lf") per l'elemento "el"
 def lf_initialize(el):

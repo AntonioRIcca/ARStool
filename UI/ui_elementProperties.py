@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'elementPropertiesHGumVi.ui'
+## Form generated from reading UI file 'elementPropertiesUtDHSK.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -21,10 +21,15 @@ class Ui_Form(object):
         if Form.objectName():
             Form.setObjectName(u"Form")
         Form.resize(785, 829)
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
+        Form.setSizePolicy(sizePolicy)
         Form.setStyleSheet(u"background-color: rgb(0, 0, 0);")
         self.propertiesWgt = QWidget(Form)
         self.propertiesWgt.setObjectName(u"propertiesWgt")
-        self.propertiesWgt.setGeometry(QRect(140, 40, 148, 651))
+        self.propertiesWgt.setGeometry(QRect(140, 40, 185, 931))
         self.propertiesWgt.setStyleSheet(u"*{\n"
 "	color: rgb(255, 255, 255);\n"
 "}\n"
@@ -47,7 +52,7 @@ class Ui_Form(object):
         self.lfWgt = QWidget(self.propertiesWgt)
         self.lfWgt.setObjectName(u"lfWgt")
         self.lfWgt.setMinimumSize(QSize(0, 0))
-        self.lfWgt.setMaximumSize(QSize(16777215, 20))
+        self.lfWgt.setMaximumSize(QSize(16777215, 500))
         self.lfWgt.setStyleSheet(u"")
         self.lfVL = QVBoxLayout(self.lfWgt)
         self.lfVL.setSpacing(6)
@@ -55,11 +60,11 @@ class Ui_Form(object):
         self.lfVL.setContentsMargins(2, 0, 2, 0)
         self.lfPls = QPushButton(self.lfWgt)
         self.lfPls.setObjectName(u"lfPls")
-        sizePolicy = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lfPls.sizePolicy().hasHeightForWidth())
-        self.lfPls.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.lfPls.sizePolicy().hasHeightForWidth())
+        self.lfPls.setSizePolicy(sizePolicy1)
         self.lfPls.setMinimumSize(QSize(0, 20))
 
         self.lfVL.addWidget(self.lfPls)
@@ -89,11 +94,6 @@ class Ui_Form(object):
         self.label_19.setObjectName(u"label_19")
 
         self.lfNodeGL.addWidget(self.label_19, 0, 0, 1, 1)
-
-        self.lineEdit = QLineEdit(self.lfNodeWgt)
-        self.lineEdit.setObjectName(u"lineEdit")
-
-        self.lfNodeGL.addWidget(self.lineEdit, 0, 1, 1, 1)
 
 
         self.lfVL.addWidget(self.lfNodeWgt)
@@ -228,16 +228,17 @@ class Ui_Form(object):
         self.lfVL.addWidget(self.lfResMainWgt)
 
         self.lfNodeWgt.raise_()
-        self.lfPls.raise_()
         self.lfResMainWgt.raise_()
         self.lfParMainWgt.raise_()
+        self.lfPls.raise_()
 
         self.propertiesVL.addWidget(self.lfWgt)
 
         self.relWgt = QWidget(self.propertiesWgt)
         self.relWgt.setObjectName(u"relWgt")
-        self.relWgt.setMaximumSize(QSize(16777215, 500))
-        self.relWgt.setStyleSheet(u"*{\n"
+        self.relWgt.setMaximumSize(QSize(16777215, 800))
+        self.relWgt.setStyleSheet(u"/**\n"
+"*{\n"
 "	background-color: rgb(0, 31, 0);\n"
 "	border-radius: 10px;\n"
 "}\n"
@@ -250,78 +251,65 @@ class Ui_Form(object):
 "\n"
 "QPushButton:pressed {\n"
 "	background-color: rgb(64, 64, 64); border-style: inset\n"
-"}")
+"}\n"
+"**/")
         self.relVL = QVBoxLayout(self.relWgt)
+        self.relVL.setSpacing(6)
         self.relVL.setObjectName(u"relVL")
         self.relVL.setContentsMargins(2, 0, 2, 0)
         self.relPls = QPushButton(self.relWgt)
         self.relPls.setObjectName(u"relPls")
-        sizePolicy.setHeightForWidth(self.relPls.sizePolicy().hasHeightForWidth())
-        self.relPls.setSizePolicy(sizePolicy)
+        sizePolicy1.setHeightForWidth(self.relPls.sizePolicy().hasHeightForWidth())
+        self.relPls.setSizePolicy(sizePolicy1)
         self.relPls.setMinimumSize(QSize(0, 20))
 
         self.relVL.addWidget(self.relPls)
 
-        self.relParLbl = QLabel(self.relWgt)
+        self.relParMainWgt = QWidget(self.relWgt)
+        self.relParMainWgt.setObjectName(u"relParMainWgt")
+        self.relParMainWgt.setStyleSheet(u"*{\n"
+"	background-color: rgb(0, 23, 0);\n"
+"	border-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton, QDoubleSpinBox {\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(0, 0, 0); border: solid;\n"
+"	border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(64, 64, 64); border-style: inset\n"
+"}")
+        self.verticalLayout_3 = QVBoxLayout(self.relParMainWgt)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, -1, 0, -1)
+        self.relParLbl = QLabel(self.relParMainWgt)
         self.relParLbl.setObjectName(u"relParLbl")
         self.relParLbl.setAlignment(Qt.AlignCenter)
 
-        self.relVL.addWidget(self.relParLbl)
+        self.verticalLayout_3.addWidget(self.relParLbl)
 
-        self.relParWgt = QWidget(self.relWgt)
+        self.relParWgt = QWidget(self.relParMainWgt)
         self.relParWgt.setObjectName(u"relParWgt")
         self.relParWgt.setStyleSheet(u"")
         self.relParGL = QGridLayout(self.relParWgt)
         self.relParGL.setObjectName(u"relParGL")
-        self.betaDsb = QDoubleSpinBox(self.relParWgt)
-        self.betaDsb.setObjectName(u"betaDsb")
-        self.betaDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.betaDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.betaDsb.setDecimals(3)
-        self.betaDsb.setMinimum(1.000000000000000)
-        self.betaDsb.setMaximum(10.000000000000000)
-        self.betaDsb.setSingleStep(0.100000000000000)
-
-        self.relParGL.addWidget(self.betaDsb, 1, 1, 1, 1)
-
         self.betaUnitLbl = QLabel(self.relParWgt)
         self.betaUnitLbl.setObjectName(u"betaUnitLbl")
 
         self.relParGL.addWidget(self.betaUnitLbl, 1, 2, 1, 1)
-
-        self.alfaLbl = QLabel(self.relParWgt)
-        self.alfaLbl.setObjectName(u"alfaLbl")
-
-        self.relParGL.addWidget(self.alfaLbl, 0, 0, 1, 1)
-
-        self.alfaDsb = QDoubleSpinBox(self.relParWgt)
-        self.alfaDsb.setObjectName(u"alfaDsb")
-        self.alfaDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.alfaDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.alfaDsb.setDecimals(1)
-        self.alfaDsb.setMaximum(999999.900000000023283)
-
-        self.relParGL.addWidget(self.alfaDsb, 0, 1, 1, 1)
 
         self.Pi_EUnitLbl = QLabel(self.relParWgt)
         self.Pi_EUnitLbl.setObjectName(u"Pi_EUnitLbl")
 
         self.relParGL.addWidget(self.Pi_EUnitLbl, 3, 2, 1, 1)
 
-        self.betaLbl = QLabel(self.relParWgt)
-        self.betaLbl.setObjectName(u"betaLbl")
-
-        self.relParGL.addWidget(self.betaLbl, 1, 0, 1, 1)
-
         self.Pi_ELBL = QLabel(self.relParWgt)
         self.Pi_ELBL.setObjectName(u"Pi_ELBL")
+        self.Pi_ELBL.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.relParGL.addWidget(self.Pi_ELBL, 3, 0, 1, 1)
-
-        self.alfaUnitLbl = QLabel(self.relParWgt)
-        self.alfaUnitLbl.setObjectName(u"alfaUnitLbl")
-
-        self.relParGL.addWidget(self.alfaUnitLbl, 0, 2, 1, 1)
 
         self.Pi_EDsb = QDoubleSpinBox(self.relParWgt)
         self.Pi_EDsb.setObjectName(u"Pi_EDsb")
@@ -335,8 +323,25 @@ class Ui_Form(object):
 
         self.Pi_QLbl = QLabel(self.relParWgt)
         self.Pi_QLbl.setObjectName(u"Pi_QLbl")
+        self.Pi_QLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.relParGL.addWidget(self.Pi_QLbl, 4, 0, 1, 1)
+
+        self.alfaUnitLbl = QLabel(self.relParWgt)
+        self.alfaUnitLbl.setObjectName(u"alfaUnitLbl")
+
+        self.relParGL.addWidget(self.alfaUnitLbl, 0, 2, 1, 1)
+
+        self.betaDsb = QDoubleSpinBox(self.relParWgt)
+        self.betaDsb.setObjectName(u"betaDsb")
+        self.betaDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.betaDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.betaDsb.setDecimals(3)
+        self.betaDsb.setMinimum(1.000000000000000)
+        self.betaDsb.setMaximum(10.000000000000000)
+        self.betaDsb.setSingleStep(0.100000000000000)
+
+        self.relParGL.addWidget(self.betaDsb, 1, 1, 1, 1)
 
         self.Pi_QDsb = QDoubleSpinBox(self.relParWgt)
         self.Pi_QDsb.setObjectName(u"Pi_QDsb")
@@ -348,133 +353,44 @@ class Ui_Form(object):
 
         self.relParGL.addWidget(self.Pi_QDsb, 4, 1, 1, 1)
 
+        self.alfaLbl = QLabel(self.relParWgt)
+        self.alfaLbl.setObjectName(u"alfaLbl")
+        self.alfaLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.relParGL.addWidget(self.alfaLbl, 0, 0, 1, 1)
+
+        self.betaLbl = QLabel(self.relParWgt)
+        self.betaLbl.setObjectName(u"betaLbl")
+        self.betaLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.relParGL.addWidget(self.betaLbl, 1, 0, 1, 1)
+
+        self.alfaDsb = QDoubleSpinBox(self.relParWgt)
+        self.alfaDsb.setObjectName(u"alfaDsb")
+        self.alfaDsb.setMinimumSize(QSize(60, 0))
+        self.alfaDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.alfaDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.alfaDsb.setDecimals(1)
+        self.alfaDsb.setMaximum(999999.900000000023283)
+        self.alfaDsb.setValue(438000.000000000000000)
+
+        self.relParGL.addWidget(self.alfaDsb, 0, 1, 1, 1)
+
         self.Pi_QUnitLbl = QLabel(self.relParWgt)
         self.Pi_QUnitLbl.setObjectName(u"Pi_QUnitLbl")
 
         self.relParGL.addWidget(self.Pi_QUnitLbl, 4, 2, 1, 1)
 
 
-        self.relVL.addWidget(self.relParWgt)
-
-        self.relLine = QFrame(self.relWgt)
-        self.relLine.setObjectName(u"relLine")
-        self.relLine.setMaximumSize(QSize(16777215, 1))
-        self.relLine.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-        self.relLine.setFrameShape(QFrame.HLine)
-        self.relLine.setFrameShadow(QFrame.Sunken)
-
-        self.relVL.addWidget(self.relLine)
-
-        self.relResLbl = QLabel(self.relWgt)
-        self.relResLbl.setObjectName(u"relResLbl")
-        self.relResLbl.setAlignment(Qt.AlignCenter)
-
-        self.relVL.addWidget(self.relResLbl)
-
-        self.relResWgt = QWidget(self.relWgt)
-        self.relResWgt.setObjectName(u"relResWgt")
-        self.relResGL = QGridLayout(self.relResWgt)
-        self.relResGL.setObjectName(u"relResGL")
-        self.relResGL.setContentsMargins(0, -1, 0, -1)
-        self.label_26 = QLabel(self.relResWgt)
-        self.label_26.setObjectName(u"label_26")
-
-        self.relResGL.addWidget(self.label_26, 1, 2, 1, 1)
-
-        self.doubleSpinBox_11 = QDoubleSpinBox(self.relResWgt)
-        self.doubleSpinBox_11.setObjectName(u"doubleSpinBox_11")
-        self.doubleSpinBox_11.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_11.setReadOnly(True)
-        self.doubleSpinBox_11.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.doubleSpinBox_11.setDecimals(1)
-        self.doubleSpinBox_11.setMaximum(999999.900000000023283)
-
-        self.relResGL.addWidget(self.doubleSpinBox_11, 3, 1, 1, 1)
-
-        self.doubleSpinBox_10 = QDoubleSpinBox(self.relResWgt)
-        self.doubleSpinBox_10.setObjectName(u"doubleSpinBox_10")
-        self.doubleSpinBox_10.setAcceptDrops(True)
-        self.doubleSpinBox_10.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_10.setReadOnly(True)
-        self.doubleSpinBox_10.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.doubleSpinBox_10.setDecimals(4)
-        self.doubleSpinBox_10.setMaximum(1000.000000000000000)
-        self.doubleSpinBox_10.setValue(0.000000000000000)
-
-        self.relResGL.addWidget(self.doubleSpinBox_10, 0, 1, 1, 1)
-
-        self.label_24 = QLabel(self.relResWgt)
-        self.label_24.setObjectName(u"label_24")
-
-        self.relResGL.addWidget(self.label_24, 3, 2, 1, 1)
-
-        self.label_27 = QLabel(self.relResWgt)
-        self.label_27.setObjectName(u"label_27")
-        self.label_27.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.relResGL.addWidget(self.label_27, 1, 0, 1, 1)
-
-        self.label_28 = QLabel(self.relResWgt)
-        self.label_28.setObjectName(u"label_28")
-
-        self.relResGL.addWidget(self.label_28, 0, 2, 1, 1)
-
-        self.label_23 = QLabel(self.relResWgt)
-        self.label_23.setObjectName(u"label_23")
-        self.label_23.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.relResGL.addWidget(self.label_23, 0, 0, 1, 1)
-
-        self.doubleSpinBox_12 = QDoubleSpinBox(self.relResWgt)
-        self.doubleSpinBox_12.setObjectName(u"doubleSpinBox_12")
-        self.doubleSpinBox_12.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_12.setReadOnly(True)
-        self.doubleSpinBox_12.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.doubleSpinBox_12.setDecimals(5)
-        self.doubleSpinBox_12.setMinimum(1.000000000000000)
-        self.doubleSpinBox_12.setMaximum(10.000000000000000)
-        self.doubleSpinBox_12.setSingleStep(0.100000000000000)
-
-        self.relResGL.addWidget(self.doubleSpinBox_12, 1, 1, 1, 1)
-
-        self.label_25 = QLabel(self.relResWgt)
-        self.label_25.setObjectName(u"label_25")
-        self.label_25.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.relResGL.addWidget(self.label_25, 3, 0, 1, 1)
-
-        self.doubleSpinBox_13 = QDoubleSpinBox(self.relResWgt)
-        self.doubleSpinBox_13.setObjectName(u"doubleSpinBox_13")
-        self.doubleSpinBox_13.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.doubleSpinBox_13.setReadOnly(True)
-        self.doubleSpinBox_13.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.doubleSpinBox_13.setDecimals(5)
-        self.doubleSpinBox_13.setMaximum(99.000000000000000)
-
-        self.relResGL.addWidget(self.doubleSpinBox_13, 4, 1, 1, 1)
-
-        self.label_29 = QLabel(self.relResWgt)
-        self.label_29.setObjectName(u"label_29")
-
-        self.relResGL.addWidget(self.label_29, 4, 2, 1, 1)
+        self.verticalLayout_3.addWidget(self.relParWgt)
 
 
-        self.relVL.addWidget(self.relResWgt)
+        self.relVL.addWidget(self.relParMainWgt)
 
-        self.relLine.raise_()
-        self.relParLbl.raise_()
-        self.relParWgt.raise_()
-        self.relResLbl.raise_()
-        self.relResWgt.raise_()
-        self.relPls.raise_()
-
-        self.propertiesVL.addWidget(self.relWgt)
-
-        self.anomWgt = QWidget(self.propertiesWgt)
-        self.anomWgt.setObjectName(u"anomWgt")
-        self.anomWgt.setMaximumSize(QSize(16777215, 500))
-        self.anomWgt.setStyleSheet(u"*{\n"
-"	background-color: rgb(0, 31, 0);\n"
+        self.relResMainWgt = QWidget(self.relWgt)
+        self.relResMainWgt.setObjectName(u"relResMainWgt")
+        self.relResMainWgt.setStyleSheet(u"*{\n"
+"	background-color: rgb(0, 47, 0);\n"
 "	border-radius: 10px;\n"
 "}\n"
 "\n"
@@ -487,36 +403,278 @@ class Ui_Form(object):
 "QPushButton:pressed {\n"
 "	background-color: rgb(64, 64, 64); border-style: inset\n"
 "}")
+        self.verticalLayout_4 = QVBoxLayout(self.relResMainWgt)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, -1, 0, -1)
+        self.relResLbl = QLabel(self.relResMainWgt)
+        self.relResLbl.setObjectName(u"relResLbl")
+        self.relResLbl.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_4.addWidget(self.relResLbl)
+
+        self.relResWgt = QWidget(self.relResMainWgt)
+        self.relResWgt.setObjectName(u"relResWgt")
+        self.relResGL = QGridLayout(self.relResWgt)
+        self.relResGL.setObjectName(u"relResGL")
+        self.relResGL.setContentsMargins(0, -1, 0, -1)
+        self.lbdRelUniLbl = QLabel(self.relResWgt)
+        self.lbdRelUniLbl.setObjectName(u"lbdRelUniLbl")
+
+        self.relResGL.addWidget(self.lbdRelUniLbl, 0, 2, 1, 1)
+
+        self.mtbfHrsDsb = QDoubleSpinBox(self.relResWgt)
+        self.mtbfHrsDsb.setObjectName(u"mtbfHrsDsb")
+        self.mtbfHrsDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.mtbfHrsDsb.setReadOnly(True)
+        self.mtbfHrsDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.mtbfHrsDsb.setDecimals(1)
+        self.mtbfHrsDsb.setMaximum(999999.900000000023283)
+
+        self.relResGL.addWidget(self.mtbfHrsDsb, 3, 1, 1, 1)
+
+        self.rRelLbl = QLabel(self.relResWgt)
+        self.rRelLbl.setObjectName(u"rRelLbl")
+        self.rRelLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.relResGL.addWidget(self.rRelLbl, 1, 0, 1, 1)
+
+        self.mtbfYrDsb = QDoubleSpinBox(self.relResWgt)
+        self.mtbfYrDsb.setObjectName(u"mtbfYrDsb")
+        self.mtbfYrDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.mtbfYrDsb.setReadOnly(True)
+        self.mtbfYrDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.mtbfYrDsb.setDecimals(5)
+        self.mtbfYrDsb.setMaximum(99.000000000000000)
+
+        self.relResGL.addWidget(self.mtbfYrDsb, 4, 1, 1, 1)
+
+        self.lbdRelDsb = QDoubleSpinBox(self.relResWgt)
+        self.lbdRelDsb.setObjectName(u"lbdRelDsb")
+        self.lbdRelDsb.setMinimumSize(QSize(60, 0))
+        self.lbdRelDsb.setAcceptDrops(True)
+        self.lbdRelDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.lbdRelDsb.setReadOnly(True)
+        self.lbdRelDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.lbdRelDsb.setDecimals(4)
+        self.lbdRelDsb.setMaximum(1000.000000000000000)
+        self.lbdRelDsb.setValue(0.000000000000000)
+
+        self.relResGL.addWidget(self.lbdRelDsb, 0, 1, 1, 1)
+
+        self.mtbfHrsLbl = QLabel(self.relResWgt)
+        self.mtbfHrsLbl.setObjectName(u"mtbfHrsLbl")
+        self.mtbfHrsLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.relResGL.addWidget(self.mtbfHrsLbl, 3, 0, 1, 1)
+
+        self.rRelDsb = QDoubleSpinBox(self.relResWgt)
+        self.rRelDsb.setObjectName(u"rRelDsb")
+        self.rRelDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.rRelDsb.setReadOnly(True)
+        self.rRelDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.rRelDsb.setDecimals(5)
+        self.rRelDsb.setMinimum(1.000000000000000)
+        self.rRelDsb.setMaximum(10.000000000000000)
+        self.rRelDsb.setSingleStep(0.100000000000000)
+
+        self.relResGL.addWidget(self.rRelDsb, 1, 1, 1, 1)
+
+        self.rRelUnitLbl = QLabel(self.relResWgt)
+        self.rRelUnitLbl.setObjectName(u"rRelUnitLbl")
+
+        self.relResGL.addWidget(self.rRelUnitLbl, 1, 2, 1, 1)
+
+        self.mtbfHrsUnitLbl = QLabel(self.relResWgt)
+        self.mtbfHrsUnitLbl.setObjectName(u"mtbfHrsUnitLbl")
+
+        self.relResGL.addWidget(self.mtbfHrsUnitLbl, 3, 2, 1, 1)
+
+        self.lbdRelLbl = QLabel(self.relResWgt)
+        self.lbdRelLbl.setObjectName(u"lbdRelLbl")
+        self.lbdRelLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.relResGL.addWidget(self.lbdRelLbl, 0, 0, 1, 1)
+
+        self.mtbfYrsUnitLbl = QLabel(self.relResWgt)
+        self.mtbfYrsUnitLbl.setObjectName(u"mtbfYrsUnitLbl")
+
+        self.relResGL.addWidget(self.mtbfYrsUnitLbl, 4, 2, 1, 1)
+
+
+        self.verticalLayout_4.addWidget(self.relResWgt)
+
+
+        self.relVL.addWidget(self.relResMainWgt)
+
+        self.relParMainWgt.raise_()
+        self.relResMainWgt.raise_()
+        self.relPls.raise_()
+
+        self.propertiesVL.addWidget(self.relWgt)
+
+        self.anomWgt = QWidget(self.propertiesWgt)
+        self.anomWgt.setObjectName(u"anomWgt")
+        self.anomWgt.setMaximumSize(QSize(16777215, 500))
+        self.anomWgt.setStyleSheet(u"*{\n"
+"   /**background-color: rgb(128, 0, 0);**/\n"
+"	/**border-radius: 10px;**/\n"
+"}\n"
+"\n"
+"#anomAddPls, QDoubleSpinBox {\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(0, 0, 0); border: solid;\n"
+"	border-width: 1px; border-radius: 10px; border-color: rgb(127, 127, 127)\n"
+"}\n"
+"\n"
+"#anomAddPls:pressed {\n"
+"	background-color: rgb(64, 64, 64); border-style: inset\n"
+"}")
         self.anomVL = QVBoxLayout(self.anomWgt)
-        self.anomVL.setSpacing(15)
+        self.anomVL.setSpacing(6)
         self.anomVL.setObjectName(u"anomVL")
         self.anomVL.setContentsMargins(2, 0, 2, 0)
         self.anomPls = QPushButton(self.anomWgt)
         self.anomPls.setObjectName(u"anomPls")
-        sizePolicy.setHeightForWidth(self.anomPls.sizePolicy().hasHeightForWidth())
-        self.anomPls.setSizePolicy(sizePolicy)
+        sizePolicy1.setHeightForWidth(self.anomPls.sizePolicy().hasHeightForWidth())
+        self.anomPls.setSizePolicy(sizePolicy1)
         self.anomPls.setMinimumSize(QSize(0, 20))
 
         self.anomVL.addWidget(self.anomPls)
 
+        self.agingWgt = QWidget(self.anomWgt)
+        self.agingWgt.setObjectName(u"agingWgt")
+        self.agingWgt.setStyleSheet(u"*{\n"
+"	background-color: rgb(24, 0, 0);\n"
+"	border-radius: 5px;\n"
+"	color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"QLabel{\n"
+"	border: none;\n"
+"}\n"
+"\n"
+"#AgingTopWgt, #agingParWgt, #agingCkB{\n"
+"	border: none;\n"
+"	background-color: rgb(24, 0, 0);\n"
+"	border-radius: 5px;\n"
+"	color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"\n"
+"#agingWgt{\n"
+"	border: none;\n"
+"	border-width: 1px;\n"
+"	border-radius: 10px;\n"
+"	border-color: rgb(128, 128, 128);\n"
+"}\n"
+"\n"
+"#agingRateDsb{\n"
+"		border-radius: 0px\n"
+"}")
+        self.verticalLayout_2 = QVBoxLayout(self.agingWgt)
+        self.verticalLayout_2.setSpacing(5)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(1, 1, 1, 5)
+        self.AgingTopWgt = QWidget(self.agingWgt)
+        self.AgingTopWgt.setObjectName(u"AgingTopWgt")
+        self.horizontalLayout_2 = QHBoxLayout(self.AgingTopWgt)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.agingLbl = QLabel(self.AgingTopWgt)
+        self.agingLbl.setObjectName(u"agingLbl")
+        self.agingLbl.setFont(font)
+        self.agingLbl.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_2.addWidget(self.agingLbl)
+
+        self.agingCkB = QCheckBox(self.AgingTopWgt)
+        self.agingCkB.setObjectName(u"agingCkB")
+        self.agingCkB.setMaximumSize(QSize(15, 16777215))
+
+        self.horizontalLayout_2.addWidget(self.agingCkB)
+
+
+        self.verticalLayout_2.addWidget(self.AgingTopWgt)
+
+        self.agingParWgt = QWidget(self.agingWgt)
+        self.agingParWgt.setObjectName(u"agingParWgt")
+        self.horizontalLayout = QHBoxLayout(self.agingParWgt)
+        self.horizontalLayout.setSpacing(5)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.agingRateLbl = QLabel(self.agingParWgt)
+        self.agingRateLbl.setObjectName(u"agingRateLbl")
+        self.agingRateLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.horizontalLayout.addWidget(self.agingRateLbl)
+
+        self.agingRateDsb = QDoubleSpinBox(self.agingParWgt)
+        self.agingRateDsb.setObjectName(u"agingRateDsb")
+        self.agingRateDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.agingRateDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.agingRateDsb.setDecimals(4)
+        self.agingRateDsb.setMaximum(999999.900000000023283)
+
+        self.horizontalLayout.addWidget(self.agingRateDsb)
+
+        self.rateUnitLbl = QLabel(self.agingParWgt)
+        self.rateUnitLbl.setObjectName(u"rateUnitLbl")
+
+        self.horizontalLayout.addWidget(self.rateUnitLbl)
+
+
+        self.verticalLayout_2.addWidget(self.agingParWgt)
+
+
+        self.anomVL.addWidget(self.agingWgt)
+
+        self.anomListWgt = QWidget(self.anomWgt)
+        self.anomListWgt.setObjectName(u"anomListWgt")
+        self.anomListVL = QVBoxLayout(self.anomListWgt)
+        self.anomListVL.setSpacing(10)
+        self.anomListVL.setObjectName(u"anomListVL")
+        self.anomListVL.setContentsMargins(0, 0, 0, 0)
+
+        self.anomVL.addWidget(self.anomListWgt)
+
         self.anomParWgt = QWidget(self.anomWgt)
         self.anomParWgt.setObjectName(u"anomParWgt")
+        self.anomParWgt.setMinimumSize(QSize(0, 20))
         self.anomParWgt.setStyleSheet(u"")
         self.relParGL_3 = QGridLayout(self.anomParWgt)
+        self.relParGL_3.setSpacing(0)
         self.relParGL_3.setObjectName(u"relParGL_3")
-        self.relParGL_3.setContentsMargins(-1, 0, -1, -1)
+        self.relParGL_3.setContentsMargins(0, 0, 0, 0)
         self.anomAddPls = QPushButton(self.anomParWgt)
         self.anomAddPls.setObjectName(u"anomAddPls")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.anomAddPls.sizePolicy().hasHeightForWidth())
+        self.anomAddPls.setSizePolicy(sizePolicy2)
+        self.anomAddPls.setMinimumSize(QSize(120, 20))
+        self.anomAddPls.setMaximumSize(QSize(120, 16777215))
 
-        self.relParGL_3.addWidget(self.anomAddPls, 2, 0, 1, 1)
+        self.relParGL_3.addWidget(self.anomAddPls, 2, 1, 1, 1)
 
-        self.verticalSpacer = QSpacerItem(20, 5, QSizePolicy.Minimum, QSizePolicy.MinimumExpanding)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.relParGL_3.addItem(self.verticalSpacer, 3, 0, 1, 1)
+        self.relParGL_3.addItem(self.horizontalSpacer, 2, 2, 1, 1)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.relParGL_3.addItem(self.horizontalSpacer_2, 2, 0, 1, 1)
 
 
         self.anomVL.addWidget(self.anomParWgt)
 
+        self.verticalSpacer = QSpacerItem(20, 5, QSizePolicy.Minimum, QSizePolicy.MinimumExpanding)
+
+        self.anomVL.addItem(self.verticalSpacer)
+
+        self.agingWgt.raise_()
+        self.anomListWgt.raise_()
+        self.anomParWgt.raise_()
+        self.anomPls.raise_()
 
         self.propertiesVL.addWidget(self.anomWgt)
 
@@ -555,7 +713,6 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.lfPls.setText(QCoreApplication.translate("Form", u"LoadFlow", None))
         self.label_19.setText(QCoreApplication.translate("Form", u"HV Node", None))
-        self.lineEdit.setText(QCoreApplication.translate("Form", u"Busbar", None))
         self.lfParLbl.setText(QCoreApplication.translate("Form", u"Parameters", None))
         self.label.setText(QCoreApplication.translate("Form", u"Power", None))
         self.label_6.setText(QCoreApplication.translate("Form", u"unit", None))
@@ -567,40 +724,44 @@ class Ui_Form(object):
         self.relPls.setText(QCoreApplication.translate("Form", u"Reliability", None))
         self.relParLbl.setText(QCoreApplication.translate("Form", u"Parameters", None))
         self.betaUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
-        self.alfaLbl.setText(QCoreApplication.translate("Form", u"alfa", None))
         self.Pi_EUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
-        self.betaLbl.setText(QCoreApplication.translate("Form", u"beta", None))
         self.Pi_ELBL.setText(QCoreApplication.translate("Form", u"Pi_E", None))
-        self.alfaUnitLbl.setText(QCoreApplication.translate("Form", u"h", None))
 #if QT_CONFIG(tooltip)
         self.Pi_EDsb.setToolTip(QCoreApplication.translate("Form", u"Fattore di Stress Ambientale ", None))
 #endif // QT_CONFIG(tooltip)
         self.Pi_QLbl.setText(QCoreApplication.translate("Form", u"Pi_Q", None))
+        self.alfaUnitLbl.setText(QCoreApplication.translate("Form", u"h", None))
 #if QT_CONFIG(tooltip)
         self.Pi_QDsb.setToolTip(QCoreApplication.translate("Form", u"Fattore di Qialit\u00e0", None))
 #endif // QT_CONFIG(tooltip)
+        self.alfaLbl.setText(QCoreApplication.translate("Form", u"alfa", None))
+        self.betaLbl.setText(QCoreApplication.translate("Form", u"beta", None))
         self.Pi_QUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
         self.relResLbl.setText(QCoreApplication.translate("Form", u"Results", None))
-        self.label_26.setText(QCoreApplication.translate("Form", u"-", None))
+        self.lbdRelUniLbl.setText(QCoreApplication.translate("Form", u"f/h", None))
 #if QT_CONFIG(tooltip)
-        self.doubleSpinBox_11.setToolTip(QCoreApplication.translate("Form", u"Tempo medio tra i guasti", None))
+        self.mtbfHrsDsb.setToolTip(QCoreApplication.translate("Form", u"Tempo medio tra i guasti", None))
+#endif // QT_CONFIG(tooltip)
+        self.rRelLbl.setText(QCoreApplication.translate("Form", u"R", None))
+#if QT_CONFIG(tooltip)
+        self.mtbfYrDsb.setToolTip(QCoreApplication.translate("Form", u"Tempo medio tra i guasti", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
-        self.doubleSpinBox_10.setToolTip(QCoreApplication.translate("Form", u"Tasso di guasto", None))
+        self.lbdRelDsb.setToolTip(QCoreApplication.translate("Form", u"Tasso di guasto", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_24.setText(QCoreApplication.translate("Form", u"h", None))
-        self.label_27.setText(QCoreApplication.translate("Form", u"R", None))
-        self.label_28.setText(QCoreApplication.translate("Form", u"f/h", None))
-        self.label_23.setText(QCoreApplication.translate("Form", u"lambda", None))
+        self.mtbfHrsLbl.setText(QCoreApplication.translate("Form", u"MTBF", None))
 #if QT_CONFIG(tooltip)
-        self.doubleSpinBox_12.setToolTip(QCoreApplication.translate("Form", u"Affidabilit\u00e0", None))
+        self.rRelDsb.setToolTip(QCoreApplication.translate("Form", u"Affidabilit\u00e0", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_25.setText(QCoreApplication.translate("Form", u"MTBF", None))
-#if QT_CONFIG(tooltip)
-        self.doubleSpinBox_13.setToolTip(QCoreApplication.translate("Form", u"Tempo medio tra i guasti", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_29.setText(QCoreApplication.translate("Form", u"yr", None))
+        self.rRelUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
+        self.mtbfHrsUnitLbl.setText(QCoreApplication.translate("Form", u"h", None))
+        self.lbdRelLbl.setText(QCoreApplication.translate("Form", u"lambda", None))
+        self.mtbfYrsUnitLbl.setText(QCoreApplication.translate("Form", u"yr", None))
         self.anomPls.setText(QCoreApplication.translate("Form", u"Anomaly Generation", None))
+        self.agingLbl.setText(QCoreApplication.translate("Form", u"Aging", None))
+        self.agingCkB.setText("")
+        self.agingRateLbl.setText(QCoreApplication.translate("Form", u"rate", None))
+        self.rateUnitLbl.setText(QCoreApplication.translate("Form", u"1/y", None))
         self.anomAddPls.setText(QCoreApplication.translate("Form", u"Nuova anomalia", None))
         self.savePLS.setText(QCoreApplication.translate("Form", u"Salva", None))
         self.cancelPLS.setText(QCoreApplication.translate("Form", u"Annulla", None))

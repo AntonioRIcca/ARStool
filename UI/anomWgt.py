@@ -19,12 +19,13 @@ class AnomWgt(QtWidgets.QWidget):
         self.cat = cat
 
         self.defdict = yaml.safe_load(open(mainpath + '/Functionalities/Anomalies/default.yml'))[self.cat]
-
-        self.int_par = {
-            'scale': 'value',
-            '(1-exp) decrease': 'alpha',
-            '(-x+1) decrease': 'alpha'
-        }
+        self.defdict.pop('Hourly_Degradation')
+        #
+        # self.anom_typol_par = {
+        #     'scale': 'value',
+        #     '(1-exp) decrease': 'alpha',
+        #     '(-x+1) decrease': 'alpha'
+        # }
 
         # self.ui.typeWgt.setVisible(False)
         # self.ui.anomParWgt.setVisible(False)
@@ -38,12 +39,6 @@ class AnomWgt(QtWidgets.QWidget):
 
     def cat_changed(self):
         self.ui.anomLbl.setText(self.ui.catCB.currentText())
-        if self.ui.catCB.currentText() == 'Hourly_Degradation':
-            self.ui.anomRateWgt.setVisible(True)
-            self.ui.anomParWgt.setVisible(False)
-        else:
-            self.ui.anomRateWgt.setVisible(False)
-            self.ui.anomParWgt.setVisible(True)
 
         cat = self.ui.catCB.currentText()
 
@@ -56,17 +51,13 @@ class AnomWgt(QtWidgets.QWidget):
         cat = self.ui.catCB.currentText()
         typol = self.ui.typeCB.currentText()
 
-        if cat != 'Hourly_Degradation':
-            par = self.int_par[typol]
-            self.ui.parLbl.setText(self.int_par[typol])
+        par = anom_typol_par[typol]
+        self.ui.parLbl.setText(anom_typol_par[typol])
 
-            self.ui.lbdaDsb.setValue(self.defdict[cat][typol]['lambda_a'])
-            self.ui.lbddurDsb.setValue(self.defdict[cat][typol]['lambda_duration'])
-            self.ui.parDsb.setValue(self.defdict[cat][typol][self.int_par[typol]])
-            self.ui.fixCkb.setChecked(self.defdict[cat][typol]['is_fixed'])
-        else:
-            self.ui.rateDsb.setValue(self.defdict[cat][typol])
-
+        self.ui.lbdaDsb.setValue(self.defdict[cat][typol]['lambda_a'])
+        self.ui.lbddurDsb.setValue(self.defdict[cat][typol]['lambda_duration'])
+        self.ui.parDsb.setValue(self.defdict[cat][typol][anom_typol_par[typol]])
+        self.ui.fixCkb.setChecked(self.defdict[cat][typol]['is_fixed'])
 
 
     def test(self):

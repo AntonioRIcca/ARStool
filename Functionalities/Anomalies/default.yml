@@ -39,6 +39,11 @@ DC-PV:
       lambda_duration: 1.5
       is_fixed: False
       alpha: 0.5
+    (-x+1) antonio:
+      lambda_a: 1
+      lambda_duration: 1.5
+      is_fixed: False
+      alpha: 0.5
   Hot_Spot: 
     scale: 
       lambda_a: 1

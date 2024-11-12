@@ -944,3 +944,9 @@ DC_elem = ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'DC-BESS', 'DC-PV', 'DC-Wind
 
 prof_elem = ['AC-Load', 'DC-Load', 'AC-BESS', 'DC-BESS', 'AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor',
              'Turbine']
+
+anom_typol_par = {
+    'scale': 'value',
+    '(1-exp) decrease': 'alpha',
+    '(-x+1) decrease': 'alpha'
+}

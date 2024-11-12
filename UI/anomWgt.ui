@@ -38,7 +38,29 @@
     </size>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
+    <string notr="true">*{
+	background-color: rgb(0, 0, 0);
+	border-radius: 5px;
+	color: rgb(255, 255, 255);
+}
+
+QLabel{
+	border: none;
+}
+
+#AgingTopWgt, #agingParWgt, #agingCkB{
+	border: none;
+}
+
+
+#anomWgt{
+	border: none;
+	border-width: 1px;
+	border-color: rgb(128, 128, 128);
+}
+
+
+QPushButton{
 	color: rgb(255, 255, 255);
 	border: solid;
 	border-width: 1px;
@@ -51,12 +73,6 @@ QPushButton:pressed {
 	border-style: inset
 }
 
-*{
-	background-color: rgb(0, 31, 31);
-	border-radius: 5px;
-   
-	color: rgb(255, 255, 255);
-}
 
 QDoubleSpinBox {
 	color: rgb(255, 255, 255);
@@ -76,13 +92,13 @@ QPushButton:pressed {
      <number>2</number>
     </property>
     <property name="topMargin">
-     <number>0</number>
+     <number>5</number>
     </property>
     <property name="rightMargin">
      <number>2</number>
     </property>
     <property name="bottomMargin">
-     <number>0</number>
+     <number>5</number>
     </property>
     <item>
      <widget class="QLabel" name="anomLbl">
@@ -191,45 +207,6 @@ QPushButton:pressed {
           </item>
           <item>
            <widget class="QComboBox" name="typeCB"/>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="anomRateWgt" native="true">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <layout class="QGridLayout" name="relParGL_2">
-          <item row="0" column="1">
-           <widget class="QDoubleSpinBox" name="rateDsb">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
-            </property>
-            <property name="decimals">
-             <number>4</number>
-            </property>
-            <property name="maximum">
-             <double>999999.900000000023283</double>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="rateUnitLbl">
-            <property name="text">
-             <string>1/y</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="rateLbl">
-            <property name="text">
-             <string>rate</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>
@@ -456,7 +433,7 @@ QPushButton:pressed {
         <number>0</number>
        </property>
        <property name="bottomMargin">
-        <number>10</number>
+        <number>0</number>
        </property>
        <item>
         <spacer name="horizontalSpacer">
@@ -498,19 +475,6 @@ QPushButton:pressed {
         </spacer>
        </item>
       </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="Line" name="line">
-      <property name="styleSheet">
-       <string notr="true">border: solid;
-border-width: 1px;
-color: rgb(255, 255, 255);
-border-color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
      </widget>
     </item>
    </layout>
