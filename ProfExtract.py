@@ -40,8 +40,6 @@ import datetime
 d = datetime.datetime.today()
 nd = d + datetime.timedelta(-2)
 
-print(d, d.weekday(), nd, nd.weekday())
-
 genProf = dict()
 file = open('./_benchmark/_data/_profiles/Gen_year.txt')
 
@@ -54,9 +52,6 @@ for h in head:
         'weekday': [],
         'day': [],
     }
-print(head)
-
-print(genProf)
 
 for p in ['year', 'month', 'weekday', 'day']:
     file = open('./_benchmark/_data/_profiles/Gen_' + p + '.txt')
@@ -66,11 +61,6 @@ for p in ['year', 'month', 'weekday', 'day']:
         r = l.split('\t')
         for i in range(len(head)):
             genProf[head[i]][p].append(float(r[i]))
-
-print(genProf['PV']['year'])
-print(genProf['PV']['month'])
-print(genProf['PV']['weekday'])
-print(genProf['PV']['day'])
 
 daystart = datetime.datetime(2024, 1, 1, 0, 0)
 # dayend = datetime.datetime(2024, 1, 30, 23, 45)

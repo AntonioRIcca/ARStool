@@ -293,10 +293,7 @@ class ElementsProfile(QtWidgets.QDialog):
             import defProfImport as dpi
             self.name, self.profile = dpi.defaultProfileImport(self.elem, self.cat)
 
-            print(self.name)
-            print('righe', self.ui.profileTW.rowCount())
             if self.ui.profileTW.rowCount() > 0:
-                print('agg')
                 self.plot_profile()
                 self.table_fill()
                 self.cat = None
@@ -328,8 +325,6 @@ class ElementsProfile(QtWidgets.QDialog):
                     for line in f.readlines():
                         prof.append(float(line))
                         i += 1
-                    print(len(prof))
-                    print(grid['profile']['points'])
                     if len(prof) == grid['profile']['points']:
                         self.profile = prof
                         self.plot_profile()

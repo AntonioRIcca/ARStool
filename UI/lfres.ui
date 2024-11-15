@@ -1170,7 +1170,7 @@ QPushButton:pressed{
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="lfResDteMinusPb">
          <property name="minimumSize">
           <size>
            <width>30</width>
@@ -1220,7 +1220,7 @@ color: rgb(255, 255, 127);</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="lfResDtePlusPb">
          <property name="minimumSize">
           <size>
            <width>30</width>

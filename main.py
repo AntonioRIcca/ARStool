@@ -1,6 +1,7 @@
 # import py_dss_interface
 # from PySide2.QtCharts import QChart, QChartView, QBarSet, QPercentBarSeries, QBarCategoryAxis
 import copy
+import datetime
 import datetime as dt
 import os.path
 from functools import partial
@@ -10,6 +11,7 @@ from PySide2 import QtGui, QtCore, QtWidgets
 
 from PySide2.QtCharts import *
 
+import variables
 # import matplotlib
 # from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 # import matplotlib.pyplot as plt
@@ -52,6 +54,8 @@ class Main:
 
         self.dsspath = os.getcwd()
         self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
+
+        self.elem = None
 
         self.lf_cat = None
         self.p_eg = None
@@ -119,6 +123,8 @@ class Main:
         self.ui.loadflow_Btn.clicked.connect(self.loadflow)
         self.ui.restartBtn.clicked.connect(self.startWgtCreate)
         self.ui.loadProfilesBtn.clicked.connect(self.elemProfList)
+        self.ui.anom_Btn.clicked.connect(self.anomStart)
+        self.ui.reliabilithy_Btn.clicked.connect(self.relStart)
 
         self.app.exec_()
 
@@ -180,10 +186,13 @@ class Main:
         self.homeHBL.addWidget(self.home2_WGT)
         self.homeHBL.addWidget(self.home3_WGT)
 
+        self.ui.rightMenuContainer.collapseMenu()
+
         self.startWGT.ui.importDssBtn.clicked.connect(self.dss_open)
         self.startWGT.ui.openFileBtn.clicked.connect(self.yml_open)
         self.startWGT.ui.benchOpenBtn.clicked.connect(self.benchmarkWGT_create)
         self.startWGT.ui.optStorBtn.clicked.connect(self.optstor_create)
+        self.startWGT.ui.newGridBtn.clicked.connect(self.new_grid)
 
 
     # Creazione dell'elenco delle reti benchmark
@@ -202,27 +211,28 @@ class Main:
         bm = yaml.safe_load(open(mainpath + '/_benchmark/grid_models/grid_bench.yml'))
 
         for b in bm.keys():
-
-            self.gridPls = QPushButton()
-            self.gridPls.setText('  ' + bm[b]['name'])
-            self.gridPls.setMinimumHeight(50)
-            self.testIco = QtGui.QIcon()
-            self.testIco.addFile(u":/icons/icons/importfile.png",
-                                 QtCore.QSize(100, 100), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-            self.gridPls.setIcon(self.testIco)
-            self.gridPls.setIconSize(QtCore.QSize(30, 30))
-
-            self.gridPls.setStyleSheet(u"QPushButton {"
-                                       u"font: 24px;"
-                                       u"text-align: left;"
-                                       u"padding: 10px 20px;"
-                                       u"color: rgb(255, 255, 255);"
-                                       u"background-color: rgb(31, 31, 31); border: solid;"  # border-style: outset;"
-                                       u"border-width: 2px; border-radius: 20px; border-color: rgb(127, 127, 127)"
-                                       u"}"
-                                       u"QPushButton:pressed {"
-                                       u"background-color: rgb(64, 64, 64); border-style: inset"
-                                       u"}")
+            self.gridPls = pb_create(text='  ' + bm[b]['name'], height=30, font=24, border=2, radius=10,
+                                     icon='importfile.png')
+            # self.gridPls = QPushButton()
+            # self.gridPls.setText('  ' + bm[b]['name'])
+            # self.gridPls.setMinimumHeight(50)
+            # self.testIco = QtGui.QIcon()
+            # self.testIco.addFile(u":/icons/icons/importfile.png",
+            #                      QtCore.QSize(100, 100), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            # self.gridPls.setIcon(self.testIco)
+            # self.gridPls.setIconSize(QtCore.QSize(30, 30))
+            #
+            # self.gridPls.setStyleSheet(u"QPushButton {"
+            #                            u"font: 24px;"
+            #                            u"text-align: left;"
+            #                            u"padding: 10px 20px;"
+            #                            u"color: rgb(255, 255, 255);"
+            #                            u"background-color: rgb(31, 31, 31); border: solid;"  # border-style: outset;"
+            #                            u"border-width: 2px; border-radius: 20px; border-color: rgb(127, 127, 127)"
+            #                            u"}"
+            #                            u"QPushButton:pressed {"
+            #                            u"background-color: rgb(64, 64, 64); border-style: inset"
+            #                            u"}")
             self.bmWgtVBL.addWidget(self.gridPls)
             self.gridPls.clicked.connect(partial(self.gridDetailsWgtCreate, bm[b], b))
 
@@ -260,6 +270,31 @@ class Main:
 
         # self.home3_WGT.setSizePolicy(QSizePolicy.Policy.Minimum)
 
+    def new_grid(self):
+        from UI.newGridDlg import NewGrid
+        popup = NewGrid()
+
+        if popup.exec_():
+            pass
+
+        if popup.newGridStart:
+            for el in v:
+                del v[el]
+
+            dictInitialize.dict_initialize('source', 'ExternalGrid')
+            v['source']['par']['Vn'] = [popup.ui.sourceVDsb.value()]
+            v['source']['par']['out-of-service'] = False
+            v['source']['top']['conn'] = ['sourcebus']
+
+            dictInitialize.dict_initialize('sourcebus', 'AC-Node')
+            v['sourcebus']['par']['Vn'] = [popup.ui.sourceVDsb.value()]
+            v['sourcebus']['par']['out-of-service'] = False
+            v['sourcebus']['top']['conn'] = ['source']
+
+            self.elementsTableWgtCreate()
+            self.func_check()
+
+
     # Apertura del file DSS
     def dss_open(self, filename=None):
         v_initialize()
@@ -277,7 +312,7 @@ class Main:
             grid['profile'] = {'step': None, 'start': None, 'end': None, 'points': None, 'exist': False}
 
         if filename:
-            grid['behcnmark'] = '_benchmark' in filename.split('/')
+            grid['benchmark'] = '_benchmark' in filename.split('/')
             # self.dss = opendss.OpenDSS()
 
             # TODO: Da ripristinare
@@ -297,7 +332,7 @@ class Main:
             grid['name'] = filename.split('/')[len(filename.split('/')) - 1].removesuffix('.dss')
 
     def yml_open(self):
-        grid['behcnmark'] = False
+        grid['benchmark'] = False
         options = QtWidgets.QFileDialog.Options()
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
 
@@ -412,8 +447,8 @@ class Main:
     def test_action(self):
         line = self.myform.ui.tableWidget.currentRow()
         self.elem = self.myform.ui.tableWidget.item(line, 0).text()
-        self.myform.ui.del_Btn.setVisible(True)
-        self.myform.ui.ren_Btn.setVisible(True)
+        self.myform.ui.del_Btn.setVisible(self.elem not in ['source', 'sourcebus'])
+        self.myform.ui.ren_Btn.setVisible(self.elem not in ['source', 'sourcebus'])
         # dss.writeline(elem)   TODO: ???????
 
         try:
@@ -732,15 +767,14 @@ class Main:
 
         a = QtWidgets.QVBoxLayout()
 
-
     def loadflow(self):
+        self.ui.rightMenuContainer.collapseMenu()
+
         self.ui.rightMenuContainer.collapseMenu()
         try:
             self.home2_WGT.deleteLater()
         except RuntimeError:
             pass
-
-        print('Grid profile', grid['profile']['exist'])
 
         # is_profile = False
         time = None
@@ -912,12 +946,13 @@ class Main:
                                   grid['current'][3], grid['current'][4])
         i = int((currenttime - timestart).total_seconds() / (60 * grid['profile']['step']))
 
-        if v[self.elem]['category'] in (mc['Load'] + mc['Generator']) and v[self.elem]['par']['profile']['name']:
-            print('forse profili')
-            self.elemPropWgt.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][i])
-            self.elemPropWgt.PeffDSB.setValue(v[self.elem]['par']['profile']['curve'][i] * v[self.elem]['par']['P'])
+        if self.elem:
+            if v[self.elem]['category'] in (mc['Load'] + mc['Generator']) and v[self.elem]['par']['profile']['name']:
+                print('forse profili')
+                self.elemPropWgt.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][i])
+                self.elemPropWgt.PeffDSB.setValue(v[self.elem]['par']['profile']['curve'][i] * v[self.elem]['par']['P'])
 
-        self.elemPropWgt.fillLfRes(i)
+            self.elemPropWgt.fillLfRes(i)
         # ----------------------------------------------------------------------------------------------------------
         pass
 
@@ -1115,9 +1150,6 @@ class Main:
         except RuntimeError:
             pass
 
-        # from UI.elementsProfile_wgt import ElemProfListWgt
-        # self.elemProfListWgt = ElemProfListWgt()
-
         self.home2_WGT = QWidget()
         self.home2_WGT.setMinimumWidth(450)
 
@@ -1139,17 +1171,13 @@ class Main:
         self.elemProfListSA = QScrollArea(self.home2_WGT)
         self.elemProfListSA.setWidgetResizable(True)
         self.elemProfListSAWgt = QWidget()
-        # self.elemProfListSAWgt.setGeometry(0, 0, 560, 641)
+
         self.elemProfListSAWgtGL = QGridLayout(self.elemProfListSAWgt)
         self.elemProfListSAWgtGL.setVerticalSpacing(0)
         self.elemProfListSA.setWidget(self.elemProfListSAWgt)
         self.elemProfListWgtVL.addWidget(self.elemProfListSA)
 
-        # self.home2_WGT = self.elemProfListWgt()
-        # self.homeHBL.insertWidget(1, self.home2_WGT)
-
         self.homeHBL.insertWidget(1, self.home2_WGT)
-        # self.elemProfListWgt.ui.mainSaWgtGL.setVerticalSpacing(0)
 
         lblfont = QtGui.QFont()
         lblfont.setFamily(u"MS Shell Dlg 2")
@@ -1197,7 +1225,6 @@ class Main:
 
                 self.__setattr__(cat + 'GL', QtWidgets.QGridLayout())
                 self.__getattribute__(cat + 'Frm').setLayout(self.__getattribute__(cat + 'GL'))
-                # self.__getattribute__(cat + 'GB').setTitle(cat)
                 self.__getattribute__(cat + 'GL').setContentsMargins(10, 10, 10, 10)
 
                 line = 0
@@ -1242,11 +1269,6 @@ class Main:
                             prof_name = bench['profiles'][mt][prof_cat]
                             self.__getattribute__(el + 'CB').setCurrentText(prof_name)
 
-                    # self.__getattribute__(el + 'CB').setCurrentText(v[el]['par']['profile']['name'])
-
-                    # a = QtWidgets.QComboBox()
-                    # a.clear()
-                    # a.addItems()
                     line += 1
 
                 self.elemProfListSAWgtGL.addWidget(self.__getattribute__(cat + 'Lbl'))
@@ -1284,13 +1306,6 @@ class Main:
 
         self.elemProfListCancelBtn.clicked.connect(self.elemProfListCancel)
         self.elemProfListSaveBtn.clicked.connect(partial(self.elemProfListSave, pt))
-
-        for cat in pt:
-            print(cat, pt[cat]['elements'])
-                # self.homeHBL = QHBoxLayout()
-                # self.home_WGT.setLayout(self.homeHBL)
-
-        # self.elemProfListWgt.ui.mainSaWgtGL.addWidget(self.TurbineGB)
 
         if grid['benchmark']:
             filepath = mainpath + '/_benchmark/grid_models/' + grid['name'] + '_ProfCat.yml'
@@ -1337,6 +1352,48 @@ class Main:
     def elemProfListCancel(self):
         self.home2_WGT.deleteLater()
 
+    def anomStart(self):
+        if self.myform.ui.verticalLayout.count() > 2:
+            self.myform.ui.verticalLayout.itemAt(2).widget().deleteLater()
+
+        variables.visualpar = 'anom'
+
+        self.homeHBL = QHBoxLayout()
+        self.homeHBL.setContentsMargins(0, 0, 0, 0)
+        self.home2_WGT.setLayout(self.homeHBL)
+
+        self.anomRunPls = pb_create(text='   Avvia calcolo Anomalie', height=50, font=14, border=2, radius=15,
+                                    icon='anomaly.png')
+
+        self.myform.ui.verticalLayout.addWidget(self.anomRunPls)
+
+        # print(self.myform.ui.verticalLayout.count())
+        # print(self.myform.ui.verticalLayout.itemAt(2).widget().objectName())
+
+        a = QVBoxLayout
+        b = QWidget
+
+        # a.itemAt(1).
+        # a.insertWidget()
+
+        #  TODO: Mostrare i risultati, se disponibili
+
+    def relStart(self):
+        if self.myform.ui.verticalLayout.count() > 2:
+            self.myform.ui.verticalLayout.itemAt(2).widget().deleteLater()
+
+        variables.visualpar = 'rel'
+
+        self.homeHBL = QHBoxLayout()
+        self.homeHBL.setContentsMargins(0, 0, 0, 0)
+        self.home2_WGT.setLayout(self.homeHBL)
+
+        self.relRunPls = pb_create(text='   Avvia calcolo Affidabilità', height=50, font=14, border=2, radius=15,
+                                   icon='reliability.png')
+
+        self.myform.ui.verticalLayout.addWidget(self.relRunPls)
+        #  TODO: Mostrare i risultati, se disponibili
+
 
 class LFrWGT(QMainWindow):
     def __init__(self):
@@ -1345,6 +1402,20 @@ class LFrWGT(QMainWindow):
         super(LFrWGT, self).__init__(None)
         self.ui = Ui_lfres_mainWGT()
         self.ui.setupUi(self)
+
+        self.ui.lfResDtePlusPb.clicked.connect(partial(self.datachange, +1))
+        self.ui.lfResDteMinusPb.clicked.connect(partial(self.datachange, -1))
+
+    def datachange(self, t):
+        step = grid['profile']['step']
+        time = self.ui.lfresDte.dateTime()
+        # print(time)
+        # a = time.toPython()
+        # b = a + datetime.timedelta(minutes=step)
+        # self.ui.lfresDte.setDateTime(b)
+        self.ui.lfresDte.setDateTime(time.toPython() + datetime.timedelta(minutes=(step * t)))
+
+        # print(b)
 
 
 def write_excel():
@@ -1402,6 +1473,53 @@ def write_excel():
 
     file_excel.close()
     pass
+
+
+def pb_create(text='Pulsante', font=16, radius=10, height=30, icon=None, padding=None, border=1):
+    pls = QPushButton()
+    pls.setText(text)
+    pls.setMinimumHeight(height)
+    if icon:
+        ico = QtGui.QIcon()
+        ico.addFile(u":/icons/icons/" + icon, QtCore.QSize(100, 100), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        pls.setIcon(ico)
+        pls.setIconSize(QtCore.QSize(30, 30))
+
+    style = 'QPushButton {'
+    style += 'font: ' + str(font) + 'px; '
+    style += 'text-align: center; '
+    if padding:
+        style += 'padding: ' + padding[0] + 'px' + padding[1] + 'px; '
+    style += 'image-position:right; '
+    style += 'color: rgb(255, 255, 255); '
+    style += 'background-color: rgb(31, 31, 31); '
+    style += 'border: solid; '
+    style += 'border-width: ' + str(border) + 'px; '
+    style += 'border-radius: ' + str(radius) + 'px; '
+    style += 'rgb(127, 127, 127);'
+    style += '} '
+    style += 'QPushButton:pressed {background-color: rgb(64, 64, 64); border-style: inset}'
+
+    # pls.setStyleSheet(style)
+
+    # style += ''
+    # style += ''
+    #
+    #
+    #
+    pls.setStyleSheet(u"QPushButton {"
+                      u"font: " + str(font) + "px;"
+                      u"text-align: center;"
+                      u"padding: 10px 20px;"
+                      u"image-position:right;"
+                      u"color: rgb(255, 255, 255);"
+                      u"background-color: rgb(31, 31, 31); border: solid;"  # border-style: outset;"
+                      u"border-width: 2px; border-radius: " + str(radius) + "px; border-color: rgb(127, 127, 127);"
+                      u"}"
+                      u"QPushButton:pressed {"
+                      u"background-color: rgb(64, 64, 64); border-style: inset"
+                      u"}")
+    return pls
 
 
 Main()

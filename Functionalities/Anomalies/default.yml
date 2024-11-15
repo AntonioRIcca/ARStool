@@ -73,6 +73,14 @@ DC-Wind:
       is_fixed: False
       value: 0.3
 
+AC-BESS:
+  Hourly_Degradation:
+    rate: 0.0137
+
+DC-BESS:
+  Hourly_Degradation:
+    rate: 0.0137
+
 FC:
   Hourly_Degradation:
     rate: 0.01

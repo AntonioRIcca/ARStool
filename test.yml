@@ -1,21 +1,18 @@
 _grid_:
-  profile:
-    end:
-    - 2024
-    - 2
-    - 18
-    - 23
-    - 45
-    exist: true
+  benchmark: true
+  current: null
+  lf:
+    end: null
     points: null
-    start:
-    - 2024
-    - 2
-    - 15
-    - 0
-    - 0
-    step: 15
-l_01-02:
+    start: null
+  name: Master
+  profile:
+    end: null
+    exist: false
+    points: null
+    start: null
+    step: null
+l_002-015:
   category: AC-Line
   lf:
     i:
@@ -34,20 +31,20 @@ l_01-02:
     B0: 1.0e-09
     B1: 1.0e-09
     C0: 1.0e-09
-    C1: 1.0e-09
-    In: 400.0
+    C1: 314.999
+    In: 260.0
     R0: 0
-    R1: 0
+    R1: 0.254014
     X0: 1.0e-09
-    X1: 1.0e-09
-    length: 3.0
+    X1: 0.125547
+    length: 1.37
     out-of-service: false
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -55,9 +52,9 @@ l_01-02:
       lambda: null
   top:
     conn:
-    - n01
-    - n02
-l_02-03:
+    - n_002
+    - n_015
+l_002-029_tr2:
   category: AC-Line
   lf:
     i:
@@ -76,20 +73,20 @@ l_02-03:
     B0: 1.0e-09
     B1: 1.0e-09
     C0: 1.0e-09
-    C1: 1.0e-09
-    In: 400.0
+    C1: 26.20347
+    In: 235.0
     R0: 0
-    R1: 0
+    R1: 0.343449
     X0: 1.0e-09
-    X1: 1.0e-09
-    length: 3.0
+    X1: 0.370493
+    length: 2.875
     out-of-service: false
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -97,9 +94,9 @@ l_02-03:
       lambda: null
   top:
     conn:
-    - n02
-    - n03
-l_03-04:
+    - n_002
+    - n_029
+l_002-034_tr2:
   category: AC-Line
   lf:
     i:
@@ -118,20 +115,20 @@ l_03-04:
     B0: 1.0e-09
     B1: 1.0e-09
     C0: 1.0e-09
-    C1: 1.0e-09
-    In: 400.0
+    C1: 21.07562
+    In: 190.0
     R0: 0
-    R1: 0
+    R1: 0.498243
     X0: 1.0e-09
-    X1: 1.0e-09
-    length: 3.0
+    X1: 0.370543
+    length: 6.14
     out-of-service: false
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -139,9 +136,9 @@ l_03-04:
       lambda: null
   top:
     conn:
-    - n03
-    - n04
-l_s-01:
+    - n_002
+    - n_034
+l_002-086:
   category: AC-Line
   lf:
     i:
@@ -160,20 +157,20 @@ l_s-01:
     B0: 1.0e-09
     B1: 1.0e-09
     C0: 1.0e-09
-    C1: 1.0e-09
-    In: 400.0
+    C1: 339.8902
+    In: 280.0
     R0: 0
-    R1: 0
+    R1: 0.2034
     X0: 1.0e-09
-    X1: 1.0e-09
-    length: 3.0
+    X1: 0.135591
+    length: 1.173
     out-of-service: false
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -181,9 +178,3243 @@ l_s-01:
       lambda: null
   top:
     conn:
-    - sourcebus
-    - n01
-myload:
+    - n_002
+    - n_086
+l_004-025:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 0.345
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_004
+    - n_025
+l_005-016:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 140.0
+    R0: 0
+    R1: 0.7214
+    X0: 1.0e-09
+    X1: 0.40715
+    length: 1.333
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_005
+    - n_016
+l_007-013:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 1.79
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_007
+    - n_013
+l_007-024:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.68
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_007
+    - n_024
+l_008-020:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 0.47
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_008
+    - n_020
+l_009-010:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 0.98
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_009
+    - n_010
+l_010-019:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 0.78
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_010
+    - n_019
+l_012-005:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 140.0
+    R0: 0
+    R1: 0.7214
+    X0: 1.0e-09
+    X1: 0.40715
+    length: 1.3
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_012
+    - n_005
+l_013-003:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 1.2
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_013
+    - n_003
+l_014-022:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 0.8
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_014
+    - n_022
+l_015-014:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 3.141593e-10
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 3.183099e-09
+    In: 330.0
+    R0: 0.0
+    R1: 0.165517
+    X0: 1.0e-09
+    X1: 0.110344
+    length: 3.07
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_015
+    - n_014
+l_020-004:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.385
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_020
+    - n_004
+l_020-009:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 2.4
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_020
+    - n_009
+l_021-007:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.35
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_021
+    - n_007
+l_021-012:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 1.4
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_021
+    - n_012
+l_022-006:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 0.9
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_022
+    - n_006
+l_022-008:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.33
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_022
+    - n_008
+l_022-026:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 1.13
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_022
+    - n_026
+l_024-023:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 1.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_024
+    - n_023
+l_025-018:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 3.12
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_025
+    - n_018
+l_025-021:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.85
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_025
+    - n_021
+l_026-011:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 2.25
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_026
+    - n_011
+l_026-017:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 140.0
+    R0: 0
+    R1: 0.7214
+    X0: 1.0e-09
+    X1: 0.40715
+    length: 1.8
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_026
+    - n_017
+l_027-028_tr1:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.909995
+    In: 140.0
+    R0: 0
+    R1: 0.528611
+    X0: 1.0e-09
+    X1: 0.3884
+    length: 0.76
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_027
+    - n_028
+l_029-031:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.998
+    In: 235.0
+    R0: 0
+    R1: 0.3529
+    X0: 1.0e-09
+    X1: 0.384311
+    length: 1.53
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_029
+    - n_031
+l_029-033:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 0.85
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_029
+    - n_033
+l_030-027:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.998
+    In: 235.0
+    R0: 0
+    R1: 0.3529
+    X0: 1.0e-09
+    X1: 0.384311
+    length: 3.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_030
+    - n_027
+l_031-030:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.998
+    In: 235.0
+    R0: 0
+    R1: 0.3529
+    X0: 1.0e-09
+    X1: 0.384311
+    length: 13.42
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_031
+    - n_030
+l_033-032:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 350.1409
+    In: 330.0
+    R0: 0
+    R1: 0.1655
+    X0: 1.0e-09
+    X1: 0.110333
+    length: 0.885
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_033
+    - n_032
+l_034-049_tr3:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 32.29472
+    In: 190.0
+    R0: 0
+    R1: 0.480911
+    X0: 1.0e-09
+    X1: 0.355824
+    length: 4.6
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_034
+    - n_049
+l_035-044:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.356
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_035
+    - n_044
+l_036-043:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 140.0
+    R0: 0
+    R1: 0.7214
+    X0: 1.0e-09
+    X1: 0.40715
+    length: 2.856
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_036
+    - n_043
+l_036-050:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.2
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_036
+    - n_050
+l_038-045:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.38
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_038
+    - n_045
+l_038-052:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 1.5
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_038
+    - n_052
+l_039-048:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.92
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_039
+    - n_048
+l_042-040:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 140.0
+    R0: 0
+    R1: 0.7214
+    X0: 1.0e-09
+    X1: 0.40715
+    length: 1.464
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_042
+    - n_040
+l_045-041:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 140.0
+    R0: 0
+    R1: 0.7214
+    X0: 1.0e-09
+    X1: 0.40715
+    length: 3.006
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_045
+    - n_041
+l_045-051:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.44
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_045
+    - n_051
+l_049-055:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 140.0
+    R0: 0
+    R1: 0.7214
+    X0: 1.0e-09
+    X1: 0.40715
+    length: 1.56
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_049
+    - n_055
+l_050-037:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.2
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_050
+    - n_037
+l_050-047:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 1.152
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_050
+    - n_047
+l_051-036:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 2.1372
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_051
+    - n_036
+l_051-046:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 140.0
+    R0: 0
+    R1: 0.7214
+    X0: 1.0e-09
+    X1: 0.40715
+    length: 1.5132
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_051
+    - n_046
+l_053-035:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.86
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_053
+    - n_035
+l_053-038:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 0.96
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_053
+    - n_038
+l_053-039:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.7
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_053
+    - n_039
+l_055-042:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.992
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_055
+    - n_042
+l_055-053:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.8
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_055
+    - n_053
+l_055-054:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 2.64
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_055
+    - n_054
+l_078-077:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 192.1228
+    In: 165.0
+    R0: 0
+    R1: 0.4
+    X0: 1.0e-09
+    X1: 0.114291
+    length: 0.001
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_078
+    - n_077
+l_080-096:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.48
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_080
+    - n_096
+l_081-092:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 0.9
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_081
+    - n_092
+l_081-094:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 0.8
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_081
+    - n_094
+l_082-080:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.2
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_082
+    - n_080
+l_082-088:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 2.4
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_082
+    - n_088
+l_083-101:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 0.45
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_083
+    - n_101
+l_084-081:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.84
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_084
+    - n_081
+l_085-099:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 0.52
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_085
+    - n_099
+l_086-083:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.37
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_086
+    - n_083
+l_088-090:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 140.0
+    R0: 0
+    R1: 0.7214
+    X0: 1.0e-09
+    X1: 0.40715
+    length: 3.86
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_088
+    - n_090
+l_088-098:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.63
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_088
+    - n_098
+l_089-078:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 2.9
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_089
+    - n_078
+l_089-087:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 2.082
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_089
+    - n_087
+l_094-085:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.58
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_094
+    - n_085
+l_094-093:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 0.75
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_094
+    - n_093
+l_095_076:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 192.1228
+    In: 165.0
+    R0: 0
+    R1: 0.4
+    X0: 1.0e-09
+    X1: 0.114291
+    length: 0.001
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_095
+    - n_076
+l_096-091:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 1.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_096
+    - n_091
+l_096-095:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 7.9577
+    In: 105.0
+    R0: 0
+    R1: 1.12
+    X0: 1.0e-09
+    X1: 0.413339
+    length: 0.4
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_096
+    - n_095
+l_097-089:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 192.1228
+    In: 165.0
+    R0: 0
+    R1: 0.4
+    X0: 1.0e-09
+    X1: 0.114291
+    length: 1.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_097
+    - n_089
+l_098-100:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 192.1228
+    In: 165.0
+    R0: 0
+    R1: 0.4
+    X0: 1.0e-09
+    X1: 0.114291
+    length: 1.2
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_098
+    - n_100
+l_099-103:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 3.8
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_099
+    - n_103
+l_100-102:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 192.1228
+    In: 165.0
+    R0: 0
+    R1: 0.4
+    X0: 1.0e-09
+    X1: 0.114291
+    length: 0.9
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_100
+    - n_102
+l_101-079:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 0.86
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_101
+    - n_079
+l_101-084:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.67
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_101
+    - n_084
+l_102-097:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 192.1228
+    In: 165.0
+    R0: 0
+    R1: 0.4
+    X0: 1.0e-09
+    X1: 0.114291
+    length: 0.74
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_102
+    - n_097
+l_103-082:
+  category: AC-Line
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    B0: 1.0e-09
+    B1: 1.0e-09
+    C0: 1.0e-09
+    C1: 8.9629
+    In: 190.0
+    R0: 0
+    R1: 0.5179
+    X0: 1.0e-09
+    X1: 0.387358
+    length: 1.4
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_103
+    - n_082
+load_003_1:
   category: AC-Load
   lf:
     i: []
@@ -192,116 +3423,20 @@ myload:
     v: []
   par:
     Customers: 1
-    P: 1200.0
+    P: 68.0
     Vn:
     - 20.0
-    cosPhi: 0.9
+    cosPhi: 1
     out-of-service: false
     profile:
-      curve:
-      - 0.5
-      - 0.495
-      - 0.49
-      - 0.485
-      - 0.48
-      - 0.475
-      - 0.47000000000000003
-      - 0.465
-      - 0.46
-      - 0.455
-      - 0.45
-      - 0.445
-      - 0.44
-      - 0.435
-      - 0.43
-      - 0.42500000000000004
-      - 0.42000000000000004
-      - 0.41500000000000004
-      - 0.41000000000000003
-      - 0.405
-      - 0.4
-      - 0.40625
-      - 0.4125
-      - 0.41875
-      - 0.425
-      - 0.42125
-      - 0.4175
-      - 0.41374999999999995
-      - 0.41
-      - 0.43666666666666665
-      - 0.4633333333333333
-      - 0.49
-      - 0.5166666666666666
-      - 0.5433333333333333
-      - 0.57
-      - 0.5966666666666667
-      - 0.6233333333333333
-      - 0.65
-      - 0.6766666666666666
-      - 0.7033333333333334
-      - 0.73
-      - 0.7275
-      - 0.725
-      - 0.7224999999999999
-      - 0.72
-      - 0.7275
-      - 0.735
-      - 0.7424999999999999
-      - 0.75
-      - 0.7575000000000001
-      - 0.765
-      - 0.7725
-      - 0.78
-      - 0.78
-      - 0.78
-      - 0.78
-      - 0.78
-      - 0.7875
-      - 0.795
-      - 0.8025
-      - 0.81
-      - 0.8175
-      - 0.825
-      - 0.8325
-      - 0.84
-      - 0.8633333333333333
-      - 0.8866666666666666
-      - 0.9099999999999999
-      - 0.9333333333333333
-      - 0.9566666666666667
-      - 0.98
-      - 0.99
-      - 1.0
-      - 0.995
-      - 0.99
-      - 0.977
-      - 0.964
-      - 0.951
-      - 0.938
-      - 0.925
-      - 0.9119999999999999
-      - 0.899
-      - 0.886
-      - 0.873
-      - 0.86
-      - 0.86
-      - 0.86
-      - 0.86
-      - 0.86
-      - 0.7949999999999999
-      - 0.73
-      - 0.665
-      - 0.6
-      - 0.575
-      - 0.55
-      - 0.525
-      name: AC-Load
+      curve: 1
+      name: null
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -310,8 +3445,4415 @@ myload:
       load_rel: null
   top:
     conn:
-    - n04
-n01:
+    - n_003
+load_003_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_003
+load_003_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 108.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_003
+load_004:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_004
+load_005:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_005
+load_006_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_006
+load_006_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_006
+load_006_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_006
+load_008:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_008
+load_009_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_009
+load_009_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_009
+load_010_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_010
+load_010_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 7.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_010
+load_011:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_011
+load_012:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_012
+load_013_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_013
+load_013_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_013
+load_013_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_013
+load_014_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_014
+load_014_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 108.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_014
+load_014_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 108.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_014
+load_015_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 442.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_015
+load_015_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 108.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_015
+load_016:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_016
+load_017:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 108.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_017
+load_018_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_018
+load_018_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_018
+load_018_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_018
+load_019:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_019
+load_020:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_020
+load_021_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_021
+load_021_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_021
+load_022:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 108.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_022
+load_023:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_023
+load_024_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_024
+load_024_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 68.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_024
+load_025:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 108.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_025
+load_026:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 169.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_026
+load_027_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 63.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_027
+load_027_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 1030.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_027
+load_027_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 466.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_027
+load_028:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 101.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_028
+load_030:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 63.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_030
+load_031:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 101.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_031
+load_032_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 63.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_032
+load_032_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 6.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_032
+load_032_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 63.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_032
+load_033_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 63.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_033
+load_033_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 63.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_033
+load_034:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 1.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_034
+load_035:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_035
+load_036_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_036
+load_036_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_036
+load_037_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_037
+load_037_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_037
+load_038:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_038
+load_040_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 234.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_040
+load_040_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_040
+load_040_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_040
+load_041_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_041
+load_041_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_041
+load_042_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 6.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_042
+load_042_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_042
+load_042_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_042
+load_043_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_043
+load_043_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_043
+load_044:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_044
+load_045_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_045
+load_045_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_045
+load_046:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_046
+load_047:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_047
+load_048_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_048
+load_048_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_048
+load_048_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 150.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_048
+load_049_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 1.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_049
+load_049_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 3.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_049
+load_049_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_049
+load_050:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_050
+load_051:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_051
+load_052:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_052
+load_054_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_054
+load_054_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_054
+load_055_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_055
+load_055_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 94.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_055
+load_076_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 15.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_076
+load_076_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 34.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_076
+load_077_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 15.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_077
+load_077_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 34.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_077
+load_078_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 49.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_078
+load_078_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 154.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_078
+load_079_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_079
+load_079_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_079
+load_079_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 49.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_079
+load_080_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_080
+load_080_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_080
+load_081_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_081
+load_081_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 49.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_081
+load_083_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_083
+load_083_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_083
+load_083_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_083
+load_084_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_084
+load_084_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_084
+load_085_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_085
+load_085_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_085
+load_085_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_085
+load_086_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 123.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_086
+load_086_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 93.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_086
+load_087_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_087
+load_087_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_087
+load_087_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_087
+load_088:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_088
+load_089:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_089
+load_090:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_090
+load_091:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 15.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_091
+load_092:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_092
+load_093:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_093
+load_094_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_094
+load_094_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_094
+load_095:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 49.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_095
+load_096:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 15.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_096
+load_097_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 49.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_097
+load_097_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 49.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_097
+load_098_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_098
+load_098_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_098
+load_098_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_098
+load_099_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_099
+load_099_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_099
+load_099_3:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_099
+load_099_4:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 48.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_099
+load_100_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 49.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_100
+load_100_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 77.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_100
+load_101_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_101
+load_101_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 49.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_101
+load_102_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 49.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_102
+load_102_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 77.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_102
+load_103_1:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_103
+load_103_2:
+  category: AC-Load
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Customers: 1
+    P: 31.0
+    Vn:
+    - 20.0
+    cosPhi: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+      load_rel: null
+  top:
+    conn:
+    - n_103
+n_001:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 150.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - source
+    - trf1
+n_002:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.8
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - trf1
+    - l_002-015
+    - l_002-029_tr2
+    - l_002-034_tr2
+    - l_002-086
+n_003:
   category: AC-Node
   lf:
     i: []
@@ -324,10 +7866,10 @@ n01:
     out-of-service: false
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -335,9 +7877,13 @@ n01:
       lambda: null
   top:
     conn:
-    - l_s-01
-    - l_01-02
-n02:
+    - l_013-003
+    - load_003_1
+    - load_003_2
+    - load_003_3
+    - pv_003
+    - stor_003_ac-bess
+n_004:
   category: AC-Node
   lf:
     i: []
@@ -350,10 +7896,10 @@ n02:
     out-of-service: false
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -361,9 +7907,10 @@ n02:
       lambda: null
   top:
     conn:
-    - l_01-02
-    - l_02-03
-n03:
+    - l_020-004
+    - l_004-025
+    - load_004
+n_005:
   category: AC-Node
   lf:
     i: []
@@ -376,10 +7923,10 @@ n03:
     out-of-service: false
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -387,9 +7934,11 @@ n03:
       lambda: null
   top:
     conn:
-    - l_02-03
-    - l_03-04
-n04:
+    - l_012-005
+    - l_005-016
+    - load_005
+    - pv_005
+n_006:
   category: AC-Node
   lf:
     i: []
@@ -402,10 +7951,10 @@ n04:
     out-of-service: false
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -413,8 +7962,2778 @@ n04:
       lambda: null
   top:
     conn:
-    - l_03-04
-    - myload
+    - l_022-006
+    - load_006_1
+    - load_006_2
+    - load_006_3
+n_007:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_021-007
+    - l_007-024
+    - l_007-013
+n_008:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_022-008
+    - l_008-020
+    - load_008
+n_009:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_020-009
+    - l_009-010
+    - load_009_1
+    - load_009_2
+n_010:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_009-010
+    - l_010-019
+    - load_010_1
+    - load_010_2
+    - pv_010
+    - stor_010_ac-bess
+n_011:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_026-011
+    - load_011
+    - pv_011
+    - stor_011_ac-bess
+n_012:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_021-012
+    - l_012-005
+    - load_012
+n_013:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_007-013
+    - l_013-003
+    - load_013_1
+    - load_013_2
+    - load_013_3
+n_014:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_015-014
+    - l_014-022
+    - load_014_1
+    - load_014_2
+    - load_014_3
+n_015:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_015-014
+    - l_002-015
+    - load_015_1
+    - load_015_2
+n_016:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_005-016
+    - load_016
+n_017:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_026-017
+    - load_017
+n_018:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_025-018
+    - load_018_1
+    - load_018_2
+    - load_018_3
+n_019:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_010-019
+    - load_019
+n_020:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_008-020
+    - l_020-004
+    - l_020-009
+    - load_020
+n_021:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_025-021
+    - l_021-007
+    - l_021-012
+    - load_021_1
+    - load_021_2
+n_022:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_014-022
+    - l_022-006
+    - l_022-026
+    - l_022-008
+    - load_022
+n_023:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_024-023
+    - load_023
+n_024:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_007-024
+    - l_024-023
+    - load_024_1
+    - load_024_2
+n_025:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_004-025
+    - l_025-018
+    - l_025-021
+    - load_025
+n_026:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_022-026
+    - l_026-017
+    - l_026-011
+    - load_026
+n_027:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_030-027
+    - l_027-028_tr1
+    - load_027_1
+    - load_027_2
+    - load_027_3
+n_028:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_027-028_tr1
+    - load_028
+n_029:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.8
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_002-029_tr2
+    - l_029-033
+    - l_029-031
+n_030:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_031-030
+    - l_030-027
+    - load_030
+    - pv_030
+n_031:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_029-031
+    - l_031-030
+    - load_031
+n_032:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_033-032
+    - load_032_1
+    - load_032_2
+    - load_032_3
+    - pv_032
+    - stor_032_ac-bess
+n_033:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_029-033
+    - l_033-032
+    - load_033_1
+    - load_033_2
+n_034:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_002-034_tr2
+    - l_034-049_tr3
+    - load_034
+    - pv_034
+    - stor_034_ac-bess
+n_035:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_053-035
+    - l_035-044
+    - load_035
+n_036:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_051-036
+    - l_036-043
+    - l_036-050
+    - load_036_1
+    - load_036_2
+    - pv_036
+    - stor_036_ac-bess
+n_037:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_050-037
+    - load_037_1
+    - load_037_2
+n_038:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_053-038
+    - l_038-052
+    - l_038-045
+    - load_038
+n_039:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_053-039
+    - l_039-048
+n_040:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_042-040
+    - load_040_1
+    - load_040_2
+    - load_040_3
+n_041:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_045-041
+    - load_041_1
+    - load_041_2
+n_042:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_055-042
+    - l_042-040
+    - load_042_1
+    - load_042_2
+    - load_042_3
+    - pv_042
+    - stor_042_ac-bess
+n_043:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_036-043
+    - load_043_1
+    - load_043_2
+n_044:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_035-044
+    - load_044
+n_045:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_038-045
+    - l_045-041
+    - l_045-051
+    - load_045_1
+    - load_045_2
+n_046:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_051-046
+    - load_046
+    - pv_046
+    - stor_046_ac-bess
+n_047:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_050-047
+    - load_047
+    - pv_047
+n_048:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_039-048
+    - load_048_1
+    - load_048_2
+    - load_048_3
+n_049:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_034-049_tr3
+    - l_049-055
+    - load_049_1
+    - load_049_2
+    - load_049_3
+    - pv_049
+    - stor_049_ac-bess
+n_050:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_036-050
+    - l_050-037
+    - l_050-047
+    - load_050
+n_051:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_045-051
+    - l_051-046
+    - l_051-036
+    - load_051
+n_052:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_038-052
+    - load_052
+n_053:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_055-053
+    - l_053-039
+    - l_053-035
+    - l_053-038
+n_054:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_055-054
+    - load_054_1
+    - load_054_2
+    - pv_054
+n_055:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_049-055
+    - l_055-042
+    - l_055-054
+    - l_055-053
+    - load_055_1
+    - load_055_2
+n_076:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_095_076
+    - load_076_1
+    - load_076_2
+    - pv_076
+    - stor_076_ac-bess
+n_077:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_078-077
+    - load_077_1
+    - load_077_2
+    - pv_077
+    - stor_077_ac-bess
+n_078:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_089-078
+    - l_078-077
+    - load_078_1
+    - load_078_2
+n_079:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_101-079
+    - load_079_1
+    - load_079_2
+    - load_079_3
+n_080:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_082-080
+    - l_080-096
+    - load_080_1
+    - load_080_2
+    - pv_080
+    - stor_080_ac-bess
+n_081:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_084-081
+    - l_081-092
+    - l_081-094
+    - load_081_1
+    - load_081_2
+n_082:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_103-082
+    - l_082-080
+    - l_082-088
+n_083:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_086-083
+    - l_083-101
+    - load_083_1
+    - load_083_2
+    - load_083_3
+n_084:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_101-084
+    - l_084-081
+    - load_084_1
+    - load_084_2
+    - pv_084
+n_085:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_094-085
+    - l_085-099
+    - load_085_1
+    - load_085_2
+    - load_085_3
+n_086:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_002-086
+    - l_086-083
+    - load_086_1
+    - load_086_2
+n_087:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_089-087
+    - load_087_1
+    - load_087_2
+    - load_087_3
+n_088:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_082-088
+    - l_088-090
+    - l_088-098
+    - load_088
+n_089:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_097-089
+    - l_089-087
+    - l_089-078
+    - load_089
+n_090:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_088-090
+    - load_090
+n_091:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_096-091
+    - load_091
+n_092:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_081-092
+    - load_092
+n_093:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_094-093
+    - load_093
+n_094:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_081-094
+    - l_094-093
+    - l_094-085
+    - load_094_1
+    - load_094_2
+n_095:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_096-095
+    - l_095_076
+    - load_095
+n_096:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_080-096
+    - l_096-091
+    - l_096-095
+    - load_096
+n_097:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_102-097
+    - l_097-089
+    - load_097_1
+    - load_097_2
+n_098:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_088-098
+    - l_098-100
+    - load_098_1
+    - load_098_2
+    - load_098_3
+n_099:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_085-099
+    - l_099-103
+    - load_099_1
+    - load_099_2
+    - load_099_3
+    - load_099_4
+n_100:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_098-100
+    - l_100-102
+    - load_100_1
+    - load_100_2
+    - pv_100
+n_101:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_083-101
+    - l_101-079
+    - l_101-084
+    - load_101_1
+    - load_101_2
+n_102:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_100-102
+    - l_102-097
+    - load_102_1
+    - load_102_2
+n_103:
+  category: AC-Node
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    Vn:
+    - 20.0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - l_099-103
+    - l_103-082
+    - load_103_1
+    - load_103_2
+pv_003:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 3000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_003
+pv_005:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 3000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_005
+pv_010:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 998.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_010
+pv_011:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 2000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_011
+pv_030:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 5000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_030
+pv_032:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1747.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_032
+pv_034:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 2992.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_034
+pv_036:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_036
+pv_042:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 999.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_042
+pv_046:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_046
+pv_047:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 5000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_047
+pv_049:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_049
+pv_054:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 3000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_054
+pv_076:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1748.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_076
+pv_077:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 2000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_077
+pv_080:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_080
+pv_084:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_084
+pv_100:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-PV
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 5000.0
+    Vn:
+    - 20.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 1
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_100
 source:
   category: ExternalGrid
   lf:
@@ -424,14 +10743,14 @@ source:
     v: []
   par:
     Vn:
-    - 20.0
+    - 150.0
     out-of-service: false
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: None
+      Pi_Q: None
+      alfa: None
+      beta: None
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -439,24 +10758,36 @@ source:
       lambda: null
   top:
     conn:
-    - sourcebus
-sourcebus:
-  category: AC-Node
+    - n_001
+stor_003_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
   lf:
     i: []
     p: []
     q: []
     v: []
   par:
+    P: 3000.0
+    SOC: 50
     Vn:
     - 20.0
+    cap: 6000.0
+    cosPhi: 1.0
+    eff: 1
     out-of-service: false
+    profile:
+      curve: 0
+      name: null
   rel:
     par:
-      Pi_E: null
-      Pi_Q: null
-      alfa: null
-      beta: null
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -464,5 +10795,452 @@ sourcebus:
       lambda: null
   top:
     conn:
-    - source
-    - l_s-01
+    - n_003
+stor_010_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 2000.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_010
+stor_011_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 2000.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 4000.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_011
+stor_032_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1747.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 3494.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_032
+stor_034_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 3000.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 6000.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_034
+stor_036_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 2000.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_036
+stor_042_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 2000.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_042
+stor_046_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 2000.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_046
+stor_049_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 2000.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_049
+stor_076_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1748.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 3496.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_076
+stor_077_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 2000.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 4000.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_077
+stor_080_ac-bess:
+  anom:
+    par:
+      anomalies: {}
+    res: {}
+  category: AC-BESS
+  lf:
+    i: []
+    p: []
+    q: []
+    v: []
+  par:
+    P: 1000.0
+    SOC: 50
+    Vn:
+    - 20.0
+    cap: 2000.0
+    cosPhi: 1.0
+    eff: 1
+    out-of-service: false
+    profile:
+      curve: 0
+      name: null
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 5.5
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_080
+trf1:
+  category: 2W-Transformer
+  lf:
+    i:
+      0: []
+      1: []
+    p:
+      0: []
+      1: []
+    q:
+      0: []
+      1: []
+    v:
+      0: []
+      1: []
+  par:
+    Rs: 0
+    Sr:
+    - 25000.0
+    - 25000.0
+    Vn:
+    - 150.0
+    - 20.8
+    XHL: 12.01
+    imag: 0
+    out-of-service: false
+  rel:
+    par:
+      Pi_E: 1
+      Pi_Q: 3
+      alfa: 438000
+      beta: 1
+    results:
+      MTBF_anni: null
+      MTBF_ore: null
+      Pi_Si: null
+      lambda: null
+  top:
+    conn:
+    - n_001
+    - n_002

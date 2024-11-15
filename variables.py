@@ -58,6 +58,7 @@ bench = {
 
 fn = {
     'lf': False,
+    'anom': False,
     'rel': False,
     'optstor': False,
 }
@@ -596,11 +597,11 @@ new_par_dict = {
                 'unit': 'uS',
                 'default': 1E-9,
             },
-            'C1': {
-                'label': 'C1',
-                'unit': 'uS',
-                'default': 1E-9,
-            },
+            # 'C1': {
+            #     'label': 'C1',
+            #     'unit': 'uS',
+            #     'default': 1E-9,
+            # },
             'R0': {
                 'label': 'r0',
                 'unit': 'ohm',
@@ -616,11 +617,11 @@ new_par_dict = {
                 'unit': 'uS',
                 'default': 1E-9,
             },
-            'C0': {
-                'label': 'C0',
-                'unit': 'uS',
-                'default': 1E-9,
-            },
+            # 'C0': {
+            #     'label': 'C0',
+            #     'unit': 'uS',
+            #     'default': 1E-9,
+            # },
 
             # 'linecode': {
             #     'label': 'linecode',

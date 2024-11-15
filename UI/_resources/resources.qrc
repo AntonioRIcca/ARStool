@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>icons/newgrid.png</file>
     <file>icons/trend.png</file>
     <file>icons/restart.png</file>
     <file>icons/Storage.png</file>

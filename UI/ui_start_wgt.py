@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'start_wgtuNwdvV.ui'
+## Form generated from reading UI file 'start_wgtLirmXy.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -21,7 +21,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(491, 685)
+        Form.resize(491, 883)
         Form.setStyleSheet(u"*{\n"
 "	background-color: rgb(0, 0, 0);\n"
 "}\n"
@@ -43,7 +43,7 @@ class Ui_Form(object):
 "")
         self.startWgt = QWidget(Form)
         self.startWgt.setObjectName(u"startWgt")
-        self.startWgt.setGeometry(QRect(10, 0, 421, 635))
+        self.startWgt.setGeometry(QRect(10, 0, 421, 781))
         self.verticalLayout = QVBoxLayout(self.startWgt)
         self.verticalLayout.setSpacing(40)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -94,6 +94,24 @@ class Ui_Form(object):
 
         self.verticalLayout.addWidget(self.benchOpenBtn)
 
+        self.startSpacer_2 = QSpacerItem(20, 146, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout.addItem(self.startSpacer_2)
+
+        self.newGridBtn = QPushButton(self.startWgt)
+        self.newGridBtn.setObjectName(u"newGridBtn")
+        self.newGridBtn.setMinimumSize(QSize(0, 80))
+        self.newGridBtn.setMaximumSize(QSize(16777215, 16777215))
+        self.newGridBtn.setFont(font)
+        self.newGridBtn.setStyleSheet(u"padding: (50, 50);")
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/icons/newgrid.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.newGridBtn.setIcon(icon3)
+        self.newGridBtn.setIconSize(QSize(50, 50))
+        self.newGridBtn.setFlat(False)
+
+        self.verticalLayout.addWidget(self.newGridBtn)
+
         self.startSpacer = QSpacerItem(20, 146, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout.addItem(self.startSpacer)
@@ -104,9 +122,9 @@ class Ui_Form(object):
         self.optStorBtn.setMaximumSize(QSize(16777215, 16777215))
         self.optStorBtn.setFont(font)
         self.optStorBtn.setStyleSheet(u"")
-        icon3 = QIcon()
-        icon3.addFile(u":/icons/icons/Storage.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.optStorBtn.setIcon(icon3)
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/icons/Storage.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.optStorBtn.setIcon(icon4)
         self.optStorBtn.setIconSize(QSize(50, 50))
         self.optStorBtn.setFlat(False)
 
@@ -123,6 +141,7 @@ class Ui_Form(object):
         self.importDssBtn.setText(QCoreApplication.translate("Form", u"  Importa file DSS", None))
         self.openFileBtn.setText(QCoreApplication.translate("Form", u"  Apri rete", None))
         self.benchOpenBtn.setText(QCoreApplication.translate("Form", u"  Benchmark", None))
-        self.optStorBtn.setText(QCoreApplication.translate("Form", u"Optimal Storage", None))
+        self.newGridBtn.setText(QCoreApplication.translate("Form", u"  Crea Nuova Rete", None))
+        self.optStorBtn.setText(QCoreApplication.translate("Form", u"  Optimal Storage", None))
     # retranslateUi
 

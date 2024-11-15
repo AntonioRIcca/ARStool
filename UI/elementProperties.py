@@ -52,7 +52,6 @@ class ElementProperties(QMainWindow):
         self.anomWgt = []
 
         # self.ui.relWgt.setMaximumHeight(20)
-        self.__getattribute__(variables.visualpar + '_show')()
 
         all_an_def = yaml.safe_load(open(mainpath + '/Functionalities/Anomalies/default.yml'))
 
@@ -68,8 +67,7 @@ class ElementProperties(QMainWindow):
         else:
             self.anom_def, self.anom_avail = None, []
 
-        self.ui.agingParWgt.setVisible(False)
-
+        self.__getattribute__(variables.visualpar + '_show')()
 
         self.ui.lfPls.clicked.connect(self.lf_show)
         self.ui.relPls.clicked.connect(self.rel_show)
@@ -81,13 +79,16 @@ class ElementProperties(QMainWindow):
 
         self.fillRelPar()
 
-        if self.cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind']:
+        if self.cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'AC-BESS', 'DC-BESS']:
             self.fillAnomPar()
         # if v[self.elem]['lf']['p']:
         #     if 0 in v[self.elem]['lf']['p'].keys():
         #         if
         #         self.fillLfRes()
         self.ui.lfResMainWgt.setVisible(fn['lf'])
+        self.ui.relResMainWgt.setVisible(fn['rel'])
+        self.ui.agingParWgt.setVisible(False)
+
         if fn['lf']:
             self.formatLfRes()
 
@@ -115,13 +116,13 @@ class ElementProperties(QMainWindow):
         self.ui.relWgt.setMaximumHeight(20)
         self.ui.anomWgt.setMaximumHeight(1500)
         variables.visualpar = 'anom'
+        self.ui.anomAddPls.setVisible(self.anom_avail != [])
 
     def fillRelPar(self):
         # for i in range(self.ui.relParGL.count()):
         #     self.ui.relParGL.itemAt(i).widget().deleteLater()
 
         # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
-        print(self.cat)
         if self.cat != 'ExternalGrid':
             for par in ['alfa', 'beta', 'Pi_E', 'Pi_Q']:
                 self.ui.__getattribute__(par + 'Dsb').setValue(v[self.elem]['rel']['par'][par])
@@ -995,7 +996,7 @@ class ElementProperties(QMainWindow):
         for par in el_format[self.cat]:
             v[self.elem]['par'][par] = self.__getattribute__(par + 'Dsb').value()
 
-        if self.cat in mc['Load'] + mc['Generator']:
+        if self.cat in mc['Load'] + mc['Generator'] + mc['Node']:
             v[self.elem]['par']['Vn'] = [self.v0Dsb.value()]
         elif self.cat in mc['Transformer']:
             v[self.elem]['par']['Vn'] = [self.v0Dsb.value(), self.v1Dsb.value()]

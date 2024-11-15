@@ -18,7 +18,7 @@ def dict_initialize(el, cat):
 
     lf_initialize(el)
     rel_initialize(el)
-    if cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind']:
+    if cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'AC-BESS', 'DC-BESS', ]:
         anom_initialize(el)
 
 

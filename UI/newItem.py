@@ -155,12 +155,15 @@ class NewItem(QtWidgets.QDialog):
 
         # Verifica che le busbar a cui connettere l'elemento siano selezionate (che esistano...)
         self.ui.saveBtn.setVisible(False)
-        if self.ui.node1CB.currentText():
-            if self.cat in mc['Transformer'] + mc['Line']:
-                if self.ui.node2CB.currentText():
+        if self.cat not in mc['Node']:
+            if self.ui.node1CB.currentText():
+                if self.cat in mc['Transformer'] + mc['Line']:
+                    if self.ui.node2CB.currentText():
+                        self.ui.saveBtn.setVisible(True)
+                else:
                     self.ui.saveBtn.setVisible(True)
-            else:
-                self.ui.saveBtn.setVisible(True)
+        else:
+            self.ui.saveBtn.setVisible(True)
 
     def bb_read(self, cat, node1=None, node2=None):
         v_ac = dict()
@@ -339,6 +342,8 @@ class NewItem(QtWidgets.QDialog):
             v[self.el]['par']['Vn'] = []
             for b in v[self.el]['top']['conn']:
                 v[self.el]['par']['Vn'].append(v[b]['par']['Vn'][0])
+        else:
+            v[self.el]['par']['Vn'] = [v[self.el]['par']['Vn']]
 
         if '_temp' in list(v.keys()):
             v[self.el]['par']['profile'] = copy.deepcopy(v['_temp']['par']['profile'])

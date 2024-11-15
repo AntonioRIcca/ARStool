@@ -110,9 +110,7 @@ class DonutBreakdownChart(QtCharts.QChart):
         breakdown_series.setHoleSize(0.7)
         breakdown_series.setLabelsVisible()
 
-        print('slices =', len(breakdown_series.slices()))
         f_light = pow(2.2, 1 / len(breakdown_series.slices())) * 100
-        print('f_light =', f_light)
         for pie_slice in breakdown_series.slices():
             # color = QColor(color).lighter(110)
             color = QColor(color).lighter(f_light)

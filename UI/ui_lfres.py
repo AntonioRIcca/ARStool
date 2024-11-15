@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'lfresvsbXzl.ui'
+## Form generated from reading UI file 'lfrespfKzEI.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -476,17 +476,17 @@ class Ui_lfres_mainWGT(object):
 
         self.lfres_center_Wgt_HL.addItem(self.horizontalSpacer)
 
-        self.pushButton = QPushButton(self.lfres_center_WGT)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setMinimumSize(QSize(30, 30))
+        self.lfResDteMinusPb = QPushButton(self.lfres_center_WGT)
+        self.lfResDteMinusPb.setObjectName(u"lfResDteMinusPb")
+        self.lfResDteMinusPb.setMinimumSize(QSize(30, 30))
         font4 = QFont()
         font4.setPointSize(13)
         font4.setBold(True)
         font4.setWeight(75)
-        self.pushButton.setFont(font4)
-        self.pushButton.setStyleSheet(u"")
+        self.lfResDteMinusPb.setFont(font4)
+        self.lfResDteMinusPb.setStyleSheet(u"")
 
-        self.lfres_center_Wgt_HL.addWidget(self.pushButton)
+        self.lfres_center_Wgt_HL.addWidget(self.lfResDteMinusPb)
 
         self.lfresDte = QDateTimeEdit(self.lfres_center_WGT)
         self.lfresDte.setObjectName(u"lfresDte")
@@ -499,13 +499,13 @@ class Ui_lfres_mainWGT(object):
 
         self.lfres_center_Wgt_HL.addWidget(self.lfresDte)
 
-        self.pushButton_2 = QPushButton(self.lfres_center_WGT)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setMinimumSize(QSize(30, 30))
-        self.pushButton_2.setFont(font4)
-        self.pushButton_2.setStyleSheet(u"")
+        self.lfResDtePlusPb = QPushButton(self.lfres_center_WGT)
+        self.lfResDtePlusPb.setObjectName(u"lfResDtePlusPb")
+        self.lfResDtePlusPb.setMinimumSize(QSize(30, 30))
+        self.lfResDtePlusPb.setFont(font4)
+        self.lfResDtePlusPb.setStyleSheet(u"")
 
-        self.lfres_center_Wgt_HL.addWidget(self.pushButton_2)
+        self.lfres_center_Wgt_HL.addWidget(self.lfResDtePlusPb)
 
         self.horizontalSpacer_2 = QSpacerItem(77, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -573,7 +573,7 @@ class Ui_lfres_mainWGT(object):
         self.q_loss_lbl_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"Reactive Power:", None))
         self.q_loss_value_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"2000.00", None))
         self.q_loss_unit_LBL.setText(QCoreApplication.translate("lfres_mainWGT", u"kVar", None))
-        self.pushButton.setText(QCoreApplication.translate("lfres_mainWGT", u"-", None))
-        self.pushButton_2.setText(QCoreApplication.translate("lfres_mainWGT", u"+", None))
+        self.lfResDteMinusPb.setText(QCoreApplication.translate("lfres_mainWGT", u"-", None))
+        self.lfResDtePlusPb.setText(QCoreApplication.translate("lfres_mainWGT", u"+", None))
     # retranslateUi
 
