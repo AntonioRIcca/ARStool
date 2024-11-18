@@ -108,6 +108,7 @@ class Main:
         # self.ui.homeSW.removeWidget(self.ui.homeSW.currentWidget())
         # self.ui.homeSW.addWidget(mywidget)
 
+        v_initialize()
         self.startWgtCreate()
         # self.elementsTableWgtCreate()                                               # TODO: da riattivare
 
@@ -143,8 +144,8 @@ class Main:
         pass
 
     def startWgtCreate(self):
-        for f in fn:
-            fn[f] = False
+        for f in grid['studies']:
+            grid['studies'][f] = False
             
         self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
 
@@ -193,6 +194,9 @@ class Main:
         self.startWGT.ui.benchOpenBtn.clicked.connect(self.benchmarkWGT_create)
         self.startWGT.ui.optStorBtn.clicked.connect(self.optstor_create)
         self.startWGT.ui.newGridBtn.clicked.connect(self.new_grid)
+
+        v_initialize()
+        # v['_grid_'] = copy.deepcopy()
 
 
     # Creazione dell'elenco delle reti benchmark
@@ -259,9 +263,9 @@ class Main:
         img = mainpath + '/_benchmark/grid_models/images/' + gridname + '.png'
         self.gridDetailsWgt.ui.imageLbl.setPixmap(QtGui.QPixmap(img))
 
-        self.filepath = mainpath + '/_benchmark/grid_models/' + grid['file']
+        self.filepath = mainpath + '/_benchmark/grid_models/' + gridname
         self.dsspath = mainpath + '/_benchmark/grid_models/'
-        self.gridname = gridname
+        # self.gridname = gridname
 
         self.gridDetailsWgt.ui.open.clicked.connect(partial(self.dss_open, self.filepath))
         # self.yml_bench_save()
@@ -278,8 +282,8 @@ class Main:
             pass
 
         if popup.newGridStart:
-            for el in v:
-                del v[el]
+            v_initialize()
+            grid['name'] = popup.ui.nameLe.text()
 
             dictInitialize.dict_initialize('source', 'ExternalGrid')
             v['source']['par']['Vn'] = [popup.ui.sourceVDsb.value()]
@@ -306,7 +310,7 @@ class Main:
                                                                   dir=self.savepath,
                                                                   filter='*.dss')
 
-            self.gridname = 'externalDSS'
+            # self.gridname = 'externalDSS'
 
             # TODO: da riattivare
             grid['profile'] = {'step': None, 'start': None, 'end': None, 'points': None, 'exist': False}
@@ -332,7 +336,7 @@ class Main:
             grid['name'] = filename.split('/')[len(filename.split('/')) - 1].removesuffix('.dss')
 
     def yml_open(self):
-        grid['benchmark'] = False
+        grid['benchmark'] = False       # TODO: perché? non viene automaticamente sovrascritta?
         options = QtWidgets.QFileDialog.Options()
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
 
@@ -343,7 +347,7 @@ class Main:
         if filename:
             name = filename.split('/')
             self.savepath = filename.removesuffix(name[len(name)-1])
-            self.gridname = name[len(name)-1].split('.')[0]
+            # self.gridname = name[len(name)-1].split('.')[0]
             v0 = yaml.safe_load(open(filename))
 
             for par in v0['_grid_']:
@@ -356,8 +360,11 @@ class Main:
             # self.func_enabled()
             self.func_check()
 
+        for el in v:
+            dictInitialize.lf_initialize(el)
+
     def yml_bench_save(self):   # TODO: non ricordo a che serve salvare la rete
-        filename = self.dsspath + '/' + self.gridname + '.yml'
+        filename = self.dsspath + '/' + grid['name'] + '.yml'
         with open(filename, 'w') as file:
             yaml.dump(v, file)
             file.close()
@@ -368,7 +375,7 @@ class Main:
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
 
         filename, ext = QtWidgets.QFileDialog.getSaveFileName(caption="Salva configurazione di rete",
-                                                              dir=self.savepath + '/' + self.gridname,
+                                                              dir=self.savepath + '/' + grid['name'],
                                                               filter='*.yml')
 
         if filename:
@@ -778,11 +785,6 @@ class Main:
 
         # is_profile = False
         time = None
-
-        # Reset dei risultati
-        for el in v:
-            dictInitialize.lf_initialize(el)
-
         #
         # for el in v:
         #     if v[el]['category'] in mc['Load'] + mc['Generator']:
@@ -802,6 +804,12 @@ class Main:
                 pass
 
             if lf_popup.confirm:
+                # Reset dei risultati
+                for el in v:
+                    dictInitialize.lf_initialize(el)
+
+                grid['studies']['lf'] = True
+
                 self.datestart = dt.datetime(grid['lf']['start'][0], grid['lf']['start'][1], grid['lf']['start'][2],
                                              grid['lf']['start'][3], grid['lf']['start'][4])
                 self.dateend = dt.datetime(grid['lf']['end'][0], grid['lf']['end'][1], grid['lf']['end'][2],
@@ -810,7 +818,6 @@ class Main:
                 self.lf_WGT.ui.lfres_center_WGT.setVisible(lf_popup.profile)
 
                 grid['current'] = copy.deepcopy(grid['lf']['start'])
-
 
                 if lf_popup.profile:
 
@@ -1348,7 +1355,6 @@ class Main:
                 pl[el] = self.__getattribute__(el + 'CB').currentText()
         return pl
 
-
     def elemProfListCancel(self):
         self.home2_WGT.deleteLater()
 
@@ -1358,14 +1364,14 @@ class Main:
 
         variables.visualpar = 'anom'
 
-        self.homeHBL = QHBoxLayout()
-        self.homeHBL.setContentsMargins(0, 0, 0, 0)
-        self.home2_WGT.setLayout(self.homeHBL)
+        # self.homeHBL = QHBoxLayout()
+        # self.homeHBL.setContentsMargins(0, 0, 0, 0)
+        # self.home2_WGT.setLayout(self.homeHBL)
 
-        self.anomRunPls = pb_create(text='   Avvia calcolo Anomalie', height=50, font=14, border=2, radius=15,
+        anomRunPls = pb_create(text='   Avvia calcolo Anomalie', height=50, font=14, border=2, radius=15,
                                     icon='anomaly.png')
 
-        self.myform.ui.verticalLayout.addWidget(self.anomRunPls)
+        self.myform.ui.verticalLayout.addWidget(anomRunPls)
 
         # print(self.myform.ui.verticalLayout.count())
         # print(self.myform.ui.verticalLayout.itemAt(2).widget().objectName())
@@ -1373,10 +1379,19 @@ class Main:
         a = QVBoxLayout
         b = QWidget
 
+        anomRunPls.clicked.connect(self.anomRun)
+
         # a.itemAt(1).
         # a.insertWidget()
 
         #  TODO: Mostrare i risultati, se disponibili
+
+    def anomRun(self):
+        print('run LCA')
+        from Functionalities.Anomalies import launch_create_anomalies as lca
+        anome_elem = lca.lauch_create_anomalies()
+        grid['studies']['anom'] = True
+        print(list(anome_elem.keys()))
 
     def relStart(self):
         if self.myform.ui.verticalLayout.count() > 2:
@@ -1384,9 +1399,9 @@ class Main:
 
         variables.visualpar = 'rel'
 
-        self.homeHBL = QHBoxLayout()
-        self.homeHBL.setContentsMargins(0, 0, 0, 0)
-        self.home2_WGT.setLayout(self.homeHBL)
+        # self.homeHBL = QHBoxLayout()
+        # self.homeHBL.setContentsMargins(0, 0, 0, 0)
+        # self.home2_WGT.setLayout(self.homeHBL)
 
         self.relRunPls = pb_create(text='   Avvia calcolo Affidabilità', height=50, font=14, border=2, radius=15,
                                    icon='reliability.png')

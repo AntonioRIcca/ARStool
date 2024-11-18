@@ -610,6 +610,11 @@ class OpenDSS:
         else:                               # per i nodi e per il Source
             self.dss.circuit.set_active_bus(el)
             v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
+
+        # if v[el]['category'] == 'ExternalGrid':
+        #     v[el]['lf']['p'] = -1 * v[el]['lf']['p']
+        #     v[el]['lf']['q'] = -1 * v[el]['lf']['q']
+
     # TODO: verificare se è possibile rendere self.results_append e self.results_store come un'unica funzione
 
     def results_store_opt(self, el):
@@ -1175,7 +1180,7 @@ class OpenDSS:
             pass
 
         self.dss.solution.solve()       # richiesta di risoluzione del sistema
-        fn['lf'] = True
+        grid['studies']['lf'] = True
 
         for el in v:
             if v[el]['category'] in mc['Load']:

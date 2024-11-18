@@ -85,11 +85,11 @@ class ElementProperties(QMainWindow):
         #     if 0 in v[self.elem]['lf']['p'].keys():
         #         if
         #         self.fillLfRes()
-        self.ui.lfResMainWgt.setVisible(fn['lf'])
-        self.ui.relResMainWgt.setVisible(fn['rel'])
+        self.ui.lfResMainWgt.setVisible(grid['studies']['lf'])
+        self.ui.relResMainWgt.setVisible(grid['studies']['rel'])
         self.ui.agingParWgt.setVisible(False)
 
-        if fn['lf']:
+        if grid['studies']['lf']:
             self.formatLfRes()
 
         self.func_check()
@@ -1012,7 +1012,7 @@ class ElementProperties(QMainWindow):
         v[self.elem]['par']['out-of-service'] = self.out_of_service_CkB.isChecked()
 
         # salvataggio dei dati di anomalia
-        if self.cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind']:
+        if self.cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'AC-BESS', 'DC-BESS']:
             self.anom_save()
 
 

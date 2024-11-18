@@ -1,28 +1,43 @@
+import copy
 import os
+
 mainpath = os.getcwd()
 
 
 def v_initialize():
     for k in list(v.keys()):
         del v[k]
+    grid_initialize()
 
 
-grid = {
-    'benchmark': False,
-    'current': None,
-    'profile': {
-        'points': None,
-        'step': None,
-        'start': None,
-        'end': None,
-        'exist': False,
-    },
-    'lf': {
-        'start': None,
-        'end': None,
-        'points': None,
-    },
-}
+def grid_initialize():
+    grid0 = {
+        'benchmark': False,
+        'current': None,
+        'name': None,
+        'studies': {
+            'lf': False,
+            'anom': False,
+            'rel': False,
+            'optstor': False,
+        },
+        'profile': {
+            'points': None,
+            'step': None,
+            'start': None,
+            'end': None,
+            'exist': False,
+        },
+        'lf': {
+            'start': None,
+            'end': None,
+            'points': None,
+        },
+    }
+
+    for p in grid0:
+        grid[p] = copy.deepcopy(grid0[p])
+
 
 bench = {
     'profiles': {
@@ -55,14 +70,12 @@ bench = {
 
 }
 
-
 fn = {
     'lf': False,
     'anom': False,
     'rel': False,
     'optstor': False,
 }
-
 
 fn_en = {
     'lf': True,
@@ -73,12 +86,12 @@ fn_en = {
     # 'onr': True,
 }
 
-
 visualpar = 'lf'
-
 
 v = dict()
 vdss = dict()
+
+grid = {}
 
 mc = {
     'Vsource': ['ExternalGrid'],
@@ -134,7 +147,6 @@ c = {
     'sourcebus': 'AC-Node'
 }
 
-
 dsstag = {
     'transformer': {
         'default': '2W-Transformer',
@@ -171,7 +183,6 @@ dsstag = {
     },
 
 }
-
 
 new_par_dict = {
     'Turbine': {
@@ -844,7 +855,6 @@ el_lfresults = {
     },
 }
 
-
 el_format = {
     'ExternalGrid': {
         'Vn': {'min': 0.001, 'max': 999.999, 'decimal': 3, 'unit': 'kV', 'default': None},
@@ -939,7 +949,6 @@ el_format = {
         'cap': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kWh', 'default': 100},
     },
 }
-
 
 DC_elem = ['DC-Line', 'DC-DC-Converter', 'DC-Load', 'DC-BESS', 'DC-PV', 'DC-Wind']
 

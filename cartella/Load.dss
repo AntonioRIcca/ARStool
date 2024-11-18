@@ -1,2 +1,11 @@
-New "Load.nome elemento (1)" bus1=bb1 phases=3 kW=121.35816 pf=1 NumCust=1.0 kV=2 enabled=true
-New "Load.carico1" bus1=bb1 phases=3 kW=303.3954 pf=1 NumCust=1.0 kV=2 enabled=true
+New "Load.ev-charge_ac-load" bus1=ev-charge_bb phases=3 NumCust=1 kW=16.12717 pf=1 kV=0.4 enabled=true
+New "Load.ev-fast_dc-load" bus1=ev-fast-load_dc-node phases=3 pf=1 NumCust=1 kW=20.1589625 kV=0.4 enabled=true
+New "Load.pros_1_ac-load" bus1=pros_bb phases=3 NumCust=1 kW=36.66585633 pf=0.9 kV=0.4 enabled=true
+New "Load.pros_dc-load" bus1=pros2_dc-bb phases=3 pf=1 NumCust=1 kW=7.333171266 kV=0.6 enabled=true
+New "Load.rs_1_ac-load" bus1=rs_04kv_bb phases=3 NumCust=1 kW=16.12717 pf=0.9 kV=0.4 enabled=true
+New "Load.rs_2_ac-load" bus1=rs_04kv_bb phases=3 NumCust=1 kW=24.190755 pf=0.9 kV=0.4 enabled=true
+New "Load.ug_dc-load" bus1=ug_dc-bb phases=3 pf=1 NumCust=1 kW=71.87831625 kV=1.5 enabled=true
+New "Load.ug_serv1_ac-load" bus1=ug_serv_bb phases=3 NumCust=1 kW=32.25434 pf=0.9 kV=0.4 enabled=true
+New "Load.ug_serv2_ac-load" bus1=ug_serv_bb phases=3 NumCust=1 kW=48.38151 pf=0.9 kV=0.4 enabled=true
+New "Load.ugs_dc-load" bus1=ugs_dc-bb phases=3 pf=1 NumCust=1 kW=71.87831625 kV=1.5 enabled=true
+New "Load.user_ac-load" bus1=user_bb phases=3 NumCust=1 kW=95.8946175 pf=0.9 kV=0.4 enabled=true
