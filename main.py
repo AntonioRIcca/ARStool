@@ -360,8 +360,8 @@ class Main:
             # self.func_enabled()
             self.func_check()
 
-        for el in v:
-            dictInitialize.lf_initialize(el)
+        # for el in v:
+        #     dictInitialize.lf_initialize(el)
 
     def yml_bench_save(self):   # TODO: non ricordo a che serve salvare la rete
         filename = self.dsspath + '/' + grid['name'] + '.yml'
@@ -849,6 +849,8 @@ class Main:
                 # self.loadflow_results_refresh(t=0)
 
         else:
+            for el in v:
+                dictInitialize.lf_initialize(el)
             print('no-profile')
             grid['current'] = None
             self.dss.full_parse_to_dss(time=None)

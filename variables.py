@@ -265,7 +265,7 @@ new_par_dict = {
         },
         'par': {
             'P': {
-                'label': 'kVA',
+                'label': 'kW',
                 'unit': 'kW',
             },
             'cosPhi': {
@@ -289,7 +289,7 @@ new_par_dict = {
             },
             'others': {
                 'phases': '3',
-                'kvar': '0',
+                # 'kvar': '0',
                 'model': '3',
             },
         },
@@ -303,7 +303,7 @@ new_par_dict = {
         },
         'par': {
             'P': {
-                'label': 'kVA',
+                'label': 'kW',
                 'unit': 'kW',
             },
             'Vn': {
@@ -322,7 +322,7 @@ new_par_dict = {
             # },
             'others': {
                 'phases': '3',
-                'kvar': '0',
+                # 'kvar': '0',
                 'model': '3',
             },
         },

@@ -412,48 +412,62 @@ class ElementProperties(QMainWindow):
                                                              'QPushButton:pressed {background-color: rgb(64, 64, 64); '
                                                              'border-style: inset}')
 
-                    # anom_typol_par = {
-                    #     'scale': 'value',
-                    #     '(1-exp) decrease': 'alpha',
-                    #     '(-x+1) decrease': 'alpha'
-                    # }
-                    self.anomWgt[n].ui.lbdaDsb.setValue(
-                        v[self.elem]['anom']['par']['anomalies'][n][cat][typol]['lambda_a'])
-                    self.anomWgt[n].ui.lbddurDsb.setValue(
-                        v[self.elem]['anom']['par']['anomalies'][n][cat][typol]['lambda_duration'])
-                    self.anomWgt[n].ui.fixCkb.setChecked(
-                        v[self.elem]['anom']['par']['anomalies'][n][cat][typol]['is_fixed'])
-                    self.anomWgt[n].ui.parDsb.setValue(
-                        v[self.elem]['anom']['par']['anomalies'][n][cat][typol][anom_typol_par[typol]])
+                    self.anom_avail = list(self.anom_def.keys())
+                    for an in self.anomWgt:
+                        if an != self.anomWgt[n]:
+                            self.anom_avail.remove(an.ui.catCB.currentText())
+                    self.anomWgt[n].ui.catCB.clear()
+                    self.anomWgt[n].ui.catCB.insertItems(1, self.anom_avail)
+                    self.anomWgt[n].ui_actions()
+                    self.anomWgt[n].ui.catCB.setCurrentText(cat)
+                    self.anomWgt[n].cat_changed()
+                    self.anomWgt[n].ui.typeCB.setCurrentText(typol)
 
-                    # vengono compresse le altre anomaliem e resa vilibile solo quella corrente
-                    self.anom_view_update(n)
+        for n in range(len(self.anomWgt)):
+            cat = self.anomWgt[n].ui.catCB.currentText()
+            typol = self.anomWgt[n].ui.typeCB.currentText()
+            # anom_typol_par = {
+            #     'scale': 'value',
+            #     '(1-exp) decrease': 'alpha',
+            #     '(-x+1) decrease': 'alpha'
+            # }
+            self.anomWgt[n].ui.lbdaDsb.setValue(
+                v[self.elem]['anom']['par']['anomalies'][n][cat][typol]['lambda_a'])
+            self.anomWgt[n].ui.lbddurDsb.setValue(
+                v[self.elem]['anom']['par']['anomalies'][n][cat][typol]['lambda_duration'])
+            self.anomWgt[n].ui.fixCkb.setChecked(
+                v[self.elem]['anom']['par']['anomalies'][n][cat][typol]['is_fixed'])
+            self.anomWgt[n].ui.parDsb.setValue(
+                v[self.elem]['anom']['par']['anomalies'][n][cat][typol][anom_typol_par[typol]])
 
-                    # Inizializzazione delle azioni sui pulsanti
-                    self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anom_view_update, n))
-                    self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anom_move, n, 'up'))
-                    self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anom_move, n, 'down'))
-                    self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anom_del, n))
+            # vengono compresse le altre anomaliem e resa vilibile solo quella corrente
+            self.anom_view_update(n)
 
-                    # pulsante "up" disabilitato per il primo widget
-                    self.anomWgt[n].ui.upPb.setEnabled(n != 0)
-                    # pulsante "down" disabilitato per l'ultimo widget
-                    self.anomWgt[n].ui.downPb.setEnabled(n != len(self.anomWgt) - 1)
+            # Inizializzazione delle azioni sui pulsanti
+            self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anom_view_update, n))
+            self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anom_move, n, 'up'))
+            self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anom_move, n, 'down'))
+            self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anom_del, n))
 
-        # Aggiorno l'elenco delle anomalie disponibili in self.anom_avail
-        for anomaly in self.anomWgt:
-            cat = anomaly.ui.catCB.currentText()
-            typol = anomaly.ui.typeCB.currentText()
-            self.anom_avail = list(self.anom_def.keys())
-            for an in self.anomWgt:
-                if an != anomaly:
-                    self.anom_avail.remove(an.ui.catCB.currentText())
-            anomaly.ui.catCB.clear()
-            anomaly.ui.catCB.insertItems(1, self.anom_avail)
-            anomaly.ui_actions()
-            anomaly.ui.catCB.setCurrentText(cat)
-            anomaly.cat_changed()
-            anomaly.ui.typeCB.setCurrentText(typol)
+            # pulsante "up" disabilitato per il primo widget
+            self.anomWgt[n].ui.upPb.setEnabled(n != 0)
+            # pulsante "down" disabilitato per l'ultimo widget
+            self.anomWgt[n].ui.downPb.setEnabled(n != len(self.anomWgt) - 1)
+
+        # # Aggiorno l'elenco delle anomalie disponibili in self.anom_avail
+        # for anomaly in self.anomWgt:
+        #     cat = anomaly.ui.catCB.currentText()
+        #     typol = anomaly.ui.typeCB.currentText()
+        #     self.anom_avail = list(self.anom_def.keys())
+        #     for an in self.anomWgt:
+        #         if an != anomaly:
+        #             self.anom_avail.remove(an.ui.catCB.currentText())
+        #     anomaly.ui.catCB.clear()
+        #     anomaly.ui.catCB.insertItems(1, self.anom_avail)
+        #     anomaly.ui_actions()
+        #     anomaly.ui.catCB.setCurrentText(cat)
+        #     anomaly.cat_changed()
+        #     anomaly.ui.typeCB.setCurrentText(typol)
 
 
 

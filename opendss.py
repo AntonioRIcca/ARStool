@@ -528,7 +528,7 @@ class OpenDSS:
 
     # Aggiornamento del dizionario dei risultati di uno studio singolo. TODO: Ridefinire
     def results_store(self, el):
-        if v[el]['category'] in mc['Load']:
+        if v[el]['category'] in mc['BESS']:
             print('break')
 
         if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi

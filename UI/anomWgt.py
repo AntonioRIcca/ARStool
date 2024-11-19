@@ -46,6 +46,7 @@ class AnomWgt(QtWidgets.QWidget):
         self.ui.typeCB.clear()
         self.ui.typeCB.currentTextChanged.connect(self.type_changed)
         self.ui.typeCB.insertItems(0, list(self.defdict[cat].keys()))
+        # self.ui.typeCB.currentTextChanged.connect(self.type_changed)
 
     def type_changed(self):
         cat = self.ui.catCB.currentText()
