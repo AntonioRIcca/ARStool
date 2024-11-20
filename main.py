@@ -1411,6 +1411,44 @@ class Main:
         self.myform.ui.verticalLayout.addWidget(self.relRunPls)
         #  TODO: Mostrare i risultati, se disponibili
 
+        self.relRunPls.clicked.connect(self.relRun)
+
+    def relRun(self):
+        from Functionalities.Adequacy.AffidabilitàV3 import Affidabilità
+
+        t = 1000
+        T0 = 25
+        Ta = [20, 24, 26, 21, 18, 15, 25, 28, 31]
+
+        reliability = Affidabilità()
+
+        for element in v.keys():
+            # if element != '_grid_':
+            reliability.Norris_Landzberg(element, t, T0, Ta)
+
+        gruppi = reliability.raggruppa()
+        reliability.RBD(t, gruppi)
+
+        self.adeqRun()
+        pass
+
+    def adeqRun(self):
+        from Functionalities.Adequacy.Adeguatezza_V3 import Adeguatezza
+
+        adequacy = Adeguatezza()
+
+        (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
+        external_grid, bilancio_potenza) = adequacy.generation_adequacy()
+
+        adequacy_result = (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
+        external_grid, bilancio_potenza)
+
+        adequacy.generation_adequacy_plot(adequacy_result)
+
+        adequacy.state_sampling_plot(generazione_totale_distribuita, domanda_totale)
+
+        pass
+
 
 class LFrWGT(QMainWindow):
     def __init__(self):
