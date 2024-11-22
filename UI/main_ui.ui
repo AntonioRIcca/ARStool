@@ -303,11 +303,14 @@ border-radius: 10px;
                  <bold>true</bold>
                 </font>
                </property>
+               <property name="toolTip">
+                <string>Grid details</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true"/>
                </property>
                <property name="text">
-                <string>Data Analysis</string>
+                <string>Grid Details</string>
                </property>
                <property name="icon">
                 <iconset resource="_resources/resources.qrc">
@@ -604,13 +607,13 @@ border-radius: 10px;
                 </font>
                </property>
                <property name="toolTip">
-                <string>Optimal Power Flow</string>
+                <string>Anomalies Generation</string>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
                </property>
                <property name="text">
-                <string>Anomalies Generator</string>
+                <string>Anomalies Gen.</string>
                </property>
                <property name="icon">
                 <iconset resource="_resources/resources.qrc">
@@ -692,7 +695,7 @@ border-radius: 10px;
                 </font>
                </property>
                <property name="toolTip">
-                <string>Reliability and Adequacy</string>
+                <string>Reliability</string>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>
@@ -703,6 +706,50 @@ border-radius: 10px;
                <property name="icon">
                 <iconset resource="_resources/resources.qrc">
                  <normaloff>:/icons/icons/reliability.png</normaloff>:/icons/icons/reliability.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="flat">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="reliabilithy_Btn_2">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="toolTip">
+                <string>Adequacy</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="text">
+                <string>Adequacy</string>
+               </property>
+               <property name="icon">
+                <iconset resource="_resources/resources.qrc">
+                 <normaloff>:/icons/icons/adequacy.png</normaloff>:/icons/icons/adequacy.png</iconset>
                </property>
                <property name="iconSize">
                 <size>

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt1
 import random as rand
 import numpy as np
 
-from variables import v, mainpath
+from variables import v, grid
 
 import copy
 

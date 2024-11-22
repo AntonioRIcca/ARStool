@@ -33,6 +33,11 @@ def grid_initialize():
             'end': None,
             'points': None,
         },
+        'rel': {
+            'T0': 25,
+            't': 1,
+            'prof_T': None,
+        }
     }
 
     for p in grid0:

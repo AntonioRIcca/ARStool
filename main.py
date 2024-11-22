@@ -1361,8 +1361,9 @@ class Main:
         self.home2_WGT.deleteLater()
 
     def anomStart(self):
-        if self.myform.ui.verticalLayout.count() > 2:
-            self.myform.ui.verticalLayout.itemAt(2).widget().deleteLater()
+        if self.myform.ui.verticalLayout.count() > 1:
+            for i in range (self.myform.ui.verticalLayout.count() - 1, 0, -1):
+                self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
 
         variables.visualpar = 'anom'
 
@@ -1373,7 +1374,7 @@ class Main:
         anomRunPls = pb_create(text='   Avvia calcolo Anomalie', height=50, font=14, border=2, radius=15,
                                     icon='anomaly.png')
 
-        self.myform.ui.verticalLayout.addWidget(anomRunPls)
+        self.myform.ui.verticalLayout.insertWidget(2, anomRunPls)
 
         # print(self.myform.ui.verticalLayout.count())
         # print(self.myform.ui.verticalLayout.itemAt(2).widget().objectName())
@@ -1396,8 +1397,9 @@ class Main:
         print(list(anome_elem.keys()))
 
     def relStart(self):
-        if self.myform.ui.verticalLayout.count() > 2:
-            self.myform.ui.verticalLayout.itemAt(2).widget().deleteLater()
+        if self.myform.ui.verticalLayout.count() > 1:
+            for i in range (self.myform.ui.verticalLayout.count() - 1, 0, -1):
+                self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
 
         variables.visualpar = 'rel'
 
@@ -1408,10 +1410,22 @@ class Main:
         self.relRunPls = pb_create(text='   Avvia calcolo Affidabilità', height=50, font=14, border=2, radius=15,
                                    icon='reliability.png')
 
-        self.myform.ui.verticalLayout.addWidget(self.relRunPls)
+        self.myform.ui.verticalLayout.insertWidget(2, self.relRunPls)
         #  TODO: Mostrare i risultati, se disponibili
 
         self.relRunPls.clicked.connect(self.relRun)
+
+        from UI.relParWgt import RelParWgt
+        self.relPar = RelParWgt()
+        self.relParWgt = self.relPar.ui.relParWgt
+        self.myform.ui.verticalLayout.insertWidget(2, self.relParWgt)
+        # TODO: popolare le caselle di relParWgt
+        self.relPar.ui.T0Dsb.setValue(grid['rel']['T0'])
+        self.relPar.ui.missionTimeDsb.setValue(grid['rel']['t'])
+        if grid['rel']['prof_T']:
+            self.relPar.ui.tempProfPb.setText(grid['rel']['prof_T']['name'])
+        else:
+            self.relPar.ui.tempProfPb.setText('Crea profilo')
 
     def relRun(self):
         from Functionalities.Adequacy.AffidabilitàV3 import Affidabilità

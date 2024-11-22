@@ -5,7 +5,7 @@ import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
 
-from variables import v
+from variables import v, grid
 
 # dizionario di prova Antonio
 #Leggo le informazioni ricavate all'istante t0
@@ -190,7 +190,7 @@ class Affidabilità:
             i = 0
             ##nota: il vettore Ta deve avere lo stesso orizzonte temporale dei vettori di generazione e carico
             for h in range(0, int(len(Ta)/4)): #sto ipotizzando un timestep di 15 minuti quindi in un'ora ho 4 valori
-                for m in range(0, 60, 15):
+                for m in range(0, 60, grid['profile']['step']):
                     rho = rho_20 * ((234.5 + Ta[i]) / (234.5 + 20))     # resistenza di ogni linea
 
                     # calcolo a partire da ro lunghezza e sezione cavi e resisitività (temeperatura)
