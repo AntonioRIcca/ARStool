@@ -1,12 +1,12 @@
-New "Generator.ugs_dc-bess" bus1=ugs_dc-bb phases=3 model=3 kv=1.5 kW=0 enabled=true
-New "Generator.ugs_1_dc-pv" bus1=ugs_pv_dc-bb phases=3 kvar=0 model=3 kv=0.75 kW=15 enabled=true
-New "Generator.ugs_2_dc-pv" bus1=ugs_pv_dc-bb phases=3 kvar=0 model=3 kv=0.75 kW=15 enabled=true
-New "Generator.ev-fast_dc-bess" bus1=ev-fast_dc-bb phases=3 model=3 kv=0.6 kW=0 enabled=true
-New "Generator.ev-fast_dc-pv" bus1=ev-fast_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=30 enabled=true
-New "Generator.pros_dc-bess" bus1=pros1_dc-bb phases=3 model=3 kv=0.6 kW=0 enabled=true
-New "Generator.pros_dc-micro-wind" bus1=pros1_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=10 enabled=true
-New "Generator.pros_dc-pv" bus1=pros2_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=50 enabled=true
-New "Generator.wpg_1_wind" bus1=wpg_2_bb phases=3 kv=2 kW=140 enabled=true
-New "Generator.wpg_2_wind" bus1=wpg_2_bb phases=3 kv=2 kW=140 enabled=true
-New "Generator.wpg_dc-bess" bus1=wpg_pv_dc-bb phases=3 model=3 kv=0.6 kW=0 enabled=true
-New "Generator.wpg_dc-pv" bus1=wpg_pv_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=40 enabled=true
+New "Generator.ugs_dc-bess" bus1=ugs_dc-bb phases=3 model=3 kW=0 kv=1.5 enabled=true
+New "Generator.ugs_1_dc-pv" bus1=ugs_pv_dc-bb phases=3 kvar=0 model=3 kW=15 kv=0.75 enabled=true
+New "Generator.ugs_2_dc-pv" bus1=ugs_pv_dc-bb phases=3 kvar=0 model=3 kW=15 kv=0.75 enabled=true
+New "Generator.ev-fast_dc-bess" bus1=ev-fast_dc-bb phases=3 model=3 kW=0 kv=0.6 enabled=true
+New "Generator.ev-fast_dc-pv" bus1=ev-fast_dc-bb phases=3 kvar=0 model=3 kW=30 kv=0.6 enabled=true
+New "Generator.pros_dc-bess" bus1=pros1_dc-bb phases=3 model=3 kW=0 kv=0.6 enabled=true
+New "Generator.pros_dc-micro-wind" bus1=pros1_dc-bb phases=3 kvar=0 model=3 kW=10 kv=0.6 enabled=true
+New "Generator.pros_dc-pv" bus1=pros2_dc-bb phases=3 kvar=0 model=3 kW=50 kv=0.6 enabled=true
+New "Generator.wpg_1_wind" bus1=wpg_2_bb phases=3 kW=140 kv=2 enabled=true
+New "Generator.wpg_2_wind" bus1=wpg_2_bb phases=3 kW=140 kv=2 enabled=true
+New "Generator.wpg_dc-bess" bus1=wpg_pv_dc-bb phases=3 model=3 kW=0 kv=0.6 enabled=true
+New "Generator.wpg_dc-pv" bus1=wpg_pv_dc-bb phases=3 kvar=0 model=3 kW=40 kv=0.6 enabled=true

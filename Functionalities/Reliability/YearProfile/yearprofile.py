@@ -31,7 +31,7 @@ class YearProfile(QtWidgets.QDialog):
         self.ui.profile_TW.setColumnWidth(0, 50)
         self.ui.profile_TW.setColumnWidth(1, 100)
 
-        self.max = 40
+        self.max = 50
 
         self.months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic']
 
@@ -40,6 +40,7 @@ class YearProfile(QtWidgets.QDialog):
         self.input_profile = profile
         self.profile_set = False
         self.step = False
+        self.confirmed = False
 
         self.void_profile = dict()
         self.graph_profile = []
@@ -91,6 +92,8 @@ class YearProfile(QtWidgets.QDialog):
         self.table_fill(self.graph_profile)
         self.plot_init(self.graph_profile)
 
+        self.refresh()
+
         self.ui.step_BTN.setVisible(False)
 
         self.ui.month_BTN.setVisible(False)
@@ -109,6 +112,7 @@ class YearProfile(QtWidgets.QDialog):
         self.ui.month_BTN.clicked.connect(self.back_to_month)
         self.ui.clear_BTN.clicked.connect(self.erase_data)
         self.ui.confirm_BTN.clicked.connect(self.confirm_and_close)
+        self.ui.exit_BTN.clicked.connect(self.close)
 
     #
     def erase_data(self):
@@ -124,7 +128,11 @@ class YearProfile(QtWidgets.QDialog):
 
     #
     def refresh(self):
-        self.ui.profile_TW.itemChanged.disconnect()
+        try:
+            self.ui.profile_TW.itemChanged.disconnect()
+        except TypeError:
+            pass
+
         self.gen_profile()
         self.table_fill(self.graph_profile)
         self.plot_graph(self.graph_profile)
@@ -565,6 +573,7 @@ class YearProfile(QtWidgets.QDialog):
             'name': self.name,
             'profile': self.profile
         }
+        self.confirmed = True
         self.close()
 
     #

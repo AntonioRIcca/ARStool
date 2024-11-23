@@ -36,8 +36,11 @@ def grid_initialize():
         'rel': {
             'T0': 25,
             't': 1,
-            'prof_T': None,
-        }
+            'prof_T': {
+                'name': None,
+                'profile': None,
+            },
+        },
     }
 
     for p in grid0:

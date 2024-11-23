@@ -1411,7 +1411,6 @@ class Main:
                                    icon='reliability.png')
 
         self.myform.ui.verticalLayout.insertWidget(2, self.relRunPls)
-        #  TODO: Mostrare i risultati, se disponibili
 
         self.relRunPls.clicked.connect(self.relRun)
 
@@ -1422,7 +1421,7 @@ class Main:
         # TODO: popolare le caselle di relParWgt
         self.relPar.ui.T0Dsb.setValue(grid['rel']['T0'])
         self.relPar.ui.missionTimeDsb.setValue(grid['rel']['t'])
-        if grid['rel']['prof_T']:
+        if grid['rel']['prof_T']['name']:
             self.relPar.ui.tempProfPb.setText(grid['rel']['prof_T']['name'])
         else:
             self.relPar.ui.tempProfPb.setText('Crea profilo')
