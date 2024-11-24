@@ -1418,31 +1418,54 @@ class Main:
         self.relPar = RelParWgt()
         self.relParWgt = self.relPar.ui.relParWgt
         self.myform.ui.verticalLayout.insertWidget(2, self.relParWgt)
-        # TODO: popolare le caselle di relParWgt
         self.relPar.ui.T0Dsb.setValue(grid['rel']['T0'])
         self.relPar.ui.missionTimeDsb.setValue(grid['rel']['t'])
         if grid['rel']['prof_T']['name']:
             self.relPar.ui.tempProfPb.setText(grid['rel']['prof_T']['name'])
         else:
             self.relPar.ui.tempProfPb.setText('Crea profilo')
+        self.relPar.ui.tempProfPb.clicked.connect(self.relTempProfile)
+
+    def relTempProfile(self):
+        from Functionalities.Reliability.YearProfile.yearprofile import YearProfile
+        popup = YearProfile(grid['rel']['prof_T']['name'], grid['rel']['prof_T']['profile'])
+        # popup = NewGrid()
+
+        if popup.exec():
+            pass
+
+        if popup.confirmed:
+            if grid['rel']['prof_T']['name']:
+                self.relPar.ui.tempProfPb.setText(grid['rel']['prof_T']['name'])
 
     def relRun(self):
-        from Functionalities.Adequacy.AffidabilitàV3 import Affidabilità
+        if grid['rel']['prof_T']['name']:
+            from Functionalities.Adequacy.AffidabilitàV3 import Affidabilità
 
-        t = 1000
-        T0 = 25
-        Ta = [20, 24, 26, 21, 18, 15, 25, 28, 31]
+            t = 1000
+            T0 = 25
+            Ta = [20, 24, 26, 21, 18, 15, 25, 28, 31]
 
-        reliability = Affidabilità()
+            # d = datetime.datetime(year=grid['profile'])
+            print(grid['lf']['start'])
 
-        for element in v.keys():
-            # if element != '_grid_':
-            reliability.Norris_Landzberg(element, t, T0, Ta)
-
-        gruppi = reliability.raggruppa()
-        reliability.RBD(t, gruppi)
-
-        self.adeqRun()
+            # reliability = Affidabilità()
+            #
+            # for element in v.keys():
+            #     # if element != '_grid_':
+            #     reliability.Norris_Landzberg(element, t, T0, Ta)
+            #
+            # gruppi = reliability.raggruppa()
+            # reliability.RBD(t, gruppi)
+            #
+            # self.adeqRun()
+        else:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText('È necessario creare o caricare un profilo di temperatura')
+            msg.setWindowTitle('Attenzione!')
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec_()
         pass
 
     def adeqRun(self):

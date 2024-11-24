@@ -16,22 +16,22 @@ class RelParWgt(QtWidgets.QWidget):
 
         self.profile_exixts = False
 
-        self.ui.tempProfPb.clicked.connect(self.temperature_profile)
+        # self.ui.tempProfPb.clicked.connect(self.temperature_profile)
 
-    def temperature_profile(self):
-        print('profilo di temperatura')
-        # from UI.newGridDlg import NewGrid
-        #
-        from Functionalities.Reliability.YearProfile.yearprofile import YearProfile
-        popup = YearProfile(grid['rel']['prof_T']['name'], grid['rel']['prof_T']['profile'])
-        # popup = NewGrid()
-
-        if popup.exec():
-            pass
-
-        if popup.confirmed:
-            if grid['rel']['prof_T']['name']:
-                self.ui.tempProfPb.setText(grid['rel']['prof_T']['name'])
+    # def temperature_profile(self):
+    #     print('profilo di temperatura')
+    #     # from UI.newGridDlg import NewGrid
+    #     #
+    #     from Functionalities.Reliability.YearProfile.yearprofile import YearProfile
+    #     popup = YearProfile(grid['rel']['prof_T']['name'], grid['rel']['prof_T']['profile'])
+    #     # popup = NewGrid()
+    #
+    #     if popup.exec():
+    #         pass
+    #
+    #     if popup.confirmed:
+    #         if grid['rel']['prof_T']['name']:
+    #             self.ui.tempProfPb.setText(grid['rel']['prof_T']['name'])
 
         # self.profile_exixts = popup.confirmed
         # self.profile_name = popup.name
