@@ -68,8 +68,12 @@ class LfModDlg(QtWidgets.QDialog):
     def calculate(self):
         self.i_start = int(QtCore.QDateTime(self.datestart).msecsTo(self.ui.startDte.dateTime()) / (60000) /
                            grid['profile']['step'])
-        self.i_steps = int((self.ui.startDte.dateTime().msecsTo(self.ui.endDte.dateTime()) / (60000) /
-                            grid['profile']['step'])) + 1
+
+        d0 = self.ui.startDte.dateTime().toPython()
+        d1 = self.ui.endDte.dateTime().toPython()
+        gap = (d1 - d0).total_seconds() / 60
+        self.i_steps = int(gap / grid['profile']['step']) + 1
+
         self.confirm = True
         self.profile = self.ui.profLfRB.isChecked()
 

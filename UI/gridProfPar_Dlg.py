@@ -98,7 +98,14 @@ class GridProfParDlg(QtWidgets.QDialog):
         self.lenfix()
 
     def lenfix(self):
-        gap = self.ui.startDte.dateTime().secsTo(self.ui.endDte.dateTime()) / 60
+        d0 = self.ui.startDte.dateTime().toPython()
+        d1 = self.ui.endDte.dateTime().toPython()
+
+        print(d0, d1)
+        dtime = d1 - d0
+        print(dtime.total_seconds() / 3600)
+
+        gap = (d1 - d0).total_seconds() / 60
 
         self.len = int(gap/self.steps[self.ui.stepCB.currentIndex()]) + 1
 

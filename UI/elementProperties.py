@@ -86,11 +86,16 @@ class ElementProperties(QMainWindow):
         #         if
         #         self.fillLfRes()
         self.ui.lfResMainWgt.setVisible(grid['studies']['lf'])
-        self.ui.relResMainWgt.setVisible(grid['studies']['rel'])
+        # self.ui.relResMainWgt.setVisible(grid['studies']['rel'])
         self.ui.agingParWgt.setVisible(False)
 
         if grid['studies']['lf']:
             self.formatLfRes()
+
+        if grid['studies']['rel']:
+            self.fillRelRes()
+        self.ui.relResMainWgt.setVisible(grid['studies']['rel'])
+        self.ui.relWgt.setVisible(False)
 
         self.func_check()
 
@@ -98,6 +103,7 @@ class ElementProperties(QMainWindow):
         for f in fn_en:
             self.ui.__getattribute__(f + 'Wgt').setVisible(fn_en[f])
         self.ui.anomWgt.setVisible(self.anom_def is not None and fn_en['anom'])
+        self.ui.relWgt.setVisible((self.cat not in mc['Node'] + mc['Vsource']) and fn_en['rel'])
 
     def lf_show(self):
         self.ui.lfWgt.setMaximumHeight(1500)
@@ -151,6 +157,21 @@ class ElementProperties(QMainWindow):
             #
             # line += 1
         # -------------------------------------------------------------------------------------------------------------
+
+    def fillRelRes(self):
+        self.ui.relResMainWgt.setVisible(grid['studies']['rel'])
+
+        self.ui.relFurnWgt.setVisible(self.cat in mc['Load'])
+        self.ui.relResWgt.setVisible(not self.cat in mc['Load'])
+
+        if self.cat in mc['Load']:
+            self.ui.rDayRelDsb.setValue(v[self.elem]['rel']['results']['load_rel'])
+            self.ui.rNightRelDsb.setValue(v[self.elem]['rel']['results']['load_rel1'])
+        elif self.cat not in mc['Node'] + mc['Vsource']:
+            self.ui.lbdRelDsb.setValue(v[self.elem]['rel']['results']['lambda'])
+            self.ui.piSiRelDsb.setValue(v[self.elem]['rel']['results']['Pi_Si'])
+            self.ui.mtbfHrsDsb.setValue(v[self.elem]['rel']['results']['MTBF_ore'])
+            self.ui.mtbfYrDsb.setValue(v[self.elem]['rel']['results']['MTBF_anni'])
 
     def fillLfPar(self):
         for i in range(self.ui.lfParGL.count()):
@@ -468,9 +489,6 @@ class ElementProperties(QMainWindow):
         #     anomaly.ui.catCB.setCurrentText(cat)
         #     anomaly.cat_changed()
         #     anomaly.ui.typeCB.setCurrentText(typol)
-
-
-
 
     def profileCheck(self):
         self.dsb_format(self.scale_DSB, 0, 1, 4)
@@ -928,7 +946,6 @@ class ElementProperties(QMainWindow):
             self.anomWgt[n].ui.downPb.setEnabled(n != len(self.anomWgt) - 1)
 
     def anom_del(self, n):
-        print('eliminazione del widget', n)
         # anon_temp = self.anomWgt
         # self.anom_avail.append(self.anomWgt[n].ui.anomLbl.text())
 
@@ -970,8 +987,6 @@ class ElementProperties(QMainWindow):
     def test(self):
         self.anomWgt1.type_changed()
         print('cliccato')
-
-
 
         # an_dict = {'mainWgt': QWidget(), 'mainGL': QGridLayout(),
         #            'catCB': QComboBox(), 'catLbl': QLabel('Cat.:'),

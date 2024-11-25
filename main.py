@@ -1361,9 +1361,15 @@ class Main:
         self.home2_WGT.deleteLater()
 
     def anomStart(self):
-        if self.myform.ui.verticalLayout.count() > 1:
-            for i in range (self.myform.ui.verticalLayout.count() - 1, 0, -1):
+        # if self.myform.ui.verticalLayout.count() > 2:
+        #     for i in range (self.myform.ui.verticalLayout.count() - 1, 1, -1):
+        #         self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
+
+        print(self.myform.ui.verticalLayout.count())
+        if self.myform.ui.verticalLayout.count() > 2:
+            for i in range(2, self.myform.ui.verticalLayout.count()):
                 self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
+                # self.myform.ui.verticalLayout.itemAt(3).widget().deleteLater()
 
         variables.visualpar = 'anom'
 
@@ -1397,9 +1403,13 @@ class Main:
         print(list(anome_elem.keys()))
 
     def relStart(self):
-        if self.myform.ui.verticalLayout.count() > 1:
-            for i in range (self.myform.ui.verticalLayout.count() - 1, 0, -1):
+        if self.myform.ui.verticalLayout.count() > 2:
+            for i in range(2, self.myform.ui.verticalLayout.count()):
                 self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
+        #
+        # if self.myform.ui.verticalLayout.count() > 2:
+        #     for i in range (self.myform.ui.verticalLayout.count() - 1, 0, -1):
+        #         self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
 
         variables.visualpar = 'rel'
 
@@ -1444,20 +1454,36 @@ class Main:
 
             t = 1000
             T0 = 25
-            Ta = [20, 24, 26, 21, 18, 15, 25, 28, 31]
+            # Ta = [20, 24, 26, 21, 18, 15, 25, 28, 31]
 
-            # d = datetime.datetime(year=grid['profile'])
-            print(grid['lf']['start'])
+            d0 = datetime.datetime(year=grid['lf']['start'][0], month=grid['lf']['start'][1],
+                                   day=grid['lf']['start'][2], hour=grid['lf']['start'][3],
+                                   minute=grid['lf']['start'][4])
+            d1 = datetime.datetime(year=grid['lf']['end'][0], month=grid['lf']['end'][1],
+                                   day=grid['lf']['end'][2], hour=grid['lf']['end'][3],
+                                   minute=grid['lf']['end'][4])
 
-            # reliability = Affidabilità()
-            #
-            # for element in v.keys():
-            #     # if element != '_grid_':
-            #     reliability.Norris_Landzberg(element, t, T0, Ta)
-            #
-            # gruppi = reliability.raggruppa()
-            # reliability.RBD(t, gruppi)
-            #
+            d = d0
+            Ta = []
+            i = 0
+            months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic']
+            while d <= d1:
+                year, month, day, hour, minute = d.year, d.month, d.day, d.hour, d.minute
+                Ta.append(grid['rel']['prof_T']['profile'][months[month - 1]]['prof'][day]['prof'][hour])
+                d += datetime.timedelta(minutes=grid['profile']['step'])
+
+            reliability = Affidabilità()
+
+            for element in v.keys():
+                # if element != '_grid_':
+                reliability.Norris_Landzberg(element, t, T0, Ta)
+
+            gruppi = reliability.raggruppa()
+            reliability.RBD(t, gruppi)
+
+            grid['studies']['rel'] = True
+
+            self.relRes()
             # self.adeqRun()
         else:
             msg = QMessageBox()
@@ -1467,6 +1493,140 @@ class Main:
             msg.setStandardButtons(QMessageBox.Ok)
             msg.exec_()
         pass
+
+    def relRes(self):
+        try:
+            self.home2_WGT.deleteLater()
+            self.home3_WGT.deleteLater()
+        except:
+            pass
+
+        self.home2_WGT = QWidget()
+        self.home2_WGT.setMinimumWidth(490)
+        self.home2_WGT.setMaximumWidth(490)
+        self.relResWgtVBL = QVBoxLayout()
+        self.relResWgtVBL.setSpacing(20)
+        self.home2_WGT.setLayout(self.relResWgtVBL)
+        self.homeHBL.addWidget(self.home2_WGT)
+
+        self.relResLbl = QLabel('Affidabilità di Componente')
+        self.relResLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
+                                     'border: solid; border-width: 1 px; '
+                                     'border-color: rgb(255, 255, 255); '
+                                     'border-radius: 10 px;')
+        self.relResLbl.setAlignment(QtCore.Qt.AlignCenter)
+        self.relResLbl.setMinimumHeight(50)
+        self.relResLbl.setMaximumHeight(50)
+        self.relResWgtVBL.addWidget(self.relResLbl)
+
+        self.relResTw = QTableWidget()
+        self.relResWgtVBL.addWidget(self.relResTw)
+
+        self.relResTw.setColumnCount(5)
+
+        header = []
+        labels = ['elemento', 'Lambda', 'Pi_Si', 'MTBF (h)', 'MTBF (y)']
+        w = [130, 80, 80, 80, 80]
+
+        for col in range(len(labels)):
+            header.append(QTableWidgetItem())
+            header[col].setText(labels[col])
+            self.relResTw.setHorizontalHeaderItem(col, header[col])
+            self.relResTw.setColumnWidth(col, w[col])
+        # self.relResTw.setColumnWidth(0, 40)
+        self.relResTw.setRowCount(len(list(v.keys())))
+
+        self.relResTw.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.relResTw.setSortingEnabled(True)
+
+        self.relResTw.setStyleSheet("*{background-color: rgb(15, 15, 15);}")
+        self.relResTw.horizontalHeader().setStyleSheet('::section{background-color:rgb(31, 31, 31);}')
+        self.relResTw.verticalHeader().setVisible(False)
+
+        row = 0
+        labels = ['lambda', 'Pi_Si', 'MTBF_ore', 'MTBF_anni']
+        rounds = (5, 2, 2, 5)
+        for el in v:
+            if v[el]['category'] not in mc['Vsource'] + mc['Node'] + mc['Load']:
+                self.relResTw.setItem(row, 0, QTableWidgetItem(el))
+                for col in range(len(labels)):
+                    if v[el]['rel']['results'][labels[col]] < 0.001:
+                        val = '%.4E' % v[el]['rel']['results'][labels[col]]
+                    else:
+                        val = str(round(v[el]['rel']['results'][labels[col]], rounds[col]))
+
+                    item = QTableWidgetItem(val)
+                    item.setTextAlignment(QtCore.Qt.AlignRight)
+                    self.relResTw.setItem(row, col + 1, item)
+                row += 1
+        self.relResTw.setRowCount(row)
+
+        # ---------------------------------------------------------------------------
+        self.home3_WGT = QWidget()
+        self.home3_WGT.setMinimumWidth(330)
+        self.home3_WGT.setMaximumWidth(330)
+        self.relLoadFurnWgtVBL = QVBoxLayout()
+        self.relLoadFurnWgtVBL.setSpacing(20)
+        self.home3_WGT.setLayout(self.relLoadFurnWgtVBL)
+        self.homeHBL.addWidget(self.home3_WGT)
+
+        self.relLoadFurnLbl = QLabel('Affidabilità di Fornitura')
+        self.relLoadFurnLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
+                                          'border: solid; border-width: 1 px; '
+                                          'border-color: rgb(255, 255, 255); '
+                                          'border-radius: 10 px;')
+        self.relLoadFurnLbl.setAlignment(QtCore.Qt.AlignCenter)
+        self.relLoadFurnLbl.setMinimumHeight(50)
+        self.relLoadFurnLbl.setMaximumHeight(50)
+        self.relLoadFurnWgtVBL.addWidget(self.relLoadFurnLbl)
+
+        self.relLoadFurnTw = QTableWidget()
+        self.relLoadFurnWgtVBL.addWidget(self.relLoadFurnTw)
+
+        self.relLoadFurnTw.setColumnCount(3)
+
+        header = []
+        labels = ['elemento', 'R (day)', 'R (night)']
+        w = [130, 80, 80]
+
+        for col in range(len(labels)):
+            header.append(QTableWidgetItem())
+            header[col].setText(labels[col])
+            self.relLoadFurnTw.setHorizontalHeaderItem(col, header[col])
+            self.relLoadFurnTw.setColumnWidth(col, w[col])
+        # self.relResTw.setColumnWidth(0, 40)
+        self.relLoadFurnTw.setRowCount(len(list(v.keys())))
+
+        self.relLoadFurnTw.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.relLoadFurnTw.setSortingEnabled(True)
+
+        self.relLoadFurnTw.setStyleSheet("*{background-color: rgb(15, 15, 15);}")
+        self.relLoadFurnTw.horizontalHeader().setStyleSheet('::section{background-color:rgb(31, 31, 31);}')
+        self.relLoadFurnTw.verticalHeader().setVisible(False)
+
+        row = 0
+        labels = ['load_rel', 'load_rel1']
+        rounds = (5, 5)
+        for el in v:
+            if v[el]['category'] in mc['Load']:
+                self.relLoadFurnTw.setItem(row, 0, QTableWidgetItem(el))
+                for col in range(len(labels)):
+                    try:
+                        if v[el]['rel']['results'][labels[col]] < 0.001:
+                            val = '%.4E' % v[el]['rel']['results'][labels[col]]
+                        else:
+                            val = str(round(v[el]['rel']['results'][labels[col]], rounds[col]))
+                    except TypeError:
+                        val = '-'
+
+                    item = QTableWidgetItem(val)
+                    item.setTextAlignment(QtCore.Qt.AlignRight)
+                    self.relLoadFurnTw.setItem(row, col + 1, item)
+                row += 1
+        self.relLoadFurnTw.setRowCount(row)
+
+        self.home_Hsp =  QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.homeHBL.addItem(self.home_Hsp)
 
     def adeqRun(self):
         from Functionalities.Adequacy.Adeguatezza_V3 import Adeguatezza
