@@ -1671,6 +1671,8 @@ class Main:
         self.av_lole_funr_rel = adequacy.avLoleFunrRel
         self.av_lole_anom = adequacy.avLoleAnom
 
+        self.adeq_graps = adequacy.graphs
+
         self.adeqRes()
         pass
 
@@ -1699,12 +1701,27 @@ class Main:
 
         folder = mainpath + '/Functionalities/Adequacy/__images__/'
 
-        hmax = self.home_WGT.height()
+        h_max = self.home_WGT.height() - 70
+        w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 30
+        ratio = w_max / h_max
+        print(w_max, h_max, ratio)
+
+        if ratio > (self.adeq_graps[0]['ratio'] + self.adeq_graps[2]['ratio']) / 2:
+            self.adeqGraphCreate(self.adeq_graps[0], w=self.adeq_graps[0]['ratio']*h_max/2, h=h_max/2, fig=1)
+            self.adeqGraphCreate(self.adeq_graps[1], w=self.adeq_graps[1]['ratio']*h_max/2, h=h_max/2, fig=2)
+            self.adeqGraphCreate(self.adeq_graps[2], w=self.adeq_graps[2]['ratio']*h_max/2, h=h_max/2, fig=3)
+            self.adeqGraphCreate(self.adeq_graps[3], w=self.adeq_graps[3]['ratio']*h_max/2, h=h_max/2, fig=4)
+            print("comanda l'altezza")
+            pass
+        else:
+            print('comanda la larghezza')
+            pass
+
 
         self.adeqFigLbl = [None, None, None, None]
 
         self.adeqFigLbl[0] = QLabel()
-        self.adeqFigLbl[0].setPixmap(QtGui.QPixmap(folder + "1.png").scaledToHeight(int(hmax / 2) - 40))
+        self.adeqFigLbl[0].setPixmap(QtGui.QPixmap(folder + "1.png"))
         self.adeqRes1WgtVBL.addWidget(self.adeqFigLbl[0])
 
         val = '%.2f' % self.x_gen_est
@@ -1719,7 +1736,7 @@ class Main:
         self.adeqRes1WgtVBL.addWidget(self.xGenEstLbl)
 
         self.adeqFigLbl[1] = QLabel()
-        self.adeqFigLbl[1].setPixmap(QtGui.QPixmap(folder + "2.png").scaledToHeight(int(hmax / 2) - 40))
+        self.adeqFigLbl[1].setPixmap(QtGui.QPixmap(folder + "2.png"))
         self.adeqRes1WgtVBL.addWidget(self.adeqFigLbl[1])
 
         self.home2_Hsp = QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -1731,7 +1748,7 @@ class Main:
         # print(self.homeHBL.spacing())
         # print(self.homeHBL.contentsMargins())
 
-        self.home2_WGT.setMinimumWidth(self.adeqFigLbl[0].width() * (int(hmax / 2) - 40) / self.adeqFigLbl[0].height())
+        self.home2_WGT.setMinimumWidth(self.adeqFigLbl[0].width() * (int(h_max / 2) - 40) / self.adeqFigLbl[0].height())
 
         # ---------------------------------------------------------------------------
 
@@ -1739,51 +1756,52 @@ class Main:
         folder = mainpath + '/Functionalities/Adequacy/__images__/'
 
         self.adeqFigLbl[2] = QLabel()
-        self.adeqFigLbl[2].setPixmap(QtGui.QPixmap(folder + "3.png").scaledToHeight(int(hmax / 2) - 40))
+        self.adeqFigLbl[2].setPixmap(QtGui.QPixmap(folder + "3.png"))
         self.adeqRes2WgtVBL.addWidget(self.adeqFigLbl[2])
 
         self.loleLBL = QLabel('LOLE')
         self.loleLBL.setStyleSheet('font: 75 12pt "MS Shell Dlg 2"; '
-                                      'border: solid; border-width: 1 px; '
-                                      'border-color: rgb(255, 255, 255); '
-                                      'border-radius: 10 px;')
+                                   'border: solid; border-width: 1 px; '
+                                   'border-color: rgb(255, 255, 255); '
+                                   'border-radius: 10 px;')
         self.loleLBL.setMinimumHeight(30)
         self.loleLBL.setAlignment(QtCore.Qt.AlignCenter)
 
         self.adeqRes2WgtVBL.addWidget(self.loleLBL)
 
         self.adeqFigLbl[3] = QLabel()
-        self.adeqFigLbl[3].setPixmap(QtGui.QPixmap(folder + "4.png").scaledToHeight(int(hmax / 2) - 40))
+        self.adeqFigLbl[3].setPixmap(QtGui.QPixmap(folder + "4.png"))
         self.adeqRes2WgtVBL.addWidget(self.adeqFigLbl[3])
 
         self.home3_Hsp = QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding)
         self.adeqRes2WgtVBL.addItem(self.home3_Hsp)
 
-        self.home3_WGT.setMinimumWidth(int(4 * (hmax / 2) / 5))
+        self.home3_WGT.setMinimumWidth(int(4 * (h_max / 2) / 5))
 
-        lmax = self.home2_WGT.width() + self.home3_WGT.width()
+        w_max = self.home2_WGT.width() + self.home3_WGT.width()
 
         lcurr = self.adeqFigLbl[0].width() + self.adeqFigLbl[2].width()
         hcurr = self.adeqFigLbl[0].height() + self.adeqFigLbl[1].height() + self.xGenEstLbl.height()
 
 
     def adeqGraphCreate(self, data, w, h, fig):
-        figure = plt.Figure(w/100, h/100)
+        figure = plt.Figure(figsize=(w/100, h/100), dpi=100)
         ax = figure.add_subplot()
 
         for i in data['y']:
             ax.plot(data['x'], data['y'][i], color=data['colors'][i], label=data['labels'][i])
 
         box = ax.get_position()
-        ax.set_position([box.x0 + box.width * 0.05, box.y0 + box.height * 0.05, box.width, box.height * 1])
+        ax.set_position([box.x0 + box.width * 0.05, box.y0 + box.height * 0.25, box.width, box.height * 0.85])
 
-        ax.set_xlabel(data['x-axis'], fontsize=10)
-        ax.set_ylabel(data['y-axis'], fontsize=10)
-        ax.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=1,
-                  fontsize=8)
+        ax.set_xlabel(data['x-axis'], fontsize=8)
+        ax.set_ylabel(data['y-axis'], fontsize=8)
+        ax.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.2), fancybox=True, shadow=True, ncol=2,
+                  fontsize=7)
 
-        filename = mainpath + '/Functionalities/Adequacy/__images__' + str(fig) + '.png'
-        figure.savefig(filename, dpi=100)
+        filename = mainpath + '/Functionalities/Adequacy/__images__/' + str(fig) + '.png'
+        print(filename)
+        figure.savefig(filename)
         pass
 
 class LFrWGT(QMainWindow):

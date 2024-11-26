@@ -26,6 +26,8 @@ import copy
 
 class Adeguatezza:
     def __init__(self):
+        self.graphs = dict()
+
         self.MC_years = 10 # anni monte carlo ovvero numero di stati casuali del sistema da generare
         self.statesampling = 4000 # stati del sistema per ogni anno monte carlo
         # estraiamo tutti i componenti di rete presenti nel dizionario
@@ -302,8 +304,6 @@ class Adeguatezza:
 #         pass
 
     def generation_adequacy_plot(self, adequacy_result, i0=0, i1=23):
-        self.graphs = dict()
-
         (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
          external_grid, bilancio_potenza) = adequacy_result
 
@@ -347,6 +347,10 @@ class Adeguatezza:
         figure1, ax1 = plt.subplots()
 
         self.graphs[0] = {
+            'title': '',
+            'x-axis': 'Tempo [h]',
+            'y-axis': 'Potenza [kW]',
+            'ratio': 1.5,
             'x': sample[i0:i1],
             'y': {
                 0: generazione_totale_distribuita[i0:i1],
@@ -399,13 +403,17 @@ class Adeguatezza:
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
         filename1 = os.path.join(savepath, strFile)
-        plt.savefig(filename1)
+        # plt.savefig(filename1)
 
         #  -------
 
         figure2, ax2 = plt.subplots()
 
         self.graphs[1] = {
+            'title': '',
+            'x-axis': 'Tempo [h]',
+            'y-axis': 'DNS [-]',
+            'ratio': 1.5,
             'x': sample[i0:i1],
             'y': {
                 0: DNS[i0:i1],
@@ -429,7 +437,7 @@ class Adeguatezza:
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
         filename1 = os.path.join(savepath, strFile)
-        plt.savefig(filename1)
+        # plt.savefig(filename1)
 
     def state_sampling_plot(self, generazione_totale_distribuita, domanda_totale):
 
@@ -451,6 +459,7 @@ class Adeguatezza:
             'title': 'Adeguatezza',
             'x-axis': 'ANNI MONTE CARLO',
             'y-axis': 'LOLE[ore/anno]',
+            'ratio': 0.8,
             'x': sample,
             'y': {
                 0: LOLE_medio_anno_MC,
@@ -538,7 +547,7 @@ class Adeguatezza:
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
         filename1 = os.path.join(savepath, strFile)
-        figure1.savefig(filename1)
+        # figure1.savefig(filename1)
 
         #  ------------
 
@@ -549,6 +558,7 @@ class Adeguatezza:
             'title': '',
             'x-axis': 'Anni Monte Carlo [y]',
             'y-axis': 'EENS [kWh]',
+            'ratio': 0.8,
             'x': sample,
             'y': {
                 0: EENS_medio_anno_MC,
@@ -579,7 +589,7 @@ class Adeguatezza:
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
         filename1 = os.path.join(savepath, strFile)
-        figure2.savefig(filename1)
+        # figure2.savefig(filename1)
 
 
 
