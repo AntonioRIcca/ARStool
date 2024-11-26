@@ -302,6 +302,7 @@ class Adeguatezza:
 #         pass
 
     def generation_adequacy_plot(self, adequacy_result, i0=0, i1=23):
+        self.graphs = dict()
 
         (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
          external_grid, bilancio_potenza) = adequacy_result
@@ -318,6 +319,9 @@ class Adeguatezza:
         axis[0].plot(sample[i0:i1],bilancio_potenza[i0:i1], color="green", label ="BILANCIO DI POTENZA")
         axis[0].set_title("ADEQUACY")
         axis[0].legend(frameon=False, loc='upper left', fontsize=5)
+        axis[0].set_xlabel('Tempo [h]', fontsize=5)
+        axis[0].set_ylabel('Potenza [kW]', fontsize=5)
+
         axis[0].text(15, 250, "% Gen.distr./Gen. interna tot.:" + str(round(sum(generazione_totale_distribuita)*100/sum(generazione_interna_totale),2)) +"%", style='italic')
         plt.xlabel('ADEQUACY')
 
@@ -340,7 +344,92 @@ class Adeguatezza:
         #
         # #
         # (LOLE_medio_anno_MC, CV_LOLE, EENS_medio_anno_MC, LOLE_medio_anomalies_anno_MC, CV_LOLE_anomalies, EENS_medio_anomalies_anno_MC) = a.State_Sampling(generazione_totale_distribuita, domanda_totale)
+        figure1, ax1 = plt.subplots()
 
+        self.graphs[0] = {
+            'x': sample[i0:i1],
+            'y': {
+                0: generazione_totale_distribuita[i0:i1],
+                1: generazione_interna_totale[i0:i1],
+                2: domanda_totale[i0:i1],
+                3: external_grid[i0:i1],
+                4: external_grid[i0:i1],
+            },
+            'colors': {
+                0: 'yellow',
+                1: 'red',
+                2: 'blue',
+                3: 'black',
+                4: 'green',
+            },
+            'labels': {
+                0: 'GENERAZIONE DISTRIBUITA',
+                1: 'GENERAZIONE INTERNA TOTALE',
+                2: 'DOMANDA',
+                3: 'GENERAZIONE ESTERNA',
+                4: 'BILANCIO DI POTENZA',
+            },
+        }
+
+
+        ax1.plot(sample[i0:i1], generazione_totale_distribuita[i0:i1], color="yellow",
+                     label="GENERAZIONE DISTRIBUITA")
+        ax1.plot(sample[i0:i1], generazione_interna_totale[i0:i1], color="red", label="GENERAZIONE INTERNA TOTALE")
+        ax1.plot(sample[i0:i1], domanda_totale[i0:i1], color="blue", label="DOMANDA")
+        ax1.plot(sample[i0:i1], external_grid[i0:i1], color="black", label="GENERAZIONE ESTERNA")
+        ax1.plot(sample[i0:i1], bilancio_potenza[i0:i1], color="green", label="BILANCIO DI POTENZA")
+        ax1.set_title("ADEQUACY")
+        ax1.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=2,
+                   fontsize=8)
+        ax1.set_xlabel('Tempo [h]', fontsize=10)
+        ax1.set_ylabel('Potenza [kW]', fontsize=10)
+
+        box = ax1.get_position()
+        ax1.set_position([box.x0, box.y0 + box.height * 0.15, box.width, box.height * 0.85])
+        box1 = ax1.get_position()
+        # print('x0:', box1.x0, '\ny0:', box1.y0, '\nheight:', box1.height, '\nwidth:', box1.width, )
+
+        # ax1.text(15, 250, "% Gen.distr./Gen. interna tot.:" + str(
+        #     round(sum(generazione_totale_distribuita) * 100 / sum(generazione_interna_totale), 2)) + "%",
+        #              style='italic')
+
+        self.x_gen_distr = sum(generazione_totale_distribuita) * 100 / sum(generazione_interna_totale)
+
+        strFile = "1.png"
+        if os.path.isfile(savepath + strFile):
+            os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
+        filename1 = os.path.join(savepath, strFile)
+        plt.savefig(filename1)
+
+        #  -------
+
+        figure2, ax2 = plt.subplots()
+
+        self.graphs[1] = {
+            'x': sample[i0:i1],
+            'y': {
+                0: DNS[i0:i1],
+            },
+            'colors': {
+                0: 'red',
+            },
+            'labels': {
+                0: 'DNS',
+            },
+        }
+
+        # figure2.set_size_inches(12, 8)
+        ax2.plot(sample[i0:i1],DNS[i0:i1], color="red", label="DNS")
+        ax2.set_title("DNS")
+        ax2.legend(fontsize=8)
+        ax2.set_xlabel('Tempo [h]', fontsize=10)
+        ax2.set_ylabel('Potenza [kW]', fontsize=10)
+
+        strFile = "2.png"
+        if os.path.isfile(savepath + strFile):
+            os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
+        filename1 = os.path.join(savepath, strFile)
+        plt.savefig(filename1)
 
     def state_sampling_plot(self, generazione_totale_distribuita, domanda_totale):
 
@@ -358,6 +447,25 @@ class Adeguatezza:
         figure1, axis1 = plt1.subplots(1, 2)
         figure1.suptitle('ADEGUATEZZA')
 
+        self.graphs[2] = {
+            'title': 'Adeguatezza',
+            'x-axis': 'ANNI MONTE CARLO',
+            'y-axis': 'LOLE[ore/anno]',
+            'x': sample,
+            'y': {
+                0: LOLE_medio_anno_MC,
+                1: LOLE_medio_anomalies_anno_MC,
+            },
+            'colors': {
+                0: 'blue',
+                1: 'red',
+            },
+            'labels': {
+                0: "CONSIDERANDO L'AFFIDABILITA DEI COMPONENTI",
+                1: "CONSIDERANDO L'AFFIDABILITA' E ANOMALIE DEI COMPONENTI",
+            },
+        }
+
 
         #print('sample,LOLE_medio_anno_MC', sample,LOLE_medio_anno_MC)
         axis1[0].plot(sample,LOLE_medio_anno_MC, color="blue")
@@ -374,6 +482,7 @@ class Adeguatezza:
         axis1[0].text(2000, 0.4, "% LOLE con affidabilità fornitura e anomalie:" + str(LOLE_medio_anomalies_anno_MC[-1]), style='italic')
         axis1[0].yaxis.set_label_position("right")
         axis1.flat[0].set(xlabel='ANNI MONTE CARLO', ylabel='LOLE[ore/anno]')
+
 
 
         axis1[1].plot(sample,EENS_medio_anno_MC, color="blue")
@@ -406,7 +515,71 @@ class Adeguatezza:
 
 
 
+        # -- New -- @AR
+        figure1 = plt.Figure(figsize=(4, 5))
+        ax1 = figure1.add_subplot()
 
+        # figure1.suptitle('Adeguatezza')
+        ax1.plot(sample, LOLE_medio_anno_MC, color="blue", label='con Affidabilità dei componenti')
+        ax1.plot(sample, LOLE_medio_anomalies_anno_MC, color="red", label='con Affidabilità e Anomalie')
+
+        box = ax1.get_position()
+        ax1.set_position([box.x0 + box.width * 0.05, box.y0 + box.height * 0.05, box.width, box.height * 1])
+
+        ax1.set_xlabel('Anni Monte Carlo [y]', fontsize=10)
+        ax1.set_ylabel('Lole [h/y]', fontsize=10)
+        ax1.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=1,
+                   fontsize=8)
+
+        self.avLoleFunrRel = LOLE_medio_anno_MC[-1]
+        self.avLoleAnom = LOLE_medio_anomalies_anno_MC[-1]
+
+        strFile = "3.png"
+        if os.path.isfile(savepath + strFile):
+            os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
+        filename1 = os.path.join(savepath, strFile)
+        figure1.savefig(filename1)
+
+        #  ------------
+
+        figure2 = plt.Figure(figsize=(4, 5))
+        ax2 = figure2.add_subplot()
+
+        self.graphs[3] = {
+            'title': '',
+            'x-axis': 'Anni Monte Carlo [y]',
+            'y-axis': 'EENS [kWh]',
+            'x': sample,
+            'y': {
+                0: EENS_medio_anno_MC,
+                1: EENS_medio_anomalies_anno_MC,
+            },
+            'colors': {
+                0: 'blue',
+                1: 'red',
+            },
+            'labels': {
+                0: "con Affidabilità dei componenti",
+                1: "con Affidabilità e Anomalie",
+            },
+        }
+
+        ax2.plot(sample, EENS_medio_anno_MC, color="blue", label='con Affidabilità dei componenti')
+        ax2.plot(sample, EENS_medio_anomalies_anno_MC, color="red", label='con Affidabilità e Anomalie')
+
+        box = ax1.get_position()
+        ax2.set_position([box.x0 + box.width * 0.05, box.y0 + box.height * 0.05, box.width, box.height * 1])
+
+        ax2.set_xlabel('Anni Monte Carlo [y]', fontsize=10)
+        ax2.set_ylabel('EENS [kWh]', fontsize=10)
+        ax2.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=1,
+                   fontsize=8)
+
+        strFile = "4.png"
+        if os.path.isfile(savepath + strFile):
+            os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
+        filename1 = os.path.join(savepath, strFile)
+        figure2.savefig(filename1)
 
 
 

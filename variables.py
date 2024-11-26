@@ -19,6 +19,7 @@ def grid_initialize():
             'lf': False,
             'anom': False,
             'rel': False,
+            'adeq': False,
             'optstor': False,
         },
         'profile': {
@@ -90,6 +91,7 @@ fn_en = {
     'anom': True,
     # 'opf': True,
     'rel': True,
+    'adeq': True
     # 'gm': True,
     # 'onr': True,
 }

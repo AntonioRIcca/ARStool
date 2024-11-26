@@ -100,8 +100,8 @@ class ElementProperties(QMainWindow):
         self.func_check()
 
     def func_check(self):
-        for f in fn_en:
-            self.ui.__getattribute__(f + 'Wgt').setVisible(fn_en[f])
+        # for f in fn_en:
+        #     self.ui.__getattribute__(f + 'Wgt').setVisible(fn_en[f])
         self.ui.anomWgt.setVisible(self.anom_def is not None and fn_en['anom'])
         self.ui.relWgt.setVisible((self.cat not in mc['Node'] + mc['Vsource']) and fn_en['rel'])
 

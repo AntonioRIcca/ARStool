@@ -39,6 +39,8 @@ from UI.newItem import NewItem
 from UI.gridProfPar_Dlg import GridProfParDlg
 import dictInitialize
 
+import matplotlib.pyplot as plt
+
 # import time
 
 from collections import namedtuple
@@ -125,7 +127,8 @@ class Main:
         self.ui.restartBtn.clicked.connect(self.startWgtCreate)
         self.ui.loadProfilesBtn.clicked.connect(self.elemProfList)
         self.ui.anom_Btn.clicked.connect(self.anomStart)
-        self.ui.reliabilithy_Btn.clicked.connect(self.relStart)
+        self.ui.reliability_Btn.clicked.connect(self.relStart)
+        self.ui.adequacy_Btn.clicked.connect(self.adeqStart)
 
         self.app.exec_()
 
@@ -1428,8 +1431,14 @@ class Main:
         self.relPar = RelParWgt()
         self.relParWgt = self.relPar.ui.relParWgt
         self.myform.ui.verticalLayout.insertWidget(2, self.relParWgt)
-        self.relPar.ui.T0Dsb.setValue(grid['rel']['T0'])
-        self.relPar.ui.missionTimeDsb.setValue(grid['rel']['t'])
+        # self.relPar.ui.T0Dsb.setValue(grid['rel']['T0'])
+
+        self.relPar.ui.missionTimeDsb.setMaximum(grid['lf']['points'] * (grid['profile']['step'] / 60))
+        if grid['studies']['rel']:
+            self.relPar.ui.missionTimeDsb.setValue(grid['rel']['t'])
+        else:
+            self.relPar.ui.missionTimeDsb.setValue(self.relPar.ui.missionTimeDsb.maximum())
+
         if grid['rel']['prof_T']['name']:
             self.relPar.ui.tempProfPb.setText(grid['rel']['prof_T']['name'])
         else:
@@ -1452,8 +1461,8 @@ class Main:
         if grid['rel']['prof_T']['name']:
             from Functionalities.Adequacy.AffidabilitàV3 import Affidabilità
 
-            t = 1000
-            T0 = 25
+            t = self.relPar.ui.missionTimeDsb.value()
+            # T0 = self.relPar.ui.T0Dsb.value()
             # Ta = [20, 24, 26, 21, 18, 15, 25, 28, 31]
 
             d0 = datetime.datetime(year=grid['lf']['start'][0], month=grid['lf']['start'][1],
@@ -1476,7 +1485,7 @@ class Main:
 
             for element in v.keys():
                 # if element != '_grid_':
-                reliability.Norris_Landzberg(element, t, T0, Ta)
+                reliability.Norris_Landzberg(element, t, 298.15, Ta)
 
             gruppi = reliability.raggruppa()
             reliability.RBD(t, gruppi)
@@ -1495,11 +1504,12 @@ class Main:
         pass
 
     def relRes(self):
-        try:
-            self.home2_WGT.deleteLater()
-            self.home3_WGT.deleteLater()
-        except:
-            pass
+        if self.homeHBL.count() > 1:
+            for i in range(1, self.homeHBL.count()):
+                try:
+                    self.homeHBL.itemAt(i).widget().deleteLater()
+                except AttributeError:
+                    self.homeHBL.removeItem(self.homeHBL.itemAt(i))
 
         self.home2_WGT = QWidget()
         self.home2_WGT.setMinimumWidth(490)
@@ -1625,8 +1635,22 @@ class Main:
                 row += 1
         self.relLoadFurnTw.setRowCount(row)
 
-        self.home_Hsp =  QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.home_Hsp = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.homeHBL.addItem(self.home_Hsp)
+
+    def adeqStart(self):
+        if self.myform.ui.verticalLayout.count() > 2:
+            for i in range(2, self.myform.ui.verticalLayout.count()):
+                self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
+
+        self.relAdeqPls = pb_create(text='   Avvia calcolo Adeguatezza', height=50, font=14, border=2, radius=15,
+                                   icon='adequacy.png')
+
+        self.myform.ui.verticalLayout.insertWidget(2, self.relAdeqPls)
+
+        self.relAdeqPls.clicked.connect(self.adeqRun)
+
+        variables.visualpar = 'rel'
 
     def adeqRun(self):
         from Functionalities.Adequacy.Adeguatezza_V3 import Adeguatezza
@@ -1643,8 +1667,124 @@ class Main:
 
         adequacy.state_sampling_plot(generazione_totale_distribuita, domanda_totale)
 
+        self.x_gen_est = adequacy.x_gen_distr
+        self.av_lole_funr_rel = adequacy.avLoleFunrRel
+        self.av_lole_anom = adequacy.avLoleAnom
+
+        self.adeqRes()
         pass
 
+    def adeqRes(self):
+        if self.homeHBL.count() > 1:
+            for i in range(1, self.homeHBL.count()):
+                try:
+                    self.homeHBL.itemAt(i).widget().deleteLater()
+                except AttributeError:
+                    self.homeHBL.removeItem(self.homeHBL.itemAt(i))
+
+        self.home2_WGT = QWidget()
+        self.adeqRes1WgtVBL = QVBoxLayout()
+        self.adeqRes1WgtVBL.setSpacing(20)
+        self.home2_WGT.setLayout(self.adeqRes1WgtVBL)
+        self.homeHBL.addWidget(self.home2_WGT)
+
+        self.home3_WGT = QWidget()
+        self.adeqRes2WgtVBL = QVBoxLayout()
+        self.adeqRes2WgtVBL.setSpacing(20)
+        self.home3_WGT.setLayout(self.adeqRes2WgtVBL)
+        self.homeHBL.addWidget(self.home3_WGT)
+
+        self.home_Hsp = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.homeHBL.addItem(self.home_Hsp)
+
+        folder = mainpath + '/Functionalities/Adequacy/__images__/'
+
+        hmax = self.home_WGT.height()
+
+        self.adeqFigLbl = [None, None, None, None]
+
+        self.adeqFigLbl[0] = QLabel()
+        self.adeqFigLbl[0].setPixmap(QtGui.QPixmap(folder + "1.png").scaledToHeight(int(hmax / 2) - 40))
+        self.adeqRes1WgtVBL.addWidget(self.adeqFigLbl[0])
+
+        val = '%.2f' % self.x_gen_est
+        self.xGenEstLbl = QLabel('Generazione distribuita / Generazione interna totale = ' + val + '%')
+        self.xGenEstLbl.setStyleSheet('font: 75 12pt "MS Shell Dlg 2"; '
+                                      'border: solid; border-width: 1 px; '
+                                      'border-color: rgb(255, 255, 255); '
+                                      'border-radius: 10 px;')
+        self.xGenEstLbl.setMinimumHeight(30)
+        self.xGenEstLbl.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.adeqRes1WgtVBL.addWidget(self.xGenEstLbl)
+
+        self.adeqFigLbl[1] = QLabel()
+        self.adeqFigLbl[1].setPixmap(QtGui.QPixmap(folder + "2.png").scaledToHeight(int(hmax / 2) - 40))
+        self.adeqRes1WgtVBL.addWidget(self.adeqFigLbl[1])
+
+        self.home2_Hsp = QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.adeqRes1WgtVBL.addItem(self.home2_Hsp)
+        #
+        # print(self.adeqRes1WgtVBL.spacing())
+        # print(self.adeqRes1WgtVBL.contentsMargins())
+        #
+        # print(self.homeHBL.spacing())
+        # print(self.homeHBL.contentsMargins())
+
+        self.home2_WGT.setMinimumWidth(self.adeqFigLbl[0].width() * (int(hmax / 2) - 40) / self.adeqFigLbl[0].height())
+
+        # ---------------------------------------------------------------------------
+
+
+        folder = mainpath + '/Functionalities/Adequacy/__images__/'
+
+        self.adeqFigLbl[2] = QLabel()
+        self.adeqFigLbl[2].setPixmap(QtGui.QPixmap(folder + "3.png").scaledToHeight(int(hmax / 2) - 40))
+        self.adeqRes2WgtVBL.addWidget(self.adeqFigLbl[2])
+
+        self.loleLBL = QLabel('LOLE')
+        self.loleLBL.setStyleSheet('font: 75 12pt "MS Shell Dlg 2"; '
+                                      'border: solid; border-width: 1 px; '
+                                      'border-color: rgb(255, 255, 255); '
+                                      'border-radius: 10 px;')
+        self.loleLBL.setMinimumHeight(30)
+        self.loleLBL.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.adeqRes2WgtVBL.addWidget(self.loleLBL)
+
+        self.adeqFigLbl[3] = QLabel()
+        self.adeqFigLbl[3].setPixmap(QtGui.QPixmap(folder + "4.png").scaledToHeight(int(hmax / 2) - 40))
+        self.adeqRes2WgtVBL.addWidget(self.adeqFigLbl[3])
+
+        self.home3_Hsp = QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.adeqRes2WgtVBL.addItem(self.home3_Hsp)
+
+        self.home3_WGT.setMinimumWidth(int(4 * (hmax / 2) / 5))
+
+        lmax = self.home2_WGT.width() + self.home3_WGT.width()
+
+        lcurr = self.adeqFigLbl[0].width() + self.adeqFigLbl[2].width()
+        hcurr = self.adeqFigLbl[0].height() + self.adeqFigLbl[1].height() + self.xGenEstLbl.height()
+
+
+    def adeqGraphCreate(self, data, w, h, fig):
+        figure = plt.Figure(w/100, h/100)
+        ax = figure.add_subplot()
+
+        for i in data['y']:
+            ax.plot(data['x'], data['y'][i], color=data['colors'][i], label=data['labels'][i])
+
+        box = ax.get_position()
+        ax.set_position([box.x0 + box.width * 0.05, box.y0 + box.height * 0.05, box.width, box.height * 1])
+
+        ax.set_xlabel(data['x-axis'], fontsize=10)
+        ax.set_ylabel(data['y-axis'], fontsize=10)
+        ax.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=1,
+                  fontsize=8)
+
+        filename = mainpath + '/Functionalities/Adequacy/__images__' + str(fig) + '.png'
+        figure.savefig(filename, dpi=100)
+        pass
 
 class LFrWGT(QMainWindow):
     def __init__(self):

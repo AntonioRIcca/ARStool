@@ -675,7 +675,7 @@ border-radius: 10px;
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="reliabilithy_Btn">
+              <widget class="QPushButton" name="reliability_Btn">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -719,7 +719,7 @@ border-radius: 10px;
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="reliabilithy_Btn_2">
+              <widget class="QPushButton" name="adequacy_Btn">
                <property name="minimumSize">
                 <size>
                  <width>0</width>

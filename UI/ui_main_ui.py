@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_uiqxSSoe.ui'
+## Form generated from reading UI file 'main_uimPjWzu.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -269,33 +269,33 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_16.addWidget(self.opf_Btn)
 
-        self.reliabilithy_Btn = QPushButton(self.frame_11)
-        self.reliabilithy_Btn.setObjectName(u"reliabilithy_Btn")
-        self.reliabilithy_Btn.setMinimumSize(QSize(0, 40))
-        self.reliabilithy_Btn.setMaximumSize(QSize(16777215, 40))
-        self.reliabilithy_Btn.setFont(font)
-        self.reliabilithy_Btn.setStyleSheet(u"")
+        self.reliability_Btn = QPushButton(self.frame_11)
+        self.reliability_Btn.setObjectName(u"reliability_Btn")
+        self.reliability_Btn.setMinimumSize(QSize(0, 40))
+        self.reliability_Btn.setMaximumSize(QSize(16777215, 40))
+        self.reliability_Btn.setFont(font)
+        self.reliability_Btn.setStyleSheet(u"")
         icon9 = QIcon()
         icon9.addFile(u":/icons/icons/reliability.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.reliabilithy_Btn.setIcon(icon9)
-        self.reliabilithy_Btn.setIconSize(QSize(24, 24))
-        self.reliabilithy_Btn.setFlat(False)
+        self.reliability_Btn.setIcon(icon9)
+        self.reliability_Btn.setIconSize(QSize(24, 24))
+        self.reliability_Btn.setFlat(False)
 
-        self.verticalLayout_16.addWidget(self.reliabilithy_Btn)
+        self.verticalLayout_16.addWidget(self.reliability_Btn)
 
-        self.reliabilithy_Btn_2 = QPushButton(self.frame_11)
-        self.reliabilithy_Btn_2.setObjectName(u"reliabilithy_Btn_2")
-        self.reliabilithy_Btn_2.setMinimumSize(QSize(0, 40))
-        self.reliabilithy_Btn_2.setMaximumSize(QSize(16777215, 40))
-        self.reliabilithy_Btn_2.setFont(font)
-        self.reliabilithy_Btn_2.setStyleSheet(u"")
+        self.adequacy_Btn = QPushButton(self.frame_11)
+        self.adequacy_Btn.setObjectName(u"adequacy_Btn")
+        self.adequacy_Btn.setMinimumSize(QSize(0, 40))
+        self.adequacy_Btn.setMaximumSize(QSize(16777215, 40))
+        self.adequacy_Btn.setFont(font)
+        self.adequacy_Btn.setStyleSheet(u"")
         icon10 = QIcon()
         icon10.addFile(u":/icons/icons/adequacy.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.reliabilithy_Btn_2.setIcon(icon10)
-        self.reliabilithy_Btn_2.setIconSize(QSize(24, 24))
-        self.reliabilithy_Btn_2.setFlat(False)
+        self.adequacy_Btn.setIcon(icon10)
+        self.adequacy_Btn.setIconSize(QSize(24, 24))
+        self.adequacy_Btn.setFlat(False)
 
-        self.verticalLayout_16.addWidget(self.reliabilithy_Btn_2)
+        self.verticalLayout_16.addWidget(self.adequacy_Btn)
 
         self.gidman_Btn = QPushButton(self.frame_11)
         self.gidman_Btn.setObjectName(u"gidman_Btn")
@@ -1129,13 +1129,13 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.opf_Btn.setText(QCoreApplication.translate("MainWindow", u"OPF", None))
 #if QT_CONFIG(tooltip)
-        self.reliabilithy_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"Reliability", None))
+        self.reliability_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"Reliability", None))
 #endif // QT_CONFIG(tooltip)
-        self.reliabilithy_Btn.setText(QCoreApplication.translate("MainWindow", u"Reliability", None))
+        self.reliability_Btn.setText(QCoreApplication.translate("MainWindow", u"Reliability", None))
 #if QT_CONFIG(tooltip)
-        self.reliabilithy_Btn_2.setToolTip(QCoreApplication.translate("MainWindow", u"Adequacy", None))
+        self.adequacy_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"Adequacy", None))
 #endif // QT_CONFIG(tooltip)
-        self.reliabilithy_Btn_2.setText(QCoreApplication.translate("MainWindow", u"Adequacy", None))
+        self.adequacy_Btn.setText(QCoreApplication.translate("MainWindow", u"Adequacy", None))
 #if QT_CONFIG(tooltip)
         self.gidman_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"Grid Management", None))
 #endif // QT_CONFIG(tooltip)
