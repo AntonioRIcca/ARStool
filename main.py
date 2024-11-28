@@ -1471,6 +1471,7 @@ class Main:
                                                         'border-radius: 10px;'
                                                         '}'
                                                         'QLabel{'
+                                                        # 'font: 75 10pt "MS Shell Dlg 2"; '
                                                         'border: none;'
                                                         '}')
             self.anomElWgt[el]['mainWgt'].setMinimumWidth(500)
@@ -1489,41 +1490,77 @@ class Main:
             self.anomElWgt[el]['topHBL'].addWidget(self.anomElWgt[el]['n_events'])
             self.anomElWgt[el]['topHBL'].addWidget(self.anomElWgt[el]['Pls'])
             self.anomElWgt[el]['mainVBL'].addWidget(self.anomElWgt[el]['topWgt'])
+            self.anomElWgt[el]['topWgt'].setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; ')
 
             self.anomElWgt[el]['eventsWgt'] = QWidget()
+            self.anomElWgt[el]['eventsVLB'] = QVBoxLayout()
+            self.anomElWgt[el]['eventsTw'] = QTableWidget()
+            self.anomElWgt[el]['eventsTw'].setColumnCount(4)
+
             self.anomElWgt[el]['eventsGL'] = QGridLayout()
             self.anomElWgt[el]['eventsWgt'].setLayout(self.anomElWgt[el]['eventsGL'])
 
-            events = 0
+            n_event = 0
+            events = []
             self.anomElWgt[el]['anomalies'] = dict()
             for a in v[el]['anom']['res']['a_dict']:
                 # anomElWgt[el]['anomalies'][a] = dict()
                 for n_ev in v[el]['anom']['res']['a_dict'][a]:
                     for event in n_ev:
                         print(a, event)
-                        self.anomElWgt[el]['anomalies'][events] = {
-                            'eventLbl': QLabel(str(events)),
-                            'typeLbl': QLabel(n_ev[event]['descr']),
-                            'startLbl': QLabel('%.1f' % n_ev[event]['orig_start']),
-                            'endLbl': QLabel('%.1f' % n_ev[event]['orig_end']),
-                        }
-                        for col in ['eventLbl', 'startLbl', 'endLbl']:
-                            # QLabel().setAlignment(QtCore.Qt.AlignRight)
-                            self.anomElWgt[el]['anomalies'][events][col].setAlignment(QtCore.Qt.AlignRight)
-                        self.anomElWgt[el]['anomalies'][events]['eventLbl'].setMaximumWidth(30)
-                        self.anomElWgt[el]['anomalies'][events]['startLbl'].setMaximumWidth(40)
-                        self.anomElWgt[el]['anomalies'][events]['endLbl'].setMaximumWidth(40)
-                        self.anomElWgt[el]['anomalies'][events]['typeLbl'].setMaximumWidth(150)
-                        self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][events]['eventLbl'], events, 0)
-                        self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][events]['startLbl'], events, 1)
-                        self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][events]['endLbl'], events, 2)
-                        self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][events]['typeLbl'], events, 3)
+                        events.append([n_event, n_ev[event]['orig_start'], n_ev[event]['orig_end'],
+                                        n_ev[event]['descr']])
+                    n_event += 1
 
-                    events += 1
-            self.anomElWgt[el]['Pls'].setVisible(events > 0)
-            self.anomElWgt[el]['n_events'].setText(str(events) + ' anomalie')
+            s_events = sorted(events, key=lambda kv: kv[1])
+
+            row = 0
+            for event in s_events:
+                print(event)
+                # n_event = event[0]
+                self.anomElWgt[el]['anomalies'][row] = {
+                    'eventLbl': QLabel(str(row)),
+                    'typeLbl': QLabel(event[3]),
+                    'startLbl': QLabel('%.1f' % event[1]),
+                    'endLbl': QLabel('%.1f' % event[2]),
+                }
+
+
+                # self.anomElWgt[el]['eventsTw'].setRowCount(events + 1)
+                # line = [str(events), '%.1f' % n_ev[event]['orig_start'],
+                #                 '%.1f' % n_ev[event]['orig_end'], n_ev[event]['descr']]
+                # for col in range(len(line)):
+                #     item = QTableWidgetItem(line[col])
+                #     if col < 3:
+                #         item.setTextAlignment(QtCore.Qt.AlignRight)
+                #     self.anomElWgt[el]['eventsTw'].setItem(events, col, item)
+
+                for col in ['eventLbl', 'startLbl', 'endLbl']:
+                    # QLabel().setAlignment(QtCore.Qt.AlignRight)
+                    self.anomElWgt[el]['anomalies'][row][col].setAlignment(QtCore.Qt.AlignRight)
+                self.anomElWgt[el]['anomalies'][row]['eventLbl'].setMaximumWidth(30)
+                self.anomElWgt[el]['anomalies'][row]['startLbl'].setMaximumWidth(40)
+                self.anomElWgt[el]['anomalies'][row]['endLbl'].setMaximumWidth(40)
+                self.anomElWgt[el]['anomalies'][row]['typeLbl'].setMaximumWidth(150)
+                self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][row]['eventLbl'], row, 0)
+                self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][row]['startLbl'], row, 1)
+                self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][row]['endLbl'], row, 2)
+                self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][row]['typeLbl'], row, 3)
+
+                row += 1
+
+
+
+            # sarray = sorted(events1, key=lambda kv: kv[1])
+            # for line in sarray:
+            #     print(line)
+            # print()
+
+            self.anomElWgt[el]['Pls'].setVisible(n_event > 0)
+            self.anomElWgt[el]['n_events'].setText(str(n_event) + ' anomalie')
 
             self.anomElWgt[el]['mainVBL'].addWidget(self.anomElWgt[el]['eventsWgt'])
+            # self.anomElWgt[el]['mainVBL'].addWidget(self.anomElWgt[el]['eventsTw'])
 
             self.home2_VBL.addWidget(self.anomElWgt[el]['mainWgt'])
             self.anomDetHide(el)
@@ -1541,6 +1578,9 @@ class Main:
         self.anomElWgt[el]['eventsWgt'].setVisible(False)
         self.anomElWgt[el]['Pls'].setText('V')
         self.anomElWgt[el]['Pls'].clicked.connect(partial(self.anomDetShow, el))
+        # self.anomElWgt[el]['elementLbl'].mouseDoubleClickEvent = self.anomDetShow(el)
+        # self.anomElWgt[el]['n_events'] = QLabel()
+        # QLabel().mouseDoubleClickEvent()
 
     def relStart(self):
         if self.myform.ui.verticalLayout.count() > 2:
