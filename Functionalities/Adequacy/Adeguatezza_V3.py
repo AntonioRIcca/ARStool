@@ -357,7 +357,7 @@ class Adeguatezza:
                 1: generazione_interna_totale[i0:i1],
                 2: domanda_totale[i0:i1],
                 3: external_grid[i0:i1],
-                4: external_grid[i0:i1],
+                4: bilancio_potenza[i0:i1],
             },
             'colors': {
                 0: 'yellow',
@@ -457,8 +457,8 @@ class Adeguatezza:
 
         self.graphs[2] = {
             'title': 'Adeguatezza',
-            'x-axis': 'ANNI MONTE CARLO',
-            'y-axis': 'LOLE[ore/anno]',
+            'x-axis': 'Anni Monte Carlo',
+            'y-axis': 'LOLE [ore/anno]',
             'ratio': 0.8,
             'x': sample,
             'y': {
@@ -470,8 +470,8 @@ class Adeguatezza:
                 1: 'red',
             },
             'labels': {
-                0: "CONSIDERANDO L'AFFIDABILITA DEI COMPONENTI",
-                1: "CONSIDERANDO L'AFFIDABILITA' E ANOMALIE DEI COMPONENTI",
+                0: "con Affidabilità dei componenti",
+                1: "con Affidabilità e Anomalie",
             },
         }
 
@@ -542,6 +542,8 @@ class Adeguatezza:
 
         self.avLoleFunrRel = LOLE_medio_anno_MC[-1]
         self.avLoleAnom = LOLE_medio_anomalies_anno_MC[-1]
+        self.avEensFurnrel = EENS_medio_anno_MC[-1]
+        self.avEensAnom = EENS_medio_anomalies_anno_MC[-1]
 
         strFile = "3.png"
         if os.path.isfile(savepath + strFile):

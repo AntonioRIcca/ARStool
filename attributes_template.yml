@@ -6,6 +6,7 @@ ExternalGrid:
     efficiency: 1
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 87600
       T0: None
       alfa: None
       beta: None
@@ -46,6 +47,7 @@ AC-Load:                                        # Nome dell'elemento
       name: ''                                  # (eventuale) nome del profilo
   results: {}       # dizionario dei risultati (da definire) sarà suddiviso in sottodizionari in base alla funzione (e.g. 'LoadFlow', 'Reliability', 'EMS'?', etc...
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 87600
       T0: 30
       alfa: 438000
       beta: 1
@@ -77,11 +79,12 @@ DC-Load:
       name: ''
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 135000
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 3
       Pi_E: 1
-      Pi_Q: 5.5
+      Pi_Q: 2
       results:
         lambda: 0
         MTBF_ore: 0
@@ -111,11 +114,12 @@ DC-Load:
     Ukr0: 0                                     # Tensione nominale di corti circuito (% rispetto a Ur1) (zero sequence) [%]
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 87600
       T0: 30
       alfa: 438000
-      beta: 1
-      Pi_E: 1
-      Pi_Q: 3  # todo: riportare a 5.5
+      beta: 2.8
+      Pi_E: 2
+      Pi_Q: 1  # todo: riportare a 5.5
       results:
         lambda: 0
         MTBF_ore: 0
@@ -141,11 +145,12 @@ PWM:
     R_loss: 0                                   # Resistive losses [Ohm]
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 43800
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 2.5
       Pi_E: 1
-      Pi_Q: 5.5
+      Pi_Q: 2
       results:
         lambda: 0
         MTBF_ore: 0
@@ -173,11 +178,12 @@ DC-DC-Converter:
     efficiency: 1
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 43800
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 2.5
       Pi_E: 1
-      Pi_Q: 5.5
+      Pi_Q: 2
       results:
         lambda: 0
         MTBF_ore: 0
@@ -214,11 +220,12 @@ AC-Wind:
       name: ''
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 87600
       T0: 30
       alfa: 438000
-      beta: 1
-      Pi_E: 1
-      Pi_Q: 5.5
+      beta: 2.8
+      Pi_E: 1.5
+      Pi_Q: 1
       results:
         lambda: 0
         MTBF_ore: 0
@@ -245,11 +252,12 @@ DC-Wind:
       name: ''
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 87600
       T0: 30
       alfa: 438000
-      beta: 1
-      Pi_E: 1
-      Pi_Q: 5.5
+      beta: 2.8
+      Pi_E: 1.5
+      Pi_Q: 1
       results:
         lambda: 0
         MTBF_ore: 0
@@ -278,11 +286,12 @@ AC-PV:
       name: ''
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 70080
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 2.8
       Pi_E: 1
-      Pi_Q: 5.5
+      Pi_Q: 2
       results:
         lambda: 0
         MTBF_ore: 0
@@ -311,11 +320,12 @@ DC-PV:
       name: ''
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 70080
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 2.8
       Pi_E: 1
-      Pi_Q: 5.5
+      Pi_Q: 2
       results:
         lambda: 0
         MTBF_ore: 0
@@ -344,9 +354,10 @@ Turbine:
       name: ''
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 175200
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 2.5
       Pi_E: 1
       Pi_Q: 5.5
       results:
@@ -373,11 +384,12 @@ AC-BESS:
     efficiency: 1
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 43800
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 2.5
       Pi_E: 1
-      Pi_Q: 5.5
+      Pi_Q: 2
       results:
         lambda: 0
         MTBF_ore: 0
@@ -410,11 +422,12 @@ DC-BESS:
     efficiency: 1
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 43800
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 2.5
       Pi_E: 1
-      Pi_Q: 5.5
+      Pi_Q: 2
       results:
         lambda: 0
         MTBF_ore: 0
@@ -456,11 +469,12 @@ AC-Line:
     Ur: 0                                       # tensione nominale [kV]
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 135000                            # Ore di funzionamento pregresso
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 3
       Pi_E: 1
-      Pi_Q: 5.5
+      Pi_Q: 2
       results:
         lambda: 0
         MTBF_ore: 0
@@ -488,11 +502,12 @@ DC-Line:
     Ur: 0                                       # tensione nominale [kV]
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 135000
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 3
       Pi_E: 1
-      Pi_Q: 5.5
+      Pi_Q: 2
       results:
         lambda: 0
         MTBF_ore: 0
@@ -519,9 +534,10 @@ AC-Node:
     Ur: 0                                       # tensione nominale [kV]
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 175200
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 2.5
       Pi_E: 1
       Pi_Q: 5.5
       results:
@@ -538,9 +554,10 @@ DC-Node:
     Ur: 0                                       # tensione nominale [kV]
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 175200
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 2.5
       Pi_E: 1
       Pi_Q: 5.5
       results:
@@ -562,9 +579,10 @@ Ext-Grid:
     slack: 0                                    # Slack portion [%]
   results: {}
   reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 175200
       T0: 30
       alfa: 438000
-      beta: 1
+      beta: 2.5
       Pi_E: 1
       Pi_Q: 5.5
       results:

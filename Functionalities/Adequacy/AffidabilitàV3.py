@@ -138,12 +138,17 @@ class Affidabilità:
     def Norris_Landzberg(self, element, t, T0, Ta):
         ####CALCOLO AFFIDABILITA' DEL COMPONENTE E SCRIVO IL RISULTATO NEL DIZIONARIO ELEMENTS CAMPO RESULTS
         ##For PF>2019
+        #calcolo formula Norris-Landzberg:
+
+
         ###
         tannual=24*365 #[ore]
         #####SARA' UTILIZZATO PER TUTTI I COMPONENTI
+        print('lunghezza Ta', len(Ta))
         num_cicli = self.cicli_termici(Ta)
-        Nannualcy=num_cicli *365
-        #calcolo formula Norris-Landzberg:
+        print('numero di cicli:', num_cicli)
+        Nannualcy=num_cicli * 8760 / len(Ta)
+        print('N. Cicli/Anno', Nannualcy)
 
         ##NOTA BENE: NON VALUTIAMO L'AFFIDABILITA' DEL CARICO IN QUANTO VALUTIAMO L'AFFIDABILITA' DELLA FORNITURA.
         ##STESSA COSA PER LE BUSBAR
@@ -189,7 +194,7 @@ class Affidabilità:
 
             i = 0
             ##nota: il vettore Ta deve avere lo stesso orizzonte temporale dei vettori di generazione e carico
-            for h in range(0, int(len(Ta)/4)): #sto ipotizzando un timestep di 15 minuti quindi in un'ora ho 4 valori
+            for h in range(0, int(len(Ta)/1)): #sto ipotizzando un timestep di 15 minuti quindi in un'ora ho 4 valori @AR Corretto 1 ora
                 for m in range(0, 60, grid['profile']['step']):
                     rho = rho_20 * ((234.5 + Ta[i]) / (234.5 + 20))     # resistenza di ogni linea
 
@@ -220,6 +225,8 @@ class Affidabilità:
 
             m = 1  # in prima approssimazione m=1
 
+            alfa, beta, pi_e, pi_q = v[element]['rel']['par']['alfa'], v[element]['rel']['par']['beta'], v[element]['rel']['par']['Pi_E'], v[element]['rel']['par']['Pi_Q']
+
             # calcolo formula Norris-Landzberg:
             # Ho inserito To pari a 30° (Prysmian)
             lambda_wear_out = (v[element]['rel']['par']['beta'] / v[element]['rel']['par']['alfa']) * pow((t / v[element]['rel']['par']['alfa']), (v[element]['rel']['par']['beta'] - 1))  ### Weibull [guasti/ore]
@@ -227,6 +234,9 @@ class Affidabilità:
             lambda_prot_linea = 1 # protezione assente; se protezione presente inserire il valore corretto
             m_line=1 # numero linee
             #stress termico dovuto alle condizioni operative di funzionamento (corrente che circola)
+            print('Delta Cycling:', Delta_Tcycling)
+            print('Top_Max_linea:', Top_MAX_linea)
+            print()
             Pi_Si_linea = (12 * Nannualcy / tannual) * pow((Delta_Tcycling / T0),m_line) * \
                           (math.exp(1414 * ((1 / (323)) - (1 / (Top_MAX_linea + 273.15)))))
             Pi_Se_linea = 0 # stress termico dovuto all'irraggiamento

@@ -208,6 +208,7 @@ class Main:
         self.startWGT.ui.benchOpenBtn.setStyleSheet(u"background-color: rgb(63, 63, 63);")
 
         self.home2_WGT.deleteLater()
+        # self.homeClear()
 
         self.home2_WGT = QWidget()
         self.home2_WGT.setMinimumWidth(250)
@@ -672,6 +673,8 @@ class Main:
             self.ui.home_WGT.deleteLater()
         except:
             self.home_WGT.deleteLater()
+        # self.homeClear()
+
         self.home_WGT = QWidget()
 
         # self.homeHBL = QHBoxLayout(self.home_WGT)
@@ -781,10 +784,11 @@ class Main:
         self.ui.rightMenuContainer.collapseMenu()
 
         self.ui.rightMenuContainer.collapseMenu()
-        try:
-            self.home2_WGT.deleteLater()
-        except RuntimeError:
-            pass
+        # try:
+        #     self.home2_WGT.deleteLater()
+        # except RuntimeError:
+        #     pass
+        self.homeClear()
 
         # is_profile = False
         time = None
@@ -833,7 +837,9 @@ class Main:
 
                     # self.dss.full_parse_profil_to_dss_array(t0=lf_popup.i_start, steps=lf_popup.i_steps)    # Array
                     # self.dss.full_parse_profil_to_dss(t0=lf_popup.i_start, steps=lf_popup.i_steps)          # PandaFrame
-                    for i in range(lf_popup.i_steps):                                                       # Dizionario
+                    for i in range(lf_popup.i_steps):
+                        print('step', i)
+                        # Dizionario
                         self.dss.full_parse_to_dss(time=lf_popup.i_start + i)
                         self.dss.solve()
                         self.dss.results_store_all()
@@ -964,7 +970,7 @@ class Main:
                 self.elemPropWgt.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][i])
                 self.elemPropWgt.PeffDSB.setValue(v[self.elem]['par']['profile']['curve'][i] * v[self.elem]['par']['P'])
 
-            self.elemPropWgt.fillLfRes(i)
+            self.elemPropWgt.lfResFill(i)
         # ----------------------------------------------------------------------------------------------------------
         pass
 
@@ -1144,10 +1150,11 @@ class Main:
     def optstor_create(self):
         from Functionalities.OptimalStorage.optimalStorage import OptStorWGT
 
-        try:
-            self.ui.home_WGT.deleteLater()
-        except:
-            self.home_WGT.deleteLater()
+        # try:
+        #     self.ui.home_WGT.deleteLater()
+        # except:
+        #     self.home_WGT.deleteLater()
+        self.homeClear()
 
         self.optStorWgt = OptStorWGT()
 
@@ -1157,10 +1164,11 @@ class Main:
 
     def elemProfList(self):
         print('lista')
-        try:
-            self.home2_WGT.deleteLater()
-        except RuntimeError:
-            pass
+        # try:
+        #     self.home2_WGT.deleteLater()
+        # except RuntimeError:
+        #     pass
+        self.homeClear()
 
         self.home2_WGT = QWidget()
         self.home2_WGT.setMinimumWidth(450)
@@ -1351,7 +1359,8 @@ class Main:
 
                 # print(el, )
 
-            self.home2_WGT.deleteLater()
+            # self.home2_WGT.deleteLater()
+            self.homeClear()
 
     def elemProfListCopmile(self, pt):
         pl = dict()
@@ -1361,14 +1370,15 @@ class Main:
         return pl
 
     def elemProfListCancel(self):
-        self.home2_WGT.deleteLater()
+        # self.home2_WGT.deleteLater()
+        self.homeClear()
 
     def anomStart(self):
         # if self.myform.ui.verticalLayout.count() > 2:
         #     for i in range (self.myform.ui.verticalLayout.count() - 1, 1, -1):
         #         self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
 
-        print(self.myform.ui.verticalLayout.count())
+        # print(self.myform.ui.verticalLayout.count())
         if self.myform.ui.verticalLayout.count() > 2:
             for i in range(2, self.myform.ui.verticalLayout.count()):
                 self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
@@ -1399,11 +1409,138 @@ class Main:
         #  TODO: Mostrare i risultati, se disponibili
 
     def anomRun(self):
-        print('run LCA')
+        # print('run LCA')
         from Functionalities.Anomalies import launch_create_anomalies as lca
         anome_elem = lca.lauch_create_anomalies()
         grid['studies']['anom'] = True
-        print(list(anome_elem.keys()))
+        # print(list(anome_elem.keys()))
+        print('Anom Run Done')
+
+        self.anomRes()
+
+    def anomRes(self):
+        self.homeClear()
+
+        try:
+            self.adeqRefreshPls.disconnect()
+        except:
+            pass
+
+        self.home2_SA = QScrollArea()
+        self.home2_SA.setMinimumWidth(550)
+        self.home2_SA.setWidgetResizable(True)
+        self.Wgt = QWidget()
+        self.home2_VBL = QVBoxLayout(self.Wgt)
+        self.home2_VBL.setSpacing(10)
+        # self.home2_WGT.setLayout(self.home2_VBL)
+        self.home2_SA.setWidget(self.Wgt)
+        self.homeHBL.addWidget(self.home2_SA)
+
+        self.home3_WGT = QWidget()
+        self.home3_VBL = QVBoxLayout()
+        self.home3_VBL.setSpacing(20)
+        self.home3_WGT.setLayout(self.home3_VBL)
+        self.homeHBL.addWidget(self.home3_WGT)
+
+        self.home_Hsp = QSpacerItem(10, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.homeHBL.addItem(self.home_Hsp)
+
+        self.anomMainQsa = QScrollArea()
+        self.anomMainVBL = QVBoxLayout()
+        self.anomMainVBL.setSpacing(20)
+        self.anomMainQsa.setLayout(self.anomMainVBL)
+
+        anom_el = []
+        for el in v:
+            if 'anom' in list(v[el].keys()):
+                anom_el.append(el)
+        anom_el.sort()
+
+        self.anomElWgt = dict()
+
+        for el in anom_el:
+            print(el)
+
+            self.anomElWgt[el] = dict()
+            self.anomElWgt[el]['mainWgt'] = QWidget()
+            self.anomElWgt[el]['mainWgt'].setStyleSheet('*{'
+                                                        'background-color: rgb(0, 0, 0);'
+                                                        'border: solid;'
+                                                        'border-width: 1px;'
+                                                        'border-color: rgb(196, 196, 196);'
+                                                        'border-radius: 10px;'
+                                                        '}'
+                                                        'QLabel{'
+                                                        'border: none;'
+                                                        '}')
+            self.anomElWgt[el]['mainWgt'].setMinimumWidth(500)
+            self.anomElWgt[el]['mainVBL'] = QVBoxLayout()
+            self.anomElWgt[el]['mainWgt'].setLayout(self.anomElWgt[el]['mainVBL'])
+            self.anomElWgt[el]['topWgt'] = QWidget()
+            self.anomElWgt[el]['topHBL'] = QHBoxLayout()
+            self.anomElWgt[el]['topWgt'].setLayout(self.anomElWgt[el]['topHBL'])
+            self.anomElWgt[el]['elementLbl'] = QLabel(el)
+            self.anomElWgt[el]['n_events'] = QLabel()
+            self.anomElWgt[el]['Pls'] = QPushButton()
+            self.anomElWgt[el]['Pls'].setMaximumWidth(20)
+            # self.anomElWgt[el]['Pls'].setText('V')
+            # self.anomElWgt[el]['Pls'].clicked.connect(partial(self.anomDetShow, el))
+            self.anomElWgt[el]['topHBL'].addWidget(self.anomElWgt[el]['elementLbl'])
+            self.anomElWgt[el]['topHBL'].addWidget(self.anomElWgt[el]['n_events'])
+            self.anomElWgt[el]['topHBL'].addWidget(self.anomElWgt[el]['Pls'])
+            self.anomElWgt[el]['mainVBL'].addWidget(self.anomElWgt[el]['topWgt'])
+
+            self.anomElWgt[el]['eventsWgt'] = QWidget()
+            self.anomElWgt[el]['eventsGL'] = QGridLayout()
+            self.anomElWgt[el]['eventsWgt'].setLayout(self.anomElWgt[el]['eventsGL'])
+
+            events = 0
+            self.anomElWgt[el]['anomalies'] = dict()
+            for a in v[el]['anom']['res']['a_dict']:
+                # anomElWgt[el]['anomalies'][a] = dict()
+                for n_ev in v[el]['anom']['res']['a_dict'][a]:
+                    for event in n_ev:
+                        print(a, event)
+                        self.anomElWgt[el]['anomalies'][events] = {
+                            'eventLbl': QLabel(str(events)),
+                            'typeLbl': QLabel(n_ev[event]['descr']),
+                            'startLbl': QLabel('%.1f' % n_ev[event]['orig_start']),
+                            'endLbl': QLabel('%.1f' % n_ev[event]['orig_end']),
+                        }
+                        for col in ['eventLbl', 'startLbl', 'endLbl']:
+                            # QLabel().setAlignment(QtCore.Qt.AlignRight)
+                            self.anomElWgt[el]['anomalies'][events][col].setAlignment(QtCore.Qt.AlignRight)
+                        self.anomElWgt[el]['anomalies'][events]['eventLbl'].setMaximumWidth(30)
+                        self.anomElWgt[el]['anomalies'][events]['startLbl'].setMaximumWidth(40)
+                        self.anomElWgt[el]['anomalies'][events]['endLbl'].setMaximumWidth(40)
+                        self.anomElWgt[el]['anomalies'][events]['typeLbl'].setMaximumWidth(150)
+                        self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][events]['eventLbl'], events, 0)
+                        self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][events]['startLbl'], events, 1)
+                        self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][events]['endLbl'], events, 2)
+                        self.anomElWgt[el]['eventsGL'].addWidget(self.anomElWgt[el]['anomalies'][events]['typeLbl'], events, 3)
+
+                    events += 1
+            self.anomElWgt[el]['Pls'].setVisible(events > 0)
+            self.anomElWgt[el]['n_events'].setText(str(events) + ' anomalie')
+
+            self.anomElWgt[el]['mainVBL'].addWidget(self.anomElWgt[el]['eventsWgt'])
+
+            self.home2_VBL.addWidget(self.anomElWgt[el]['mainWgt'])
+            self.anomDetHide(el)
+
+            self.home2_Spc = QSpacerItem(40, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+            self.home2_VBL.addItem(self.home2_Spc)
+
+    def anomDetShow(self, el):
+        self.anomElWgt[el]['eventsWgt'].setVisible(True)
+        self.anomElWgt[el]['Pls'].setText('X')
+        self.anomElWgt[el]['Pls'].clicked.connect(partial(self.anomDetHide, el))
+        pass
+
+    def anomDetHide(self, el):
+        self.anomElWgt[el]['eventsWgt'].setVisible(False)
+        self.anomElWgt[el]['Pls'].setText('V')
+        self.anomElWgt[el]['Pls'].clicked.connect(partial(self.anomDetShow, el))
 
     def relStart(self):
         if self.myform.ui.verticalLayout.count() > 2:
@@ -1433,7 +1570,13 @@ class Main:
         self.myform.ui.verticalLayout.insertWidget(2, self.relParWgt)
         # self.relPar.ui.T0Dsb.setValue(grid['rel']['T0'])
 
-        self.relPar.ui.missionTimeDsb.setMaximum(grid['lf']['points'] * (grid['profile']['step'] / 60))
+        t_max = 438000
+        for el in v:
+            if v[el]['category'] not in mc['Vsource']:
+                t_max = min(t_max, v[el]['rel']['par']['alfa'])
+        self.relPar.ui.missionTimeDsb.setMaximum(t_max)
+        self.relPar.ui.missionTimeDsb.setMinimum(8760)
+
         if grid['studies']['rel']:
             self.relPar.ui.missionTimeDsb.setValue(grid['rel']['t'])
         else:
@@ -1472,6 +1615,17 @@ class Main:
                                    day=grid['lf']['end'][2], hour=grid['lf']['end'][3],
                                    minute=grid['lf']['end'][4])
 
+            # # # TODO: Da eliminare:
+            # d0 = datetime.datetime(year=2025, month=1, day=1, hour=0, minute=0)
+            # d1 = d0 + datetime.timedelta(hours=self.relPar.ui.T0Dsb.value() - 1)
+            # for el in v:
+            #     print(el)
+            #     if v[el]['category'] not in mc['Line'] + mc['Transformer']:
+            #         v[el]['lf']['i'] = [v[el]['lf']['i'][0]] * int(self.relPar.ui.T0Dsb.value())
+            #     else:
+            #         v[el]['lf']['i'][0] = [v[el]['lf']['i'][0][0]] * int(self.relPar.ui.T0Dsb.value())
+            #         v[el]['lf']['i'][1] = [v[el]['lf']['i'][1][0]] * int(self.relPar.ui.T0Dsb.value())
+
             d = d0
             Ta = []
             i = 0
@@ -1483,9 +1637,9 @@ class Main:
 
             reliability = Affidabilità()
 
-            for element in v.keys():
+            for el in v.keys():
                 # if element != '_grid_':
-                reliability.Norris_Landzberg(element, t, 298.15, Ta)
+                reliability.Norris_Landzberg(el, t + v[el]['rel']['par']['t_preg'], 298.15, Ta)
 
             gruppi = reliability.raggruppa()
             reliability.RBD(t, gruppi)
@@ -1504,16 +1658,17 @@ class Main:
         pass
 
     def relRes(self):
-        if self.homeHBL.count() > 1:
-            for i in range(1, self.homeHBL.count()):
-                try:
-                    self.homeHBL.itemAt(i).widget().deleteLater()
-                except AttributeError:
-                    self.homeHBL.removeItem(self.homeHBL.itemAt(i))
+        # if self.homeHBL.count() > 1:
+        #     for i in range(1, self.homeHBL.count()):
+        #         try:
+        #             self.homeHBL.itemAt(i).widget().deleteLater()
+        #         except AttributeError:
+        #             self.homeHBL.removeItem(self.homeHBL.itemAt(i))
+        self.homeClear()
 
         self.home2_WGT = QWidget()
-        self.home2_WGT.setMinimumWidth(490)
-        self.home2_WGT.setMaximumWidth(490)
+        self.home2_WGT.setMinimumWidth(570)
+        self.home2_WGT.setMaximumWidth(570)
         self.relResWgtVBL = QVBoxLayout()
         self.relResWgtVBL.setSpacing(20)
         self.home2_WGT.setLayout(self.relResWgtVBL)
@@ -1532,11 +1687,11 @@ class Main:
         self.relResTw = QTableWidget()
         self.relResWgtVBL.addWidget(self.relResTw)
 
-        self.relResTw.setColumnCount(5)
+        self.relResTw.setColumnCount(6)
 
         header = []
-        labels = ['elemento', 'Lambda', 'Pi_Si', 'MTBF (h)', 'MTBF (y)']
-        w = [130, 80, 80, 80, 80]
+        labels = ['elemento', 'Lambda', 'R', 'Pi_Si', 'MTBF (h)', 'MTBF (y)']
+        w = [130, 80, 80, 80, 80, 80]
 
         for col in range(len(labels)):
             header.append(QTableWidgetItem())
@@ -1554,8 +1709,8 @@ class Main:
         self.relResTw.verticalHeader().setVisible(False)
 
         row = 0
-        labels = ['lambda', 'Pi_Si', 'MTBF_ore', 'MTBF_anni']
-        rounds = (5, 2, 2, 5)
+        labels = ['lambda', 'R', 'Pi_Si', 'MTBF_ore', 'MTBF_anni']
+        rounds = (5, 5, 4, 2, 5)
         for el in v:
             if v[el]['category'] not in mc['Vsource'] + mc['Node'] + mc['Load']:
                 self.relResTw.setItem(row, 0, QTableWidgetItem(el))
@@ -1670,6 +1825,8 @@ class Main:
         self.x_gen_est = adequacy.x_gen_distr
         self.av_lole_funr_rel = adequacy.avLoleFunrRel
         self.av_lole_anom = adequacy.avLoleAnom
+        self.av_eens_furn_rel = adequacy.avEensFurnrel
+        self.av_eens_anom = adequacy.avEensAnom
 
         self.adeq_graps = adequacy.graphs
 
@@ -1677,12 +1834,18 @@ class Main:
         pass
 
     def adeqRes(self):
-        if self.homeHBL.count() > 1:
-            for i in range(1, self.homeHBL.count()):
-                try:
-                    self.homeHBL.itemAt(i).widget().deleteLater()
-                except AttributeError:
-                    self.homeHBL.removeItem(self.homeHBL.itemAt(i))
+        # if self.homeHBL.count() > 1:
+        #     for i in range(1, self.homeHBL.count()):
+        #         try:
+        #             self.homeHBL.itemAt(i).widget().deleteLater()
+        #         except AttributeError:
+        #             self.homeHBL.removeItem(self.homeHBL.itemAt(i))
+        self.homeClear()
+
+        try:
+            self.adeqRefreshPls.disconnect()
+        except:
+            pass
 
         self.home2_WGT = QWidget()
         self.adeqRes1WgtVBL = QVBoxLayout()
@@ -1696,27 +1859,46 @@ class Main:
         self.home3_WGT.setLayout(self.adeqRes2WgtVBL)
         self.homeHBL.addWidget(self.home3_WGT)
 
-        self.home_Hsp = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.home_Hsp = QSpacerItem(10, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.homeHBL.addItem(self.home_Hsp)
+
+        self.adeqRefreshPls = QPushButton()
+        self.adeqRefreshPls.setText('Aggiorna vista')
+        self.adeqRefreshPls.setStyleSheet('QPushButton, QDoubleSpinBox {'
+                                          'color: rgb(255, 255, 255);background-color: rgb(0, 0, 0); '
+                                          'border: solid;border-width: 1px; border-radius: 5px; '
+                                          'border-color: rgb(127, 127, 127)}'
+                                          'QPushButton:pressed {background-color: rgb(64, 64, 64); '
+                                          'border-style: inset}')
+        self.adeqRefreshPls.setMinimumHeight(40)
+        self.adeqRefreshPls.setMaximumHeight(40)
+        self.adeqRefreshPls.clicked.connect(self.adeqRes)
 
         folder = mainpath + '/Functionalities/Adequacy/__images__/'
 
-        h_max = self.home_WGT.height() - 70
-        w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 30
+        h_max = self.home_WGT.height() - 140
+        w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
         ratio = w_max / h_max
         print(w_max, h_max, ratio)
 
-        if ratio > (self.adeq_graps[0]['ratio'] + self.adeq_graps[2]['ratio']) / 2:
-            self.adeqGraphCreate(self.adeq_graps[0], w=self.adeq_graps[0]['ratio']*h_max/2, h=h_max/2, fig=1)
-            self.adeqGraphCreate(self.adeq_graps[1], w=self.adeq_graps[1]['ratio']*h_max/2, h=h_max/2, fig=2)
-            self.adeqGraphCreate(self.adeq_graps[2], w=self.adeq_graps[2]['ratio']*h_max/2, h=h_max/2, fig=3)
-            self.adeqGraphCreate(self.adeq_graps[3], w=self.adeq_graps[3]['ratio']*h_max/2, h=h_max/2, fig=4)
-            print("comanda l'altezza")
-            pass
-        else:
-            print('comanda la larghezza')
-            pass
+        # if ratio > (self.adeq_graps[0]['ratio'] + self.adeq_graps[2]['ratio']) / 2:
+        #     self.adeqGraphCreate(self.adeq_graps[0], w=self.adeq_graps[0]['ratio']*h_max/2, h=h_max/2, fig=1)
+        #     self.adeqGraphCreate(self.adeq_graps[1], w=self.adeq_graps[1]['ratio']*h_max/2, h=h_max/2, fig=2)
+        #     self.adeqGraphCreate(self.adeq_graps[2], w=self.adeq_graps[2]['ratio']*h_max/2, h=h_max/2, fig=3)
+        #     self.adeqGraphCreate(self.adeq_graps[3], w=self.adeq_graps[3]['ratio']*h_max/2, h=h_max/2, fig=4)
+        #     print("comanda l'altezza")
+        #     pass
+        # else:
+        #     self.adeqGraphCreate(self.adeq_graps[0], w=self.adeq_graps[0]['ratio']*h_max/2, h=h_max/2, fig=1)
+        #     print('comanda la larghezza')
+        #     pass
 
+        r1, r2 = self.adeq_graps[0]['ratio'], self.adeq_graps[2]['ratio']
+
+        self.adeqGraphCreate(self.adeq_graps[0], w=w_max * r1 / (r1 + r2), h=h_max / 2, fig=1)
+        self.adeqGraphCreate(self.adeq_graps[1], w=w_max * r1 / (r1 + r2), h=h_max / 2, fig=2)
+        self.adeqGraphCreate(self.adeq_graps[2], w=w_max * r2 / (r1 + r2), h=h_max / 2, fig=3)
+        self.adeqGraphCreate(self.adeq_graps[3], w=w_max * r2 / (r1 + r2), h=h_max / 2, fig=4)
 
         self.adeqFigLbl = [None, None, None, None]
 
@@ -1730,7 +1912,7 @@ class Main:
                                       'border: solid; border-width: 1 px; '
                                       'border-color: rgb(255, 255, 255); '
                                       'border-radius: 10 px;')
-        self.xGenEstLbl.setMinimumHeight(30)
+        self.xGenEstLbl.setMinimumHeight(40)
         self.xGenEstLbl.setAlignment(QtCore.Qt.AlignCenter)
 
         self.adeqRes1WgtVBL.addWidget(self.xGenEstLbl)
@@ -1738,6 +1920,8 @@ class Main:
         self.adeqFigLbl[1] = QLabel()
         self.adeqFigLbl[1].setPixmap(QtGui.QPixmap(folder + "2.png"))
         self.adeqRes1WgtVBL.addWidget(self.adeqFigLbl[1])
+
+        self.adeqRes1WgtVBL.addWidget(self.adeqRefreshPls)
 
         self.home2_Hsp = QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding)
         self.adeqRes1WgtVBL.addItem(self.home2_Hsp)
@@ -1748,30 +1932,86 @@ class Main:
         # print(self.homeHBL.spacing())
         # print(self.homeHBL.contentsMargins())
 
-        self.home2_WGT.setMinimumWidth(self.adeqFigLbl[0].width() * (int(h_max / 2) - 40) / self.adeqFigLbl[0].height())
-
-        # ---------------------------------------------------------------------------
-
-
-        folder = mainpath + '/Functionalities/Adequacy/__images__/'
+        # self.home2_WGT.setMinimumWidth(self.adeqFigLbl[0].width() * (int(h_max / 2) - 40) / self.adeqFigLbl[0].height())
+        # TODO: questo sopra serve?
 
         self.adeqFigLbl[2] = QLabel()
         self.adeqFigLbl[2].setPixmap(QtGui.QPixmap(folder + "3.png"))
         self.adeqRes2WgtVBL.addWidget(self.adeqFigLbl[2])
 
-        self.loleLBL = QLabel('LOLE')
-        self.loleLBL.setStyleSheet('font: 75 12pt "MS Shell Dlg 2"; '
-                                   'border: solid; border-width: 1 px; '
-                                   'border-color: rgb(255, 255, 255); '
-                                   'border-radius: 10 px;')
-        self.loleLBL.setMinimumHeight(30)
-        self.loleLBL.setAlignment(QtCore.Qt.AlignCenter)
+        self.loleWgt = QWidget()
+        self.loleVL = QVBoxLayout()
+        self.loleVL.setSpacing(0)
+        self.loleVL.setContentsMargins(0, 0, 0, 0)
+        self.loleWgt.setLayout(self.loleVL)
+        self.loleWgt.setMinimumHeight(40)
+        self.loleWgt.setMaximumHeight(40)
 
-        self.adeqRes2WgtVBL.addWidget(self.loleLBL)
+        val1 = '%.2f' % self.av_lole_funr_rel
+        val2 = '%.2f' % self.av_lole_anom
+        self.lole1LBL = QLabel('LOLE = ' + val1 + ' ore/anno')
+        self.lole1LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
+                                    # 'border: solid; border-width: 1 px; '
+                                    # 'border-color: rgb(255, 255, 255); '
+                                    # 'border-radius: 10 px;'
+                                    'color: rgb(0, 0, 255);'
+                                    'background-color: rgb(255, 255, 255)')
+        self.lole1LBL.setMinimumHeight(15)
+        self.lole1LBL.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.lole2LBL = QLabel('LOLE = ' + val2 + ' ore/anno')
+        self.lole2LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
+                                    # 'border: solid; border-width: 1 px; '
+                                    # 'border-color: rgb(255, 255, 255); '
+                                    # 'border-radius: 10 px;'
+                                    'color: rgb(255, 0, 0);'
+                                    'background-color: rgb(255, 255, 255)')
+        self.lole2LBL.setMinimumHeight(15)
+        self.lole2LBL.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.loleVL.addWidget(self.lole1LBL)
+        self.loleVL.addWidget(self.lole2LBL)
+        self.adeqRes2WgtVBL.addWidget(self.loleWgt)
+
+        # ---------------------------------------------------------------------------
 
         self.adeqFigLbl[3] = QLabel()
         self.adeqFigLbl[3].setPixmap(QtGui.QPixmap(folder + "4.png"))
         self.adeqRes2WgtVBL.addWidget(self.adeqFigLbl[3])
+
+        self.eensWgt = QWidget()
+        self.eensVL = QVBoxLayout()
+        self.eensVL.setSpacing(0)
+        self.eensVL.setContentsMargins(0, 0, 0, 0)
+        self.eensWgt.setLayout(self.eensVL)
+        self.eensWgt.setMinimumHeight(40)
+        self.eensWgt.setMaximumHeight(40)
+
+        val1 = '%.5f' % self.av_eens_furn_rel
+        val2 = '%.5f' % self.av_eens_anom
+        self.eens1LBL = QLabel('EENS = ' + val1 + 'kWh')
+        self.eens1LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
+                                    # 'border: solid; border-width: 1 px; '
+                                    # 'border-color: rgb(255, 255, 255); '
+                                    # 'border-radius: 10 px;'
+                                    'color: rgb(0, 0, 255);'
+                                    'background-color: rgb(255, 255, 255)')
+        self.eens1LBL.setMinimumHeight(15)
+        self.eens1LBL.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.eens2LBL = QLabel('EENS = ' + val2 + 'kWh')
+        self.eens2LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
+                                    # 'border: solid; border-width: 1 px; '
+                                    # 'border-color: rgb(255, 255, 255); '
+                                    # 'border-radius: 10 px;'
+                                    'color: rgb(255, 0, 0);'
+                                    'background-color: rgb(255, 255, 255)')
+        self.eens2LBL.setMinimumHeight(15)
+        self.eens2LBL.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.eensVL.addWidget(self.eens1LBL)
+        self.eensVL.addWidget(self.eens2LBL)
+        self.adeqRes2WgtVBL.addWidget(self.eensWgt)
 
         self.home3_Hsp = QSpacerItem(1, 1, QSizePolicy.Minimum, QSizePolicy.Expanding)
         self.adeqRes2WgtVBL.addItem(self.home3_Hsp)
@@ -1786,23 +2026,40 @@ class Main:
 
     def adeqGraphCreate(self, data, w, h, fig):
         figure = plt.Figure(figsize=(w/100, h/100), dpi=100)
-        ax = figure.add_subplot()
-
+        ax = figure.subplots()
         for i in data['y']:
             ax.plot(data['x'], data['y'][i], color=data['colors'][i], label=data['labels'][i])
+            if i > 2:
+                col = 2
+            else:
+                col = 1
 
         box = ax.get_position()
-        ax.set_position([box.x0 + box.width * 0.05, box.y0 + box.height * 0.25, box.width, box.height * 0.85])
 
-        ax.set_xlabel(data['x-axis'], fontsize=8)
-        ax.set_ylabel(data['y-axis'], fontsize=8)
-        ax.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.2), fancybox=True, shadow=True, ncol=2,
-                  fontsize=7)
+        if fig <= 2:
+            ax.set_position([box.x0 + box.width * 0.05, box.y0 + box.height * 0.25, box.width, box.height * 0.85])
+            ax.set_xticks(list(range(0, 24, 3)))
+        else:
+            ax.set_position([box.x0 + box.width * 0.15, box.y0 + box.height * 0.25, box.width * 0.9, box.height * 0.85])
+            ax.set_xticks(list(range(10)))
+
+        ax.set_xlabel(data['x-axis'], fontsize=10)
+        ax.set_ylabel(data['y-axis'], fontsize=10)
+        ax.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.2), fancybox=True, shadow=True, ncol=col,
+                  fontsize=8)
 
         filename = mainpath + '/Functionalities/Adequacy/__images__/' + str(fig) + '.png'
-        print(filename)
+        # print(filename)
         figure.savefig(filename)
         pass
+
+    def homeClear(self):
+        if self.homeHBL.count() > 1:
+            for i in range(1, self.homeHBL.count()):
+                try:
+                    self.homeHBL.itemAt(i).widget().deleteLater()
+                except AttributeError:
+                    self.homeHBL.removeItem(self.homeHBL.itemAt(i))
 
 class LFrWGT(QMainWindow):
     def __init__(self):

@@ -67,20 +67,20 @@ class ElementProperties(QMainWindow):
         else:
             self.anom_def, self.anom_avail = None, []
 
-        self.__getattribute__(variables.visualpar + '_show')()
+        self.__getattribute__(variables.visualpar + 'Show')()
 
-        self.ui.lfPls.clicked.connect(self.lf_show)
-        self.ui.relPls.clicked.connect(self.rel_show)
-        self.ui.anomPls.clicked.connect(self.anom_show)
-        self.ui.anomAddPls.clicked.connect(self.anom_add)
-        self.ui.agingCkB.clicked.connect(self.anom_aging)
+        self.ui.lfPls.clicked.connect(self.lfShow)
+        self.ui.relPls.clicked.connect(self.relShow)
+        self.ui.anomPls.clicked.connect(self.anomShow)
+        self.ui.anomAddPls.clicked.connect(self.anomAdd)
+        self.ui.agingCkB.clicked.connect(self.anomAging)
 
-        self.fillLfPar()
+        self.lfParFill()
 
-        self.fillRelPar()
+        self.relParFill()
 
         if self.cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'AC-BESS', 'DC-BESS']:
-            self.fillAnomPar()
+            self.anomParFill()
         # if v[self.elem]['lf']['p']:
         #     if 0 in v[self.elem]['lf']['p'].keys():
         #         if
@@ -93,72 +93,54 @@ class ElementProperties(QMainWindow):
             self.formatLfRes()
 
         if grid['studies']['rel']:
-            self.fillRelRes()
+            self.relResFill()
         self.ui.relResMainWgt.setVisible(grid['studies']['rel'])
         self.ui.relWgt.setVisible(False)
 
-        self.func_check()
+        self.funcCheck()
 
-    def func_check(self):
+    def funcCheck(self):
         # for f in fn_en:
         #     self.ui.__getattribute__(f + 'Wgt').setVisible(fn_en[f])
         self.ui.anomWgt.setVisible(self.anom_def is not None and fn_en['anom'])
         self.ui.relWgt.setVisible((self.cat not in mc['Node'] + mc['Vsource']) and fn_en['rel'])
 
-    def lf_show(self):
+    def lfShow(self):
         self.ui.lfWgt.setMaximumHeight(1500)
         self.ui.relWgt.setMaximumHeight(20)
         self.ui.anomWgt.setMaximumHeight(20)
         variables.visualpar = 'lf'
 
-    def rel_show(self):
+    def relShow(self):
         self.ui.lfWgt.setMaximumHeight(20)
         self.ui.relWgt.setMaximumHeight(1500)
         self.ui.anomWgt.setMaximumHeight(20)
         variables.visualpar = 'rel'
 
-    def anom_show(self):
+    def anomShow(self):
         self.ui.lfWgt.setMaximumHeight(20)
         self.ui.relWgt.setMaximumHeight(20)
         self.ui.anomWgt.setMaximumHeight(1500)
         variables.visualpar = 'anom'
         self.ui.anomAddPls.setVisible(self.anom_avail != [])
 
-    def fillRelPar(self):
-        # for i in range(self.ui.relParGL.count()):
-        #     self.ui.relParGL.itemAt(i).widget().deleteLater()
-
+    def relParFill(self):
         # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
         if self.cat != 'ExternalGrid':
-            for par in ['alfa', 'beta', 'Pi_E', 'Pi_Q']:
+            for par in ['t_preg', 'alfa', 'beta', 'Pi_E', 'Pi_Q']:
                 self.ui.__getattribute__(par + 'Dsb').setValue(v[self.elem]['rel']['par'][par])
         else:
             self.ui.relWgt.setVisible(False)
 
-            #
-            # self.__setattr__(par + 'Lbl', QLabel(par))
-            # self.__setattr__(par + 'Dsb', QDoubleSpinBox(None))
-            # self.__setattr__(par + 'UnitLbl', QLabel(el_format[self.cat][par]['unit']))
-            #
-            # self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Lbl'), line, 0)
-            # self.ui.lfParGL.addWidget(self.__getattribute__(par + 'Dsb'), line, 1)
-            # self.ui.lfParGL.addWidget(self.__getattribute__(par + 'UnitLbl'), line, 2)
-            # i += 1
-            #
-            # # formattazione e popolazione dei campi
-            # self.dsb_format(self.__getattribute__(par + 'Dsb'), minimum=el_format[self.cat][par]['min'],
-            #                 maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
-            # self.__getattribute__(par + 'Lbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
-            #
-            # if isinstance(v[self.elem]['par'][par], list):
-            #     self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par][0])
-            # else:
-            #     self.__getattribute__(par + 'Dsb').setValue(v[self.elem]['par'][par])
-            #
-            # line += 1
-        # -------------------------------------------------------------------------------------------------------------
+    def relParSave(self):
+        # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
+        if self.cat != 'ExternalGrid':
+            for par in ['t_preg', 'alfa', 'beta', 'Pi_E', 'Pi_Q']:
+                v[self.elem]['rel']['par'][par] = self.ui.__getattribute__(par + 'Dsb').value()
+        # else:
+        #     self.ui.relWgt.setVisible(False)
 
-    def fillRelRes(self):
+    def relResFill(self):
         self.ui.relResMainWgt.setVisible(grid['studies']['rel'])
 
         self.ui.relFurnWgt.setVisible(self.cat in mc['Load'])
@@ -169,11 +151,12 @@ class ElementProperties(QMainWindow):
             self.ui.rNightRelDsb.setValue(v[self.elem]['rel']['results']['load_rel1'])
         elif self.cat not in mc['Node'] + mc['Vsource']:
             self.ui.lbdRelDsb.setValue(v[self.elem]['rel']['results']['lambda'])
+            self.ui.rRelDsb.setValue(v[self.elem]['rel']['results']['R'])
             self.ui.piSiRelDsb.setValue(v[self.elem]['rel']['results']['Pi_Si'])
             self.ui.mtbfHrsDsb.setValue(v[self.elem]['rel']['results']['MTBF_ore'])
             self.ui.mtbfYrDsb.setValue(v[self.elem]['rel']['results']['MTBF_anni'])
 
-    def fillLfPar(self):
+    def lfParFill(self):
         for i in range(self.ui.lfParGL.count()):
             self.ui.lfParGL.itemAt(i).widget().deleteLater()
 
@@ -192,7 +175,7 @@ class ElementProperties(QMainWindow):
                 self.ui.lfParGL.addWidget(self.__getattribute__('v' + str(b) + 'UnitLbl'), b, 2)
 
                 # formattazione e popolazione dei campi
-                self.dsb_format(self.__getattribute__('v' + str(b) + 'Dsb'), decimals=3)
+                self.dsbFormat(self.__getattribute__('v' + str(b) + 'Dsb'), decimals=3)
                 self.__getattribute__('v' + str(b) + 'Lbl').setAlignment(Qt.AlignRight |
                                                                          Qt.AlignTrailing | Qt.AlignVCenter)
                 self.__getattribute__('v' + str(b) + 'Dsb').setValue(v[self.buses[b]]['par']['Vn'][0])
@@ -219,8 +202,8 @@ class ElementProperties(QMainWindow):
             i += 1
 
             # formattazione e popolazione dei campi
-            self.dsb_format(self.__getattribute__(par + 'Dsb'), minimum=el_format[self.cat][par]['min'],
-                            maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
+            self.dsbFormat(self.__getattribute__(par + 'Dsb'), minimum=el_format[self.cat][par]['min'],
+                           maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
             self.__getattribute__(par + 'Lbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
             if isinstance(v[self.elem]['par'][par], list):
@@ -233,7 +216,7 @@ class ElementProperties(QMainWindow):
             if self.cat in (mc['Load'] + mc['Generator']) and par == 'P':
                 self.PeffDSB = QDoubleSpinBox()
                 self.PeffDSB.setEnabled(True)
-                self.dsb_format(self.PeffDSB, decimals=3)
+                self.dsbFormat(self.PeffDSB, decimals=3)
                 self.PeffDSB.setStyleSheet(u"background-color: rgb(95, 95, 95)")
 
                 self.PeffunitLbl = QLabel('kW')
@@ -270,7 +253,7 @@ class ElementProperties(QMainWindow):
             i += 1
 
             # formattazione e popolazione degli elementi del profilo
-            self.dsb_format(self.scale_DSB, 0, 1, 4)
+            self.dsbFormat(self.scale_DSB, 0, 1, 4)
             self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
             if v[self.elem]['par']['profile']['name'] is None:
@@ -380,13 +363,13 @@ class ElementProperties(QMainWindow):
 
             # settare le azioni degli elementi (se non sono Node o Source)
             if self.cat not in mc['Node'] + mc['Vsource']:
-                self.__getattribute__('node' + str(i) + '_BTN').clicked.connect(partial(self.bb_clicked, i))
-                self.__getattribute__('node' + str(i) + '_CB').activated.connect(partial(self.bb_changed, i,
+                self.__getattribute__('node' + str(i) + '_BTN').clicked.connect(partial(self.bbClicked, i))
+                self.__getattribute__('node' + str(i) + '_CB').activated.connect(partial(self.bbChanged, i,
                                                                                          None))
 
         # Scrittura dei campi node0 e node1
         for i in range(len(v[self.elem]['top']['conn'])):
-            self.bb_changed(i=i, node=v[self.elem]['top']['conn'][i])
+            self.bbChanged(i=i, node=v[self.elem]['top']['conn'][i])
         # ------------------------------------------------------------------------------------------------------------
 
         # creazione della scrollbar, se il settore fosse troppo lungo
@@ -400,11 +383,11 @@ class ElementProperties(QMainWindow):
         # self.profile_RB.clicked.connect(self.profileCheck)
         # self.scale_RB.toggled.connect(self.profileCheck)
 
-        self.ui.savePLS.clicked.connect(self.save_par)
+        self.ui.savePLS.clicked.connect(self.parSave)
 
         pass
 
-    def fillAnomPar(self):
+    def anomParFill(self):
         self.ui.agingParWgt.setVisible('Hourly_Degradation'in list(v[self.elem]['anom']['par'].keys()))
         self.ui.agingCkB.setChecked('Hourly_Degradation'in list(v[self.elem]['anom']['par'].keys()))
         if self.ui.agingCkB.isChecked():
@@ -462,13 +445,13 @@ class ElementProperties(QMainWindow):
                 v[self.elem]['anom']['par']['anomalies'][n][cat][typol][anom_typol_par[typol]])
 
             # vengono compresse le altre anomaliem e resa vilibile solo quella corrente
-            self.anom_view_update(n)
+            self.anomViewUpdate(n)
 
             # Inizializzazione delle azioni sui pulsanti
-            self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anom_view_update, n))
-            self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anom_move, n, 'up'))
-            self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anom_move, n, 'down'))
-            self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anom_del, n))
+            self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anomViewUpdate, n))
+            self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anomMove, n, 'up'))
+            self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anomMove, n, 'down'))
+            self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anomDel, n))
 
             # pulsante "up" disabilitato per il primo widget
             self.anomWgt[n].ui.upPb.setEnabled(n != 0)
@@ -491,7 +474,7 @@ class ElementProperties(QMainWindow):
         #     anomaly.ui.typeCB.setCurrentText(typol)
 
     def profileCheck(self):
-        self.dsb_format(self.scale_DSB, 0, 1, 4)
+        self.dsbFormat(self.scale_DSB, 0, 1, 4)
         self.scale_LBL.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
         if isinstance(v[self.elem]['par']['profile']['curve'], list):
@@ -548,7 +531,7 @@ class ElementProperties(QMainWindow):
         # self.profWgtVBL.addWidget(self.canvas1)
 
         self.profileBtn = QPushButton('Apri profilo')
-        self.pb_format(self.profileBtn, min_h=20)
+        self.pbFormat(self.profileBtn, min_h=20)
 
         self.profWgtVBL.addWidget(self.profileBtn)
 
@@ -559,7 +542,7 @@ class ElementProperties(QMainWindow):
         self.ui.lfVL.insertWidget(3, self.profileWidget)
 
     # azioni da eseguire alla richiesta di modifica del nodo di connessione
-    def bb_clicked(self, i=0, event2=None):
+    def bbClicked(self, i=0, event2=None):
         # Se è ancora attiva la selezione sull'altra busbar, deve essere ripristinata la casella
         if len(self.buses) > 1:
             j = int(not i)
@@ -572,7 +555,7 @@ class ElementProperties(QMainWindow):
         self.__getattribute__('node' + str(i) + '_BTN').hide()
         self.__getattribute__('node' + str(i) + '_CB').show()
 
-    def bb_changed(self, i=0, node=None, event=None):
+    def bbChanged(self, i=0, node=None, event=None):
         if not node:
             node = self.__getattribute__('node' + str(i) + '_CB').currentText()
 
@@ -591,7 +574,7 @@ class ElementProperties(QMainWindow):
 
         # aggiornamento della lista delle busbar coerenti per ogni nodo
         for j in range(len(self.buses)):
-            nodes = self.bb_list(j, node)
+            nodes = self.bbList(j, node)
             self.__getattribute__('node' + str(j) + '_CB').clear()
             self.__getattribute__('node' + str(j) + '_CB').addItems(nodes)
             self.__getattribute__('node' + str(j) + '_CB').hide()
@@ -607,14 +590,14 @@ class ElementProperties(QMainWindow):
             self.ui.savePLS.setEnabled(self.__getattribute__('node1_BTN').text() != '-')
             if self.ui.savePLS.isEnabled():
                 # self.save_BTN.setStyleSheet(u"background-color: rgb(255, 255, 255)")
-                self.pb_format(self.ui.savePLS, min_h=25)
+                self.pbFormat(self.ui.savePLS, min_h=25)
 
             else:
                 # self.save_BTN.setStyleSheet(u"background-color: rgb(95, 95, 95)")
-                self.pb_disabled(self.ui.savePLS, min_h=25)
+                self.pbDisabled(self.ui.savePLS, min_h=25)
 
     # Definizione dell'elenco delle BusBar ammissibili
-    def bb_list(self, i, node):
+    def bbList(self, i, node):
         nodes = []
 
         if self.cat in ['2W-Transformer']:
@@ -706,16 +689,16 @@ class ElementProperties(QMainWindow):
             # i += 1
 
             # formattazione e popolazione dei campi
-            self.dsb_format(self.__getattribute__(par + 'ResDsb'), decimals=el_lfresults[self.cat][par]['decimal'],
-                            minimum=-9999999.999, maximum=9999999.999)
+            self.dsbFormat(self.__getattribute__(par + 'ResDsb'), decimals=el_lfresults[self.cat][par]['decimal'],
+                           minimum=-9999999.999, maximum=9999999.999)
             self.__getattribute__(par + 'ResLbl').setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
             line += 1
         # -------------------------------------------------------------------------------------------------------------
-        self.fillLfRes()
+        self.lfResFill()
         pass
 
-    def fillLfRes(self, t=0):
+    def lfResFill(self, t=0):
         for par in el_lfresults[self.cat]:
             tag = el_lfresults[self.cat][par]['tag']
             i = el_lfresults[self.cat][par]['i']
@@ -726,7 +709,7 @@ class ElementProperties(QMainWindow):
         pass
 
     # formattazione dei DoubleSPinBox
-    def dsb_format(self, item, minimum=0.00, maximum=9999.99, decimals=2, step=0.1):
+    def dsbFormat(self, item, minimum=0.00, maximum=9999.99, decimals=2, step=0.1):
         item.setMinimum(minimum)
         item.setMaximum(maximum)
         item.setDecimals(decimals)
@@ -741,7 +724,7 @@ class ElementProperties(QMainWindow):
         item.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
     # formattazione dei pushbutton
-    def pb_format(self, item, min_w=0, min_h=0):
+    def pbFormat(self, item, min_w=0, min_h=0):
         item.setStyleSheet(u"QPushButton {"
                            u"color: rgb(255, 255, 255);"
                            u"background-color: rgb(0, 0, 0); border: solid;"  # border-style: outset;"
@@ -752,7 +735,7 @@ class ElementProperties(QMainWindow):
                            u"}")
         item.setMinimumSize(QSize(min_w, min_h))
 
-    def pb_disabled(self, item, min_w=0, min_h=0):
+    def pbDisabled(self, item, min_w=0, min_h=0):
         item.setStyleSheet(u"QPushButton {"
                            u"color: rgb(63, 63, 63);"
                            u"background-color: rgb(31, 31, 31); border: solid;"  # border-style: outset;"
@@ -763,14 +746,14 @@ class ElementProperties(QMainWindow):
                            u"}")
         item.setMinimumSize(QSize(min_w, min_h))
 
-    def bb_fix(self, elem):
+    def bbFix(self, elem):
         # Se si modifica la tensione della busbar,
         # bisogna modificare la tensione nominale degli elementi a essa connessa
 
         # Se l'elemento è un nodo o la rete esterna, e se è cambiata la tensione nomnale
         if self.cat in mc['Node'] + mc['Vsource'] and v[elem]['par']['Vn'] != self.VnDsb.value():
         # if self.cat in mc['Node'] + mc['Vsource'] and v[elem]['par']['Vn'] != self.Vn_DSB.value():
-            for el in self.bb_link(elem):
+            for el in self.bbLink(elem):
                 for bb in self.buses:
                     if v[bb]['category'] in mc['Transformer']:
                         for i in range(len(v[bb]['top']['conn'])):
@@ -808,7 +791,7 @@ class ElementProperties(QMainWindow):
         #
         #         pass
 
-    def bb_link(self, busbar):
+    def bbLink(self, busbar):
         buses = [busbar]
         bb_solved = []
         lines_solved = []
@@ -824,14 +807,14 @@ class ElementProperties(QMainWindow):
                 buses.pop(buses.index(bb))
         return bb_solved
 
-    def anom_aging(self):
+    def anomAging(self):
         self.ui.agingParWgt.setVisible(self.ui.agingCkB.isChecked())
         if 'Hourly_Degradation' in list(v[self.elem]['anom']['par'].keys()):
             self.ui.agingRateDsb.setValue(v[self.elem]['anom']['par']['Hourly_Degradation']['rate'])
         else:
             self.ui.agingRateDsb.setValue(self.aging_rate_def)
 
-    def anom_add(self):
+    def anomAdd(self):
         # Aggiorno l'elenco delle anomalie disponibili in self.anom_avail
         self.anom_avail = list(self.anom_def.keys())
         for an in self.anomWgt:
@@ -868,21 +851,21 @@ class ElementProperties(QMainWindow):
                                                     'border-style: inset}')
 
         # vengono compresse le altre anomaliem e resa vilibile solo quella corrente
-        self.anom_view_update(n)
+        self.anomViewUpdate(n)
 
         # Inizializzazione delle azioni sui pulsanti
-        self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anom_view_update, n))
-        self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anom_move, n, 'up'))
-        self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anom_move, n, 'down'))
-        self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anom_del, n))
+        self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anomViewUpdate, n))
+        self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anomMove, n, 'up'))
+        self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anomMove, n, 'down'))
+        self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anomDel, n))
 
-    def anom_view_update(self, n):
+    def anomViewUpdate(self, n):
         # Viene esploso il dettaglio dell'anomalia "n", le altre sono nascoste
         for i in range(len(self.anomWgt)):
             self.anomWgt[i].ui.detailsWgt.setVisible(i == n)
             self.anomWgt[i].ui.detailsPbWgt.setVisible(i != n)
 
-    def anom_move(self, n, move):
+    def anomMove(self, n, move):
         anom_temp = []      # variabile d'apoggio dei widget delle anomalie
 
         for i in range(len(self.anomWgt)):
@@ -909,9 +892,9 @@ class ElementProperties(QMainWindow):
             anom_temp[new_i] = self.anomWgt[i]  # riscrivo i widget nell'array temporaneo con le nuove posizioni
         self.anomWgt = anom_temp                # riporto tutto nellarray dei widget effettivo
 
-        self.anom_populate()
+        self.anomPopulate()
 
-    def anom_populate(self):
+    def anomPopulate(self):
         # Cancellazione di tutti i widget dei dettagloi delle anomalie
         for i in range(self.ui.anomListVL.count() - 1, -1, -1):
             self.ui.anomListVL.removeWidget(self.ui.anomListVL.itemAt(i).widget())
@@ -925,10 +908,10 @@ class ElementProperties(QMainWindow):
         # Riscrittura Widget dei dettagli delle anomalie
         for n in range(len(self.anomWgt)):
             self.ui.anomListVL.insertWidget(n, self.anomWgt[n].ui.anomWgt)
-            self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anom_move, n, 'up'))
-            self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anom_move, n, 'down'))
-            self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anom_view_update, n))
-            self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anom_del, n))
+            self.anomWgt[n].ui.upPb.clicked.connect(partial(self.anomMove, n, 'up'))
+            self.anomWgt[n].ui.downPb.clicked.connect(partial(self.anomMove, n, 'down'))
+            self.anomWgt[n].ui.detailsPb.clicked.connect(partial(self.anomViewUpdate, n))
+            self.anomWgt[n].ui.cancPb.clicked.connect(partial(self.anomDel, n))
 
             col = 39 + 16 * n
             self.anomWgt[n].ui.anomWgt.setStyleSheet('*{background-color: rgb(' + str(col) + ', 0, 0);'
@@ -945,7 +928,7 @@ class ElementProperties(QMainWindow):
             # pulsante "down" disabilitato per l'ultimo widget
             self.anomWgt[n].ui.downPb.setEnabled(n != len(self.anomWgt) - 1)
 
-    def anom_del(self, n):
+    def anomDel(self, n):
         # anon_temp = self.anomWgt
         # self.anom_avail.append(self.anomWgt[n].ui.anomLbl.text())
 
@@ -954,10 +937,10 @@ class ElementProperties(QMainWindow):
         self.anomWgt[n].ui.anomWgt.deleteLater()
         # self.ui.anomListVL.update()
         self.anomWgt.pop(n)
-        self.anom_populate()
+        self.anomPopulate()
         self.ui.anomAddPls.setVisible(True)
 
-    def anom_save(self):
+    def anomSave(self):
         if self.ui.agingCkB.isChecked():
             v[self.elem]['anom']['par']['Hourly_Degradation'] = {'rate': self.ui.agingRateDsb.value()}
         elif 'Hourly_Degradation' in list(v[self.elem]['anom']['par'].keys()):
@@ -1018,8 +1001,8 @@ class ElementProperties(QMainWindow):
         pass
 
     # salvataggio dei dati dall'interfaccia al dizionario
-    def save_par(self):
-        self.bb_fix(self.elem)
+    def parSave(self):
+        self.bbFix(self.elem)
         # TODO: nel caso di variazione di tensione a busbar correlate, bisogna mettere un alert
 
         for par in el_format[self.cat]:
@@ -1040,9 +1023,11 @@ class ElementProperties(QMainWindow):
                 pass
         v[self.elem]['par']['out-of-service'] = self.out_of_service_CkB.isChecked()
 
+        self.relParSave()
+
         # salvataggio dei dati di anomalia
         if self.cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'AC-BESS', 'DC-BESS']:
-            self.anom_save()
+            self.anomSave()
 
 
 if __name__ == '__main__':

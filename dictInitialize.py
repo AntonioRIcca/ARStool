@@ -33,7 +33,8 @@ def profile_initialize(el):
 # Inizializzazione del sottodizionario rella Reliability ("rel") per l'elemento "el"
 def rel_initialize(el):
     v[el]['rel']['par'] = dict()
-    for p in ['Pi_E', 'Pi_Q', 'alfa', 'beta']:
+    print(el)
+    for p in ['t_preg', 'Pi_E', 'Pi_Q', 'alfa', 'beta']:
         #v[el]['rel']['par'][p] = None
         v[el]['rel']['par'][p] = attr_dict[v[el]['category']]['reliability'][p]
 

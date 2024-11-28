@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>785</width>
-    <height>829</height>
+    <height>1196</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -426,31 +426,7 @@ QPushButton:pressed {
              <string notr="true"/>
             </property>
             <layout class="QGridLayout" name="relParGL">
-             <item row="1" column="2">
-              <widget class="QLabel" name="betaUnitLbl">
-               <property name="text">
-                <string>-</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="2">
-              <widget class="QLabel" name="Pi_EUnitLbl">
-               <property name="text">
-                <string>-</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="Pi_ELBL">
-               <property name="text">
-                <string>Pi_E</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
+             <item row="4" column="1">
               <widget class="QDoubleSpinBox" name="Pi_EDsb">
                <property name="toolTip">
                 <string>Fattore di Stress Ambientale </string>
@@ -472,46 +448,34 @@ QPushButton:pressed {
                </property>
               </widget>
              </item>
+             <item row="2" column="2">
+              <widget class="QLabel" name="betaUnitLbl">
+               <property name="text">
+                <string>-</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="betaLbl">
+               <property name="text">
+                <string>beta</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
              <item row="4" column="0">
-              <widget class="QLabel" name="Pi_QLbl">
+              <widget class="QLabel" name="Pi_ELBL">
                <property name="text">
-                <string>Pi_Q</string>
+                <string>Pi_E</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="alfaUnitLbl">
-               <property name="text">
-                <string>h</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QDoubleSpinBox" name="betaDsb">
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::NoButtons</enum>
-               </property>
-               <property name="decimals">
-                <number>3</number>
-               </property>
-               <property name="minimum">
-                <double>1.000000000000000</double>
-               </property>
-               <property name="maximum">
-                <double>10.000000000000000</double>
-               </property>
-               <property name="singleStep">
-                <double>0.100000000000000</double>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
+             <item row="5" column="1">
               <widget class="QDoubleSpinBox" name="Pi_QDsb">
                <property name="toolTip">
                 <string>Fattore di Qialità</string>
@@ -533,7 +497,53 @@ QPushButton:pressed {
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
+             <item row="5" column="2">
+              <widget class="QLabel" name="Pi_QUnitLbl">
+               <property name="text">
+                <string>-</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="alfaUnitLbl">
+               <property name="text">
+                <string>h</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="Pi_QLbl">
+               <property name="text">
+                <string>Pi_Q</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QDoubleSpinBox" name="betaDsb">
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+               <property name="decimals">
+                <number>3</number>
+               </property>
+               <property name="minimum">
+                <double>1.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>10.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.100000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
               <widget class="QLabel" name="alfaLbl">
                <property name="text">
                 <string>alfa</string>
@@ -543,17 +553,7 @@ QPushButton:pressed {
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="betaLbl">
-               <property name="text">
-                <string>beta</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
+             <item row="1" column="1">
               <widget class="QDoubleSpinBox" name="alfaDsb">
                <property name="minimumSize">
                 <size>
@@ -579,9 +579,54 @@ QPushButton:pressed {
               </widget>
              </item>
              <item row="4" column="2">
-              <widget class="QLabel" name="Pi_QUnitLbl">
+              <widget class="QLabel" name="Pi_EUnitLbl">
                <property name="text">
                 <string>-</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="t_pregLbl">
+               <property name="text">
+                <string>vita preg.</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QDoubleSpinBox" name="t_pregDsb">
+               <property name="minimumSize">
+                <size>
+                 <width>60</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Vita pregressa di componente</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+               <property name="decimals">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <double>999999.900000000023283</double>
+               </property>
+               <property name="value">
+                <double>438000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="t_pregUnitLbl">
+               <property name="text">
+                <string>h</string>
                </property>
               </widget>
              </item>
@@ -635,10 +680,59 @@ QPushButton:pressed {
              <property name="rightMargin">
               <number>0</number>
              </property>
-             <item row="1" column="2">
-              <widget class="QLabel" name="pSiRelUnitLbl">
+             <item row="4" column="0">
+              <widget class="QLabel" name="mtbfHrsLbl">
                <property name="text">
-                <string>-</string>
+                <string>MTBF</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QLabel" name="mtbfHrsUnitLbl">
+               <property name="text">
+                <string>h</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="lbdRelLbl">
+               <property name="text">
+                <string>lambda</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="lbdRelUniLbl">
+               <property name="text">
+                <string>f/h</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QDoubleSpinBox" name="mtbfYrDsb">
+               <property name="toolTip">
+                <string>Tempo medio tra i guasti</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+               <property name="decimals">
+                <number>5</number>
+               </property>
+               <property name="maximum">
+                <double>99.000000000000000</double>
                </property>
               </widget>
              </item>
@@ -676,73 +770,7 @@ QPushButton:pressed {
                </property>
               </widget>
              </item>
-             <item row="3" column="2">
-              <widget class="QLabel" name="mtbfHrsUnitLbl">
-               <property name="text">
-                <string>h</string>
-               </property>
-              </widget>
-             </item>
              <item row="4" column="1">
-              <widget class="QDoubleSpinBox" name="mtbfYrDsb">
-               <property name="toolTip">
-                <string>Tempo medio tra i guasti</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::NoButtons</enum>
-               </property>
-               <property name="decimals">
-                <number>5</number>
-               </property>
-               <property name="maximum">
-                <double>99.000000000000000</double>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="lbdRelLbl">
-               <property name="text">
-                <string>lambda</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="mtbfHrsLbl">
-               <property name="text">
-                <string>MTBF</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="piSiRelLbl">
-               <property name="text">
-                <string>Pi_Si</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="lbdRelUniLbl">
-               <property name="text">
-                <string>f/h</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
               <widget class="QDoubleSpinBox" name="mtbfHrsDsb">
                <property name="toolTip">
                 <string>Tempo medio tra i guasti</string>
@@ -764,14 +792,7 @@ QPushButton:pressed {
                </property>
               </widget>
              </item>
-             <item row="4" column="2">
-              <widget class="QLabel" name="mtbfYrsUnitLbl">
-               <property name="text">
-                <string>yr</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
+             <item row="2" column="1">
               <widget class="QDoubleSpinBox" name="piSiRelDsb">
                <property name="toolTip">
                 <string>Affidabilità</string>
@@ -796,6 +817,75 @@ QPushButton:pressed {
                </property>
                <property name="singleStep">
                 <double>0.100000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLabel" name="pSiRelUnitLbl">
+               <property name="text">
+                <string>-</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="piSiRelLbl">
+               <property name="text">
+                <string>Pi_Si</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
+              <widget class="QLabel" name="mtbfYrsUnitLbl">
+               <property name="text">
+                <string>yr</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="rRelLbl">
+               <property name="text">
+                <string>R</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QDoubleSpinBox" name="rRelDsb">
+               <property name="toolTip">
+                <string>Affidabilità</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+               <property name="decimals">
+                <number>6</number>
+               </property>
+               <property name="minimum">
+                <double>0.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>999.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.100000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="rUnitLbl">
+               <property name="text">
+                <string>-</string>
                </property>
               </widget>
              </item>
@@ -1309,6 +1399,31 @@ QLabel{
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>doubleSpinBox</tabstop>
+  <tabstop>doubleSpinBox_2</tabstop>
+  <tabstop>doubleSpinBox_3</tabstop>
+  <tabstop>t_pregDsb</tabstop>
+  <tabstop>alfaDsb</tabstop>
+  <tabstop>betaDsb</tabstop>
+  <tabstop>Pi_EDsb</tabstop>
+  <tabstop>Pi_QDsb</tabstop>
+  <tabstop>agingRateDsb</tabstop>
+  <tabstop>savePLS</tabstop>
+  <tabstop>cancelPLS</tabstop>
+  <tabstop>lfPls</tabstop>
+  <tabstop>relPls</tabstop>
+  <tabstop>mtbfYrDsb</tabstop>
+  <tabstop>lbdRelDsb</tabstop>
+  <tabstop>mtbfHrsDsb</tabstop>
+  <tabstop>piSiRelDsb</tabstop>
+  <tabstop>rRelDsb</tabstop>
+  <tabstop>rNightRelDsb</tabstop>
+  <tabstop>rDayRelDsb</tabstop>
+  <tabstop>agingCkB</tabstop>
+  <tabstop>anomPls</tabstop>
+  <tabstop>anomAddPls</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
