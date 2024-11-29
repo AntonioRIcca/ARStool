@@ -1,46 +1,46 @@
-New "Load.ev-charge_ac-load" bus1=ev-charge_bb phases=3 kW=14.78264 kV=0.4 NumCust=1 pf=1.0 enabled=True
-New "Line.ev-charge_line" bus1=rs_04kv_bb bus2=ev-charge_bb Season=1 Ratings=[400,] emergamps=600 B0=1e-09 normamps=400.0 length=0.05 B1=1e-09 x1=1e-09 x0=1e-09 r0=0 r1=0 enabled=True
-New "Generator.ev-fast_dc-bess" bus1=ev-fast_dc-bb phases=3 model=3 kW=0.0 kv=0.6 enabled=True
-New "Transformer.ev-fast_dc-dc-conv" buses=['ev-fast_dc-bb', 'ev-fast-load_dc-node'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVAs=[300.0, 300.0] kVs=[0.6, 0.4] enabled=True
-New "Load.ev-fast_dc-load" bus1=ev-fast-load_dc-node phases=3 pf=1 NumCust=1 kW=18.4783 kV=0.4 enabled=True
-New "Generator.ev-fast_dc-pv" bus1=ev-fast_dc-bb phases=3 kvar=0 model=3 kW=0.0 kv=0.6 enabled=True
-New "Transformer.ev-fast_pwm" buses=['rs_04kv_bb', 'ev-fast_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVAs=[2000.0, 2000.0] kVs=[0.4, 0.6] enabled=True
-New "Line.pros-ev_dc-line" linecode=dc-line linecode=dc-line bus1=pros1_dc-bb bus2=ev-fast_dc-bb Season=1 Ratings=[400,] emergamps=600 normamps=400.0 length=0.02 enabled=True
-New "Load.pros_1_ac-load" bus1=pros_bb phases=3 kW=30.24437662680001 kV=0.4 NumCust=1 pf=0.9 enabled=True
-New "Transformer.pros_bess_pwm" buses=['pros_bb', 'pros1_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVAs=[400.0, 400.0] kVs=[0.4, 0.6] enabled=True
-New "Generator.pros_dc-bess" bus1=pros1_dc-bb phases=3 model=3 kW=-0.0 kv=0.6 enabled=True
-New "Load.pros_dc-load" bus1=pros2_dc-bb phases=3 pf=1 NumCust=1 kW=6.048875325360001 kV=0.6 enabled=True
-New "Generator.pros_dc-micro-wind" bus1=pros1_dc-bb phases=3 kvar=0 model=3 kW=2.054435175 kv=0.6 enabled=True
-New "Generator.pros_dc-pv" bus1=pros2_dc-bb phases=3 kvar=0 model=3 kW=0.0 kv=0.6 enabled=True
-New "Line.pros_line" bus1=res_bb bus2=pros_bb Season=1 Ratings=[400,] emergamps=600 B0=1e-09 normamps=400.0 length=0.05 B1=1e-09 x1=1e-09 x0=1e-09 r0=0 r1=0 enabled=True
-New "Transformer.pros_pv_pwm" buses=['pros_bb', 'pros2_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVAs=[400.0, 400.0] kVs=[0.4, 0.6] enabled=True
-New "Line.res-wpg_line" bus1=sourcebus bus2=res-wpg_bb Season=1 Ratings=[400,] emergamps=600 B0=1e-09 normamps=400.0 length=2.0 B1=1e-09 x1=1e-09 x0=1e-09 r0=0 r1=0 enabled=True
-New "Transformer.res_tr" buses=['res-wpg_bb', 'res_bb'] windings=2 conns=[delta, wye, ] %imag=1.6 XHL=6.0 kVs=[20.0, 0.4] %Rs=[1.0, 0.0] kVAs=[630.0, 630.0] enabled=True
-New "Load.rs_1_ac-load" bus1=rs_04kv_bb phases=3 kW=14.78264 kV=0.4 NumCust=1 pf=0.9 enabled=True
-New "Load.rs_2_ac-load" bus1=rs_04kv_bb phases=3 kW=22.17396 kV=0.4 NumCust=1 pf=0.9 enabled=True
-New "Line.rs_line" bus1=sourcebus bus2=rs_20kv_bb Season=1 Ratings=[400,] emergamps=600 B0=1e-09 normamps=400.0 length=3.0 B1=1e-09 x1=1e-09 x0=1e-09 r0=0 r1=0 enabled=True
-New "Transformer.rs_tr" buses=['rs_20kv_bb', 'rs_04kv_bb'] windings=2 conns=[delta, wye, ] %imag=1.6 XHL=6.0 kVs=[20.0, 0.4] %Rs=[1.0, 0.0] kVAs=[400.0, 400.0] enabled=True
+New "Load.ev-charge_ac-load" bus1=ev-charge_bb phases=3 pf=1.0 kW=16.11732192 kV=0.4 NumCust=1 enabled=True
+New "Line.ev-charge_line" bus1=rs_04kv_bb bus2=ev-charge_bb Season=1 Ratings=[400,] emergamps=600 r1=0 x0=1e-09 B0=1e-09 x1=1e-09 B1=1e-09 length=0.05 normamps=400.0 r0=0 enabled=True
+New "Generator.ev-fast_dc-bess" bus1=ev-fast_dc-bb phases=3 model=3 kv=0.6 kW=10.0 enabled=True
+New "Transformer.ev-fast_dc-dc-conv" buses=['ev-fast_dc-bb', 'ev-fast-load_dc-node'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[0.6, 0.4] kVAs=[300.0, 300.0] enabled=True
+New "Load.ev-fast_dc-load" bus1=ev-fast-load_dc-node phases=3 pf=1 kV=0.4 kW=20.146652399999997 NumCust=1 enabled=True
+New "Generator.ev-fast_dc-pv" bus1=ev-fast_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=0.0 enabled=True
+New "Transformer.ev-fast_pwm" buses=['rs_04kv_bb', 'ev-fast_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[0.4, 0.6] kVAs=[2000.0, 2000.0] enabled=True
+New "Line.pros-ev_dc-line" linecode=dc-line linecode=dc-line bus1=pros1_dc-bb bus2=ev-fast_dc-bb Season=1 Ratings=[400,] emergamps=600 length=0.02 normamps=400.0 enabled=True
+New "Load.pros_1_ac-load" bus1=pros_bb phases=3 pf=0.9 kW=46.5424785 kV=0.4 NumCust=1 enabled=True
+New "Transformer.pros_bess_pwm" buses=['pros_bb', 'pros1_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[0.4, 0.6] kVAs=[400.0, 400.0] enabled=True
+New "Generator.pros_dc-bess" bus1=pros1_dc-bb phases=3 model=3 kv=0.6 kW=50.0 enabled=True
+New "Load.pros_dc-load" bus1=pros2_dc-bb phases=3 pf=1 kV=0.6 kW=9.3084957 NumCust=1 enabled=True
+New "Generator.pros_dc-micro-wind" bus1=pros1_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=5.9953782 enabled=True
+New "Generator.pros_dc-pv" bus1=pros2_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=0.0 enabled=True
+New "Line.pros_line" bus1=res_bb bus2=pros_bb Season=1 Ratings=[400,] emergamps=600 r1=0 x0=1e-09 B0=1e-09 x1=1e-09 B1=1e-09 length=0.05 normamps=400.0 r0=0 enabled=True
+New "Transformer.pros_pv_pwm" buses=['pros_bb', 'pros2_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[0.4, 0.6] kVAs=[400.0, 400.0] enabled=True
+New "Line.res-wpg_line" bus1=sourcebus bus2=res-wpg_bb Season=1 Ratings=[400,] emergamps=600 r1=0 x0=1e-09 B0=1e-09 x1=1e-09 B1=1e-09 length=2.0 normamps=400.0 r0=0 enabled=True
+New "Transformer.res_tr" buses=['res-wpg_bb', 'res_bb'] windings=2 conns=[delta, wye, ] XHL=6.0 %Rs=[1.0, 0.0] kVAs=[630.0, 630.0] kVs=[20.0, 0.4] %imag=1.6 enabled=True
+New "Load.rs_1_ac-load" bus1=rs_04kv_bb phases=3 pf=0.9 kW=16.11732192 kV=0.4 NumCust=1 enabled=True
+New "Load.rs_2_ac-load" bus1=rs_04kv_bb phases=3 pf=0.9 kW=24.17598288 kV=0.4 NumCust=1 enabled=True
+New "Line.rs_line" bus1=sourcebus bus2=rs_20kv_bb Season=1 Ratings=[400,] emergamps=600 r1=0 x0=1e-09 B0=1e-09 x1=1e-09 B1=1e-09 length=3.0 normamps=400.0 r0=0 enabled=True
+New "Transformer.rs_tr" buses=['rs_20kv_bb', 'rs_04kv_bb'] windings=2 conns=[delta, wye, ] XHL=6.0 %Rs=[1.0, 0.0] kVAs=[400.0, 400.0] kVs=[20.0, 0.4] %imag=1.6 enabled=True
 Edit "Vsource.source bus1=sourcebus basekv=20.0 enabled=True
-New "Transformer.ug_1_tr" buses=['ug_20kv_bb', 'ug_2kv_bb'] windings=2 conns=[delta, wye, ] %imag=1.5 XHL=6.0 kVs=[20.0, 2.0] %Rs=[0.93, 0.0] kVAs=[2000.0, 2000.0] enabled=True
-New "Transformer.ug_2_tr" buses=['ug_20kv_bb', 'ug_2kv_bb'] windings=2 conns=[delta, wye, ] %imag=1.5 XHL=6.0 kVs=[20.0, 2.0] %Rs=[0.93, 0.0] kVAs=[2000.0, 2000.0] enabled=True
-New "Load.ug_dc-load" bus1=ug_dc-bb phases=3 pf=1 NumCust=1 kW=58.0870875 kV=1.5 enabled=True
-New "Line.ug_line" bus1=sourcebus bus2=ug_20kv_bb Season=1 Ratings=[400,] emergamps=600 B0=1e-09 normamps=400.0 length=3.0 B1=1e-09 x1=1e-09 x0=1e-09 r0=0 r1=0 enabled=True
-New "Transformer.ug_pwm" buses=['ug_2kv_bb', 'ug_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVAs=[800.0, 800.0] kVs=[2.0, 1.5] enabled=True
-New "Load.ug_serv1_ac-load" bus1=ug_serv_bb phases=3 kW=29.56528 kV=0.4 NumCust=1 pf=0.9 enabled=True
-New "Load.ug_serv2_ac-load" bus1=ug_serv_bb phases=3 kW=44.34792 kV=0.4 NumCust=1 pf=0.9 enabled=True
-New "Transformer.ug_serv_tr" buses=['ug_2kv_bb', 'ug_serv_bb'] windings=2 conns=[delta, wye, ] %imag=1.6 XHL=6.0 kVs=[2.0, 0.4] %Rs=[1.0, 0.0] kVAs=[400.0, 400.0] enabled=True
-New "Generator.ugs_1_dc-pv" bus1=ugs_pv_dc-bb phases=3 kvar=0 model=3 kW=0.0 kv=0.75 enabled=True
-New "Generator.ugs_2_dc-pv" bus1=ugs_pv_dc-bb phases=3 kvar=0 model=3 kW=0.0 kv=0.75 enabled=True
-New "Generator.ugs_dc-bess" bus1=ugs_dc-bb phases=3 model=3 kW=-0.0 kv=1.5 enabled=True
-New "Transformer.ugs_dc-dc-conv" buses=['ugs_dc-bb', 'ugs_pv_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVAs=[50.0, 50.0] kVs=[1.5, 0.75] enabled=True
-New "Load.ugs_dc-load" bus1=ugs_dc-bb phases=3 pf=1 NumCust=1 kW=58.0870875 kV=1.5 enabled=True
-New "Transformer.ugs_pwm" buses=['ug_2kv_bb', 'ugs_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVAs=[800.0, 800.0] kVs=[2.0, 1.5] enabled=True
-New "Load.user_ac-load" bus1=user_bb phases=3 kW=52.059892500000004 kV=0.4 NumCust=1 pf=0.9 enabled=True
-New "Line.user_line" bus1=res_bb bus2=user_bb Season=1 Ratings=[400,] emergamps=600 B0=1e-09 normamps=400.0 length=0.1 B1=1e-09 x1=1e-09 x0=1e-09 r0=0 r1=0 enabled=True
-New "Generator.wpg_1_wind" bus1=wpg_2_bb phases=3 kW=28.76209245 kv=2.0 kW=140.0 enabled=True
-New "Generator.wpg_2_wind" bus1=wpg_2_bb phases=3 kW=28.76209245 kv=2.0 kW=140.0 enabled=True
-New "Generator.wpg_dc-bess" bus1=wpg_pv_dc-bb phases=3 model=3 kW=-0.0 kv=0.6 enabled=True
-New "Generator.wpg_dc-pv" bus1=wpg_pv_dc-bb phases=3 kvar=0 model=3 kW=0.0 kv=0.6 enabled=True
-New "Line.wpg_line" bus1=wpg_1_bb bus2=wpg_2_bb Season=1 Ratings=[400,] emergamps=600 B0=1e-09 normamps=400.0 length=1.0 B1=1e-09 x1=1e-09 x0=1e-09 r0=0 r1=0 enabled=True
-New "Transformer.wpg_pwm" buses=['wpg_1_bb', 'wpg_pv_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVAs=[2000.0, 2000.0] kVs=[2.0, 0.6] enabled=True
-New "Transformer.wpg_tr" buses=['res-wpg_bb', 'wpg_1_bb'] windings=2 conns=[delta, wye, ] %imag=1.5 XHL=6.0 kVs=[20.0, 2.0] %Rs=[0.93, 0.0] kVAs=[2000.0, 2000.0] enabled=True
+New "Transformer.ug_1_tr" buses=['ug_20kv_bb', 'ug_2kv_bb'] windings=2 conns=[delta, wye, ] XHL=6.0 %Rs=[0.93, 0.0] kVAs=[2000.0, 2000.0] kVs=[20.0, 2.0] %imag=1.5 enabled=True
+New "Transformer.ug_2_tr" buses=['ug_20kv_bb', 'ug_2kv_bb'] windings=2 conns=[delta, wye, ] XHL=6.0 %Rs=[0.93, 0.0] kVAs=[2000.0, 2000.0] kVs=[20.0, 2.0] %imag=1.5 enabled=True
+New "Load.ug_dc-load" bus1=ug_dc-bb phases=3 pf=1 kV=1.5 kW=76.9966592 NumCust=1 enabled=True
+New "Line.ug_line" bus1=sourcebus bus2=ug_20kv_bb Season=1 Ratings=[400,] emergamps=600 r1=0 x0=1e-09 B0=1e-09 x1=1e-09 B1=1e-09 length=3.0 normamps=400.0 r0=0 enabled=True
+New "Transformer.ug_pwm" buses=['ug_2kv_bb', 'ug_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[2.0, 1.5] kVAs=[800.0, 800.0] enabled=True
+New "Load.ug_serv1_ac-load" bus1=ug_serv_bb phases=3 pf=0.9 kW=32.23464384 kV=0.4 NumCust=1 enabled=True
+New "Load.ug_serv2_ac-load" bus1=ug_serv_bb phases=3 pf=0.9 kW=48.35196576 kV=0.4 NumCust=1 enabled=True
+New "Transformer.ug_serv_tr" buses=['ug_2kv_bb', 'ug_serv_bb'] windings=2 conns=[delta, wye, ] XHL=6.0 %Rs=[1.0, 0.0] kVAs=[400.0, 400.0] kVs=[2.0, 0.4] %imag=1.6 enabled=True
+New "Generator.ugs_1_dc-pv" bus1=ugs_pv_dc-bb phases=3 kvar=0 model=3 kv=0.75 kW=0.0 enabled=True
+New "Generator.ugs_2_dc-pv" bus1=ugs_pv_dc-bb phases=3 kvar=0 model=3 kv=0.75 kW=0.0 enabled=True
+New "Generator.ugs_dc-bess" bus1=ugs_dc-bb phases=3 model=3 kv=1.5 kW=50.0 enabled=True
+New "Transformer.ugs_dc-dc-conv" buses=['ugs_dc-bb', 'ugs_pv_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[1.5, 0.75] kVAs=[50.0, 50.0] enabled=True
+New "Load.ugs_dc-load" bus1=ugs_dc-bb phases=3 pf=1 kV=1.5 kW=76.9966592 NumCust=1 enabled=True
+New "Transformer.ugs_pwm" buses=['ug_2kv_bb', 'ugs_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[2.0, 1.5] kVAs=[800.0, 800.0] enabled=True
+New "Load.user_ac-load" bus1=user_bb phases=3 pf=0.9 kW=122.83040000000001 kV=0.4 NumCust=1 enabled=True
+New "Line.user_line" bus1=res_bb bus2=user_bb Season=1 Ratings=[400,] emergamps=600 r1=0 x0=1e-09 B0=1e-09 x1=1e-09 B1=1e-09 length=0.1 normamps=400.0 r0=0 enabled=True
+New "Generator.wpg_1_wind" bus1=wpg_2_bb phases=3 kv=2.0 kW=1.0 kW=83.9352948 enabled=True
+New "Generator.wpg_2_wind" bus1=wpg_2_bb phases=3 kv=2.0 kW=1.0 kW=83.9352948 enabled=True
+New "Generator.wpg_dc-bess" bus1=wpg_pv_dc-bb phases=3 model=3 kv=0.6 kW=100.0 enabled=True
+New "Generator.wpg_dc-pv" bus1=wpg_pv_dc-bb phases=3 kvar=0 model=3 kv=0.6 kW=0.0 enabled=True
+New "Line.wpg_line" bus1=wpg_1_bb bus2=wpg_2_bb Season=1 Ratings=[400,] emergamps=600 r1=0 x0=1e-09 B0=1e-09 x1=1e-09 B1=1e-09 length=1.0 normamps=400.0 r0=0 enabled=True
+New "Transformer.wpg_pwm" buses=['wpg_1_bb', 'wpg_pv_dc-bb'] windings=2 conns=[delta, wye, ] %Rs=[0, 0, ] XHL=1E-009 %imag=0 kVs=[2.0, 0.6] kVAs=[2000.0, 2000.0] enabled=True
+New "Transformer.wpg_tr" buses=['res-wpg_bb', 'wpg_1_bb'] windings=2 conns=[delta, wye, ] XHL=6.0 %Rs=[0.93, 0.0] kVAs=[2000.0, 2000.0] kVs=[20.0, 2.0] %imag=1.5 enabled=True

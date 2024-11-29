@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'elementPropertiesPgetwm.ui'
+## Form generated from reading UI file 'elementPropertiesgGplVs.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -836,16 +836,16 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.lfPls.setText(QCoreApplication.translate("Form", u"LoadFlow", None))
         self.label_19.setText(QCoreApplication.translate("Form", u"HV Node", None))
-        self.lfParLbl.setText(QCoreApplication.translate("Form", u"Parameters", None))
+        self.lfParLbl.setText(QCoreApplication.translate("Form", u"Parametri", None))
         self.label.setText(QCoreApplication.translate("Form", u"Power", None))
         self.label_6.setText(QCoreApplication.translate("Form", u"unit", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"Power", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"unit", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"Power", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"unit", None))
-        self.lfResLbl.setText(QCoreApplication.translate("Form", u"Results", None))
-        self.relPls.setText(QCoreApplication.translate("Form", u"Reliability", None))
-        self.relParLbl.setText(QCoreApplication.translate("Form", u"Parameters", None))
+        self.lfResLbl.setText(QCoreApplication.translate("Form", u"Risultati", None))
+        self.relPls.setText(QCoreApplication.translate("Form", u"Affidabilit\u00e0", None))
+        self.relParLbl.setText(QCoreApplication.translate("Form", u"Parametri", None))
 #if QT_CONFIG(tooltip)
         self.Pi_EDsb.setToolTip(QCoreApplication.translate("Form", u"Fattore di Stress Ambientale ", None))
 #endif // QT_CONFIG(tooltip)
@@ -865,7 +865,7 @@ class Ui_Form(object):
         self.t_pregDsb.setToolTip(QCoreApplication.translate("Form", u"Vita pregressa di componente", None))
 #endif // QT_CONFIG(tooltip)
         self.t_pregUnitLbl.setText(QCoreApplication.translate("Form", u"h", None))
-        self.relResLbl.setText(QCoreApplication.translate("Form", u"Results", None))
+        self.relResLbl.setText(QCoreApplication.translate("Form", u"Risultati", None))
         self.mtbfHrsLbl.setText(QCoreApplication.translate("Form", u"MTBF", None))
         self.mtbfHrsUnitLbl.setText(QCoreApplication.translate("Form", u"h", None))
         self.lbdRelLbl.setText(QCoreApplication.translate("Form", u"lambda", None))
@@ -900,8 +900,8 @@ class Ui_Form(object):
 #if QT_CONFIG(tooltip)
         self.rDayRelDsb.setToolTip(QCoreApplication.translate("Form", u"Tasso di guasto", None))
 #endif // QT_CONFIG(tooltip)
-        self.anomPls.setText(QCoreApplication.translate("Form", u"Anomaly Generation", None))
-        self.agingLbl.setText(QCoreApplication.translate("Form", u"Aging", None))
+        self.anomPls.setText(QCoreApplication.translate("Form", u"Anomalie", None))
+        self.agingLbl.setText(QCoreApplication.translate("Form", u"Deterioramento", None))
         self.agingCkB.setText("")
         self.agingRateLbl.setText(QCoreApplication.translate("Form", u"rate", None))
         self.rateUnitLbl.setText(QCoreApplication.translate("Form", u"1/y", None))

@@ -659,7 +659,14 @@ class Main:
 
         try:
             self.home3_top_WGT.deleteLater()
+            # self.home3_WGT.deleteLater()
         except: pass
+
+
+        # self.home3_WGT = QWidget()
+        # self.home3_VL = QVBoxLayout(self.home3_WGT)
+        # self.homeHBL.insertWidget(2, self.home3_WGT)
+
         self.home3_top_WGT = QtCharts.QChartView(db_graph)
         self.home3_VL.insertWidget(0, self.home3_top_WGT)
         # --------------------------------------------------------------
@@ -784,11 +791,6 @@ class Main:
         self.ui.rightMenuContainer.collapseMenu()
 
         self.ui.rightMenuContainer.collapseMenu()
-        # try:
-        #     self.home2_WGT.deleteLater()
-        # except RuntimeError:
-        #     pass
-        self.homeClear()
 
         # is_profile = False
         time = None
@@ -927,6 +929,17 @@ class Main:
         self.q_loss = self.q_eg + self.q_gen - self.q_loads - self.q_bess
 
     def loadflow_results_init(self):
+        # try:
+        #     self.home2_WGT.deleteLater()
+        # except RuntimeError:
+        #     pass
+        self.homeClear()
+
+        self.home3_WGT = QWidget()
+        self.home3_VL = QVBoxLayout(self.home3_WGT)
+        self.homeHBL.insertWidget(2, self.home3_WGT)
+
+
         # pasqu
         self.lf_WGT = LFrWGT()
         self.home2_WGT = self.lf_WGT.ui.lfres_WGT
@@ -1172,6 +1185,7 @@ class Main:
 
         self.home2_WGT = QWidget()
         self.home2_WGT.setMinimumWidth(450)
+        self.home2_WGT.setMaximumWidth(450)
 
         self.home2_WGT.setStyleSheet(u"*{\n"
                                            u"background-color: rgb(0, 0, 0);\n"
@@ -1198,6 +1212,10 @@ class Main:
         self.elemProfListWgtVL.addWidget(self.elemProfListSA)
 
         self.homeHBL.insertWidget(1, self.home2_WGT)
+
+        self.home3_WGT = QWidget()
+        self.home3_VL = QVBoxLayout(self.home3_WGT)
+        self.homeHBL.insertWidget(2, self.home3_WGT)
 
         lblfont = QtGui.QFont()
         lblfont.setFamily(u"MS Shell Dlg 2")

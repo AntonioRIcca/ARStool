@@ -184,7 +184,7 @@ QPushButton:pressed {
              </font>
             </property>
             <property name="text">
-             <string>Parameters</string>
+             <string>Parametri</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -302,7 +302,7 @@ QPushButton:pressed {
              </font>
             </property>
             <property name="text">
-             <string>Results</string>
+             <string>Risultati</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -381,7 +381,7 @@ QPushButton:pressed {
           </size>
          </property>
          <property name="text">
-          <string>Reliability</string>
+          <string>Affidabilità</string>
          </property>
         </widget>
        </item>
@@ -413,7 +413,7 @@ QPushButton:pressed {
           <item>
            <widget class="QLabel" name="relParLbl">
             <property name="text">
-             <string>Parameters</string>
+             <string>Parametri</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -664,7 +664,7 @@ QPushButton:pressed {
           <item>
            <widget class="QLabel" name="relResLbl">
             <property name="text">
-             <string>Results</string>
+             <string>Risultati</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1067,7 +1067,7 @@ QPushButton:pressed {
           </size>
          </property>
          <property name="text">
-          <string>Anomaly Generation</string>
+          <string>Anomalie</string>
          </property>
         </widget>
        </item>
@@ -1131,7 +1131,7 @@ QLabel{
                 </font>
                </property>
                <property name="text">
-                <string>Aging</string>
+                <string>Deterioramento</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>

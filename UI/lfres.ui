@@ -163,7 +163,7 @@
              </font>
             </property>
             <property name="title">
-             <string>External Grid </string>
+             <string>Rete esterna</string>
             </property>
             <property name="flat">
              <bool>false</bool>
@@ -218,7 +218,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Reactive Power:</string>
+                <string>Potenza Passiva</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -324,7 +324,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Active Power:</string>
+                <string>Potenza Attiva</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -360,7 +360,7 @@
              </font>
             </property>
             <property name="title">
-             <string>Loads</string>
+             <string>Carichi</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_5">
              <item row="3" column="0">
@@ -387,7 +387,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Active Power:</string>
+                <string>Potenza Attiva</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -443,7 +443,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Reactive Power:</string>
+                <string>Potenza Passiva</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -581,7 +581,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Active Power:</string>
+                <string>Potenza Attiva</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -637,7 +637,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Reactive Power:</string>
+                <string>Potenza Passiva</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -750,7 +750,7 @@
              </font>
             </property>
             <property name="title">
-             <string>Generators</string>
+             <string>Generatori</string>
             </property>
             <property name="flat">
              <bool>false</bool>
@@ -780,7 +780,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Active Power:</string>
+                <string>Potenza Attiva</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -836,7 +836,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Reactive Power:</string>
+                <string>Potenza Passiva</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -947,7 +947,7 @@
              </font>
             </property>
             <property name="title">
-             <string>Losses</string>
+             <string>Perdite di rete</string>
             </property>
             <layout class="QGridLayout" name="gridLayout">
              <item row="0" column="0">
@@ -974,7 +974,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Active Power:</string>
+                <string>Potenza Attiva</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1055,7 +1055,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Reactive Power:</string>
+                <string>Potenza Passiva</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
