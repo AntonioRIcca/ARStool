@@ -362,8 +362,8 @@ class Adeguatezza:
             'colors': {
                 0: 'yellow',
                 1: 'red',
-                2: 'blue',
-                3: 'black',
+                2: '#00ffdd',
+                3: 'white',
                 4: 'green',
             },
             'labels': {
@@ -466,7 +466,7 @@ class Adeguatezza:
                 1: LOLE_medio_anomalies_anno_MC,
             },
             'colors': {
-                0: 'blue',
+                0: 'green',
                 1: 'red',
             },
             'labels': {
@@ -567,7 +567,7 @@ class Adeguatezza:
                 1: EENS_medio_anomalies_anno_MC,
             },
             'colors': {
-                0: 'blue',
+                0: 'green',
                 1: 'red',
             },
             'labels': {

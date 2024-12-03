@@ -1163,11 +1163,11 @@ class Main:
     def optstor_create(self):
         from Functionalities.OptimalStorage.optimalStorage import OptStorWGT
 
-        # try:
-        #     self.ui.home_WGT.deleteLater()
-        # except:
-        #     self.home_WGT.deleteLater()
-        self.homeClear()
+        try:
+            self.ui.home_WGT.deleteLater()
+        except:
+            self.home_WGT.deleteLater()
+        # self.homeClear()
 
         self.optStorWgt = OptStorWGT()
 
@@ -2009,21 +2009,25 @@ class Main:
         val2 = '%.2f' % self.av_lole_anom
         self.lole1LBL = QLabel('LOLE = ' + val1 + ' ore/anno')
         self.lole1LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
+                                    'border-top: 1px solid white;'
                                     # 'border: solid; border-width: 1 px; '
                                     # 'border-color: rgb(255, 255, 255); '
                                     # 'border-radius: 10 px;'
-                                    'color: rgb(0, 0, 255);'
-                                    'background-color: rgb(255, 255, 255)')
+                                    'color: rgb(0, 255, 0);'
+                                    # 'background-color: rgb(255, 255, 255)'
+                                    )
         self.lole1LBL.setMinimumHeight(15)
         self.lole1LBL.setAlignment(QtCore.Qt.AlignCenter)
 
         self.lole2LBL = QLabel('LOLE = ' + val2 + ' ore/anno')
         self.lole2LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
+                                    'border-bottom: 1px solid white;'
                                     # 'border: solid; border-width: 1 px; '
                                     # 'border-color: rgb(255, 255, 255); '
                                     # 'border-radius: 10 px;'
                                     'color: rgb(255, 0, 0);'
-                                    'background-color: rgb(255, 255, 255)')
+                                    # 'background-color: rgb(255, 255, 255)'
+                                    )
         self.lole2LBL.setMinimumHeight(15)
         self.lole2LBL.setAlignment(QtCore.Qt.AlignCenter)
 
@@ -2047,23 +2051,27 @@ class Main:
 
         val1 = '%.5f' % self.av_eens_furn_rel
         val2 = '%.5f' % self.av_eens_anom
-        self.eens1LBL = QLabel('EENS = ' + val1 + 'kWh')
+        self.eens1LBL = QLabel('EENS = %.4f kWh' % self.av_eens_furn_rel)
         self.eens1LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
                                     # 'border: solid; border-width: 1 px; '
                                     # 'border-color: rgb(255, 255, 255); '
                                     # 'border-radius: 10 px;'
-                                    'color: rgb(0, 0, 255);'
-                                    'background-color: rgb(255, 255, 255)')
+                                    'border-top: 1px solid white;'
+                                    'color: rgb(0, 255, 0);'
+                                    # 'background-color: rgb(255, 255, 255)'
+                                    )
         self.eens1LBL.setMinimumHeight(15)
         self.eens1LBL.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.eens2LBL = QLabel('EENS = ' + val2 + 'kWh')
+        self.eens2LBL = QLabel('EENS =  %.4f kWh' % self.av_eens_anom)
         self.eens2LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
                                     # 'border: solid; border-width: 1 px; '
                                     # 'border-color: rgb(255, 255, 255); '
                                     # 'border-radius: 10 px;'
+                                    'border-bottom: 1px solid white;'
                                     'color: rgb(255, 0, 0);'
-                                    'background-color: rgb(255, 255, 255)')
+                                    # 'background-color: rgb(255, 255, 255)'
+                                    )
         self.eens2LBL.setMinimumHeight(15)
         self.eens2LBL.setAlignment(QtCore.Qt.AlignCenter)
 
@@ -2101,14 +2109,22 @@ class Main:
             ax.set_position([box.x0 + box.width * 0.15, box.y0 + box.height * 0.25, box.width * 0.9, box.height * 0.85])
             ax.set_xticks(list(range(10)))
 
-        ax.set_xlabel(data['x-axis'], fontsize=10)
-        ax.set_ylabel(data['y-axis'], fontsize=10)
+        for side in ['bottom', 'top', 'right', 'left']:
+            ax.spines[side].set_color('white')
+        ax.tick_params(colors='white')
+        # ax.xaxis.label.set_color('white')
+
+        #  -- TODO: PROVA -------------------------------------------------
+        # ax.setTitleBrush(QtGui.QColor(255, 255, 255))
+
+        ax.set_xlabel(data['x-axis'], fontsize=10, color='white')
+        ax.set_ylabel(data['y-axis'], fontsize=10, color='white')
         ax.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.2), fancybox=True, shadow=True, ncol=col,
-                  fontsize=8)
+                  fontsize=8, labelcolor='white')
 
         filename = mainpath + '/Functionalities/Adequacy/__images__/' + str(fig) + '.png'
         # print(filename)
-        figure.savefig(filename)
+        figure.savefig(filename, transparent=True)
         pass
 
     def homeClear(self):
