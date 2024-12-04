@@ -31,7 +31,6 @@ class OpenDSS:
     def open(self, filename):
         self.dss = py_dss_interface.DSS(r"C:\Program Files\OpenDSS")
         # TODO: da sostituire con la variabile di configurazione del percorso di OpenDSS
-
         self.dss.text(f"compile [{filename}]")
         # txt =
         self.dss.text(f"Save Circuit dir=" + mainpath + "/cartella")     # scrittura della cartella degli elementi
@@ -85,7 +84,6 @@ class OpenDSS:
                 # print(self.dss.meters.all_pce_in_zone)
                 # print(self.dss.meters.all_branches_in_zone)
                 # print()
-
 
     def read_new(self, el):
         mcat = mcat_find(el)
@@ -1218,7 +1216,6 @@ class OpenDSS:
             for p in new_par_dict[cat]['top'].keys():
                 params = params + new_par_dict[cat]['top'][p]['label']
             # -----------------------------------------------------------------------------
-
             file = open(mainpath + '/cartella/' + mcat + '.dss', 'r')
             # file = open(mainpath + '/cartella/' + mcat + '.dss', 'r')
 

@@ -1,0 +1,20 @@
+Clear 
+New Circuit.ReteTest basekV=150.000000 pu=1 MVAsc1=10000000 MVAsc3=10000000 bus1=Sourcebus phases=3 
+
+Set DefaultBaseFrequency=50 
+Set normvmaxpu=1.05 
+Set normvminpu=0.95 
+Set emergvmaxpu=1.1 
+Set emergvminpu=0.9 
+
+
+Redirect Transformers.dss 
+Redirect Lines.dss 
+Redirect Loads.dss
+Redirect PV.dss
+Redirect Storage.dss
+
+Set voltagebases=[150.000000  20.000000]
+Calcvoltagebases 
+
+Solve 

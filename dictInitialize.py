@@ -20,6 +20,7 @@ def dict_initialize(el, cat):
     rel_initialize(el)
     if cat in ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'AC-BESS', 'DC-BESS', ]:
         anom_initialize(el)
+    onr_initialize(el)
 
 
 # Inizializzazione del sottodizionario del profilo dei parametri ("Par") per l'elemento "el"
@@ -33,7 +34,6 @@ def profile_initialize(el):
 # Inizializzazione del sottodizionario rella Reliability ("rel") per l'elemento "el"
 def rel_initialize(el):
     v[el]['rel']['par'] = dict()
-    print(el)
     for p in ['t_preg', 'Pi_E', 'Pi_Q', 'alfa', 'beta']:
         #v[el]['rel']['par'][p] = None
         v[el]['rel']['par'][p] = attr_dict[v[el]['category']]['reliability'][p]
@@ -59,3 +59,30 @@ def lf_initialize(el):
     else:
         for p in params:
             v[el]['lf'][p] = []
+
+def onr_initialize(el):
+    v[el]['ONR'] = {
+        'lf_pre': {},
+        'lf_post': {},
+        'par': {'zone': None}
+    }
+
+    if v[el]['category'] in mc['Load']:
+        v[el]['ONR']['par']['numcust'] = 1
+    # elif v[el]['category'] in mc['Generator'] + mc['Vsource']:
+    #     v[el]['ONR']['par']['numcust'] = 1
+    #     v[el]['ONR']['par']['lambda'] = 0.1
+    #     v[el]['ONR']['par']['mu'] = 3
+    else:
+        v[el]['ONR']['par']['lambda'] = 0.1
+        v[el]['ONR']['par']['mu'] = 3
+
+    for sd in ['lf_pre', 'lf_post']:
+        for p in ['i', 'v', 'p', 'q']:
+            if v[el]['category'] in mc['Line'] + mc['Transformer']:
+                v[el]['ONR'][sd][p] = {
+                    0: 0,
+                    1: 0,
+                }
+            else:
+                v[el]['ONR'][sd][p] = 0

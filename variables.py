@@ -109,7 +109,7 @@ mc = {
     'GrowthShape': [],
     'TCC_Curve': [],
     'Spectrum': [],
-    'Line': ['AC-Line', 'DC-Line'],
+    'Line': ['AC-Line', 'DC-Line', 'Switch'],
     'Load': ['AC-Load', 'DC-Load'],
     'Transformer': ['2W-Transformer', 'PWM', 'DC-DC-Converter'],
     'Generator': ['AC-PV', 'DC-PV', 'AC-Wind', 'DC-Wind', 'Diesel-Motor', 'Turbine', 'AC-BESS', 'DC-BESS'],
@@ -189,7 +189,8 @@ dsstag = {
         'line': 'AC-Line',
         'ac-line': 'AC-Line',
         'dc-line': 'DC-Line',
-        'switch': 'Switch',
+        's': 'Switch',
+        'm': 'Switch',
     },
 
 }
@@ -684,6 +685,29 @@ new_par_dict = {
         },
     },
 
+    'Switch': {
+        'top': {
+            'conn': {
+                'label': ['bus1', 'bus2', ],
+            },
+        },
+        'par': {
+            'others': {
+                'Season': '1',
+                'Ratings': '[400,]',
+                'emergamps': '600',
+                'normamps': '1000',
+                'length': '0.01',
+                'R1': '0',
+                'X1': '1e-9',
+                'B1': '1e-9',
+                'R0': '0',
+                'X0': '1e-9',
+                'B0': '1e-9',
+            },
+        },
+    },
+
     'ExternalGrid': {
         'top': {
             'conn': {
@@ -891,6 +915,7 @@ el_format = {
         'X1': {'min': 0, 'max': 999.99999, 'decimal': 5, 'unit': 'Ohm', 'default': 0},
         'length': {'min': 0, 'max': 9999.999, 'decimal': 3, 'unit': 'Km', 'default': 1},
     },
+    'Switch': {},
     '2W-Transformer': {
         'Sr': {'min': 0.001, 'max': 99999.9, 'decimal': 1, 'unit': 'kVA', 'default': 1000},
         # 'Vn0': {'min': 0, 'max': 999.999, 'decimal': 3, 'unit': 'kV'},

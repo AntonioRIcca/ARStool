@@ -527,6 +527,42 @@ DC-Line:
     Vn: 0
     results: {}
 
+Switch:
+  category: 'AC-Line'
+  conn: [ ]
+  parameters:
+    length: 0                                   # lunghezza della linea [m]
+    lines: 0                                    # Numero di linee in parallelo
+    R1: 0                                       # Positive sequence resistance [Ohm/km]
+    X1: 0                                       # Positive sequence reactance [Ohm/km]
+    B1: 0                                       # Positive sequence admittance [micro_S/km]
+    R0: 0                                       # Zero sequence resistance [Ohm/km]
+    X0: 0                                       # Zero sequence reactance [Ohm/km]
+    B0: 0                                       # Zero sequence admittancve [micro_S/km]
+    Irmax: 0                                    # maximum rated current [A]
+    Ur: 0                                       # tensione nominale [kV]
+  results: {}
+  reliability:      # dizionario dei parametri necessari al calcolo della reliability (in definizione)
+      t_preg: 135000                            # Ore di funzionamento pregresso
+      T0: 30
+      alfa: 438000
+      beta: 3
+      Pi_E: 1
+      Pi_Q: 2
+      results:
+        lambda: 0
+        MTBF_ore: 0
+        MTBF_anni: 0
+        R: 0
+  ems:
+    in: ''
+    out: ''
+    cap_pwr: 0
+    max_outin: 1
+    max_inout: 1
+    etaoutin: 1
+    etainout: 1
+
 AC-Node:
   category: 'AC-Node'
   conn: [ ]

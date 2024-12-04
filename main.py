@@ -6,6 +6,7 @@ import datetime as dt
 import os.path
 from functools import partial
 import xlsxwriter
+from requests import utils
 
 from PySide2 import QtGui, QtCore, QtWidgets
 
@@ -335,7 +336,6 @@ class Main:
             # TODO: da eliminare
             self.dss.open(filename)
             self.elementsTableWgtCreate()
-            # self.func_enabled()
             self.func_check()
             grid['name'] = filename.split('/')[len(filename.split('/')) - 1].removesuffix('.dss')
 
@@ -1425,6 +1425,8 @@ class Main:
         # a.insertWidget()
 
         #  TODO: Mostrare i risultati, se disponibili
+        if grid['studies']['anom']:
+            self.anomRun()
 
     def anomRun(self):
         # print('run LCA')
@@ -1614,6 +1616,9 @@ class Main:
         # self.homeHBL = QHBoxLayout()
         # self.homeHBL.setContentsMargins(0, 0, 0, 0)
         # self.home2_WGT.setLayout(self.homeHBL)
+
+        if grid['studies']['rel']:
+            self.adeqRel()
 
         self.relRunPls = pb_create(text='   Avvia calcolo Affidabilità', height=50, font=14, border=2, radius=15,
                                    icon='reliability.png')
@@ -1864,6 +1869,9 @@ class Main:
         self.relAdeqPls.clicked.connect(self.adeqRun)
 
         variables.visualpar = 'rel'
+
+        if grid['studies']['adeq']:
+            self.adeqRes()
 
     def adeqRun(self):
         from Functionalities.Adequacy.Adeguatezza_V3 import Adeguatezza
