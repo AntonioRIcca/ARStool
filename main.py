@@ -130,6 +130,7 @@ class Main:
         self.ui.anom_Btn.clicked.connect(self.anomStart)
         self.ui.reliability_Btn.clicked.connect(self.relStart)
         self.ui.adequacy_Btn.clicked.connect(self.adeqStart)
+        self.ui.onr_Btn.clicked.connect(self.onrStart)
 
         self.app.exec_()
 
@@ -1426,7 +1427,7 @@ class Main:
 
         #  TODO: Mostrare i risultati, se disponibili
         if grid['studies']['anom']:
-            self.anomRun()
+            self.anomRes()
 
     def anomRun(self):
         # print('run LCA')
@@ -1618,7 +1619,7 @@ class Main:
         # self.home2_WGT.setLayout(self.homeHBL)
 
         if grid['studies']['rel']:
-            self.adeqRel()
+            self.relRes()
 
         self.relRunPls = pb_create(text='   Avvia calcolo Affidabilità', height=50, font=14, border=2, radius=15,
                                    icon='reliability.png')
@@ -2135,6 +2136,177 @@ class Main:
         figure.savefig(filename, transparent=True)
         pass
 
+    def onrStart(self):
+        if self.myform.ui.verticalLayout.count() > 2:
+            for i in range(2, self.myform.ui.verticalLayout.count()):
+                self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
+
+        variables.visualpar = 'onr'
+
+        onrRunPls = pb_create(text='   Avvia Optimal Network Recongiguration', height=50, font=14, border=2, radius=15,
+                              icon='anomaly.png')
+
+        self.myform.ui.verticalLayout.insertWidget(2, onrRunPls)
+        onrRunPls.clicked.connect(self.onrRun)
+
+        w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
+        ratio = 1.5
+        folder = mainpath + '/Functionalities/ONR/__images__/'
+
+        self.homeClear()
+        # -- Visualizzazione del Grafo nodale radiale e zonale -----
+
+        self.onrResTabW = QTabWidget(self.home_WGT)
+        # self.onrRes1MainWgt = QWidget()
+        # self.onrRes1MainHL = QHBoxLayout()
+        # self.onrRes1MainWgt.setLayout(self.onrRes1MainHL)
+        # # self.onrRes1MainVL.setContentsMargins(0, 0, 0, 0)
+        #
+        self.homeHBL.addWidget(self.onrResTabW)
+        # self.onrResTabW.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+        #
+        # self.onrResTabW.addTab(self.onrRes1MainWgt, 'None')
+
+        # self.onrResTabW.setWindowOpacity(0)
+        self.onrResTabW.setStyleSheet('background-color: rgb(15, 15, 15);'
+                                      'border-color: rgb(15, 15, 15); ')
+
+
+
+
+        #
+        # # Widget Sinistro
+        # self.home2_WGT = QWidget()
+        # self.home2_WGT.setMinimumWidth(w_max * (ratio / (ratio + 1)))
+        # self.home2_WGT.setMaximumWidth(w_max * (ratio / (ratio + 1)))
+        # self.onr1ResWgtVBL = QVBoxLayout()
+        # self.onr1ResWgtVBL.setSpacing(20)
+        # self.home2_WGT.setLayout(self.onr1ResWgtVBL)
+        # self.onrRes1MainHL.addWidget(self.home2_WGT)
+        #
+        # self.onr1ResLbl = QLabel('Grafo nodale zonale')
+        # self.onr1ResLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
+        #                              'border: solid; border-width: 1 px; '
+        #                              'border-color: rgb(255, 255, 255); '
+        #                              'border-radius: 10 px;')
+        # self.onr1ResLbl.setAlignment(QtCore.Qt.AlignCenter)
+        # self.onr1ResLbl.setMinimumHeight(30)
+        # self.onr1ResLbl.setMaximumHeight(30)
+        # self.onr1ResWgtVBL.addWidget(self.onr1ResLbl)
+        #
+        #
+        # self.onrRefreshPls = QPushButton()
+        # self.onrRefreshPls.setText('Aggiorna vista')
+        # self.onrRefreshPls.setStyleSheet('QPushButton, QDoubleSpinBox {'
+        #                                  'color: rgb(255, 255, 255);background-color: rgb(0, 0, 0); '
+        #                                  'border: solid;border-width: 1px; border-radius: 5px; '
+        #                                  'border-color: rgb(127, 127, 127)}'
+        #                                  'QPushButton:pressed {background-color: rgb(64, 64, 64); '
+        #                                  'border-style: inset}')
+        # self.onrRefreshPls.setMinimumHeight(40)
+        # self.onrRefreshPls.setMaximumHeight(40)
+        # self.onrRefreshPls.clicked.connect(self.onrStart)
+        #
+        # self.onr1FigLbl = QLabel()
+        # self.onr1ResWgtVBL.addWidget(self.onr1FigLbl)
+        # self.onr1FigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale.png').scaledToWidth(w_max *
+        #                                                                                    (ratio / (ratio + 1))))
+        #
+        # z0_n = 23
+        # z0_b = 33
+        # z0_conn = True
+        # zsm_n = 23
+        # zsm_b = 33
+        # zsm_conn = True
+        # rsm_n = 105
+        # rsm_b = 104
+        # rsm_conn = True
+        #
+        # z0_txt = ''
+        # if not z0_conn:
+        #     z0_txt = 'non '
+        #
+        # zsm_txt = ''
+        # if not zsm_conn:
+        #     zsm_txt = 'non '
+        #
+        # rsm_txt = ''
+        # if not zsm_conn:
+        #     rsm_txt = 'non '
+        #
+        # z_log = (('Il grafo zonale della rete ha %d nodi e %d rami connessi.\n' % (z0_n, z0_b)) +
+        #          'La rete zonale ' + z0_txt + 'è inizialmente connessa.\n\n' +
+        #          ('Il grafo della rete senza maglie ha %d nodi e %d rami connessi.\n' % (rsm_n, rsm_b)) +
+        #          'La rete zonale ' + rsm_txt + 'è inizialmente connessa.\n\n' +
+        #          ('Il grafo della rete zonale senza maglie ha %d nodi e %d rami connessi.\n' % (zsm_n, zsm_b)) +
+        #          'La rete zonale smagliata ' + zsm_txt + 'è connessa.')
+        #
+        # # b = 0.98
+        # # c = 9.34
+        # # a = 'ufwepjn %d e %.2f' % (b, c)
+        #
+        # self.onr1LogLbl = QLabel(z_log)
+        #
+        # self.onr1LogLbl.setStyleSheet('font: 75 11pt "MS Shell Dlg 2"; '
+        #                               'border: solid; border-width: 1 px; '
+        #                               'border-color: rgb(255, 255, 255); '
+        #                               'background-color: rgb(0, 0, 0); '
+        #                               )
+        # self.onr1LogLbl.setWindowOpacity(0.1)
+        # self.onr1LogLbl.setMinimumHeight(160)
+        # self.onr1LogLbl.setMaximumHeight(160)
+        # self.onr1ResWgtVBL.addWidget(self.onr1LogLbl)
+        #
+        #
+        # self.onr1resSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        # self.onr1ResWgtVBL.addItem(self.onr1resSpc)
+        #
+        # # Widget destro
+        # self.home3_WGT = QWidget()
+        # self.home3_WGT.setMinimumWidth(w_max * (1 / (ratio + 1)))
+        # self.home3_WGT.setMaximumWidth(w_max * (1 / (ratio + 1)))
+        # self.onr2ResWgtVBL = QVBoxLayout()
+        # self.onr2ResWgtVBL.setSpacing(20)
+        # self.home3_WGT.setLayout(self.onr2ResWgtVBL)
+        # self.onrRes1MainHL.addWidget(self.home3_WGT)
+        #
+        # self.onr2ResLbl = QLabel('Grafo nodale radiale')
+        # self.onr2ResLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
+        #                                   'border: solid; border-width: 1 px; '
+        #                                   'border-color: rgb(255, 255, 255); '
+        #                                   'border-radius: 10 px;')
+        # self.onr2ResLbl.setAlignment(QtCore.Qt.AlignCenter)
+        # self.onr2ResLbl.setMinimumHeight(30)
+        # self.onr2ResLbl.setMaximumHeight(30)
+        # self.onr2ResWgtVBL.addWidget(self.onr2ResLbl)
+        #
+        # self.onr2FigLbl = QLabel()
+        # self.onr2ResWgtVBL.addWidget(self.onr2FigLbl)
+        # self.onr2FigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_zonale.png').scaledToWidth(w_max *
+        #                                                                                    (1 / (ratio + 1))))
+        #
+        # self.onr2resSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        # self.onr2ResWgtVBL.addItem(self.onr2resSpc)
+
+
+
+
+
+
+        # self.home_Hsp = QSpacerItem(10, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        # self.homeHBL.addItem(self.home_Hsp)
+
+
+        #  TODO: Mostrare i risultati, se disponibili
+        if grid['studies']['onr']:
+            self.onrRes()
+
+    def onrRun(self):
+        pass
+
+    def onrRes(self):
+        pass
+
     def homeClear(self):
         if self.homeHBL.count() > 1:
             for i in range(1, self.homeHBL.count()):
@@ -2142,6 +2314,7 @@ class Main:
                     self.homeHBL.itemAt(i).widget().deleteLater()
                 except AttributeError:
                     self.homeHBL.removeItem(self.homeHBL.itemAt(i))
+
 
 class LFrWGT(QMainWindow):
     def __init__(self):

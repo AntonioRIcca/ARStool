@@ -21,6 +21,7 @@ def grid_initialize():
             'rel': False,
             'adeq': False,
             'optstor': False,
+            'onr': False,
         },
         'profile': {
             'points': None,
