@@ -2149,153 +2149,368 @@ class Main:
         self.myform.ui.verticalLayout.insertWidget(2, onrRunPls)
         onrRunPls.clicked.connect(self.onrRun)
 
+
+        self.homeClear()
+        # -- Inizializzazione della schermata degli output -----
+        self.onrResMainWgt = QWidget()
+        self.onrMainVBL = QVBoxLayout(self.onrResMainWgt)
+        self.homeHBL.addWidget(self.onrResMainWgt)
+        self.onrMainVBL.setContentsMargins(0, 0, 0, 0)
+
+        self.onrResTopWgt = QWidget()
+        self.onrResTopHBL = QHBoxLayout(self.onrResTopWgt)
+        onrLbl = QLabel('Optimal Network Reconfiguration')
+        onrLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; ')
+        self.onrResTopHBL.addWidget(onrLbl)
+
+        onrTopSpc = QSpacerItem(20, 20, QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+        self.onrResTopHBL.addItem(onrTopSpc)
+
+        self.onrMainVBL.addWidget(self.onrResTopWgt)
+
+        self.onrBottomSpc = QSpacerItem(10, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.homeHBL.addItem(self.onrBottomSpc)
+
+        self.onrPrelOutput()
+
+    def onrPrelOutput(self):
+        # Creazione Widget iniziale
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
         ratio = 1.5
         folder = mainpath + '/Functionalities/ONR/__images__/'
 
-        self.homeClear()
-        # -- Visualizzazione del Grafo nodale radiale e zonale -----
+        onr1MainWgt = QWidget()
+        onr1MainHBL = QHBoxLayout(onr1MainWgt)
+        onr1MainHBL.setContentsMargins(0, 0, 0, 0)
+        self.onrMainVBL.addWidget(onr1MainWgt)
 
-        self.onrResTabW = QTabWidget(self.home_WGT)
-        # self.onrRes1MainWgt = QWidget()
-        # self.onrRes1MainHL = QHBoxLayout()
-        # self.onrRes1MainWgt.setLayout(self.onrRes1MainHL)
-        # # self.onrRes1MainVL.setContentsMargins(0, 0, 0, 0)
-        #
-        self.homeHBL.addWidget(self.onrResTabW)
-        # self.onrResTabW.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-        #
-        # self.onrResTabW.addTab(self.onrRes1MainWgt, 'None')
+        # Widget Sinistro
+        onr1SxWgt = QWidget()
+        onr1SxWgt.setMinimumWidth(w_max * (ratio / (ratio + 1)))
+        onr1SxWgt.setMaximumWidth(w_max * (ratio / (ratio + 1)))
+        onr1SxVBL = QVBoxLayout(onr1SxWgt)
+        onr1SxVBL.setContentsMargins(0, 0, 0, 0)
+        onr1SxVBL.setSpacing(20)
+        onr1MainHBL.addWidget(onr1SxWgt)
 
-        # self.onrResTabW.setWindowOpacity(0)
-        self.onrResTabW.setStyleSheet('background-color: rgb(15, 15, 15);'
-                                      'border-color: rgb(15, 15, 15); ')
-
-
-
-
-        #
-        # # Widget Sinistro
-        # self.home2_WGT = QWidget()
-        # self.home2_WGT.setMinimumWidth(w_max * (ratio / (ratio + 1)))
-        # self.home2_WGT.setMaximumWidth(w_max * (ratio / (ratio + 1)))
-        # self.onr1ResWgtVBL = QVBoxLayout()
-        # self.onr1ResWgtVBL.setSpacing(20)
-        # self.home2_WGT.setLayout(self.onr1ResWgtVBL)
-        # self.onrRes1MainHL.addWidget(self.home2_WGT)
-        #
-        # self.onr1ResLbl = QLabel('Grafo nodale zonale')
-        # self.onr1ResLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
-        #                              'border: solid; border-width: 1 px; '
-        #                              'border-color: rgb(255, 255, 255); '
-        #                              'border-radius: 10 px;')
-        # self.onr1ResLbl.setAlignment(QtCore.Qt.AlignCenter)
-        # self.onr1ResLbl.setMinimumHeight(30)
-        # self.onr1ResLbl.setMaximumHeight(30)
-        # self.onr1ResWgtVBL.addWidget(self.onr1ResLbl)
-        #
-        #
-        # self.onrRefreshPls = QPushButton()
-        # self.onrRefreshPls.setText('Aggiorna vista')
-        # self.onrRefreshPls.setStyleSheet('QPushButton, QDoubleSpinBox {'
-        #                                  'color: rgb(255, 255, 255);background-color: rgb(0, 0, 0); '
-        #                                  'border: solid;border-width: 1px; border-radius: 5px; '
-        #                                  'border-color: rgb(127, 127, 127)}'
-        #                                  'QPushButton:pressed {background-color: rgb(64, 64, 64); '
-        #                                  'border-style: inset}')
-        # self.onrRefreshPls.setMinimumHeight(40)
-        # self.onrRefreshPls.setMaximumHeight(40)
-        # self.onrRefreshPls.clicked.connect(self.onrStart)
-        #
-        # self.onr1FigLbl = QLabel()
-        # self.onr1ResWgtVBL.addWidget(self.onr1FigLbl)
-        # self.onr1FigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale.png').scaledToWidth(w_max *
-        #                                                                                    (ratio / (ratio + 1))))
-        #
-        # z0_n = 23
-        # z0_b = 33
-        # z0_conn = True
-        # zsm_n = 23
-        # zsm_b = 33
-        # zsm_conn = True
-        # rsm_n = 105
-        # rsm_b = 104
-        # rsm_conn = True
-        #
-        # z0_txt = ''
-        # if not z0_conn:
-        #     z0_txt = 'non '
-        #
-        # zsm_txt = ''
-        # if not zsm_conn:
-        #     zsm_txt = 'non '
-        #
-        # rsm_txt = ''
-        # if not zsm_conn:
-        #     rsm_txt = 'non '
-        #
-        # z_log = (('Il grafo zonale della rete ha %d nodi e %d rami connessi.\n' % (z0_n, z0_b)) +
-        #          'La rete zonale ' + z0_txt + 'è inizialmente connessa.\n\n' +
-        #          ('Il grafo della rete senza maglie ha %d nodi e %d rami connessi.\n' % (rsm_n, rsm_b)) +
-        #          'La rete zonale ' + rsm_txt + 'è inizialmente connessa.\n\n' +
-        #          ('Il grafo della rete zonale senza maglie ha %d nodi e %d rami connessi.\n' % (zsm_n, zsm_b)) +
-        #          'La rete zonale smagliata ' + zsm_txt + 'è connessa.')
-        #
-        # # b = 0.98
-        # # c = 9.34
-        # # a = 'ufwepjn %d e %.2f' % (b, c)
-        #
-        # self.onr1LogLbl = QLabel(z_log)
-        #
-        # self.onr1LogLbl.setStyleSheet('font: 75 11pt "MS Shell Dlg 2"; '
-        #                               'border: solid; border-width: 1 px; '
-        #                               'border-color: rgb(255, 255, 255); '
-        #                               'background-color: rgb(0, 0, 0); '
-        #                               )
-        # self.onr1LogLbl.setWindowOpacity(0.1)
-        # self.onr1LogLbl.setMinimumHeight(160)
-        # self.onr1LogLbl.setMaximumHeight(160)
-        # self.onr1ResWgtVBL.addWidget(self.onr1LogLbl)
-        #
-        #
-        # self.onr1resSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        # self.onr1ResWgtVBL.addItem(self.onr1resSpc)
-        #
-        # # Widget destro
-        # self.home3_WGT = QWidget()
-        # self.home3_WGT.setMinimumWidth(w_max * (1 / (ratio + 1)))
-        # self.home3_WGT.setMaximumWidth(w_max * (1 / (ratio + 1)))
-        # self.onr2ResWgtVBL = QVBoxLayout()
-        # self.onr2ResWgtVBL.setSpacing(20)
-        # self.home3_WGT.setLayout(self.onr2ResWgtVBL)
-        # self.onrRes1MainHL.addWidget(self.home3_WGT)
-        #
-        # self.onr2ResLbl = QLabel('Grafo nodale radiale')
-        # self.onr2ResLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
-        #                                   'border: solid; border-width: 1 px; '
-        #                                   'border-color: rgb(255, 255, 255); '
-        #                                   'border-radius: 10 px;')
-        # self.onr2ResLbl.setAlignment(QtCore.Qt.AlignCenter)
-        # self.onr2ResLbl.setMinimumHeight(30)
-        # self.onr2ResLbl.setMaximumHeight(30)
-        # self.onr2ResWgtVBL.addWidget(self.onr2ResLbl)
-        #
-        # self.onr2FigLbl = QLabel()
-        # self.onr2ResWgtVBL.addWidget(self.onr2FigLbl)
-        # self.onr2FigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_zonale.png').scaledToWidth(w_max *
-        #                                                                                    (1 / (ratio + 1))))
-        #
-        # self.onr2resSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        # self.onr2ResWgtVBL.addItem(self.onr2resSpc)
+        onr1SxLbl = QLabel('Grafo nodale zonale')
+        onr1SxLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
+                                'border: solid; border-width: 1 px; '
+                                'border-color: rgb(255, 255, 255); '
+                                'border-radius: 10 px;')
+        onr1SxLbl.setAlignment(QtCore.Qt.AlignCenter)
+        onr1SxLbl.setMinimumHeight(30)
+        onr1SxLbl.setMaximumHeight(30)
+        onr1SxVBL.addWidget(onr1SxLbl)
 
 
+        onr1RefreshPls = QPushButton()
+        onr1RefreshPls.setText('Aggiorna vista')
+        onr1RefreshPls.setStyleSheet('QPushButton, QDoubleSpinBox {'
+                                     'color: rgb(255, 255, 255);background-color: rgb(0, 0, 0); '
+                                     'border: solid;border-width: 1px; border-radius: 5px; '
+                                     'border-color: rgb(127, 127, 127)}'
+                                     'QPushButton:pressed {background-color: rgb(64, 64, 64); '
+                                     'border-style: inset}')
+        onr1RefreshPls.setMinimumHeight(40)
+        onr1RefreshPls.setMaximumHeight(40)
+        onr1RefreshPls.clicked.connect(self.onrStart)
 
+        onr1SxFigLbl = QLabel()
+        onr1SxVBL.addWidget(onr1SxFigLbl)
+        onr1SxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale.png').scaledToWidth(w_max *
+                                                                                        (ratio / (ratio + 1))))
 
+        z0_n = 23
+        z0_b = 33
+        z0_conn = True
+        zsm_n = 23
+        zsm_b = 33
+        zsm_conn = True
+        rsm_n = 105
+        rsm_b = 104
+        rsm_conn = True
 
+        z0_txt = ''
+        if not z0_conn:
+            z0_txt = 'non '
 
-        # self.home_Hsp = QSpacerItem(10, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        # self.homeHBL.addItem(self.home_Hsp)
+        zsm_txt = ''
+        if not zsm_conn:
+            zsm_txt = 'non '
 
+        rsm_txt = ''
+        if not zsm_conn:
+            rsm_txt = 'non '
+
+        z_log = (('Il grafo zonale della rete ha %d nodi e %d rami connessi.\n' % (z0_n, z0_b)) +
+                 'La rete zonale ' + z0_txt + 'è inizialmente connessa.\n\n' +
+                 ('Il grafo della rete senza maglie ha %d nodi e %d rami connessi.\n' % (rsm_n, rsm_b)) +
+                 'La rete zonale ' + rsm_txt + 'è inizialmente connessa.\n\n' +
+                 ('Il grafo della rete zonale senza maglie ha %d nodi e %d rami connessi.\n' % (zsm_n, zsm_b)) +
+                 'La rete zonale smagliata ' + zsm_txt + 'è connessa.')
+
+        # b = 0.98
+        # c = 9.34
+        # a = 'ufwepjn %d e %.2f' % (b, c)
+
+        onr1LogLbl = QLabel(z_log)
+
+        onr1LogLbl.setStyleSheet('font: 75 11pt "MS Shell Dlg 2"; '
+                                      'border: solid; border-width: 1 px; '
+                                      'border-color: rgb(255, 255, 255); '
+                                      'background-color: rgb(0, 0, 0); '
+                                      )
+        onr1LogLbl.setWindowOpacity(0.1)
+        onr1LogLbl.setMinimumHeight(160)
+        onr1LogLbl.setMaximumHeight(160)
+        onr1SxVBL.addWidget(onr1LogLbl)
+
+        onr1SxSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        onr1SxVBL.addItem(onr1SxSpc)
+
+        # Widget destro
+        onr1DxWgt = QWidget()
+        onr1DxWgt.setMinimumWidth(w_max * (1 / (ratio + 1)))
+        onr1DxWgt.setMaximumWidth(w_max * (1 / (ratio + 1)))
+        onr1DxVBL = QVBoxLayout(onr1DxWgt)
+        onr1DxVBL.setContentsMargins(0, 0, 0, 0)
+        onr1DxVBL.setSpacing(20)
+        onr1MainHBL.addWidget(onr1DxWgt)
+
+        onr1DxLbl = QLabel('Grafo nodale radiale')
+        onr1DxLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
+                                'border: solid; border-width: 1 px; '
+                                'border-color: rgb(255, 255, 255); '
+                                'border-radius: 10 px;')
+        onr1DxLbl.setAlignment(QtCore.Qt.AlignCenter)
+        onr1DxLbl.setMinimumHeight(30)
+        onr1DxLbl.setMaximumHeight(30)
+        onr1DxVBL.addWidget(onr1DxLbl)
+
+        onr1DxFigLbl = QLabel()
+        onr1DxVBL.addWidget(onr1DxFigLbl)
+        onr1DxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_zonale.png').scaledToWidth(w_max *
+                                                                                        (1 / (ratio + 1))))
+
+        onr1DxSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        onr1DxVBL.addItem(onr1DxSpc)
+
+        onrIndexPls = pb_create(text='Calcolo indici di Qualità', height=30, font=14, border=2, radius=10)
+        onrIndexPls.clicked.connect(self.onrIndexOutput)
+
+        onr1SxVBL.insertWidget(3, onrIndexPls)
+
+    def onrIndexOutput(self):
+        self.onrMainVBL.itemAt(1).widget().deleteLater()
+
+        # Creazione Widget Output Index
+        h_max = self.home_WGT.height() - 20
+        w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 340
+        ratio = 1
+        folder = mainpath + '/Functionalities/ONR/__images__/'
+
+        onr2MainWgt = QWidget()
+        onr2MainHBL = QHBoxLayout(onr2MainWgt)
+        onr2MainHBL.setContentsMargins(0, 0, 0, 0)
+        self.onrMainVBL.addWidget(onr2MainWgt)
+
+        # Widget Sinistro
+        onr2SxWgt = QWidget()
+        onr2SxWgt.setMinimumWidth(w_max * (ratio / (ratio + 1)))
+        onr2SxWgt.setMaximumWidth(w_max * (ratio / (ratio + 1)))
+        onr2SxVBL = QVBoxLayout(onr2SxWgt)
+        onr2SxVBL.setContentsMargins(0, 0, 0, 0)
+        onr2SxVBL.setSpacing(20)
+        onr2MainHBL.addWidget(onr2SxWgt)
+
+        onr2SxLbl = QLabel('Indici affidabilistici')
+        onr2SxLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
+                                'border: solid; border-width: 1 px; '
+                                'border-color: rgb(255, 255, 255); '
+                                # 'border-radius: 10 px;'
+                                )
+        onr2SxLbl.setAlignment(QtCore.Qt.AlignRight)
+        onr2SxLbl.setMinimumHeight(30)
+        onr2SxLbl.setMaximumHeight(30)
+        onr2SxVBL.addWidget(onr2SxLbl)
+
+        onr2RefreshPls = QPushButton()
+        onr2RefreshPls.setText('Aggiorna vista')
+        onr2RefreshPls.setStyleSheet('QPushButton, QDoubleSpinBox {'
+                                     'color: rgb(255, 255, 255);background-color: rgb(0, 0, 0); '
+                                     'border: solid;border-width: 1px; border-radius: 5px; '
+                                     'border-color: rgb(127, 127, 127)}'
+                                     'QPushButton:pressed {background-color: rgb(64, 64, 64); '
+                                     'border-style: inset}')
+        onr2RefreshPls.setMinimumHeight(40)
+        onr2RefreshPls.setMaximumHeight(40)
+        onr2RefreshPls.clicked.connect(self.onrStart)
+
+        onr2SxFig1Lbl = QLabel()
+        onr2SxVBL.addWidget(onr2SxFig1Lbl)
+        onr2SxFig1Lbl.setPixmap(QtGui.QPixmap(folder + 'EENS.png').scaledToWidth(w_max *
+                                                                                 (ratio / (ratio + 1))))
+        onr2SxFig2Lbl = QLabel()
+        onr2SxVBL.addWidget(onr2SxFig2Lbl)
+        onr2SxFig2Lbl.setPixmap(QtGui.QPixmap(folder + 'SAIFI.png').scaledToWidth(w_max *
+                                                                                  (ratio / (ratio + 1))))
+
+        onr2SxSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        onr2SxVBL.addItem(onr2SxSpc)
+
+        # Widget destro
+        onr2DxWgt = QWidget()
+        onr2DxWgt.setMinimumWidth(w_max * (1 / (ratio + 1)))
+        onr2DxWgt.setMaximumWidth(w_max * (1 / (ratio + 1)))
+        onr2DxVBL = QVBoxLayout(onr2DxWgt)
+        onr2DxVBL.setContentsMargins(0, 0, 0, 0)
+        onr2DxVBL.setSpacing(20)
+        onr2MainHBL.addWidget(onr2DxWgt)
+
+        onr2DxLbl = QLabel('topologia iniziale radiale')
+        onr2DxLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
+                                'border: solid; border-width: 1 px; '
+                                'border-color: rgb(255, 255, 255); '
+                                # 'border-radius: 10 px;'
+                                )
+        onr2DxLbl.setAlignment(QtCore.Qt.AlignLeft)
+        onr2DxLbl.setMinimumHeight(30)
+        onr2DxLbl.setMaximumHeight(30)
+        onr2DxVBL.addWidget(onr2DxLbl)
+
+        onr2DxFig1Lbl = QLabel()
+        onr2DxVBL.addWidget(onr2DxFig1Lbl)
+        onr2DxFig1Lbl.setPixmap(QtGui.QPixmap(folder + 'SAIDI.png').scaledToWidth(w_max *
+                                                                                 (1 / (ratio + 1))))
+        onr2DxFig2Lbl = QLabel()
+        onr2DxVBL.addWidget(onr2DxFig2Lbl)
+        onr2DxFig2Lbl.setPixmap(QtGui.QPixmap(folder + 'obj_funct.png').scaledToWidth(w_max *
+                                                                                 (1 / (ratio + 1))))
+
+        onr2DxSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        onr2DxVBL.addItem(onr2DxSpc)
+
+        # Widget Indici
+        indexes = {
+            'abs': {
+                'FRG': {
+                    'EENS': 70361.6025,
+                    'SAIDI': 6.4346,
+                    'SAIFI': 3.5758,
+                },
+                'FNC': {
+                    'EENS': 69788.4269,
+                    'SAIDI': 6.3820,
+                    'SAIFI': 2.5250,
+                },
+                'SFS': {
+                    'EENS': 69501.8389,
+                    'SAIDI': 6.3558,
+                    'SAIFI': 1.9995,
+                },
+            },
+            'norm': {
+                'FRG': {
+                    'EENS': 1,
+                    'SAIDI': 1,
+                    'SAIFI': 1,
+                },
+                'FNC': {
+                    'EENS': 0.9919,
+                    'SAIDI': 0.9918,
+                    'SAIFI': 0.7061,
+                },
+                'SFS': {
+                    'EENS': 0.9878,
+                    'SAIDI': 0.9878,
+                    'SAIFI': 0.5592,
+                },
+            },
+            'obj_funct': {
+                'FRG': {'F. Ob.': 1},
+                'FNC': {'F. Ob.': 0.8966},
+                'SFS': {'F. Ob.': 0.8449},
+            },
+        }
+
+        lWgt = 300
+        onr2IndexWgt = QWidget()
+        onr2IndexWgt.setMinimumWidth(lWgt)
+        onr2IndexWgt.setMaximumWidth(lWgt)
+        onr2IndexVBL = QVBoxLayout(onr2IndexWgt)
+        onr2IndexVBL.setContentsMargins(30, 0, 0, 0)
+        onr2IndexVBL.setSpacing(20)
+        onr2MainHBL.addWidget(onr2IndexWgt)
+
+        indexesLbl = ['Indici di Affidabilità allo stato iniziale',
+                    'Indici di Affidabilità allo stato iniziale normalizzato',
+                    'Funzione obiettivo allo stato iniziale']
+
+        font = QtGui.QFont()
+        font.setItalic(True)
+
+        iDict = dict()
+
+        wgt = 0
+        for t in indexes:
+            iDict[t] = dict()
+            iDict[t]['label'] = QLabel(indexesLbl[wgt])
+            iDict[t]['wgt'] = QWidget()
+            iDict[t]['grid'] = QGridLayout(iDict[t]['wgt'])
+            iDict[t]['grid'].setSpacing(0)
+
+            row = 0
+            null = QLabel('')
+            # null.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+            null.setStyleSheet('border-bottom: 1px solid white;'
+                               'border-right: 1px solid white;')
+            iDict[t]['grid'].addWidget(null, 0, 0)
+            col = 1
+            for i in indexes[t][list(indexes[t].keys())[0]]:
+                row_head = QLabel(i + ' ' )
+                row_head.setAlignment(QtCore.Qt.AlignRight)
+
+                row_head.setFont(font)
+                row_head.setMinimumWidth(70)
+                row_head.setMaximumWidth(70)
+                row_head.setMinimumHeight(20)
+                row_head.setMaximumWidth(20)
+                row_head.setStyleSheet('border-bottom: 1px solid white;')
+                iDict[t]['grid'].addWidget(row_head, row, col)
+                col += 1
+            null = QLabel('')
+            null.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+            iDict[t]['grid'].addWidget(null, 0, col)
+
+            row += 1
+
+            for m in indexes[t]:
+                iDict[t][m] = dict()
+
+                line_head = QLabel(m + ' ')
+                line_head.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
+                line_head.setFont(font)
+                line_head.setStyleSheet('border-right: 1px solid white;')
+                iDict[t]['grid'].addWidget(line_head, row, 0)
+
+                col = 1
+                for i in indexes[t][m]:
+                    iDict[t][m][i] = QLabel('%.4f' % indexes[t][m][i])
+                    iDict[t][m][i].setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
+                    iDict[t][m][i].setMinimumHeight(25)
+                    iDict[t][m][i].setMaximumHeight(25)
+                    iDict[t]['grid'].addWidget(iDict[t][m][i], row, col)
+                    col += 1
+                row += 1
+
+            onr2IndexVBL.addWidget(iDict[t]['label'])
+            onr2IndexVBL.addWidget(iDict[t]['wgt'])
+
+            wgt += 1
+
+        onr2IndexSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        onr2IndexVBL.addItem(onr2IndexSpc)
 
         #  TODO: Mostrare i risultati, se disponibili
         if grid['studies']['onr']:
