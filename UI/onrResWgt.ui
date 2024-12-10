@@ -92,7 +92,7 @@ QTabWidget::pane{
        <enum>QTabWidget::East</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="onr1TabWgt">
        <property name="styleSheet">
@@ -188,10 +188,12 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                  </size>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">background-color: rgb(0, 0, 0);
+                 <string notr="true">font: 10pt &quot;MS Shell Dlg 2&quot;;
+background-color: rgb(0, 0, 0);
 border-top: 1px solid  rgb(255, 255, 255);
 border-bottom: 1px solid  rgb(255, 255, 255);
-color: rgb(255, 255, 255);</string>
+color: rgb(255, 170, 0);
+</string>
                 </property>
                 <property name="text">
                  <string>TextLabel</string>
@@ -529,7 +531,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="onr2calcBtn">
+               <widget class="QPushButton" name="onr2calcPb">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -652,13 +654,13 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="onr2indWgt" native="true">
+            <widget class="QWidget" name="onr2indAbsWgt" native="true">
              <layout class="QGridLayout" name="onr2indGL">
               <property name="spacing">
                <number>0</number>
               </property>
               <item row="2" column="3">
-               <widget class="QLabel" name="onr2indFRGSAIFILbl">
+               <widget class="QLabel" name="onr2indAbsFRGSAIFILbl">
                 <property name="text">
                  <string>3.5784</string>
                 </property>
@@ -668,7 +670,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLabel" name="onr2indTitleEENSLbl">
+               <widget class="QLabel" name="onr2indAbsTitleEENSLbl">
                 <property name="minimumSize">
                  <size>
                   <width>70</width>
@@ -695,7 +697,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QLabel" name="onr2indNullLbl">
+               <widget class="QLabel" name="onr2indAbsNullLbl">
                 <property name="minimumSize">
                  <size>
                   <width>40</width>
@@ -718,7 +720,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
 border-right: 1px solid rgb(255, 170, 0);</string>
                 </property>
                 <property name="text">
-                 <string> </string>
+                 <string/>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -729,7 +731,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="2" column="2">
-               <widget class="QLabel" name="onr2indFRGSAIDILbl">
+               <widget class="QLabel" name="onr2indAbsFRGSAIDILbl">
                 <property name="text">
                  <string>6.4346</string>
                 </property>
@@ -739,7 +741,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="1" column="3">
-               <widget class="QLabel" name="onr2indTitleSAIFILbl">
+               <widget class="QLabel" name="onr2indAbsTitleSAIFILbl">
                 <property name="minimumSize">
                  <size>
                   <width>70</width>
@@ -766,7 +768,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="1" column="2">
-               <widget class="QLabel" name="onr2indTitleSAIDILbl">
+               <widget class="QLabel" name="onr2indAbsTitleSAIDILbl">
                 <property name="minimumSize">
                  <size>
                   <width>70</width>
@@ -793,7 +795,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="4" column="1">
-               <widget class="QLabel" name="onr2indFNCEENSLbl">
+               <widget class="QLabel" name="onr2indAbsFNCEENSLbl">
                 <property name="text">
                  <string>70361.6025</string>
                 </property>
@@ -803,7 +805,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="5" column="1">
-               <widget class="QLabel" name="onr2indSFSEENSLbl">
+               <widget class="QLabel" name="onr2indAbsSFSEENSLbl">
                 <property name="text">
                  <string>70361.6025</string>
                 </property>
@@ -813,7 +815,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="4" column="2">
-               <widget class="QLabel" name="onr2indFNCSAIDILbl">
+               <widget class="QLabel" name="onr2indAbsFNCSAIDILbl">
                 <property name="text">
                  <string>6.4346</string>
                 </property>
@@ -823,7 +825,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="5" column="3">
-               <widget class="QLabel" name="onr2indSFSSAIFILbl">
+               <widget class="QLabel" name="onr2indAbsSFSSAIFILbl">
                 <property name="text">
                  <string>70361.6025</string>
                 </property>
@@ -833,7 +835,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="5" column="2">
-               <widget class="QLabel" name="onr2indSFSSAIDILbl">
+               <widget class="QLabel" name="onr2indAbsSFSSAIDILbl">
                 <property name="text">
                  <string>6.4346</string>
                 </property>
@@ -843,7 +845,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="2" column="0">
-               <widget class="QLabel" name="onr2indFRGTitleLbl">
+               <widget class="QLabel" name="onr2indAbsFRGTitleLbl">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -876,7 +878,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="5" column="0">
-               <widget class="QLabel" name="onr2indSFSTitleLbl">
+               <widget class="QLabel" name="onr2indAbsSFSTitleLbl">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -909,7 +911,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="4" column="0">
-               <widget class="QLabel" name="onr2indFNCTitleLbl">
+               <widget class="QLabel" name="onr2indAbsFNCTitleLbl">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -942,7 +944,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="4" column="3">
-               <widget class="QLabel" name="onr2indFNCSAIFILbl">
+               <widget class="QLabel" name="onr2indAbsFNCSAIFILbl">
                 <property name="text">
                  <string>70361.6025</string>
                 </property>
@@ -952,7 +954,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QLabel" name="onr2indFRGEENSLbl">
+               <widget class="QLabel" name="onr2indAbsFRGEENSLbl">
                 <property name="text">
                  <string>70361.6025</string>
                 </property>
@@ -962,7 +964,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="1" column="4">
-               <spacer name="onr2indSpc">
+               <spacer name="onr2indAbsSpc">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -1339,7 +1341,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
 border-right: 1px solid rgb(255, 170, 0);</string>
                 </property>
                 <property name="text">
-                 <string> </string>
+                 <string/>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1402,13 +1404,13 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="onr2fobWgt" native="true">
+            <widget class="QWidget" name="onr2indFobWgt" native="true">
              <layout class="QGridLayout" name="onr2fobGL">
               <property name="spacing">
                <number>0</number>
               </property>
               <item row="3" column="0">
-               <widget class="QLabel" name="onr2fobFNCTitleLbl">
+               <widget class="QLabel" name="onr2indFobFNCTitleLbl">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -1441,7 +1443,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="2" column="0">
-               <widget class="QLabel" name="onr2fobFRGTitleLbl">
+               <widget class="QLabel" name="onr2indFobFRGTitleLbl">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -1474,7 +1476,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QLabel" name="onr2fobFNCEENSLbl">
+               <widget class="QLabel" name="onr2indFobFNCfobLbl">
                 <property name="text">
                  <string>70361.6025</string>
                 </property>
@@ -1484,7 +1486,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="4" column="1">
-               <widget class="QLabel" name="onr2fobSFSEENSLbl">
+               <widget class="QLabel" name="onr2indFobSFSfobLbl">
                 <property name="text">
                  <string>70361.6025</string>
                 </property>
@@ -1494,7 +1496,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QLabel" name="onr2fobNullLbl">
+               <widget class="QLabel" name="onr2indFobNullLbl">
                 <property name="minimumSize">
                  <size>
                   <width>40</width>
@@ -1517,7 +1519,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
 border-right: 1px solid rgb(255, 170, 0);</string>
                 </property>
                 <property name="text">
-                 <string> </string>
+                 <string/>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1528,7 +1530,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="4" column="0">
-               <widget class="QLabel" name="onr2fobSFSTitleLbl">
+               <widget class="QLabel" name="onr2indFobSFSTitleLbl">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -1561,7 +1563,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLabel" name="onr2fobTitleEENSLbl">
+               <widget class="QLabel" name="onr2indFobTitlefobLbl">
                 <property name="minimumSize">
                  <size>
                   <width>70</width>
@@ -1588,7 +1590,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="1" column="2">
-               <spacer name="onr2fobSpc">
+               <spacer name="onr2indFobSpc">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -1601,7 +1603,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </spacer>
               </item>
               <item row="2" column="1">
-               <widget class="QLabel" name="onr2fobFRGEENSLbl">
+               <widget class="QLabel" name="onr2indFobFRGfobLbl">
                 <property name="text">
                  <string>70361.6025</string>
                 </property>
@@ -1749,7 +1751,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
           </property>
           <layout class="QVBoxLayout" name="onr3dxVBL">
            <property name="spacing">
-            <number>20</number>
+            <number>5</number>
            </property>
            <property name="leftMargin">
             <number>10</number>
@@ -1778,6 +1780,39 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
               </size>
              </property>
             </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="onr3log1TitleLbl">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);
+border-bottom: 1px solid rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>LOG Solver</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QTextBrowser" name="onr3log1TB">
@@ -1814,6 +1849,55 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Grid Power: P = 10314.0 kW  |  Q = -234.8 KVar&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Analisi delle potenze (ACLF) con la topologia iniziale:&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="onr3dxMidSpc">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>277</width>
+               <height>27</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="onr3log2TitleLbl">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);
+border-bottom: 1px solid rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>LOG Violazioni</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -1924,13 +2008,64 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                <height>100</height>
               </size>
              </property>
-             <layout class="QGridLayout" name="onr4logGL">
+             <layout class="QGridLayout" name="onr4logGL" rowstretch="0,0">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <property name="horizontalSpacing">
+               <number>10</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>5</number>
+              </property>
+              <item row="0" column="1">
+               <widget class="QLabel" name="onr4log2TitleLbl">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="sizeIncrement">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);
+border-bottom: 1px solid rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string>LOG Switch</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
               <item row="1" column="0">
                <widget class="QTextBrowser" name="onr4log1TB">
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
-                  <height>200</height>
+                  <height>16777215</height>
                  </size>
                 </property>
                 <property name="html">
@@ -1968,7 +2103,7 @@ p, li { white-space: pre-wrap; }
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
-                  <height>200</height>
+                  <height>16777215</height>
                  </size>
                 </property>
                 <property name="html">
@@ -2028,39 +2163,6 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                 </property>
                 <property name="text">
                  <string>LOG Solver</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="onr4log2TitleLbl">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="sizeIncrement">
-                 <size>
-                  <width>0</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
-color: rgb(255, 255, 255);
-border-bottom: 1px solid rgb(255, 255, 255);</string>
-                </property>
-                <property name="text">
-                 <string>LOG Switch</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -2251,7 +2353,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="5" column="2">
-               <widget class="QLabel" name="onr4indSAIFIpostLBL">
+               <widget class="QLabel" name="onr4indSAIFIpostLbl">
                 <property name="text">
                  <string>70361.6025</string>
                 </property>
@@ -2337,7 +2439,7 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
 border-right: 1px solid rgb(255, 170, 0);</string>
                 </property>
                 <property name="text">
-                 <string> </string>
+                 <string/>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2375,7 +2477,7 @@ border-right: 1px solid rgb(255, 170, 0);</string>
                </widget>
               </item>
               <item row="6" column="0">
-               <widget class="QLabel" name="onr4indFOBtitleLBL">
+               <widget class="QLabel" name="onr4indFOBtitleLbl">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>

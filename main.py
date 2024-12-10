@@ -41,6 +41,7 @@ from UI.gridProfPar_Dlg import GridProfParDlg
 import dictInitialize
 
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 # import time
 
@@ -151,7 +152,7 @@ class Main:
     def startWgtCreate(self):
         for f in grid['studies']:
             grid['studies'][f] = False
-            
+
         self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
 
         try:
@@ -1189,18 +1190,18 @@ class Main:
         self.home2_WGT.setMaximumWidth(450)
 
         self.home2_WGT.setStyleSheet(u"*{\n"
-                                           u"background-color: rgb(0, 0, 0);\n"
-                                           u"color: rgb(191, 191, 191);\n"
-                                           u"}\n\n"
-                                           u"QGroupBox{\n"
-                                           u"font: 75 12pt \"MS Shell Dlg 2\";\n\n"
-                                           u"QGroupBox::title  {\n"
-                                           u"subcontrol-origin: margin;\nsubcontrol-position: top center;\n"
-                                           u"padding: 5px 50 5px 50px;\n"
-                                           u"background-color: rgb(0, 0, 21);\n"
-                                           u"border-color: rgb(255, 255, 255);\n"
-                                           u"color: rgb(255, 255, 255);\n"
-                                           u"}\n")
+                                     u"background-color: rgb(0, 0, 0);\n"
+                                     u"color: rgb(191, 191, 191);\n"
+                                     u"}\n\n"
+                                     u"QGroupBox{\n"
+                                     u"font: 75 12pt \"MS Shell Dlg 2\";\n\n"
+                                     u"QGroupBox::title  {\n"
+                                     u"subcontrol-origin: margin;\nsubcontrol-position: top center;\n"
+                                     u"padding: 5px 50 5px 50px;\n"
+                                     u"background-color: rgb(0, 0, 21);\n"
+                                     u"border-color: rgb(255, 255, 255);\n"
+                                     u"color: rgb(255, 255, 255);\n"
+                                     u"}\n")
 
         self.elemProfListWgtVL = QVBoxLayout(self.home2_WGT)
         self.elemProfListSA = QScrollArea(self.home2_WGT)
@@ -1374,7 +1375,7 @@ class Main:
             import defProfImport as dpi
             for el in pl:
                 v[el]['par']['profile']['name'], v[el]['par']['profile']['curve'] = (
-                        dpi.defaultProfileImport(el, pl[el]))
+                    dpi.defaultProfileImport(el, pl[el]))
 
                 # print(el, )
 
@@ -1410,7 +1411,7 @@ class Main:
         # self.home2_WGT.setLayout(self.homeHBL)
 
         anomRunPls = pb_create(text='   Avvia calcolo Anomalie', height=50, font=14, border=2, radius=15,
-                                    icon='anomaly.png')
+                               icon='anomaly.png')
 
         self.myform.ui.verticalLayout.insertWidget(2, anomRunPls)
 
@@ -1530,7 +1531,7 @@ class Main:
                     for event in n_ev:
                         print(a, event)
                         events.append([n_event, n_ev[event]['orig_start'], n_ev[event]['orig_end'],
-                                        n_ev[event]['descr']])
+                                       n_ev[event]['descr']])
                     n_event += 1
 
             s_events = sorted(events, key=lambda kv: kv[1])
@@ -1863,7 +1864,7 @@ class Main:
                 self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
 
         self.relAdeqPls = pb_create(text='   Avvia calcolo Adeguatezza', height=50, font=14, border=2, radius=15,
-                                   icon='adequacy.png')
+                                    icon='adequacy.png')
 
         self.myform.ui.verticalLayout.insertWidget(2, self.relAdeqPls)
 
@@ -1880,10 +1881,10 @@ class Main:
         adequacy = Adeguatezza()
 
         (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
-        external_grid, bilancio_potenza) = adequacy.generation_adequacy()
+         external_grid, bilancio_potenza) = adequacy.generation_adequacy()
 
         adequacy_result = (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
-        external_grid, bilancio_potenza)
+                           external_grid, bilancio_potenza)
 
         adequacy.generation_adequacy_plot(adequacy_result)
 
@@ -2198,13 +2199,51 @@ class Main:
         self.onrBottomSpc = QSpacerItem(10, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.homeHBL.addItem(self.onrBottomSpc)
 
-        # self.onrPrelOutput()
+        self.onrPrelOutput()
 
     def onrPrelOutput(self):
         # Creazione Widget iniziale
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
         ratio = 1.5
         folder = mainpath + '/Functionalities/ONR/__images__/'
+
+        self.onr_res.ui.onr1sxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale.png').scaledToWidth(w_max *
+                                                                                                        (ratio / (ratio + 1))))
+        self.onr_res.ui.onr1dxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_zonale.png').scaledToWidth(w_max *
+                                                                                                        (1 / (ratio + 1))))
+
+        z0_n = 23
+        z0_b = 33
+        z0_conn = True
+        zsm_n = 23
+        zsm_b = 33
+        zsm_conn = True
+        rsm_n = 105
+        rsm_b = 104
+        rsm_conn = True
+
+        z0_txt = ''
+        if not z0_conn:
+            z0_txt = 'non '
+
+        zsm_txt = ''
+        if not zsm_conn:
+            zsm_txt = 'non '
+
+        rsm_txt = ''
+        if not zsm_conn:
+            rsm_txt = 'non '
+
+        z_log = (('Il grafo zonale della rete ha %d nodi e %d rami connessi.\n' % (z0_n, z0_b)) +
+                 'La rete zonale ' + z0_txt + 'è inizialmente connessa.\n\n' +
+                 ('Il grafo della rete senza maglie ha %d nodi e %d rami connessi.\n' % (rsm_n, rsm_b)) +
+                 'La rete zonale ' + rsm_txt + 'è inizialmente connessa.\n\n' +
+                 ('Il grafo della rete zonale senza maglie ha %d nodi e %d rami connessi.\n' % (zsm_n, zsm_b)) +
+                 'La rete zonale smagliata ' + zsm_txt + 'è connessa.')
+
+        self.onr_res.ui.onr1logLbl.setText(z_log)
+
+        self.onr_res.ui.indexCalcPb.clicked.connect(self.onrIndexOutput)
 
         # onr1MainWgt = QWidget()
         # onr1MainHBL = QHBoxLayout(onr1MainWgt)
@@ -2329,98 +2368,25 @@ class Main:
         # onr1SxVBL.insertWidget(3, onrIndexPls)
 
     def onrIndexOutput(self):
-        self.onrMainVBL.itemAt(1).widget().deleteLater()
+        self.onr_res.ui.onrTabWgt.setTabVisible(1, True)
+        self.onr_res.ui.onrTabWgt.setTabVisible(2, True)
 
-        # Creazione Widget Output Index
-        h_max = self.home_WGT.height() - 20
-        w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 340
-        ratio = 1
+        self.onr_res.ui.onrTabWgt.setCurrentIndex(1)
+
+        w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 20
+        ratio = 1.5
         folder = mainpath + '/Functionalities/ONR/__images__/'
 
-        onr2MainWgt = QWidget()
-        onr2MainHBL = QHBoxLayout(onr2MainWgt)
-        onr2MainHBL.setContentsMargins(0, 0, 0, 0)
-        self.onrMainVBL.addWidget(onr2MainWgt)
+        wsx = 0.5 * w_max * (ratio / (ratio + 1))
 
-        # Widget Sinistro
-        onr2SxWgt = QWidget()
-        onr2SxWgt.setMinimumWidth(w_max * (ratio / (ratio + 1)))
-        onr2SxWgt.setMaximumWidth(w_max * (ratio / (ratio + 1)))
-        onr2SxVBL = QVBoxLayout(onr2SxWgt)
-        onr2SxVBL.setContentsMargins(0, 0, 0, 0)
-        onr2SxVBL.setSpacing(20)
-        onr2MainHBL.addWidget(onr2SxWgt)
-
-        onr2SxLbl = QLabel('Indici affidabilistici')
-        onr2SxLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
-                                'border: solid; border-width: 1 px; '
-                                'border-color: rgb(255, 255, 255); '
-                                # 'border-radius: 10 px;'
-                                )
-        onr2SxLbl.setAlignment(QtCore.Qt.AlignRight)
-        onr2SxLbl.setMinimumHeight(30)
-        onr2SxLbl.setMaximumHeight(30)
-        onr2SxVBL.addWidget(onr2SxLbl)
-
-        onr2RefreshPls = QPushButton()
-        onr2RefreshPls.setText('Aggiorna vista')
-        onr2RefreshPls.setStyleSheet('QPushButton, QDoubleSpinBox {'
-                                     'color: rgb(255, 255, 255);background-color: rgb(0, 0, 0); '
-                                     'border: solid;border-width: 1px; border-radius: 5px; '
-                                     'border-color: rgb(127, 127, 127)}'
-                                     'QPushButton:pressed {background-color: rgb(64, 64, 64); '
-                                     'border-style: inset}')
-        onr2RefreshPls.setMinimumHeight(40)
-        onr2RefreshPls.setMaximumHeight(40)
-        onr2RefreshPls.clicked.connect(self.onrStart)
-
-        onr2SxFig1Lbl = QLabel()
-        onr2SxVBL.addWidget(onr2SxFig1Lbl)
-        onr2SxFig1Lbl.setPixmap(QtGui.QPixmap(folder + 'EENS.png').scaledToWidth(w_max *
-                                                                                 (ratio / (ratio + 1))))
-        onr2SxFig2Lbl = QLabel()
-        onr2SxVBL.addWidget(onr2SxFig2Lbl)
-        onr2SxFig2Lbl.setPixmap(QtGui.QPixmap(folder + 'SAIFI.png').scaledToWidth(w_max *
-                                                                                  (ratio / (ratio + 1))))
-
-        onr2SxSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        onr2SxVBL.addItem(onr2SxSpc)
-
-        # Widget destro
-        onr2DxWgt = QWidget()
-        onr2DxWgt.setMinimumWidth(w_max * (1 / (ratio + 1)))
-        onr2DxWgt.setMaximumWidth(w_max * (1 / (ratio + 1)))
-        onr2DxVBL = QVBoxLayout(onr2DxWgt)
-        onr2DxVBL.setContentsMargins(0, 0, 0, 0)
-        onr2DxVBL.setSpacing(20)
-        onr2MainHBL.addWidget(onr2DxWgt)
-
-        onr2DxLbl = QLabel('topologia iniziale radiale')
-        onr2DxLbl.setStyleSheet('font: 75 14pt "MS Shell Dlg 2"; '
-                                'border: solid; border-width: 1 px; '
-                                'border-color: rgb(255, 255, 255); '
-                                # 'border-radius: 10 px;'
-                                )
-        onr2DxLbl.setAlignment(QtCore.Qt.AlignLeft)
-        onr2DxLbl.setMinimumHeight(30)
-        onr2DxLbl.setMaximumHeight(30)
-        onr2DxVBL.addWidget(onr2DxLbl)
-
-        onr2DxFig1Lbl = QLabel()
-        onr2DxVBL.addWidget(onr2DxFig1Lbl)
-        onr2DxFig1Lbl.setPixmap(QtGui.QPixmap(folder + 'SAIDI.png').scaledToWidth(w_max *
-                                                                                 (1 / (ratio + 1))))
-        onr2DxFig2Lbl = QLabel()
-        onr2DxVBL.addWidget(onr2DxFig2Lbl)
-        onr2DxFig2Lbl.setPixmap(QtGui.QPixmap(folder + 'obj_funct.png').scaledToWidth(w_max *
-                                                                                 (1 / (ratio + 1))))
-
-        onr2DxSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        onr2DxVBL.addItem(onr2DxSpc)
+        self.onr_res.ui.onr2Fig1Lbl.setPixmap(QtGui.QPixmap(folder + 'SAIDI.png').scaledToWidth(wsx))
+        self.onr_res.ui.onr2Fig2Lbl.setPixmap(QtGui.QPixmap(folder + 'SAIFI.png').scaledToWidth(wsx))
+        self.onr_res.ui.onr2Fig3Lbl.setPixmap(QtGui.QPixmap(folder + 'EENS.png').scaledToWidth(wsx))
+        self.onr_res.ui.onr2Fig4Lbl.setPixmap(QtGui.QPixmap(folder + 'obj_funct.png').scaledToWidth(wsx))
 
         # Widget Indici
         indexes = {
-            'abs': {
+            'Abs': {
                 'FRG': {
                     'EENS': 70361.6025,
                     'SAIDI': 6.4346,
@@ -2437,7 +2403,7 @@ class Main:
                     'SAIFI': 1.9995,
                 },
             },
-            'norm': {
+            'Norm': {
                 'FRG': {
                     'EENS': 1,
                     'SAIDI': 1,
@@ -2454,103 +2420,78 @@ class Main:
                     'SAIFI': 0.5592,
                 },
             },
-            'obj_funct': {
-                'FRG': {'F. Ob.': 1},
-                'FNC': {'F. Ob.': 0.8966},
-                'SFS': {'F. Ob.': 0.8449},
+            'Fob': {
+                'FRG': {'fob': 1},
+                'FNC': {'fob': 0.8966},
+                'SFS': {'fob': 0.8449},
             },
         }
 
-        lWgt = 300
-        onr2IndexWgt = QWidget()
-        onr2IndexWgt.setMinimumWidth(lWgt)
-        onr2IndexWgt.setMaximumWidth(lWgt)
-        onr2IndexVBL = QVBoxLayout(onr2IndexWgt)
-        onr2IndexVBL.setContentsMargins(30, 0, 0, 0)
-        onr2IndexVBL.setSpacing(20)
-        onr2MainHBL.addWidget(onr2IndexWgt)
+        for w in indexes:
+            for cat in indexes[w]:
+                for i in indexes[w][cat]:
+                    self.onr_res.ui.__getattribute__('onr2ind' + w + cat + i + 'Lbl').setText('%.4f' % indexes[w][cat][i])
 
-        indexesLbl = ['Indici di Affidabilità allo stato iniziale',
-                    'Indici di Affidabilità allo stato iniziale normalizzato',
-                    'Funzione obiettivo allo stato iniziale']
+        wsx =  w_max * (ratio / (ratio + 1))
+        self.onr_res.ui.onr3Fig1Lbl.setPixmap(QtGui.QPixmap(folder + 'nodes_violations_pre.png').scaledToWidth(wsx))
+        self.onr_res.ui.onr3Fig2Lbl.setPixmap(QtGui.QPixmap(folder + 'lines_overload.png').scaledToWidth(wsx))
 
-        font = QtGui.QFont()
-        font.setItalic(True)
+        self.onr_res.ui.onr3Fig1Lbl.mouseDoubleClickEvent = partial(self.openImage, folder + 'nodes_violations_pre.png')
+        self.onr_res.ui.onr3Fig2Lbl.mouseDoubleClickEvent = partial(self.openImage, folder + 'lines_overload.png')
 
-        iDict = dict()
+        self.onr_res.ui.onr2calcPb.clicked.connect(self.onrRun)
 
-        wgt = 0
-        for t in indexes:
-            iDict[t] = dict()
-
-            iDict[t]['label'] = QLabel(indexesLbl[wgt])
-
-            iDict[t]['wgt'] = QWidget()
-            iDict[t]['grid'] = QGridLayout(iDict[t]['wgt'])
-            iDict[t]['grid'].setSpacing(0)
-
-            onr2IndexSpc = QSpacerItem(20, 50, QSizePolicy.Preferred, QSizePolicy.Fixed)
-
-            row = 0
-            null = QLabel()
-            null.setStyleSheet('border-bottom: 1px solid white;'
-                               'border-right: 1px solid white;')
-            iDict[t]['grid'].addWidget(null, 0, 0)
-            col = 1
-            for i in indexes[t][list(indexes[t].keys())[0]]:
-                row_head = QLabel(i + ' ')
-                row_head.setAlignment(QtCore.Qt.AlignRight)
-
-                row_head.setFont(font)
-                row_head.setMinimumWidth(70)
-                row_head.setMaximumWidth(70)
-                row_head.setMinimumHeight(20)
-                row_head.setMaximumWidth(20)
-                row_head.setStyleSheet('border-bottom: 1px solid white;')
-                iDict[t]['grid'].addWidget(row_head, row, col)
-                col += 1
-            null = QLabel()
-            null.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-            iDict[t]['grid'].addWidget(null, 0, col)
-
-            row += 1
-
-            for m in indexes[t]:
-                iDict[t][m] = dict()
-
-                line_head = QLabel(m + ' ')
-                line_head.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
-                line_head.setFont(font)
-                line_head.setStyleSheet('border-right: 1px solid white;')
-                iDict[t]['grid'].addWidget(line_head, row, 0)
-
-                col = 1
-                for i in indexes[t][m]:
-                    iDict[t][m][i] = QLabel('%.4f' % indexes[t][m][i])
-                    iDict[t][m][i].setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
-                    iDict[t][m][i].setMinimumHeight(25)
-                    iDict[t][m][i].setMaximumHeight(25)
-                    iDict[t]['grid'].addWidget(iDict[t][m][i], row, col)
-                    col += 1
-                row += 1
-
-            onr2IndexVBL.addWidget(iDict[t]['label'])
-            onr2IndexVBL.addWidget(iDict[t]['wgt'])
-            onr2IndexVBL.addItem(onr2IndexSpc)
-
-            wgt += 1
-
-        onr2IndexSpc = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        onr2IndexVBL.addItem(onr2IndexSpc)
-
-        #  TODO: Mostrare i risultati, se disponibili
-        if grid['studies']['onr']:
-            self.onrRes()
+    def openImage(self, path, event=None):
+        img = mpimg.imread(path)
+        imgplot = plt.imshow(img)
+        plt.show()
 
     def onrRun(self):
+        self.onrRes()
         pass
 
     def onrRes(self):
+        self.onr_res.ui.onrTabWgt.setTabVisible(3, True)
+        self.onr_res.ui.onrTabWgt.setTabVisible(4, True)
+
+        self.onr_res.ui.onrTabWgt.setCurrentIndex(3)
+
+        w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
+        ratio = 1.5
+        folder = mainpath + '/Functionalities/ONR/__images__/'
+
+        wsx = w_max * (ratio / (ratio + 1))
+        wdx = w_max * (1 / (ratio + 1))
+
+        # self.onr_res.ui.onr4logWgt.setMaximumWidth(wsx)
+        # self.onr_res.ui.onr4sxTitleLbl.setMaximumWidth(wsx)
+        self.onr_res.ui.onr4sxWgt.setMaximumWidth(wsx)
+        self.onr_res.ui.onr4dxWgt.setMinimumWidth(wdx + 20)
+
+        self.onr_res.ui.onr4Fig1Lbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale.png').scaledToWidth(wsx))
+        self.onr_res.ui.onr4Fig2Lbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale_post.png').scaledToWidth(wsx))
+        self.onr_res.ui.onr4indFigLbl.setPixmap(QtGui.QPixmap(folder + 'indici_post.png').scaledToWidth(wdx))
+
+        indexes = {
+            'Res': {
+                'pre': {
+                    'EENS': 69788.4268879,
+                    'SAIDI': 6.3820281184171794,
+                    'SAIFI': 32.5249505459743213,
+                    'FOB': 0.8966061535323807,
+                },
+                'post': {
+                    'EENS': 53558.2419789,
+                    'SAIDI': 5.0633097099650546,
+                    'SAIFI': 2.181570805704159,
+                    'FOB': 0.7193925237240815,
+                },
+            },
+        }
+
+        for cat in indexes['Res']:
+            for i in indexes['Res'][cat]:
+                self.onr_res.ui.__getattribute__('onr4ind' + i + cat + 'Lbl').setText('%.4f' % indexes['Res'][cat][i])
         pass
 
     def homeClear(self):

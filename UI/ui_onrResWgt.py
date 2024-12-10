@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'onrResWgtyOIQhm.ui'
+## Form generated from reading UI file 'onrResWgtPDpryP.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -102,10 +102,12 @@ class Ui_Form(object):
         self.onr1logLbl = QLabel(self.onr1sxWgt)
         self.onr1logLbl.setObjectName(u"onr1logLbl")
         self.onr1logLbl.setMinimumSize(QSize(0, 200))
-        self.onr1logLbl.setStyleSheet(u"background-color: rgb(0, 0, 0);\n"
+        self.onr1logLbl.setStyleSheet(u"font: 10pt \"MS Shell Dlg 2\";\n"
+"background-color: rgb(0, 0, 0);\n"
 "border-top: 1px solid  rgb(255, 255, 255);\n"
 "border-bottom: 1px solid  rgb(255, 255, 255);\n"
-"color: rgb(255, 255, 255);")
+"color: rgb(255, 170, 0);\n"
+"")
         self.onr1logLbl.setMargin(10)
 
         self.onr1sxVBL.addWidget(self.onr1logLbl)
@@ -261,11 +263,11 @@ class Ui_Form(object):
 
         self.onr2calcHBL.addWidget(self.onr2calcCB)
 
-        self.onr2calcBtn = QPushButton(self.onr2calcWgt)
-        self.onr2calcBtn.setObjectName(u"onr2calcBtn")
-        self.onr2calcBtn.setMinimumSize(QSize(0, 40))
-        self.onr2calcBtn.setMaximumSize(QSize(16777215, 40))
-        self.onr2calcBtn.setStyleSheet(u"QPushButton{\n"
+        self.onr2calcPb = QPushButton(self.onr2calcWgt)
+        self.onr2calcPb.setObjectName(u"onr2calcPb")
+        self.onr2calcPb.setMinimumSize(QSize(0, 40))
+        self.onr2calcPb.setMaximumSize(QSize(16777215, 40))
+        self.onr2calcPb.setStyleSheet(u"QPushButton{\n"
 "	\n"
 "	color: rgb(255, 255, 255);\n"
 "	background-color: rgb(0, 0, 0);\n"
@@ -280,7 +282,7 @@ class Ui_Form(object):
 "}\n"
 "")
 
-        self.onr2calcHBL.addWidget(self.onr2calcBtn)
+        self.onr2calcHBL.addWidget(self.onr2calcPb)
 
 
         self.onr2sxVBL.addWidget(self.onr2calcWgt)
@@ -313,148 +315,148 @@ class Ui_Form(object):
 
         self.onr2dxVBL.addWidget(self.onr2indTitleLbl)
 
-        self.onr2indWgt = QWidget(self.onr2dxWgt)
-        self.onr2indWgt.setObjectName(u"onr2indWgt")
-        self.onr2indGL = QGridLayout(self.onr2indWgt)
+        self.onr2indAbsWgt = QWidget(self.onr2dxWgt)
+        self.onr2indAbsWgt.setObjectName(u"onr2indAbsWgt")
+        self.onr2indGL = QGridLayout(self.onr2indAbsWgt)
         self.onr2indGL.setSpacing(0)
         self.onr2indGL.setObjectName(u"onr2indGL")
-        self.onr2indFRGSAIFILbl = QLabel(self.onr2indWgt)
-        self.onr2indFRGSAIFILbl.setObjectName(u"onr2indFRGSAIFILbl")
-        self.onr2indFRGSAIFILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsFRGSAIFILbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsFRGSAIFILbl.setObjectName(u"onr2indAbsFRGSAIFILbl")
+        self.onr2indAbsFRGSAIFILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2indGL.addWidget(self.onr2indFRGSAIFILbl, 2, 3, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsFRGSAIFILbl, 2, 3, 1, 1)
 
-        self.onr2indTitleEENSLbl = QLabel(self.onr2indWgt)
-        self.onr2indTitleEENSLbl.setObjectName(u"onr2indTitleEENSLbl")
-        self.onr2indTitleEENSLbl.setMinimumSize(QSize(70, 0))
+        self.onr2indAbsTitleEENSLbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsTitleEENSLbl.setObjectName(u"onr2indAbsTitleEENSLbl")
+        self.onr2indAbsTitleEENSLbl.setMinimumSize(QSize(70, 0))
         font1 = QFont()
         font1.setItalic(True)
-        self.onr2indTitleEENSLbl.setFont(font1)
-        self.onr2indTitleEENSLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
-        self.onr2indTitleEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2indTitleEENSLbl.setMargin(2)
+        self.onr2indAbsTitleEENSLbl.setFont(font1)
+        self.onr2indAbsTitleEENSLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
+        self.onr2indAbsTitleEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsTitleEENSLbl.setMargin(2)
 
-        self.onr2indGL.addWidget(self.onr2indTitleEENSLbl, 1, 1, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsTitleEENSLbl, 1, 1, 1, 1)
 
-        self.onr2indNullLbl = QLabel(self.onr2indWgt)
-        self.onr2indNullLbl.setObjectName(u"onr2indNullLbl")
-        self.onr2indNullLbl.setMinimumSize(QSize(40, 20))
-        self.onr2indNullLbl.setMaximumSize(QSize(40, 20))
-        self.onr2indNullLbl.setFont(font1)
-        self.onr2indNullLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);\n"
+        self.onr2indAbsNullLbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsNullLbl.setObjectName(u"onr2indAbsNullLbl")
+        self.onr2indAbsNullLbl.setMinimumSize(QSize(40, 20))
+        self.onr2indAbsNullLbl.setMaximumSize(QSize(40, 20))
+        self.onr2indAbsNullLbl.setFont(font1)
+        self.onr2indAbsNullLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);\n"
 "border-right: 1px solid rgb(255, 170, 0);")
-        self.onr2indNullLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2indNullLbl.setMargin(5)
+        self.onr2indAbsNullLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsNullLbl.setMargin(5)
 
-        self.onr2indGL.addWidget(self.onr2indNullLbl, 1, 0, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsNullLbl, 1, 0, 1, 1)
 
-        self.onr2indFRGSAIDILbl = QLabel(self.onr2indWgt)
-        self.onr2indFRGSAIDILbl.setObjectName(u"onr2indFRGSAIDILbl")
-        self.onr2indFRGSAIDILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsFRGSAIDILbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsFRGSAIDILbl.setObjectName(u"onr2indAbsFRGSAIDILbl")
+        self.onr2indAbsFRGSAIDILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2indGL.addWidget(self.onr2indFRGSAIDILbl, 2, 2, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsFRGSAIDILbl, 2, 2, 1, 1)
 
-        self.onr2indTitleSAIFILbl = QLabel(self.onr2indWgt)
-        self.onr2indTitleSAIFILbl.setObjectName(u"onr2indTitleSAIFILbl")
-        self.onr2indTitleSAIFILbl.setMinimumSize(QSize(70, 0))
-        self.onr2indTitleSAIFILbl.setFont(font1)
-        self.onr2indTitleSAIFILbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
-        self.onr2indTitleSAIFILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2indTitleSAIFILbl.setMargin(2)
+        self.onr2indAbsTitleSAIFILbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsTitleSAIFILbl.setObjectName(u"onr2indAbsTitleSAIFILbl")
+        self.onr2indAbsTitleSAIFILbl.setMinimumSize(QSize(70, 0))
+        self.onr2indAbsTitleSAIFILbl.setFont(font1)
+        self.onr2indAbsTitleSAIFILbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
+        self.onr2indAbsTitleSAIFILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsTitleSAIFILbl.setMargin(2)
 
-        self.onr2indGL.addWidget(self.onr2indTitleSAIFILbl, 1, 3, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsTitleSAIFILbl, 1, 3, 1, 1)
 
-        self.onr2indTitleSAIDILbl = QLabel(self.onr2indWgt)
-        self.onr2indTitleSAIDILbl.setObjectName(u"onr2indTitleSAIDILbl")
-        self.onr2indTitleSAIDILbl.setMinimumSize(QSize(70, 0))
-        self.onr2indTitleSAIDILbl.setFont(font1)
-        self.onr2indTitleSAIDILbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
-        self.onr2indTitleSAIDILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2indTitleSAIDILbl.setMargin(2)
+        self.onr2indAbsTitleSAIDILbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsTitleSAIDILbl.setObjectName(u"onr2indAbsTitleSAIDILbl")
+        self.onr2indAbsTitleSAIDILbl.setMinimumSize(QSize(70, 0))
+        self.onr2indAbsTitleSAIDILbl.setFont(font1)
+        self.onr2indAbsTitleSAIDILbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
+        self.onr2indAbsTitleSAIDILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsTitleSAIDILbl.setMargin(2)
 
-        self.onr2indGL.addWidget(self.onr2indTitleSAIDILbl, 1, 2, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsTitleSAIDILbl, 1, 2, 1, 1)
 
-        self.onr2indFNCEENSLbl = QLabel(self.onr2indWgt)
-        self.onr2indFNCEENSLbl.setObjectName(u"onr2indFNCEENSLbl")
-        self.onr2indFNCEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsFNCEENSLbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsFNCEENSLbl.setObjectName(u"onr2indAbsFNCEENSLbl")
+        self.onr2indAbsFNCEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2indGL.addWidget(self.onr2indFNCEENSLbl, 4, 1, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsFNCEENSLbl, 4, 1, 1, 1)
 
-        self.onr2indSFSEENSLbl = QLabel(self.onr2indWgt)
-        self.onr2indSFSEENSLbl.setObjectName(u"onr2indSFSEENSLbl")
-        self.onr2indSFSEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsSFSEENSLbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsSFSEENSLbl.setObjectName(u"onr2indAbsSFSEENSLbl")
+        self.onr2indAbsSFSEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2indGL.addWidget(self.onr2indSFSEENSLbl, 5, 1, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsSFSEENSLbl, 5, 1, 1, 1)
 
-        self.onr2indFNCSAIDILbl = QLabel(self.onr2indWgt)
-        self.onr2indFNCSAIDILbl.setObjectName(u"onr2indFNCSAIDILbl")
-        self.onr2indFNCSAIDILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsFNCSAIDILbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsFNCSAIDILbl.setObjectName(u"onr2indAbsFNCSAIDILbl")
+        self.onr2indAbsFNCSAIDILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2indGL.addWidget(self.onr2indFNCSAIDILbl, 4, 2, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsFNCSAIDILbl, 4, 2, 1, 1)
 
-        self.onr2indSFSSAIFILbl = QLabel(self.onr2indWgt)
-        self.onr2indSFSSAIFILbl.setObjectName(u"onr2indSFSSAIFILbl")
-        self.onr2indSFSSAIFILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsSFSSAIFILbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsSFSSAIFILbl.setObjectName(u"onr2indAbsSFSSAIFILbl")
+        self.onr2indAbsSFSSAIFILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2indGL.addWidget(self.onr2indSFSSAIFILbl, 5, 3, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsSFSSAIFILbl, 5, 3, 1, 1)
 
-        self.onr2indSFSSAIDILbl = QLabel(self.onr2indWgt)
-        self.onr2indSFSSAIDILbl.setObjectName(u"onr2indSFSSAIDILbl")
-        self.onr2indSFSSAIDILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsSFSSAIDILbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsSFSSAIDILbl.setObjectName(u"onr2indAbsSFSSAIDILbl")
+        self.onr2indAbsSFSSAIDILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2indGL.addWidget(self.onr2indSFSSAIDILbl, 5, 2, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsSFSSAIDILbl, 5, 2, 1, 1)
 
-        self.onr2indFRGTitleLbl = QLabel(self.onr2indWgt)
-        self.onr2indFRGTitleLbl.setObjectName(u"onr2indFRGTitleLbl")
-        self.onr2indFRGTitleLbl.setMinimumSize(QSize(0, 25))
-        self.onr2indFRGTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indFRGTitleLbl.setFont(font1)
-        self.onr2indFRGTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
-        self.onr2indFRGTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2indFRGTitleLbl.setMargin(2)
+        self.onr2indAbsFRGTitleLbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsFRGTitleLbl.setObjectName(u"onr2indAbsFRGTitleLbl")
+        self.onr2indAbsFRGTitleLbl.setMinimumSize(QSize(0, 25))
+        self.onr2indAbsFRGTitleLbl.setMaximumSize(QSize(16777215, 20))
+        self.onr2indAbsFRGTitleLbl.setFont(font1)
+        self.onr2indAbsFRGTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
+        self.onr2indAbsFRGTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsFRGTitleLbl.setMargin(2)
 
-        self.onr2indGL.addWidget(self.onr2indFRGTitleLbl, 2, 0, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsFRGTitleLbl, 2, 0, 1, 1)
 
-        self.onr2indSFSTitleLbl = QLabel(self.onr2indWgt)
-        self.onr2indSFSTitleLbl.setObjectName(u"onr2indSFSTitleLbl")
-        self.onr2indSFSTitleLbl.setMinimumSize(QSize(0, 25))
-        self.onr2indSFSTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indSFSTitleLbl.setFont(font1)
-        self.onr2indSFSTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
-        self.onr2indSFSTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2indSFSTitleLbl.setMargin(2)
+        self.onr2indAbsSFSTitleLbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsSFSTitleLbl.setObjectName(u"onr2indAbsSFSTitleLbl")
+        self.onr2indAbsSFSTitleLbl.setMinimumSize(QSize(0, 25))
+        self.onr2indAbsSFSTitleLbl.setMaximumSize(QSize(16777215, 20))
+        self.onr2indAbsSFSTitleLbl.setFont(font1)
+        self.onr2indAbsSFSTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
+        self.onr2indAbsSFSTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsSFSTitleLbl.setMargin(2)
 
-        self.onr2indGL.addWidget(self.onr2indSFSTitleLbl, 5, 0, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsSFSTitleLbl, 5, 0, 1, 1)
 
-        self.onr2indFNCTitleLbl = QLabel(self.onr2indWgt)
-        self.onr2indFNCTitleLbl.setObjectName(u"onr2indFNCTitleLbl")
-        self.onr2indFNCTitleLbl.setMinimumSize(QSize(0, 25))
-        self.onr2indFNCTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indFNCTitleLbl.setFont(font1)
-        self.onr2indFNCTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
-        self.onr2indFNCTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2indFNCTitleLbl.setMargin(2)
+        self.onr2indAbsFNCTitleLbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsFNCTitleLbl.setObjectName(u"onr2indAbsFNCTitleLbl")
+        self.onr2indAbsFNCTitleLbl.setMinimumSize(QSize(0, 25))
+        self.onr2indAbsFNCTitleLbl.setMaximumSize(QSize(16777215, 20))
+        self.onr2indAbsFNCTitleLbl.setFont(font1)
+        self.onr2indAbsFNCTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
+        self.onr2indAbsFNCTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsFNCTitleLbl.setMargin(2)
 
-        self.onr2indGL.addWidget(self.onr2indFNCTitleLbl, 4, 0, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsFNCTitleLbl, 4, 0, 1, 1)
 
-        self.onr2indFNCSAIFILbl = QLabel(self.onr2indWgt)
-        self.onr2indFNCSAIFILbl.setObjectName(u"onr2indFNCSAIFILbl")
-        self.onr2indFNCSAIFILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsFNCSAIFILbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsFNCSAIFILbl.setObjectName(u"onr2indAbsFNCSAIFILbl")
+        self.onr2indAbsFNCSAIFILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2indGL.addWidget(self.onr2indFNCSAIFILbl, 4, 3, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsFNCSAIFILbl, 4, 3, 1, 1)
 
-        self.onr2indFRGEENSLbl = QLabel(self.onr2indWgt)
-        self.onr2indFRGEENSLbl.setObjectName(u"onr2indFRGEENSLbl")
-        self.onr2indFRGEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indAbsFRGEENSLbl = QLabel(self.onr2indAbsWgt)
+        self.onr2indAbsFRGEENSLbl.setObjectName(u"onr2indAbsFRGEENSLbl")
+        self.onr2indAbsFRGEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2indGL.addWidget(self.onr2indFRGEENSLbl, 2, 1, 1, 1)
+        self.onr2indGL.addWidget(self.onr2indAbsFRGEENSLbl, 2, 1, 1, 1)
 
-        self.onr2indSpc = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.onr2indAbsSpc = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.onr2indGL.addItem(self.onr2indSpc, 1, 4, 1, 1)
+        self.onr2indGL.addItem(self.onr2indAbsSpc, 1, 4, 1, 1)
 
 
-        self.onr2dxVBL.addWidget(self.onr2indWgt)
+        self.onr2dxVBL.addWidget(self.onr2indAbsWgt)
 
         self.onr2dx1Spc = QSpacerItem(20, 10, QSizePolicy.Minimum, QSizePolicy.Fixed)
 
@@ -629,90 +631,90 @@ class Ui_Form(object):
 
         self.onr2dxVBL.addWidget(self.onr2fobLbl)
 
-        self.onr2fobWgt = QWidget(self.onr2dxWgt)
-        self.onr2fobWgt.setObjectName(u"onr2fobWgt")
-        self.onr2fobGL = QGridLayout(self.onr2fobWgt)
+        self.onr2indFobWgt = QWidget(self.onr2dxWgt)
+        self.onr2indFobWgt.setObjectName(u"onr2indFobWgt")
+        self.onr2fobGL = QGridLayout(self.onr2indFobWgt)
         self.onr2fobGL.setSpacing(0)
         self.onr2fobGL.setObjectName(u"onr2fobGL")
-        self.onr2fobFNCTitleLbl = QLabel(self.onr2fobWgt)
-        self.onr2fobFNCTitleLbl.setObjectName(u"onr2fobFNCTitleLbl")
-        self.onr2fobFNCTitleLbl.setMinimumSize(QSize(0, 25))
-        self.onr2fobFNCTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2fobFNCTitleLbl.setFont(font1)
-        self.onr2fobFNCTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
-        self.onr2fobFNCTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2fobFNCTitleLbl.setMargin(2)
+        self.onr2indFobFNCTitleLbl = QLabel(self.onr2indFobWgt)
+        self.onr2indFobFNCTitleLbl.setObjectName(u"onr2indFobFNCTitleLbl")
+        self.onr2indFobFNCTitleLbl.setMinimumSize(QSize(0, 25))
+        self.onr2indFobFNCTitleLbl.setMaximumSize(QSize(16777215, 20))
+        self.onr2indFobFNCTitleLbl.setFont(font1)
+        self.onr2indFobFNCTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
+        self.onr2indFobFNCTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indFobFNCTitleLbl.setMargin(2)
 
-        self.onr2fobGL.addWidget(self.onr2fobFNCTitleLbl, 3, 0, 1, 1)
+        self.onr2fobGL.addWidget(self.onr2indFobFNCTitleLbl, 3, 0, 1, 1)
 
-        self.onr2fobFRGTitleLbl = QLabel(self.onr2fobWgt)
-        self.onr2fobFRGTitleLbl.setObjectName(u"onr2fobFRGTitleLbl")
-        self.onr2fobFRGTitleLbl.setMinimumSize(QSize(0, 25))
-        self.onr2fobFRGTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2fobFRGTitleLbl.setFont(font1)
-        self.onr2fobFRGTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
-        self.onr2fobFRGTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2fobFRGTitleLbl.setMargin(2)
+        self.onr2indFobFRGTitleLbl = QLabel(self.onr2indFobWgt)
+        self.onr2indFobFRGTitleLbl.setObjectName(u"onr2indFobFRGTitleLbl")
+        self.onr2indFobFRGTitleLbl.setMinimumSize(QSize(0, 25))
+        self.onr2indFobFRGTitleLbl.setMaximumSize(QSize(16777215, 20))
+        self.onr2indFobFRGTitleLbl.setFont(font1)
+        self.onr2indFobFRGTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
+        self.onr2indFobFRGTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indFobFRGTitleLbl.setMargin(2)
 
-        self.onr2fobGL.addWidget(self.onr2fobFRGTitleLbl, 2, 0, 1, 1)
+        self.onr2fobGL.addWidget(self.onr2indFobFRGTitleLbl, 2, 0, 1, 1)
 
-        self.onr2fobFNCEENSLbl = QLabel(self.onr2fobWgt)
-        self.onr2fobFNCEENSLbl.setObjectName(u"onr2fobFNCEENSLbl")
-        self.onr2fobFNCEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indFobFNCfobLbl = QLabel(self.onr2indFobWgt)
+        self.onr2indFobFNCfobLbl.setObjectName(u"onr2indFobFNCfobLbl")
+        self.onr2indFobFNCfobLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2fobGL.addWidget(self.onr2fobFNCEENSLbl, 3, 1, 1, 1)
+        self.onr2fobGL.addWidget(self.onr2indFobFNCfobLbl, 3, 1, 1, 1)
 
-        self.onr2fobSFSEENSLbl = QLabel(self.onr2fobWgt)
-        self.onr2fobSFSEENSLbl.setObjectName(u"onr2fobSFSEENSLbl")
-        self.onr2fobSFSEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indFobSFSfobLbl = QLabel(self.onr2indFobWgt)
+        self.onr2indFobSFSfobLbl.setObjectName(u"onr2indFobSFSfobLbl")
+        self.onr2indFobSFSfobLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2fobGL.addWidget(self.onr2fobSFSEENSLbl, 4, 1, 1, 1)
+        self.onr2fobGL.addWidget(self.onr2indFobSFSfobLbl, 4, 1, 1, 1)
 
-        self.onr2fobNullLbl = QLabel(self.onr2fobWgt)
-        self.onr2fobNullLbl.setObjectName(u"onr2fobNullLbl")
-        self.onr2fobNullLbl.setMinimumSize(QSize(40, 20))
-        self.onr2fobNullLbl.setMaximumSize(QSize(40, 20))
-        self.onr2fobNullLbl.setFont(font1)
-        self.onr2fobNullLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);\n"
+        self.onr2indFobNullLbl = QLabel(self.onr2indFobWgt)
+        self.onr2indFobNullLbl.setObjectName(u"onr2indFobNullLbl")
+        self.onr2indFobNullLbl.setMinimumSize(QSize(40, 20))
+        self.onr2indFobNullLbl.setMaximumSize(QSize(40, 20))
+        self.onr2indFobNullLbl.setFont(font1)
+        self.onr2indFobNullLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);\n"
 "border-right: 1px solid rgb(255, 170, 0);")
-        self.onr2fobNullLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2fobNullLbl.setMargin(5)
+        self.onr2indFobNullLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indFobNullLbl.setMargin(5)
 
-        self.onr2fobGL.addWidget(self.onr2fobNullLbl, 1, 0, 1, 1)
+        self.onr2fobGL.addWidget(self.onr2indFobNullLbl, 1, 0, 1, 1)
 
-        self.onr2fobSFSTitleLbl = QLabel(self.onr2fobWgt)
-        self.onr2fobSFSTitleLbl.setObjectName(u"onr2fobSFSTitleLbl")
-        self.onr2fobSFSTitleLbl.setMinimumSize(QSize(0, 25))
-        self.onr2fobSFSTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2fobSFSTitleLbl.setFont(font1)
-        self.onr2fobSFSTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
-        self.onr2fobSFSTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2fobSFSTitleLbl.setMargin(2)
+        self.onr2indFobSFSTitleLbl = QLabel(self.onr2indFobWgt)
+        self.onr2indFobSFSTitleLbl.setObjectName(u"onr2indFobSFSTitleLbl")
+        self.onr2indFobSFSTitleLbl.setMinimumSize(QSize(0, 25))
+        self.onr2indFobSFSTitleLbl.setMaximumSize(QSize(16777215, 20))
+        self.onr2indFobSFSTitleLbl.setFont(font1)
+        self.onr2indFobSFSTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
+        self.onr2indFobSFSTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indFobSFSTitleLbl.setMargin(2)
 
-        self.onr2fobGL.addWidget(self.onr2fobSFSTitleLbl, 4, 0, 1, 1)
+        self.onr2fobGL.addWidget(self.onr2indFobSFSTitleLbl, 4, 0, 1, 1)
 
-        self.onr2fobTitleEENSLbl = QLabel(self.onr2fobWgt)
-        self.onr2fobTitleEENSLbl.setObjectName(u"onr2fobTitleEENSLbl")
-        self.onr2fobTitleEENSLbl.setMinimumSize(QSize(70, 0))
-        self.onr2fobTitleEENSLbl.setFont(font1)
-        self.onr2fobTitleEENSLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
-        self.onr2fobTitleEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr2fobTitleEENSLbl.setMargin(2)
+        self.onr2indFobTitlefobLbl = QLabel(self.onr2indFobWgt)
+        self.onr2indFobTitlefobLbl.setObjectName(u"onr2indFobTitlefobLbl")
+        self.onr2indFobTitlefobLbl.setMinimumSize(QSize(70, 0))
+        self.onr2indFobTitlefobLbl.setFont(font1)
+        self.onr2indFobTitlefobLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
+        self.onr2indFobTitlefobLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indFobTitlefobLbl.setMargin(2)
 
-        self.onr2fobGL.addWidget(self.onr2fobTitleEENSLbl, 1, 1, 1, 1)
+        self.onr2fobGL.addWidget(self.onr2indFobTitlefobLbl, 1, 1, 1, 1)
 
-        self.onr2fobSpc = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.onr2indFobSpc = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.onr2fobGL.addItem(self.onr2fobSpc, 1, 2, 1, 1)
+        self.onr2fobGL.addItem(self.onr2indFobSpc, 1, 2, 1, 1)
 
-        self.onr2fobFRGEENSLbl = QLabel(self.onr2fobWgt)
-        self.onr2fobFRGEENSLbl.setObjectName(u"onr2fobFRGEENSLbl")
-        self.onr2fobFRGEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr2indFobFRGfobLbl = QLabel(self.onr2indFobWgt)
+        self.onr2indFobFRGfobLbl.setObjectName(u"onr2indFobFRGfobLbl")
+        self.onr2indFobFRGfobLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr2fobGL.addWidget(self.onr2fobFRGEENSLbl, 2, 1, 1, 1)
+        self.onr2fobGL.addWidget(self.onr2indFobFRGfobLbl, 2, 1, 1, 1)
 
 
-        self.onr2dxVBL.addWidget(self.onr2fobWgt)
+        self.onr2dxVBL.addWidget(self.onr2indFobWgt)
 
         self.onr2dxBottomSpc = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -769,18 +771,46 @@ class Ui_Form(object):
         self.onr3dxWgt.setMinimumSize(QSize(300, 0))
         self.onr3dxWgt.setMaximumSize(QSize(300, 16777215))
         self.onr3dxVBL = QVBoxLayout(self.onr3dxWgt)
-        self.onr3dxVBL.setSpacing(20)
+        self.onr3dxVBL.setSpacing(5)
         self.onr3dxVBL.setObjectName(u"onr3dxVBL")
         self.onr3dxVBL.setContentsMargins(10, 10, 10, 10)
         self.onr3dxTopSpc = QSpacerItem(277, 27, QSizePolicy.Minimum, QSizePolicy.Fixed)
 
         self.onr3dxVBL.addItem(self.onr3dxTopSpc)
 
+        self.onr3log1TitleLbl = QLabel(self.onr3dxWgt)
+        self.onr3log1TitleLbl.setObjectName(u"onr3log1TitleLbl")
+        self.onr3log1TitleLbl.setMinimumSize(QSize(0, 30))
+        self.onr3log1TitleLbl.setMaximumSize(QSize(16777215, 30))
+        self.onr3log1TitleLbl.setSizeIncrement(QSize(0, 30))
+        self.onr3log1TitleLbl.setStyleSheet(u"font: 75 10pt \"MS Shell Dlg 2\";\n"
+"color: rgb(255, 255, 255);\n"
+"border-bottom: 1px solid rgb(255, 255, 255);")
+        self.onr3log1TitleLbl.setAlignment(Qt.AlignCenter)
+
+        self.onr3dxVBL.addWidget(self.onr3log1TitleLbl)
+
         self.onr3log1TB = QTextBrowser(self.onr3dxWgt)
         self.onr3log1TB.setObjectName(u"onr3log1TB")
         self.onr3log1TB.setMaximumSize(QSize(16777215, 200))
 
         self.onr3dxVBL.addWidget(self.onr3log1TB)
+
+        self.onr3dxMidSpc = QSpacerItem(277, 27, QSizePolicy.Minimum, QSizePolicy.Fixed)
+
+        self.onr3dxVBL.addItem(self.onr3dxMidSpc)
+
+        self.onr3log2TitleLbl = QLabel(self.onr3dxWgt)
+        self.onr3log2TitleLbl.setObjectName(u"onr3log2TitleLbl")
+        self.onr3log2TitleLbl.setMinimumSize(QSize(0, 30))
+        self.onr3log2TitleLbl.setMaximumSize(QSize(16777215, 30))
+        self.onr3log2TitleLbl.setSizeIncrement(QSize(0, 30))
+        self.onr3log2TitleLbl.setStyleSheet(u"font: 75 10pt \"MS Shell Dlg 2\";\n"
+"color: rgb(255, 255, 255);\n"
+"border-bottom: 1px solid rgb(255, 255, 255);")
+        self.onr3log2TitleLbl.setAlignment(Qt.AlignCenter)
+
+        self.onr3dxVBL.addWidget(self.onr3log2TitleLbl)
 
         self.onr3log2YB = QTextBrowser(self.onr3dxWgt)
         self.onr3log2YB.setObjectName(u"onr3log2YB")
@@ -830,15 +860,30 @@ class Ui_Form(object):
         self.onr4logWgt.setMinimumSize(QSize(0, 100))
         self.onr4logGL = QGridLayout(self.onr4logWgt)
         self.onr4logGL.setObjectName(u"onr4logGL")
+        self.onr4logGL.setHorizontalSpacing(10)
+        self.onr4logGL.setVerticalSpacing(5)
+        self.onr4logGL.setContentsMargins(0, 0, 0, 0)
+        self.onr4log2TitleLbl = QLabel(self.onr4logWgt)
+        self.onr4log2TitleLbl.setObjectName(u"onr4log2TitleLbl")
+        self.onr4log2TitleLbl.setMinimumSize(QSize(0, 30))
+        self.onr4log2TitleLbl.setMaximumSize(QSize(16777215, 30))
+        self.onr4log2TitleLbl.setSizeIncrement(QSize(0, 30))
+        self.onr4log2TitleLbl.setStyleSheet(u"font: 75 10pt \"MS Shell Dlg 2\";\n"
+"color: rgb(255, 255, 255);\n"
+"border-bottom: 1px solid rgb(255, 255, 255);")
+        self.onr4log2TitleLbl.setAlignment(Qt.AlignCenter)
+
+        self.onr4logGL.addWidget(self.onr4log2TitleLbl, 0, 1, 1, 1)
+
         self.onr4log1TB = QTextBrowser(self.onr4logWgt)
         self.onr4log1TB.setObjectName(u"onr4log1TB")
-        self.onr4log1TB.setMaximumSize(QSize(16777215, 200))
+        self.onr4log1TB.setMaximumSize(QSize(16777215, 16777215))
 
         self.onr4logGL.addWidget(self.onr4log1TB, 1, 0, 1, 1)
 
         self.onr4log2TB = QTextBrowser(self.onr4logWgt)
         self.onr4log2TB.setObjectName(u"onr4log2TB")
-        self.onr4log2TB.setMaximumSize(QSize(16777215, 200))
+        self.onr4log2TB.setMaximumSize(QSize(16777215, 16777215))
 
         self.onr4logGL.addWidget(self.onr4log2TB, 1, 1, 1, 1)
 
@@ -853,18 +898,6 @@ class Ui_Form(object):
         self.onr4log1TitleLbl.setAlignment(Qt.AlignCenter)
 
         self.onr4logGL.addWidget(self.onr4log1TitleLbl, 0, 0, 1, 1)
-
-        self.onr4log2TitleLbl = QLabel(self.onr4logWgt)
-        self.onr4log2TitleLbl.setObjectName(u"onr4log2TitleLbl")
-        self.onr4log2TitleLbl.setMinimumSize(QSize(0, 30))
-        self.onr4log2TitleLbl.setMaximumSize(QSize(16777215, 30))
-        self.onr4log2TitleLbl.setSizeIncrement(QSize(0, 30))
-        self.onr4log2TitleLbl.setStyleSheet(u"font: 75 10pt \"MS Shell Dlg 2\";\n"
-"color: rgb(255, 255, 255);\n"
-"border-bottom: 1px solid rgb(255, 255, 255);")
-        self.onr4log2TitleLbl.setAlignment(Qt.AlignCenter)
-
-        self.onr4logGL.addWidget(self.onr4log2TitleLbl, 0, 1, 1, 1)
 
 
         self.onr4sxVBL.addWidget(self.onr4logWgt)
@@ -938,11 +971,11 @@ class Ui_Form(object):
 
         self.onr4indGL.addWidget(self.onr4indFOBpreLbl, 6, 1, 1, 1)
 
-        self.onr4indSAIFIpostLBL = QLabel(self.onr4indWgt)
-        self.onr4indSAIFIpostLBL.setObjectName(u"onr4indSAIFIpostLBL")
-        self.onr4indSAIFIpostLBL.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr4indSAIFIpostLbl = QLabel(self.onr4indWgt)
+        self.onr4indSAIFIpostLbl.setObjectName(u"onr4indSAIFIpostLbl")
+        self.onr4indSAIFIpostLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.onr4indGL.addWidget(self.onr4indSAIFIpostLBL, 5, 2, 1, 1)
+        self.onr4indGL.addWidget(self.onr4indSAIFIpostLbl, 5, 2, 1, 1)
 
         self.onr4indSAIDIpreLbl = QLabel(self.onr4indWgt)
         self.onr4indSAIDIpreLbl.setObjectName(u"onr4indSAIDIpreLbl")
@@ -994,16 +1027,16 @@ class Ui_Form(object):
 
         self.onr4indGL.addWidget(self.onr4indTitlePreLbl, 1, 1, 1, 1)
 
-        self.onr4indFOBtitleLBL = QLabel(self.onr4indWgt)
-        self.onr4indFOBtitleLBL.setObjectName(u"onr4indFOBtitleLBL")
-        self.onr4indFOBtitleLBL.setMinimumSize(QSize(0, 25))
-        self.onr4indFOBtitleLBL.setMaximumSize(QSize(16777215, 20))
-        self.onr4indFOBtitleLBL.setFont(font1)
-        self.onr4indFOBtitleLBL.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
-        self.onr4indFOBtitleLBL.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.onr4indFOBtitleLBL.setMargin(2)
+        self.onr4indFOBtitleLbl = QLabel(self.onr4indWgt)
+        self.onr4indFOBtitleLbl.setObjectName(u"onr4indFOBtitleLbl")
+        self.onr4indFOBtitleLbl.setMinimumSize(QSize(0, 25))
+        self.onr4indFOBtitleLbl.setMaximumSize(QSize(16777215, 20))
+        self.onr4indFOBtitleLbl.setFont(font1)
+        self.onr4indFOBtitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
+        self.onr4indFOBtitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.onr4indFOBtitleLbl.setMargin(2)
 
-        self.onr4indGL.addWidget(self.onr4indFOBtitleLBL, 6, 0, 1, 1)
+        self.onr4indGL.addWidget(self.onr4indFOBtitleLbl, 6, 0, 1, 1)
 
         self.onr4indEENStitleLbl = QLabel(self.onr4indWgt)
         self.onr4indEENStitleLbl.setObjectName(u"onr4indEENStitleLbl")
@@ -1174,7 +1207,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.onrTabWgt.setCurrentIndex(0)
+        self.onrTabWgt.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -1200,24 +1233,24 @@ class Ui_Form(object):
         self.onr2calcCB.setItemText(1, QCoreApplication.translate("Form", u"FNC", None))
         self.onr2calcCB.setItemText(2, QCoreApplication.translate("Form", u"SFS", None))
 
-        self.onr2calcBtn.setText(QCoreApplication.translate("Form", u"Calcolo Indici di Qualit\u00e0", None))
+        self.onr2calcPb.setText(QCoreApplication.translate("Form", u"Calcolo Indici di Qualit\u00e0", None))
         self.onr2indTitleLbl.setText(QCoreApplication.translate("Form", u"Indici di Affidabilit\u00e0 allo stato iniziale", None))
-        self.onr2indFRGSAIFILbl.setText(QCoreApplication.translate("Form", u"3.5784", None))
-        self.onr2indTitleEENSLbl.setText(QCoreApplication.translate("Form", u"EENS", None))
-        self.onr2indNullLbl.setText("")
-        self.onr2indFRGSAIDILbl.setText(QCoreApplication.translate("Form", u"6.4346", None))
-        self.onr2indTitleSAIFILbl.setText(QCoreApplication.translate("Form", u"SAIFI", None))
-        self.onr2indTitleSAIDILbl.setText(QCoreApplication.translate("Form", u"SAIDI", None))
-        self.onr2indFNCEENSLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
-        self.onr2indSFSEENSLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
-        self.onr2indFNCSAIDILbl.setText(QCoreApplication.translate("Form", u"6.4346", None))
-        self.onr2indSFSSAIFILbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
-        self.onr2indSFSSAIDILbl.setText(QCoreApplication.translate("Form", u"6.4346", None))
-        self.onr2indFRGTitleLbl.setText(QCoreApplication.translate("Form", u"FRG ", None))
-        self.onr2indSFSTitleLbl.setText(QCoreApplication.translate("Form", u"SFS ", None))
-        self.onr2indFNCTitleLbl.setText(QCoreApplication.translate("Form", u"FNC ", None))
-        self.onr2indFNCSAIFILbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
-        self.onr2indFRGEENSLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
+        self.onr2indAbsFRGSAIFILbl.setText(QCoreApplication.translate("Form", u"3.5784", None))
+        self.onr2indAbsTitleEENSLbl.setText(QCoreApplication.translate("Form", u"EENS", None))
+        self.onr2indAbsNullLbl.setText("")
+        self.onr2indAbsFRGSAIDILbl.setText(QCoreApplication.translate("Form", u"6.4346", None))
+        self.onr2indAbsTitleSAIFILbl.setText(QCoreApplication.translate("Form", u"SAIFI", None))
+        self.onr2indAbsTitleSAIDILbl.setText(QCoreApplication.translate("Form", u"SAIDI", None))
+        self.onr2indAbsFNCEENSLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
+        self.onr2indAbsSFSEENSLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
+        self.onr2indAbsFNCSAIDILbl.setText(QCoreApplication.translate("Form", u"6.4346", None))
+        self.onr2indAbsSFSSAIFILbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
+        self.onr2indAbsSFSSAIDILbl.setText(QCoreApplication.translate("Form", u"6.4346", None))
+        self.onr2indAbsFRGTitleLbl.setText(QCoreApplication.translate("Form", u"FRG ", None))
+        self.onr2indAbsSFSTitleLbl.setText(QCoreApplication.translate("Form", u"SFS ", None))
+        self.onr2indAbsFNCTitleLbl.setText(QCoreApplication.translate("Form", u"FNC ", None))
+        self.onr2indAbsFNCSAIFILbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
+        self.onr2indAbsFRGEENSLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
         self.onr2indNormTitleLbl.setText(QCoreApplication.translate("Form", u"Indici di Affidabilit\u00e0 normalizzati allo stato iniziale", None))
         self.onr2indNormFRGSAIFILbl.setText(QCoreApplication.translate("Form", u"3.5784", None))
         self.onr2indNormTitleEENSLbl.setText(QCoreApplication.translate("Form", u"EENS", None))
@@ -1236,18 +1269,19 @@ class Ui_Form(object):
         self.onr2indNormFRGTitleLbl.setText(QCoreApplication.translate("Form", u"FRG ", None))
         self.onr2indNormNullLbl.setText("")
         self.onr2fobLbl.setText(QCoreApplication.translate("Form", u"Funzione obiettivo allo stato iniziale", None))
-        self.onr2fobFNCTitleLbl.setText(QCoreApplication.translate("Form", u"FNC ", None))
-        self.onr2fobFRGTitleLbl.setText(QCoreApplication.translate("Form", u"FRG ", None))
-        self.onr2fobFNCEENSLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
-        self.onr2fobSFSEENSLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
-        self.onr2fobNullLbl.setText("")
-        self.onr2fobSFSTitleLbl.setText(QCoreApplication.translate("Form", u"SFS ", None))
-        self.onr2fobTitleEENSLbl.setText(QCoreApplication.translate("Form", u"f. Obiettivo", None))
-        self.onr2fobFRGEENSLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
+        self.onr2indFobFNCTitleLbl.setText(QCoreApplication.translate("Form", u"FNC ", None))
+        self.onr2indFobFRGTitleLbl.setText(QCoreApplication.translate("Form", u"FRG ", None))
+        self.onr2indFobFNCfobLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
+        self.onr2indFobSFSfobLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
+        self.onr2indFobNullLbl.setText("")
+        self.onr2indFobSFSTitleLbl.setText(QCoreApplication.translate("Form", u"SFS ", None))
+        self.onr2indFobTitlefobLbl.setText(QCoreApplication.translate("Form", u"f. Obiettivo", None))
+        self.onr2indFobFRGfobLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
         self.onrTabWgt.setTabText(self.onrTabWgt.indexOf(self.onr2TabWgt), QCoreApplication.translate("Form", u"Indici pre-ONR", None))
         self.onr3sxTitleLbl.setText(QCoreApplication.translate("Form", u"Violazioni su nodi e linee", None))
         self.onr3Fig1Lbl.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.onr3Fig2Lbl.setText(QCoreApplication.translate("Form", u"TextLabel", None))
+        self.onr3log1TitleLbl.setText(QCoreApplication.translate("Form", u"LOG Solver", None))
         self.onr3log1TB.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1278,6 +1312,7 @@ class Ui_Form(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Analisi delle potenze (ACLF) con la topologia iniziale:</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bot"
                         "tom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
+        self.onr3log2TitleLbl.setText(QCoreApplication.translate("Form", u"LOG Violazioni", None))
         self.onr3log2YB.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1287,6 +1322,7 @@ class Ui_Form(object):
         self.onr4sxTitleLbl.setText(QCoreApplication.translate("Form", u"Risultati ONR", None))
         self.onr4Fig1Lbl.setText(QCoreApplication.translate("Form", u"Grafo zonale pre", None))
         self.onr4Fig2Lbl.setText(QCoreApplication.translate("Form", u"Grafo zonale post", None))
+        self.onr4log2TitleLbl.setText(QCoreApplication.translate("Form", u"LOG Switch", None))
         self.onr4log1TB.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1348,20 +1384,19 @@ class Ui_Form(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bot"
                         "tom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
         self.onr4log1TitleLbl.setText(QCoreApplication.translate("Form", u"LOG Solver", None))
-        self.onr4log2TitleLbl.setText(QCoreApplication.translate("Form", u"LOG Switch", None))
         self.onr4indTitleLbl.setText(QCoreApplication.translate("Form", u"Indici di Affidabilit\u00e0 ", None))
         self.onr4indFigLbl.setText(QCoreApplication.translate("Form", u"Figura Indici", None))
         self.onr4indSAIDItitleLbl.setText(QCoreApplication.translate("Form", u"SAIDI ", None))
         self.onr4indSAIFIpreLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
         self.onr4indFOBpreLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
-        self.onr4indSAIFIpostLBL.setText(QCoreApplication.translate("Form", u"70361.6025", None))
+        self.onr4indSAIFIpostLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
         self.onr4indSAIDIpreLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
         self.onr4indFOBpostLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
         self.onr4indEENSpostLbl.setText(QCoreApplication.translate("Form", u"6.4346", None))
         self.onr4indSAIDIpostLbl.setText(QCoreApplication.translate("Form", u"6.4346", None))
         self.onr4indNullLbl.setText("")
         self.onr4indTitlePreLbl.setText(QCoreApplication.translate("Form", u"Pre-ONR", None))
-        self.onr4indFOBtitleLBL.setText(QCoreApplication.translate("Form", u"f. Ob. ", None))
+        self.onr4indFOBtitleLbl.setText(QCoreApplication.translate("Form", u"f. Ob. ", None))
         self.onr4indEENStitleLbl.setText(QCoreApplication.translate("Form", u"EENS ", None))
         self.onr4indEENSpreLbl.setText(QCoreApplication.translate("Form", u"70361.6025", None))
         self.onr4indSAIFItitleLbl.setText(QCoreApplication.translate("Form", u"SAIFI ", None))
