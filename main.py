@@ -2444,6 +2444,9 @@ class Main:
     def openImage(self, path, event=None):
         img = mpimg.imread(path)
         imgplot = plt.imshow(img)
+        mng = plt.get_current_fig_manager()
+        mng.window.showMaximized()
+
         plt.show()
 
     def onrRun(self):
@@ -2492,6 +2495,20 @@ class Main:
         for cat in indexes['Res']:
             for i in indexes['Res'][cat]:
                 self.onr_res.ui.__getattribute__('onr4ind' + i + cat + 'Lbl').setText('%.4f' % indexes['Res'][cat][i])
+
+        # wsx = w_max * (ratio / (ratio + 1)) / 2
+        # wdx = w_max * (1 / (ratio + 1))
+
+        # self.onr_res.ui.onr4sxWgt.setMaximumWidth(wsx)
+        self.onr_res.ui.onr5dxWgt.setMinimumWidth(wdx + 20)
+
+        self.onr_res.ui.onr5Fig1Lbl.setPixmap(QtGui.QPixmap(folder + 'nodes_violations_post.png').scaledToWidth(wsx))
+        self.onr_res.ui.onr5Fig2Lbl.setPixmap(QtGui.QPixmap(folder + 'lines_overload.png').scaledToWidth(wsx / 2))
+        self.onr_res.ui.onr5Fig3Lbl.setPixmap(QtGui.QPixmap(folder + 'lines_overload_post.png').scaledToWidth(wsx / 2))
+
+        self.onr_res.ui.onr5Fig1Lbl.mouseDoubleClickEvent = partial(self.openImage,
+                                                                    folder + 'nodes_violations_post.png')
+
         pass
 
     def homeClear(self):
