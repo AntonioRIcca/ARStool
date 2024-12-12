@@ -64,7 +64,8 @@ def onr_initialize(el):
     v[el]['ONR'] = {
         'lf_pre': {},
         'lf_post': {},
-        'par': {'zone': None}
+        'par': {'zone': None},
+        # 'info_switch': None,
     }
 
     if v[el]['category'] in mc['Load']:

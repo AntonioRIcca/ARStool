@@ -2138,6 +2138,12 @@ class Main:
         pass
 
     def onrStart(self):
+        from Functionalities.ONR.onr import ONR
+
+        self.onr = ONR()
+
+        self.onr.ONR_PRE()
+
         if self.myform.ui.verticalLayout.count() > 2:
             for i in range(2, self.myform.ui.verticalLayout.count()):
                 self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()

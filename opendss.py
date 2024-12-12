@@ -443,12 +443,13 @@ class OpenDSS:
 
     # Scrittura di tutti gli elementi in OpenDSS
     def full_parse_to_dss(self, time=None):
-
+        print(0)
         self.dss.text('Clear')
         self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0])
                       + ' bus1=' + str(v['source']['top']['conn'][0]))
 
         # Popolamento dei comandi pero ogni macrocategoria di OpenDSS
+        print(1)
         for key in dss_cat.keys():
             dss_cat[key] = []
 
@@ -463,6 +464,7 @@ class OpenDSS:
         f.close()
 
         # Scrittura dei comandi in OpenDSS
+        print(2)
         for mcat in dss_cat:
             for r in dss_cat[mcat]:
                 self.dss.text(r)
@@ -471,6 +473,7 @@ class OpenDSS:
 
         # print(v['a_10_ac-load']['lf']['i'])
 
+        print(3)
         self.dss.text(f"Save Circuit dir=" + mainpath + "/cartella")
 
     # Compilazione di tutti gli elementi in OpenDSS
@@ -528,8 +531,9 @@ class OpenDSS:
     def results_store(self, el):
         # if v[el]['category'] in mc['BESS']:
         #     print('break')
+        # print(el, v[el]['category'])
 
-        if v[el]['category'] != 'Node':     # per tutti gli elementi tranne che per i Nodi
+        if v[el]['category'] not in mc['Node']:     # per tutti gli elementi tranne che per i Nodi
 
             if not v[el]['par']['out-of-service']:  # Se l'elemento è in servizio
                 # mcat = ''
@@ -607,7 +611,9 @@ class OpenDSS:
 
         else:                               # per i nodi e per il Source
             self.dss.circuit.set_active_bus(el)
-            v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
+            # v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
+            # print(el, self.dss.bus.vmag_angle)
+            v[el]['lf']['v'].append(self.dss.bus.vmag_angle[0] * 3 ** 0.5)
 
         # if v[el]['category'] == 'ExternalGrid':
         #     v[el]['lf']['p'] = -1 * v[el]['lf']['p']
