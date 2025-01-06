@@ -1,1 +1,1 @@
-New "LineCode.line" nphases=3 r1=0.164 x1=0.11 B1=91.106 r0=0.805 x0=0.11 B0=91.106
+New "LineCode.dc-line" nphases=3 x1=0.1 r1=0.123

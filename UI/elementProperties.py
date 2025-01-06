@@ -67,7 +67,10 @@ class ElementProperties(QMainWindow):
         else:
             self.anom_def, self.anom_avail = None, []
 
-        # self.__getattribute__(variables.visualpar + 'Show')()   # TODO: dA RIATTIVARE
+        try:
+            self.__getattribute__(variables.visualpar + 'Show')()   # TODO: dA RIATTIVARE
+        except:
+            self.lfShow()
 
         self.ui.lfPls.clicked.connect(self.lfShow)
         self.ui.relPls.clicked.connect(self.relShow)

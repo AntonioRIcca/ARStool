@@ -44,6 +44,12 @@ class ONR:
     def __init__(self):
         self.ONR_initialize()
         self.dss = OpenDSS()
+        self.indexes = dict()
+        self.filedir = 'C:/Users/anton/PycharmProjects/ARStool/Functionalities/ONR/__images__/'
+        self.log_pre_grafos = ''
+        self.log_pre_solver = ''
+        self.log_pre_viol = ''
+
 
     def ONR_PRE(self):
         # with open('C:/Users/velin/OneDrive - Politecnico di Bari/Desktop/ENEA_PORTICI_12_2024/ONR_ENEA_PORTICI_class/ENEA_PORTICI_dict_.yml', 'r') as file:
@@ -84,8 +90,6 @@ class ONR:
         if 'sourcebus' in bus:
             bus_ultimo = bus.pop()
             bus.insert(0, bus_ultimo)
-
-        print(bus)
 
         trbus = []
         for i in v.keys():
@@ -714,6 +718,15 @@ class ONR:
             print('')
             print('Il grafo della rete ha', nx.number_of_nodes(G), 'nodi e', nx.number_of_edges(G), 'rami connessi.')
             print(f'La rete è inizialmente connessa? {is_connected}')
+
+            if is_connected:
+                str_conn = ''
+            else:
+                str_conn = 'non '
+
+            self.log_pre_grafos = (self.log_pre_grafos + 'Il grafo della rete ha ' + str(nx.number_of_nodes(G)) +
+                                   ' nodi e ' + str(nx.number_of_edges(G)) + ' rami connessi.\n' +
+                                   'La rete ' + str_conn + 'è inizialmente connessa\n\n')
             return G
 
         NX_grafo_nodale = Creazione_grafo_nodale(bus, branches)
@@ -736,9 +749,7 @@ class ONR:
                 ind_to = bus.index(to_zone)
                 Grafo_nodale.edge(str(ind_from), str(ind_to), label=f'{r}', color='dimgray', constraint='true')
 
-        filedir = 'C:/Users/anton/PycharmProjects/ARStool/Functionalities/ONR/__images__/'
-        # Grafo_nodale.render(filename=filedir + 'Grafo Rete nodale e magliato.png')
-        Grafo_nodale.render(filename=filedir + 'Grafo Rete nodale e magliato', format='png', cleanup=True)
+        Grafo_nodale.render(filename=self.filedir + 'Grafo Rete nodale e magliato', format='png', cleanup=True)
         # if vedi_grafi=='y':
         # Grafo_nodale.view()
 
@@ -759,6 +770,16 @@ class ONR:
             print('Il grafo zonale della rete ha', nx.number_of_nodes(G), 'nodi e', nx.number_of_edges(G),
                   'rami connessi.')
             print(f'La rete zonale è inizialmente connessa? {is_connected}')
+
+            if is_connected:
+                str_conn = ''
+            else:
+                str_conn = 'non '
+
+            self.log_pre_grafos = (self.log_pre_grafos + 'Il grafo zonale della rete ha ' + str(nx.number_of_nodes(G)) +
+                                   ' nodi e ' + str(nx.number_of_edges(G)) + ' rami connessi.\n' +
+                                   'La rete zonale ' + str_conn + 'è inizialmente connessa\n\n')
+
             Grafo = nx.Graph(G)
             return Grafo
 
@@ -995,6 +1016,17 @@ class ONR:
             print('Il grafo della rete senza maglie ha', nx.number_of_nodes(G), 'nodi e', nx.number_of_edges(G),
                   'rami connessi.')
             print(f'La rete smagliata è connessa? {is_connected}')
+
+            if is_connected:
+                str_conn = ''
+            else:
+                str_conn = 'non '
+
+            self.log_pre_grafos = (self.log_pre_grafos + 'Il grafo della rete senza maglie ha ' +
+                                   str(nx.number_of_nodes(G)) + ' nodi e ' + str(nx.number_of_edges(G)) +
+                                   ' rami connessi.\n' +
+                                   'La rete smagliata ' + str_conn + 'è connessa\n\n')
+
             return G
 
         NX_grafo_nodale_smagliato = Creazione_grafo_nodale2(bus, branches)
@@ -1046,6 +1078,17 @@ class ONR:
                 print('Il grafo della rete zonale senza maglie ha', nx.number_of_nodes(G), 'nodi e',
                       nx.number_of_edges(G), 'rami connessi.')
                 print(f'La rete zonale smagliata è connessa? {is_connected}')
+
+                if is_connected:
+                    str_conn = ''
+                else:
+                    str_conn = 'non '
+
+                self.log_pre_grafos = (self.log_pre_grafos + 'Il grafo della rete zonale senza maglie ha ' +
+                                       str(nx.number_of_nodes(G)) + ' nodi e ' + str(nx.number_of_edges(G)) +
+                                       ' rami connessi.\n' +
+                                       'La rete zonale smagliata ' + str_conn + 'è connessa\n\n')
+
             grafo = nx.Graph(G)
             return grafo
 
@@ -1209,7 +1252,6 @@ class ONR:
                 nodi_capo_feeder.append(zone_bus[i][0])
 
         # TODO: Da riattivare
-        print('start')
         Grafo_nodale_radiale = graphviz.Digraph(comment='Grafo nodale')
         # Grafo_nodale_radiale.attr(size='100,40', orientation='landscape', layout='dot')
         Grafo_nodale_radiale.attr(graphattr='dpi=600')
@@ -1246,8 +1288,6 @@ class ONR:
                                           fontcolor=scritte[corr[bus[i]]], style='filled', fixedsize='true',
                                           width='0.7', height='0.7', penwidth='3.0')
 
-        print(1)
-
         fromzone = []
         tozone = []
         indfrom = []
@@ -1268,8 +1308,6 @@ class ONR:
                     indicesw.append((ind_from, ind_to))
                 else:
                     indicesw.append((0, 0))
-
-        print(2)
 
         indice = sorted(indice, key=lambda x: x[0])
         indicesw = sorted(indicesw, key=lambda x: x[0])
@@ -1303,8 +1341,6 @@ class ONR:
                         indfromo.append(indice[i][1])
                         indtoto.append(indice[i][0])
 
-        print(3)
-
         for i in range(len(index)):
             p = 0
             for j in bus_from_to_sw.keys():
@@ -1319,8 +1355,7 @@ class ONR:
                 Grafo_nodale_radiale.edge(str(indfromo[i]), str(indtoto[i]), color='black', arrowhead='none',
                                           constraint='true', penwidth='2.0')
 
-        # Grafo_nodale_radiale.render(filename=filedir + 'Grafo rete nodale e smagliato pre ONR', format='png', cleanup=True)
-        Grafo_nodale_radiale.render(filename=filedir + 'Grafo rete nodale e smagliato pre ONR', format='png', cleanup=True)
+        Grafo_nodale_radiale.render(filename=self.filedir + 'grafo_nodale_pre_ONR', format='png', cleanup=True)
         # Grafo_nodale_radiale.view()
 
         # %% GRAFO ZONALE PRE ONR
@@ -1331,8 +1366,6 @@ class ONR:
         Grafo_zone_radiale.attr(graphattr='dpi=600')
 
         # Costruzione del grafo:
-        print(4)
-
         for i in range(Nzone):
             if lista_zone[i] == 'z0':
                 Grafo_zone_radiale.node(str(i), label=f'{lista_zone[i]}', shape='circle', fontname='Arial Bold',
@@ -1363,9 +1396,6 @@ class ONR:
                                                 height='0.6', fontsize='14', pos='c', penwidth=('1.2'))
 
                         # Aggiungere i rank per organizzare i nodi sotto i nodi della zona_capo_feeder
-
-        print(5)
-
 
         fromzone = []
         tozone = []
@@ -1417,10 +1447,7 @@ class ONR:
                     Grafo_zone_radiale.edge(str(indfromo[i]), str(indtoto[i]), label=f'{j}', color='red',
                                             arrowhead='none', constraint='true', penwidth='2.0')
 
-        print(6)
-
-        Grafo_zone_radiale.render(filename=filedir + 'Grafo zonale pre_ONR', format='png', cleanup=True)
-        # Grafo_zone_radiale.render(filename=filedir + 'Grafo zonale pre_ONR', format='png', cleanup=True)
+        Grafo_zone_radiale.render(filename=self.filedir + 'grafo_zonale_pre_ONR', format='png', cleanup=True)
         # Grafo_zone_radiale.view()
 
         # %% Trovo indici di reliability utilizzando la funzione calcolo_indici_reliability
@@ -1545,9 +1572,51 @@ class ONR:
         print(round(Funzioni_obiettivo_pre, 4))
         print('')
 
+        self.indexes = {
+            'Abs': {
+                'FRG': {
+                    'EENS': ENS_PRE_FRG,
+                    'SAIDI': SAIDI_PRE_FRG,
+                    'SAIFI': SAIFI_PRE_FRG,
+                },
+                'FNC': {
+                    'EENS': ENS_PRE_FNC,
+                    'SAIDI': SAIDI_PRE_FNC,
+                    'SAIFI': SAIFI_PRE_FNC,
+                },
+                'SFS': {
+                    'EENS': ENS_PRE_SFS,
+                    'SAIDI': SAIDI_PRE_SFS,
+                    'SAIFI': SAIFI_PRE_SFS,
+                },
+            },
+            'Norm': {
+                'FRG': {
+                    'EENS': ENS_PRE_FRG / ENS_PRE_FRG,
+                    'SAIDI': SAIDI_PRE_FRG / SAIDI_PRE_FRG,
+                    'SAIFI': SAIFI_PRE_FRG / SAIFI_PRE_FRG,
+                },
+                'FNC': {
+                    'EENS': ENS_PRE_FNC / ENS_PRE_FRG,
+                    'SAIDI': SAIDI_PRE_FNC / SAIDI_PRE_FRG,
+                    'SAIFI': SAIFI_PRE_FNC / SAIFI_PRE_FRG,
+                },
+                'SFS': {
+                    'EENS': ENS_PRE_SFS / ENS_PRE_FRG,
+                    'SAIDI': SAIDI_PRE_SFS / SAIDI_PRE_FRG,
+                    'SAIFI': SAIFI_PRE_SFS / SAIFI_PRE_FRG,
+                },
+            },
+            'Fob': {
+                'FRG': {'fob': funzione_obiettivo_pre_FRG},
+                'FNC': {'fob': funzione_obiettivo_pre_FNC},
+                'SFS': {'fob': funzione_obiettivo_pre_SFS},
+            },
+        }
+
         # Grafici ENS, SAIDI, SAIFI
 
-        plt.figure(3, figsize=(6, 6))
+        eens_fig = plt.figure(3, figsize=(6, 6))
         plt.bar(Indici_di_Reliability_pre_norm.index, Indici_di_Reliability_pre_norm['ENS'].values, width=0.5,
                 color=['#FFA07A', '#FF7F50', '#FF6347'], edgecolor='black')
         plt.locator_params(axis='y', nbins=15)
@@ -1557,31 +1626,38 @@ class ONR:
         formatter.set_scientific(True)
         formatter.set_powerlimits((0, 3))
         plt.gca().yaxis.set_major_formatter(formatter)
-        plt.show()
-        plt.savefig(filedir + 'EENS.png')
+        # plt.show()
+        # plt.savefig(self.filedir + 'EENS.png')
+        eens_fig.savefig(self.filedir + 'EENS.png')
 
-        plt.figure(3, figsize=(6, 6))
+        saidi_fig = plt.figure(3, figsize=(6, 6))
         plt.bar(Indici_di_Reliability_pre_norm.index, Indici_di_Reliability_pre_norm['SAIDI'].values, width=0.5,
                 color=['#FFA07A', '#FF7F50', '#FF6347'], edgecolor='black')
         plt.locator_params(axis='y', nbins=10)
         plt.xlabel('Automation logics', fontsize=15)
         plt.ylabel('SAIDI [hours/year]', fontsize=15)
-        plt.show()
+        # plt.show(
+        # plt.savefig(self.filedir + 'SAIDI.png')
+        saidi_fig.savefig(self.filedir + 'SAIDI.png')
 
-        plt.figure(3, figsize=(6, 6))
+        saifi_fig = plt.figure(3, figsize=(6, 6))
         plt.bar(Indici_di_Reliability_pre_norm.index, Indici_di_Reliability_pre_norm['SAIFI'].values, width=0.5,
                 color=['#FFA07A', '#FF7F50', '#FF6347'], edgecolor='black')
         plt.xlabel('Automation logics', fontsize=15)
         plt.ylabel('SAIFI [faults/year]', fontsize=15)
-        plt.show()
+        # plt.show()
+        # plt.savefig(self.filedir + 'SAIFI.png')
+        saifi_fig.savefig(self.filedir + 'SAIFI.png')
 
-        plt.figure(3, figsize=(6, 6))
+        fob_fig = plt.figure(3, figsize=(6, 6))
         plt.bar(Funzioni_obiettivo_pre.index, Funzioni_obiettivo_pre['Funzione obiettivo'].values, width=0.5,
                 color=['#FFA07A', '#FF7F50', '#FF6347'], edgecolor='black')
         plt.locator_params(axis='y', nbins=15)
         plt.xlabel('Automation logics', fontsize=15)
         plt.ylabel('Objective function', fontsize=15)
-        plt.show()
+        # plt.show()
+        # plt.savefig(self.filedir + 'obj_funct.png')
+        fob_fig.savefig(self.filedir + 'obj_funct.png')
 
         # kw=[]
         # kvar=[]
@@ -1695,9 +1771,18 @@ class ONR:
 
         V0 = self.LFviolations_pre(x, 'lf_pre', busfrom, linee, trafi)
 
+        self.V0 = V0
+        self.ONR_GLOBALE = ONR_GLOBALE
+        self.ONR_ZONALE = ONR_ZONALE
+        self.xx = x
+
         return V0, bus, x, ONR_GLOBALE, ONR_ZONALE
 
-    def ONR(self, V0, xx, ONR_GLOBALE, ONR_ZONALE, choice):
+    def ONR(self, choice):
+
+        V0, xx, ONR_GLOBALE, ONR_ZONALE = self.V0, self.xx, self.ONR_GLOBALE, self.ONR_ZONALE
+
+        # choiche = (a, b, c) TODO: Ricorda!!!
 
         # %% ONR
 
@@ -2503,6 +2588,8 @@ class ONR:
                     Grafo_zone_radiale.edge(str(indfromo[i]), str(indtoto[i]), label=f'{j}', color='red',
                                             arrowhead='none', constraint='true', penwidth='2.0')
 
+
+        # TODO: da cambiare: cartella di salvataggio e togliere il view()
         if scelta == 'a':
             Grafo_zone_radiale.render(filename='Grafo zonale post_ONR', format='png', cleanup=True)
         if scelta == 'b':
@@ -2645,7 +2732,6 @@ class ONR:
                 v[i]['ONR']['info_switch'] = dict()
                 for p in ['stato_pre', 'stato_post', 'transition']:
                     v[i]['ONR']['info_switch'][p] = None
-                print(i, v[i]['ONR'])
 
     def Stato_Switch(self, stati_switch_iniziali):
         for i in v.keys():
@@ -2717,8 +2803,6 @@ class ONR:
         self.dss.full_parse_to_dss()
         self.dss.solve()
 
-        print(v['load_031']['lf'])
-
         print('Grid power: P = %.1f\tQ = %.1f' % (
               self.dss.dss.circuit.total_power[0], self.dss.dss.circuit.total_power[1]))
 
@@ -2748,7 +2832,6 @@ class ONR:
         q2 = 0
         for i in v.keys():
             if 'Line' in v[i]['category'] or 'Transformer' in v[i]['category'] or 'Switch' in v[i]['category']:
-                print(i)
                 p1 += v[i]['ONR']['lf_pre']['p'][0]
                 p2 += -v[i]['ONR']['lf_pre']['p'][1]
                 q1 += v[i]['ONR']['lf_pre']['q'][0]
@@ -2791,6 +2874,14 @@ class ONR:
         print('Reactive power losses:', round(q1 + q2, 2), 'Kvar')
         print('')
 
+        self.log_pre_solver = (self.log_pre_solver + 'Analisi delle potenze (ACLF) con la topologia iniziale:\n\n' +
+                               'Carico: ' + str(round(sum(P_loads2.values()), 2)) + ' KW ; ' +
+                               str(round(sum(Q_loads2.values()), 2)) + ' Kvar\n' +
+                               'Slack Bus active power: ' + str(round(sum(P_slack_pre2.values()), 2)) + ' KW\n' +
+                               'Slack Bus reactive power: ' + str(round(sum(Q_slack_pre2.values()), 2)) + ' Kvar\n' +
+                               'Active power losses: ' + str(round(p1 + p2, 2)) + ' KW\n' +
+                               'Reactive power losses: ' + str(round(q1 + q2, 2)) + ' Kvar\n\n')
+
         # Controllo se ci sono linee in sovraccarico:
 
         sovraccarichi_iniziali = {}
@@ -2800,6 +2891,9 @@ class ONR:
             if Correnti_linee_modulo2[b] > Portata_linee2[b]:
                 print(b, 'in sovraccarico:', round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0), '%')
                 sovraccarichi_iniziali[b] = round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0)
+
+                self.log_pre_solver += (b + ' in sovraccarico: ' +
+                                        str(round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0)) + '%\n')
         print('')
 
         # Tensioni base
@@ -2846,7 +2940,10 @@ class ONR:
             if b <= Vmin or b >= Vmax:
                 print('Violazione di tensione sul nodo', a, '- Vi =', round(b, 4), 'p.u.')
                 violazioni_tensioni[a] = b
-        print('')
+                self.log_pre_viol += 'Violazione di tensione sul nodo ' + a + ' - Vi =' + str(round(b, 4)) + ' p.u.\n'
+
+        if self.log_pre_viol == '':
+            self.log_pre_viol = 'Nessuna violazione sui nodi'
 
         newV0 = []
         newbus = []
@@ -2861,7 +2958,8 @@ class ONR:
         # Modulo delle tensioni in pu
         plt.cla()
 
-        plt.figure(3, figsize=(20, 6))
+        nv_fig = plt.figure(figsize=(20, 6))
+        # nv_fig = plt.figure(3, figsize=(30, 6))
         plt.axhline(1, color='black', linestyle='--', linewidth=1)
         plt.plot(buses, V0.values(), linewidth=1.5, marker='o', markersize=2.5, color='dodgerblue', label='Pre ONR')
         # plt.plot(buses, V1.values(), linewidth=1, marker='o',markersize=1, color='orange', label='ONR risultati')
@@ -2887,7 +2985,9 @@ class ONR:
         plt.ylabel(r'$V_{i} [pu]$', fontsize=20)
         plt.legend(loc='best', fontsize=12, frameon=False, ncol=2)
         plt.tight_layout()
-        plt.show()
+        # plt.show()
+        # plt.savefig(self.filedir + 'nodes_violations_pre.png')
+        nv_fig.savefig(self.filedir + 'nodes_violations_pre.png')
 
         from matplotlib.lines import Line2D
 
@@ -2909,15 +3009,20 @@ class ONR:
                            Line2D([0], [0], color='darkred', marker='v', linestyle='None', label=r'$S_{ij}^{pre}$')]
         plt.legend(handles=legend_elements, fontsize=12)
         plt.tight_layout()
-        plt.show()
+        # plt.show()
+        plt.savefig(self.filedir + 'lines_overload.png')
 
         return V0
 
     def LFviolations_post(self, V0, x, pre_post, busfrom, linee, trafi, switch):
 
         OpenDSS().full_parse_to_dss()
+        OpenDSS().solve()
         print('Grid power: P = %.1f\tQ = %.1f' % (
         OpenDSS().dss.circuit.total_power[0], OpenDSS().dss.circuit.total_power[1]))
+
+        self.log_pre_solver = ('Grid power: P = %.1f\tQ = %.1f\n\n' %
+                               (OpenDSS().dss.circuit.total_power[0], OpenDSS().dss.circuit.total_power[1]))
 
         self.results_store(pre_post)
 
@@ -3003,7 +3108,11 @@ class ONR:
 
         tensioni_bus_modulo_post2 = {}
         for b in buses:
-            tensioni_bus_modulo_post2[b] = v[b]['ONR']['lf_post']['v'] / (sqrt(3) * 1000)
+
+            print('pre', v[b]['ONR']['lf_post']['v'])
+            print('post', v[b]['ONR']['lf_post']['v'])
+
+            tensioni_bus_modulo_post2[b] = v[b]['ONR']['lf_post']['v'][0] / (sqrt(3) * 1000)
 
         # Modulo della tensione concatenata in p.u.:
         V0_post = {}
@@ -3019,7 +3128,7 @@ class ONR:
         Sijpre = {(b): 0 for b in branches}
 
         for b in branches:
-            if b in linee or b in switch:
+            if b in linee:
                 Sijmax[b] = round(Vnbus[busfrom[b]] * Portata_linee2[b.replace('Line.', '')], 2)
                 Sijpre[b] = round(
                     sqrt(3) * tensioni_bus_modulo_post2[busfrom[b]] * Correnti_linee_modulo2[b.replace('Line.', '')], 2)
@@ -3118,7 +3227,6 @@ class ONR:
                         # le potenza globali sono date dalla somma delle potenze delle singole fasi
                         # Accodamento nel vettore dei risultati nel dizionario
                         # dei valori di P, Q, V, i con i relativi fattori di correzione
-                        print(el, v[el]['lf']['p'])
                         v[el]['ONR'][pre_post]['p'] = v[el]['lf']['p'][0]
                         v[el]['ONR'][pre_post]['q'] = v[el]['lf']['q'][0]
                         v[el]['ONR'][pre_post]['v'] = v[el]['lf']['v'][0]
@@ -3128,9 +3236,6 @@ class ONR:
 
                         # Inserimento nel dizionario, per ogni lato,
                         # dei valori di P, Q, V, i con i relativi fattori di correzione
-                        # print(el)
-                        print(el, v[el]['ONR'][pre_post]['p'], v[el]['lf']['p'])
-
                         v[el]['ONR'][pre_post]['p'][0] = v[el]['lf']['p'][0][0]
                         v[el]['ONR'][pre_post]['q'][0] = v[el]['lf']['q'][0][0]
                         v[el]['ONR'][pre_post]['p'][1] = v[el]['lf']['p'][1][0]
@@ -3168,7 +3273,7 @@ class ONR:
 
     def ONR_SF(self):
         for i in v.keys():
-            if ('s_' in i or '_m' in i) and ('Line' in v[i]['category'] or 'switch' in v[i]['category']):
+            if ('s_' in i or '_m' in i) and ('Line' in v[i]['category'] or 'Switch' in v[i]['category']):
                 if (v[i]['ONR']['info_switch']['transition']) == -1:
                     v[i]['par']['out-of-service'] = False
                     v[i]['ONR']['info_switch']['stato_post'] = 'Chiuso'

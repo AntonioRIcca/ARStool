@@ -888,6 +888,7 @@ el_lfresults = {
         'i': {'tag': 'i', 'i': None, 'decimal': 3, 'unit': 'A'},
         'V': {'tag': 'v', 'i': None, 'decimal': 3, 'unit': 'kV'},
     },
+    'Switch': {},
 }
 
 el_format = {

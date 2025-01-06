@@ -132,6 +132,7 @@ class Main:
         self.ui.reliability_Btn.clicked.connect(self.relStart)
         self.ui.adequacy_Btn.clicked.connect(self.adeqStart)
         self.ui.onr_Btn.clicked.connect(self.onrStart)
+        self.ui.gidman_Btn.clicked.connect(self.gridManStart)
 
         self.app.exec_()
 
@@ -560,30 +561,30 @@ class Main:
     #     self.elemPropWgt.ui.relWgt.setMaximumHeight(1500)
     #     self.elemPropWgt.ui.lfWgt.setMaximumHeight(20)
 
-    def profile_draw(self, l=180, h=120):
-        font = {
-            'weight': 'normal',
-            'size': 4
-        }
-
-        matplotlib.rc('font', **font)
-        self.canvas = FigureCanvas(plt.Figure(figsize=(2, 1.5)))
-        # self.ax = self.canvas.figure.subplots()
-        self.ax = self.canvas.figure.add_subplot(111)
-        self.ax.plot([0, 12, 24], [0.3, 0.9, 0.6])
-
-        self.ax.set_title('Profilo')
-        self.ax.set_ylim([0, 1.05])
-        self.ax.set_xlim([0, 24])
-        self.ax.set_xlabel('Tempo [h]', fontsize=4)
-        self.ax.set_ylabel('Profilo [p.u.]', fontsize=2)
-
-        # self.line, = self.ax.plot([0,12,24], [0.3, 0.9, 0.6])
-        self.canvas.draw()
-        self.canvas.flush_events()
-        self.canvas.flush_events()
-
-        self.par_wgt.mainVBL.insertWidget(2, self.canvas)
+    # def profile_draw(self, l=180, h=120):
+    #     font = {
+    #         'weight': 'normal',
+    #         'size': 4
+    #     }
+    #
+    #     matplotlib.rc('font', **font)
+    #     self.canvas = FigureCanvas(plt.Figure(figsize=(2, 1.5)))
+    #     # self.ax = self.canvas.figure.subplots()
+    #     self.ax = self.canvas.figure.add_subplot(111)
+    #     self.ax.plot([0, 12, 24], [0.3, 0.9, 0.6])
+    #
+    #     self.ax.set_title('Profilo')
+    #     self.ax.set_ylim([0, 1.05])
+    #     self.ax.set_xlim([0, 24])
+    #     self.ax.set_xlabel('Tempo [h]', fontsize=4)
+    #     self.ax.set_ylabel('Profilo [p.u.]', fontsize=2)
+    #
+    #     # self.line, = self.ax.plot([0,12,24], [0.3, 0.9, 0.6])
+    #     self.canvas.draw()
+    #     self.canvas.flush_events()
+    #     self.canvas.flush_events()
+    #
+    #     self.par_wgt.mainVBL.insertWidget(2, self.canvas)
 
     def profile_open(self):
         # if not grid['profile']['exist']:
@@ -2165,7 +2166,7 @@ class Main:
         self.homeHBL.addWidget(self.onr_wgt)
 
         # self.onr_res.ui.onr2TabWgt.setVisible(False)
-        for i in range(1, 5):
+        for i in range(3, 5):
             self.onr_res.ui.onrTabWgt.setTabVisible(i, False)
         # self.onr_res.ui.onrTabWgt.tabBar().tabButton()
 
@@ -2213,10 +2214,10 @@ class Main:
         ratio = 1.5
         folder = mainpath + '/Functionalities/ONR/__images__/'
 
-        self.onr_res.ui.onr1sxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale.png').scaledToWidth(w_max *
-                                                                                                        (ratio / (ratio + 1))))
-        self.onr_res.ui.onr1dxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_zonale.png').scaledToWidth(w_max *
-                                                                                                        (1 / (ratio + 1))))
+        self.onr_res.ui.onr1sxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_zonale_pre_ONR.png').scaledToWidth(
+            w_max * (ratio / (ratio + 1))))
+        self.onr_res.ui.onr1dxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale_pre_ONR.png').scaledToWidth(
+            w_max * (1 / (ratio + 1))))
 
         z0_n = 23
         z0_b = 33
@@ -2240,16 +2241,18 @@ class Main:
         if not zsm_conn:
             rsm_txt = 'non '
 
-        z_log = (('Il grafo zonale della rete ha %d nodi e %d rami connessi.\n' % (z0_n, z0_b)) +
-                 'La rete zonale ' + z0_txt + 'è inizialmente connessa.\n\n' +
-                 ('Il grafo della rete senza maglie ha %d nodi e %d rami connessi.\n' % (rsm_n, rsm_b)) +
-                 'La rete zonale ' + rsm_txt + 'è inizialmente connessa.\n\n' +
-                 ('Il grafo della rete zonale senza maglie ha %d nodi e %d rami connessi.\n' % (zsm_n, zsm_b)) +
-                 'La rete zonale smagliata ' + zsm_txt + 'è connessa.')
+        # z_log = (('Il grafo zonale della rete ha %d nodi e %d rami connessi.\n' % (z0_n, z0_b)) +
+        #          'La rete zonale ' + z0_txt + 'è inizialmente connessa.\n\n' +
+        #          ('Il grafo della rete senza maglie ha %d nodi e %d rami connessi.\n' % (rsm_n, rsm_b)) +
+        #          'La rete zonale ' + rsm_txt + 'è inizialmente connessa.\n\n' +
+        #          ('Il grafo della rete zonale senza maglie ha %d nodi e %d rami connessi.\n' % (zsm_n, zsm_b)) +
+        #          'La rete zonale smagliata ' + zsm_txt + 'è connessa.')
 
-        self.onr_res.ui.onr1logLbl.setText(z_log)
+        self.onr_res.ui.onr1logLbl.setText(self.onr.log_pre_grafos)
 
-        self.onr_res.ui.indexCalcPb.clicked.connect(self.onrIndexOutput)
+        # self.onr_res.ui.indexCalcPb.clicked.connect(self.onrIndexOutput)
+
+        self.onrIndexOutput()
 
         # onr1MainWgt = QWidget()
         # onr1MainHBL = QHBoxLayout(onr1MainWgt)
@@ -2377,8 +2380,6 @@ class Main:
         self.onr_res.ui.onrTabWgt.setTabVisible(1, True)
         self.onr_res.ui.onrTabWgt.setTabVisible(2, True)
 
-        self.onr_res.ui.onrTabWgt.setCurrentIndex(1)
-
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 20
         ratio = 1.5
         folder = mainpath + '/Functionalities/ONR/__images__/'
@@ -2391,71 +2392,83 @@ class Main:
         self.onr_res.ui.onr2Fig4Lbl.setPixmap(QtGui.QPixmap(folder + 'obj_funct.png').scaledToWidth(wsx))
 
         # Widget Indici
-        indexes = {
-            'Abs': {
-                'FRG': {
-                    'EENS': 70361.6025,
-                    'SAIDI': 6.4346,
-                    'SAIFI': 3.5758,
-                },
-                'FNC': {
-                    'EENS': 69788.4269,
-                    'SAIDI': 6.3820,
-                    'SAIFI': 2.5250,
-                },
-                'SFS': {
-                    'EENS': 69501.8389,
-                    'SAIDI': 6.3558,
-                    'SAIFI': 1.9995,
-                },
-            },
-            'Norm': {
-                'FRG': {
-                    'EENS': 1,
-                    'SAIDI': 1,
-                    'SAIFI': 1,
-                },
-                'FNC': {
-                    'EENS': 0.9919,
-                    'SAIDI': 0.9918,
-                    'SAIFI': 0.7061,
-                },
-                'SFS': {
-                    'EENS': 0.9878,
-                    'SAIDI': 0.9878,
-                    'SAIFI': 0.5592,
-                },
-            },
-            'Fob': {
-                'FRG': {'fob': 1},
-                'FNC': {'fob': 0.8966},
-                'SFS': {'fob': 0.8449},
-            },
-        }
+        # indexes = {
+        #     'Abs': {
+        #         'FRG': {
+        #             'EENS': 70361.6025,
+        #             'SAIDI': 6.4346,
+        #             'SAIFI': 3.5758,
+        #         },
+        #         'FNC': {
+        #             'EENS': 69788.4269,
+        #             'SAIDI': 6.3820,
+        #             'SAIFI': 2.5250,
+        #         },
+        #         'SFS': {
+        #             'EENS': 69501.8389,
+        #             'SAIDI': 6.3558,
+        #             'SAIFI': 1.9995,
+        #         },
+        #     },
+        #     'Norm': {
+        #         'FRG': {
+        #             'EENS': 1,
+        #             'SAIDI': 1,
+        #             'SAIFI': 1,
+        #         },
+        #         'FNC': {
+        #             'EENS': 0.9919,
+        #             'SAIDI': 0.9918,
+        #             'SAIFI': 0.7061,
+        #         },
+        #         'SFS': {
+        #             'EENS': 0.9878,
+        #             'SAIDI': 0.9878,
+        #             'SAIFI': 0.5592,
+        #         },
+        #     },
+        #     'Fob': {
+        #         'FRG': {'fob': 1},
+        #         'FNC': {'fob': 0.8966},
+        #         'SFS': {'fob': 0.8449},
+        #     },
+        # }
 
-        for w in indexes:
-            for cat in indexes[w]:
-                for i in indexes[w][cat]:
-                    self.onr_res.ui.__getattribute__('onr2ind' + w + cat + i + 'Lbl').setText('%.4f' % indexes[w][cat][i])
+        for w in self.onr.indexes:
+            for cat in self.onr.indexes[w]:
+                for i in self.onr.indexes[w][cat]:
+                    self.onr_res.ui.__getattribute__(
+                        'onr2ind' + w + cat + i + 'Lbl').setText('%.4f' % self.onr.indexes[w][cat][i])
 
-        wsx =  w_max * (ratio / (ratio + 1))
+        wsx = w_max * (ratio / (ratio + 1))
         self.onr_res.ui.onr3Fig1Lbl.setPixmap(QtGui.QPixmap(folder + 'nodes_violations_pre.png').scaledToWidth(wsx))
         self.onr_res.ui.onr3Fig2Lbl.setPixmap(QtGui.QPixmap(folder + 'lines_overload.png').scaledToWidth(wsx))
 
         self.onr_res.ui.onr3Fig1Lbl.mouseDoubleClickEvent = partial(self.openImage, folder + 'nodes_violations_pre.png')
         self.onr_res.ui.onr3Fig2Lbl.mouseDoubleClickEvent = partial(self.openImage, folder + 'lines_overload.png')
 
+        self.onr_res.ui.onr3log1TB.setText(self.onr.log_pre_solver)
+        self.onr_res.ui.onr3log2YB.setText(self.onr.log_pre_viol)
+
         self.onr_res.ui.onr2calcPb.clicked.connect(self.onrRun)
 
     def openImage(self, path, event=None):
+        plt.cla()
+        # plt.clf()
+        # plt.close()
         img = mpimg.imread(path)
         imgplot = plt.imshow(img)
+        # plt.show()
         mng = plt.get_current_fig_manager()
         mng.window.showMaximized()
 
         plt.show()
 
     def onrRun(self):
+        choiche = ['a', 'b', 'c']
+
+        self.onr.ONR(choiche[self.onr_res.ui.onr2calcCB.currentIndex()])
+
         self.onrRes()
         pass
 
@@ -2516,6 +2529,29 @@ class Main:
                                                                     folder + 'nodes_violations_post.png')
 
         pass
+
+    def gridManStart(self):
+        if self.myform.ui.verticalLayout.count() > 2:
+            for i in range(2, self.myform.ui.verticalLayout.count()):
+                self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
+
+        self.gridManPls = pb_create(text='   Avvia Grid Management', height=50, font=14, border=2, radius=15,
+                                    icon='gridmanagement.png')
+
+        self.myform.ui.verticalLayout.insertWidget(2, self.gridManPls)
+
+        self.gridManPls.clicked.connect(self.gridManRun)
+
+        variables.visualpar = 'rel'
+
+        if grid['studies']['adeq']:
+            self.adeqRes()
+
+    def gridManRun(self):
+        print('Start Grid Management')
+
+    def gridManRes(self):
+        print('Grid Management Results')
 
     def homeClear(self):
         if self.homeHBL.count() > 1:

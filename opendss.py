@@ -73,24 +73,16 @@ class OpenDSS:
     #     with open('CityArea.yml', 'w') as file:
     #         yaml.dump(v, file)
     #         file.close()
-    #     print('meters', self.dss.meters.names)
 
         # -- Metodo per definire le zone -----------------------------------------------------------------------
         if self.dss.meters.names != ['NONE']:
             for i in range(len(self.dss.meters.names)):
                 meter = self.dss.meters.names[i]
-                # print(meter)
                 self.dss.meters.name = meter
-                # print(self.dss.meters.all_pce_in_zone)
-                # print(self.dss.meters.all_branches_in_zone)
-                # print()
 
     def read_new(self, el):
         mcat = mcat_find(el)
         cat = v[el]['category']
-
-        # if cat == 'AC-BESS':
-        #     print('Stop')
 
         if mcat not in mc['Node']:
             self.dss.circuit.set_active_element(mcat + '.' + el)  # viene richiamato l'elemento in OpenDSS
@@ -100,7 +92,6 @@ class OpenDSS:
             par = self.readline(el)     # TODO: vedi commento in self.readline
 
             for p in new_par_dict[cat]['par'].keys() - ['others', 'linecode']:  # todo: forse da modificare in base al TODO precedente
-                # print(cat, p, new_par_dict[cat]['par'])
                 try:
                     v[el]['par'][p] = par[new_par_dict[cat]['par'][p]['label']]
                 except:
@@ -171,9 +162,8 @@ class OpenDSS:
                 v[el]['par']['eff'] = 1
                 if cat in ['AC-BESS', 'DC-BESS']:   # Si ipotizza che la capacità delle batterie sia inizalmente 0
                     v[el]['par']['cap'] = 2 * v[el]['par']['P']
-                    v[el]['par']['profile']['curve'] = 0
+                    v[el]['par']['profile']['curve'] = 1
                     v[el]['par']['SOC'] = 50
-                    # print('BESS', el)
 
     def node_solve(self):
         for el in v:
@@ -266,7 +256,6 @@ class OpenDSS:
         return line     # TODO: Perchè?
 
     def full_parse_profil_to_dss(self, t0=None, steps=None):
-        # print('start')
         for el in v:
             self.__setattr__(el + '_pd', pd.DataFrame(index=list(range(steps)),
                                                       columns=['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']))
@@ -278,7 +267,6 @@ class OpenDSS:
                 self.results_store_pd(el, i)
 
     def full_parse_profil_to_dss_polars(self, t0=None, steps=None):
-        # print('start')
         for el in v:
             self.__setattr__(el + '_pl', pl.DataFrame({
                 'i0': list(float(0) for i in range(steps)),
@@ -305,10 +293,7 @@ class OpenDSS:
             self.__getattribute__(el + '_pl').write_csv(path + el + '.csv', separator='\t')
         # TODO ---------------------------------
 
-        # print(self.__getattribute__('a_24_ac-load_pl'))
-
     def full_parse_profil_to_dss_csv(self, t0=None, steps=None):
-        # print('start')
         path = str(mainpath) + '/_temp/elements/'
 
         for el in v:
@@ -335,7 +320,6 @@ class OpenDSS:
         #     # self.__getattribute__(el + '_np').savetxt(path + el + '.csv', separator='\t')
 
     def full_parse_profil_to_dss_numpy(self, t0=None, steps=None):
-        # print('start')
         for el in v:
             # for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
             self.__setattr__(el + '_np', np.zeros((steps, 8)))
@@ -359,11 +343,9 @@ class OpenDSS:
         # for el in v:
         #     for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
         #         if self.__getattribute__(el + '_' + p):
-        #             # print(el, p)
         #             self.__getattribute__(el + '_pd')[p] = self.__getattribute__(el + '_' + p)
 
     def full_parse_profil_to_dss_numpy_chatGPT(self, t0=None, steps=None):
-        # print('start')
         for el in v:
             # for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
             self.__setattr__(el + '_np', np.zeros((steps, 8)))
@@ -387,11 +369,9 @@ class OpenDSS:
         # for el in v:
         #     for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
         #         if self.__getattribute__(el + '_' + p):
-        #             # print(el, p)
         #             self.__getattribute__(el + '_pd')[p] = self.__getattribute__(el + '_' + p)
 
     def full_parse_profil_to_dss_numpy_chatGPT_nodata(self, t0=None, steps=None):
-        # print('start')
         for el in v:
             # for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
             self.__setattr__(el + '_np', np.zeros((steps, 8)))
@@ -415,11 +395,9 @@ class OpenDSS:
         # for el in v:
         #     for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
         #         if self.__getattribute__(el + '_' + p):
-        #             # print(el, p)
         #             self.__getattribute__(el + '_pd')[p] = self.__getattribute__(el + '_' + p)
 
     def full_parse_profil_to_dss_array(self, t0=None, steps=None):
-        # print('start')
         for el in v:
             for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
                 self.__setattr__(el + '_' + p, [])
@@ -435,21 +413,15 @@ class OpenDSS:
         for el in v:
             for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
                 if self.__getattribute__(el + '_' + p):
-                    # print(el, p)
                     self.__getattribute__(el + '_pd')[p] = self.__getattribute__(el + '_' + p)
-
-        # print(self.__getattribute__('a_24_ac-load_pd'))
-        # print(self.__getattribute__('a_24_ac-load_p0'))
 
     # Scrittura di tutti gli elementi in OpenDSS
     def full_parse_to_dss(self, time=None):
-        print(0)
         self.dss.text('Clear')
         self.dss.text('New object=circuit.dss_grid basekv=' + str(v['source']['par']['Vn'][0])
                       + ' bus1=' + str(v['source']['top']['conn'][0]))
 
         # Popolamento dei comandi pero ogni macrocategoria di OpenDSS
-        print(1)
         for key in dss_cat.keys():
             dss_cat[key] = []
 
@@ -460,20 +432,14 @@ class OpenDSS:
             if mcat in dss_cat:
                 # myline = self.writeline(el, time)
                 f.write(self.writeline(el, time) + '\n')
-                # print('done')
         f.close()
 
         # Scrittura dei comandi in OpenDSS
-        print(2)
         for mcat in dss_cat:
             for r in dss_cat[mcat]:
                 self.dss.text(r)
 
         # self.solve()
-
-        # print(v['a_10_ac-load']['lf']['i'])
-
-        print(3)
         self.dss.text(f"Save Circuit dir=" + mainpath + "/cartella")
 
     # Compilazione di tutti gli elementi in OpenDSS
@@ -529,10 +495,6 @@ class OpenDSS:
 
     # Aggiornamento del dizionario dei risultati di uno studio singolo. TODO: Ridefinire
     def results_store(self, el):
-        # if v[el]['category'] in mc['BESS']:
-        #     print('break')
-        # print(el, v[el]['category'])
-
         if v[el]['category'] not in mc['Node']:     # per tutti gli elementi tranne che per i Nodi
 
             if not v[el]['par']['out-of-service']:  # Se l'elemento è in servizio
@@ -612,7 +574,6 @@ class OpenDSS:
         else:                               # per i nodi e per il Source
             self.dss.circuit.set_active_bus(el)
             # v[el]['lf']['v'].append(self.dss.cktelement.voltages_mag_ang[0] * 3 ** 0.5)
-            # print(el, self.dss.bus.vmag_angle)
             v[el]['lf']['v'].append(self.dss.bus.vmag_angle[0] * 3 ** 0.5)
 
         # if v[el]['category'] == 'ExternalGrid':
@@ -1190,9 +1151,6 @@ class OpenDSS:
             if v[el]['category'] in mc['Load']:
                 self.dss.circuit.set_active_element('load.' + el)
 
-                # print(el, self.dss.cktelement.powers)
-
-
         self.dss.text(f"Save Circuit dir=cartella")
 
         # self.results_store_all()
@@ -1201,7 +1159,6 @@ class OpenDSS:
 
     # scrittura dei risultati nel dizionario per ogni elemento
     def results_store_all(self):
-        # print('store all')
         for el in v.keys():
             self.results_store(el)
 
@@ -1268,7 +1225,6 @@ class OpenDSS:
             if mcat == 'Generator':
                 par['kv'] = [par['kv']]
             elif mcat == 'Load':
-                # print(el)
                 par['kV'] = [par['kV']]
             elif mcat == 'Vsource':
                 par['basekv'] = [par['basekv']]
