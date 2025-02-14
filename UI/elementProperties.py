@@ -131,7 +131,12 @@ class ElementProperties(QMainWindow):
         # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
         if self.cat != 'ExternalGrid':
             for par in ['t_preg', 'alfa', 'beta', 'Pi_E', 'Pi_Q']:
-                self.ui.__getattribute__(par + 'Dsb').setValue(v[self.elem]['rel']['par'][par])
+                try:
+                    self.ui.__getattribute__(par + 'Dsb').setValue(v[self.elem]['rel']['par'][par])
+                except KeyError:    # TODO: da abolire
+                    if par == 't_preg':
+                        self.ui.t_pregDsb.setValue(87600)
+                        v[self.elem]['rel']['par'][par] = 87600
         else:
             self.ui.relWgt.setVisible(False)
 

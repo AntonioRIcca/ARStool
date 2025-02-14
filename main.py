@@ -1667,6 +1667,7 @@ class Main:
                 self.relPar.ui.tempProfPb.setText(grid['rel']['prof_T']['name'])
 
     def relRun(self):
+        print('rel cliccato')
         if grid['rel']['prof_T']['name']:
             from Functionalities.Adequacy.AffidabilitàV3 import Affidabilità
 
@@ -1698,7 +1699,9 @@ class Main:
             months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic']
             while d <= d1:
                 year, month, day, hour, minute = d.year, d.month, d.day, d.hour, d.minute
-                Ta.append(grid['rel']['prof_T']['profile'][months[month - 1]]['prof'][day]['prof'][hour])
+                try:
+                    Ta.append(grid['rel']['prof_T']['profile'][months[month - 1]]['prof'][day]['prof'][hour])
+                except: pass
                 d += datetime.timedelta(minutes=grid['profile']['step'])
 
             reliability = Affidabilità()

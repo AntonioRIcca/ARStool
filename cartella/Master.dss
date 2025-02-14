@@ -1,8 +1,9 @@
 Clear
-New Circuit.retetest
+New Circuit.dss_grid
 
 
 Redirect Vsource.dss
+Redirect LineCode.dss
 Redirect LoadShape.dss
 Redirect GrowthShape.dss
 Redirect TCC_Curve.dss

@@ -1,1 +1,1 @@
-Edit "Vsource.source" basekv=150.000000 pu=1 MVAsc1=1E007 MVAsc3=1E007 bus1=sourcebus phases=3
+Edit "Vsource.source" basekv=20.0 bus1=sourcebus
