@@ -1144,6 +1144,8 @@ class OpenDSS:
         except:
             pass
 
+        self.dss.vsources.vsource_write_frequency(60)
+        print('freq', self.dss.vsources.frequency)
         self.dss.solution.solve()       # richiesta di risoluzione del sistema
         grid['studies']['lf'] = True
 

@@ -49,7 +49,9 @@ class ONR:
         self.log_pre_grafos = ''
         self.log_pre_solver = ''
         self.log_pre_viol = ''
-
+        self.log_post_solver = ''
+        self.log_post_switch = ''
+        self.log_post_viol = ''
 
     def ONR_PRE(self):
         # with open('C:/Users/velin/OneDrive - Politecnico di Bari/Desktop/ENEA_PORTICI_12_2024/ONR_ENEA_PORTICI_class/ENEA_PORTICI_dict_.yml', 'r') as file:
@@ -87,9 +89,9 @@ class ONR:
             if v[i]['category'] == 'AC-Node':
                 bus.append(i)
 
-        if 'sourcebus' in bus:
-            bus_ultimo = bus.pop()
-            bus.insert(0, bus_ultimo)
+        # if 'sourcebus' in bus:
+        #     bus_ultimo = bus.pop()
+        #     bus.insert(0, bus_ultimo)
 
         trbus = []
         for i in v.keys():
@@ -303,6 +305,7 @@ class ONR:
                         zoneconnesse_radiali[i].append(j)
 
             NX_grafo_zonale_smagliato = Creazione_grafo_zonale2(lista_zone, stati_switch, stampa_a_video=False)
+            print('test3')
 
             #### Dizionario per memorizzare i percorsi più brevi da ciascuna zona capo feeder verso tutte le zone
             percorsi_più_brevi = {}
@@ -1084,12 +1087,17 @@ class ONR:
                 else:
                     str_conn = 'non '
 
+                print('test0')
+
                 self.log_pre_grafos = (self.log_pre_grafos + 'Il grafo della rete zonale senza maglie ha ' +
                                        str(nx.number_of_nodes(G)) + ' nodi e ' + str(nx.number_of_edges(G)) +
                                        ' rami connessi.\n' +
                                        'La rete zonale smagliata ' + str_conn + 'è connessa\n\n')
 
+                print('test1')
+
             grafo = nx.Graph(G)
+            print('test2')
             return grafo
 
         NX_grafo_zonale_smagliato = Creazione_grafo_zonale2(lista_zone, stati_switch_iniziali)
@@ -1097,9 +1105,13 @@ class ONR:
         #### Dizionario per memorizzare i percorsi più brevi da ciascuna zona capo feeder verso tutte le zone
         percorsi_più_brevi = {}
 
+        print('test4')
+
         # Calcola i percorsi più brevi per ciascun nodo sorgente
         for sorgente in zone_capo_feeder:
             percorsi_più_brevi[sorgente] = nx.single_source_shortest_path(NX_grafo_zonale_smagliato, sorgente)
+
+        print('test5')
 
         ### Grafo zonale smagliato con Graphviz
 
@@ -1160,7 +1172,7 @@ class ONR:
 
         independent_loops_zone2 = list(nx.cycle_basis(NX_grafo_zonale_smagliato))
         independent_loops2 = list(nx.cycle_basis(NX_grafo_nodale_smagliato))
-
+        print('test6')
         if len(independent_loops_zone2) != 0 or len(independent_loops2) != 0:
             print('Ci sono ancora delle maglie')
 
@@ -1250,7 +1262,7 @@ class ONR:
         for i in zone_bus.keys():
             if i in zone_capo_feeder:
                 nodi_capo_feeder.append(zone_bus[i][0])
-
+        print('test7')
         # TODO: Da riattivare
         Grafo_nodale_radiale = graphviz.Digraph(comment='Grafo nodale')
         # Grafo_nodale_radiale.attr(size='100,40', orientation='landscape', layout='dot')
@@ -1308,7 +1320,7 @@ class ONR:
                     indicesw.append((ind_from, ind_to))
                 else:
                     indicesw.append((0, 0))
-
+        print('test8')
         indice = sorted(indice, key=lambda x: x[0])
         indicesw = sorted(indicesw, key=lambda x: x[0])
 
@@ -1322,6 +1334,8 @@ class ONR:
                 indexsw.append(indicesw[i][:])
                 indfromo.append(indice[i][0])
                 indtoto.append(indice[i][1])
+        print('test9')
+
         while len(index) < len(bus) - 1:
 
             for i in range(len(indice)):
@@ -1340,6 +1354,7 @@ class ONR:
 
                         indfromo.append(indice[i][1])
                         indtoto.append(indice[i][0])
+        print('test10')
 
         for i in range(len(index)):
             p = 0
@@ -1853,6 +1868,7 @@ class ONR:
         print('');
         print('Eseguo', tecnica_utilizzata, 'con solver', solverino, '...');
         print('')
+        self.log_post_solver = 'Eseguito ' + tecnica_utilizzata + ' con solver ' + solverino + '\n'
 
         tempo_iniziale = time.time()
 
@@ -2183,12 +2199,14 @@ class ONR:
         # %% RISULTATI
         # =============================================================================
 
-        results = solver.solve(ONR)
+        results = solver.solve(ONR)  # tee=True
         print(results)
+        self.log_post_solver = self.log_post_solver + str(results) + '\n'
 
         if results.solver.termination_condition == TerminationCondition.optimal:
             print('')
             print("ONR è stato risolto con successo e tutti i vincoli sono rispettati!")
+            self.log_post_solver = self.log_post_solver + "ONR è stato risolto con successo e tutti i vincoli sono rispettati!\n"
             ONR.solutions.load_from(results)
             # RISULTATI ONR:
             ObjF_ONR = ONR.ObjectiveFunction()
@@ -2208,6 +2226,8 @@ class ONR:
             print('');
             print('SAIFI pre-ONR:', Indici_di_Reliability_pre.loc[tecnica_utilizzata, 'SAIFI'], 'guasti/anno')
             print('SAIFI post-ONR:', ONR.SAIFI_POST.value, 'guasti/anno')
+            # self.log_post_solver = self.log_post_solver + (f"Tempo trascorso per il metodo analitico con solver {solverino}:" + tempo_trascorso + "secondi\n")
+
 
 
         elif results.solver.termination_condition == TerminationCondition.infeasible:
@@ -2410,16 +2430,21 @@ class ONR:
         for s in switch:
             if stati_switch_iniziali[s] == 1 and stati_switch_finale[s] == 0:
                 aperture = aperture + 1
-                print('Lo switch', s, 'si è aperto')
+                print('Lo switch ' + s + ' si è aperto')
+                self.log_post_switch += 'Lo switch ' + s + ' si è aperto\n'
                 switch_che_si_aprono_post_ONR.append(s)
             if stati_switch_iniziali[s] == 0 and stati_switch_finale[s] == 1:
                 chiusure = chiusure + 1
-                print('Lo switch', s, 'si è chiuso')
+                print('Lo switch ' + s + ' si è chiuso')
+                self.log_post_switch += 'Lo switch ' + s + ' si è chiuso\n'
                 switch_che_si_chiudono_post_ONR.append(s)
 
         print('')
         print('Il numero di aperture effettuate è', aperture)
+        self.log_post_switch += '\nIl numero di aperture effettuate è ' + str(aperture)
+
         print('Il numero di chiusure effettuate è', chiusure)
+        self.log_post_switch += '\nIl numero di chiusure effettuate è ' + str(chiusure)
 
         # Conto i rami aperti e chiusi:
         Nramiaperti = round(sum(1 - x_ij_opt[s] for s in switch))
@@ -3076,7 +3101,7 @@ class ONR:
             P_gen = 0
             Q_gen = 0
 
-        print('');
+        print('')
         print('Analisi delle potenze (ACLF) con la topologia iniziale:')
         print('')
         # print('Generazione:',round(sum(P_gen.values()),2), 'KW', ';', round(sum(Q_gen.values()),2),'Kvar')
@@ -3086,13 +3111,23 @@ class ONR:
         print('Active power losses:', round(p1 + p2, 2), 'KW')
         print('Reactive power losses:', round(q1 + q2, 2), 'Kvar')
         print('')
+        self.log_post_viol += 'Analisi delle potenze (ACLF) con la topologia iniziale:\n\n'
+        self.log_post_viol += ('Carico: ' + str(round(sum(P_loads2.values()), 2)) + 'KW | ' +
+                               str(round(sum(Q_loads2.values()), 2)) + 'Kvar\n\n')
+        self.log_post_viol += 'Slack Bus active power: ' + str(round(sum(P_slack_pre2.values()), 2)) + 'KW\n'
+        self.log_post_viol += 'Slack Bus reactive power: ' + str(round(sum(Q_slack_pre2.values()), 2)) + 'Kvar\n\n'
+        self.log_post_viol += 'Active power losses: ' + str(round(p1 + p2, 2)) + 'KW\n'
+        self.log_post_viol += 'Reactive power losses: ' + str(round(q1 + q2, 2)) + 'Kvar\n'
+        self.log_post_viol += '\n\nAnalisi delle potenze (ACLF) con la topologia iniziale:\n\n'
 
         # Controllo se ci sono linee in sovraccarico:
 
         sovraccarichi_iniziali = {}
         for b in linee:
             if Correnti_linee_modulo2[b] > Portata_linee2[b]:
-                print(b, 'in sovraccarico:', round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0), '%')
+                print(b, 'in sovraccarico:', round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0), '%\n')
+                self.log_post_viol += (b + ' in sovraccarico: ' +
+                                       str(round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0)) + '%\n')
                 sovraccarichi_iniziali[b] = round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0)
         print('')
 
@@ -3227,6 +3262,7 @@ class ONR:
                         # le potenza globali sono date dalla somma delle potenze delle singole fasi
                         # Accodamento nel vettore dei risultati nel dizionario
                         # dei valori di P, Q, V, i con i relativi fattori di correzione
+                        print(el)
                         v[el]['ONR'][pre_post]['p'] = v[el]['lf']['p'][0]
                         v[el]['ONR'][pre_post]['q'] = v[el]['lf']['q'][0]
                         v[el]['ONR'][pre_post]['v'] = v[el]['lf']['v'][0]

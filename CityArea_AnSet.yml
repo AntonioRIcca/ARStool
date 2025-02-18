@@ -2600,14 +2600,7 @@ ugs_1_dc-pv:
       zone: null
   anom:
     par:
-      anomalies:
-        0:
-          Hot_Spot:
-            scale:
-              is_fixed: false
-              lambda_a: 1.0
-              lambda_duration: 4.0
-              value: 0.5
+      anomalies: {}
     res: {}
   category: DC-PV
   lf:
@@ -2622,15 +2615,15 @@ ugs_1_dc-pv:
     eff: 1
     out-of-service: false
     profile:
-      curve: 1.0
+      curve: 1
       name: null
   rel:
     par:
-      Pi_E: 1.0
-      Pi_Q: 2.0
-      alfa: 438000.0
+      Pi_E: 1
+      Pi_Q: 2
+      alfa: 438000
       beta: 2.8
-      t_preg: 70080.0
+      t_preg: 70080
     results:
       MTBF_anni: null
       MTBF_ore: null
@@ -2659,13 +2652,6 @@ ugs_2_dc-pv:
     par:
       anomalies:
         0:
-          Hot_Spot:
-            scale:
-              is_fixed: false
-              lambda_a: 1.0
-              lambda_duration: 4.0
-              value: 0.5
-        1:
           Dust:
             (-x+1) decrease:
               alpha: 0.5

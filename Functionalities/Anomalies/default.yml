@@ -44,12 +44,12 @@ DC-PV:
       lambda_duration: 1.5
       is_fixed: False
       alpha: 0.5
-  Hot_Spot: 
-    scale: 
-      lambda_a: 1
-      lambda_duration: 4
-      is_fixed: False
-      value: 0.5
+#  Hot_Spot:
+#    scale:
+#      lambda_a: 1
+#      lambda_duration: 4
+#      is_fixed: False
+#      value: 0.5
       
 AC-Wind:
   Hourly_Degradation:

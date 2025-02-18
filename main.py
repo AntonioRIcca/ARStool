@@ -1411,7 +1411,7 @@ class Main:
         # self.homeHBL.setContentsMargins(0, 0, 0, 0)
         # self.home2_WGT.setLayout(self.homeHBL)
 
-        anomRunPls = pb_create(text='   Avvia calcolo Anomalie', height=50, font=14, border=2, radius=15,
+        anomRunPls = pb_create(text='   Avvia generazione Anomalie', height=50, font=14, border=2, radius=15,
                                icon='anomaly.png')
 
         self.myform.ui.verticalLayout.insertWidget(2, anomRunPls)
@@ -2514,6 +2514,9 @@ class Main:
             },
         }
 
+        self.onr_res.ui.onr4log1TB.setText(self.onr.log_post_solver)
+        self.onr_res.ui.onr4log2TB.setText(self.onr.log_post_switch)
+
         for cat in indexes['Res']:
             for i in indexes['Res'][cat]:
                 self.onr_res.ui.__getattribute__('onr4ind' + i + cat + 'Lbl').setText('%.4f' % indexes['Res'][cat][i])
@@ -2530,6 +2533,8 @@ class Main:
 
         self.onr_res.ui.onr5Fig1Lbl.mouseDoubleClickEvent = partial(self.openImage,
                                                                     folder + 'nodes_violations_post.png')
+
+        self.onr_res.ui.onr5log2TB.setText(self.onr.log_post_viol)
 
         pass
 
