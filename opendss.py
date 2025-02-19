@@ -425,12 +425,16 @@ class OpenDSS:
         for key in dss_cat.keys():
             dss_cat[key] = []
 
-        open('lista.txt', 'w').close()
-        f = open('lista.txt', 'a')
+        # open('lista.txt', 'w').close()
+        f = open('lista.txt', 'w')
         for el in v:
             mcat = mcat_find(el)
             if mcat in dss_cat:
-                # myline = self.writeline(el, time)
+                # # myline = self.writeline(el, time)
+                # line = self.writeline(el, time)
+                # # if mcat == 'Line':
+                # print(line)
+                # f.write(line + '\n')
                 f.write(self.writeline(el, time) + '\n')
         f.close()
 
@@ -1144,8 +1148,6 @@ class OpenDSS:
         except:
             pass
 
-        self.dss.vsources.vsource_write_frequency(60)
-        print('freq', self.dss.vsources.frequency)
         self.dss.solution.solve()       # richiesta di risoluzione del sistema
         grid['studies']['lf'] = True
 

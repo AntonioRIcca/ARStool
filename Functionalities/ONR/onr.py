@@ -45,6 +45,7 @@ class ONR:
         self.ONR_initialize()
         self.dss = OpenDSS()
         self.indexes = dict()
+        self.indexes_post = dict()
         self.filedir = 'C:/Users/anton/PycharmProjects/ARStool/Functionalities/ONR/__images__/'
         self.log_pre_grafos = ''
         self.log_pre_solver = ''
@@ -2228,7 +2229,20 @@ class ONR:
             print('SAIFI post-ONR:', ONR.SAIFI_POST.value, 'guasti/anno')
             # self.log_post_solver = self.log_post_solver + (f"Tempo trascorso per il metodo analitico con solver {solverino}:" + tempo_trascorso + "secondi\n")
 
-
+            self.indexes_post = {
+                'pre': {
+                    'EENS': Indici_di_Reliability_pre.loc[tecnica_utilizzata, 'ENS'],
+                    'SAIDI': Indici_di_Reliability_pre.loc[tecnica_utilizzata, 'SAIDI'],
+                    'SAIFI': Indici_di_Reliability_pre.loc[tecnica_utilizzata, 'SAIFI'],
+                    'FOB': Funzioni_obiettivo_pre.loc[tecnica_utilizzata, 'Funzione obiettivo'],
+                },
+                'post': {
+                    'EENS': ONR.ENS_POST.value,
+                    'SAIDI': ONR.SAIDI_POST.value,
+                    'SAIFI': ONR.SAIFI_POST.value,
+                    'FOB': ObjF_ONR,
+                },
+            }
 
         elif results.solver.termination_condition == TerminationCondition.infeasible:
             print("ONR è irrealizzabile, alcuni vincoli non sono rispettati.")
@@ -2336,7 +2350,7 @@ class ONR:
 
         # %% Grafici POST ONR ENS, SAIDI, SAIFI
 
-        plt.figure(3, figsize=(6, 6))
+        post_indexes_fig = plt.figure(3, figsize=(6, 6))
         positions = np.arange(len(Indici_di_Reliability_post_norm.columns))
         plt.bar(Indici_di_Reliability_pre_norm_graph.columns,
                 Indici_di_Reliability_pre_norm_graph.loc[tecnica_utilizzata], width=0.4,
@@ -2355,7 +2369,8 @@ class ONR:
         plt.gca().yaxis.set_major_formatter(formatter)
         plt.legend(loc='best')
 
-        plt.show()
+        # plt.show()
+        post_indexes_fig.savefig(self.filedir + 'indexes_post.png')
 
         # %%DIZIONARIO CON I VALORI DEI VINCOLI
         # Crea un dizionario vuoto per memorizzare i valori delle espressioni di vincolo
@@ -2614,14 +2629,14 @@ class ONR:
                                             arrowhead='none', constraint='true', penwidth='2.0')
 
 
-        # TODO: da cambiare: cartella di salvataggio e togliere il view()
+        # TODO: perché serve questo "if"?
         if scelta == 'a':
-            Grafo_zone_radiale.render(filename='Grafo zonale post_ONR', format='png', cleanup=True)
+            Grafo_zone_radiale.render(filename=self.filedir + 'Grafo_zonale_post_ONR', format='png', cleanup=True)
         if scelta == 'b':
-            Grafo_zone_radiale.render(filename='Grafo zonale post_ONR', format='png', cleanup=True)
+            Grafo_zone_radiale.render(filename=self.filedir + 'Grafo_zonale_post_ONR', format='png', cleanup=True)
         if scelta == 'c':
-            Grafo_zone_radiale.render(filename='Grafo zonale post_ONR', format='png', cleanup=True)
-        Grafo_zone_radiale.view()
+            Grafo_zone_radiale.render(filename=self.filedir + 'Grafo_zonale_post_ONR', format='png', cleanup=True)
+        # Grafo_zone_radiale.view()
 
         for i in switch_non_apribili:
             if (StatiSwitchesFinali.loc[i]['Stato finale']) != 'chiuso':
@@ -3196,7 +3211,9 @@ class ONR:
         Vmin = 0.9
         Vmax = 1.1
         # Modulo delle tensioni in pu
-        plt.figure(figsize=(20, 6))
+        plt.cla()
+
+        nv_fig = plt.figure(figsize=(20, 6))
         plt.axhline(1, color='black', linestyle='--', linewidth=1)
         plt.plot(newbus, V0.values(), linewidth=1.5, marker='o', markersize=2.5, color='dodgerblue', label='Pre ONR')
         plt.plot(newbus, V0_post.values(), linewidth=1.5, marker='o', markersize=2.5, color='orange', label='Post ONR')
@@ -3216,7 +3233,8 @@ class ONR:
         plt.ylabel(r'$V_{i} [pu]$', fontsize=20)
         plt.legend(loc='best', fontsize=12, frameon=False, ncol=2)
         plt.tight_layout()
-        plt.show()
+        # plt.show()
+        nv_fig.savefig(self.filedir + 'nodes_violations_post.png')
 
         from matplotlib.lines import Line2D
         # Flussi di potenza apparente sui branches in sovraccarico:
@@ -3237,7 +3255,8 @@ class ONR:
                            Line2D([0], [0], color='darkred', marker='v', linestyle='None', label=r'$S_{ij}^{post}$')]
         plt.legend(handles=legend_elements, fontsize=12)
         plt.tight_layout()
-        plt.show()
+        # plt.show()
+        plt.savefig(self.filedir + 'lines_overload_post.png')
 
     def results_store(self, pre_post):
 

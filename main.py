@@ -43,6 +43,8 @@ import dictInitialize
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
+from PIL import Image
+
 # import time
 
 from collections import namedtuple
@@ -2214,13 +2216,36 @@ class Main:
     def onrPrelOutput(self):
         # Creazione Widget iniziale
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
+        h_max = self.home_WGT.height() - 80
         ratio = 1.5
         folder = mainpath + '/Functionalities/ONR/__images__/'
 
-        self.onr_res.ui.onr1sxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_zonale_pre_ONR.png').scaledToWidth(
-            w_max * (ratio / (ratio + 1))))
-        self.onr_res.ui.onr1dxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale_pre_ONR.png').scaledToWidth(
-            w_max * (1 / (ratio + 1))))
+        hav = h_max - 320
+        wav = w_max * ratio / (ratio + 1)
+        w, h = Image.open(folder + 'grafo_zonale_pre_ONR.png').size
+        # print('grafo_zonale_pre_ONR.png', '\tw = ', w, '\th = ', h, '\tw_avail = ', wav, '\th_avail = ', hav)
+        if w/h > wav/hav:
+            self.onr_res.ui.onr1sxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_zonale_pre_ONR.png').scaledToWidth(wav))
+            # print("rdimensionamento rispoetto alla larghezza")
+        else:
+            self.onr_res.ui.onr1sxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_zonale_pre_ONR.png').scaledToHeight(hav))
+            # print("rdimensionamento rispoetto all'altezza")
+
+        hav = h_max - 75
+        wav = w_max / (ratio + 1)
+        w, h = Image.open(folder + 'grafo_nodale_pre_ONR.png').size
+        if w / h > wav / hav:
+            self.onr_res.ui.onr1dxFigLbl.setPixmap(
+                QtGui.QPixmap(folder + 'grafo_nodale_pre_ONR.png').scaledToWidth(wav))
+        else:
+            self.onr_res.ui.onr1dxFigLbl.setPixmap(
+                QtGui.QPixmap(folder + 'grafo_nodale_pre_ONR.png').scaledToHeight(hav))
+
+
+        # self.onr_res.ui.onr1sxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_zonale_pre_ONR.png').scaledToWidth(
+        #     w_max * (ratio / (ratio + 1))))
+        # self.onr_res.ui.onr1dxFigLbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale_pre_ONR.png').scaledToWidth(
+        #     w_max * (1 / (ratio + 1))))
 
         z0_n = 23
         z0_b = 33
@@ -2482,44 +2507,63 @@ class Main:
         self.onr_res.ui.onrTabWgt.setCurrentIndex(3)
 
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
-        ratio = 1.5
+        h_max = self.home_WGT.height() - 80
+
+        ratio = 1.8
         folder = mainpath + '/Functionalities/ONR/__images__/'
 
         wsx = w_max * (ratio / (ratio + 1))
-        wdx = w_max * (1 / (ratio + 1))
+        wdx = w_max * (1 / (ratio + 1))  # + 20
 
         # self.onr_res.ui.onr4logWgt.setMaximumWidth(wsx)
         # self.onr_res.ui.onr4sxTitleLbl.setMaximumWidth(wsx)
         self.onr_res.ui.onr4sxWgt.setMaximumWidth(wsx)
-        self.onr_res.ui.onr4dxWgt.setMinimumWidth(wdx + 20)
+        self.onr_res.ui.onr4dxWgt.setMinimumWidth(wdx)
 
-        self.onr_res.ui.onr4Fig1Lbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale.png').scaledToWidth(wsx))
-        self.onr_res.ui.onr4Fig2Lbl.setPixmap(QtGui.QPixmap(folder + 'grafo_nodale_post.png').scaledToWidth(wsx))
-        self.onr_res.ui.onr4indFigLbl.setPixmap(QtGui.QPixmap(folder + 'indici_post.png').scaledToWidth(wdx))
+        w_pre, h_pre = Image.open(folder + 'grafo_zonale_pre_ONR.png').size
+        w_post, h_post = Image.open(folder + 'Grafo_zonale_post_ONR.png').size
 
-        indexes = {
-            'Res': {
-                'pre': {
-                    'EENS': 69788.4268879,
-                    'SAIDI': 6.3820281184171794,
-                    'SAIFI': 32.5249505459743213,
-                    'FOB': 0.8966061535323807,
-                },
-                'post': {
-                    'EENS': 53558.2419789,
-                    'SAIDI': 5.0633097099650546,
-                    'SAIFI': 2.181570805704159,
-                    'FOB': 0.7193925237240815,
-                },
-            },
-        }
+
+        self.onr_res.ui.onr4Fig1Lbl.setPixmap(
+            QtGui.QPixmap(folder + 'grafo_zonale_pre_ONR.png').scaledToHeight(int(h_max / 2) - 100))
+
+        if w_post/h_post > wsx/ (int(h_max / 2) - 100):
+            self.onr_res.ui.onr4Fig2Lbl.setPixmap(
+                QtGui.QPixmap(folder + 'Grafo_zonale_post_ONR.png').scaledToWidth(wsx))
+            # print("rdimensionamento rispoetto alla larghezza")
+        else:
+            self.onr_res.ui.onr4Fig2Lbl.setPixmap(
+                QtGui.QPixmap(folder + 'Grafo_zonale_post_ONR.png').scaledToHeight(int(h_max / 2) - 100))
+            # print("rdimensionamento rispoetto all'altezza")
+
+        # self.onr_res.ui.onr4Fig2Lbl.setPixmap(
+        #     QtGui.QPixmap(folder + 'Grafo_zonale_post_ONR.png').scaledToHeight(int(h_max / 2) - 100))
+        self.onr_res.ui.onr4indFigLbl.setPixmap(QtGui.QPixmap(folder + 'indexes_post.png').scaledToWidth(wdx))
+
+        # indexes = {
+        #     'Res': {
+        #         'pre': {
+        #             'EENS': 69788.4268879,
+        #             'SAIDI': 6.3820281184171794,
+        #             'SAIFI': 32.5249505459743213,
+        #             'FOB': 0.8966061535323807,
+        #         },
+        #         'post': {
+        #             'EENS': 53558.2419789,
+        #             'SAIDI': 5.0633097099650546,
+        #             'SAIFI': 2.181570805704159,
+        #             'FOB': 0.7193925237240815,
+        #         },
+        #     },
+        # }
 
         self.onr_res.ui.onr4log1TB.setText(self.onr.log_post_solver)
         self.onr_res.ui.onr4log2TB.setText(self.onr.log_post_switch)
 
-        for cat in indexes['Res']:
-            for i in indexes['Res'][cat]:
-                self.onr_res.ui.__getattribute__('onr4ind' + i + cat + 'Lbl').setText('%.4f' % indexes['Res'][cat][i])
+        for cat in self.onr.indexes_post:
+            for i in self.onr.indexes_post[cat]:
+                self.onr_res.ui.__getattribute__('onr4ind' + i + cat + 'Lbl').setText(
+                    '%.4f' % self.onr.indexes_post[cat][i])
 
         # wsx = w_max * (ratio / (ratio + 1)) / 2
         # wdx = w_max * (1 / (ratio + 1))
