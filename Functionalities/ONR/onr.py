@@ -3271,12 +3271,12 @@ class ONR:
         print('\n\n')
 
         plt.cla()
-        plt.close()
+        # plt.close()
         # plt.show()
-        plt.figure(2, figsize=(15, 6))
+        lv_fig = plt.figure(10, figsize=(15, 6))
         for b in Sij_plot.keys():
-            plt.bar(b, 0, linewidth=1, color='salmon')
-            # plt.bar(b, Sijmax[b], linewidth=1, color='salmon')
+            # plt.bar(b, 0, linewidth=1, color='salmon')
+            plt.bar(b, Sijmax[b], linewidth=1, color='salmon')
             plt.stem(b, Sijpre[b], linefmt='darkred', markerfmt='v', basefmt=' ')
         plt.xticks(range(0, len(Sij_plot.keys())), [f'{br} ' for br in Sij_plot.keys()],
                    fontsize=20)  # Ruota le etichette di 45 gradi
@@ -3287,7 +3287,7 @@ class ONR:
         plt.legend(handles=legend_elements, fontsize=12)
         plt.tight_layout()
         # plt.show()
-        plt.savefig(self.filedir + 'lines_overload_post.png')
+        lv_fig.savefig(self.filedir + 'lines_overload_post.png')
 
     def results_store(self, pre_post):
 

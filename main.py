@@ -2156,7 +2156,7 @@ class Main:
 
         variables.visualpar = 'onr'
 
-        onrRunPls = pb_create(text='   Avvia Optimal Network Recongiguration', height=50, font=14, border=2, radius=15,
+        onrRunPls = pb_create(text='   Avvia Optimal Network Reconfiguration', height=50, font=14, border=2, radius=15,
                               icon='anomaly.png')
 
         self.myform.ui.verticalLayout.insertWidget(2, onrRunPls)
@@ -2214,6 +2214,11 @@ class Main:
         self.onrPrelOutput()
 
     def onrPrelOutput(self):
+        from UI.onrParWgt import ONRParWgt
+        self.onrPar = ONRParWgt()
+        self.onrParWgt = self.onrPar.ui.onrParWgt
+        self.myform.ui.verticalLayout.insertWidget(2, self.onrParWgt)
+
         # Creazione Widget iniziale
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
         h_max = self.home_WGT.height() - 80
@@ -2493,9 +2498,10 @@ class Main:
         plt.show()
 
     def onrRun(self):
+        print(self.onrPar.ui.onrLogicCB.currentIndex())
         choiche = ['a', 'b', 'c']
-
-        self.onr.ONR(choiche[self.onr_res.ui.onr2calcCB.currentIndex()])
+        self.onr.ONR(choiche[self.onrPar.ui.onrLogicCB.currentIndex()])
+        # self.onr.ONR(choiche[self.onr_res.ui.onr2calcCB.currentIndex()])
 
         self.onrRes()
         pass
