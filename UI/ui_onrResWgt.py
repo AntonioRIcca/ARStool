@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'onrResWgtPDpryP.ui'
+## Form generated from reading UI file 'onrResWgtLqOvYm.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -153,27 +153,6 @@ class Ui_Form(object):
 
         self.onr1TabVBL.addWidget(self.onr1Wgt)
 
-        self.indexCalcPb = QPushButton(self.onr1TabWgt)
-        self.indexCalcPb.setObjectName(u"indexCalcPb")
-        self.indexCalcPb.setMinimumSize(QSize(0, 40))
-        self.indexCalcPb.setMaximumSize(QSize(16777215, 40))
-        self.indexCalcPb.setStyleSheet(u"QPushButton{\n"
-"	\n"
-"	color: rgb(255, 255, 255);\n"
-"	background-color: rgb(0, 0, 0);\n"
-"	border: 2px solid rgb(127, 127, 127);\n"
-"	border-radius: 10px\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton::pressed{\n"
-"	background-color: rgb(63, 63, 63);\n"
-"	border-style: inset;\n"
-"}\n"
-"")
-
-        self.onr1TabVBL.addWidget(self.indexCalcPb)
-
         self.onrTabWgt.addTab(self.onr1TabWgt, "")
         self.onr2TabWgt = QWidget()
         self.onr2TabWgt.setObjectName(u"onr2TabWgt")
@@ -233,60 +212,6 @@ class Ui_Form(object):
 
         self.onr2sxVBL.addItem(self.onr2sxSpc)
 
-        self.onr2calcWgt = QWidget(self.onr2sxWgt)
-        self.onr2calcWgt.setObjectName(u"onr2calcWgt")
-        self.onr2calcWgt.setStyleSheet(u"color: rgb(255, 255, 255);")
-        self.onr2calcHBL = QHBoxLayout(self.onr2calcWgt)
-        self.onr2calcHBL.setObjectName(u"onr2calcHBL")
-        self.onr2calcLbl = QLabel(self.onr2calcWgt)
-        self.onr2calcLbl.setObjectName(u"onr2calcLbl")
-        self.onr2calcLbl.setStyleSheet(u"font: 75 12pt \"MS Shell Dlg 2\";")
-        self.onr2calcLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.onr2calcHBL.addWidget(self.onr2calcLbl)
-
-        self.onr2calcCB = QComboBox(self.onr2calcWgt)
-        self.onr2calcCB.addItem("")
-        self.onr2calcCB.addItem("")
-        self.onr2calcCB.addItem("")
-        self.onr2calcCB.setObjectName(u"onr2calcCB")
-        self.onr2calcCB.setMinimumSize(QSize(0, 40))
-        self.onr2calcCB.setMaximumSize(QSize(70, 16777215))
-        font = QFont()
-        font.setFamily(u"MS Shell Dlg 2")
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(9)
-        self.onr2calcCB.setFont(font)
-        self.onr2calcCB.setStyleSheet(u"font: 75 12pt \"MS Shell Dlg 2\";")
-
-        self.onr2calcHBL.addWidget(self.onr2calcCB)
-
-        self.onr2calcPb = QPushButton(self.onr2calcWgt)
-        self.onr2calcPb.setObjectName(u"onr2calcPb")
-        self.onr2calcPb.setMinimumSize(QSize(0, 40))
-        self.onr2calcPb.setMaximumSize(QSize(16777215, 40))
-        self.onr2calcPb.setStyleSheet(u"QPushButton{\n"
-"	\n"
-"	color: rgb(255, 255, 255);\n"
-"	background-color: rgb(0, 0, 0);\n"
-"	border: 2px solid rgb(127, 127, 127);\n"
-"	border-radius: 10px\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton::pressed{\n"
-"	background-color: rgb(63, 63, 63);\n"
-"	border-style: inset;\n"
-"}\n"
-"")
-
-        self.onr2calcHBL.addWidget(self.onr2calcPb)
-
-
-        self.onr2sxVBL.addWidget(self.onr2calcWgt)
-
 
         self.onr2TabHBL.addWidget(self.onr2sxWgt)
 
@@ -329,9 +254,9 @@ class Ui_Form(object):
         self.onr2indAbsTitleEENSLbl = QLabel(self.onr2indAbsWgt)
         self.onr2indAbsTitleEENSLbl.setObjectName(u"onr2indAbsTitleEENSLbl")
         self.onr2indAbsTitleEENSLbl.setMinimumSize(QSize(70, 0))
-        font1 = QFont()
-        font1.setItalic(True)
-        self.onr2indAbsTitleEENSLbl.setFont(font1)
+        font = QFont()
+        font.setItalic(True)
+        self.onr2indAbsTitleEENSLbl.setFont(font)
         self.onr2indAbsTitleEENSLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
         self.onr2indAbsTitleEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indAbsTitleEENSLbl.setMargin(2)
@@ -342,7 +267,7 @@ class Ui_Form(object):
         self.onr2indAbsNullLbl.setObjectName(u"onr2indAbsNullLbl")
         self.onr2indAbsNullLbl.setMinimumSize(QSize(40, 20))
         self.onr2indAbsNullLbl.setMaximumSize(QSize(40, 20))
-        self.onr2indAbsNullLbl.setFont(font1)
+        self.onr2indAbsNullLbl.setFont(font)
         self.onr2indAbsNullLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);\n"
 "border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indAbsNullLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
@@ -359,7 +284,7 @@ class Ui_Form(object):
         self.onr2indAbsTitleSAIFILbl = QLabel(self.onr2indAbsWgt)
         self.onr2indAbsTitleSAIFILbl.setObjectName(u"onr2indAbsTitleSAIFILbl")
         self.onr2indAbsTitleSAIFILbl.setMinimumSize(QSize(70, 0))
-        self.onr2indAbsTitleSAIFILbl.setFont(font1)
+        self.onr2indAbsTitleSAIFILbl.setFont(font)
         self.onr2indAbsTitleSAIFILbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
         self.onr2indAbsTitleSAIFILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indAbsTitleSAIFILbl.setMargin(2)
@@ -369,7 +294,7 @@ class Ui_Form(object):
         self.onr2indAbsTitleSAIDILbl = QLabel(self.onr2indAbsWgt)
         self.onr2indAbsTitleSAIDILbl.setObjectName(u"onr2indAbsTitleSAIDILbl")
         self.onr2indAbsTitleSAIDILbl.setMinimumSize(QSize(70, 0))
-        self.onr2indAbsTitleSAIDILbl.setFont(font1)
+        self.onr2indAbsTitleSAIDILbl.setFont(font)
         self.onr2indAbsTitleSAIDILbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
         self.onr2indAbsTitleSAIDILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indAbsTitleSAIDILbl.setMargin(2)
@@ -410,7 +335,7 @@ class Ui_Form(object):
         self.onr2indAbsFRGTitleLbl.setObjectName(u"onr2indAbsFRGTitleLbl")
         self.onr2indAbsFRGTitleLbl.setMinimumSize(QSize(0, 25))
         self.onr2indAbsFRGTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indAbsFRGTitleLbl.setFont(font1)
+        self.onr2indAbsFRGTitleLbl.setFont(font)
         self.onr2indAbsFRGTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indAbsFRGTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indAbsFRGTitleLbl.setMargin(2)
@@ -421,7 +346,7 @@ class Ui_Form(object):
         self.onr2indAbsSFSTitleLbl.setObjectName(u"onr2indAbsSFSTitleLbl")
         self.onr2indAbsSFSTitleLbl.setMinimumSize(QSize(0, 25))
         self.onr2indAbsSFSTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indAbsSFSTitleLbl.setFont(font1)
+        self.onr2indAbsSFSTitleLbl.setFont(font)
         self.onr2indAbsSFSTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indAbsSFSTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indAbsSFSTitleLbl.setMargin(2)
@@ -432,7 +357,7 @@ class Ui_Form(object):
         self.onr2indAbsFNCTitleLbl.setObjectName(u"onr2indAbsFNCTitleLbl")
         self.onr2indAbsFNCTitleLbl.setMinimumSize(QSize(0, 25))
         self.onr2indAbsFNCTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indAbsFNCTitleLbl.setFont(font1)
+        self.onr2indAbsFNCTitleLbl.setFont(font)
         self.onr2indAbsFNCTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indAbsFNCTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indAbsFNCTitleLbl.setMargin(2)
@@ -488,7 +413,7 @@ class Ui_Form(object):
         self.onr2indNormTitleEENSLbl = QLabel(self.onr2indNormWgt)
         self.onr2indNormTitleEENSLbl.setObjectName(u"onr2indNormTitleEENSLbl")
         self.onr2indNormTitleEENSLbl.setMinimumSize(QSize(70, 0))
-        self.onr2indNormTitleEENSLbl.setFont(font1)
+        self.onr2indNormTitleEENSLbl.setFont(font)
         self.onr2indNormTitleEENSLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
         self.onr2indNormTitleEENSLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indNormTitleEENSLbl.setMargin(2)
@@ -504,7 +429,7 @@ class Ui_Form(object):
         self.onr2indNormTitleSAIFILbl = QLabel(self.onr2indNormWgt)
         self.onr2indNormTitleSAIFILbl.setObjectName(u"onr2indNormTitleSAIFILbl")
         self.onr2indNormTitleSAIFILbl.setMinimumSize(QSize(70, 0))
-        self.onr2indNormTitleSAIFILbl.setFont(font1)
+        self.onr2indNormTitleSAIFILbl.setFont(font)
         self.onr2indNormTitleSAIFILbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
         self.onr2indNormTitleSAIFILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indNormTitleSAIFILbl.setMargin(2)
@@ -514,7 +439,7 @@ class Ui_Form(object):
         self.onr2indNormTitleSAIDILbl = QLabel(self.onr2indNormWgt)
         self.onr2indNormTitleSAIDILbl.setObjectName(u"onr2indNormTitleSAIDILbl")
         self.onr2indNormTitleSAIDILbl.setMinimumSize(QSize(70, 0))
-        self.onr2indNormTitleSAIDILbl.setFont(font1)
+        self.onr2indNormTitleSAIDILbl.setFont(font)
         self.onr2indNormTitleSAIDILbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
         self.onr2indNormTitleSAIDILbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indNormTitleSAIDILbl.setMargin(2)
@@ -555,7 +480,7 @@ class Ui_Form(object):
         self.onr2indNormSFSTitleLbl.setObjectName(u"onr2indNormSFSTitleLbl")
         self.onr2indNormSFSTitleLbl.setMinimumSize(QSize(0, 25))
         self.onr2indNormSFSTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indNormSFSTitleLbl.setFont(font1)
+        self.onr2indNormSFSTitleLbl.setFont(font)
         self.onr2indNormSFSTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indNormSFSTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indNormSFSTitleLbl.setMargin(2)
@@ -566,7 +491,7 @@ class Ui_Form(object):
         self.onr2indNormFNCTitleLbl.setObjectName(u"onr2indNormFNCTitleLbl")
         self.onr2indNormFNCTitleLbl.setMinimumSize(QSize(0, 25))
         self.onr2indNormFNCTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indNormFNCTitleLbl.setFont(font1)
+        self.onr2indNormFNCTitleLbl.setFont(font)
         self.onr2indNormFNCTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indNormFNCTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indNormFNCTitleLbl.setMargin(2)
@@ -593,7 +518,7 @@ class Ui_Form(object):
         self.onr2indNormFRGTitleLbl.setObjectName(u"onr2indNormFRGTitleLbl")
         self.onr2indNormFRGTitleLbl.setMinimumSize(QSize(0, 25))
         self.onr2indNormFRGTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indNormFRGTitleLbl.setFont(font1)
+        self.onr2indNormFRGTitleLbl.setFont(font)
         self.onr2indNormFRGTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indNormFRGTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indNormFRGTitleLbl.setMargin(2)
@@ -604,7 +529,7 @@ class Ui_Form(object):
         self.onr2indNormNullLbl.setObjectName(u"onr2indNormNullLbl")
         self.onr2indNormNullLbl.setMinimumSize(QSize(40, 20))
         self.onr2indNormNullLbl.setMaximumSize(QSize(40, 20))
-        self.onr2indNormNullLbl.setFont(font1)
+        self.onr2indNormNullLbl.setFont(font)
         self.onr2indNormNullLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);\n"
 "border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indNormNullLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
@@ -640,7 +565,7 @@ class Ui_Form(object):
         self.onr2indFobFNCTitleLbl.setObjectName(u"onr2indFobFNCTitleLbl")
         self.onr2indFobFNCTitleLbl.setMinimumSize(QSize(0, 25))
         self.onr2indFobFNCTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indFobFNCTitleLbl.setFont(font1)
+        self.onr2indFobFNCTitleLbl.setFont(font)
         self.onr2indFobFNCTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indFobFNCTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indFobFNCTitleLbl.setMargin(2)
@@ -651,7 +576,7 @@ class Ui_Form(object):
         self.onr2indFobFRGTitleLbl.setObjectName(u"onr2indFobFRGTitleLbl")
         self.onr2indFobFRGTitleLbl.setMinimumSize(QSize(0, 25))
         self.onr2indFobFRGTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indFobFRGTitleLbl.setFont(font1)
+        self.onr2indFobFRGTitleLbl.setFont(font)
         self.onr2indFobFRGTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indFobFRGTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indFobFRGTitleLbl.setMargin(2)
@@ -674,7 +599,7 @@ class Ui_Form(object):
         self.onr2indFobNullLbl.setObjectName(u"onr2indFobNullLbl")
         self.onr2indFobNullLbl.setMinimumSize(QSize(40, 20))
         self.onr2indFobNullLbl.setMaximumSize(QSize(40, 20))
-        self.onr2indFobNullLbl.setFont(font1)
+        self.onr2indFobNullLbl.setFont(font)
         self.onr2indFobNullLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);\n"
 "border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indFobNullLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
@@ -686,7 +611,7 @@ class Ui_Form(object):
         self.onr2indFobSFSTitleLbl.setObjectName(u"onr2indFobSFSTitleLbl")
         self.onr2indFobSFSTitleLbl.setMinimumSize(QSize(0, 25))
         self.onr2indFobSFSTitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr2indFobSFSTitleLbl.setFont(font1)
+        self.onr2indFobSFSTitleLbl.setFont(font)
         self.onr2indFobSFSTitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr2indFobSFSTitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indFobSFSTitleLbl.setMargin(2)
@@ -696,7 +621,7 @@ class Ui_Form(object):
         self.onr2indFobTitlefobLbl = QLabel(self.onr2indFobWgt)
         self.onr2indFobTitlefobLbl.setObjectName(u"onr2indFobTitlefobLbl")
         self.onr2indFobTitlefobLbl.setMinimumSize(QSize(70, 0))
-        self.onr2indFobTitlefobLbl.setFont(font1)
+        self.onr2indFobTitlefobLbl.setFont(font)
         self.onr2indFobTitlefobLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
         self.onr2indFobTitlefobLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr2indFobTitlefobLbl.setMargin(2)
@@ -952,7 +877,7 @@ class Ui_Form(object):
         self.onr4indSAIDItitleLbl.setObjectName(u"onr4indSAIDItitleLbl")
         self.onr4indSAIDItitleLbl.setMinimumSize(QSize(0, 25))
         self.onr4indSAIDItitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr4indSAIDItitleLbl.setFont(font1)
+        self.onr4indSAIDItitleLbl.setFont(font)
         self.onr4indSAIDItitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr4indSAIDItitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr4indSAIDItitleLbl.setMargin(2)
@@ -1009,7 +934,7 @@ class Ui_Form(object):
         self.onr4indNullLbl.setObjectName(u"onr4indNullLbl")
         self.onr4indNullLbl.setMinimumSize(QSize(40, 20))
         self.onr4indNullLbl.setMaximumSize(QSize(40, 20))
-        self.onr4indNullLbl.setFont(font1)
+        self.onr4indNullLbl.setFont(font)
         self.onr4indNullLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);\n"
 "border-right: 1px solid rgb(255, 170, 0);")
         self.onr4indNullLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
@@ -1020,7 +945,7 @@ class Ui_Form(object):
         self.onr4indTitlePreLbl = QLabel(self.onr4indWgt)
         self.onr4indTitlePreLbl.setObjectName(u"onr4indTitlePreLbl")
         self.onr4indTitlePreLbl.setMinimumSize(QSize(100, 0))
-        self.onr4indTitlePreLbl.setFont(font1)
+        self.onr4indTitlePreLbl.setFont(font)
         self.onr4indTitlePreLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
         self.onr4indTitlePreLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr4indTitlePreLbl.setMargin(2)
@@ -1031,7 +956,7 @@ class Ui_Form(object):
         self.onr4indFOBtitleLbl.setObjectName(u"onr4indFOBtitleLbl")
         self.onr4indFOBtitleLbl.setMinimumSize(QSize(0, 25))
         self.onr4indFOBtitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr4indFOBtitleLbl.setFont(font1)
+        self.onr4indFOBtitleLbl.setFont(font)
         self.onr4indFOBtitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr4indFOBtitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr4indFOBtitleLbl.setMargin(2)
@@ -1042,7 +967,7 @@ class Ui_Form(object):
         self.onr4indEENStitleLbl.setObjectName(u"onr4indEENStitleLbl")
         self.onr4indEENStitleLbl.setMinimumSize(QSize(0, 25))
         self.onr4indEENStitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr4indEENStitleLbl.setFont(font1)
+        self.onr4indEENStitleLbl.setFont(font)
         self.onr4indEENStitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr4indEENStitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr4indEENStitleLbl.setMargin(2)
@@ -1059,7 +984,7 @@ class Ui_Form(object):
         self.onr4indSAIFItitleLbl.setObjectName(u"onr4indSAIFItitleLbl")
         self.onr4indSAIFItitleLbl.setMinimumSize(QSize(0, 25))
         self.onr4indSAIFItitleLbl.setMaximumSize(QSize(16777215, 20))
-        self.onr4indSAIFItitleLbl.setFont(font1)
+        self.onr4indSAIFItitleLbl.setFont(font)
         self.onr4indSAIFItitleLbl.setStyleSheet(u"border-right: 1px solid rgb(255, 170, 0);")
         self.onr4indSAIFItitleLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr4indSAIFItitleLbl.setMargin(2)
@@ -1069,7 +994,7 @@ class Ui_Form(object):
         self.onr4indTitlePostLbl = QLabel(self.onr4indWgt)
         self.onr4indTitlePostLbl.setObjectName(u"onr4indTitlePostLbl")
         self.onr4indTitlePostLbl.setMinimumSize(QSize(100, 0))
-        self.onr4indTitlePostLbl.setFont(font1)
+        self.onr4indTitlePostLbl.setFont(font)
         self.onr4indTitlePostLbl.setStyleSheet(u"border-bottom: 1px solid rgb(255, 170, 0);")
         self.onr4indTitlePostLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.onr4indTitlePostLbl.setMargin(2)
@@ -1204,10 +1129,31 @@ class Ui_Form(object):
 
         self.onrMainVBL.addWidget(self.onrTabWgt)
 
+        self.viewRefreshPb = QPushButton(self.onrMainWgt)
+        self.viewRefreshPb.setObjectName(u"viewRefreshPb")
+        self.viewRefreshPb.setMinimumSize(QSize(0, 25))
+        self.viewRefreshPb.setMaximumSize(QSize(16777215, 40))
+        self.viewRefreshPb.setStyleSheet(u"QPushButton{\n"
+"	\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(0, 0, 0);\n"
+"	border: 2px solid rgb(127, 127, 127);\n"
+"	border-radius: 10px\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton::pressed{\n"
+"	background-color: rgb(63, 63, 63);\n"
+"	border-style: inset;\n"
+"}\n"
+"")
+
+        self.onrMainVBL.addWidget(self.viewRefreshPb)
+
 
         self.retranslateUi(Form)
 
-        self.onrTabWgt.setCurrentIndex(3)
+        self.onrTabWgt.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -1221,19 +1167,12 @@ class Ui_Form(object):
         self.onr1logLbl.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.onr1dxTitleLbl.setText(QCoreApplication.translate("Form", u"Grafo Nodale Radiale", None))
         self.onr1dxFigLbl.setText(QCoreApplication.translate("Form", u"img1", None))
-        self.indexCalcPb.setText(QCoreApplication.translate("Form", u"Calcolo Indici di Qualit\u00e0", None))
         self.onrTabWgt.setTabText(self.onrTabWgt.indexOf(self.onr1TabWgt), QCoreApplication.translate("Form", u"Grafi pre-ONR", None))
         self.onr2sxTitleLbl.setText(QCoreApplication.translate("Form", u"Indici affidabilistici topologia iniziale radiale", None))
         self.onr2Fig1Lbl.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.onr2Fig2Lbl.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.onr2Fig3Lbl.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.onr2Fig4Lbl.setText(QCoreApplication.translate("Form", u"TextLabel", None))
-        self.onr2calcLbl.setText(QCoreApplication.translate("Form", u"Scegli llogica di automazione", None))
-        self.onr2calcCB.setItemText(0, QCoreApplication.translate("Form", u"FRG", None))
-        self.onr2calcCB.setItemText(1, QCoreApplication.translate("Form", u"FNC", None))
-        self.onr2calcCB.setItemText(2, QCoreApplication.translate("Form", u"SFS", None))
-
-        self.onr2calcPb.setText(QCoreApplication.translate("Form", u"Calcolo Indici di Qualit\u00e0", None))
         self.onr2indTitleLbl.setText(QCoreApplication.translate("Form", u"Indici di Affidabilit\u00e0 allo stato iniziale", None))
         self.onr2indAbsFRGSAIFILbl.setText(QCoreApplication.translate("Form", u"3.5784", None))
         self.onr2indAbsTitleEENSLbl.setText(QCoreApplication.translate("Form", u"EENS", None))
@@ -1440,5 +1379,6 @@ class Ui_Form(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bot"
                         "tom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
         self.onrTabWgt.setTabText(self.onrTabWgt.indexOf(self.onr5TabWgt), QCoreApplication.translate("Form", u"Risultati ONR (2)", None))
+        self.viewRefreshPb.setText(QCoreApplication.translate("Form", u"Aggiorna vista", None))
     # retranslateUi
 

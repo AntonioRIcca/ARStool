@@ -92,7 +92,7 @@ QTabWidget::pane{
        <enum>QTabWidget::East</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="onr1TabWgt">
        <property name="styleSheet">
@@ -297,41 +297,6 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
           </layout>
          </widget>
         </item>
-        <item>
-         <widget class="QPushButton" name="indexCalcPb">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton{
-	
-	color: rgb(255, 255, 255);
-	background-color: rgb(0, 0, 0);
-	border: 2px solid rgb(127, 127, 127);
-	border-radius: 10px
-
-}
-
-QPushButton::pressed{
-	background-color: rgb(63, 63, 63);
-	border-style: inset;
-}
-</string>
-          </property>
-          <property name="text">
-           <string>Calcolo Indici di Qualità</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="onr2TabWgt">
@@ -467,106 +432,6 @@ border-bottom: 1px solid rgb(255, 255, 255);</string>
               </size>
              </property>
             </spacer>
-           </item>
-           <item>
-            <widget class="QWidget" name="onr2calcWgt" native="true">
-             <property name="styleSheet">
-              <string notr="true">color: rgb(255, 255, 255);</string>
-             </property>
-             <layout class="QHBoxLayout" name="onr2calcHBL">
-              <item>
-               <widget class="QLabel" name="onr2calcLbl">
-                <property name="styleSheet">
-                 <string notr="true">font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
-                </property>
-                <property name="text">
-                 <string>Scegli llogica di automazione</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="onr2calcCB">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>40</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>70</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>MS Shell Dlg 2</family>
-                  <pointsize>12</pointsize>
-                  <weight>9</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>FRG</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>FNC</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>SFS</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="onr2calcPb">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>40</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>40</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">QPushButton{
-	
-	color: rgb(255, 255, 255);
-	background-color: rgb(0, 0, 0);
-	border: 2px solid rgb(127, 127, 127);
-	border-radius: 10px
-
-}
-
-QPushButton::pressed{
-	background-color: rgb(63, 63, 63);
-	border-style: inset;
-}
-</string>
-                </property>
-                <property name="text">
-                 <string>Calcolo Indici di Qualità</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
            </item>
           </layout>
          </widget>
@@ -2945,6 +2810,41 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="viewRefreshPb">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	
+	color: rgb(255, 255, 255);
+	background-color: rgb(0, 0, 0);
+	border: 2px solid rgb(127, 127, 127);
+	border-radius: 10px
+
+}
+
+QPushButton::pressed{
+	background-color: rgb(63, 63, 63);
+	border-style: inset;
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Aggiorna vista</string>
+      </property>
      </widget>
     </item>
    </layout>

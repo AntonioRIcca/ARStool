@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'onrParWgtJtFbvE.ui'
+## Form generated from reading UI file 'onrParWgtsJdCXS.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -84,7 +84,7 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.onrLogicLbl.setText(QCoreApplication.translate("Form", u"Scegli logica di automazione:", None))
         self.onrLogicCB.setItemText(0, QCoreApplication.translate("Form", u"FRG", None))
-        self.onrLogicCB.setItemText(1, QCoreApplication.translate("Form", u"FNG", None))
+        self.onrLogicCB.setItemText(1, QCoreApplication.translate("Form", u"FNC", None))
         self.onrLogicCB.setItemText(2, QCoreApplication.translate("Form", u"SFS", None))
 
     # retranslateUi

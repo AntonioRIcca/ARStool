@@ -3048,7 +3048,7 @@ class ONR:
                 Sij_plot[b] = Sijpre[b]
 
         plt.cla()
-        plt.figure(2, figsize=(15, 6))
+        lv_pre_fig = plt.figure(2, figsize=(15, 6))
         for b in Sij_plot.keys():
             plt.bar(b, Sijmax[b], linewidth=1, color='salmon')
             plt.stem(b, Sijpre[b], linefmt='darkred', markerfmt='v', basefmt=' ')
@@ -3061,7 +3061,7 @@ class ONR:
         plt.legend(handles=legend_elements, fontsize=12)
         plt.tight_layout()
         # plt.show()
-        plt.savefig(self.filedir + 'lines_overload.png')
+        lv_pre_fig.savefig(self.filedir + 'lines_overload.png')
 
         return V0
 

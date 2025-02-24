@@ -1,1 +1,1 @@
-New "Transformer.trf1" buses=[sourcebus, n_002, ] windings=2 conns=[delta, wye, ] %Rs=[0.225, 0.225, ] kVs=[150, 20, ] XHL=12.01 kVAs=[25000, 25000, ] %imag=0 enabled=true
+New "Transformer.trf1" buses=[sourcebus, n_002, ] windings=2 conns=[delta, wye, ] kVAs=[25000, 25000, ] kVs=[150, 20, ] %Rs=[0.225, 0.225, ] XHL=12.01 %imag=0 enabled=true

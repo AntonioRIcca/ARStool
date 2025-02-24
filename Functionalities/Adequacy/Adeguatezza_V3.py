@@ -1,5 +1,5 @@
 import os
-import yaml
+
 import math
 from math import modf
 import matplotlib.pyplot as plt
@@ -9,27 +9,13 @@ import numpy as np
 
 from variables import v, grid
 
-import copy
-
-
-# dizionario di prova Antonio
-# v = yaml.safe_load(open(os.getcwd() + '/__shared__/CityArea_LFres_AnRes - 1year-Profile.yml'))
-#
-# filename = os.path.join(os.getcwd() + '/__shared__/CityArea_LFres_AnRes - 1year-Profile.yml')
-# try:
-#     del v['_grid_']
-# except:
-#     pass
-
-
-
 
 class Adeguatezza:
     def __init__(self):
         self.graphs = dict()
 
-        self.MC_years = 10 # anni monte carlo ovvero numero di stati casuali del sistema da generare
-        self.statesampling = 4000 # stati del sistema per ogni anno monte carlo
+        self.MC_years = 10  # anni monte carlo ovvero numero di stati casuali del sistema da generare
+        self.statesampling = 4000   # stati del sistema per ogni anno monte carlo
         # estraiamo tutti i componenti di rete presenti nel dizionario
         self.buss = [componente for componente in v.keys() if v[componente]['category'] != 'ExternalGrid' if v[componente]['category'] == 'AC-Node']
         self.trasformatori = [componente for componente in v.keys() if v[componente]['category'] == '2W-Transformer' and v[componente]['par']['out-of-service'] == False]
@@ -51,8 +37,8 @@ class Adeguatezza:
         self.BESS = self.BESS_AC + self.BESS_DC
         self.generazione_distribuita_con_BESS = self.generazione_distribuita_senza_BESS + self.BESS
         self.PV = self.PV_AC + self.PV_DC
-        #verifico l'orizzonte temporale delle curve di previsione e carico leggendo l'output
-        #di un componente qualsiasi
+        # verifico l'orizzonte temporale delle curve di previsione e carico leggendo l'output
+        # di un componente qualsiasi
         self.horizon_time = len(v[self.generazione_distribuita_senza_BESS[0]]['lf']['p'])
 
     def somma(self,v1, v2):
@@ -61,7 +47,6 @@ class Adeguatezza:
         for i in range(n):
             w.append(v1[i] + v2[i])
         return w
-    
 
     def prodotto(self,v1, v2):
         n = len(v1)
@@ -94,13 +79,13 @@ class Adeguatezza:
             Pbess1 = Pbess.copy()
             Pbess2 = Pbess.copy()
             index0 = np.where(Pbess > 0)  # nei timestep dove la batteria assorbe (Pbess>0) pongo il valore uguale a zer
-            # perhè devo considerare solo la potenza immessa in rete
+            # perchè devo considerare solo la potenza immessa in rete
             index1 = np.where(Pbess < 0)  # nei timestep dove la batteria eroga (Pbess<0) pongo il valore uguale a zer
-            # perhè devo considerare solo la potenza erogata in rete
+            # perchè devo considerare solo la potenza erogata in rete
             for i in range(0, len(index0[0])):
-                Pbess1[index0[0][i]] = 0  #Pbess1 contiene valori negativi ovvero la batteria eroga
+                Pbess1[index0[0][i]] = 0  # Pbess1 contiene valori negativi ovvero la batteria eroga
             for i in range(0, len(index1[0])):
-                Pbess2[index1[0][i]] = 0 #Pbess2 contiene valori positivi ovvero la batteria assorbe
+                Pbess2[index1[0][i]] = 0 # Pbess2 contiene valori positivi ovvero la batteria assorbe
             Pbess_generazione_totale = self.somma(np.abs(Pbess1), Pbess_generazione_totale)
             Pbess_domanda_totale = self.somma(np.abs(Pbess2), Pbess_domanda_totale)
         for generatore in self.generazione_distribuita_senza_BESS:
@@ -119,34 +104,28 @@ class Adeguatezza:
             external_grid[i] = -external_grid[i] # Se la potenza arriva dalla rete esterna deve essere positiva. Nel dizionario il segno è invertito.
             if external_grid[i] > 0:
                 generazione_da_external_grid[i] = external_grid[i]
-        #per generazione interna totale intendo la somma di tutta la potenza prodotta ed iniettata nella microgrid. Quindi considera sia la potenza generata dalla
-        #generazione distribuita che la potenza proveninente dalla rete esterna
+        # per generazione interna totale intendo la somma di tutta la potenza prodotta ed iniettata nella microgrid. Quindi considera sia la potenza generata dalla
+        # generazione distribuita che la potenza proveninente dalla rete esterna
         generazione_interna_totale = self.somma(generazione_da_external_grid, generazione_totale_distribuita)
-        #per generazione totale intendo il bilancio della potenza entrante ed uscente dalla microrete
+        # per generazione totale intendo il bilancio della potenza entrante ed uscente dalla microrete
         bilancio_potenza = self.somma(external_grid, generazione_totale_distribuita)
         for i in range(0, len(generazione_interna_totale)):
             if generazione_interna_totale[i] < domanda_totale[i]:
                 DNS[i] = 1
                 DNS_somma = domanda_totale[i] - generazione_interna_totale[i] + DNS_somma
 
-
-
         LOLP = sum(DNS) * 100 / self.horizon_time  # Loss of Load Probability (probabilità di avere un load shedding involontario)
         EDNS = DNS_somma / self.horizon_time  # [valore in potenza]Expected Demand Not Supplied
         LOLE = (LOLP / 100) * self.horizon_time  # [ore/anno] Loss of load expectation
         # è la durata totale degli incrementi in cui è prevista la perdita di carico
 
-
         return generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,  external_grid, bilancio_potenza
 
-
-
-
     def State_Sampling(self, generazione_totale_distribuita, domanda_totale):
-        durata_timestep = 1 # durata timestep in ore
+        durata_timestep = 1     # durata timestep in ore
         timehorizon = len(generazione_totale_distribuita) # orizzonte temporale in ore
         numerotimestep = timehorizon/durata_timestep
-        SAIDI = 2.5 # ORE DI INTERRUZIONE MEDIE ANNUE PREVISTE DA ENEL NEL 2025
+        SAIDI = 2.5     # ORE DI INTERRUZIONE MEDIE ANNUE PREVISTE DA ENEL NEL 2025
         LOLE = np.zeros(self.statesampling)
         LOLE_medio = np.zeros(self.statesampling)
         EENS = np.zeros(self.statesampling)
@@ -173,20 +152,16 @@ class Adeguatezza:
                 LOLE_carico_degrado = 0
                 EENS_carico_degrado = 0
                 timestep = rand.randrange(0, numerotimestep-1)  # estraggo il time step nell'orizzonte temporale che sto analizzando
-                #v_degrado = yaml.safe_load(open(os.getcwd() + '/__shared__/CityArea_with_anomalies_high_1.yml'))
-                ##quando disponibili previsioni estrarre anno fornito da Gianluca
-                ##Valuto LOLE ed ENS considerando la sola affidabilità della fornitura
+                # #quando disponibili previsioni estrarre anno fornito da Gianluca
+                # Valuto LOLE ed ENS considerando la sola affidabilità della fornitura
                 for carico in self.domanda :
                     u = rand.uniform(0, 1)
                     ttr = (-1/SAIDI) * math.log(u) # tempo di ripristino in ore
                     fraz, int = modf(ttr / durata_timestep)
                     if v[self.PV[0]]['lf']['p'][timestep] > 0 : # siamo in ore diurne
-                        #print('giorno')
                         load_rel = v[carico]['rel']['results']['load_rel']
                     else:
-                        #print('notte')
-                        #quando sarà inserito puntare a load_rel1
-                        #print('carico:', carico)
+                        # quando sarà inserito puntare a load_rel1
                         load_rel = v[carico]['rel']['results']['load_rel1']
                     if u > load_rel: # il carico non è alimentato
                         #calcolo le ore di mancata fornitura al carico
@@ -203,7 +178,7 @@ class Adeguatezza:
                                     EENS_carico = EENS_carico + v[carico]['lf']['p'][timestep+t] * durata_timestep
                                 EENS_carico = EENS_carico + v[carico]['lf']['p'][timestep + round(int)] * fraz
                             else:
-                                for t in range(0, numerotimestep-1):
+                                for t in range(0, numerotimestep - 1):
                                     EENS_carico = EENS_carico + v[carico]['lf']['p'][timestep + t] * durata_timestep
 
                 ##Valuto LOLE ed ENS considerando sia l'affidabilità della fornitura che le anomalie presenti
@@ -217,91 +192,58 @@ class Adeguatezza:
                     betai = v[generatore]['anom']['res']['beta']
                     if (v[generatore]['anom']['par'].get('Hourly_Degradation') and a_vct[timestep] == 'normal' and timestep not in timestep_estratti) or (a_vct[timestep] != 'normal' and timestep not in timestep_estratti):
                         timestep_estratti.append(timestep)
-                        #leggo le informazioni sull'evento anomalo transitorio tipo partial shading
-                        #non sto considerando il degrado dei generatori PV che è un'anomalia permanente già contenuta nel segnale di partenza
-                        #print('timestep', timestep)
-                        #print('gen tot prima',generazione_totale_distribuita_copy[timestep] )
-                        #print('generatore', v[generatore]['lf']['p'][timestep])
-                        #print('gen. anomala',v[generatore]['lf']['p'][timestep]*xi[timestep] )
-                        #generazione_totale_copy[timestep] = generazione_totale[timestep] - abs(v[generatore]['lf']['p'][timestep]) + (abs(v[generatore]['lf']['p'][timestep]*v[generatore]['anomaly']['xi_deg'][timestep]+v[generatore]['anomaly']['beta_deg'][timestep]) * v[generatore]['anomaly']['xi'][timestep] + v[generatore]['anomaly']['beta'][timestep])
+                        # leggo le informazioni sull'evento anomalo transitorio tipo partial shading
+                        # non sto considerando il degrado dei generatori PV che è un'anomalia permanente già contenuta
+                        # nel segnale di partenza
                         generazione_totale_distribuita_copy[timestep] = generazione_totale_distribuita[timestep]-abs(v[generatore]['lf']['p'][timestep])+(abs(v[generatore]['lf']['p'][timestep])*xi[timestep] + betai[timestep] )
                         if generazione_totale_distribuita_copy[timestep] < domanda_totale[timestep] and a_vct[timestep] == 'normal' : # dobbiamo considerare il naturale degrado
                             EENS_carico_degrado = abs(v[generatore]['lf']['p'][timestep])-(abs(v[generatore]['lf']['p'][timestep])*xi[timestep] + betai[timestep]) + EENS_carico_degrado
                             LOLE_carico_degrado = LOLE_carico_degrado + 1 # il degrado dura tutto il timestep cha vale 1 ora
-                        #print('gen tot dopo', generazione_totale_distribuita_copy[timestep])
-                        #print('domanda',domanda_totale[timestep])
+
                         if generazione_totale_distribuita_copy[timestep] < domanda_totale[timestep] and a_vct[timestep] != 'normal': # a causa delle anomalie la generazione distribuita totale non è piu adeguata
                             for evento in range(0,len(a_dict.keys())):
+                                print('len(a_vct):', len(a_vct))
+                                print('timestamp:', timestep, '\tevento:', evento, 'event' + str(evento+1))
+                                print('a_dict[a_vct[timestep]]:', len(a_dict[a_vct[timestep]]))
                                 if timestep in a_dict[a_vct[timestep]][evento]['event' + str(evento+1)]['idx']:
                                     orig_start = a_dict[a_vct[timestep]][evento]['event' + str(evento + 1)]['orig_start']
                                     orig_end = a_dict[a_vct[timestep]][evento]['event' + str(evento + 1)]['orig_end']
                                     if timestep == math.floor(orig_start): # il timestep coincide con il punto di partenza dell'evento
-                                        #EENS_carico_anomalies = EENS_carico_anomalies + abs(v[generatore]['lf']['p'][timestep]*v[generatore]['anomaly']['anomalies']['degradation']-v[generatore]['anomaly']['p'][timestep]) * (orig_start-min(orig_end, math.ceil(orig_start))) * durata_timestep
-                                        #il segnale contiene già il degrado dovuto all'usura quindi non serve piu il campo degradation
+                                        # EENS_carico_anomalies = EENS_carico_anomalies + abs(v[generatore]['lf']['p'][timestep]*v[generatore]['anomaly']['anomalies']['degradation']-v[generatore]['anomaly']['p'][timestep]) * (orig_start-min(orig_end, math.ceil(orig_start))) * durata_timestep
+                                        # il segnale contiene già il degrado dovuto all'usura quindi non serve piu il campo degradation
                                         EENS_carico_anomalies = EENS_carico_anomalies + abs(v[generatore]['lf']['p'][timestep] - (abs(v[generatore]['lf']['p'][timestep])*xi[timestep] + betai[timestep])) * (orig_start - min(orig_end, math.ceil(orig_start))) * durata_timestep
                                         LOLE_carico_anomalies = LOLE_carico_anomalies + (orig_start-min(orig_end, math.ceil(orig_start))) * durata_timestep
                                     if timestep > orig_start and timestep < math.floor(orig_end):
-                                        #EENS_carico_anomalies = EENS_carico_anomalies + abs(v[generatore]['lf']['p'][timestep]*v[generatore]['anomaly']['anomalies']['degradation'] - v[generatore]['anomaly']['p'][timestep]) * durata_timestep
-                                        #il segnale contiene già il degrado dovuto all'usura quindi non serve piu il campo degradation
+                                        # EENS_carico_anomalies = EENS_carico_anomalies + abs(v[generatore]['lf']['p'][timestep]*v[generatore]['anomaly']['anomalies']['degradation'] - v[generatore]['anomaly']['p'][timestep]) * durata_timestep
+                                        # il segnale contiene già il degrado dovuto all'usura quindi non serve piu il campo degradation
                                         EENS_carico_anomalies = EENS_carico_anomalies + abs(v[generatore]['lf']['p'][timestep]  - abs(v[generatore]['lf']['p'][timestep])*xi[timestep] + betai[timestep]) * durata_timestep
                                         LOLE_carico_anomalies = LOLE_carico_anomalies + durata_timestep
                                     if timestep == math.floor(orig_end):
-                                        #EENS_carico_anomalies = EENS_carico_anomalies + abs(v[generatore]['lf']['p'][timestep]*v[generatore]['anomaly']['anomalies']['degradation'] - v[generatore]['anomaly']['p'][timestep]) * (orig_end-timestep) * durata_timestep
+                                        # EENS_carico_anomalies = EENS_carico_anomalies + abs(v[generatore]['lf']['p'][timestep]*v[generatore]['anomaly']['anomalies']['degradation'] - v[generatore]['anomaly']['p'][timestep]) * (orig_end-timestep) * durata_timestep
                                         # il segnale contiene già il degrado dovuto all'usura quindi non serve piu il campo degradation
                                         EENS_carico_anomalies = EENS_carico_anomalies + abs(v[generatore]['lf']['p'][timestep] - (v[generatore]['lf']['p'][timestep])*xi[timestep] + betai[timestep]) * (orig_end-timestep) * durata_timestep
                                         LOLE_carico_anomalies = LOLE_carico_anomalies + (orig_end-timestep) * durata_timestep
-                # sample = np.zeros(len(generazione_totale))
-                # for s in range(0, len(generazione_totale)):
-                #     sample[s] = s
-                # plt.plot(sample, generazione_totale_copy, color="red", label="GENERAZIONE")
-                # plt.plot(sample, domanda_totale, color="blue", label="DOMANDA")
-                # plt.legend()
-                # plt.xlabel('ADEQUACY')
-                # filename1 = os.path.join(v.project_folder, 'generation_adequacy_state_sampling', "generation_adequacy_" + str(i) + '.png')
-                # plt.savefig(filename1)
-                # plt.close()
-                #generazione_totale_copy.clear()
 
                 LOLE_degrado_anomalie = LOLE_carico_degrado + LOLE_carico_anomalies
                 EENS_degrado_anomalie = EENS_carico_degrado + EENS_carico_anomalies
 
                 LOLE[j] = LOLE_carico
                 EENS[j] = EENS_carico
-                #LOLE_medio[j] = LOLE_carico
-                #EENS_medio[j] = EENS_carico
                 LOLE_anomalies[j] = LOLE_degrado_anomalie
                 EENS_anomalies[j] = EENS_degrado_anomalie
-                #LOLE_medio_anomalies[j] = LOLE_carico_anomalies
-                #EENS_medio_anomalies[j] = EENS_carico_anomalies
-                # if j>0:
-                #     LOLE_medio[j] = sum(LOLE)/(j+1)
-                #     EENS_medio[j] = sum(EENS)/(j+1)
-                #     LOLE_medio_anomalies[j] = sum(LOLE_anomalies)/(j+1)
-                #     EENS_medio_anomalies[j] = sum(EENS_anomalies)/(j+1)
+
             LOLE_medio_anno_MC[i] =  sum(LOLE)/self.statesampling
             EENS_medio_anno_MC[i] = sum(EENS)/self.statesampling
             LOLE_medio_anomalies_anno_MC[i] = sum(LOLE_anomalies)/self.statesampling
             EENS_medio_anomalies_anno_MC[i] = sum(EENS_anomalies)/self.statesampling
-            #EENS[i] = EENS_year
-            #EENS[i] = np.mean(EENS)
         # calcolo il coefficiente di variazione (CV) che rappresenta
         # la distanza della deviazione standard rispetto al valore medio
-        ##CV_LOLE = st.stdev(LOLE_medio)/(np.sqrt(i)*LOLE_medio[-1])
-        ##CV_LOLE_anomalies = st.stdev(LOLE_medio_anomalies) / (np.sqrt(i) * LOLE_medio_anomalies[-1])
+
         CV_LOLE = 0
         CV_LOLE_anomalies = 0
-        #CV_EENS = st.stdev(EENS)/(np.sqrt(i) * np.mean(EENS))
+
         generazione_totale_distribuita_copy.clear()
         return LOLE_medio_anno_MC, CV_LOLE, EENS_medio_anno_MC, LOLE_medio_anomalies_anno_MC, CV_LOLE_anomalies, EENS_medio_anomalies_anno_MC
-
-
-# a=Adeguatezza()
-# adequacy_result = a.generation_adequacy()
-
-
-# class AdequacyOutput():
-#     def __init__(self):
-#         pass
 
     def generation_adequacy_plot(self, adequacy_result, i0=0, i1=23):
         (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
@@ -329,9 +271,7 @@ class Adeguatezza:
         axis[1].set_title("DNS")
         axis[1].legend()
 
-        #plt.show()
         strFile = "generation_adequacy.png"
-        #save
 
         savepath = 'C:/Users/anton/PycharmProjects/ARStool/Functionalities/Adequacy/__images__/'
 
@@ -340,10 +280,7 @@ class Adeguatezza:
         filename1 = os.path.join(savepath, strFile)
         plt.savefig(filename1)
         plt.close()
-        #
-        #
-        # #
-        # (LOLE_medio_anno_MC, CV_LOLE, EENS_medio_anno_MC, LOLE_medio_anomalies_anno_MC, CV_LOLE_anomalies, EENS_medio_anomalies_anno_MC) = a.State_Sampling(generazione_totale_distribuita, domanda_totale)
+
         figure1, ax1 = plt.subplots()
 
         self.graphs[0] = {
@@ -375,7 +312,6 @@ class Adeguatezza:
             },
         }
 
-
         ax1.plot(sample[i0:i1], generazione_totale_distribuita[i0:i1], color="yellow",
                      label="GENERAZIONE DISTRIBUITA")
         ax1.plot(sample[i0:i1], generazione_interna_totale[i0:i1], color="red", label="GENERAZIONE INTERNA TOTALE")
@@ -391,19 +327,12 @@ class Adeguatezza:
         box = ax1.get_position()
         ax1.set_position([box.x0, box.y0 + box.height * 0.15, box.width, box.height * 0.85])
         box1 = ax1.get_position()
-        # print('x0:', box1.x0, '\ny0:', box1.y0, '\nheight:', box1.height, '\nwidth:', box1.width, )
-
-        # ax1.text(15, 250, "% Gen.distr./Gen. interna tot.:" + str(
-        #     round(sum(generazione_totale_distribuita) * 100 / sum(generazione_interna_totale), 2)) + "%",
-        #              style='italic')
 
         self.x_gen_distr = sum(generazione_totale_distribuita) * 100 / sum(generazione_interna_totale)
 
         strFile = "1.png"
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
-        filename1 = os.path.join(savepath, strFile)
-        # plt.savefig(filename1)
 
         #  -------
 
@@ -426,7 +355,6 @@ class Adeguatezza:
             },
         }
 
-        # figure2.set_size_inches(12, 8)
         ax2.plot(sample[i0:i1],DNS[i0:i1], color="red", label="DNS")
         ax2.set_title("DNS")
         ax2.legend(fontsize=8)
@@ -436,8 +364,6 @@ class Adeguatezza:
         strFile = "2.png"
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
-        filename1 = os.path.join(savepath, strFile)
-        # plt.savefig(filename1)
 
     def state_sampling_plot(self, generazione_totale_distribuita, domanda_totale):
 
@@ -475,17 +401,14 @@ class Adeguatezza:
             },
         }
 
-
-        #print('sample,LOLE_medio_anno_MC', sample,LOLE_medio_anno_MC)
         axis1[0].plot(sample,LOLE_medio_anno_MC, color="blue")
         axis1[0].plot(sample,LOLE_medio_anomalies_anno_MC, color="red")
-        #axis1[0].legend()
 
         # Shrink current axis's height by 10% on the bottom
         box = axis1[0].get_position()
         axis1[0].set_position([box.x0, box.y0 + box.height * 0.1, box.width*0.9, box.height * 0.9])
 
-        print('x0',plt.axis()[2])
+        print('x0', plt.axis()[2])
 
         axis1[0].text(2.5, 0.000625, "% LOLE con affidabilità fornitura:" + str(LOLE_medio_anno_MC[-1]), style='italic')
         axis1[0].text(2000, 0.4, "% LOLE con affidabilità fornitura e anomalie:" + str(LOLE_medio_anomalies_anno_MC[-1]), style='italic')
@@ -496,7 +419,6 @@ class Adeguatezza:
 
         axis1[1].plot(sample,EENS_medio_anno_MC, color="blue")
         axis1[1].plot(sample,EENS_medio_anomalies_anno_MC, color="red")
-        #axis1[1].legend()
         axis1[1].yaxis.set_label_position("right")
         axis1.flat[1].set(xlabel='ANNI MONTE CARLO', ylabel='EENS[KWh]')
 
@@ -506,18 +428,14 @@ class Adeguatezza:
 
         # Put a legend below current axis
         figure1.legend(labels=["CONSIDERANDO L'AFFIDABILITA' DEI COMPONENTI","CONSIDERANDO L'AFFIDABILITA' E ANOMALIE DEI COMPONENTI"], loc="lower center", ncol=2)
-        #plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05), fancybox=True, shadow=True, ncol=5)
 
-        #plt.show()
         strFile = "LOLE&EENS.png"
-        #save
 
         savepath = 'C:/Users/anton/PycharmProjects/ARStool/Functionalities/Adequacy/__images__/'
 
         if os.path.isfile(savepath + strFile):
-           os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
+            os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
 
-        #(os.getcwd())
         filename1 = os.path.join(savepath, strFile)
         plt1.savefig(filename1, dpi=1200)
         plt1.close()
@@ -528,7 +446,6 @@ class Adeguatezza:
         figure1 = plt.Figure(figsize=(4, 5))
         ax1 = figure1.add_subplot()
 
-        # figure1.suptitle('Adeguatezza')
         ax1.plot(sample, LOLE_medio_anno_MC, color="blue", label='con Affidabilità dei componenti')
         ax1.plot(sample, LOLE_medio_anomalies_anno_MC, color="red", label='con Affidabilità e Anomalie')
 
@@ -548,9 +465,6 @@ class Adeguatezza:
         strFile = "3.png"
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
-        filename1 = os.path.join(savepath, strFile)
-        # figure1.savefig(filename1)
-
         #  ------------
 
         figure2 = plt.Figure(figsize=(4, 5))
@@ -589,15 +503,4 @@ class Adeguatezza:
 
         strFile = "4.png"
         if os.path.isfile(savepath + strFile):
-            os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
-        filename1 = os.path.join(savepath, strFile)
-        # figure2.savefig(filename1)
-
-
-
-
-
-
-
-
-
+            os.remove(savepath + strFile)

@@ -89,7 +89,7 @@ QPushButton:pressed {
       </item>
       <item>
        <property name="text">
-        <string>FNG</string>
+        <string>FNC</string>
        </property>
       </item>
       <item>

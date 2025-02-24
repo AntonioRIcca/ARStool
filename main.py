@@ -2483,7 +2483,7 @@ class Main:
         self.onr_res.ui.onr3log1TB.setText(self.onr.log_pre_solver)
         self.onr_res.ui.onr3log2YB.setText(self.onr.log_pre_viol)
 
-        self.onr_res.ui.onr2calcPb.clicked.connect(self.onrRun)
+        # self.onr_res.ui.onr2calcPb.clicked.connect(self.onrRun)
 
     def openImage(self, path, event=None):
         plt.cla()
