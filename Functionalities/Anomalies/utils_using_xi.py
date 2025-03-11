@@ -80,8 +80,11 @@ def plot_signals(n1, xn1, n2, xn2, label1='', label2='',
     def format_func(value, tick_number):
         return f"{value:.2f}".replace(".", ",")
 
+    # If no ax is passed, create a new figure and axes
     if ax == []:
         fig, ax = plt.subplots(figsize=(15, 4))
+    else:
+        fig = ax.get_figure()  # Use the figure from ax if passed
     
     #ax.stem(n, xn)
     ax.plot(n1, xn1, label=label1, color='b')
@@ -247,7 +250,9 @@ def scales (N: int, timestamps_start: list, timestamps_stop: list, values: list)
 # of the original signal. E.g. we can have an original signal modulated 
 # by a gaussian 
 # Alpha assume different meaning for different type of signals
-def modulate_signal(N: int, timestamp_start: int=0, timestamp_stop: int=-1, type: str='-x+1', alpha: float = 100):
+# reset_modulation = True means that the modulation is reset at each application of the modulation
+def modulate_signal(N: int, timestamp_start: int=0, timestamp_stop: int=-1, type: str='-x+1', 
+                    alpha: float = 100, reset_modulation=True):
     x_i = np.ones((N,))
     b_i = np.zeros((N,))
     
@@ -259,15 +264,21 @@ def modulate_signal(N: int, timestamp_start: int=0, timestamp_stop: int=-1, type
 
     for i in range(0, len(ts)):
         t_value = ts[i]
+
+        if (reset_modulation):
+            internal_t = i
+        else:
+            internal_t = t_value  
+        
         if (type == '1-exp'):
-            if (t_value == 0):
+            if (internal_t == 0):
                 envelope = 1
             else:
-                envelope = (1-np.exp(- alpha * 1/t_value))
+                envelope = (1-np.exp(- alpha * 1 / internal_t))
         elif (type == 'exp'):
-            envelope = (np.exp(- alpha * t_value))
+            envelope = (np.exp(- alpha * internal_t))
         elif (type == '-x+1'):
-            envelope = -alpha*t_value + 1
+            envelope = -alpha * internal_t + 1
             if (envelope < 0):
                 envelope = 0
 
@@ -344,7 +355,7 @@ def add_variable_noise(N: int, timestamp_start: int=0, timestamp_stop: int=0, le
     k=int((end-start) / levels)
     
     if (levels > len(sigma)):
-        print ('ERROR - Not enough sigmal values')
+        print ('ERROR - Not enough sigma values')
 
     i = 0
     while ((start+k<=end) & (i <=N)):
