@@ -23,6 +23,8 @@ def adapt_config_from_ARS_TOOL(key_perturbation, input_params):
         splitted_key_perturbation = key_perturbation.split(' ')
         type_of_perturbation = splitted_key_perturbation[1]
         subtype_of_perturbation = splitted_key_perturbation[0]
+        # rimozione delle paranetesi
+        subtype_of_perturbation = ''.join(char for char in subtype_of_perturbation if char not in "()")
     else:
         type_of_perturbation = key_perturbation
 
