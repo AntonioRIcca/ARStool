@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_uiuAqYJR.ui'
+## Form generated from reading UI file 'main_uivUYrWb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -663,6 +663,16 @@ class Ui_MainWindow(object):
         self.page_8.setObjectName(u"page_8")
         self.verticalLayout_18 = QVBoxLayout(self.page_8)
         self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.printPB = QPushButton(self.page_8)
+        self.printPB.setObjectName(u"printPB")
+        self.printPB.setMinimumSize(QSize(0, 30))
+        self.printPB.setStyleSheet(u"border: solid;\n"
+"border-width: 1 px;\n"
+"border-radius: 10 px;\n"
+"border-color: rgb(255, 255, 255);")
+
+        self.verticalLayout_18.addWidget(self.printPB)
+
         self.label_12 = QLabel(self.page_8)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setFont(font1)
@@ -1193,6 +1203,7 @@ class Ui_MainWindow(object):
         self.closeBtn.setText("")
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Home", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Data Analysis", None))
+        self.printPB.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Reports", None))
         self.rightMenu_LBL.setText(QCoreApplication.translate("MainWindow", u"Right Menu", None))
 #if QT_CONFIG(tooltip)

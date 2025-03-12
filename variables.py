@@ -49,6 +49,26 @@ def grid_initialize():
         grid[p] = copy.deepcopy(grid0[p])
 
 
+onr_dict = {}
+
+
+_onr_dict_ = {
+    'log_pre_grafos': '',
+    'log_pre_solver': '',
+    'log_pre_viol': '',
+    'log_post_solver': '',
+    'log_post_switch': '',
+    'log_post_viol': '',
+    'indexes': {},
+    'indexes_post': {},
+}
+
+
+def onr_dict_init():
+    for i in _onr_dict_:
+        onr_dict[i] = _onr_dict_[i]
+
+
 bench = {
     'profiles': {
         'load': {

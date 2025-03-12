@@ -5,7 +5,7 @@ try:
 except:
     from .UI.ui_optimalStorage_wgt import *
 
-from PySide2 import QtGui, QtCore, QtWidgets
+from PySide2 import QtGui, QtWidgets
 
 from PySide2.QtCharts import *
 
@@ -129,15 +129,27 @@ class OptStorWGT(QMainWindow):
             for c in ['Gen', 'Cap']:
                 self.__setattr__('fer' + c + 'PercScen',
                                  self.__getattribute__('fer' + c + 'Scen') / self.enDutyScen * 100)
+                self.ui.__getattribute__('fer' + c + 'ScenPercDsb').setValue(
+                    self.__getattribute__('fer' + c + 'PercScen'))
+
                 for p in ['solar', 'wind', 'other']:
                     self.__setattr__(p + c + 'PercScen',
                                      self.__getattribute__(p + c + 'Scen') /
                                      self.__getattribute__('fer' + c + 'Scen') * 100)
+                    self.ui.__getattribute__(p + c + 'ScenPercDsb').setValue(self.__getattribute__(p + c + 'PercScen'))
+            # ----------------------------------------------------------------------------------------
+
+            # -- Calcolo OverGeneration --------------------------------------------------------------
+            self.hiOvergenResScen = 0.05 * (self.solarGenScen + self.windGenScen)
+            self.lowOvergenResScen = 0.027 * (self.solarGenScen + self.windGenScen)
+            self.ui.hiOvergenResActDsb.setValue(self.hiOvergenResScen)
+            self.ui.lowOvergenResActDsb.setValue(self.lowOvergenResScen)
             # ----------------------------------------------------------------------------------------
 
     # Calcolo dello storage
     def sysStor_calc(self):
         # Verifica dela linea corrispondente alla percentuale di input
+        i = 0
         for i in range(len(storage[0])):
             x = storage[0][i]
             if self.ferGenInput / 100 <= x:
@@ -284,12 +296,12 @@ class OptStorWGT(QMainWindow):
 s = {
     '2019': {
         'Consuntivo': {
-            'totEnConsMtep': 112,
-            'totEnCons': 1302.3,
+            'totEnConsMtep': 110.6,
+            # 'totEnCons': 1302.3,
             'h2Cons': 0,
             'enDuty': 320,
-            'enImport': 51,
-            'enProd': 269,
+            'enImport': 38,
+            # 'enProd': 269,
             'ferGen': 113,
             'solarGen': 23,
             'windGen': 20,
@@ -300,12 +312,12 @@ s = {
     },
     '2030': {
         'FF55': {
-            'totEnConsMtep': 112,
-            'totEnCons': 1302.3,
+            'totEnConsMtep': 95.5,
+            # 'totEnCons': 1302.3,
             'h2Cons': 9,
             'enDuty': 366,
             'enImport': 52,
-            'enProd': 314,
+            # 'enProd': 314,
             'ferGen': 239,
             'solarGen': 101,
             'windGen': 68,
@@ -314,12 +326,12 @@ s = {
             'windCap': 27,
         },
         'LT': {
-            'totEnConsMtep': 112,
-            'totEnCons': 1302.3,
+            'totEnConsMtep': 103.7,
+            # 'totEnCons': 1302.3,
             'h2Cons': 0,
             'enDuty': 331,
             'enImport': 91,
-            'enProd': 260,
+            # 'enProd': 260,
             'ferGen': 187,
             'solarGen': 69,
             'windGen': 46,
@@ -330,12 +342,12 @@ s = {
     },
     '2040': {
         'DE-IT': {
-            'totEnConsMtep': 112,
-            'totEnCons': 1302.3,
+            'totEnConsMtep': 80.7,
+            # 'totEnCons': 1302.3,
             'h2Cons': 18,
             'enDuty': 418,
             'enImport': 54,
-            'enProd': 364,
+            # 'enProd': 364,
             'ferGen': 325,
             'solarGen': 157,
             'windGen': 108,
@@ -344,12 +356,12 @@ s = {
             'windCap': 42,
         },
         'GA-IT': {
-            'totEnConsMtep': 112,
-            'totEnCons': 1302.3,
+            'totEnConsMtep': 84.6,
+            # 'totEnCons': 1302.3,
             'h2Cons': 16,
             'enDuty': 396,
             'enImport': 49,
-            'enProd': 347,
+            # 'enProd': 347,
             'ferGen': 302,
             'solarGen': 138,
             'windGen': 99,
@@ -358,12 +370,12 @@ s = {
             'windCap': 39,
         },
         'LT': {
-            'totEnConsMtep': 112,
-            'totEnCons': 1302.3,
+            'totEnConsMtep': 89.2,
+            # 'totEnCons': 1302.3,
             'h2Cons': 9,
             'enDuty': 389,
-            'enImport': 52,
-            'enProd': 337,
+            'enImport': 51,
+            # 'enProd': 337,
             'ferGen': 244,
             'solarGen': 102,
             'windGen': 71,
@@ -373,6 +385,12 @@ s = {
         },
     },
 }
+
+for y in s:
+    for scen in s[y]:
+        s[y][scen]['totEnCons'] = s[y][scen]['totEnConsMtep'] / 0.0863    # TODO: Questo fattore non sembra essere fisso
+        s[y][scen]['enProd'] = s[y][scen]['enDuty'] - s[y][scen]['enImport']
+        print(y, scen)
 
 
 # Lettura del dizionario della curva di riferimento dello storage

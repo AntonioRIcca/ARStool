@@ -1530,6 +1530,25 @@ border-radius: 10px;
                <widget class="QWidget" name="page_8">
                 <layout class="QVBoxLayout" name="verticalLayout_18">
                  <item>
+                  <widget class="QPushButton" name="printPB">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border: solid;
+border-width: 1 px;
+border-radius: 10 px;
+border-color: rgb(255, 255, 255);</string>
+                   </property>
+                   <property name="text">
+                    <string>PushButton</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QLabel" name="label_12">
                    <property name="font">
                     <font>

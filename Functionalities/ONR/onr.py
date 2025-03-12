@@ -2,7 +2,7 @@
 # =============================================================================
 import matplotlib.pyplot
 
-from variables import v, new_par_dict, mc
+from variables import v, new_par_dict, mc, onr_dict
 from opendss import OpenDSS
 import sys
 from math import pi, sqrt, cos, sin, tan, atan2, exp
@@ -47,15 +47,15 @@ class ONR:
     def __init__(self):
         self.ONR_initialize()
         self.dss = OpenDSS()
-        self.indexes = dict()
-        self.indexes_post = dict()
+        # self.indexes = dict()
+        # self.indexes_post = dict()
         self.filedir = 'C:/Users/anton/PycharmProjects/ARStool/Functionalities/ONR/__images__/'
-        self.log_pre_grafos = ''
-        self.log_pre_solver = ''
-        self.log_pre_viol = ''
-        self.log_post_solver = ''
-        self.log_post_switch = ''
-        self.log_post_viol = ''
+        # self.log_pre_grafos = ''
+        # self.log_pre_solver = ''
+        # self.log_pre_viol = ''
+        # self.log_post_solver = ''
+        # self.log_post_switch = ''
+        # self.log_post_viol = ''
 
     def ONR_PRE(self):
         # with open('C:/Users/velin/OneDrive - Politecnico di Bari/Desktop/ENEA_PORTICI_12_2024/ONR_ENEA_PORTICI_class/ENEA_PORTICI_dict_.yml', 'r') as file:
@@ -93,10 +93,22 @@ class ONR:
             if v[i]['category'] == 'AC-Node':
                 bus.append(i)
 
-        # TODO: da commentare se si importa reta da DSS
-        if 'sourcebus' in bus:
-            bus_ultimo = bus.pop()
-            bus.insert(0, bus_ultimo)
+        # # TODO: da commentare se si importa reta da DSS
+        # if 'sourcebus' in bus:
+        #     bus_ultimo = bus.pop()
+        #     bus.insert(0, bus_ultimo)
+        # bus.sort(reverse=True)
+
+        source = ''
+        for source in v:
+            if v[source]['category'] == 'ExternalGrid':
+                break
+
+        for b in bus:
+            if source in v[b]['top']['conn']:
+                bus.remove(b)
+                bus.insert(0, b)
+                break
 
         trbus = []
         for i in v.keys():
@@ -551,7 +563,7 @@ class ONR:
         # zone_bus=zone_bus[0:84]
         # print('Suddivisione zonale - END.')
         # print('Le zone ottenute sono:', len(lista_zone));
-        self.log_pre_grafos += 'Le zone ottenute sono ' + str(len(lista_zone))
+        onr_dict['log_pre_grafos'] += 'Le zone ottenute sono ' + str(len(lista_zone)) + '\n'
         Nzone = len(lista_zone)
 
         # Zona-from e Zona-to per ciascuno switch:
@@ -732,9 +744,9 @@ class ONR:
             else:
                 str_conn = 'non '
 
-            self.log_pre_grafos = (self.log_pre_grafos + 'Il grafo della rete ha ' + str(nx.number_of_nodes(G)) +
-                                   ' nodi e ' + str(nx.number_of_edges(G)) + ' rami connessi.\n' +
-                                   'La rete ' + str_conn + 'è inizialmente connessa\n\n')
+            onr_dict['log_pre_grafos'] += ('Il grafo della rete ha ' + str(nx.number_of_nodes(G)) + ' nodi e ' +
+                                           str(nx.number_of_edges(G)) + ' rami connessi.\n' + 'La rete ' + str_conn +
+                                           ' è inizialmente connessa\n\n')
             return G
 
         NX_grafo_nodale = Creazione_grafo_nodale(bus, branches)
@@ -784,9 +796,9 @@ class ONR:
             else:
                 str_conn = 'non '
 
-            self.log_pre_grafos = (self.log_pre_grafos + 'Il grafo zonale della rete ha ' + str(nx.number_of_nodes(G)) +
-                                   ' nodi e ' + str(nx.number_of_edges(G)) + ' rami connessi.\n' +
-                                   'La rete zonale ' + str_conn + 'è inizialmente connessa\n\n')
+            onr_dict['log_pre_grafos'] += ('Il grafo zonale della rete ha ' + str(nx.number_of_nodes(G)) + ' nodi e '
+                                           + str(nx.number_of_edges(G)) + ' rami connessi.\n' +
+                                           'La rete zonale ' + str_conn + 'è inizialmente connessa\n\n')
 
             Grafo = nx.Graph(G)
             return Grafo
@@ -1030,10 +1042,9 @@ class ONR:
             else:
                 str_conn = 'non '
 
-            self.log_pre_grafos = (self.log_pre_grafos + 'Il grafo della rete senza maglie ha ' +
-                                   str(nx.number_of_nodes(G)) + ' nodi e ' + str(nx.number_of_edges(G)) +
-                                   ' rami connessi.\n' +
-                                   'La rete smagliata ' + str_conn + 'è connessa\n\n')
+            onr_dict['log_pre_grafos'] += ('Il grafo della rete senza maglie ha ' + str(nx.number_of_nodes(G)) +
+                                           ' nodi e ' + str(nx.number_of_edges(G)) + ' rami connessi.\n' +
+                                           'La rete smagliata ' + str_conn + 'è connessa\n\n')
 
             return G
 
@@ -1092,10 +1103,10 @@ class ONR:
                 else:
                     str_conn = 'non '
 
-                self.log_pre_grafos = (self.log_pre_grafos + 'Il grafo della rete zonale senza maglie ha ' +
-                                       str(nx.number_of_nodes(G)) + ' nodi e ' + str(nx.number_of_edges(G)) +
-                                       ' rami connessi.\n' +
-                                       'La rete zonale smagliata ' + str_conn + 'è connessa\n\n')
+                onr_dict['log_pre_grafos'] += ('Il grafo della rete zonale senza maglie ha ' +
+                                               str(nx.number_of_nodes(G)) + ' nodi e ' + str(nx.number_of_edges(G)) +
+                                               ' rami connessi.\n' +
+                                               'La rete zonale smagliata ' + str_conn + 'è connessa\n\n')
 
             grafo = nx.Graph(G)
             return grafo
@@ -1581,7 +1592,7 @@ class ONR:
         # print(round(Funzioni_obiettivo_pre, 4))
         # print('')
 
-        self.indexes = {
+        onr_dict['indexes'] = {
             'Abs': {
                 'FRG': {
                     'EENS': ENS_PRE_FRG,
@@ -1862,7 +1873,7 @@ class ONR:
         # print('');
         # print('Eseguo', tecnica_utilizzata, 'con solver', solverino, '...');
         # print('')
-        self.log_post_solver = 'Eseguito ' + tecnica_utilizzata + ' con solver ' + solverino + '\n'
+        onr_dict['log_post_solver'] += 'Eseguito ' + tecnica_utilizzata + ' con solver ' + solverino + '\n'
 
         tempo_iniziale = time.time()
 
@@ -2195,12 +2206,12 @@ class ONR:
 
         results = solver.solve(ONR)  # tee=True
         print(results)
-        self.log_post_solver = self.log_post_solver + str(results) + '\n'
+        onr_dict['log_post_solver'] += str(results) + '\n'
 
         if results.solver.termination_condition == TerminationCondition.optimal:
             # print('')
             # print("ONR è stato risolto con successo e tutti i vincoli sono rispettati!")
-            self.log_post_solver = self.log_post_solver + "ONR è stato risolto con successo e tutti i vincoli sono rispettati!\n\n"
+            onr_dict['log_post_solver'] += "ONR è stato risolto con successo e tutti i vincoli sono rispettati!\n\n"
             ONR.solutions.load_from(results)
             # RISULTATI ONR:
             ObjF_ONR = ONR.ObjectiveFunction()
@@ -2222,7 +2233,7 @@ class ONR:
             # print('SAIFI post-ONR:', ONR.SAIFI_POST.value, 'guasti/anno')
             # self.log_post_solver = self.log_post_solver + (f"Tempo trascorso per il metodo analitico con solver {solverino}:" + tempo_trascorso + "secondi\n")
 
-            self.indexes_post = {
+            onr_dict['indexes_post'] = {
                 'pre': {
                     'EENS': Indici_di_Reliability_pre.loc[tecnica_utilizzata, 'ENS'],
                     'SAIDI': Indici_di_Reliability_pre.loc[tecnica_utilizzata, 'SAIDI'],
@@ -2239,13 +2250,13 @@ class ONR:
 
         elif results.solver.termination_condition == TerminationCondition.infeasible:
             # print("ONR è irrealizzabile, alcuni vincoli non sono rispettati.")
-            self.log_pre_solver += "ONR è irrealizzabile, alcuni vincoli non sono rispettati.\n"
+            onr_dict['log_pre_solver'] += "ONR è irrealizzabile, alcuni vincoli non sono rispettati.\n"
             sys.exit()
         else:
             # print(
             #     "Il solver ha terminato con uno stato diverso da 'ottimale', è bene verificare il modello e i vincoli.")
-            self.log_pre_solver += ("OIl solver ha terminato con uno stato diverso da 'ottimale', è bene verificare il "
-                                    "modello e i vincoli.\n")
+            onr_dict['log_pre_solver'] += ("OIl solver ha terminato con uno stato diverso da 'ottimale', è bene verificare il "
+                                           "modello e i vincoli.\n")
         # print('')
 
         if choice == 'a':
@@ -2442,28 +2453,28 @@ class ONR:
             if stati_switch_iniziali[s] == 1 and stati_switch_finale[s] == 0:
                 aperture = aperture + 1
                 # print('Lo switch ' + s + ' si è aperto')
-                self.log_post_switch += 'Lo switch ' + s + ' si è aperto\n'
+                onr_dict['log_post_switch'] += 'Lo switch ' + s + ' si è aperto\n'
                 switch_che_si_aprono_post_ONR.append(s)
             if stati_switch_iniziali[s] == 0 and stati_switch_finale[s] == 1:
                 chiusure = chiusure + 1
                 # print('Lo switch ' + s + ' si è chiuso')
-                self.log_post_switch += 'Lo switch ' + s + ' si è chiuso\n'
+                onr_dict['log_post_switch'] += 'Lo switch ' + s + ' si è chiuso\n'
                 switch_che_si_chiudono_post_ONR.append(s)
 
         # print('')
         # print('Il numero di aperture effettuate è', aperture)
-        self.log_post_switch += '\nIl numero di aperture effettuate è ' + str(aperture)
+        onr_dict['log_post_switch'] += '\nIl numero di aperture effettuate è ' + str(aperture)
 
         # print('Il numero di chiusure effettuate è', chiusure)
-        self.log_post_switch += '\nIl numero di chiusure effettuate è ' + str(chiusure)
+        onr_dict['log_post_switch'] += '\nIl numero di chiusure effettuate è ' + str(chiusure)
 
         # Conto i rami aperti e chiusi:
         Nramiaperti = round(sum(1 - x_ij_opt[s] for s in switch))
-        self.log_post_switch + "\n\nIl numero di rami aperti è " + str(Nramiaperti)
+        onr_dict['log_post_switch'] + "\n\nIl numero di rami aperti è " + str(Nramiaperti)
         # print('Il numero di rami aperti è', Nramiaperti)
         Nramichiusi = Nswitch - Nramiaperti
         # print('Il numero di rami chiusi è', Nramichiusi)
-        self.log_post_switch + "\nIl numero di rami chiusi è " + str(Nramichiusi)
+        onr_dict['log_post_switch'] + "\nIl numero di rami chiusi è " + str(Nramichiusi)
 
         switch_chiusi_post_ONR = []
 
@@ -2503,11 +2514,11 @@ class ONR:
             #       'rami connessi.')
             # print(f'La rete zonale post ONR è connessa? {is_connected}')
 
-            self.log_post_switch += ('\n\nIl grafo della rete zonale post ONR ha ' + str(nx.number_of_nodes(G)) +
-                                     ' nodi e ' + str(nx.number_of_edges(G)) + ' rami connessi.')
+            onr_dict['log_post_switch'] += ('\n\nIl grafo della rete zonale post ONR ha ' + str(nx.number_of_nodes(G)) +
+                                            ' nodi e ' + str(nx.number_of_edges(G)) + ' rami connessi.')
             if is_connected: conn = ''
             else: conn = 'non'
-            self.log_post_switch += '\nLa rete zonale post ONR ' + conn + ' è connessa.'
+            onr_dict['log_post_switch'] += '\nLa rete zonale post ONR ' + conn + ' è connessa.'
 
             grafo = nx.Graph(G)
             return grafo
@@ -2519,10 +2530,10 @@ class ONR:
         if not loops_zone_afterONR:
             # print('')
             # print("Il grafo post ONR non contiene maglie.")
-            self.log_post_switch += "\n\nIl grafo post ONR non contiene maglie."
+            onr_dict['log_post_switch'] += "\n\nIl grafo post ONR non contiene maglie."
         else:
             # print("Il grafo post ONR contiene ALMENO una maglia.")
-            self.log_post_switch += "\n\nIl grafo post ONR contiene ALMENO una maglia."
+            onr_dict['log_post_switch'] += "\n\nIl grafo post ONR contiene ALMENO una maglia."
 
 
         # %% GRAFO FINALE POST_ONR ZONALE
@@ -2924,13 +2935,14 @@ class ONR:
         # print('Reactive power losses:', round(q1 + q2, 2), 'Kvar')
         # print('')
 
-        self.log_pre_solver = (self.log_pre_solver + 'Analisi delle potenze (ACLF) con la topologia iniziale:\n\n' +
-                               'Carico: ' + str(round(sum(P_loads2.values()), 2)) + ' KW ; ' +
-                               str(round(sum(Q_loads2.values()), 2)) + ' Kvar\n' +
-                               'Slack Bus active power: ' + str(round(sum(P_slack_pre2.values()), 2)) + ' KW\n' +
-                               'Slack Bus reactive power: ' + str(round(sum(Q_slack_pre2.values()), 2)) + ' Kvar\n' +
-                               'Active power losses: ' + str(round(p1 + p2, 2)) + ' KW\n' +
-                               'Reactive power losses: ' + str(round(q1 + q2, 2)) + ' Kvar\n\n')
+        onr_dict['log_pre_solver'] = ('Analisi delle potenze (ACLF) con la topologia iniziale:\n\n' +
+                                      'Carico: ' + str(round(sum(P_loads2.values()), 2)) + ' KW ; ' +
+                                      str(round(sum(Q_loads2.values()), 2)) + ' Kvar\n' +
+                                      'Slack Bus active power: ' + str(round(sum(P_slack_pre2.values()), 2)) + ' KW\n' +
+                                      'Slack Bus reactive power: ' + str(round(sum(Q_slack_pre2.values()), 2)) +
+                                      ' Kvar\n' +
+                                      'Active power losses: ' + str(round(p1 + p2, 2)) + ' KW\n' +
+                                      'Reactive power losses: ' + str(round(q1 + q2, 2)) + ' Kvar\n\n')
 
         # Controllo se ci sono linee in sovraccarico:
 
@@ -2942,8 +2954,8 @@ class ONR:
                 # print(b, 'in sovraccarico:', round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0), '%')
                 # sovraccarichi_iniziali[b] = round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0)
 
-                self.log_pre_solver += (b + ' in sovraccarico: ' +
-                                        str(round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0)) + '%\n')
+                onr_dict['log_pre_solver'] += (b + ' in sovraccarico: ' +
+                                               str(round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0)) + '%\n')
         # print('')
 
         # Tensioni base
@@ -2990,10 +3002,11 @@ class ONR:
             if b <= Vmin or b >= Vmax:
                 # print('Violazione di tensione sul nodo', a, '- Vi =', round(b, 4), 'p.u.')
                 violazioni_tensioni[a] = b
-                self.log_pre_viol += 'Violazione di tensione sul nodo ' + a + ' - Vi =' + str(round(b, 4)) + ' p.u.\n'
+                onr_dict['log_pre_viol'] += ('Violazione di tensione sul nodo ' + a + ' - Vi =' + str(round(b, 4)) +
+                                             ' p.u.\n')
 
-        if self.log_pre_viol == '':
-            self.log_pre_viol = 'Nessuna violazione sui nodi'
+        if onr_dict['log_pre_viol'] == '':
+            onr_dict['log_pre_viol'] = 'Nessuna violazione sui nodi'
 
         newV0 = []
         newbus = []
@@ -3081,8 +3094,8 @@ class ONR:
         # print('Grid power: P = %.1f\tQ = %.1f' % (
         #       OpenDSS().dss.circuit.total_power[0], OpenDSS().dss.circuit.total_power[1]))
 
-        self.log_post_solver += ('Grid power: P = %.1f\tQ = %.1f\n\n' %
-                                 (OpenDSS().dss.circuit.total_power[0], OpenDSS().dss.circuit.total_power[1]))
+        onr_dict['log_post_solver'] += ('Grid power: P = %.1f\tQ = %.1f\n\n' %
+                                        (OpenDSS().dss.circuit.total_power[0], OpenDSS().dss.circuit.total_power[1]))
 
         self.results_store(pre_post)
 
@@ -3146,14 +3159,14 @@ class ONR:
         # print('Active power losses:', round(p1 + p2, 2), 'KW')
         # print('Reactive power losses:', round(q1 + q2, 2), 'Kvar')
         # print('')
-        self.log_post_viol += 'Analisi delle potenze (ACLF) con la topologia iniziale:\n\n'
-        self.log_post_viol += ('Carico: ' + str(round(sum(P_loads2.values()), 2)) + 'KW | ' +
-                               str(round(sum(Q_loads2.values()), 2)) + 'Kvar\n\n')
-        self.log_post_viol += 'Slack Bus active power: ' + str(round(sum(P_slack_pre2.values()), 2)) + 'KW\n'
-        self.log_post_viol += 'Slack Bus reactive power: ' + str(round(sum(Q_slack_pre2.values()), 2)) + 'Kvar\n\n'
-        self.log_post_viol += 'Active power losses: ' + str(round(p1 + p2, 2)) + 'KW\n'
-        self.log_post_viol += 'Reactive power losses: ' + str(round(q1 + q2, 2)) + 'Kvar\n'
-        self.log_post_viol += '\n\nAnalisi delle potenze (ACLF) con la topologia iniziale:\n\n'
+        onr_dict['log_post_viol'] += 'Analisi delle potenze (ACLF) con la topologia iniziale:\n\n'
+        onr_dict['log_post_viol'] += ('Carico: ' + str(round(sum(P_loads2.values()), 2)) + 'KW | ' +
+                                    str(round(sum(Q_loads2.values()), 2)) + 'Kvar\n\n')
+        onr_dict['log_post_viol'] += 'Slack Bus active power: ' + str(round(sum(P_slack_pre2.values()), 2)) + 'KW\n'
+        onr_dict['log_post_viol'] += 'Slack Bus reactive power: ' + str(round(sum(Q_slack_pre2.values()), 2)) + 'Kvar\n\n'
+        onr_dict['log_post_viol'] += 'Active power losses: ' + str(round(p1 + p2, 2)) + 'KW\n'
+        onr_dict['log_post_viol'] += 'Reactive power losses: ' + str(round(q1 + q2, 2)) + 'Kvar\n'
+        onr_dict['log_post_viol'] += '\n\nAnalisi delle potenze (ACLF) con la topologia iniziale:\n\n'
 
         # Controllo se ci sono linee in sovraccarico:
 
@@ -3161,11 +3174,11 @@ class ONR:
         for b in linee:
             if Correnti_linee_modulo2[b] > Portata_linee2[b]:
                 # print(b, 'in sovraccarico:', round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0), '%\n')
-                self.log_post_viol += (b + ' in sovraccarico: ' +
-                                       str(round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0)) + '%\n')
+                onr_dict['log_post_viol'] += (b + ' in sovraccarico: ' +
+                                              str(round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0)) + '%\n')
                 sovraccarichi_iniziali[b] = round((Correnti_linee_modulo2[b] / Portata_linee2[b]) * 100, 0)
         # print('')
-        self.log_post_viol += '\n'
+        onr_dict['log_post_viol'] += '\n'
 
         # Tensioni base
         Vnbus = {}  # kv
@@ -3216,7 +3229,7 @@ class ONR:
             if b <= Vmin or b >= Vmax:
                 # print('Violazione di tensione sul nodo', a, '- Vi =', round(b, 4), 'p.u.')
                 violazioni_tensioni[a] = b
-                self.log_post_viol += 'Violazione di tensione sul nodo ' + a + ' - Vi = ' + str(round(b, 4)) + ' p.u.\n'
+                onr_dict['log_post_viol'] += 'Violazione di tensione sul nodo ' + a + ' - Vi = ' + str(round(b, 4)) + ' p.u.\n'
         # print('')
 
         newV0_post = []

@@ -341,7 +341,7 @@ class Adeguatezza:
         self.graphs[1] = {
             'title': '',
             'x-axis': 'Tempo [h]',
-            'y-axis': 'DNS [-]',
+            'y-axis': 'DNS [kW]',
             'ratio': 1.5,
             'x': sample[i0:i1],
             'y': {
