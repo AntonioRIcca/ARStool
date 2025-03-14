@@ -135,7 +135,8 @@ class Main:
         self.ui.adequacy_Btn.clicked.connect(self.adeqStart)
         self.ui.onr_Btn.clicked.connect(self.onrStart)
         self.ui.gidman_Btn.clicked.connect(self.gridManStart)
-        self.ui.printPB.clicked.connect(self.pdf_gen)
+        self.ui.reportBtn.clicked.connect(self.pdf_set)
+        self.ui.repPrintPB.clicked.connect(self.pdf_gen)
 
         self.app.exec_()
 
@@ -2352,6 +2353,23 @@ class Main:
                     self.homeHBL.itemAt(i).widget().deleteLater()
                 except AttributeError:
                     self.homeHBL.removeItem(self.homeHBL.itemAt(i))
+
+    def pdf_set(self):
+        for s in grid['studies']:
+            # print(s, )
+            self.ui.__getattribute__('rep' + s.title() + 'Wgt').setVisible(grid['studies'][s])
+        self.ui.repLfTiE.setVisible(grid['studies']['lf'] and grid['lf']['points'] is not None)
+        if grid['studies']['lf'] and grid['lf']['points'] is not None:
+            # a = QtWidgets.QDateTimeEdit()
+            ds = dt.datetime(grid['lf']['start'][0], grid['lf']['start'][1], grid['lf']['start'][2],
+                             grid['lf']['start'][3], grid['lf']['start'][4])
+            de = dt.datetime(grid['lf']['end'][0], grid['lf']['end'][1], grid['lf']['end'][2],
+                             grid['lf']['end'][3], grid['lf']['end'][4])
+            # a.setDateTime()
+            self.ui.repLfTiE.setMinimumDateTime(QtCore.QDateTime(ds))
+            self.ui.repLfTiE.setMaximumDateTime(QtCore.QDateTime(de))
+            self.ui.repLfTiE.setMinimumDateTime(QtCore.QDateTime(ds))
+
 
     def pdf_gen(self):
         from pdf_creator import PDF

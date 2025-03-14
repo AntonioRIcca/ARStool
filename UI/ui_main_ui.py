@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_uivUYrWb.ui'
+## Form generated from reading UI file 'main_uiGCRhAn.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -663,22 +663,153 @@ class Ui_MainWindow(object):
         self.page_8.setObjectName(u"page_8")
         self.verticalLayout_18 = QVBoxLayout(self.page_8)
         self.verticalLayout_18.setObjectName(u"verticalLayout_18")
-        self.printPB = QPushButton(self.page_8)
-        self.printPB.setObjectName(u"printPB")
-        self.printPB.setMinimumSize(QSize(0, 30))
-        self.printPB.setStyleSheet(u"border: solid;\n"
+        self.reportWgt = QWidget(self.page_8)
+        self.reportWgt.setObjectName(u"reportWgt")
+        self.gridLayout_4 = QGridLayout(self.reportWgt)
+        self.gridLayout_4.setSpacing(10)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.gridLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.repAnomWgt = QWidget(self.reportWgt)
+        self.repAnomWgt.setObjectName(u"repAnomWgt")
+        self.horizontalLayout_17 = QHBoxLayout(self.repAnomWgt)
+        self.horizontalLayout_17.setSpacing(15)
+        self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.horizontalLayout_17.setContentsMargins(10, 10, 10, 10)
+        self.repAnomChB = QCheckBox(self.repAnomWgt)
+        self.repAnomChB.setObjectName(u"repAnomChB")
+        self.repAnomChB.setChecked(True)
+
+        self.horizontalLayout_17.addWidget(self.repAnomChB)
+
+
+        self.gridLayout_4.addWidget(self.repAnomWgt, 3, 0, 1, 1)
+
+        self.reportVs = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout_4.addItem(self.reportVs, 9, 0, 1, 1)
+
+        self.repLfWgt = QWidget(self.reportWgt)
+        self.repLfWgt.setObjectName(u"repLfWgt")
+        self.horizontalLayout_21 = QHBoxLayout(self.repLfWgt)
+        self.horizontalLayout_21.setSpacing(15)
+        self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
+        self.horizontalLayout_21.setContentsMargins(10, 10, 10, 10)
+        self.repLfChB = QCheckBox(self.repLfWgt)
+        self.repLfChB.setObjectName(u"repLfChB")
+        self.repLfChB.setChecked(True)
+
+        self.horizontalLayout_21.addWidget(self.repLfChB)
+
+        self.repLfTiE = QDateTimeEdit(self.repLfWgt)
+        self.repLfTiE.setObjectName(u"repLfTiE")
+        self.repLfTiE.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.repLfTiE.setCalendarPopup(True)
+
+        self.horizontalLayout_21.addWidget(self.repLfTiE)
+
+
+        self.gridLayout_4.addWidget(self.repLfWgt, 2, 0, 1, 1)
+
+        self.repAdeqWgt = QWidget(self.reportWgt)
+        self.repAdeqWgt.setObjectName(u"repAdeqWgt")
+        self.horizontalLayout_19 = QHBoxLayout(self.repAdeqWgt)
+        self.horizontalLayout_19.setSpacing(15)
+        self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
+        self.horizontalLayout_19.setContentsMargins(10, 10, 10, 10)
+        self.repAdeqChB = QCheckBox(self.repAdeqWgt)
+        self.repAdeqChB.setObjectName(u"repAdeqChB")
+        self.repAdeqChB.setChecked(True)
+
+        self.horizontalLayout_19.addWidget(self.repAdeqChB)
+
+
+        self.gridLayout_4.addWidget(self.repAdeqWgt, 5, 0, 1, 1)
+
+        self.repParWgt = QWidget(self.reportWgt)
+        self.repParWgt.setObjectName(u"repParWgt")
+        self.horizontalLayout_15 = QHBoxLayout(self.repParWgt)
+        self.horizontalLayout_15.setSpacing(15)
+        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        self.horizontalLayout_15.setContentsMargins(10, 10, 10, 10)
+        self.repParChB = QCheckBox(self.repParWgt)
+        self.repParChB.setObjectName(u"repParChB")
+        self.repParChB.setChecked(True)
+
+        self.horizontalLayout_15.addWidget(self.repParChB)
+
+
+        self.gridLayout_4.addWidget(self.repParWgt, 1, 0, 1, 1)
+
+        self.reportLbl = QLabel(self.reportWgt)
+        self.reportLbl.setObjectName(u"reportLbl")
+        self.reportLbl.setMaximumSize(QSize(300, 16777215))
+        self.reportLbl.setFont(font1)
+        self.reportLbl.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_4.addWidget(self.reportLbl, 0, 0, 1, 1)
+
+        self.repOnrWgt = QWidget(self.reportWgt)
+        self.repOnrWgt.setObjectName(u"repOnrWgt")
+        self.horizontalLayout_20 = QHBoxLayout(self.repOnrWgt)
+        self.horizontalLayout_20.setSpacing(15)
+        self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
+        self.horizontalLayout_20.setContentsMargins(10, 10, 10, 10)
+        self.repOnrChB = QCheckBox(self.repOnrWgt)
+        self.repOnrChB.setObjectName(u"repOnrChB")
+        self.repOnrChB.setChecked(True)
+
+        self.horizontalLayout_20.addWidget(self.repOnrChB)
+
+
+        self.gridLayout_4.addWidget(self.repOnrWgt, 6, 0, 1, 1)
+
+        self.repPrintPB = QPushButton(self.reportWgt)
+        self.repPrintPB.setObjectName(u"repPrintPB")
+        self.repPrintPB.setMinimumSize(QSize(0, 30))
+        self.repPrintPB.setStyleSheet(u"border: solid;\n"
 "border-width: 1 px;\n"
 "border-radius: 10 px;\n"
 "border-color: rgb(255, 255, 255);")
 
-        self.verticalLayout_18.addWidget(self.printPB)
+        self.gridLayout_4.addWidget(self.repPrintPB, 8, 0, 1, 1)
 
-        self.label_12 = QLabel(self.page_8)
-        self.label_12.setObjectName(u"label_12")
-        self.label_12.setFont(font1)
-        self.label_12.setAlignment(Qt.AlignCenter)
+        self.widget_2 = QWidget(self.reportWgt)
+        self.widget_2.setObjectName(u"widget_2")
 
-        self.verticalLayout_18.addWidget(self.label_12)
+        self.gridLayout_4.addWidget(self.widget_2, 8, 1, 1, 1)
+
+        self.repRelWgt = QWidget(self.reportWgt)
+        self.repRelWgt.setObjectName(u"repRelWgt")
+        self.horizontalLayout_18 = QHBoxLayout(self.repRelWgt)
+        self.horizontalLayout_18.setSpacing(15)
+        self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
+        self.horizontalLayout_18.setContentsMargins(10, 10, 10, 10)
+        self.repRelChB = QCheckBox(self.repRelWgt)
+        self.repRelChB.setObjectName(u"repRelChB")
+        self.repRelChB.setChecked(True)
+
+        self.horizontalLayout_18.addWidget(self.repRelChB)
+
+
+        self.gridLayout_4.addWidget(self.repRelWgt, 4, 0, 1, 1)
+
+        self.repOptstorWgt = QWidget(self.reportWgt)
+        self.repOptstorWgt.setObjectName(u"repOptstorWgt")
+        self.horizontalLayout_22 = QHBoxLayout(self.repOptstorWgt)
+        self.horizontalLayout_22.setSpacing(15)
+        self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
+        self.horizontalLayout_22.setContentsMargins(10, 10, 10, 10)
+        self.repOptstorChB = QCheckBox(self.repOptstorWgt)
+        self.repOptstorChB.setObjectName(u"repOptstorChB")
+        self.repOptstorChB.setChecked(True)
+
+        self.horizontalLayout_22.addWidget(self.repOptstorChB)
+
+
+        self.gridLayout_4.addWidget(self.repOptstorWgt, 7, 0, 1, 1)
+
+
+        self.verticalLayout_18.addWidget(self.reportWgt)
 
         self.mainPages.addWidget(self.page_8)
 
@@ -1203,8 +1334,15 @@ class Ui_MainWindow(object):
         self.closeBtn.setText("")
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Home", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Data Analysis", None))
-        self.printPB.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.label_12.setText(QCoreApplication.translate("MainWindow", u"Reports", None))
+        self.repAnomChB.setText(QCoreApplication.translate("MainWindow", u"Anomalie", None))
+        self.repLfChB.setText(QCoreApplication.translate("MainWindow", u"LoadFlow", None))
+        self.repAdeqChB.setText(QCoreApplication.translate("MainWindow", u"Adeguatezza", None))
+        self.repParChB.setText(QCoreApplication.translate("MainWindow", u"Parametri", None))
+        self.reportLbl.setText(QCoreApplication.translate("MainWindow", u"Reports", None))
+        self.repOnrChB.setText(QCoreApplication.translate("MainWindow", u"Optimal Network Reconfiguration", None))
+        self.repPrintPB.setText(QCoreApplication.translate("MainWindow", u"Stampa", None))
+        self.repRelChB.setText(QCoreApplication.translate("MainWindow", u"Affidabilit\u00e0", None))
+        self.repOptstorChB.setText(QCoreApplication.translate("MainWindow", u"Optimal Network Reconfiguration", None))
         self.rightMenu_LBL.setText(QCoreApplication.translate("MainWindow", u"Right Menu", None))
 #if QT_CONFIG(tooltip)
         self.closeRightMenuBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close Menu", None))

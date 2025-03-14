@@ -950,7 +950,7 @@ class PDF(FPDF):
             self.ln(p_h)
         # ----------------------------------------------------------------------
 
-        # -- Sesta pagna -------------------------------------------------------
+        # -- Sesta pagina ------------------------------------------------------
         self.add_page()
         self.page_name = "Optimal Network Reconfiguration"
 
@@ -979,14 +979,14 @@ class PDF(FPDF):
             self.cell(d_w, i_h, i, 1, 0, 'C', fill=True)
         self.ln()
 
-        for m in y_lbl:
+        for m in range(len(y_lbl)):
             self.set_font('Arial', i_s, i_c)
-            self.cell(d_w, p_h, m, 0, 0, 'C')
+            self.cell(d_w, p_h, y_lbl_ext[m], 0, 0, 'C')
             for i in x_lbl:
                 if i == 'EENS':
-                    val = '%.1f' % onr_dict['indexes_post'][m][i]
+                    val = '%.1f' % onr_dict['indexes_post'][y_lbl[m]][i]
                 else:
-                    val = '%.4f' % onr_dict['indexes_post'][m][i]
+                    val = '%.4f' % onr_dict['indexes_post'][y_lbl[m]][i]
                 self.set_font('Arial', p_s, p_c)
                 self.cell(d_w, p_h, val, 0, 0, 'C')
             self.ln(p_h)
@@ -1036,7 +1036,103 @@ class PDF(FPDF):
             self.ln(p_h)
         # ----------------------------------------------------------------------
 
+        # -- Ottava pagna ------------------------------------------------------
+        self.add_page()
+        self.page_name = "Optimal Network Reconfiguration"
 
+        self.set_font('Arial', t2_s, t2_c)
+        self.write(0, 'Confronto LoadFlow prima e dopo ONR')
+        self.ln(t2_h * 2)
+
+        for c in elem_cat:
+            if c in ['AC-Node', 'DC-Node']:
+                captions = lf['Nodi']
+                node, line = '', 1
+
+            elif c in ['2W-Transformer', 'AC-Line', 'DC-Line', 'PWM', 'DC-DC-Converter', 'Switch']:
+                captions = lf['Links']
+                node, line = 'Nodo', 2
+            else:
+                captions = lf['Periferiche']
+                node, line = '', 1
+
+            # if 275 < self.get_y() + t2_h + i_h + p_h * len(elem_cat[c].items()) * line:
+            if 255 < self.get_y():
+                self.add_page()
+            self.set_font('Arial', t2_s, t2_c)
+            self.write(0, cat[c])
+            self.ln(t2_h)
+            self.set_font('Arial', i_s, i_c)
+            self.set_fill_color(226, 226, 226)
+            self.cell(e_w, i_h, 'Elemento', 1, 0, 'C', fill=True)
+            self.cell(p_w, i_h, node, 1, 0, 'C', fill=True)
+
+            line_length = e_w + p_w + d_w * len(captions[1]) * 2
+
+            for e in captions[1]:
+                for pp in ['pre', 'post']:
+                    self.cell(d_w, i_h, e + ' ' + pp, 1, 0, 'C', fill=True)
+            self.ln(i_h)
+
+            self.set_font('Arial', p_s, p_c)
+            for e in elem_cat[c]:
+                if node != '':
+                    print(e, captions[0])
+                    self.cell(e_w, 2*p_h, e, 0, 0, 'L')
+                    if c in ['2W-Transformer', 'DC-DC_Conv']:
+                        nodes = ['HV', 'LV']
+                    elif c == 'PWM':
+                        nodes = ['AC', 'DC']
+                    else:
+                        nodes = ['1', '2']
+
+                    for n in [1, 2]:
+                        if n == 2:
+                            self.cell(e_w, p_h, '', 0, 0, 'C')
+                        self.cell(p_w, p_h, nodes[n-1], 0, 0, 'C')
+                        # for item in captions[0][:len(captions[0])-1]:
+                        for item in captions[0]:
+                            for pp in ['pre', 'post']:
+                                try:
+                                    data = '%.3f' % v[e]['ONR']['lf_' + pp][item][n-1]  #  elem_cat[c][e]['lf'][item][n-1][tlf]
+                                except:
+                                    data = ''
+                                self.cell(d_w, p_h, data, 0, 0, 'C')
+
+                        if n == 1:
+                            self.ln(p_h)
+
+                    self.set_xy(self.get_x(), self.get_y() - p_h)
+                    # print(e)
+                    # try:
+                    #     data = str(elem_cat[c][e]['results']['LimitViolated'])
+                    # except:
+                    #     data = ''
+                    # self.cell(d_w, 2 * p_h, data, 0, 0, 'C')
+                    self.ln(2 * p_h)
+
+                else:
+                    self.cell(e_w, p_h, e, 0, 0, 'L')
+                    self.cell(p_w, p_h, '', 0, 0, 'C')
+
+                    for item in captions[0]:
+                        for pp in ['pre', 'post']:
+                            try:
+                                if item in captions[0]:
+                                    try:
+                                        data = '%.3f' % v[e]['ONR']['lf_' + pp][item][0]
+                                    except:
+                                        data = '%.3f' % v[e]['ONR']['lf_' + pp][item]
+                                else:
+                                    data = '%.3f' % v[e]['ONR']['lf_' + pp][item]
+                            except:
+                                data = ''
+                            self.cell(d_w, p_h, data, 0, 0, 'C')
+                    self.ln(p_h)
+                self.set_draw_color(226, 226, 226)
+                self.line(self.get_x() + 1, self.get_y(), self.get_x() + line_length - 2, self.get_y())
+
+            self.ln(p_ls)
 
     def img_size(self, img, w_max, h_max):
         image = Image.open(img)
