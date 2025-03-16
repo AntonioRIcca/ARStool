@@ -2372,8 +2372,28 @@ class Main:
 
 
     def pdf_gen(self):
+        sel = []
+        step, tlf = None, None
+        for s in grid['studies']:
+            if grid['studies'][s] and self.ui.__getattribute__('rep' + s.title() + 'ChB').isChecked():
+                sel.append(s)
+        print('sel: ', sel)
+
+        if grid['studies']['lf'] and grid['lf']['points'] is not None and self.ui.repLfChB.isChecked():
+            ds = dt.datetime(grid['lf']['start'][0], grid['lf']['start'][1], grid['lf']['start'][2],
+                             grid['lf']['start'][3], grid['lf']['start'][4])
+            # ds = self.ui.repLfTiE.dateTime()
+            step = int(QtCore.QDateTime(ds).msecsTo(self.ui.repLfTiE.dateTime()) / 60000 / grid['profile']['step'])
+            tlf = self.ui.repLfTiE.dateTime()
+            print(ds)
+            print(self.ui.repLfTiE.dateTime())
+            print('steps: ', step)
+
+            # a = QtWidgets.QDateTimeEdit()
+            # a.dateTime().date().
+
         from pdf_creator import PDF
-        pdf = PDF()
+        pdf = PDF(sel, step, tlf)
         pdf.save()
         self.ui.mainPages.setCurrentIndex(0)
 

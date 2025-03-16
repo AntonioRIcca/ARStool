@@ -1,3 +1,5 @@
+import datetime
+
 from fpdf import FPDF
 import os
 import yaml
@@ -89,7 +91,7 @@ cat['Switch'] = 'Switch'
 
 
 class PDF(FPDF):
-    def __init__(self):
+    def __init__(self, sel, step=0, ds=None):
         super(PDF, self).__init__()
 
         # elements = copy.deepcopy(v.elements)
@@ -132,15 +134,13 @@ class PDF(FPDF):
 
         self.parameters(elem_cat)
 
-        print(grid['studies'])
-        # for study in grid['studies']:
-        if grid['studies']['lf']:
-            self.loadflow(elem_cat=elem_cat)
-        if grid['studies']['rel']:
+        if 'lf' in sel:
+            self.loadflow(elem_cat=elem_cat, tlf=step, ds=ds)
+        if 'rel' in sel:
             self.reliability(elem_cat=elem_cat, elements='')
-        if grid['studies']['anom']:
+        if 'anom' in sel:
             self.anomalies(elem_cat=elem_cat, elements='')
-        if grid['studies']['onr']:
+        if 'onr' in sel:
             self.onr(elem_cat=elem_cat, elements='')
 
         print('done')
@@ -217,7 +217,7 @@ class PDF(FPDF):
         self.set_text_color(0, 0, 0)
         # self.cell(170, 1.5*t1_h, v.features['name'], 0, 0, 'C')
         self.cell(170, 1.5*t1_h, grid['name'], 0, 0, 'C')
-        print(grid)
+        # print(grid)
 
     #
     def parameters(self, elem_cat):
@@ -230,7 +230,7 @@ class PDF(FPDF):
         self.ln(t1_ls)
 
         for c in elem_cat:
-            print(c)
+            # print(c)
             line_length = e_w + d_w * (len(par[cat[c]][1]) + 1)
             if 275 < self.get_y() + t2_h + i_h + p_h*len(elem_cat[c].items()):
                 self.add_page()
@@ -253,7 +253,8 @@ class PDF(FPDF):
                     try:
                         self.cell(d_w, p_h, '%.3f' % elem_cat[c][e]['par'][item], 0, 0, 'C')
                     except:
-                        print('c', c, '\te', e, '\titem', item)
+                        # print('c', c, '\te', e, '\titem', item)
+                        pass
                 if c not in mc['Node']:
                     self.cell(d_w, p_h, str(elem_cat[c][e]['par']['out-of-service']), 0, 0, 'C')
                 self.ln(p_h)
@@ -261,7 +262,7 @@ class PDF(FPDF):
             self.ln(p_ls)
 
     #
-    def loadflow(self, elem_cat, tlf=0):
+    def loadflow(self, elem_cat, tlf=0, ds=None):
         self.add_page()
 
         self.page_name = 'LoadFlow'
@@ -269,6 +270,44 @@ class PDF(FPDF):
         self.set_font('Arial', t1_s, t1_c)
         self.write(0, 'LoadFlow')
         self.ln(t1_ls)
+
+        if ds:
+            day = (str(ds.date().day()) + '/' + str(ds.date().month()) + '/' + str(ds.date().year()) + '  -  ' +
+                   ('%02i:%02i' % (ds.time().hour(), ds.time().minute())))
+            self.set_font('Arial', t2_s, t2_c)
+            self.write(0, 'LoadFlow relativo a:  ' + day)
+            self.ln(t2_ls)
+
+        print('tlf', tlf)
+        p_loads, q_loads, p_gen, q_gen, p_bess, q_bess, p_eg, q_eg, p_loss, q_loss = self.loadflow_results(tlf)
+        self.set_font('Arial', 'I', t2_c)
+        self.write(0, 'Potenza dalla rete esterna:  ')
+        self.set_font('Arial', t2_s, t2_c)
+        self.write(0, 'P = %.1f kW - Q = %.1f kVA' % (p_eg, q_eg))
+        self.ln(t2_ls)
+
+        self.set_font('Arial', 'I', t2_c)
+        self.write(0, 'Potenza prelevata dai carichi:  ')
+        self.set_font('Arial', t2_s, t2_c)
+        self.write(0, 'P = %.1f kW - Q = %.1f kVA' % (p_loads, q_loads))
+        self.ln(t2_h)
+
+        self.set_font('Arial', 'I', t2_c)
+        self.write(0, 'Potenza generata:  ')
+        self.set_font('Arial', t2_s, t2_c)
+        self.write(0, 'P = %.1f kW - Q = %.1f kVA' % (p_gen, q_gen))
+        self.ln(t2_h)
+
+        self.set_font('Arial', 'I', t2_c)
+        self.write(0, 'Potenza dai sistemi di accumulo:  ')
+        self.set_font('Arial', t2_s, t2_c)
+        self.write(0, 'P = %.1f kW - Q = %.1f kVA' % (p_bess, q_bess))
+        self.ln(t2_ls)
+
+        self.set_font('Arial', 'I', t2_c)
+        self.write(0, 'Potenza dissipata:  ')
+        self.set_font('Arial', t2_s, t2_c)
+        self.write(0, 'P = %.1f kW - Q = %.1f kVA' % (p_loss, q_loss))
 
         for c in elem_cat:
             if c in ['AC-Node', 'DC-Node']:
@@ -301,7 +340,7 @@ class PDF(FPDF):
             self.set_font('Arial', p_s, p_c)
             for e in elem_cat[c]:
                 if node != '':
-                    print(e, captions[0])
+                    # print(e, captions[0])
                     self.cell(e_w, 2*p_h, e, 0, 0, 'L')
                     if c in ['2W-Transformer', 'DC-DC_Conv']:
                         nodes = ['HV', 'LV']
@@ -351,6 +390,48 @@ class PDF(FPDF):
                 self.line(self.get_x() + 1, self.get_y(), self.get_x() + line_length - 2, self.get_y())
 
             self.ln(p_ls)
+
+    def loadflow_results(self, t=0):
+        p_loads, q_loads = 0, 0
+        p_gen, q_gen = 0, 0
+        p_bess, q_bess = 0, 0
+
+        # self.lf_cat = dict()
+        # for mcat in ['Generators', 'Loads', 'BESS']:
+        #     self.lf_cat[mcat] = dict()
+        # # for cat in ['AC-Load', 'DC-Load', 'PV', 'AC-Wind', 'DC-Wind', 'BESS']:
+        # #     lf_cat[cat] = dict()
+
+        for elem in v.keys():
+            # cat = v[elem]['category']
+            if v[elem]['category'] in mc['Load']:
+                p_loads += v[elem]['lf']['p'][t]
+                q_loads += v[elem]['lf']['q'][t]
+                mcat = 'Loads'
+
+            elif v[elem]['category'] in mc['BESS']:
+                p_bess += v[elem]['lf']['p'][t]
+                q_bess += v[elem]['lf']['q'][t]
+                mcat = 'BESS'
+
+            elif v[elem]['category'] in mc['Generator']:
+                p_gen -= v[elem]['lf']['p'][t]
+                q_gen -= v[elem]['lf']['q'][t]
+                mcat = 'Generators'
+
+            # if cat in prof_elem:
+            #     if cat not in list(self.lf_cat[mcat].keys()):
+            #         self.lf_cat[mcat][cat] = dict()
+            #     self.lf_cat[mcat][cat][elem] = {
+            #         'p': abs(v[elem]['lf']['p'][t]),
+            #         'q': abs(v[elem]['lf']['q'][t]),
+            #     }
+
+        p_eg, q_eg = -v['source']['lf']['p'][t], -v['source']['lf']['q'][t]
+        p_loss = p_eg + p_gen - p_loads - p_bess
+        q_loss = q_eg + q_gen - q_loads - q_bess
+
+        return p_loads, q_loads, p_gen, q_gen, p_bess, q_bess, p_eg, q_eg, p_loss, q_loss
 
     #
     def ems(self, elem_cat):
@@ -1077,7 +1158,7 @@ class PDF(FPDF):
             self.set_font('Arial', p_s, p_c)
             for e in elem_cat[c]:
                 if node != '':
-                    print(e, captions[0])
+                    # print(e, captions[0])
                     self.cell(e_w, 2*p_h, e, 0, 0, 'L')
                     if c in ['2W-Transformer', 'DC-DC_Conv']:
                         nodes = ['HV', 'LV']
@@ -1142,7 +1223,7 @@ class PDF(FPDF):
         else:
             w, h = w_max, w_max * h0 / w0
 
-        print('w = ', w, '\th = ', h)
+        # print('w = ', w, '\th = ', h)
 
         return w, h
 
