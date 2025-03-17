@@ -91,7 +91,7 @@ cat['Switch'] = 'Switch'
 
 
 class PDF(FPDF):
-    def __init__(self, sel, step=0, ds=None):
+    def __init__(self, sel, tlf=0, ds=None):
         super(PDF, self).__init__()
 
         # elements = copy.deepcopy(v.elements)
@@ -131,15 +131,16 @@ class PDF(FPDF):
         self.set_draw_color(226, 226, 226)
 
         self.cover()
-
-        self.parameters(elem_cat)
-
+        if 'par' in sel:
+            self.parameters(elem_cat)
         if 'lf' in sel:
-            self.loadflow(elem_cat=elem_cat, tlf=step, ds=ds)
+            self.loadflow(elem_cat=elem_cat, tlf=tlf, ds=ds)
         if 'rel' in sel:
             self.reliability(elem_cat=elem_cat, elements='')
         if 'anom' in sel:
             self.anomalies(elem_cat=elem_cat, elements='')
+        if 'adeq' in sel:
+            self.adequacy(elem_cat=elem_cat, elements='')
         if 'onr' in sel:
             self.onr(elem_cat=elem_cat, elements='')
 
@@ -154,20 +155,20 @@ class PDF(FPDF):
 
     def header(self):
         if self.page_no() > 1:
-            self.image(mainpath + '/_images/ARStool500.png', 8, 8, 24.5, 20)
+            self.image(mainpath + '/_images/ARStool500.png', 8, 8, 20, 20)
             self.set_font('Arial', 'B', t1_c)
             self.set_xy(34, 18)
             self.set_text_color(217, 193, 221)
-            self.write(0, 'Optimization')
-            self.set_font('Arial', '', t1_c)
-            self.write(0, ' and')
-
+            self.write(0, 'Adequacy, ')
             self.set_font('Arial', 'B', t1_c)
-            self.set_xy(34, 25)
             self.set_text_color(194, 214, 236)
             self.write(0, 'Reliability')
+
+            self.set_xy(34, 25)
+            self.set_font('Arial', '', t1_c)
+            self.write(0, 'and ')
             self.set_text_color(204, 191, 233)
-            self.write(0, 'Assessment')
+            self.write(0, 'Security ')
             self.set_text_color(240, 233, 173)
             self.write(0, 'Tool')
 
@@ -198,18 +199,18 @@ class PDF(FPDF):
     def cover(self):
         self.add_page()
         self.set_font('Arial', t1_s, 1.5*t1_c)
-        self.image(mainpath + '/_images/ARStool500.png', 55, 80, 100, 82)
-        self.set_xy(60, 170)
+        self.image(mainpath + '/_images/ARStool500.png', 55, 80, 100, 100)
+        self.set_xy(60, 190)
         self.set_text_color(204, 191, 233)
         self.write(0, 'Adequacy, ')
         self.set_text_color(194, 214, 236)
         self.write(0, 'Reliability')
-        self.set_xy(65, 180)
+        self.set_xy(65, 200)
         self.set_font('Arial', '', 1.5*t1_c)
-        self.write(0, ' and')
+        self.write(0, 'and ')
         self.set_text_color(217, 193, 221)
         self.set_font('Arial', 'B', 1.5*t1_c)
-        self.write(0, 'Security')
+        self.write(0, 'Security ')
         self.set_text_color(240, 233, 173)
         self.write(0, 'Tool')
 
@@ -264,8 +265,21 @@ class PDF(FPDF):
     #
     def loadflow(self, elem_cat, tlf=0, ds=None):
         self.add_page()
-
         self.page_name = 'LoadFlow'
+
+        # todo: da riattivare con l'immagine giusta
+        img_path = mainpath + '/UI/_resources/icons/loadFlow.png'
+        self.set_xy(12, 35)
+        self.set_fill_color(0)
+        self.set_draw_color(255, 170, 0)
+        self.rect(self.get_x()-2, self.get_y()-2, 19, 19, style='FD')
+        self.image(img_path, self.get_x(), self.get_y(), 15, 15)
+        self.set_xy(37.5, 44)
+
+        self.set_draw_color(25, 25, 25)
+        self.set_line_width(0.3)
+        self.line(35, 38, 195, 38)
+        self.line(35, 48, 195, 48)
 
         self.set_font('Arial', t1_s, t1_c)
         self.write(0, 'LoadFlow')
@@ -308,6 +322,8 @@ class PDF(FPDF):
         self.write(0, 'Potenza dissipata:  ')
         self.set_font('Arial', t2_s, t2_c)
         self.write(0, 'P = %.1f kW - Q = %.1f kVA' % (p_loss, q_loss))
+        self.ln(3 * t2_ls)
+
 
         for c in elem_cat:
             if c in ['AC-Node', 'DC-Node']:
@@ -556,9 +572,9 @@ class PDF(FPDF):
                     else:
                         self.set_font('Arial', i_s, i_c)
                     self.cell(d_w, p_h, '%.1f' % elem_cat[c][e]['protections']['results']['comparison'][t]['overcurrent'],
-                             0, 0, 'C')
+                              0, 0, 'C')
                     self.cell(d_w, p_h, '%.3f' % elem_cat[c][e]['protections']['results']['comparison'][t]['overvoltage'],
-                             0, 0, 'C')
+                              0, 0, 'C')
                     self.cell(d_w, p_h, '%.2f' % elem_cat[c][e]['protections']['results']['comparison'][t]['cost'], 0, 0, 'C')
                     self.cell(d_w/2, p_h, '', 0, 0, 'C')
                 self.ln(p_h)
@@ -594,10 +610,13 @@ class PDF(FPDF):
         self.page_name = "Calcolo dell'Affidabilità"
 
         # todo: da riattivare con l'immagine giusta
-        # img_path = os.getcwd() + '/_images/SplashScreen/Re_80x80.png'
-        # self.set_xy(15, 35)
-        # self.image(img_path, self.get_x(), self.get_y(), 15, 15)
-        # self.set_xy(37.5, 44)
+        img_path = mainpath + '/UI/_resources/icons/reliability.png'
+        self.set_xy(12, 35)
+        self.set_fill_color(0)
+        self.set_draw_color(255, 170, 0)
+        self.rect(self.get_x()-2, self.get_y()-2, 19, 19, style='FD')
+        self.image(img_path, self.get_x(), self.get_y(), 15, 15)
+        self.set_xy(37.5, 44)
 
         self.set_draw_color(25, 25, 25)
         self.set_line_width(0.3)
@@ -709,10 +728,13 @@ class PDF(FPDF):
         self.page_name = "Stima delle Anomalie"
 
         # todo: da riattivare con l'immagine giusta
-        # img_path = os.getcwd() + '/_images/SplashScreen/Re_80x80.png'
-        # self.set_xy(15, 35)
-        # self.image(img_path, self.get_x(), self.get_y(), 15, 15)
-        # self.set_xy(37.5, 44)
+        img_path = mainpath + '/UI/_resources/icons/anomaly.png'
+        self.set_xy(12, 35)
+        self.set_fill_color(0)
+        self.set_draw_color(255, 170, 0)
+        self.rect(self.get_x()-2, self.get_y()-2, 19, 19, style='FD')
+        self.image(img_path, self.get_x(), self.get_y(), 15, 15)
+        self.set_xy(37.5, 44)
 
         self.set_draw_color(25, 25, 25)
         self.set_line_width(0.3)
@@ -800,16 +822,244 @@ class PDF(FPDF):
 
                     self.ln(p_ls)
 
+    def adequacy(self, elem_cat, elements):
+        # -- Pagina iniziale ---------------------------------------------------
+        self.add_page()
+        self.page_name = "Calcolo dell'Adeguatezza"
+
+        # todo: da riattivare con l'immagine giusta
+        img_path = mainpath + '/UI/_resources/icons/adequacy.png'
+        self.set_xy(12, 35)
+        self.set_fill_color(0)
+        self.set_draw_color(255, 170, 0)
+        self.rect(self.get_x()-2, self.get_y()-2, 19, 19, style='FD')
+        self.image(img_path, self.get_x(), self.get_y(), 15, 15)
+        self.set_xy(37.5, 44)
+
+        self.set_draw_color(25, 25, 25)
+        self.set_line_width(0.3)
+        self.line(35, 38, 195, 38)
+        self.line(35, 48, 195, 48)
+
+        img_path = mainpath + '/Functionalities/Adequacy/__images__/'
+        x, y = 0, 32  # devono essere i margini della pagina
+
+        self.set_font('Arial', t1_s, t1_c)
+        self.write(0, "Calcolo dell'Adeguatezza")
+        self.ln(t1_ls)
+
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Profili di potenza')
+        img = img_path + '1.png'
+        w, h = self.img_size(img, 160, 120)
+        self.set_fill_color(0)
+        self.rect(25, y + 25, w, h, style='FD')
+        self.image(img, 25, y + 25, w, h)
+
+        pos_y = y + 30 + h
+        self.set_y(pos_y)
+        self.set_font('Arial', 'I', e_c)
+        self.write(0, 'Generazione distribuita / Generazione interna totale = ')
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, '%.2f %%' % grid['adeq']['x_gen_est'])
+        self.ln(e_h*3)
+
+        pos_y = self.get_y()
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Demand Not Served')
+        img = img_path + '2.png'
+        w, h = self.img_size(img, 160, 120)
+        self.set_fill_color(0)
+        self.rect(25, pos_y + e_h, w, h, style='FD')
+        self.image(img, 25, pos_y + e_h, w, h)
+
+        # ----------------------------------------------------------------------
+
+        # -- Seconda pagina ----------------------------------------------------
+        self.add_page()
+        self.page_name = "Calcolo dell'Adeguatezza"
+
+        pos_xlab, pos_ylab = self.get_x(), self.get_y()
+
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Loss Of Load Expectation (LOLE)')
+        img = img_path + '3.png'
+        w, h = self.img_size(img, 100, 100)
+        self.set_fill_color(0)
+        self.rect(5, pos_ylab + e_h, w, h, style='FD')
+        self.image(img, 5, pos_ylab + e_h, w, h)
+
+        pos_y = pos_ylab + e_h + h + e_h
+        self.set_y(pos_y)
+        self.set_font('Arial', 'I', e_c)
+        self.write(0, 'LOLE (con Affidabilità dei componenti = ')
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, '%.4f ore/anno' % grid['adeq']['av_lole_funr_rel'])
+        self.ln(e_h)
+        self.set_font('Arial', 'I', e_c)
+        self.write(0, 'LOLE (con Affidabilità ed Anomalie = ')
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, '%.4f ore/anno' % grid['adeq']['av_lole_anom'])
+
+        self.set_xy(105, pos_ylab)
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Expected Energy Not Supplied (EENS)')
+        img = img_path + '4.png'
+        w, h = self.img_size(img, 100, 100)
+        self.set_fill_color(0)
+        self.rect(105, pos_ylab + e_h, w, h, style='FD')
+        self.image(img, 105, pos_ylab + e_h, w, h)
+
+        self.set_xy(105, pos_ylab + e_h + h + e_h)
+        self.set_font('Arial', 'I', e_c)
+        self.write(0, 'EENS (con Affidabilità dei componenti = ')
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, '%.4f kWh' % grid['adeq']['av_eens_furn_rel'])
+        self.ln(e_h)
+        self.set_x(105)
+        self.set_font('Arial', 'I', e_c)
+        self.write(0, 'EENS (con Affidabilità ed Anomalie = ')
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, '%.4f kWh' % grid['adeq']['av_eens_anom'])
+
+        # ----------------------------------------------------------------------
+        #
+        # # -- Terza pagina ------------------------------------------------------
+        # self.add_page()
+        # self.page_name = "Optimal Network Reconfiguration"
+        #
+        # self.set_font('Arial', e_s, e_c)
+        # self.write(0, 'Indici affidabilistici topologia iniziale radiale')
+        #
+        # img = img_path + 'SAIDI.png'
+        # self.image(img, 35, y + 15, 70, 70)
+        #
+        # img = img_path + 'SAIFI.png'
+        # self.image(img, 105, y + 15, 70, 70)
+        #
+        # img = img_path + 'EENS.png'
+        # self.image(img, 35, y + 85, 70, 70)
+        #
+        # img = img_path + 'obj_funct.png'
+        # self.image(img, 105, y + 85, 70, 70)
+        #
+        # self.ln(150)
+        #
+        # self.write(0, 'Indici di affidabilità allo stato iniziale')
+        # self.ln(2)
+        #
+        # x_lbl = ['EENS', 'SAIDI', 'SAIFI']
+        # y_lbl = ['FRG', 'FNC', 'SFS']
+        #
+        # self.set_font('Arial', i_s, i_c)
+        # self.set_fill_color(226, 226, 226)
+        #
+        # self.cell(d_w, i_h, '', 1, 0, 'C', fill=True)
+        # for i in x_lbl:
+        #     self.cell(d_w, i_h, i, 1, 0, 'C', fill=True)
+        # self.ln()
+        #
+        # for m in y_lbl:
+        #     self.cell(d_w, p_h, m, 0, 0, 'C')
+        #     for i in x_lbl:
+        #         if i == 'EENS':
+        #             val = '%.1f' % grid['onr']['indexes']['Abs'][m][i]
+        #         else:
+        #             val = '%.4f' % grid['onr']['indexes']['Abs'][m][i]
+        #         self.cell(d_w, p_h, val, 0, 0, 'C')
+        #     self.ln(p_h)
+        #
+        # self.set_font('Arial', e_s, e_c)
+        # self.ln(10)
+        # self.write(0, 'Indici di affidabilità normalizzati allo stato iniziale')
+        # self.ln(2)
+        #
+        # self.set_font('Arial', i_s, i_c)
+        # self.set_fill_color(226, 226, 226)
+        #
+        # self.cell(d_w, i_h, '', 1, 0, 'C', fill=True)
+        # for i in x_lbl:
+        #     self.cell(d_w, i_h, i, 1, 0, 'C', fill=True)
+        # self.ln()
+        #
+        # for m in y_lbl:
+        #     self.cell(d_w, p_h, m, 0, 0, 'C')
+        #     for i in x_lbl:
+        #         val = '%.4f' % grid['onr']['indexes']['Norm'][m][i]
+        #         self.cell(d_w, p_h, val, 0, 0, 'C')
+        #     self.ln(p_h)
+        #
+        # self.set_font('Arial', e_s, e_c)
+        # self.ln(10)
+        # self.write(0, 'Funzione obiettivo allo stato iniziale')
+        # self.ln(2)
+        #
+        # self.set_font('Arial', i_s, i_c)
+        # self.set_fill_color(226, 226, 226)
+        #
+        # self.cell(d_w, i_h, '', 1, 0, 'C', fill=True)
+        # self.cell(d_w, i_h, 'F. obiettivo', 1, 0, 'C', fill=True)
+        # self.ln()
+        #
+        # for m in y_lbl:
+        #     self.cell(d_w, p_h, m, 0, 0, 'C')
+        #     val = '%.4f' % grid['onr']['indexes']['Fob'][m]['fob']
+        #     self.cell(d_w, p_h, val, 0, 0, 'C')
+        #     self.ln(p_h)
+        # # ----------------------------------------------------------------------
+        #
+        # # -- quarta pagna ------------------------------------------------------
+        # self.add_page()
+        # self.page_name = "Optimal Network Reconfiguration"
+        #
+        # self.set_font('Arial', e_s, e_c)
+        # self.write(0, 'Violazioni si nodi e line allo stato iniziale')
+        #
+        # img = img_path + 'nodes_violations_pre.png'
+        # w, h = self.img_size(img, 200, 230)
+        # self.image(img, 5, y + 15, w, h)
+        # dy = y + 15 + h
+        #
+        # img = img_path + 'lines_overload.png'
+        # w, h = self.img_size(img, 200, 230)
+        # self.image(img, 5, dy + 15, w, h)
+        #
+        # self.ln(y + dy + 30)
+        #
+        # self.set_font('Arial', e_s, e_c)
+        # self.write(0, 'Log Solver allo stato iniziale')
+        # self.ln(e_h)
+        #
+        # self.set_font('Arial', p_s, p_c)
+        # text = grid['onr']['log_pre_solver'].split('\n')
+        # for t in text:
+        #     self.write(0, t)
+        #     self.ln(p_h)
+        # self.ln(p_h)
+        # self.set_font('Arial', e_s, e_c)
+        # self.write(0, 'Log Violazioni allo stato iniziale')
+        # self.ln(e_h)
+        #
+        # self.set_font('Arial', p_s, p_c)
+        # text = grid['onr']['log_pre_viol'].split('\n')
+        # for t in text:
+        #     self.write(0, t)
+        #     self.ln(p_h)
+        # # ----------------------------------------------------------------------
+
     def onr(self, elem_cat, elements):
         # -- Pagina iniziale ---------------------------------------------------
         self.add_page()
         self.page_name = "Optimal Network Reconfiguration"
 
         # todo: da riattivare con l'immagine giusta
-        # img_path = os.getcwd() + '/_images/SplashScreen/Re_80x80.png'
-        # self.set_xy(15, 35)
-        # self.image(img_path, self.get_x(), self.get_y(), 15, 15)
-        # self.set_xy(37.5, 44)
+        img_path = mainpath + '/UI/_resources/icons/onr.png'
+        self.set_xy(12, 35)
+        self.set_fill_color(0)
+        self.set_draw_color(255, 170, 0)
+        self.rect(self.get_x()-2, self.get_y()-2, 19, 19, style='FD')
+        self.image(img_path, self.get_x(), self.get_y(), 15, 15)
+        self.set_xy(37.5, 44)
 
         self.set_draw_color(25, 25, 25)
         self.set_line_width(0.3)
@@ -830,7 +1080,7 @@ class PDF(FPDF):
         self.ln(e_h)
 
         self.set_font('Arial', p_s, p_c)
-        text = onr_dict['log_pre_grafos'].split('\n')
+        text = grid['onr']['log_pre_grafos'].split('\n')
         for t in text:
             self.write(0, t)
             self.ln(p_h)
@@ -909,9 +1159,9 @@ class PDF(FPDF):
             self.cell(d_w, p_h, m, 0, 0, 'C')
             for i in x_lbl:
                 if i == 'EENS':
-                    val = '%.1f' % onr_dict['indexes']['Abs'][m][i]
+                    val = '%.1f' % grid['onr']['indexes']['Abs'][m][i]
                 else:
-                    val = '%.4f' % onr_dict['indexes']['Abs'][m][i]
+                    val = '%.4f' % grid['onr']['indexes']['Abs'][m][i]
                 self.cell(d_w, p_h, val, 0, 0, 'C')
             self.ln(p_h)
 
@@ -931,7 +1181,7 @@ class PDF(FPDF):
         for m in y_lbl:
             self.cell(d_w, p_h, m, 0, 0, 'C')
             for i in x_lbl:
-                val = '%.4f' % onr_dict['indexes']['Norm'][m][i]
+                val = '%.4f' % grid['onr']['indexes']['Norm'][m][i]
                 self.cell(d_w, p_h, val, 0, 0, 'C')
             self.ln(p_h)
 
@@ -949,7 +1199,7 @@ class PDF(FPDF):
 
         for m in y_lbl:
             self.cell(d_w, p_h, m, 0, 0, 'C')
-            val = '%.4f' % onr_dict['indexes']['Fob'][m]['fob']
+            val = '%.4f' % grid['onr']['indexes']['Fob'][m]['fob']
             self.cell(d_w, p_h, val, 0, 0, 'C')
             self.ln(p_h)
         # ----------------------------------------------------------------------
@@ -977,7 +1227,7 @@ class PDF(FPDF):
         self.ln(e_h)
 
         self.set_font('Arial', p_s, p_c)
-        text = onr_dict['log_pre_solver'].split('\n')
+        text = grid['onr']['log_pre_solver'].split('\n')
         for t in text:
             self.write(0, t)
             self.ln(p_h)
@@ -987,7 +1237,7 @@ class PDF(FPDF):
         self.ln(e_h)
 
         self.set_font('Arial', p_s, p_c)
-        text = onr_dict['log_pre_viol'].split('\n')
+        text = grid['onr']['log_pre_viol'].split('\n')
         for t in text:
             self.write(0, t)
             self.ln(p_h)
@@ -1015,7 +1265,7 @@ class PDF(FPDF):
         self.ln(e_h)
 
         self.set_font('Arial', p_s, p_c)
-        text = onr_dict['log_post_solver'].split('\n')
+        text = grid['onr']['log_post_solver'].split('\n')
         for t in text:
             self.write(0, t)
             self.ln(p_h)
@@ -1025,7 +1275,7 @@ class PDF(FPDF):
         self.ln(e_h)
 
         self.set_font('Arial', p_s, p_c)
-        text = onr_dict['log_post_switch'].split('\n')
+        text = grid['onr']['log_post_switch'].split('\n')
         for t in text:
             self.write(0, t)
             self.ln(p_h)
@@ -1065,9 +1315,9 @@ class PDF(FPDF):
             self.cell(d_w, p_h, y_lbl_ext[m], 0, 0, 'C')
             for i in x_lbl:
                 if i == 'EENS':
-                    val = '%.1f' % onr_dict['indexes_post'][y_lbl[m]][i]
+                    val = '%.1f' % grid['onr']['indexes_post'][y_lbl[m]][i]
                 else:
-                    val = '%.4f' % onr_dict['indexes_post'][y_lbl[m]][i]
+                    val = '%.4f' % grid['onr']['indexes_post'][y_lbl[m]][i]
                 self.set_font('Arial', p_s, p_c)
                 self.cell(d_w, p_h, val, 0, 0, 'C')
             self.ln(p_h)
@@ -1111,7 +1361,7 @@ class PDF(FPDF):
         self.ln(e_h)
 
         self.set_font('Arial', p_s, p_c)
-        text = onr_dict['log_post_viol'].split('\n')
+        text = grid['onr']['log_post_viol'].split('\n')
         for t in text:
             self.write(0, t)
             self.ln(p_h)

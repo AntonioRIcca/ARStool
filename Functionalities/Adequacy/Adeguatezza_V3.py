@@ -328,7 +328,7 @@ class Adeguatezza:
         ax1.set_position([box.x0, box.y0 + box.height * 0.15, box.width, box.height * 0.85])
         box1 = ax1.get_position()
 
-        self.x_gen_distr = sum(generazione_totale_distribuita) * 100 / sum(generazione_interna_totale)
+        grid['adeq']['x_gen_est'] = sum(generazione_totale_distribuita) * 100 / sum(generazione_interna_totale)
 
         strFile = "1.png"
         if os.path.isfile(savepath + strFile):
@@ -457,10 +457,10 @@ class Adeguatezza:
         ax1.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=1,
                    fontsize=8)
 
-        self.avLoleFunrRel = LOLE_medio_anno_MC[-1]
-        self.avLoleAnom = LOLE_medio_anomalies_anno_MC[-1]
-        self.avEensFurnrel = EENS_medio_anno_MC[-1]
-        self.avEensAnom = EENS_medio_anomalies_anno_MC[-1]
+        grid['adeq']['av_lole_funr_rel'] = LOLE_medio_anno_MC[-1]
+        grid['adeq']['av_lole_anom'] = LOLE_medio_anomalies_anno_MC[-1]
+        grid['adeq']['av_eens_furn_rel'] = EENS_medio_anno_MC[-1]
+        grid['adeq']['av_eens_anom'] = EENS_medio_anomalies_anno_MC[-1]
 
         strFile = "3.png"
         if os.path.isfile(savepath + strFile):

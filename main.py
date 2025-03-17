@@ -365,6 +365,10 @@ class Main:
                 grid[par] = v0['_grid_'][par]
             del v0['_grid_']
 
+            for p in grid0:
+                if p not in list(grid.keys()):
+                    grid[p] = copy.deepcopy(grid0[p])
+
             for elem in v0:
                 v[elem] = v0[elem]
             self.elementsTableWgtCreate()
@@ -1898,13 +1902,15 @@ class Main:
 
         adequacy.state_sampling_plot(generazione_totale_distribuita, domanda_totale)
 
-        self.x_gen_est = adequacy.x_gen_distr
-        self.av_lole_funr_rel = adequacy.avLoleFunrRel
-        self.av_lole_anom = adequacy.avLoleAnom
-        self.av_eens_furn_rel = adequacy.avEensFurnrel
-        self.av_eens_anom = adequacy.avEensAnom
+        # self.x_gen_est = adequacy.x_gen_distr
+        # self.av_lole_funr_rel = adequacy.avLoleFunrRel
+        # self.av_lole_anom = adequacy.avLoleAnom
+        # self.av_eens_furn_rel = adequacy.avEensFurnrel
+        # self.av_eens_anom = adequacy.avEensAnom
 
         self.adeq_graps = adequacy.graphs
+
+        grid['studies']['adeq'] = True
 
         self.adeqRes()
         pass
@@ -1982,7 +1988,7 @@ class Main:
         self.adeqFigLbl[0].setPixmap(QtGui.QPixmap(folder + "1.png"))
         self.adeqRes1WgtVBL.addWidget(self.adeqFigLbl[0])
 
-        val = '%.2f' % self.x_gen_est
+        val = '%.2f' % grid['adeq']['x_gen_est']
         self.xGenEstLbl = QLabel('Generazione distribuita / Generazione interna totale = ' + val + '%')
         self.xGenEstLbl.setStyleSheet('font: 75 12pt "MS Shell Dlg 2"; '
                                       'border: solid; border-width: 1 px; '
@@ -2023,8 +2029,8 @@ class Main:
         self.loleWgt.setMinimumHeight(40)
         self.loleWgt.setMaximumHeight(40)
 
-        val1 = '%.2f' % self.av_lole_funr_rel
-        val2 = '%.2f' % self.av_lole_anom
+        val1 = '%.2f' %  grid['adeq']['av_lole_funr_rel']
+        val2 = '%.2f' % grid['adeq']['av_lole_anom']
         self.lole1LBL = QLabel('LOLE = ' + val1 + ' ore/anno')
         self.lole1LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
                                     'border-top: 1px solid white;'
@@ -2067,9 +2073,9 @@ class Main:
         self.eensWgt.setMinimumHeight(40)
         self.eensWgt.setMaximumHeight(40)
 
-        val1 = '%.5f' % self.av_eens_furn_rel
-        val2 = '%.5f' % self.av_eens_anom
-        self.eens1LBL = QLabel('EENS = %.4f kWh' % self.av_eens_furn_rel)
+        val1 = '%.5f' % grid['adeq']['av_eens_furn_rel']
+        val2 = '%.5f' % grid['adeq']['av_eens_anom']
+        self.eens1LBL = QLabel('EENS = %.4f kWh' % grid['adeq']['av_eens_furn_rel'])
         self.eens1LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
                                     # 'border: solid; border-width: 1 px; '
                                     # 'border-color: rgb(255, 255, 255); '
@@ -2081,7 +2087,7 @@ class Main:
         self.eens1LBL.setMinimumHeight(15)
         self.eens1LBL.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.eens2LBL = QLabel('EENS =  %.4f kWh' % self.av_eens_anom)
+        self.eens2LBL = QLabel('EENS =  %.4f kWh' % grid['adeq']['av_eens_anom'])
         self.eens2LBL.setStyleSheet('font: 75 10pt "MS Shell Dlg 2"; '
                                     # 'border: solid; border-width: 1 px; '
                                     # 'border-color: rgb(255, 255, 255); '
@@ -2146,8 +2152,6 @@ class Main:
 
     def onrStart(self):
         from Functionalities.ONR.onr import ONR
-
-        onr_dict_init()
 
         self.onr = ONR()
 
@@ -2215,7 +2219,7 @@ class Main:
             self.onr_res.ui.onr1dxFigLbl.setPixmap(
                 QtGui.QPixmap(folder + 'grafo_nodale_pre_ONR.png').scaledToHeight(hav))
 
-        self.onr_res.ui.onr1logLbl.setText(onr_dict['log_pre_grafos'])
+        self.onr_res.ui.onr1logLbl.setText(grid['onr']['log_pre_grafos'])
 
         self.onrIndexOutput()
 
@@ -2234,11 +2238,11 @@ class Main:
         self.onr_res.ui.onr2Fig3Lbl.setPixmap(QtGui.QPixmap(folder + 'EENS.png').scaledToWidth(wsx))
         self.onr_res.ui.onr2Fig4Lbl.setPixmap(QtGui.QPixmap(folder + 'obj_funct.png').scaledToWidth(wsx))
 
-        for w in onr_dict['indexes']:
-            for cat in onr_dict['indexes'][w]:
-                for i in onr_dict['indexes'][w][cat]:
+        for w in grid['onr']['indexes']:
+            for cat in grid['onr']['indexes'][w]:
+                for i in grid['onr']['indexes'][w][cat]:
                     self.onr_res.ui.__getattribute__(
-                        'onr2ind' + w + cat + i + 'Lbl').setText('%.4f' % onr_dict['indexes'][w][cat][i])
+                        'onr2ind' + w + cat + i + 'Lbl').setText('%.4f' % grid['onr']['indexes'][w][cat][i])
 
         wsx = w_max * (ratio / (ratio + 1))
         self.onr_res.ui.onr3Fig1Lbl.setPixmap(QtGui.QPixmap(folder + 'nodes_violations_pre.png').scaledToWidth(wsx))
@@ -2247,8 +2251,8 @@ class Main:
         self.onr_res.ui.onr3Fig1Lbl.mouseDoubleClickEvent = partial(self.openImage, folder + 'nodes_violations_pre.png')
         self.onr_res.ui.onr3Fig2Lbl.mouseDoubleClickEvent = partial(self.openImage, folder + 'lines_overload.png')
 
-        self.onr_res.ui.onr3log1TB.setText(onr_dict['log_pre_solver'])
-        self.onr_res.ui.onr3log2YB.setText(onr_dict['log_pre_viol'])
+        self.onr_res.ui.onr3log1TB.setText(grid['onr']['log_pre_solver'])
+        self.onr_res.ui.onr3log2YB.setText(grid['onr']['log_pre_viol'])
 
     def openImage(self, path, event=None):
         plt.cla()
@@ -2304,13 +2308,13 @@ class Main:
 
         self.onr_res.ui.onr4indFigLbl.setPixmap(QtGui.QPixmap(folder + 'indexes_post.png').scaledToWidth(wdx))
 
-        self.onr_res.ui.onr4log1TB.setText(onr_dict['log_post_solver'])
-        self.onr_res.ui.onr4log2TB.setText(onr_dict['log_post_switch'])
+        self.onr_res.ui.onr4log1TB.setText(grid['onr']['log_post_solver'])
+        self.onr_res.ui.onr4log2TB.setText(grid['onr']['log_post_switch'])
 
-        for cat in onr_dict['indexes_post']:
-            for i in onr_dict['indexes_post'][cat]:
+        for cat in grid['onr']['indexes_post']:
+            for i in grid['onr']['indexes_post'][cat]:
                 self.onr_res.ui.__getattribute__('onr4ind' + i + cat + 'Lbl').setText(
-                    '%.4f' % onr_dict['indexes_post'][cat][i])
+                    '%.4f' % grid['onr']['indexes_post'][cat][i])
 
         self.onr_res.ui.onr5dxWgt.setMinimumWidth(wdx + 20)
 
@@ -2321,7 +2325,7 @@ class Main:
         self.onr_res.ui.onr5Fig1Lbl.mouseDoubleClickEvent = partial(self.openImage,
                                                                     folder + 'nodes_violations_post.png')
 
-        self.onr_res.ui.onr5log2TB.setText(onr_dict['log_post_viol'])
+        self.onr_res.ui.onr5log2TB.setText(grid['onr']['log_post_viol'])
 
     def gridManStart(self):
         if self.myform.ui.verticalLayout.count() > 2:
@@ -2355,6 +2359,9 @@ class Main:
                     self.homeHBL.removeItem(self.homeHBL.itemAt(i))
 
     def pdf_set(self):
+        self.ui.repParWgt.setVisible(grid['name'] is not None)
+        self.ui.repPrintPB.setVisible(grid['name'] is not None)
+
         for s in grid['studies']:
             # print(s, )
             self.ui.__getattribute__('rep' + s.title() + 'Wgt').setVisible(grid['studies'][s])
@@ -2370,10 +2377,12 @@ class Main:
             self.ui.repLfTiE.setMaximumDateTime(QtCore.QDateTime(de))
             self.ui.repLfTiE.setMinimumDateTime(QtCore.QDateTime(ds))
 
-
     def pdf_gen(self):
         sel = []
-        step, tlf = None, None
+        if self.ui.repParChB.isChecked():
+            sel.append('par')
+
+        tlf, ds = 0, None
         for s in grid['studies']:
             if grid['studies'][s] and self.ui.__getattribute__('rep' + s.title() + 'ChB').isChecked():
                 sel.append(s)
@@ -2383,17 +2392,19 @@ class Main:
             ds = dt.datetime(grid['lf']['start'][0], grid['lf']['start'][1], grid['lf']['start'][2],
                              grid['lf']['start'][3], grid['lf']['start'][4])
             # ds = self.ui.repLfTiE.dateTime()
-            step = int(QtCore.QDateTime(ds).msecsTo(self.ui.repLfTiE.dateTime()) / 60000 / grid['profile']['step'])
-            tlf = self.ui.repLfTiE.dateTime()
-            print(ds)
-            print(self.ui.repLfTiE.dateTime())
-            print('steps: ', step)
+            tlf = int(QtCore.QDateTime(ds).msecsTo(self.ui.repLfTiE.dateTime()) / 60000 / grid['profile']['step'])
+            ds = self.ui.repLfTiE.dateTime()
+            # print(ds)
+            # print(self.ui.repLfTiE.dateTime())
+            # print('steps: ', step)
 
             # a = QtWidgets.QDateTimeEdit()
             # a.dateTime().date().
 
+        print('sel:', sel, 'tls:', tlf, 'ds:', ds)
+
         from pdf_creator import PDF
-        pdf = PDF(sel, step, tlf)
+        pdf = PDF(sel, tlf, ds)
         pdf.save()
         self.ui.mainPages.setCurrentIndex(0)
 

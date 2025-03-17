@@ -1,0 +1,247 @@
+par:
+  Input:
+    electrLev:
+      lbl: Livello di elettrificazione
+      unit: '%'
+      val: 28.0
+    enConsGrow:
+      lbl: Crescita annua dei consumi di energia finale t.m.a
+      unit: '%'
+      val: 2.0
+    ferGen:
+      lbl: Generazione da FER
+      unit: '%'
+      val: 65.0
+    h2Cons:
+      lbl: Produzione solare su RES
+      unit: '%'
+      val: 1.2
+    solarFer:
+      lbl: Consumo per produzione H2
+      unit: '%'
+      val: 70.0
+  Scenario:
+    0:
+      scen:
+        lbl: Scenario
+        unit: ''
+        val: Consuntivo
+      year:
+        lbl: Anno Scenario
+        unit: ''
+        val: '2019'
+    1:
+      enDuty:
+        lbl: Fabbisogno di energia elettrica
+        unit: TWh
+        val: 320
+      enImport:
+        lbl: Energia importata
+        unit: TWh
+        val: 38
+      enProd:
+        lbl: Energia prodotta
+        unit: TWh
+        val: 282
+      h2Cons:
+        lbl: di cui consumi per produrre H2
+        unit: TWh
+        val: 0
+      totEnCons:
+        lbl: '-'
+        unit: TWh
+        val: 1281.5758980301273
+      totEnConsMtep:
+        lbl: Consumi finali di energia
+        unit: Mtep
+        val: 110.6
+    2:
+      ferGen:
+        lbl: Generazione da FER
+        perc: 35.3125
+        unit: TWh
+        val: 113
+      otherGen:
+        lbl: di cui Altre fonti
+        perc: 61.94690265486725
+        unit: TWh
+        val: 70
+      solarGen:
+        lbl: di cui Solare
+        perc: 20.353982300884958
+        unit: TWh
+        val: 23
+      windGen:
+        lbl: di cui Eolico
+        perc: 17.699115044247787
+        unit: TWh
+        val: 20
+    3:
+      ferCap:
+        lbl: "Capacit\xE0 installata FER"
+        perc: 17.1875
+        unit: GW
+        val: 55
+      otherCap:
+        lbl: di cui Altre fonti
+        perc: 41.81818181818181
+        unit: GW
+        val: 23
+      solarCap:
+        lbl: di cui Solare
+        perc: 38.18181818181819
+        unit: GW
+        val: 21
+      windCap:
+        lbl: di cui Eolico
+        perc: 20.0
+        unit: GW
+        val: 11
+    4:
+      co2Emis:
+        lbl: Emissioni di CO2
+        unit: kg
+        val: 78.87
+res:
+  Accumuli:
+    sysStor:
+      lbl: Sistemi di stoccaggio (ipotesi TERNA)
+      unit: GWh
+      val: 0
+  Costi:
+    capexCosts:
+      lbl: CAPEX totale SdA
+      unit: "\u20AC"
+      val: 0
+    frnpCosts:
+      lbl: Costo FRNP M(al kW installato)
+      unit: "M\u20AC"
+      val: 0
+    h2Costs:
+      lbl: Costo H2)
+      unit: "\u20AC"
+      val: 0
+  Emissioni:
+    co2Emis:
+      lbl: Emissioni di CO2
+      unit: Mt
+      val_act: 0
+      val_prosp: 0
+    co2EmisRed:
+      lbl: Riduzione delle emissioni
+      unit: Mt
+      val_act: 0
+      val_prosp: 0
+  Fabbisogno:
+    0:
+      enDuty:
+        lbl: Fabbisogno di energia elettrica
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+      enImport:
+        lbl: Energia importata
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+      enProd:
+        lbl: Energia prodotta
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+      h2Cons:
+        lbl: di cui consumi per produrre H2
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+      totEnCons:
+        lbl: '-'
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+      totEnConsMtep:
+        lbl: Consumi finali di energia
+        unit: Mtep
+        val_act: 0
+        val_prosp: 0
+  Idrogeno:
+    maxH2:
+      lbl: Max Produzione di H2 da overgeneration
+      unit: TWh
+      val_HI: 0
+      val_LO: 0
+    toprodH2:
+      lbl: Produzione di H2 oltre overgeneration
+      unit: TWh
+      val_HI: 0
+      val_LO: 0
+  Rinnovabili:
+    0:
+      ferGen:
+        lbl: Generazione da FER
+        perc_act: 0
+        perc_prosp: 0
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+      otherGen:
+        lbl: di cui Altre fonti
+        perc_act: 0
+        perc_prosp: 0
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+      solarGen:
+        lbl: di cui Solare
+        perc_act: 0
+        perc_prosp: 0
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+      windGen:
+        lbl: di cui Eolico
+        perc_act: 0
+        perc_prosp: 0
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+    1:
+      hiOvergen:
+        lbl: Overgenerazione Alta
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+      lowOvergen:
+        lbl: Overgenerazione Bassa
+        unit: TWh
+        val_act: 0
+        val_prosp: 0
+    2:
+      ferCap:
+        lbl: "Capacit\xE0 installata FER"
+        perc_act: 0
+        perc_prosp: 0
+        unit: GW
+        val_act: 0
+        val_prosp: 0
+      otherCap:
+        lbl: di cui Altre fonti
+        perc_act: 0
+        perc_prosp: 0
+        unit: GW
+        val_act: 0
+        val_prosp: 0
+      solarCap:
+        lbl: di cui Solare
+        perc_act: 0
+        perc_prosp: 0
+        unit: GW
+        val_act: 0
+        val_prosp: 0
+      windCap:
+        lbl: di cui Eolico
+        perc_act: 0
+        perc_prosp: 0
+        unit: GW
+        val_act: 0
+        val_prosp: 0

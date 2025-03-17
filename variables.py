@@ -11,7 +11,379 @@ def v_initialize():
 
 
 def grid_initialize():
-    grid0 = {
+    # grid0 = {
+    #     'benchmark': False,
+    #     'current': None,
+    #     'name': None,
+    #     'studies': {
+    #         'lf': False,
+    #         'anom': False,
+    #         'rel': False,
+    #         'adeq': False,
+    #         'optstor': False,
+    #         'onr': False,
+    #     },
+    #     'profile': {
+    #         'points': None,
+    #         'step': None,
+    #         'start': None,
+    #         'end': None,
+    #         'exist': False,
+    #     },
+    #     'lf': {
+    #         'start': None,
+    #         'end': None,
+    #         'points': None,
+    #     },
+    #     'rel': {
+    #         'T0': 25,
+    #         't': 1,
+    #         'prof_T': {
+    #             'name': None,
+    #             'profile': None,
+    #         },
+    #     },
+    #     'adeq': {
+    #         'x_gen_est': None,
+    #         'av_lole_funr_rel': None,
+    #         'av_lole_anom': None,
+    #         'av_eens_furn_rel': None,
+    #         'av_eens_anom': None,
+    #     },
+    #     'onr': {
+    #         'log_pre_grafos': '',
+    #         'log_pre_solver': '',
+    #         'log_pre_viol': '',
+    #         'log_post_solver': '',
+    #         'log_post_switch': '',
+    #         'log_post_viol': '',
+    #         'indexes': {},
+    #         'indexes_post': {},
+    #     }
+    # }
+
+    for p in grid0:
+        grid[p] = copy.deepcopy(grid0[p])
+
+
+opt_stor = {
+    'par': {
+        'Input': {
+            'electrLev': {
+                'lbl': 'Livello di elettrificazione',
+                'val': 0,
+                'unit': '%'
+            },
+            'enConsGrow': {
+                'lbl': 'Crescita annua dei consumi di energia finale t.m.a',
+                'val': 0,
+                'unit': '%'
+            },
+            'ferGen': {
+                'lbl': 'Generazione da FER',
+                'val': 0,
+                'unit': '%'
+            },
+            'h2Cons': {
+                'lbl': 'Produzione solare su RES',
+                'val': 0,
+                'unit': '%'
+            },
+            'solarFer': {
+                'lbl': 'Consumo per produzione H2',
+                'val': 0,
+                'unit': '%'
+            },
+        },
+        'Scenario': {
+            0: {
+                'year': {
+                    'lbl': 'Anno Scenario',
+                    'val': 2019,
+                    'unit': '',
+                },
+                'scen': {
+                    'lbl': 'Scenario',
+                    'val': '',
+                    'unit': '',
+                },
+            },
+            1: {
+                'totEnConsMtep': {
+                    'lbl': 'Consumi finali di energia',
+                    'val': 0,
+                    'unit': 'Mtep',
+                },
+                'totEnCons': {
+                    'lbl': '-',
+                    'val': 0,
+                    'unit': 'TWh',
+                },
+                'h2Cons': {
+                    'lbl': 'di cui consumi per produrre H2',
+                    'val': 0,
+                    'unit': 'TWh',
+                },
+                'enDuty': {
+                    'lbl': 'Fabbisogno di energia elettrica',
+                    'val': 0,
+                    'unit': 'TWh',
+                },
+                'enImport': {
+                    'lbl': 'Energia importata',
+                    'val': 0,
+                    'unit': 'TWh',
+                },
+                'enProd': {
+                    'lbl': 'Energia prodotta',
+                    'val': 0,
+                    'unit': 'TWh',
+                },
+            },
+            2: {
+                'ferGen': {
+                    'lbl': 'Generazione da FER',
+                    'val': 0,
+                    'perc': 0,
+                    'unit': 'TWh',
+                },
+                'solarGen': {
+                    'lbl': 'di cui Solare',
+                    'val': 0,
+                    'perc': 0,
+                    'unit': 'TWh',
+                },
+                'windGen': {
+                    'lbl': 'di cui Eolico',
+                    'val': 0,
+                    'perc': 0,
+                    'unit': 'TWh',
+                },
+                'otherGen': {
+                    'lbl': 'di cui Altre fonti',
+                    'val': 0,
+                    'perc': 0,
+                    'unit': 'TWh',
+                },
+            },
+            3: {
+                'ferCap': {
+                    'lbl': 'Capacità installata FER',
+                    'val': 0,
+                    'perc': 0,
+                    'unit': 'GW',
+                },
+                'solarCap': {
+                    'lbl': 'di cui Solare',
+                    'val': 0,
+                    'perc': 0,
+                    'unit': 'GW',
+                },
+                'windCap': {
+                    'lbl': 'di cui Eolico',
+                    'val': 0,
+                    'perc': 0,
+                    'unit': 'GW',
+                },
+                'otherCap': {
+                    'lbl': 'di cui Altre fonti',
+                    'val': 0,
+                    'perc': 0,
+                    'unit': 'GW',
+                },
+            },
+
+            4: {
+                'co2Emis': {
+                    'lbl': 'Emissioni di CO2',
+                    'val': 0,
+                    'unit': 'kg',
+                },
+            },
+        },
+    },
+    'res': {
+        'Fabbisogno': {
+            0: {
+                'totEnConsMtep': {
+                    'lbl': 'Consumi finali di energia',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'unit': 'Mtep',
+                },
+                'totEnCons': {
+                    'lbl': '-',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'unit': 'TWh',
+                },
+                'h2Cons': {
+                    'lbl': 'di cui consumi per produrre H2',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'unit': 'TWh',
+                },
+                'enDuty': {
+                    'lbl': 'Fabbisogno di energia elettrica',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'unit': 'TWh',
+                },
+                'enImport': {
+                    'lbl': 'Energia importata',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'unit': 'TWh',
+                },
+                'enProd': {
+                    'lbl': 'Energia prodotta',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'unit': 'TWh',
+                },
+            },
+        },
+        'Rinnovabili': {
+            0: {
+                'ferGen': {
+                    'lbl': 'Generazione da FER',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'perc_act': 0,
+                    'perc_prosp': 0,
+                    'unit': 'TWh',
+                },
+                'solarGen': {
+                    'lbl': 'di cui Solare',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'perc_act': 0,
+                    'perc_prosp': 0,
+                    'unit': 'TWh',
+                },
+                'windGen': {
+                    'lbl': 'di cui Eolico',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'perc_act': 0,
+                    'perc_prosp': 0,
+                    'unit': 'TWh',
+                },
+                'otherGen': {
+                    'lbl': 'di cui Altre fonti',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'perc_act': 0,
+                    'perc_prosp': 0,
+                    'unit': 'TWh',
+                },
+            },
+            1: {
+                'hiOvergen': {
+                    'lbl': 'Overgenerazione Alta',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'unit': 'TWh',
+                },
+                'lowOvergen': {
+                    'lbl': 'Overgenerazione Bassa',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'unit': 'TWh',
+                },
+            },
+            2: {
+                'ferCap': {
+                    'lbl': 'Capacità installata FER',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'perc_act': 0,
+                    'perc_prosp': 0,
+                    'unit': 'GW',
+                },
+                'solarCap': {
+                    'lbl': 'di cui Solare',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'perc_act': 0,
+                    'perc_prosp': 0,
+                    'unit': 'GW',
+                },
+                'windCap': {
+                    'lbl': 'di cui Eolico',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'perc_act': 0,
+                    'perc_prosp': 0,
+                    'unit': 'GW',
+                },
+                'otherCap': {
+                    'lbl': 'di cui Altre fonti',
+                    'val_act': 0,
+                    'val_prosp': 0,
+                    'perc_act': 0,
+                    'perc_prosp': 0,
+                    'unit': 'GW',
+                },
+            },
+        },
+        'Accumuli': {
+            'sysStor': {
+                'lbl': 'Sistemi di stoccaggio (ipotesi TERNA)',
+                'val': 0,
+                'unit': 'GWh',
+            },
+        },
+        'Idrogeno': {
+            'maxH2': {
+                'lbl': 'Max Produzione di H2 da overgeneration',
+                'val_HI': 0,
+                'val_LO': 0,
+                'unit': 'TWh',
+            },
+            'toprodH2': {
+                'lbl': 'Produzione di H2 oltre overgeneration',
+                'val_HI': 0,
+                'val_LO': 0,
+                'unit': 'TWh',
+            },
+        },
+        'Costi': {
+            'frnpCosts': {
+                'lbl': 'Costo FRNP M(al kW installato)',
+                'val': 0,
+                'unit': 'M€',
+            },
+            'capexCosts': {
+                'lbl': 'CAPEX totale SdA',
+                'val': 0,
+                'unit': '€',
+            },
+            'h2Costs': {
+                'lbl': 'Costo H2)',
+                'val': 0,
+                'unit': '€',
+            },
+        },
+        'Emissioni': {
+            'co2Emis': {
+                'lbl': 'Emissioni di CO2',
+                'val_act': 0,
+                'val_prosp': 0,
+                'unit': 'Mt',
+            },
+            'co2EmisRed': {
+                'lbl': 'Riduzione delle emissioni',
+                'val_act': 0,
+                'val_prosp': 0,
+                'unit': 'Mt',
+            },
+        },
+    },
+}
+
+
+grid0 = {
         'benchmark': False,
         'current': None,
         'name': None,
@@ -43,30 +415,43 @@ def grid_initialize():
                 'profile': None,
             },
         },
+        'adeq': {
+            'x_gen_est': None,
+            'av_lole_funr_rel': None,
+            'av_lole_anom': None,
+            'av_eens_furn_rel': None,
+            'av_eens_anom': None,
+        },
+        'onr': {
+            'log_pre_grafos': '',
+            'log_pre_solver': '',
+            'log_pre_viol': '',
+            'log_post_solver': '',
+            'log_post_switch': '',
+            'log_post_viol': '',
+            'indexes': {},
+            'indexes_post': {},
+        }
     }
 
-    for p in grid0:
-        grid[p] = copy.deepcopy(grid0[p])
+# onr_dict = {}
+#
+#
+# _onr_dict_ = {
+#     'log_pre_grafos': '',
+#     'log_pre_solver': '',
+#     'log_pre_viol': '',
+#     'log_post_solver': '',
+#     'log_post_switch': '',
+#     'log_post_viol': '',
+#     'indexes': {},
+#     'indexes_post': {},
+# }
 
 
-onr_dict = {}
-
-
-_onr_dict_ = {
-    'log_pre_grafos': '',
-    'log_pre_solver': '',
-    'log_pre_viol': '',
-    'log_post_solver': '',
-    'log_post_switch': '',
-    'log_post_viol': '',
-    'indexes': {},
-    'indexes_post': {},
-}
-
-
-def onr_dict_init():
-    for i in _onr_dict_:
-        onr_dict[i] = _onr_dict_[i]
+# def onr_dict_init():
+#     for i in _onr_dict_:
+#         onr_dict[i] = _onr_dict_[i]
 
 
 bench = {

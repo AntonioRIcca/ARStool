@@ -9,6 +9,10 @@ from PySide2 import QtGui, QtWidgets
 
 from PySide2.QtCharts import *
 
+from variables import grid, mainpath, opt_stor
+
+import yaml
+
 
 class OptStorWGT(QMainWindow):
     def __init__(self):
@@ -36,6 +40,8 @@ class OptStorWGT(QMainWindow):
         # lettura dei dati di input e scrittura nelle variabili
         for p in ['electrLev', 'enConsGrow', 'ferGen', 'h2Cons', 'solarFer']:
             self.__setattr__(p + 'Input', self.ui.__getattribute__(p + 'InputDsb').value())
+            opt_stor['par']['Input'][p]['val'] = self.__getattribute__(p + 'Input')
+
 
         self.ui.resultsWgt.setVisible(True)     # Rendo visibile il Widget dei risultati
 
@@ -97,6 +103,9 @@ class OptStorWGT(QMainWindow):
         # -------------------------------------------------------------------------------------
 
         self.barchart()     # creazione dei diagrammi
+
+        self.data_storage() # Salvataggio dei dati nel dizionario
+
 
     # Azioni conseguenti alla selezione dell'anno: popolazione della tendina dello scenario
     def year_selected(self):
@@ -291,6 +300,24 @@ class OptStorWGT(QMainWindow):
         bm_spacer = QSpacerItem(20, 10)
         self.ui.graphVL.addItem(bm_spacer)
 
+    def data_storage(self):
+        opt_stor['par']['Scenario'][0]['year']['val'] = self.ui.yearScenCb.currentText()
+        opt_stor['par']['Scenario'][0]['scen']['val'] = self.ui.scenCb.currentText()
+        for i in range(1, 5):
+            for p in opt_stor['par']['Scenario'][i]:
+                opt_stor['par']['Scenario'][i][p]['val'] = self.__getattribute__(p + 'Scen')
+                try:
+                    opt_stor['par']['Scenario'][i][p]['perc'] = self.__getattribute__(p + 'PercScen')
+                except:
+                    print(p + 'PercScen')
+                    pass
+        filename = mainpath + '/OptStor.yml'
+        print(filename)
+
+        with open(filename, 'w') as file:
+            yaml.dump(opt_stor, file)
+            file.close()
+
 
 # Dizionario degli scenari  TODO: Capire se deve essere impostato dall'esterno
 s = {
@@ -395,7 +422,10 @@ for y in s:
 
 # Lettura del dizionario della curva di riferimento dello storage
 storage = [[], []]
-with open('./Functionalities/OptimalStorage/StorageTerna.csv', mode='r') as csv_file:
+
+print(mainpath)
+
+with open(mainpath + '/Functionalities/OptimalStorage/StorageTerna.csv', mode='r') as csv_file:
     for line in csv_file:
         storage[0].append(float(line.rstrip().split(';')[0]))
         storage[1].append(float(line.rstrip().split(';')[1]))
