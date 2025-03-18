@@ -135,6 +135,7 @@ class Main:
         self.ui.adequacy_Btn.clicked.connect(self.adeqStart)
         self.ui.onr_Btn.clicked.connect(self.onrStart)
         self.ui.gidman_Btn.clicked.connect(self.gridManStart)
+        self.ui.opf_Btn.clicked.connect(self.operPlanStart)
         self.ui.reportBtn.clicked.connect(self.pdf_set)
         self.ui.repPrintPB.clicked.connect(self.pdf_gen)
 
@@ -2350,6 +2351,68 @@ class Main:
     def gridManRes(self):
         print('Grid Management Results')
 
+    def operPlanStart(self):
+        for f in grid['studies']:
+            grid['studies'][f] = False
+
+        self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
+
+        try:
+            self.ui.home_WGT.deleteLater()
+        except:
+            self.home_WGT.deleteLater()
+        self.home_WGT = QWidget()
+
+        self.homeHBL = QHBoxLayout()
+        self.home_WGT.setLayout(self.homeHBL)
+        self.homeHBL.setContentsMargins(0, 0, 0, 0)
+
+        opWgt = QtWidgets.QWidget()
+        opWgt.setMinimumWidth(300)
+        opVBL = QtWidgets.QVBoxLayout(opWgt)
+
+        spc1 = QtWidgets.QSpacerItem(100, 100, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        spc2 = QtWidgets.QSpacerItem(100, 100, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        opPB = QtWidgets.QPushButton()
+        opPB.setText('Smart Flex Grid')
+        opPB.setMaximumHeight(80)
+
+        opVBL.addItem(spc1)
+        opVBL.addWidget(opPB)
+        opVBL.addItem(spc2)
+
+        opWgt.setStyleSheet(u"QPushButton {"
+                            u"text-align: center;"
+                            u"padding: 10px 10px;"
+                            u"color: rgb(255, 255, 255);"
+                            u"background-color: rgb(31, 31, 31); border: solid;" # border-style: outset;"
+                            u"border-width: 3px; border-radius: 15px; border-color: rgb(127, 127, 127);"
+                            u"font: 14pt \"MS Shell Dlg 2\";"
+                            u"}"
+                            u"QPushButton:pressed {"
+                            u"background-color: rgb(64, 64, 64); border-style: inset"
+                            u"}")
+
+        self.homeHBL.addWidget(opWgt, 0, QtCore.Qt.AlignLeft)
+
+        # from UI.start_wgt import StartWGT
+        # self.startWGT = StartWGT()
+        # self.startWGT.ui.startWgt.setMinimumSize(QtCore.QSize(300, 0))
+        #
+        # self.homeHBL.addWidget(self.startWGT.ui.startWgt, 0, QtCore.Qt.AlignLeft)
+        #
+        self.ui.home_VL.addWidget(self.home_WGT)
+
+        opPB.clicked.connect(self.operPlanRun)
+
+    def operPlanRun(self):
+        lnk = mainpath + '/Functionalities/OperationalPlanning/SmartFlexGrid.exe'
+        os.system(lnk)
+        #
+        # import subprocess
+        # subprocess.call([lnk])
+
     def homeClear(self):
         if self.homeHBL.count() > 1:
             for i in range(1, self.homeHBL.count()):
@@ -2363,17 +2426,14 @@ class Main:
         self.ui.repParChB.setChecked(grid['name'] is not None and not grid['studies']['optstor'])
 
         for s in grid['studies']:
-            # print(s, )
             self.ui.__getattribute__('rep' + s.title() + 'Wgt').setVisible(grid['studies'][s])
             self.ui.__getattribute__('rep' + s.title() + 'ChB').setChecked(grid['studies'][s])
         self.ui.repLfTiE.setVisible(grid['studies']['lf'] and grid['lf']['points'] is not None)
         if grid['studies']['lf'] and grid['lf']['points'] is not None:
-            # a = QtWidgets.QDateTimeEdit()
             ds = dt.datetime(grid['lf']['start'][0], grid['lf']['start'][1], grid['lf']['start'][2],
                              grid['lf']['start'][3], grid['lf']['start'][4])
             de = dt.datetime(grid['lf']['end'][0], grid['lf']['end'][1], grid['lf']['end'][2],
                              grid['lf']['end'][3], grid['lf']['end'][4])
-            # a.setDateTime()
             self.ui.repLfTiE.setMinimumDateTime(QtCore.QDateTime(ds))
             self.ui.repLfTiE.setMaximumDateTime(QtCore.QDateTime(de))
             self.ui.repLfTiE.setMinimumDateTime(QtCore.QDateTime(ds))
@@ -2387,28 +2447,17 @@ class Main:
         for s in grid['studies']:
             if grid['studies'][s] and self.ui.__getattribute__('rep' + s.title() + 'ChB').isChecked():
                 sel.append(s)
-        print('sel: ', sel)
 
         if grid['studies']['lf'] and grid['lf']['points'] is not None and self.ui.repLfChB.isChecked():
             ds = dt.datetime(grid['lf']['start'][0], grid['lf']['start'][1], grid['lf']['start'][2],
                              grid['lf']['start'][3], grid['lf']['start'][4])
-            # ds = self.ui.repLfTiE.dateTime()
             tlf = int(QtCore.QDateTime(ds).msecsTo(self.ui.repLfTiE.dateTime()) / 60000 / grid['profile']['step'])
             ds = self.ui.repLfTiE.dateTime()
-            # print(ds)
-            # print(self.ui.repLfTiE.dateTime())
-            # print('steps: ', step)
-
-            # a = QtWidgets.QDateTimeEdit()
-            # a.dateTime().date().
-
-        print('sel:', sel, 'tls:', tlf, 'ds:', ds)
 
         from pdf_creator import PDF
         pdf = PDF(sel, tlf, ds)
         pdf.save()
-        self.ui.mainPages.setCurrentIndex(0)
-
+        self.ui.homeBtn.click()
 
 class LFrWGT(QMainWindow):
     def __init__(self):
