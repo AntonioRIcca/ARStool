@@ -335,13 +335,13 @@ opt_stor = {
             },
         },
         'Idrogeno': {
-            'maxH2': {
+            'max': {
                 'lbl': 'Max Produzione di H2 da overgeneration',
                 'val_HI': 0,
                 'val_LO': 0,
                 'unit': 'TWh',
             },
-            'toprodH2': {
+            'toprod': {
                 'lbl': 'Produzione di H2 oltre overgeneration',
                 'val_HI': 0,
                 'val_LO': 0,
@@ -352,17 +352,17 @@ opt_stor = {
             'frnpCosts': {
                 'lbl': 'Costo FRNP M(al kW installato)',
                 'val': 0,
-                'unit': 'M€',
+                'unit': 'M Euro',
             },
             'capexCosts': {
                 'lbl': 'CAPEX totale SdA',
                 'val': 0,
-                'unit': '€',
+                'unit': 'Euro',
             },
             'h2Costs': {
                 'lbl': 'Costo H2)',
                 'val': 0,
-                'unit': '€',
+                'unit': 'Euro',
             },
         },
         'Emissioni': {

@@ -107,141 +107,141 @@ res:
     sysStor:
       lbl: Sistemi di stoccaggio (ipotesi TERNA)
       unit: GWh
-      val: 0
+      val: 94.76272939775667
   Costi:
     capexCosts:
       lbl: CAPEX totale SdA
-      unit: "\u20AC"
+      unit: Euro
       val: 0
     frnpCosts:
       lbl: Costo FRNP M(al kW installato)
-      unit: "M\u20AC"
-      val: 0
+      unit: M Euro
+      val: 89034.77088361984
     h2Costs:
       lbl: Costo H2)
-      unit: "\u20AC"
+      unit: Euro
       val: 0
   Emissioni:
     co2Emis:
       lbl: Emissioni di CO2
       unit: Mt
-      val_act: 0
-      val_prosp: 0
+      val_act: 78.87
+      val_prosp: 64.73361452794975
     co2EmisRed:
       lbl: Riduzione delle emissioni
       unit: Mt
       val_act: 0
-      val_prosp: 0
+      val_prosp: 14.13638547205025
   Fabbisogno:
     0:
       enDuty:
         lbl: Fabbisogno di energia elettrica
         unit: TWh
-        val_act: 0
-        val_prosp: 0
+        val_act: 320
+        val_prosp: 421.90636873114147
       enImport:
         lbl: Energia importata
         unit: TWh
-        val_act: 0
-        val_prosp: 0
+        val_act: 38
+        val_prosp: 52
       enProd:
         lbl: Energia prodotta
         unit: TWh
-        val_act: 0
-        val_prosp: 0
+        val_act: 282
+        val_prosp: 369.90636873114147
       h2Cons:
         lbl: di cui consumi per produrre H2
         unit: TWh
         val_act: 0
-        val_prosp: 0
+        val_prosp: 18.08170151704892
       totEnCons:
         lbl: '-'
         unit: TWh
-        val_act: 0
-        val_prosp: 0
+        val_act: 1281.5758980301273
+        val_prosp: 1506.8084597540767
       totEnConsMtep:
         lbl: Consumi finali di energia
         unit: Mtep
-        val_act: 0
-        val_prosp: 0
+        val_act: 110.6
+        val_prosp: 129.58552753885058
   Idrogeno:
-    maxH2:
+    max:
       lbl: Max Produzione di H2 da overgeneration
       unit: TWh
-      val_HI: 0
-      val_LO: 0
-    toprodH2:
+      val_HI: 5.965369888633469
+      val_LO: 3.2212997398620726
+    toprod:
       lbl: Produzione di H2 oltre overgeneration
       unit: TWh
-      val_HI: 0
-      val_LO: 0
+      val_HI: 12.116331628415452
+      val_LO: 14.860401777186848
   Rinnovabili:
     0:
       ferGen:
         lbl: Generazione da FER
-        perc_act: 0
-        perc_prosp: 0
+        perc_act: 35.3125
+        perc_prosp: 65.0
         unit: TWh
-        val_act: 0
-        val_prosp: 0
+        val_act: 113
+        val_prosp: 240.43913967524196
       otherGen:
         lbl: di cui Altre fonti
-        perc_act: 0
-        perc_prosp: 0
+        perc_act: 61.94690265486725
+        perc_prosp: 29.113396468872786
         unit: TWh
-        val_act: 0
-        val_prosp: 0
+        val_act: 70
+        val_prosp: 70.0
       solarGen:
         lbl: di cui Solare
-        perc_act: 0
-        perc_prosp: 0
+        perc_act: 20.353982300884958
+        perc_prosp: 49.62062247178905
         unit: TWh
-        val_act: 0
-        val_prosp: 0
+        val_act: 23
+        val_prosp: 119.30739777266938
       windGen:
         lbl: di cui Eolico
-        perc_act: 0
-        perc_prosp: 0
+        perc_act: 17.699115044247787
+        perc_prosp: 21.265981059338166
         unit: TWh
-        val_act: 0
-        val_prosp: 0
+        val_act: 20
+        val_prosp: 51.13174190257259
     1:
       hiOvergen:
         lbl: Overgenerazione Alta
         unit: TWh
-        val_act: 0
-        val_prosp: 0
+        val_act: 2.15
+        val_prosp: 8.521956983762099
       lowOvergen:
         lbl: Overgenerazione Bassa
         unit: TWh
-        val_act: 0
-        val_prosp: 0
+        val_act: 1.161
+        val_prosp: 4.601856771231533
     2:
       ferCap:
         lbl: "Capacit\xE0 installata FER"
-        perc_act: 0
-        perc_prosp: 0
+        perc_act: 17.1875
+        perc_prosp: 33.20681479351392
         unit: GW
-        val_act: 0
-        val_prosp: 0
+        val_act: 55
+        val_prosp: 131.74706211535283
       otherCap:
         lbl: di cui Altre fonti
-        perc_act: 0
-        perc_prosp: 0
+        perc_act: 41.81818181818181
+        perc_prosp: 17.457694790842513
         unit: GW
-        val_act: 0
-        val_prosp: 0
+        val_act: 23
+        val_prosp: 23
       solarCap:
         lbl: di cui Solare
-        perc_act: 0
-        perc_prosp: 0
+        perc_act: 38.18181818181819
+        perc_prosp: 67.07993998727555
         unit: GW
-        val_act: 0
-        val_prosp: 0
+        val_act: 21
+        val_prosp: 88.37585020197731
       windCap:
         lbl: di cui Eolico
-        perc_act: 0
-        perc_prosp: 0
+        perc_act: 20.0
+        perc_prosp: 15.462365221881957
         unit: GW
-        val_act: 0
-        val_prosp: 0
+        val_act: 11
+        val_prosp: 20.371211913375536

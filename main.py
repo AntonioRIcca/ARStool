@@ -2359,12 +2359,13 @@ class Main:
                     self.homeHBL.removeItem(self.homeHBL.itemAt(i))
 
     def pdf_set(self):
-        self.ui.repParWgt.setVisible(grid['name'] is not None)
-        self.ui.repPrintPB.setVisible(grid['name'] is not None)
+        self.ui.repParWgt.setVisible(grid['name'] is not None and not grid['studies']['optstor'])
+        self.ui.repParChB.setChecked(grid['name'] is not None and not grid['studies']['optstor'])
 
         for s in grid['studies']:
             # print(s, )
             self.ui.__getattribute__('rep' + s.title() + 'Wgt').setVisible(grid['studies'][s])
+            self.ui.__getattribute__('rep' + s.title() + 'ChB').setChecked(grid['studies'][s])
         self.ui.repLfTiE.setVisible(grid['studies']['lf'] and grid['lf']['points'] is not None)
         if grid['studies']['lf'] and grid['lf']['points'] is not None:
             # a = QtWidgets.QDateTimeEdit()

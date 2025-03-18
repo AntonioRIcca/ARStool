@@ -61,6 +61,9 @@ class OptStorWGT(QMainWindow):
         self.windCap = self.windGen / 2.51      # TODO: capire questo indice
         self.otherCap = self.otherCapScen
         self.ferCap = self.solarCap + self.windCap + self.otherCap
+        self.ferCapPerc = (100 * self.ferCap /
+                           (self.ferCap + self.ferCapScen * ((100 - self.ferCapPercScen) / self.ferCapPercScen)))
+
         self.co2Emis = (self.enProd - self.ferGen) * 0.5
         self.co2EmisRed = self.co2EmisScen - self.co2Emis
 
@@ -106,6 +109,8 @@ class OptStorWGT(QMainWindow):
 
         self.data_storage() # Salvataggio dei dati nel dizionario
 
+        grid['name'] = 'Rete generica'
+        grid['studies']['optstor'] = True
 
     # Azioni conseguenti alla selezione dell'anno: popolazione della tendina dello scenario
     def year_selected(self):
@@ -134,7 +139,7 @@ class OptStorWGT(QMainWindow):
                 self.ui.__getattribute__(p + 'ScenDsb').setValue(self.__getattribute__(p + 'Scen'))
             # ----------------------------------------------------------------------------------------
 
-            # -- Calcolo delle variabili delle percentuali dei dari di scenario ----------------------
+            # -- Calcolo delle variabili delle percentuali dei dati di scenario ----------------------
             for c in ['Gen', 'Cap']:
                 self.__setattr__('fer' + c + 'PercScen',
                                  self.__getattribute__('fer' + c + 'Scen') / self.enDutyScen * 100)
@@ -311,6 +316,38 @@ class OptStorWGT(QMainWindow):
                 except:
                     print(p + 'PercScen')
                     pass
+
+        for p in opt_stor['res']['Fabbisogno'][0]:
+            opt_stor['res']['Fabbisogno'][0][p]['val_act'] = self.__getattribute__(p + 'Scen')
+            opt_stor['res']['Fabbisogno'][0][p]['val_prosp'] = self.__getattribute__(p)
+
+        for i in opt_stor['res']['Rinnovabili']:
+            for p in opt_stor['res']['Rinnovabili'][i]:
+                if i != 1:
+                    try:
+                        opt_stor['res']['Rinnovabili'][i][p]['val_act'] = self.__getattribute__(p + 'Scen')
+                        opt_stor['res']['Rinnovabili'][i][p]['val_prosp'] = self.__getattribute__(p)
+                        opt_stor['res']['Rinnovabili'][i][p]['perc_act'] = self.__getattribute__(p + 'PercScen')
+                        opt_stor['res']['Rinnovabili'][i][p]['perc_prosp'] = self.__getattribute__(p + 'Perc')
+                    except:
+                        print(p + 'PercScen')
+                else:
+                    opt_stor['res']['Rinnovabili'][i][p]['val_act'] = self.__getattribute__(p + 'ResScen')
+                    opt_stor['res']['Rinnovabili'][i][p]['val_prosp'] = self.__getattribute__(p)
+
+        opt_stor['res']['Accumuli']['sysStor']['val'] = self.sysStor
+
+        for p in opt_stor['res']['Idrogeno']:
+            opt_stor['res']['Idrogeno'][p]['val_HI'] = self.__getattribute__(p + 'LowH2')
+            opt_stor['res']['Idrogeno'][p]['val_LO'] = self.__getattribute__(p + 'HiH2')
+
+        for p in opt_stor['res']['Costi']:
+            opt_stor['res']['Costi'][p]['val'] = self.__getattribute__(p)
+
+        opt_stor['res']['Emissioni']['co2Emis']['val_act'] = self.__getattribute__('co2EmisScen')
+        opt_stor['res']['Emissioni']['co2Emis']['val_prosp'] = self.__getattribute__('co2Emis')
+        opt_stor['res']['Emissioni']['co2EmisRed']['val_prosp'] = self.__getattribute__('co2EmisRed')
+
         filename = mainpath + '/OptStor.yml'
         print(filename)
 

@@ -143,6 +143,8 @@ class PDF(FPDF):
             self.adequacy(elem_cat=elem_cat, elements='')
         if 'onr' in sel:
             self.onr(elem_cat=elem_cat, elements='')
+        if 'optstor' in sel:
+            self.optimal_storage()
 
         print('done')
 
@@ -450,12 +452,16 @@ class PDF(FPDF):
         return p_loads, q_loads, p_gen, q_gen, p_bess, q_bess, p_eg, q_eg, p_loss, q_loss
 
     #
-    def ems(self, elem_cat):
+    def optimal_storage(self):
         self.add_page()
-        self.page_name = 'EMS'
+        self.page_name = 'Optimal Storage'
 
-        img_path = os.getcwd() + '/_images/SplashScreen/EMS_80x80.png'
-        self.set_xy(15, 35)
+        # todo: da riattivare con l'immagine giusta
+        img_path = mainpath + '/UI/_resources/icons/storage.png'
+        self.set_xy(12, 35)
+        self.set_fill_color(0)
+        self.set_draw_color(255, 170, 0)
+        self.rect(self.get_x() - 2, self.get_y() - 2, 19, 19, style='FD')
         self.image(img_path, self.get_x(), self.get_y(), 15, 15)
         self.set_xy(37.5, 44)
 
@@ -465,30 +471,261 @@ class PDF(FPDF):
         self.line(35, 48, 195, 48)
 
         self.set_font('Arial', t1_s, t1_c)
-        self.write(0, 'EMS')
+        self.write(0, 'Optimal storage')
         self.ln(t1_ls)
 
-        img_path = v.project_folder + '/EMS/results'
-        images = []
-        for file in os.listdir(img_path):
-            if file.endswith('.png') and file != 'LoadPie.png' and file != 'SelfConsPie.png':
-                images.append(file)
-        x, y = 20, 35   # devono essere i margini della pagina
+        # -- Parametri ------------------------------------------------------------------------------------------------
+        self.set_font('Arial', t2_s, t2_c)
+        self.write(0, 'Parametri')
+        self.ln(t2_h * 1.5)
 
-        self.image(img_path + '/LoadPie.png', 50, 55, 110, 110)
-        self.image(img_path + '/SelfConsPie.png', 50, 175, 110, 110)
+        # -- Input --------------------------------------------------------------
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Input')
+        self.ln(e_h)
 
+        self.set_font('Arial', i_s, i_c)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w + d_w, i_h, 'Parametro', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Valore', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+
+        for p in opt_stor['par']['Input']:
+            self.set_font('Arial', i_s, i_c)
+            self.cell(e_w + d_w, p_h, opt_stor['par']['Input'][p]['lbl'], 0, 0, 'L')
+            self.set_font('Arial', p_s, p_c)
+            # val =
+            self.cell(d_w, p_h, ('%.2f ' % opt_stor['par']['Input'][p]['val']) + opt_stor['par']['Input'][p]['unit'],
+                      0, 0, 'R')
+            self.ln(p_h)
+        self.ln(e_h * 3)
+        # -----------------------------------------------------------------------
+
+        # -- Scenario -----------------------------------------------------------
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Scenario ' + str(opt_stor['par']['Scenario'][0]['year']['val']) + ' ' +
+                   opt_stor['par']['Scenario'][0]['scen']['val'])
+        self.ln(e_h)
+
+        self.set_font('Arial', i_s, i_c)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w, i_h, 'Parametro', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Valore', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Percentuale', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+
+        for i in range(1, 5):
+            for p in opt_stor['par']['Scenario'][i]:
+                self.set_font('Arial', i_s, i_c)
+                self.cell(e_w, p_h, opt_stor['par']['Scenario'][i][p]['lbl'], 0, 0, 'L')
+                self.set_font('Arial', p_s, p_c)
+                # val =
+                self.cell(d_w, p_h,
+                          ('%.2f ' % opt_stor['par']['Scenario'][i][p]['val']) +
+                          opt_stor['par']['Scenario'][i][p]['unit'],
+                          0, 0, 'R')
+                try:
+                    self.cell(d_w, p_h, ('%.2f%%' % opt_stor['par']['Scenario'][i][p]['perc']),0, 0, 'R')
+                except:
+                    self.cell(d_w, p_h, '-', 0, 0, 'R')
+                self.ln(p_h)
+            self.ln(p_h)
+        self.ln(e_h)
+        # -----------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------------------------
+
+        # -- Risultati ------------------------------------------------------------------------------------------------
         self.add_page()
-        count = 0
-        for img in images:
-            if count >= 4:
-                self.add_page()
-                count = 0
-                y = 35
-            self.image(img_path + '/' + img, 55, y, 100, 55)
-            y = y + 60
-            count += 1
-        print('ems done')
+        self.page_name = 'Optimal Storage'
+
+        self.set_font('Arial', t2_s, t2_c)
+        self.write(0, 'Risultati')
+        self.ln(t2_h * 1.5)
+
+        # -- Fabbisogno----------------------------------------------------------
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Fabbisogno')
+        self.ln(e_h)
+
+        self.set_font('Arial', i_s, i_c)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w, i_h, '', 0, 0, 'C', fill=True)
+        self.cell(2 * d_w, i_h, 'Valori', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w, i_h, 'Parametro', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Attuale', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Prospettico', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+
+        for p in opt_stor['res']['Fabbisogno'][0]:
+            self.set_font('Arial', i_s, i_c)
+            self.cell(e_w, p_h, opt_stor['res']['Fabbisogno'][0][p]['lbl'], 0, 0, 'L')
+            self.set_font('Arial', p_s, p_c)
+            # val =
+            self.cell(d_w, p_h, ('%.2f ' % opt_stor['res']['Fabbisogno'][0][p]['val_act']) +
+                      opt_stor['res']['Fabbisogno'][0][p]['unit'],
+                      0, 0, 'R')
+            self.cell(d_w, p_h, ('%.2f ' % opt_stor['res']['Fabbisogno'][0][p]['val_prosp']) +
+                      opt_stor['res']['Fabbisogno'][0][p]['unit'],
+                      0, 0, 'R')
+            self.ln(p_h)
+        self.ln(e_h * 3)
+        # -----------------------------------------------------------------------
+
+        # -- Rinnovabili --------------------------------------------------------
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Rinnovabili')
+        self.ln(e_h)
+
+        self.set_font('Arial', i_s, i_c)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w, i_h, '', 0, 0, 'C', fill=True)
+        self.cell(d_w * 2, i_h, 'Attuale', 0, 0, 'C', fill=True)
+        self.cell(d_w * 2, i_h, 'Prospettico', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w, i_h, 'Parametro', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Valore', 0, 0, 'R', fill=True)
+        self.cell(d_w, i_h, 'Percentuale', 0, 0, 'L', fill=True)
+        self.cell(d_w, i_h, 'Valore', 0, 0, 'R', fill=True)
+        self.cell(d_w, i_h, 'Percentuale', 0, 0, 'L', fill=True)
+        self.ln(i_h)
+
+        for i in opt_stor['res']['Rinnovabili']:
+            for p in opt_stor['res']['Rinnovabili'][i]:
+                self.set_font('Arial', i_s, i_c)
+                self.cell(e_w, p_h, opt_stor['res']['Rinnovabili'][i][p]['lbl'], 0, 0, 'L')
+                self.set_font('Arial', p_s, p_c)
+                # val =
+                self.cell(d_w, p_h,
+                          ('%.2f ' % opt_stor['res']['Rinnovabili'][i][p]['val_act']) +
+                          opt_stor['res']['Rinnovabili'][i][p]['unit'],
+                          0, 0, 'R')
+                try:
+                    self.cell(d_w, p_h, ('%.2f%%' % opt_stor['res']['Rinnovabili'][i][p]['perc_act']), 0, 0, 'L')
+                except:
+                    self.cell(d_w, p_h, '-', 0, 0, 'R')
+                self.cell(d_w, p_h,
+                          ('%.2f ' % opt_stor['res']['Rinnovabili'][i][p]['val_prosp']) +
+                          opt_stor['res']['Rinnovabili'][i][p]['unit'],
+                          0, 0, 'R')
+                try:
+                    self.cell(d_w, p_h, ('%.2f%%' % opt_stor['res']['Rinnovabili'][i][p]['perc_prosp']), 0, 0, 'L')
+                except:
+                    self.cell(d_w, p_h, '-', 0, 0, 'R')
+
+                self.ln(p_h)
+            self.ln(p_h)
+        self.ln(e_h * 3)
+        # -----------------------------------------------------------------------
+
+        # -- Accumuli -----------------------------------------------------------
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Accumuili')
+        self.ln(e_h)
+
+        self.set_font('Arial', i_s, i_c)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w + d_w, i_h, 'Parametro', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Val. Prospettico', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+
+        self.set_font('Arial', i_s, i_c)
+        self.cell(e_w + d_w, p_h, 'Sistemi di stoccaggio (ipotesi TERNA)', 0, 0, 'L')
+        self.set_font('Arial', p_s, p_c)
+        self.cell(d_w, p_h, ('%.2f ' % opt_stor['res']['Accumuli']['sysStor']['val']) +
+                  opt_stor['res']['Accumuli']['sysStor']['unit'],
+                      0, 0, 'R')
+        self.ln(e_h * 3)
+        # -----------------------------------------------------------------------
+
+        # -- Idrogeno -----------------------------------------------------------
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Idrogeno')
+        self.ln(e_h)
+
+        self.set_font('Arial', i_s, i_c)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w, i_h, '', 0, 0, 'C', fill=True)
+        self.cell(2 * d_w, i_h, 'Valori', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w, i_h, 'Parametro', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Alta', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Bassa', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+
+        for p in opt_stor['res']['Idrogeno']:
+            self.set_font('Arial', i_s, i_c)
+            self.cell(e_w, p_h, opt_stor['res']['Idrogeno'][p]['lbl'], 0, 0, 'L')
+            self.set_font('Arial', p_s, p_c)
+            # val =
+            self.cell(d_w, p_h, ('%.2f ' % opt_stor['res']['Idrogeno'][p]['val_HI']) +
+                      opt_stor['res']['Idrogeno'][p]['unit'],
+                      0, 0, 'R')
+            self.cell(d_w, p_h, ('%.2f ' % opt_stor['res']['Idrogeno'][p]['val_LO']) +
+                      opt_stor['res']['Idrogeno'][p]['unit'],
+                      0, 0, 'R')
+            self.ln(p_h)
+        self.ln(e_h * 3)
+        # -----------------------------------------------------------------------
+
+        # -- Costi --------------------------------------------------------------
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Costi')
+        self.ln(e_h)
+
+        self.set_font('Arial', i_s, i_c)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w + d_w, i_h, 'Parametro', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Val. Prospettici', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+
+        for p in opt_stor['res']['Costi']:
+            self.set_font('Arial', i_s, i_c)
+            self.cell(e_w + d_w, p_h, opt_stor['res']['Costi'][p]['lbl'], 0, 0, 'L')
+            self.set_font('Arial', p_s, p_c)
+            # val =
+            self.cell(d_w, p_h, ('%.2f ' % opt_stor['res']['Costi'][p]['val']) +
+                      opt_stor['res']['Costi'][p]['unit'],
+                      0, 0, 'R')
+            self.ln(p_h)
+        self.ln(e_h * 3)
+        # -----------------------------------------------------------------------
+
+        # -- Emissioni ----------------------------------------------------------
+        self.set_font('Arial', e_s, e_c)
+        self.write(0, 'Emissioni')
+        self.ln(e_h)
+
+        self.set_font('Arial', i_s, i_c)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w, i_h, '', 0, 0, 'C', fill=True)
+        self.cell(2 * d_w, i_h, 'Valori', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+        self.set_fill_color(226, 226, 226)
+        self.cell(e_w, i_h, 'Parametro', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Attuale', 0, 0, 'C', fill=True)
+        self.cell(d_w, i_h, 'Prospettico', 0, 0, 'C', fill=True)
+        self.ln(i_h)
+
+        for p in opt_stor['res']['Emissioni']:
+            self.set_font('Arial', i_s, i_c)
+            self.cell(e_w, p_h, opt_stor['res']['Emissioni'][p]['lbl'], 0, 0, 'L')
+            self.set_font('Arial', p_s, p_c)
+            # val =
+            self.cell(d_w, p_h, ('%.2f ' % opt_stor['res']['Emissioni'][p]['val_act']) +
+                      opt_stor['res']['Emissioni'][p]['unit'],
+                      0, 0, 'R')
+            self.cell(d_w, p_h, ('%.2f ' % opt_stor['res']['Emissioni'][p]['val_prosp']) +
+                      opt_stor['res']['Emissioni'][p]['unit'],
+                      0, 0, 'R')
+            self.ln(p_h)
+        self.ln(e_h * 3)
+        # -----------------------------------------------------------------------
+
+        # -------------------------------------------------------------------------------------------------------------
 
     # -- Stampa Protezioni ---------
     def protections(self, elem_cat):
