@@ -1957,7 +1957,7 @@ class Main:
         self.adeqRefreshPls.setMaximumHeight(40)
         self.adeqRefreshPls.clicked.connect(self.adeqRes)
 
-        folder = mainpath + '/Functionalities/Adequacy/__images__/'
+        folder = mainpath + '/_temp/Functionalities/Adequacy/__images__/'
 
         h_max = self.home_WGT.height() - 140
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
@@ -2146,7 +2146,7 @@ class Main:
         ax.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.2), fancybox=True, shadow=True, ncol=col,
                   fontsize=8, labelcolor='white')
 
-        filename = mainpath + '/Functionalities/Adequacy/__images__/' + str(fig) + '.png'
+        filename = mainpath + '/_temp/Functionalities/Adequacy/__images__/' + str(fig) + '.png'
         # print(filename)
         figure.savefig(filename, transparent=True)
         pass
@@ -2198,7 +2198,7 @@ class Main:
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
         h_max = self.home_WGT.height() - 80
         ratio = 1.5
-        folder = mainpath + '/Functionalities/ONR/__images__/'
+        folder = mainpath + '/_temp/Functionalities/ONR/__images__/'
 
         hav = h_max - 320
         wav = w_max * ratio / (ratio + 1)
@@ -2230,7 +2230,7 @@ class Main:
 
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 20
         ratio = 1.5
-        folder = mainpath + '/Functionalities/ONR/__images__/'
+        folder = mainpath + '/_temp/Functionalities/ONR/__images__/'
 
         wsx = 0.5 * w_max * (ratio / (ratio + 1))
 
@@ -2284,7 +2284,7 @@ class Main:
         h_max = self.home_WGT.height() - 80
 
         ratio = 1.8
-        folder = mainpath + '/Functionalities/ONR/__images__/'
+        folder = mainpath + '/_temp/Functionalities/ONR/__images__/'
 
         wsx = w_max * (ratio / (ratio + 1))
         wdx = w_max * (1 / (ratio + 1))  # + 20

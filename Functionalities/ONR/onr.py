@@ -49,7 +49,7 @@ class ONR:
         self.dss = OpenDSS()
         # self.indexes = dict()
         # self.indexes_post = dict()
-        self.filedir = 'C:/Users/anton/PycharmProjects/ARStool/Functionalities/ONR/__images__/'
+        self.filedir = 'C:/Users/anton/PycharmProjects/ARStool/_temp/Functionalities/ONR/__images__/'
         # self.log_pre_grafos = ''
         # self.log_pre_solver = ''
         # self.log_pre_viol = ''

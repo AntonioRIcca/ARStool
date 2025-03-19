@@ -5,7 +5,8 @@ import os
 import yaml
 from variables import *
 from pathlib import Path
-from PyQt5 import QtWidgets
+# from PyQt5 import QtWidgets
+from PySide2 import QtWidgets
 import copy
 from PIL import Image
 import unicodedata as ud
@@ -133,11 +134,11 @@ class PDF(FPDF):
         if 'lf' in sel:
             self.loadflow(elem_cat=elem_cat, tlf=tlf, ds=ds)
         if 'rel' in sel:
-            self.reliability(elem_cat=elem_cat, elements='')
+            self.reliability(elem_cat=elem_cat)
         if 'anom' in sel:
-            self.anomalies(elem_cat=elem_cat, elements='')
+            self.anomalies()
         if 'adeq' in sel:
-            self.adequacy(elem_cat=elem_cat, elements='')
+            self.adequacy()
         if 'onr' in sel:
             self.onr(elem_cat=elem_cat, elements='')
         if 'optstor' in sel:
@@ -864,7 +865,7 @@ class PDF(FPDF):
         self.line(35, 38, 195, 38)
         self.line(35, 48, 195, 48)
 
-        img_path = mainpath + '/Functionalities/Adequacy/__images__/'
+        img_path = mainpath + '/_temp/Functionalities/Adequacy/__images__/'
         x, y = 0, 32  # devono essere i margini della pagina
 
         self.set_font('Arial', t1_s, t1_c)
@@ -945,7 +946,7 @@ class PDF(FPDF):
         self.write(0, '%.4f kWh' % grid['adeq']['av_eens_anom'])
 
     #
-    def onr(self, elem_cat, elements):
+    def onr(self, elem_cat):
         # -- Pagina iniziale ---------------------------------------------------
         self.add_page()
         self.page_name = "Optimal Network Reconfiguration"
@@ -987,7 +988,7 @@ class PDF(FPDF):
         self.set_font('Arial', e_s, e_c)
         self.write(0, 'Grafo Nodale Zonale')
 
-        img_path = mainpath + '/Functionalities/ONR/__images__/'
+        img_path = mainpath + '/_temp/Functionalities/ONR/__images__/'
         x, y = 0, 32  # devono essere i margini della pagina
         img = img_path + 'grafo_zonale_pre_ONR.png'
 
