@@ -1,13 +1,13 @@
 # from ui_elementsProfile_dlg import Ui_mainDlg
-# from UI.ui_elementsProfile_dlg import Ui_mainDlg
-import os
-from UI.elementsProfile_Dlg import Ui_mainDlg
+from UI.ui_elementsProfile_dlg import Ui_mainDlg
+# import os
+# from UI.elementsProfile_Dlg import Ui_mainDlg
 
-# from PySide2 import QtGui, QtCore, QtWidgets
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PySide2 import QtGui, QtCore, QtWidgets
+# from PyQt5 import QtWidgets, QtGui, QtCore
 
 import matplotlib
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+# from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 
 from variables import *
@@ -72,16 +72,22 @@ class ElementsProfile(QtWidgets.QDialog):
         self.plotVBL = QtWidgets.QVBoxLayout()
         self.ui.plotWgt.setLayout(self.plotVBL)
 
-        self.canvas = FigureCanvas(plt.Figure(figsize=(3, 2), facecolor=(0, 0, 0)))
+        # self.canvas = FigureCanvas(plt.Figure(figsize=(3, 2), facecolor=(0, 0, 0)))
+        self.plot = plt.Figure(figsize=(5.5, 4.5), facecolor=(0, 0, 0), layout='constrained')
+        # self.ax = self.plot.subplots()
+        self.plotLbl = QtWidgets.QLabel()
 
         with plt.rc_context({'axes.edgecolor': 'white', 'xtick.color': 'white', 'ytick.color': 'white',
                              'figure.facecolor': 'red'}):
 
-            self.ax = self.canvas.figure.subplots()
+            self.ax = self.plot.subplots()
+            # self.ax = self.canvas.figure.subplots()
+
         self.ax.tick_params(axis='x', colors='white', labelsize=10)
         self.ax.tick_params(axis='y', colors='white', labelsize=10)
 
-        self.plotVBL.addWidget(self.canvas)
+        # self.plotVBL.addWidget(self.canvas)
+        self.plotVBL.addWidget(self.plotLbl)
 
         self.table_fill()
         self.plot_profile()
@@ -162,11 +168,15 @@ class ElementsProfile(QtWidgets.QDialog):
 
         self.ax.set_facecolor((0, 0, 0))
 
-        self.line, = self.ax.plot(x, y)
+        self.ax.plot(x, y)
+        # self.line, = self.ax.plot(x, y)
         # self.plotVBL.addWidget(self.canvas)
 
-        self.canvas.draw()
-        self.canvas.flush_events()
+        # self.canvas.draw()
+        # self.canvas.flush_events()
+        self.plot.savefig(mainpath + '/_temp/Tprof_red.jpg')
+        self.plotLbl.setPixmap(QtGui.QPixmap(mainpath + '/_temp/Tprof_red.jpg'))
+
 
     def x_par(self):  # TODO: per il momento non serve
         s = grid['profile']['step']

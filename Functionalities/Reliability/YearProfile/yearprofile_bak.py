@@ -1,10 +1,10 @@
 import copy
 
-from PySide2 import QtGui, QtCore, QtWidgets
-# from PyQt5 import QtWidgets, QtGui, QtCore
+# from PySide2 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtWidgets, QtGui, QtCore
 
-# from Functionalities.Reliability.YearProfile.yearprofileUI import Ui_Form
-from Functionalities.Reliability.YearProfile.ui_yearprofileUI import Ui_Form
+from Functionalities.Reliability.YearProfile.yearprofileUI import Ui_Form
+# from Functionalities.Reliability.YearProfile.ui_yearprofileUI import Ui_Form
 # from Functionalities.Reliability.YearProfile.yearprofileUI import Ui_MainWindow
 # from PyQt5 import QtWidgets, QtGui, QtCore
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -82,16 +82,10 @@ class YearProfile(QtWidgets.QDialog):
         layout = QtWidgets.QVBoxLayout()
         self.ui.plt_WGT.setLayout(layout)
 
-        # self.canvas = FigureCanvas(plt.Figure(figsize=(15, 6)))
-        # self.ax = self.canvas.figure.subplots()
+        self.canvas = FigureCanvas(plt.Figure(figsize=(15, 6)))
+        self.ax = self.canvas.figure.subplots()
 
-        self.plot = plt.Figure(figsize=(4, 3.5))
-        self.ax = self.plot.subplots()
-
-        self.plotLBL = QtWidgets.QLabel()
-        self.plotLBL.setMinimumSize(400, 350)
-
-        layout.addWidget(self.plotLBL)     # TODO: da riattivare
+        layout.addWidget(self.canvas)     # TODO: da riattivare
 
         self.ui.profile_LBL.setText(name)
         self.gen_profile()
@@ -136,7 +130,7 @@ class YearProfile(QtWidgets.QDialog):
     def refresh(self):
         try:
             self.ui.profile_TW.itemChanged.disconnect()
-        except:
+        except TypeError:
             pass
 
         self.gen_profile()
@@ -268,15 +262,13 @@ class YearProfile(QtWidgets.QDialog):
         self.ax.set_ylim([0, 40])
         self.ax.set_xlim([0, len(self.graph_profile)-1])
         self.ax.set_ylabel('T [°C]')
-        self.ax.yaxis.set_label_coords(0.2, 0.2)
 
-        self.ax.plot(self.timeline, profile)
+        self.line, = self.ax.plot(self.timeline, profile)
 
         self.ax.xaxis.set_tick_params(rotation=90, labelsize=8)
 
-        self.plot.savefig(mainpath + '/_temp/Tprof.jpg')
-
-        self.plotLBL.setPixmap(QtGui.QPixmap(mainpath + '/_temp/Tprof.jpg'))
+        self.canvas.draw()
+        self.canvas.flush_events()
 
     #
     def plot_graph(self, y):
@@ -292,15 +284,11 @@ class YearProfile(QtWidgets.QDialog):
 
         font = {
             'weight': 'normal',
-            'size': 8
+            'size': 10
         }
         matplotlib.rc('font', **font)
-        # self.line.set_xdata(self.timeline)
-        # self.line.set_ydata(y)
-        self.plot.clear()
-        self.ax = self.plot.subplots()
-        self.ax.plot(self.timeline, y)
-        self.ax.yaxis.set_label_coords(-0.12, 1.01)
+        self.line.set_xdata(self.timeline)
+        self.line.set_ydata(y)
 
         try:
             max_y = max(y) * 1.05
@@ -315,11 +303,8 @@ class YearProfile(QtWidgets.QDialog):
         self.ax.xaxis.set_tick_params(rotation=90, labelsize=xfont)
         self.ax.set_ylabel('T [°C]')
 
-        self.plot.savefig('Tprof.jpg')
-
-        self.plotLBL.setPixmap(QtGui.QPixmap('Tprof.jpg'))
-        # self.canvas.draw()
-        # self.canvas.flush_events()
+        self.canvas.draw()
+        self.canvas.flush_events()
 
     #
     def tab_value_changed(self, q_item):
