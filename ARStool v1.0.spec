@@ -5,7 +5,7 @@ a = Analysis(
     ['C:/Users/anton/PycharmProjects/ARStool/main.py'],
     pathex=[],
     binaries=[],
-    datas=[('C:/Users/anton/PycharmProjects/ARStool/_benchmark', '_benchmark/'), ('C:/Users/anton/PycharmProjects/ARStool/_images', '_images/'), ('C:/Users/anton/PycharmProjects/ARStool/_temp', '_temp/')],
+    datas=[('C:/Users/anton/PycharmProjects/ARStool/_benchmark', '_benchmark/'), ('C:/Users/anton/PycharmProjects/ARStool/_util', '_util/'), ('C:/Users/anton/PycharmProjects/ARStool/_images', '_images/'), ('C:/Users/anton/PycharmProjects/ARStool/_temp', '_temp/')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

@@ -3,7 +3,7 @@ import yaml
 from variables import *
 
 
-attr_dict = yaml.safe_load(open(mainpath + "/attributes_template.yml"))
+attr_dict = yaml.safe_load(open(mainpath + "/_util/attributes_template.yml"))
 
 
 def dict_initialize(el, cat):

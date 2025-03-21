@@ -446,6 +446,7 @@ class OpenDSS:
         # self.solve()
         self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")
 
+
     # Compilazione di tutti gli elementi in OpenDSS
     def write_all(self, t=None):
         for el in v.keys():
@@ -1155,7 +1156,7 @@ class OpenDSS:
             if v[el]['category'] in mc['Load']:
                 self.dss.circuit.set_active_element('load.' + el)
 
-        self.dss.text(f"Save Circuit dir=_temp/cartella")
+        self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")     # scrittura della cartella degli elementi
 
         # self.results_store_all()
 

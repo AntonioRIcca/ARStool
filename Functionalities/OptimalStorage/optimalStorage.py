@@ -348,7 +348,7 @@ class OptStorWGT(QMainWindow):
         opt_stor['res']['Emissioni']['co2Emis']['val_prosp'] = self.__getattribute__('co2Emis')
         opt_stor['res']['Emissioni']['co2EmisRed']['val_prosp'] = self.__getattribute__('co2EmisRed')
 
-        filename = mainpath + '/OptStor.yml'
+        filename = mainpath + '/_util/OptStor.yml'
         print(filename)
 
         with open(filename, 'w') as file:
