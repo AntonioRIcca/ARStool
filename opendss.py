@@ -25,7 +25,7 @@ class OpenDSS:
         self.unr_conv = []                  # lista dei convertitori non risolti tramite self.node_define
         self.unr_lines = []                 # lista delle linee non risolte tramite self.node_define
 
-        mainpath = 'papap'
+        # mainpath = 'papap'
 
     # Procedura di connessione con il file di OpenDSS
     def open(self, filename):
@@ -33,9 +33,10 @@ class OpenDSS:
         # TODO: da sostituire con la variabile di configurazione del percorso di OpenDSS
         self.dss.text(f"compile [{filename}]")
         # txt =
+        self.dss.text(f"Save Circuit dir=C:/cartella")     # scrittura della cartella degli elementi
         self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")     # scrittura della cartella degli elementi
-
-
+        # print(mainpath + "/_temp/cartella")
+        self.dss.solution.solve()
 
         # Dato il nome dell'elemento (e.g. "transformer.WPG_TR"), vengono definite:
         # - le categorie dal suffisso del nome dell'elemento, dopo l'ultimo "_" (e.g. "TR")
@@ -90,14 +91,17 @@ class OpenDSS:
 
             # lettura dei parametri dalle righe di dss
             par = self.readline(el)     # TODO: vedi commento in self.readline
+            # print(par)
 
             for p in new_par_dict[cat]['par'].keys() - ['others', 'linecode']:  # todo: forse da modificare in base al TODO precedente
+
                 try:
                     v[el]['par'][p] = par[new_par_dict[cat]['par'][p]['label']]
                 except:
+                    # print('cat:', cat, '\tp:', p)
                     v[el]['par'][p] = new_par_dict[cat]['par'][p]['default']
 
-            # definisco la connessione degli elementi come array
+            # definisco la connessione degli elementi comye array
             if mcat == 'Line':
                 v[el]['top']['conn'] = [par['bus1'].lower(), par['bus2'].lower()]
             elif mcat == 'Transformer':
@@ -444,7 +448,8 @@ class OpenDSS:
                 self.dss.text(r)
 
         # self.solve()
-        self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")
+        self.dss.text(f"Save Circuit dir=C:/cartella")
+        # self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")
 
 
     # Compilazione di tutti gli elementi in OpenDSS
@@ -1156,7 +1161,8 @@ class OpenDSS:
             if v[el]['category'] in mc['Load']:
                 self.dss.circuit.set_active_element('load.' + el)
 
-        self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")     # scrittura della cartella degli elementi
+        self.dss.text(f"Save Circuit dir=c:/cartella")     # scrittura della cartella degli elementi
+        # self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")     # scrittura della cartella degli elementi
 
         # self.results_store_all()
 
@@ -1175,6 +1181,8 @@ class OpenDSS:
         mcat = mcat_find(el)
         cat = v[el]['category']
 
+        # print('n\nElemento:', el, '\tcat:', cat, '\tmcat:', mcat)
+
         par = dict()
         if cat in new_par_dict:
             # -- creo l'elenco delle voci da ricercare nella stringa di codice DSS --------
@@ -1184,7 +1192,8 @@ class OpenDSS:
             for p in new_par_dict[cat]['top'].keys():
                 params = params + new_par_dict[cat]['top'][p]['label']
             # -----------------------------------------------------------------------------
-            file = open(mainpath + '/_temp/cartella/' + mcat + '.dss', 'r')
+            # file = open(mainpath + '/_temp/cartella/' + mcat + '.dss', 'r')
+            file = open('C:/cartella/' + mcat + '.dss', 'r')
             # file = open(mainpath + '/cartella/' + mcat + '.dss', 'r')
 
             # -- ricerca dei parametri dell'elemento selezionato -----------------------------------------------------
@@ -1196,7 +1205,9 @@ class OpenDSS:
                 # Il nome dell'elemento è riportato tra due "" (e.g. New "Load.ug_dc-load" bus1=ug_dc-bb...).
                 # Quindi il nome sarà la seconda voce dell'array derivato dalla stringa divisa per l'elemento '"'.
                 elements = line.split('"')
+                # print(elements, elements[1].lower(), (mcat + '.' + el).lower())
                 if elements[1].lower() == (mcat + '.' + el).lower():
+                    # print(elements[1].lower())
                     line = line.replace('New "' + mcat + '.' + el.lower() + '" ', '').replace('\n', '')
                     line = line.replace(', ', ',')  # elimino lo spazio dopo le virgole
                     datas = line.split(' ')     # Array delle propietà: e.g. [proprietà=valore, ...]
@@ -1205,6 +1216,7 @@ class OpenDSS:
                     for d_comp in datas:
                         d = d_comp.split('=')   # d = [proprietà, valore]
                         if d[0] in params:      # considreo le sole propietà elencate in params
+                            # print(d)
                             if d[1][0] == '[':      # se il valore è un insieme di valori tra [], lo scrivo come array
                                 val = []
                                 d[1] = d[1].replace('[', '').replace(']', '')
@@ -1222,6 +1234,7 @@ class OpenDSS:
                                     val = float(d[1])
                                 except InvalidOperation:
                                     val = d[1]
+                            # print('d:', d, '\td[0]:', d[0], '=', val)
                             par[d[0]] = val     # scrittura del valore ottenuto nel dizionario "par"
                             # TODO: perché mi memorizzo tutti i parametri, anche quello che non sono in params???
                     break

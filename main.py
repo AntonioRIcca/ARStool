@@ -276,7 +276,7 @@ class Main:
         img = mainpath + '/_benchmark/grid_models/images/' + gridname + '.png'
         self.gridDetailsWgt.ui.imageLbl.setPixmap(QtGui.QPixmap(img))
 
-        self.filepath = mainpath + '/_benchmark/grid_models/' + gridname
+        self.filepath = mainpath + '/_benchmark/grid_models/' + gridname + '.dss'
         self.dsspath = mainpath + '/_benchmark/grid_models/'
         # self.gridname = gridname
 
@@ -333,19 +333,21 @@ class Main:
             # self.dss = opendss.OpenDSS()
 
             # TODO: Da ripristinare
-            # try:
-            #     self.dss.open(filename)
-            #     self.elementsTableWgtCreate()
-            #     # self.func_enabled()
-            #     self.func_check()
-            # except:
-            #     QtWidgets.QMessageBox.warning(QtWidgets.QMessageBox(), 'Attenzione', 'Modello DSS non compatibile')
+            try:
+                print(filename)
+                self.dss.open(filename)
+                print('opened')
+                self.elementsTableWgtCreate()
+                # self.func_enabled()
+                self.func_check()
+            except:
+                QtWidgets.QMessageBox.warning(QtWidgets.QMessageBox(), 'Attenzione', 'Modello DSS non compatibile')
 
             # TODO: da eliminare
-            self.dss.open(filename)
-            self.elementsTableWgtCreate()
-            self.func_check()
-            grid['name'] = filename.split('/')[len(filename.split('/')) - 1].removesuffix('.dss')
+            # self.dss.open(filename)
+            # self.elementsTableWgtCreate()
+            # self.func_check()
+            # grid['name'] = filename.split('/')[len(filename.split('/')) - 1].removesuffix('.dss')
 
     def yml_open(self):
         grid['benchmark'] = False       # TODO: perché? non viene automaticamente sovrascritta?

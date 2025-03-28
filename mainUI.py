@@ -4,7 +4,7 @@ import os
 
 from UI.ui_main_ui import *
 
-from PySide2 import *
+# from PySide2 import *
 
 from Custom_Widgets.Widgets import *
 

@@ -807,6 +807,7 @@ new_par_dict = {
             'Vn': {
                 'label': 'kVs',
                 'unit': 'kV',
+                'default': 0,
             },
             'Rs': {
                 'label': '%Rs',
@@ -1003,10 +1004,12 @@ new_par_dict = {
             'In': {
                 'label': 'normamps',
                 'unit': 'ohm/km',
+                'default': 100,
             },
             'length': {
                 'label': 'length',
                 'unit': 'km',
+                'default': 0.001,
             },
 
             # -- TODO: da verificare -------------

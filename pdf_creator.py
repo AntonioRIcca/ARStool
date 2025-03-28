@@ -262,7 +262,7 @@ class PDF(FPDF):
         self.page_name = 'LoadFlow'
 
         # todo: da riattivare con l'immagine giusta
-        img_path = mainpath + '/UI/_resources/icons/loadFlow.png'
+        img_path = mainpath + '/_images/loadFlow.png'
         self.set_xy(12, 35)
         self.set_fill_color(0)
         self.set_draw_color(255, 170, 0)
@@ -420,7 +420,7 @@ class PDF(FPDF):
         self.add_page()
         self.page_name = 'Optimal Storage'
 
-        img_path = mainpath + '/UI/_resources/icons/storage.png'
+        img_path = mainpath + '/_images/storage.png'
         self.set_xy(12, 35)
         self.set_fill_color(0)
         self.set_draw_color(255, 170, 0)
@@ -582,7 +582,7 @@ class PDF(FPDF):
 
         # -- Accumuli -----------------------------------------------------------
         self.set_font('Arial', e_s, e_c)
-        self.write(0, 'Accumuili')
+        self.write(0, 'Accumuli')
         self.ln(e_h)
 
         self.set_font('Arial', i_s, i_c)
@@ -689,7 +689,7 @@ class PDF(FPDF):
         self.add_page()
         self.page_name = "Calcolo dell'Affidabilità"
 
-        img_path = mainpath + '/UI/_resources/icons/reliability.png'
+        img_path = mainpath + '/_images/reliability.png'
         self.set_xy(12, 35)
         self.set_fill_color(0)
         self.set_draw_color(255, 170, 0)
@@ -751,7 +751,7 @@ class PDF(FPDF):
         self.add_page()
         self.page_name = "Stima delle Anomalie"
 
-        img_path = mainpath + '/UI/_resources/icons/anomaly.png'
+        img_path = mainpath + '/_images/anomaly.png'
         self.set_xy(12, 35)
         self.set_fill_color(0)
         self.set_draw_color(255, 170, 0)
@@ -852,7 +852,7 @@ class PDF(FPDF):
         self.add_page()
         self.page_name = "Calcolo dell'Adeguatezza"
 
-        img_path = mainpath + '/UI/_resources/icons/adequacy.png'
+        img_path = mainpath + '/_images/adequacy.png'
         self.set_xy(12, 35)
         self.set_fill_color(0)
         self.set_draw_color(255, 170, 0)
@@ -951,7 +951,7 @@ class PDF(FPDF):
         self.add_page()
         self.page_name = "Optimal Network Reconfiguration"
 
-        img_path = mainpath + '/UI/_resources/icons/onr.png'
+        img_path = mainpath + '/_images/onr.png'
         self.set_xy(12, 35)
         self.set_fill_color(0)
         self.set_draw_color(255, 170, 0)

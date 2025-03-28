@@ -18,7 +18,7 @@ class AnomWgt(QtWidgets.QWidget):
 
         self.cat = cat
 
-        self.defdict = yaml.safe_load(open(mainpath + '/Functionalities/Anomalies/default.yml'))[self.cat]
+        self.defdict = yaml.safe_load(open(mainpath + '/_temp/Functionalities/Anomalies/default.yml'))[self.cat]
         self.defdict.pop('Hourly_Degradation')
         #
         # self.anom_typol_par = {
@@ -45,7 +45,9 @@ class AnomWgt(QtWidgets.QWidget):
         self.ui.typeCB.currentTextChanged.disconnect()
         self.ui.typeCB.clear()
         self.ui.typeCB.currentTextChanged.connect(self.type_changed)
-        self.ui.typeCB.insertItems(0, list(self.defdict[cat].keys()))
+        try:
+            self.ui.typeCB.insertItems(0, list(self.defdict[cat].keys()))
+        except: pass
         # self.ui.typeCB.currentTextChanged.connect(self.type_changed)
 
     def type_changed(self):

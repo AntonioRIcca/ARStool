@@ -462,7 +462,7 @@ storage = [[], []]
 
 print(mainpath)
 
-with open(mainpath + '/Functionalities/OptimalStorage/StorageTerna.csv', mode='r') as csv_file:
+with open(mainpath + '/_temp/Functionalities/OptimalStorage/StorageTerna.csv', mode='r') as csv_file:
     for line in csv_file:
         storage[0].append(float(line.rstrip().split(';')[0]))
         storage[1].append(float(line.rstrip().split(';')[1]))

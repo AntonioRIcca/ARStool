@@ -1,0 +1,54 @@
+Clear
+
+clear
+
+New object=circuit.dss_grid basekv=110
+
+New transformer.TRsource-001 windings=2 buses=(SourceBus N001) conns='delta wye' kvs=(110 20) kvas=(4000 4000) %Rs=[0 0] XHL=0.03 %imag=0
+ New load.Load001 bus1=N001 phases=3 kv=20 kw=200.0 pf=0.9
+ New generator.PV001 bus1=N001 phases=3 kv=20 kw=350.0 kvar=0
+ New line.L001-002 bus1=N001 bus2=N002 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=2.82
+  New line.L002-003 bus1=N002 bus2=N003 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=4.42
+   New load.Load003 bus1=N003 phases=3 kv=20 kw=150.0 pf=0.9
+   New line.L003-004 bus1=N003 bus2=N004 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=0.61
+    New load.Load004 bus1=N004 phases=3 kv=20 kw=200.0 pf=0.9
+    New line.L004-005 bus1=N004 bus2=N005 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=0.56
+     New load.Load005 bus1=N005 phases=3 kv=20 kw=300.0 pf=0.9
+     New generator.PV005 bus1=N005 phases=3 kv=20 kw=400.0 kvar=0
+     New line.L005-006 bus1=N005 bus2=N006 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=1.54
+      New load.Load006 bus1=N006 phases=3 kv=20 kw=250.0 pf=0.9
+      New generator.PV006 bus1=N006 phases=3 kv=20 kw=300.0 kvar=0
+      New line.L006-007 bus1=N006 bus2=N007 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=0.24
+       New load.Load007 bus1=N006 phases=3 kv=20 kw=300.0 pf=0.9
+       New generator.PV007 bus1=N007 phases=3 kv=20 kw=450.0 kvar=0
+
+    New line.L004-011 bus1=N004 bus2=N011 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=0.49
+     New load.Load011 bus1=N011 phases=3 kv=20 kw=300.0 pf=0.9
+
+!New transformer.TRsource-012 windings=2 buses=(SourceBus N012) conns='delta wye' kvs=(110 20) kvas=(4000 4000) %Rs=[0 0] XHL=0.03 %imag=0
+ New load.Load012 bus1=N012 phases=3 kv=20 kw=250.0 pf=0.9
+ New line.L012-013 bus1=N012 bus2=N013 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=2.82
+  New load.Load013 bus1=N013 phases=3 kv=20 kw=250.0 pf=0.9
+  !New generator.PV013 bus1=N013 phases=3 kv=20 kw=250.0 kvar=0
+  New line.L013-014 bus1=N013 bus2=N014 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=2.99
+   New load.Load014 bus1=N014 phases=3 kv=20 kw=150.0 pf=0.9
+   !New generator.PV014 bus1=N014 phases=3 kv=20 kw=250.0 kvar=0
+   New generator.BESS014 bus1=N014 phases=3 kv=20 kw=0.001 kvar=0.0
+   New line.L008-014 bus1=N014 bus2=N008 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=2.00
+    New load.Load008 bus1=N008 phases=3 kv=20 kw=150.0 pf=0.9
+    !New generator.PV008 bus1=N008 phases=3 kv=20 kw=350.0 kvar=0
+    New line.L008-009 bus1=N008 bus2=N009 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=0.32
+     New load.Load009 bus1=N009 phases=3 kv=20 kw=150.0 pf=0.9
+     New line.L009-010 bus1=N009 bus2=N010 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=0.77
+      New load.Load010 bus1=N010 phases=3 kv=20 kw=150.0 pf=0.9
+
+
+! Swittch
+!New line.S003-008_S bus1=N003 bus2=N008 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=0.33
+!New line.S007-008_S bus1=N007 bus2=N008 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=1.67
+!New line.S010-011_S bus1=N010 bus2=N011 phases=3 R1=0.501 X1=0.716 C1=151.175 normamps=145.000000 units=km length=0.33
+
+
+
+solve
+

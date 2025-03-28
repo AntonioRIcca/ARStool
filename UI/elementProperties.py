@@ -53,7 +53,7 @@ class ElementProperties(QMainWindow):
 
         # self.ui.relWgt.setMaximumHeight(20)
 
-        all_an_def = yaml.safe_load(open(mainpath + '/Functionalities/Anomalies/default.yml'))
+        all_an_def = yaml.safe_load(open(mainpath + '/_temp/Functionalities/Anomalies/default.yml'))
 
         if self.cat in all_an_def.keys():
             self.anom_def = all_an_def[self.cat]
@@ -125,6 +125,13 @@ class ElementProperties(QMainWindow):
         self.ui.relWgt.setMaximumHeight(20)
         self.ui.anomWgt.setMaximumHeight(1500)
         variables.visualpar = 'anom'
+
+        for i in v[self.elem]['anom']['par']['anomalies']:
+            for a in v[self.elem]['anom']['par']['anomalies'][i]:
+                if a in self.anom_avail:
+                    self.anom_avail.remove(a)
+
+        # print('anom avail: ', self.anom_avail)
         self.ui.anomAddPls.setVisible(self.anom_avail != [])
 
     def relParFill(self):
@@ -437,12 +444,18 @@ class ElementProperties(QMainWindow):
 
         for n in range(len(self.anomWgt)):
             cat = self.anomWgt[n].ui.catCB.currentText()
+            cat = list(v[self.elem]['anom']['par']['anomalies'][n].keys())[0]
             typol = self.anomWgt[n].ui.typeCB.currentText()
+            typol = list(v[self.elem]['anom']['par']['anomalies'][n][cat].keys())[0]
             # anom_typol_par = {
             #     'scale': 'value',
             #     '(1-exp) decrease': 'alpha',
             #     '(-x+1) decrease': 'alpha'
             # }
+            # print('n:', n)
+            # print('cat:', cat)
+            # print('typol:', typol)
+
             self.anomWgt[n].ui.lbdaDsb.setValue(
                 v[self.elem]['anom']['par']['anomalies'][n][cat][typol]['lambda_a'])
             self.anomWgt[n].ui.lbddurDsb.setValue(

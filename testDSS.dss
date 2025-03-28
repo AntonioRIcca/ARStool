@@ -1,0 +1,16 @@
+clear
+
+New object=circuit.dss_grid basekv=20
+
+New linecode.line nphases=3 R1=0.164 X1=0.11 B1=91.10619 R0=0.805 X0=0.11 B0=91.10619
+
+New line.L_S-01 bus1=SourceBus bus2=N01 linecode=line length=3
+New line.L_01-02 bus1=N01 bus2=N02 linecode=line length=3
+New line.L_02-03 bus1=N02 bus2=N03 linecode=line length=3
+New line.L_03-04 bus1=N03 bus2=N04 linecode=line length=3
+
+New load.myload bus1=N04 phases=3 kv=20 kw=1200 pf=0.9
+
+solve
+
+
