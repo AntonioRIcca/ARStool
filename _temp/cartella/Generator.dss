@@ -1,12 +1,5 @@
-New "Generator.ugs_dc-bess" bus1=UGS_DC-BB phases=3 kv=1.5 kW=-10 kvar=0 kVA=300 model=3
-New "Generator.ugs_1_dc-pv" bus1=UGS_PV_DC-BB phases=3 kv=0.75 kW=15 kvar=0 model=3
-New "Generator.ugs_2_dc-pv" bus1=UGS_PV_DC-BB phases=3 kv=0.75 kW=15 kvar=0 model=3
-New "Generator.ev-fast_dc-bess" bus1=EV-Fast_DC-BB phases=3 kv=0.6 kW=10 kvar=0 kVA=200 model=3
-New "Generator.ev-fast_dc-pv" bus1=EV-Fast_DC-BB phases=3 kv=0.6 kW=30 kvar=0 model=3
-New "Generator.pros_dc-bess" bus1=Pros1_DC-BB phases=3 kv=0.6 kW=-50 kvar=0 kVA=200 model=3
-New "Generator.pros_dc-micro-wind" bus1=Pros1_DC-BB phases=3 kv=0.6 kW=10 kvar=0 model=3
-New "Generator.pros_dc-pv" bus1=Pros2_DC-BB phases=3 kv=0.6 kW=50 kvar=0 model=3
-New "Generator.wpg_1_wind" bus1=WPG_2_BB phases=3 kv=2 kW=140 pf=0.84
-New "Generator.wpg_2_wind" bus1=WPG_2_BB phases=3 kv=2 kW=140 pf=0.87
-New "Generator.wpg_dc-bess" bus1=WPG_PV_DC-BB phases=3 kv=0.6 kW=-100 kvar=0 kVA=400 model=3
-New "Generator.wpg_dc-pv" bus1=WPG_PV_DC-BB phases=3 kv=0.6 kW=40 kvar=0 model=3
+New "Generator.pv001" bus1=N001 phases=3 kv=20 kW=350 kvar=0
+New "Generator.pv005" bus1=N005 phases=3 kv=20 kW=400 kvar=0
+New "Generator.pv006" bus1=N006 phases=3 kv=20 kW=300 kvar=0
+New "Generator.pv007" bus1=N007 phases=3 kv=20 kW=450 kvar=0
+New "Generator.bess014" bus1=N014 phases=3 kv=20 kW=0.001 kvar=0

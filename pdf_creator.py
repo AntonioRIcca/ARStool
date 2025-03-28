@@ -140,7 +140,7 @@ class PDF(FPDF):
         if 'adeq' in sel:
             self.adequacy()
         if 'onr' in sel:
-            self.onr(elem_cat=elem_cat, elements='')
+            self.onr(elem_cat=elem_cat)
         if 'optstor' in sel:
             self.optimal_storage()
 
@@ -983,8 +983,9 @@ class PDF(FPDF):
             self.write(0, t)
             self.ln(p_h)
 
-        self.line(10, 92, 190, 92)
+        self.line(10, 100, 190, 100)
 
+        self.set_y(110)
         self.set_font('Arial', e_s, e_c)
         self.write(0, 'Grafo Nodale Zonale')
 
@@ -994,7 +995,7 @@ class PDF(FPDF):
 
         w, h = self.img_size(img, 200, 230)
 
-        self.image(img, 5, y + 70, w, h)
+        self.image(img, 5, 120, w, h)
         # ----------------------------------------------------------------------
 
         # -- Seconda pagina ----------------------------------------------------

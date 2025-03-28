@@ -2,7 +2,7 @@
 # =============================================================================
 import matplotlib.pyplot
 
-from variables import v, new_par_dict, mc, grid
+from variables import v, new_par_dict, mc, grid, grid0
 from opendss import OpenDSS
 import sys
 from math import pi, sqrt, cos, sin, tan, atan2, exp
@@ -50,6 +50,7 @@ class ONR:
         # self.indexes = dict()
         # self.indexes_post = dict()
         self.filedir = 'C:/Users/anton/PycharmProjects/ARStool/_temp/Functionalities/ONR/__images__/'
+        grid['onr'] = copy.deepcopy(grid0['onr'])
         # self.log_pre_grafos = ''
         # self.log_pre_solver = ''
         # self.log_pre_viol = ''

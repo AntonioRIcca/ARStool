@@ -1,8 +1,12 @@
-New "Line.ug_line" bus1=sourcebus bus2=ug_20kv_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=3
-New "Line.rs_line" bus1=sourcebus bus2=rs_20kv_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=3
-New "Line.ev-charge_line" bus1=rs_04kv_bb bus2=ev-charge_bb linecode=6-12_3x1x150cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.05
-New "Line.res-wpg_line" bus1=sourcebus bus2=res-wpg_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=2
-New "Line.user_line" bus1=res_bb bus2=user_bb linecode=6-12_3x1x150cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.1
-New "Line.pros_line" bus1=res_bb bus2=pros_bb linecode=6-12_3x1x150cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.05
-New "Line.wpg_line" bus1=wpg_1_bb bus2=wpg_2_bb linecode=3-6_3x1x240cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=1
-New "Line.pros-ev_dc-line" bus1=pros1_dc-bb bus2=ev-fast_dc-bb linecode=dc-line Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.02
+New "Line.l001-002" bus1=n001 bus2=n002 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=2.82
+New "Line.l002-003" bus1=n002 bus2=n003 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=4.42
+New "Line.l003-004" bus1=n003 bus2=n004 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=0.61
+New "Line.l004-005" bus1=n004 bus2=n005 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=0.56
+New "Line.l005-006" bus1=n005 bus2=n006 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=1.54
+New "Line.l006-007" bus1=n006 bus2=n007 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=0.24
+New "Line.l004-011" bus1=n004 bus2=n011 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=0.49
+New "Line.l012-013" bus1=n012 bus2=n013 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=2.82
+New "Line.l013-014" bus1=n013 bus2=n014 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=2.99
+New "Line.l008-014" bus1=n014 bus2=n008 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=2
+New "Line.l008-009" bus1=n008 bus2=n009 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=0.32
+New "Line.l009-010" bus1=n009 bus2=n010 phases=3 r1=0.501 x1=0.716 C1=151.175 normamps=145.000000 units=km length=0.77

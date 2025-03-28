@@ -1,11 +1,13 @@
-New "Load.ug_serv1_ac-load" bus1=ug_serv_bb phases=3 kV=0.4 kW=80 pf=0.9
-New "Load.ug_serv2_ac-load" bus1=ug_serv_bb phases=3 kV=0.4 kW=120 pf=0.9
-New "Load.ug_dc-load" bus1=ug_dc-bb phases=3 kV=1.5 kW=200 pf=1
-New "Load.ugs_dc-load" bus1=ugs_dc-bb phases=3 kV=1.5 kW=200 pf=1
-New "Load.rs_1_ac-load" bus1=rs_04kv_bb phases=3 kV=0.4 kW=40 pf=0.9
-New "Load.rs_2_ac-load" bus1=rs_04kv_bb phases=3 kV=0.4 kW=60 pf=0.9
-New "Load.ev-charge_ac-load" bus1=ev-charge_bb phases=3 kV=0.4 kW=40 pf=1
-New "Load.ev-fast_dc-load" bus1=ev-fast-load_dc-node phases=3 kV=0.4 kW=50 pf=1
-New "Load.user_ac-load" bus1=user_bb phases=3 kV=0.4 kW=200 pf=0.9
-New "Load.pros_1_ac-load" bus1=pros_bb phases=3 kV=0.4 kW=150 pf=0.9
-New "Load.pros_dc-load" bus1=pros2_dc-bb phases=3 kV=0.6 kW=30 kvar=0 model=3
+New "Load.load001" bus1=n001 phases=3 kV=20 kW=200 pf=0.9
+New "Load.load003" bus1=n003 phases=3 kV=20 kW=150 pf=0.9
+New "Load.load004" bus1=n004 phases=3 kV=20 kW=200 pf=0.9
+New "Load.load005" bus1=n005 phases=3 kV=20 kW=300 pf=0.9
+New "Load.load006" bus1=n006 phases=3 kV=20 kW=250 pf=0.9
+New "Load.load007" bus1=n006 phases=3 kV=20 kW=300 pf=0.9
+New "Load.load011" bus1=n011 phases=3 kV=20 kW=300 pf=0.9
+New "Load.load012" bus1=n012 phases=3 kV=20 kW=250 pf=0.9
+New "Load.load013" bus1=n013 phases=3 kV=20 kW=250 pf=0.9
+New "Load.load014" bus1=n014 phases=3 kV=20 kW=150 pf=0.9
+New "Load.load008" bus1=n008 phases=3 kV=20 kW=150 pf=0.9
+New "Load.load009" bus1=n009 phases=3 kV=20 kW=150 pf=0.9
+New "Load.load010" bus1=n010 phases=3 kV=20 kW=150 pf=0.9
