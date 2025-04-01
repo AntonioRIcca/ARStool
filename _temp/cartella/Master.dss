@@ -1,9 +1,8 @@
 Clear
-New Circuit.dss_grid
+New Circuit.atl_rete_rurale_cluster_am_bau_2030
 
 
 Redirect Vsource.dss
-Redirect LineCode.dss
 Redirect LoadShape.dss
 Redirect GrowthShape.dss
 Redirect TCC_Curve.dss

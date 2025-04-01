@@ -1,0 +1,17 @@
+Clear
+New Circuit.dss_grid
+
+
+Redirect Vsource.dss
+Redirect LoadShape.dss
+Redirect GrowthShape.dss
+Redirect TCC_Curve.dss
+Redirect Spectrum.dss
+Redirect Line.dss
+Redirect Load.dss
+Redirect Transformer.dss
+Redirect Generator.dss
+MakeBusList
+Redirect BusVoltageBases.dss  ! set voltage bases
+Buscoords BusCoords.dss
+GIScoords GISCoords.dss

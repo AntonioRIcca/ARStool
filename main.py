@@ -276,7 +276,7 @@ class Main:
         img = mainpath + '/_benchmark/grid_models/images/' + gridname + '.png'
         self.gridDetailsWgt.ui.imageLbl.setPixmap(QtGui.QPixmap(img))
 
-        self.filepath = mainpath + '/_benchmark/grid_models/' + gridname + '.dss'
+        self.filepath = mainpath + '/_benchmark/grid_models/' + grid['file']
         self.dsspath = mainpath + '/_benchmark/grid_models/'
         # self.gridname = gridname
 
@@ -2331,27 +2331,66 @@ class Main:
         self.onr_res.ui.onr5log2TB.setText(grid['onr']['log_post_viol'])
 
     def gridManStart(self):
-        if self.myform.ui.verticalLayout.count() > 2:
-            for i in range(2, self.myform.ui.verticalLayout.count()):
-                self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
 
-        self.gridManPls = pb_create(text='   Avvia Grid Management', height=50, font=14, border=2, radius=15,
-                                    icon='gridmanagement.png')
+        for f in grid['studies']:
+            grid['studies'][f] = False
 
-        self.myform.ui.verticalLayout.insertWidget(2, self.gridManPls)
+        self.savepath = os.path.join(os.environ['USERPROFILE'], 'Desktop')
 
-        self.gridManPls.clicked.connect(self.gridManRun)
+        try:
+            self.ui.home_WGT.deleteLater()
+        except:
+            self.home_WGT.deleteLater()
+        self.home_WGT = QWidget()
 
-        variables.visualpar = 'rel'
+        self.homeHBL = QHBoxLayout()
+        self.home_WGT.setLayout(self.homeHBL)
+        self.homeHBL.setContentsMargins(0, 0, 0, 0)
 
-        if grid['studies']['adeq']:
-            self.adeqRes()
+        gmWgt = QtWidgets.QWidget()
+        gmWgt.setMinimumWidth(300)
+        gmVBL = QtWidgets.QVBoxLayout(gmWgt)
+
+        spc1 = QtWidgets.QSpacerItem(100, 100, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        spc2 = QtWidgets.QSpacerItem(100, 100, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        gmPB = QtWidgets.QPushButton()
+        gmPB.setText('Grid Management')
+        gmPB.setMaximumHeight(80)
+
+        gmVBL.addItem(spc1)
+        gmVBL.addWidget(gmPB)
+        gmVBL.addItem(spc2)
+
+        gmWgt.setStyleSheet(u"QPushButton {"
+                            u"text-align: center;"
+                            u"padding: 10px 10px;"
+                            u"color: rgb(255, 255, 255);"
+                            u"background-color: rgb(31, 31, 31); border: solid;"  # border-style: outset;"
+                            u"border-width: 3px; border-radius: 15px; border-color: rgb(127, 127, 127);"
+                            u"font: 14pt \"MS Shell Dlg 2\";"
+                            u"}"
+                            u"QPushButton:pressed {"
+                            u"background-color: rgb(64, 64, 64); border-style: inset"
+                            u"}")
+
+        self.homeHBL.addWidget(gmWgt, 0, QtCore.Qt.AlignLeft)
+
+        # from UI.start_wgt import StartWGT
+        # self.startWGT = StartWGT()
+        # self.startWGT.ui.startWgt.setMinimumSize(QtCore.QSize(300, 0))
+        #
+        # self.homeHBL.addWidget(self.startWGT.ui.startWgt, 0, QtCore.Qt.AlignLeft)
+        #
+        self.ui.home_VL.addWidget(self.home_WGT)
+
+        gmPB.clicked.connect(self.gridManRun)
 
     def gridManRun(self):
         print('Start Grid Management')
-
-    def gridManRes(self):
-        print('Grid Management Results')
+        lnk = mainpath + '/_functionalities\GridManagement/final_version_security.exe'
+        os.system(lnk)
+        self.startWgtCreate()
 
     def operPlanStart(self):
         for f in grid['studies']:
@@ -2409,8 +2448,11 @@ class Main:
         opPB.clicked.connect(self.operPlanRun)
 
     def operPlanRun(self):
-        lnk = mainpath + '/Functionalities/OperationalPlanning/SmartFlexGrid.exe'
+        lnk = mainpath + '/_functionalities/OperationalPlanning/SmartFlexGrid.exe'
         os.system(lnk)
+
+        self.startWgtCreate()
+
         #
         # import subprocess
         # subprocess.call([lnk])

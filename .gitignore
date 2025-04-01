@@ -2,3 +2,4 @@
 *.iml
 !/build/
 !/dist/
+/_functionalities/OperationalPlanning/

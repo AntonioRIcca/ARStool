@@ -1,1 +1,0 @@
-New Transformer.Trf1 phases=3 windings=2 xhl=12.010000 sub=y wdg=1 Sourcebus wye 150.000000 25000.000000 1 0.225000 wdg=2 N_002 wye 20.800000 25000.000000 1.000000 0.225000 numtaps=20.000000 maxtap=1.100000 mintap=0.900000

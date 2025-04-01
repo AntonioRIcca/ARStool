@@ -1,0 +1,103 @@
+# Climate data file
+climate_data_file: "Dati Palermo.xlsx"
+
+# Confidence level for calculations
+confidence_level: 0.80
+
+# importance factor for objective function
+f_grid: 0.2
+f_SOC: 0.8
+
+# grid parameters
+S_base: 200   # kVA
+
+# programming time steps
+Dt: 0.25   #hour (15 minutes)
+
+# Areas (Residential, Underground, Car Park)
+areas:
+  - name: Residential
+    # Load data files
+    load_data_Res: "RESIDENTIAL_Load.xlsx"
+    critical_load_factor: 0.05  # Percentage of total load considered critical
+
+  - name: Underground  
+    # Load data files
+    load_data_Und: "UNDERGROUND_Load.xlsx"  
+
+  - name: EV Park
+    load_data_EV: "EV_Data.xlsx"  
+
+# RES converters' capacity
+wind:
+  C_wind: 30  # kW
+PV:
+  C_pv1: 50   # Capacity of PV source 1 (kW)
+  C_pv2: 50   # Capacity of PV source 2 (kW)
+
+# Battery parameters
+battery:
+  # Underground network
+  V_DC_und: 750  # volt
+  B_und: 500  # kWh
+  C_und: 666.666  # Capacity of ESS (Ah)
+  t: 4               # fullcharge time [hour]
+  I_max_und: 166.666   # battery maximum current [A]
+  P_max_und: 125  # Maximum charging/discharging power for battery (kW)
+  P_min_und: 0
+  in_SOC_und: 0.9  # initial soc for battery in underground network
+  SOC_max_change_und: 0.0625
+  Pg_max_und: 1500
+
+  # EV Parking network
+  V_DC_ev: 300 # [V]
+  B_ev: 50  # kWh
+  C_ev: 166.666 # [A.h]
+  t: 4        # fullcharge time [hour]
+  I_max_ev: 41.666
+  P_max_ev: 12.5  # Maximum charging/discharging power for battery (kW)
+  P_min_ev: 0
+  in_SOC_ev: 0.9  # initial soc for battery in EV park network
+  SOC_max_change_ev: 0.0625
+  Pg_max_ev: 30
+
+  # Residential network
+  N_bess: 2  # number of BESS units
+  V_DC_res: 300  # volt
+  B_res: 540  # kWh
+  B_res1: 270  #kWh
+  B_res2: 270  #kWh
+  C_res: 900  # Capacity of ESS (Ah) each
+  t: 4        # fullcharge time [hour]
+  I_max_res: 225 # battery maximum current [A]
+  P_max_res: 67.5  # Maximum charging/discharging power for battery (kW)
+  P_min_res: 0
+  in_SOC_1_res: 0.65  # initial soc for battery in residential network
+  in_SOC_2_res: 0.65
+  SOC_max_change_res: 0.0625
+  Pg_max_res: 350 # kW
+
+  # other fixed parameters for battery
+  Qch: 1  # Converter charging efficiency
+  Qdis: 1  # Converter discharging efficiency 
+  SOC_max: 0.9 
+  SOC_min: 0.2
+  D_SOC: 0.4 # delta SoC for t = 96
+  m_ch: 0.00005  # charging droop constant for SOC balancing
+  m_dis: 0.000005 # discharging droop constant for SOC balancing
+  n: 6   # balancing exponent 
+  
+# Interlinking converter capacities
+interlinking_converters:
+  IC1: 100  # capacity of interlinikng converter 1 (kwh) 
+  IC2: 100  # capacity of interlinikng converter 2 (kwh)
+  IC3: 100  # capacity of interlinikng converter 3 (kwh)
+  P_IC_max: 5e4  # Maximum active power for IC (kw)
+  Q_IC_max: 5e4  # Maximum reactive power for IC (kvar)
+
+# RES capacity
+RES:
+  C_PV_und: 109 # PV power rated [kW]
+  C_PV_ev: 15 # PV power rated [kW]
+  C_PV_res: 33 # PV power rated [kW] (total for two pv stations)
+  C_W_res: 33 # PV power rated [kW]

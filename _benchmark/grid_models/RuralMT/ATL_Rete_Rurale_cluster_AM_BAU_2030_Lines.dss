@@ -1,0 +1,147 @@
+!Feeder 1
+New Line.L_002-015 bus1=N_002 bus2=N_015 phases=3 R1=0.254014 X1=0.125547 C1=314.999000 normamps=260.000000 units=km length=1.370000
+
+!Lines 1
+New Line.L_015-014 bus1=N_015 bus2=N_014 phases=3 R1=0.165517 X1=0.110344 C1=350.140900 normamps=330.000000 units=km length=3.070000
+New Line.L_014-022 bus1=N_014 bus2=N_022 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.800000
+
+New Line.L_022-006 bus1=N_022 bus2=N_006 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.900000
+
+New Line.L_022-026 bus1=N_022 bus2=N_026 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=1.130000
+New Line.L_026-017 bus1=N_026 bus2=N_017 phases=3 R1=0.721400 X1=0.407150 C1=7.957700 normamps=140.000000 units=km length=1.800000
+New Line.L_026-011 bus1=N_026 bus2=N_011 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=2.250000
+
+New Line.L_022-008 bus1=N_022 bus2=N_008 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.330000
+New Line.L_008-020 bus1=N_008 bus2=N_020 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.470000
+
+New Line.L_020-004 bus1=N_020 bus2=N_004 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.385000
+New Line.L_004-025 bus1=N_004 bus2=N_025 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.345000
+
+New Line.L_025-018 bus1=N_025 bus2=N_018 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=3.120000
+New Line.L_025-021 bus1=N_025 bus2=N_021 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.850000
+
+New Line.L_021-007 bus1=N_021 bus2=N_007 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.350000
+
+New Line.L_007-024 bus1=N_007 bus2=N_024 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.680000
+New Line.L_024-023 bus1=N_024 bus2=N_023 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=1.000000
+
+New Line.L_007-013 bus1=N_007 bus2=N_013 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=1.790000
+New Line.L_013-003 bus1=N_013 bus2=N_003 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=1.200000
+
+New Line.L_021-012 bus1=N_021 bus2=N_012 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=1.400000
+New Line.L_012-005 bus1=N_012 bus2=N_005 phases=3 R1=0.721400 X1=0.407150 C1=7.957700 normamps=140.000000 units=km length=1.300000
+New Line.L_005-016 bus1=N_005 bus2=N_016 phases=3 R1=0.721400 X1=0.407150 C1=7.957700 normamps=140.000000 units=km length=1.333000
+
+New Line.L_020-009 bus1=N_020 bus2=N_009 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=2.400000
+New Line.L_009-010 bus1=N_009 bus2=N_010 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=0.980000
+New Line.L_010-019 bus1=N_010 bus2=N_019 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=0.780000
+
+
+
+
+!Feeder 2
+New Line.L_002-029_Tr2 bus1=N_002 bus2=N_029 phases=3 R1=0.343449 X1=0.370493 C1=26.203468 normamps=235.000000 units=km length=2.875000
+
+!Lines 2
+New Line.L_029-033 bus1=N_029 bus2=N_033 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.850000
+New Line.L_033-032 bus1=N_033 bus2=N_032 phases=3 R1=0.165500 X1=0.110333 C1=350.140900 normamps=330.000000 units=km length=0.885000
+
+New Line.L_029-031 bus1=N_029 bus2=N_031 phases=3 R1=0.352900 X1=0.384311 C1=8.998000 normamps=235.000000 units=km length=1.530000
+New Line.L_031-030 bus1=N_031 bus2=N_030 phases=3 R1=0.352900 X1=0.384311 C1=8.998000 normamps=235.000000 units=km length=13.420000
+New Line.L_030-027 bus1=N_030 bus2=N_027 phases=3 R1=0.352900 X1=0.384311 C1=8.998000 normamps=235.000000 units=km length=3.000000
+New Line.L_027-028_Tr1 bus1=N_027 bus2=N_028 phases=3 R1=0.528611 X1=0.388400 C1=8.909995 normamps=140.000000 units=km length=0.760000
+
+
+
+
+!Feeder 3
+New Line.L_002-034_Tr2 bus1=N_002 bus2=N_034 phases=3 R1=0.498243 X1=0.370543 C1=21.075615 normamps=190.000000 units=km length=6.140000
+
+!Lines 3
+New Line.L_034-049_Tr3 bus1=N_034 bus2=N_049 phases=3 R1=0.480911 X1=0.355824 C1=32.294717 normamps=190.000000 units=km length=4.600000
+New Line.L_049-055 bus1=N_049 bus2=N_055 phases=3 R1=0.721400 X1=0.407150 C1=7.957700 normamps=140.000000 units=km length=1.560000
+
+New Line.L_055-042 bus1=N_055 bus2=N_042 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.992000
+New Line.L_042-040 bus1=N_042 bus2=N_040 phases=3 R1=0.721400 X1=0.407150 C1=7.957700 normamps=140.000000 units=km length=1.464000
+
+New Line.L_055-054 bus1=N_055 bus2=N_054 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=2.640000
+
+New Line.L_055-053 bus1=N_055 bus2=N_053 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.800000
+
+New Line.L_053-039 bus1=N_053 bus2=N_039 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.700000
+New Line.L_039-048 bus1=N_039 bus2=N_048 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.920000
+
+New Line.L_053-035 bus1=N_053 bus2=N_035 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.860000
+New Line.L_035-044 bus1=N_035 bus2=N_044 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.356000
+
+New Line.L_053-038 bus1=N_053 bus2=N_038 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.960000
+
+New Line.L_038-052 bus1=N_038 bus2=N_052 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=1.500000
+
+New Line.L_038-045 bus1=N_038 bus2=N_045 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.380000
+
+New Line.L_045-041 bus1=N_045 bus2=N_041 phases=3 R1=0.721400 X1=0.407150 C1=7.957700 normamps=140.000000 units=km length=3.006000
+
+New Line.L_045-051 bus1=N_045 bus2=N_051 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.440000
+
+New Line.L_051-046 bus1=N_051 bus2=N_046 phases=3 R1=0.721400 X1=0.407150 C1=7.957700 normamps=140.000000 units=km length=1.513200
+
+New Line.L_051-036 bus1=N_051 bus2=N_036 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=2.137200
+
+New Line.L_036-043 bus1=N_036 bus2=N_043 phases=3 R1=0.721400 X1=0.407150 C1=7.957700 normamps=140.000000 units=km length=2.856000
+
+New Line.L_036-050 bus1=N_036 bus2=N_050 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.200000
+New Line.L_050-037 bus1=N_050 bus2=N_037 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.200000
+New Line.L_050-047 bus1=N_050 bus2=N_047 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=1.152000
+
+
+
+
+!Feedere 7
+New Line.L_002-086 bus1=N_002 bus2=N_086 phases=3 R1=0.203400 X1=0.135591 C1=339.890200 normamps=280.000000 units=km length=1.173000
+
+!Lines 7
+New Line.L_086-083 bus1=N_086 bus2=N_083 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.370000
+New Line.L_083-101 bus1=N_083 bus2=N_101 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.450000
+
+New Line.L_101-079 bus1=N_101 bus2=N_079 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.860000
+
+New Line.L_101-084 bus1=N_101 bus2=N_084 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.670000
+New Line.L_084-081 bus1=N_084 bus2=N_081 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.840000
+
+New Line.L_081-092 bus1=N_081 bus2=N_092 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=0.900000
+
+New Line.L_081-094 bus1=N_081 bus2=N_094 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.800000
+
+New Line.L_094-093 bus1=N_094 bus2=N_093 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=0.750000
+
+New Line.L_094-085 bus1=N_094 bus2=N_085 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.580000
+New Line.L_085-099 bus1=N_085 bus2=N_099 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=0.520000
+New Line.L_099-103 bus1=N_099 bus2=N_103 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=3.800000
+New Line.L_103-082 bus1=N_103 bus2=N_082 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.400000
+
+New Line.L_082-080 bus1=N_082 bus2=N_080 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.200000
+New Line.L_080-096 bus1=N_080 bus2=N_096 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.480000
+
+New Line.L_096-091 bus1=N_096 bus2=N_091 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=1.000000
+
+New Line.L_096-095 bus1=N_096 bus2=N_095 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=0.400000
+New Line.L_095_076 bus1=N_095 bus2=N_076 phases=3 R1=0.400000 X1=0.114291 C1=192.122800 normamps=165.000000 units=km length=0.001000
+
+New Line.L_082-088 bus1=N_082 bus2=N_088 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=2.400000
+
+New Line.L_088-090 bus1=N_088 bus2=N_090 phases=3 R1=0.721400 X1=0.407150 C1=7.957700 normamps=140.000000 units=km length=3.860000
+
+New Line.L_088-098 bus1=N_088 bus2=N_098 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=1.630000
+New Line.L_098-100 bus1=N_098 bus2=N_100 phases=3 R1=0.400000 X1=0.114291 C1=192.122800 normamps=165.000000 units=km length=1.200000
+New Line.L_100-102 bus1=N_100 bus2=N_102 phases=3 R1=0.400000 X1=0.114291 C1=192.122800 normamps=165.000000 units=km length=0.900000
+New Line.L_102-097 bus1=N_102 bus2=N_097 phases=3 R1=0.400000 X1=0.114291 C1=192.122800 normamps=165.000000 units=km length=0.740000
+New Line.L_097-089 bus1=N_097 bus2=N_089 phases=3 R1=0.400000 X1=0.114291 C1=192.122800 normamps=165.000000 units=km length=1.000000
+
+New Line.L_089-087 bus1=N_089 bus2=N_087 phases=3 R1=0.517900 X1=0.387358 C1=8.962900 normamps=190.000000 units=km length=2.082000
+
+New Line.L_089-078 bus1=N_089 bus2=N_078 phases=3 R1=1.120000 X1=0.413339 C1=7.957700 normamps=105.000000 units=km length=2.900000
+New Line.L_078-077 bus1=N_078 bus2=N_077 phases=3 R1=0.400000 X1=0.114291 C1=192.122800 normamps=165.000000 units=km length=0.001000
+
+
+

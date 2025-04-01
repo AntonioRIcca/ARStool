@@ -1,1 +1,0 @@
-New "Transformer.trf1" buses=[sourcebus, n_002, ] windings=2 conns=[delta, wye, ] %imag=0 XHL=12.01 kVs=[150, 20.8, ] kVAs=[25000, 25000, ] %Rs=[0, 0.2, ] enabled=true

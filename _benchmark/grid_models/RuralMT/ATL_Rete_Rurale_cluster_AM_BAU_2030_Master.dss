@@ -1,0 +1,34 @@
+!ATL_Rete_Rurale_cluster_AM_BAU_2030.dss
+Clear 
+New Circuit.ATL_Rete_Rurale_cluster_AM_BAU_2030 basekV=150.000000 pu=1 MVAsc1=10000000 MVAsc3=10000000 bus1=N_001 phases=3 
+
+Set DefaultBaseFrequency=50 
+Set normvmaxpu=1.05 
+Set normvminpu=0.95 
+Set emergvmaxpu=1.1 
+Set emergvminpu=0.9 
+
+Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_Storages_Stat.dss 
+!Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_LoadshapesLD.dss 
+!Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_GenshapesGEN.dss 
+!Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_StgshapesStorage.dss 
+Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_Transformers.dss 
+Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_Lines.dss 
+Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_Lines_new.dss 
+Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_Loads_Stat.dss 
+Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_Loads_new_Stat.dss 
+Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_Generators_Stat.dss 
+
+Set voltagebases=[150.000000  20.000000]
+Calcvoltagebases 
+
+BusCoords ATL_Rete_Rurale_cluster_AM_BAU_2030_XY.dss 
+
+!Plot type=circuit quantity=voltage max=0 dots=y labels=y subs=y c1=navy c2=green c3=red 
+
+!Redirect ATL_Rete_Rurale_cluster_AM_BAU_2030_Monitor.dss 
+
+!Set mode=yearly stepsize=1.000000h number=8760.000000 
+
+Solve 
+

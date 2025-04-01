@@ -3,7 +3,12 @@ CityArea:
   description: "Rete urbana ibrida"
   file: "CityArea.dss"
 
-OtherGrid:
-  name: "other grid"
-  description: "Rete che non esiste"
-  file: "CityArea.dss"
+Rete Rurale MT:
+  name: "Rete Rurale MT"
+  description: "Rete MT da progetto Atlantide"
+  file: "RuralMT/ATL_Rete_Rurale_cluster_AM_BAU_2030_Master.dss"
+
+Rete  Magliata:
+  name: "Rete Magliata ONR"
+  description: "Rete Magliata per calcolo ONR"
+  file: "retePOLIBA/Master.dss"

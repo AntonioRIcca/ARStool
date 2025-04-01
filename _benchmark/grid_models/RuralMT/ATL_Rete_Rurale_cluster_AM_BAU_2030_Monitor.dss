@@ -1,0 +1,166 @@
+New Monitor.TN_001 element=Transformer.Trf1 mode=112 terminal=1
+New Monitor.VcplxN_001 element=Transformer.Trf1 terminal=1
+New Monitor.TN_002 element=Transformer.Trf1 mode=112 terminal=2
+New Monitor.VcplxN_002 element=Transformer.Trf1 terminal=2
+New Monitor.MN_015 element=Line.Line1 mode=112 terminal=2
+New Monitor.VcplxN_015 element=Line.Line1 terminal=2
+New Monitor.MN_022 element=Line.Line2 mode=112 terminal=2
+New Monitor.VcplxN_022 element=Line.Line2 terminal=2
+New Monitor.MN_011 element=Line.Line3 mode=112 terminal=2
+New Monitor.VcplxN_011 element=Line.Line3 terminal=2
+New Monitor.MN_017 element=Line.Line4 mode=112 terminal=2
+New Monitor.VcplxN_017 element=Line.Line4 terminal=2
+New Monitor.MN_008 element=Line.Line5 mode=112 terminal=2
+New Monitor.VcplxN_008 element=Line.Line5 terminal=2
+New Monitor.MN_020 element=Line.Line6 mode=112 terminal=2
+New Monitor.VcplxN_020 element=Line.Line6 terminal=2
+New Monitor.MN_004 element=Line.Line7 mode=112 terminal=2
+New Monitor.VcplxN_004 element=Line.Line7 terminal=2
+New Monitor.MN_025 element=Line.Line8 mode=112 terminal=2
+New Monitor.VcplxN_025 element=Line.Line8 terminal=2
+New Monitor.MN_039 element=Line.Line9 mode=112 terminal=2
+New Monitor.VcplxN_039 element=Line.Line9 terminal=2
+New Monitor.MN_012 element=Line.Line10 mode=112 terminal=2
+New Monitor.VcplxN_012 element=Line.Line10 terminal=2
+New Monitor.MN_005 element=Line.Line11 mode=112 terminal=2
+New Monitor.VcplxN_005 element=Line.Line11 terminal=2
+New Monitor.MN_016 element=Line.Line12 mode=112 terminal=2
+New Monitor.VcplxN_016 element=Line.Line12 terminal=2
+New Monitor.MN_007 element=Line.Line13 mode=112 terminal=2
+New Monitor.VcplxN_007 element=Line.Line13 terminal=2
+New Monitor.MN_023 element=Line.Line14 mode=112 terminal=2
+New Monitor.VcplxN_023 element=Line.Line14 terminal=2
+New Monitor.MN_019 element=Line.Line15 mode=112 terminal=2
+New Monitor.VcplxN_019 element=Line.Line15 terminal=2
+New Monitor.MN_006 element=Line.Line16 mode=112 terminal=2
+New Monitor.VcplxN_006 element=Line.Line16 terminal=2
+New Monitor.MN_029 element=Line.Line17 mode=112 terminal=2
+New Monitor.VcplxN_029 element=Line.Line17 terminal=2
+New Monitor.MN_031 element=Line.Line18 mode=112 terminal=2
+New Monitor.VcplxN_031 element=Line.Line18 terminal=2
+New Monitor.MN_030 element=Line.Line19 mode=112 terminal=2
+New Monitor.VcplxN_030 element=Line.Line19 terminal=2
+New Monitor.MN_027 element=Line.Line20 mode=112 terminal=2
+New Monitor.VcplxN_027 element=Line.Line20 terminal=2
+New Monitor.MN_028 element=Line.Line21 mode=112 terminal=2
+New Monitor.VcplxN_028 element=Line.Line21 terminal=2
+New Monitor.MN_034 element=Line.Line22 mode=112 terminal=2
+New Monitor.VcplxN_034 element=Line.Line22 terminal=2
+New Monitor.MN_049 element=Line.Line23 mode=112 terminal=2
+New Monitor.VcplxN_049 element=Line.Line23 terminal=2
+New Monitor.MN_086 element=Line.Line24 mode=112 terminal=2
+New Monitor.VcplxN_086 element=Line.Line24 terminal=2
+New Monitor.MN_013 element=Line.Line25 mode=112 terminal=2
+New Monitor.VcplxN_013 element=Line.Line25 terminal=2
+New Monitor.MN_024 element=Line.Line26 mode=112 terminal=2
+New Monitor.VcplxN_024 element=Line.Line26 terminal=2
+New Monitor.MN_010 element=Line.Line27 mode=112 terminal=2
+New Monitor.VcplxN_010 element=Line.Line27 terminal=2
+New Monitor.MN_003 element=Line.Line28 mode=112 terminal=2
+New Monitor.VcplxN_003 element=Line.Line28 terminal=2
+New Monitor.MN_014 element=Line.Line29 mode=112 terminal=2
+New Monitor.VcplxN_014 element=Line.Line29 terminal=2
+New Monitor.MN_009 element=Line.Line30 mode=112 terminal=2
+New Monitor.VcplxN_009 element=Line.Line30 terminal=2
+New Monitor.MN_026 element=Line.Line31 mode=112 terminal=2
+New Monitor.VcplxN_026 element=Line.Line31 terminal=2
+New Monitor.MN_018 element=Line.Line32 mode=112 terminal=2
+New Monitor.VcplxN_018 element=Line.Line32 terminal=2
+New Monitor.MN_021 element=Line.Line33 mode=112 terminal=2
+New Monitor.VcplxN_021 element=Line.Line33 terminal=2
+New Monitor.MN_033 element=Line.Line34 mode=112 terminal=2
+New Monitor.VcplxN_033 element=Line.Line34 terminal=2
+New Monitor.MN_032 element=Line.Line35 mode=112 terminal=2
+New Monitor.VcplxN_032 element=Line.Line35 terminal=2
+New Monitor.MN_044 element=Line.Line36 mode=112 terminal=2
+New Monitor.VcplxN_044 element=Line.Line36 terminal=2
+New Monitor.MN_043 element=Line.Line37 mode=112 terminal=2
+New Monitor.VcplxN_043 element=Line.Line37 terminal=2
+New Monitor.MN_050 element=Line.Line38 mode=112 terminal=2
+New Monitor.VcplxN_050 element=Line.Line38 terminal=2
+New Monitor.MN_045 element=Line.Line39 mode=112 terminal=2
+New Monitor.VcplxN_045 element=Line.Line39 terminal=2
+New Monitor.MN_052 element=Line.Line40 mode=112 terminal=2
+New Monitor.VcplxN_052 element=Line.Line40 terminal=2
+New Monitor.MN_048 element=Line.Line41 mode=112 terminal=2
+New Monitor.VcplxN_048 element=Line.Line41 terminal=2
+New Monitor.MN_040 element=Line.Line42 mode=112 terminal=2
+New Monitor.VcplxN_040 element=Line.Line42 terminal=2
+New Monitor.MN_041 element=Line.Line43 mode=112 terminal=2
+New Monitor.VcplxN_041 element=Line.Line43 terminal=2
+New Monitor.MN_051 element=Line.Line44 mode=112 terminal=2
+New Monitor.VcplxN_051 element=Line.Line44 terminal=2
+New Monitor.MN_055 element=Line.Line45 mode=112 terminal=2
+New Monitor.VcplxN_055 element=Line.Line45 terminal=2
+New Monitor.MN_037 element=Line.Line46 mode=112 terminal=2
+New Monitor.VcplxN_037 element=Line.Line46 terminal=2
+New Monitor.MN_047 element=Line.Line47 mode=112 terminal=2
+New Monitor.VcplxN_047 element=Line.Line47 terminal=2
+New Monitor.MN_036 element=Line.Line48 mode=112 terminal=2
+New Monitor.VcplxN_036 element=Line.Line48 terminal=2
+New Monitor.MN_046 element=Line.Line49 mode=112 terminal=2
+New Monitor.VcplxN_046 element=Line.Line49 terminal=2
+New Monitor.MN_035 element=Line.Line50 mode=112 terminal=2
+New Monitor.VcplxN_035 element=Line.Line50 terminal=2
+New Monitor.MN_038 element=Line.Line51 mode=112 terminal=2
+New Monitor.VcplxN_038 element=Line.Line51 terminal=2
+New Monitor.MN_042 element=Line.Line52 mode=112 terminal=2
+New Monitor.VcplxN_042 element=Line.Line52 terminal=2
+New Monitor.MN_053 element=Line.Line53 mode=112 terminal=2
+New Monitor.VcplxN_053 element=Line.Line53 terminal=2
+New Monitor.MN_054 element=Line.Line54 mode=112 terminal=2
+New Monitor.VcplxN_054 element=Line.Line54 terminal=2
+New Monitor.MN_077 element=Line.Line55 mode=112 terminal=2
+New Monitor.VcplxN_077 element=Line.Line55 terminal=2
+New Monitor.MN_096 element=Line.Line56 mode=112 terminal=2
+New Monitor.VcplxN_096 element=Line.Line56 terminal=2
+New Monitor.MN_092 element=Line.Line57 mode=112 terminal=2
+New Monitor.VcplxN_092 element=Line.Line57 terminal=2
+New Monitor.MN_094 element=Line.Line58 mode=112 terminal=2
+New Monitor.VcplxN_094 element=Line.Line58 terminal=2
+New Monitor.MN_080 element=Line.Line59 mode=112 terminal=2
+New Monitor.VcplxN_080 element=Line.Line59 terminal=2
+New Monitor.MN_088 element=Line.Line60 mode=112 terminal=2
+New Monitor.VcplxN_088 element=Line.Line60 terminal=2
+New Monitor.MN_101 element=Line.Line61 mode=112 terminal=2
+New Monitor.VcplxN_101 element=Line.Line61 terminal=2
+New Monitor.MN_081 element=Line.Line62 mode=112 terminal=2
+New Monitor.VcplxN_081 element=Line.Line62 terminal=2
+New Monitor.MN_099 element=Line.Line63 mode=112 terminal=2
+New Monitor.VcplxN_099 element=Line.Line63 terminal=2
+New Monitor.MN_083 element=Line.Line64 mode=112 terminal=2
+New Monitor.VcplxN_083 element=Line.Line64 terminal=2
+New Monitor.MN_090 element=Line.Line65 mode=112 terminal=2
+New Monitor.VcplxN_090 element=Line.Line65 terminal=2
+New Monitor.MN_098 element=Line.Line66 mode=112 terminal=2
+New Monitor.VcplxN_098 element=Line.Line66 terminal=2
+New Monitor.MN_078 element=Line.Line67 mode=112 terminal=2
+New Monitor.VcplxN_078 element=Line.Line67 terminal=2
+New Monitor.MN_087 element=Line.Line68 mode=112 terminal=2
+New Monitor.VcplxN_087 element=Line.Line68 terminal=2
+New Monitor.MN_085 element=Line.Line69 mode=112 terminal=2
+New Monitor.VcplxN_085 element=Line.Line69 terminal=2
+New Monitor.MN_093 element=Line.Line70 mode=112 terminal=2
+New Monitor.VcplxN_093 element=Line.Line70 terminal=2
+New Monitor.MN_076 element=Line.Line71 mode=112 terminal=2
+New Monitor.VcplxN_076 element=Line.Line71 terminal=2
+New Monitor.MN_091 element=Line.Line72 mode=112 terminal=2
+New Monitor.VcplxN_091 element=Line.Line72 terminal=2
+New Monitor.MN_095 element=Line.Line73 mode=112 terminal=2
+New Monitor.VcplxN_095 element=Line.Line73 terminal=2
+New Monitor.MN_089 element=Line.Line74 mode=112 terminal=2
+New Monitor.VcplxN_089 element=Line.Line74 terminal=2
+New Monitor.MN_100 element=Line.Line75 mode=112 terminal=2
+New Monitor.VcplxN_100 element=Line.Line75 terminal=2
+New Monitor.MN_103 element=Line.Line76 mode=112 terminal=2
+New Monitor.VcplxN_103 element=Line.Line76 terminal=2
+New Monitor.MN_102 element=Line.Line77 mode=112 terminal=2
+New Monitor.VcplxN_102 element=Line.Line77 terminal=2
+New Monitor.MN_079 element=Line.Line78 mode=112 terminal=2
+New Monitor.VcplxN_079 element=Line.Line78 terminal=2
+New Monitor.MN_084 element=Line.Line79 mode=112 terminal=2
+New Monitor.VcplxN_084 element=Line.Line79 terminal=2
+New Monitor.MN_097 element=Line.Line80 mode=112 terminal=2
+New Monitor.VcplxN_097 element=Line.Line80 terminal=2
+New Monitor.MN_082 element=Line.Line81 mode=112 terminal=2
+New Monitor.VcplxN_082 element=Line.Line81 terminal=2

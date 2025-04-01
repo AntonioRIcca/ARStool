@@ -1,0 +1,40 @@
+!Feeder 4
+New Line.L_002-056 bus1=N_002 bus2=N_056 phases=3 R1=0.191666 X1=0.108333 C1=209.9685 normamps=245 units=km length=0.8
+
+
+
+
+!Feeder 5
+New Line.L_002-067 bus1=N_002 bus2=N_067 phases=3 R1=0.191666 X1=0.108333 C1=209.9685 normamps=245 units=km length=0.35
+
+!Lines 5
+New Line.L_067-059 bus1=N_067 bus2=N_059 phases=3 R1=0.517894 X1=0.387368 C1=8.96294 normamps=190 units=km length=1.02
+New Line.L_059-066 bus1=N_059 bus2=N_066 phases=3 R1=0.517894 X1=0.387368 C1=8.96294 normamps=190 units=km length=1.05
+
+New Line.L_066-060 bus1=N_066 bus2=N_060 phases=3 R1=0.56 X1=0.14 C1=218.0423 normamps=156 units=km length=1.2
+
+New Line.L_066-068 bus1=N_066 bus2=N_068 phases=3 R1=0.4 X1=0.114285 C1=192.1228 normamps=165 units=km length=1
+New Line.L_068-065 bus1=N_068 bus2=N_065 phases=3 R1=0.4 X1=0.114285 C1=192.1228 normamps=165 units=km length=1.2
+New Line.L_065-064 bus1=N_065 bus2=N_064 phases=3 R1=0.203389 X1=0.135593 C1=339.8902 normamps=280 units=km length=0.83
+New Line.L_064-062 bus1=N_064 bus2=N_062 phases=3 R1=0.4 X1=0.114285 C1=192.1228 normamps=165 units=km length=1.6
+New Line.L_062-063 bus1=N_062 bus2=N_063 phases=3 R1=0.203389 X1=0.135593 C1=339.8902 normamps=280 units=km length=0.906
+
+New Line.L_067-058 bus1=N_067 bus2=N_058 phases=3 R1=1.12 X1=0.413333 C1=7.95775 normamps=105 units=km length=1.348
+New Line.L_058-061 bus1=N_058 bus2=N_061 phases=3 R1=1.12 X1=0.413333 C1=7.95775 normamps=105 units=km length=0.15
+New Line.L_061-057 bus1=N_061 bus2=N_057 phases=3 R1=0.4 X1=0.114285 C1=192.1228 normamps=165  units=km length=0.001
+
+
+
+
+!Feeder 6
+New Line.L_002-069 bus1=N_002 bus2=N_069 phases=3 R1=0.191666 X1=0.108333 C1=209.9685 normamps=245 units=km length=1.39
+
+!Lines 6
+New Line.L_069-075 bus1=N_069 bus2=N_075 phases=3 R1=0.191666 X1=0.108333 C1=209.9685 normamps=245 units=km length=2.37
+New Line.L_075-073 bus1=N_075 bus2=N_073 phases=3 R1=0.4 X1=0.114285 C1=192.1228 normamps=245 units=km length=0.57
+New Line.L_073-072 bus1=N_073 bus2=N_072 phases=3 R1=0.4 X1=0.114285 C1=192.1228 normamps=245 units=km length=1.386
+New Line.L_072-070 bus1=N_072 bus2=N_070 phases=3 R1=0.203389 X1=0.135593 C1=339.8902 normamps=280 units=km length=1.02
+New Line.L_070-074 bus1=N_070 bus2=N_074 phases=3 R1=0.4 X1=0.114285 C1=192.1228 normamps=165 units=km length=1.09
+New Line.L_074-071 bus1=N_074 bus2=N_071 phases=3 R1=0.4 X1=0.114285 C1=192.1228 normamps=165 units=km length=0.91
+
+
