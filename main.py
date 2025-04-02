@@ -280,7 +280,7 @@ class Main:
         self.dsspath = mainpath + '/_benchmark/grid_models/'
         # self.gridname = gridname
 
-        self.gridDetailsWgt.ui.open.clicked.connect(partial(self.dss_open, self.filepath))
+        self.gridDetailsWgt.ui.open.clicked.connect(partial(self.dss_open, self.filepath, gridname))
         # self.yml_bench_save()
 
         # self.main.ui.EV303_img_LBL.setPixmap(QtGui.QPixmap("UI/_resources/arrowSX_20x20.png")
@@ -311,10 +311,10 @@ class Main:
             self.elementsTableWgtCreate()
             self.func_check()
 
-
     # Apertura del file DSS
-    def dss_open(self, filename=None):
+    def dss_open(self, filename=None, gridname=None):
         v_initialize()
+        grid['name'] = gridname
         if not filename:
             options = QtWidgets.QFileDialog.Options()
             options |= QtWidgets.QFileDialog.DontUseNativeDialog
@@ -2387,9 +2387,13 @@ class Main:
         gmPB.clicked.connect(self.gridManRun)
 
     def gridManRun(self):
-        print('Start Grid Management')
-        lnk = mainpath + '/_functionalities\GridManagement/final_version_security.exe'
-        os.system(lnk)
+        # print('Start Grid Management')
+        # lnk = mainpath + '/_functionalities\GridManagement/final_version_security.exe'
+        # os.system(lnk)
+        os.chdir(mainpath + '/_functionalities/GridManagement/')
+        os.system('final_version_security.exe')
+        os.chdir(mainpath)
+
         self.startWgtCreate()
 
     def operPlanStart(self):
@@ -2448,8 +2452,15 @@ class Main:
         opPB.clicked.connect(self.operPlanRun)
 
     def operPlanRun(self):
-        lnk = mainpath + '/_functionalities/OperationalPlanning/SmartFlexGrid.exe'
-        os.system(lnk)
+        # try:
+        #     raise
+        #     lnk = mainpath + '/_functionalities/OperationalPlanning/SmartFlexGrid.exe'
+        #     os.system(lnk)
+        # except:
+        #     print('except')
+        os.chdir(mainpath + '/_functionalities/OperationalPlanning')
+        os.system('SmartFlexGrid.exe')
+        os.chdir(mainpath)
 
         self.startWgtCreate()
 
