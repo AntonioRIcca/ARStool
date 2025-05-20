@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'optimalStorage_wgtpcQMjs.ui'
+## Form generated from reading UI file 'optimalStorage_wgtIBHjSP.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -232,231 +232,24 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setHorizontalSpacing(20)
         self.gridLayout.setVerticalSpacing(10)
-        self.co2EmisScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.co2EmisScenDsb.setObjectName(u"co2EmisScenDsb")
-        self.co2EmisScenDsb.setMinimumSize(QSize(70, 0))
-        self.co2EmisScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        font4 = QFont()
-        font4.setPointSize(10)
-        font4.setBold(True)
-        font4.setWeight(75)
-        self.co2EmisScenDsb.setFont(font4)
-        self.co2EmisScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.co2EmisScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.co2EmisScenDsb.setMaximum(999999999.990000009536743)
-        self.co2EmisScenDsb.setSingleStep(0.100000000000000)
-        self.co2EmisScenDsb.setValue(999999.989999999990687)
-
-        self.gridLayout.addWidget(self.co2EmisScenDsb, 22, 1, 1, 1)
-
-        self.scenLbl = QLabel(self.scenWgt)
-        self.scenLbl.setObjectName(u"scenLbl")
-        self.scenLbl.setFont(font2)
-        self.scenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.scenLbl, 1, 0, 1, 1)
-
         self.windGenScenDsb = QDoubleSpinBox(self.scenWgt)
         self.windGenScenDsb.setObjectName(u"windGenScenDsb")
         self.windGenScenDsb.setMinimumSize(QSize(70, 0))
         self.windGenScenDsb.setMaximumSize(QSize(16777215, 16777215))
         self.windGenScenDsb.setFont(font1)
+        self.windGenScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(255, 255, 255);")
         self.windGenScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.windGenScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.windGenScenDsb.setMaximum(999999.989999999990687)
         self.windGenScenDsb.setSingleStep(0.100000000000000)
-        self.windGenScenDsb.setValue(0.000000000000000)
+        self.windGenScenDsb.setValue(20.000000000000000)
 
-        self.gridLayout.addWidget(self.windGenScenDsb, 14, 1, 1, 1)
-
-        self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_9, 21, 0, 1, 1)
-
-        self.solarCapScenPercDsb = QDoubleSpinBox(self.scenWgt)
-        self.solarCapScenPercDsb.setObjectName(u"solarCapScenPercDsb")
-        self.solarCapScenPercDsb.setMinimumSize(QSize(70, 0))
-        self.solarCapScenPercDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.solarCapScenPercDsb.setFont(font1)
-        self.solarCapScenPercDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.solarCapScenPercDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.solarCapScenPercDsb.setMaximum(100.000000000000000)
-        self.solarCapScenPercDsb.setSingleStep(0.100000000000000)
-        self.solarCapScenPercDsb.setValue(12.000000000000000)
-
-        self.gridLayout.addWidget(self.solarCapScenPercDsb, 18, 2, 1, 1)
-
-        self.enImportScenLbl = QLabel(self.scenWgt)
-        self.enImportScenLbl.setObjectName(u"enImportScenLbl")
-        self.enImportScenLbl.setFont(font2)
-        self.enImportScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.enImportScenLbl, 9, 0, 1, 1)
-
-        self.enImportScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.enImportScenDsb.setObjectName(u"enImportScenDsb")
-        self.enImportScenDsb.setMinimumSize(QSize(70, 0))
-        self.enImportScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.enImportScenDsb.setFont(font1)
-        self.enImportScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.enImportScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.enImportScenDsb.setMaximum(999999.989999999990687)
-        self.enImportScenDsb.setSingleStep(0.100000000000000)
-        self.enImportScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.enImportScenDsb, 9, 1, 1, 1)
-
-        self.totEnConsScenLbl = QLabel(self.scenWgt)
-        self.totEnConsScenLbl.setObjectName(u"totEnConsScenLbl")
-        self.totEnConsScenLbl.setFont(font2)
-        self.totEnConsScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.totEnConsScenLbl, 4, 0, 1, 1)
-
-        self.scenCb = QComboBox(self.scenWgt)
-        self.scenCb.addItem("")
-        self.scenCb.setObjectName(u"scenCb")
-        self.scenCb.setMinimumSize(QSize(100, 0))
-        self.scenCb.setFont(font4)
-        self.scenCb.setLayoutDirection(Qt.LeftToRight)
-
-        self.gridLayout.addWidget(self.scenCb, 1, 1, 1, 1)
-
-        self.otherGenScenPercDsb = QDoubleSpinBox(self.scenWgt)
-        self.otherGenScenPercDsb.setObjectName(u"otherGenScenPercDsb")
-        self.otherGenScenPercDsb.setMinimumSize(QSize(70, 0))
-        self.otherGenScenPercDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.otherGenScenPercDsb.setFont(font1)
-        self.otherGenScenPercDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.otherGenScenPercDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.otherGenScenPercDsb.setMaximum(100.000000000000000)
-        self.otherGenScenPercDsb.setSingleStep(0.100000000000000)
-        self.otherGenScenPercDsb.setValue(12.000000000000000)
-
-        self.gridLayout.addWidget(self.otherGenScenPercDsb, 15, 2, 1, 1)
-
-        self.otherCapScenLbl = QLabel(self.scenWgt)
-        self.otherCapScenLbl.setObjectName(u"otherCapScenLbl")
-        self.otherCapScenLbl.setFont(font2)
-        self.otherCapScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.otherCapScenLbl, 20, 0, 1, 1)
-
-        self.solarCapScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.solarCapScenDsb.setObjectName(u"solarCapScenDsb")
-        self.solarCapScenDsb.setMinimumSize(QSize(70, 0))
-        self.solarCapScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.solarCapScenDsb.setFont(font1)
-        self.solarCapScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.solarCapScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.solarCapScenDsb.setMaximum(999999.989999999990687)
-        self.solarCapScenDsb.setSingleStep(0.100000000000000)
-        self.solarCapScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.solarCapScenDsb, 18, 1, 1, 1)
-
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout.addItem(self.horizontalSpacer_3, 12, 3, 1, 1)
-
-        self.solarGenScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.solarGenScenDsb.setObjectName(u"solarGenScenDsb")
-        self.solarGenScenDsb.setMinimumSize(QSize(70, 0))
-        self.solarGenScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.solarGenScenDsb.setFont(font1)
-        self.solarGenScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.solarGenScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.solarGenScenDsb.setMaximum(999999.989999999990687)
-        self.solarGenScenDsb.setSingleStep(0.100000000000000)
-        self.solarGenScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.solarGenScenDsb, 13, 1, 1, 1)
-
-        self.ferGenScenPercDsb = QDoubleSpinBox(self.scenWgt)
-        self.ferGenScenPercDsb.setObjectName(u"ferGenScenPercDsb")
-        self.ferGenScenPercDsb.setMinimumSize(QSize(70, 0))
-        self.ferGenScenPercDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.ferGenScenPercDsb.setFont(font4)
-        self.ferGenScenPercDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.ferGenScenPercDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.ferGenScenPercDsb.setMaximum(100.000000000000000)
-        self.ferGenScenPercDsb.setSingleStep(0.100000000000000)
-        self.ferGenScenPercDsb.setValue(12.000000000000000)
-
-        self.gridLayout.addWidget(self.ferGenScenPercDsb, 12, 2, 1, 1)
-
-        self.totEnConsMtepScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.totEnConsMtepScenDsb.setObjectName(u"totEnConsMtepScenDsb")
-        self.totEnConsMtepScenDsb.setMinimumSize(QSize(70, 0))
-        self.totEnConsMtepScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.totEnConsMtepScenDsb.setFont(font1)
-        self.totEnConsMtepScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.totEnConsMtepScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.totEnConsMtepScenDsb.setMaximum(999999.989999999990687)
-        self.totEnConsMtepScenDsb.setSingleStep(0.100000000000000)
-        self.totEnConsMtepScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.totEnConsMtepScenDsb, 4, 1, 1, 1)
-
-        self.windCapScenLbl = QLabel(self.scenWgt)
-        self.windCapScenLbl.setObjectName(u"windCapScenLbl")
-        self.windCapScenLbl.setFont(font2)
-        self.windCapScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.windCapScenLbl, 19, 0, 1, 1)
-
-        self.enProdScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.enProdScenDsb.setObjectName(u"enProdScenDsb")
-        self.enProdScenDsb.setMinimumSize(QSize(70, 0))
-        self.enProdScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.enProdScenDsb.setFont(font1)
-        self.enProdScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.enProdScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.enProdScenDsb.setMaximum(999999.989999999990687)
-        self.enProdScenDsb.setSingleStep(0.100000000000000)
-        self.enProdScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.enProdScenDsb, 10, 1, 1, 1)
-
-        self.enDutyScenLbl = QLabel(self.scenWgt)
-        self.enDutyScenLbl.setObjectName(u"enDutyScenLbl")
-        self.enDutyScenLbl.setFont(font2)
-        self.enDutyScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.enDutyScenLbl, 8, 0, 1, 1)
-
-        self.enDutyScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.enDutyScenDsb.setObjectName(u"enDutyScenDsb")
-        self.enDutyScenDsb.setMinimumSize(QSize(70, 0))
-        self.enDutyScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.enDutyScenDsb.setFont(font1)
-        self.enDutyScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.enDutyScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.enDutyScenDsb.setMaximum(999999.989999999990687)
-        self.enDutyScenDsb.setSingleStep(0.100000000000000)
-        self.enDutyScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.enDutyScenDsb, 8, 1, 1, 1)
-
-        self.solarCapScenLbl = QLabel(self.scenWgt)
-        self.solarCapScenLbl.setObjectName(u"solarCapScenLbl")
-        self.solarCapScenLbl.setFont(font2)
-        self.solarCapScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.solarCapScenLbl, 18, 0, 1, 1)
-
-        self.windCapScenPercDsb = QDoubleSpinBox(self.scenWgt)
-        self.windCapScenPercDsb.setObjectName(u"windCapScenPercDsb")
-        self.windCapScenPercDsb.setMinimumSize(QSize(70, 0))
-        self.windCapScenPercDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.windCapScenPercDsb.setFont(font1)
-        self.windCapScenPercDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.windCapScenPercDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.windCapScenPercDsb.setMaximum(100.000000000000000)
-        self.windCapScenPercDsb.setSingleStep(0.100000000000000)
-        self.windCapScenPercDsb.setValue(12.000000000000000)
-
-        self.gridLayout.addWidget(self.windCapScenPercDsb, 19, 2, 1, 1)
+        self.gridLayout.addWidget(self.windGenScenDsb, 11, 1, 1, 1)
 
         self.windGenScenPercDsb = QDoubleSpinBox(self.scenWgt)
         self.windGenScenPercDsb.setObjectName(u"windGenScenPercDsb")
@@ -469,194 +262,116 @@ class Ui_MainWindow(object):
         self.windGenScenPercDsb.setSingleStep(0.100000000000000)
         self.windGenScenPercDsb.setValue(12.000000000000000)
 
-        self.gridLayout.addWidget(self.windGenScenPercDsb, 14, 2, 1, 1)
+        self.gridLayout.addWidget(self.windGenScenPercDsb, 11, 2, 1, 1)
 
-        self.h2ConsScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.h2ConsScenDsb.setObjectName(u"h2ConsScenDsb")
-        self.h2ConsScenDsb.setMinimumSize(QSize(70, 0))
-        self.h2ConsScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.h2ConsScenDsb.setFont(font1)
-        self.h2ConsScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.h2ConsScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.h2ConsScenDsb.setMaximum(999999.989999999990687)
-        self.h2ConsScenDsb.setSingleStep(0.100000000000000)
-        self.h2ConsScenDsb.setValue(0.000000000000000)
+        self.co2EmisScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.co2EmisScenDsb.setObjectName(u"co2EmisScenDsb")
+        self.co2EmisScenDsb.setMinimumSize(QSize(70, 0))
+        self.co2EmisScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        font4 = QFont()
+        font4.setPointSize(10)
+        font4.setBold(True)
+        font4.setWeight(75)
+        self.co2EmisScenDsb.setFont(font4)
+        self.co2EmisScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(191, 127, 127);")
+        self.co2EmisScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.co2EmisScenDsb.setReadOnly(True)
+        self.co2EmisScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.co2EmisScenDsb.setMaximum(999999999.990000009536743)
+        self.co2EmisScenDsb.setSingleStep(0.100000000000000)
+        self.co2EmisScenDsb.setValue(999999.989999999990687)
 
-        self.gridLayout.addWidget(self.h2ConsScenDsb, 6, 1, 1, 1)
+        self.gridLayout.addWidget(self.co2EmisScenDsb, 19, 1, 1, 1)
 
         self.otherGenScenDsb = QDoubleSpinBox(self.scenWgt)
         self.otherGenScenDsb.setObjectName(u"otherGenScenDsb")
         self.otherGenScenDsb.setMinimumSize(QSize(70, 0))
         self.otherGenScenDsb.setMaximumSize(QSize(16777215, 16777215))
         self.otherGenScenDsb.setFont(font1)
+        self.otherGenScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(191, 127, 127);")
         self.otherGenScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.otherGenScenDsb.setReadOnly(True)
         self.otherGenScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.otherGenScenDsb.setMaximum(999999.989999999990687)
         self.otherGenScenDsb.setSingleStep(0.100000000000000)
         self.otherGenScenDsb.setValue(0.000000000000000)
 
-        self.gridLayout.addWidget(self.otherGenScenDsb, 15, 1, 1, 1)
-
-        self.enProdScenLbl = QLabel(self.scenWgt)
-        self.enProdScenLbl.setObjectName(u"enProdScenLbl")
-        self.enProdScenLbl.setFont(font2)
-        self.enProdScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.enProdScenLbl, 10, 0, 1, 1)
-
-        self.ferGenScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.ferGenScenDsb.setObjectName(u"ferGenScenDsb")
-        self.ferGenScenDsb.setMinimumSize(QSize(70, 0))
-        self.ferGenScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.ferGenScenDsb.setFont(font4)
-        self.ferGenScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.ferGenScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.ferGenScenDsb.setMaximum(999999.989999999990687)
-        self.ferGenScenDsb.setSingleStep(0.100000000000000)
-        self.ferGenScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.ferGenScenDsb, 12, 1, 1, 1)
-
-        self.windGenScenLbl = QLabel(self.scenWgt)
-        self.windGenScenLbl.setObjectName(u"windGenScenLbl")
-        self.windGenScenLbl.setFont(font2)
-        self.windGenScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.windGenScenLbl, 14, 0, 1, 1)
-
-        self.yearScenLbl = QLabel(self.scenWgt)
-        self.yearScenLbl.setObjectName(u"yearScenLbl")
-        self.yearScenLbl.setFont(font2)
-        self.yearScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.yearScenLbl, 0, 0, 1, 1)
-
-        self.ferCapScenLbl = QLabel(self.scenWgt)
-        self.ferCapScenLbl.setObjectName(u"ferCapScenLbl")
-        font5 = QFont()
-        font5.setPointSize(9)
-        font5.setBold(True)
-        font5.setWeight(75)
-        self.ferCapScenLbl.setFont(font5)
-        self.ferCapScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.ferCapScenLbl, 17, 0, 1, 1)
-
-        self.h2ConsScenLbl = QLabel(self.scenWgt)
-        self.h2ConsScenLbl.setObjectName(u"h2ConsScenLbl")
-        font6 = QFont()
-        font6.setPointSize(9)
-        font6.setItalic(False)
-        self.h2ConsScenLbl.setFont(font6)
-        self.h2ConsScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.h2ConsScenLbl, 6, 0, 1, 1)
-
-        self.windCapScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.windCapScenDsb.setObjectName(u"windCapScenDsb")
-        self.windCapScenDsb.setMinimumSize(QSize(70, 0))
-        self.windCapScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.windCapScenDsb.setFont(font1)
-        self.windCapScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.windCapScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.windCapScenDsb.setMaximum(999999.989999999990687)
-        self.windCapScenDsb.setSingleStep(0.100000000000000)
-        self.windCapScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.windCapScenDsb, 19, 1, 1, 1)
-
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_3, 3, 1, 1, 1)
-
-        self.otherCapScenPercDsb = QDoubleSpinBox(self.scenWgt)
-        self.otherCapScenPercDsb.setObjectName(u"otherCapScenPercDsb")
-        self.otherCapScenPercDsb.setMinimumSize(QSize(70, 0))
-        self.otherCapScenPercDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.otherCapScenPercDsb.setFont(font1)
-        self.otherCapScenPercDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.otherCapScenPercDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.otherCapScenPercDsb.setMaximum(100.000000000000000)
-        self.otherCapScenPercDsb.setSingleStep(0.100000000000000)
-        self.otherCapScenPercDsb.setValue(12.000000000000000)
-
-        self.gridLayout.addWidget(self.otherCapScenPercDsb, 20, 2, 1, 1)
-
-        self.otherCapScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.otherCapScenDsb.setObjectName(u"otherCapScenDsb")
-        self.otherCapScenDsb.setMinimumSize(QSize(70, 0))
-        self.otherCapScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.otherCapScenDsb.setFont(font1)
-        self.otherCapScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.otherCapScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.otherCapScenDsb.setMaximum(999999.989999999990687)
-        self.otherCapScenDsb.setSingleStep(0.100000000000000)
-        self.otherCapScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.otherCapScenDsb, 20, 1, 1, 1)
-
-        self.totEnConsScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.totEnConsScenDsb.setObjectName(u"totEnConsScenDsb")
-        self.totEnConsScenDsb.setMinimumSize(QSize(70, 0))
-        self.totEnConsScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.totEnConsScenDsb.setFont(font1)
-        self.totEnConsScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.totEnConsScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.totEnConsScenDsb.setMaximum(999999.989999999990687)
-        self.totEnConsScenDsb.setSingleStep(0.100000000000000)
-        self.totEnConsScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.totEnConsScenDsb, 5, 1, 1, 1)
-
-        self.solarGenScenLbl = QLabel(self.scenWgt)
-        self.solarGenScenLbl.setObjectName(u"solarGenScenLbl")
-        self.solarGenScenLbl.setFont(font2)
-        self.solarGenScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.solarGenScenLbl, 13, 0, 1, 1)
-
-        self.yearScenCb = QComboBox(self.scenWgt)
-        self.yearScenCb.addItem("")
-        self.yearScenCb.addItem("")
-        self.yearScenCb.addItem("")
-        self.yearScenCb.setObjectName(u"yearScenCb")
-        self.yearScenCb.setMinimumSize(QSize(100, 0))
-        self.yearScenCb.setFont(font4)
-        self.yearScenCb.setLayoutDirection(Qt.LeftToRight)
-        self.yearScenCb.setStyleSheet(u"")
-
-        self.gridLayout.addWidget(self.yearScenCb, 0, 1, 1, 1)
-
-        self.ferCapScenDsb = QDoubleSpinBox(self.scenWgt)
-        self.ferCapScenDsb.setObjectName(u"ferCapScenDsb")
-        self.ferCapScenDsb.setMinimumSize(QSize(70, 0))
-        self.ferCapScenDsb.setMaximumSize(QSize(16777215, 16777215))
-        self.ferCapScenDsb.setFont(font4)
-        self.ferCapScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.ferCapScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.ferCapScenDsb.setMaximum(999999.989999999990687)
-        self.ferCapScenDsb.setSingleStep(0.100000000000000)
-        self.ferCapScenDsb.setValue(0.000000000000000)
-
-        self.gridLayout.addWidget(self.ferCapScenDsb, 17, 1, 1, 1)
-
-        self.ferGenScenLbl = QLabel(self.scenWgt)
-        self.ferGenScenLbl.setObjectName(u"ferGenScenLbl")
-        self.ferGenScenLbl.setFont(font5)
-        self.ferGenScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.ferGenScenLbl, 12, 0, 1, 1)
-
-        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_4, 11, 0, 1, 1)
+        self.gridLayout.addWidget(self.otherGenScenDsb, 12, 1, 1, 1)
 
         self.otherGenScenLbl = QLabel(self.scenWgt)
         self.otherGenScenLbl.setObjectName(u"otherGenScenLbl")
         self.otherGenScenLbl.setFont(font2)
         self.otherGenScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.gridLayout.addWidget(self.otherGenScenLbl, 15, 0, 1, 1)
+        self.gridLayout.addWidget(self.otherGenScenLbl, 12, 0, 1, 1)
+
+        self.enDutyScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.enDutyScenDsb.setObjectName(u"enDutyScenDsb")
+        self.enDutyScenDsb.setMinimumSize(QSize(70, 0))
+        self.enDutyScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.enDutyScenDsb.setFont(font4)
+        self.enDutyScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(255, 255, 255);")
+        self.enDutyScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.enDutyScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.enDutyScenDsb.setMaximum(999999.989999999990687)
+        self.enDutyScenDsb.setSingleStep(0.100000000000000)
+        self.enDutyScenDsb.setValue(320.000000000000000)
+
+        self.gridLayout.addWidget(self.enDutyScenDsb, 5, 1, 1, 1)
+
+        self.solarGenScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.solarGenScenDsb.setObjectName(u"solarGenScenDsb")
+        self.solarGenScenDsb.setMinimumSize(QSize(70, 0))
+        self.solarGenScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.solarGenScenDsb.setFont(font1)
+        self.solarGenScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(255, 255, 255);")
+        self.solarGenScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.solarGenScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.solarGenScenDsb.setMaximum(999999.989999999990687)
+        self.solarGenScenDsb.setSingleStep(0.100000000000000)
+        self.solarGenScenDsb.setValue(23.000000000000000)
+
+        self.gridLayout.addWidget(self.solarGenScenDsb, 10, 1, 1, 1)
+
+        self.enProdScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.enProdScenDsb.setObjectName(u"enProdScenDsb")
+        self.enProdScenDsb.setMinimumSize(QSize(70, 0))
+        self.enProdScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.enProdScenDsb.setFont(font1)
+        self.enProdScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(191, 127, 127);")
+        self.enProdScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.enProdScenDsb.setReadOnly(True)
+        self.enProdScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.enProdScenDsb.setMaximum(999999.989999999990687)
+        self.enProdScenDsb.setSingleStep(0.100000000000000)
+        self.enProdScenDsb.setValue(0.000000000000000)
+
+        self.gridLayout.addWidget(self.enProdScenDsb, 7, 1, 1, 1)
 
         self.solarGenScenPercDsb = QDoubleSpinBox(self.scenWgt)
         self.solarGenScenPercDsb.setObjectName(u"solarGenScenPercDsb")
@@ -669,18 +384,165 @@ class Ui_MainWindow(object):
         self.solarGenScenPercDsb.setSingleStep(0.100000000000000)
         self.solarGenScenPercDsb.setValue(12.000000000000000)
 
-        self.gridLayout.addWidget(self.solarGenScenPercDsb, 13, 2, 1, 1)
+        self.gridLayout.addWidget(self.solarGenScenPercDsb, 10, 2, 1, 1)
 
-        self.co2EmisScenLbl = QLabel(self.scenWgt)
-        self.co2EmisScenLbl.setObjectName(u"co2EmisScenLbl")
-        self.co2EmisScenLbl.setFont(font5)
-        self.co2EmisScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.otherCapScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.otherCapScenDsb.setObjectName(u"otherCapScenDsb")
+        self.otherCapScenDsb.setMinimumSize(QSize(70, 0))
+        self.otherCapScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.otherCapScenDsb.setFont(font1)
+        self.otherCapScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(191, 127, 127);")
+        self.otherCapScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.otherCapScenDsb.setReadOnly(True)
+        self.otherCapScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.otherCapScenDsb.setMaximum(999999.989999999990687)
+        self.otherCapScenDsb.setSingleStep(0.100000000000000)
+        self.otherCapScenDsb.setValue(0.000000000000000)
 
-        self.gridLayout.addWidget(self.co2EmisScenLbl, 22, 0, 1, 1)
+        self.gridLayout.addWidget(self.otherCapScenDsb, 17, 1, 1, 1)
+
+        self.ferGenScenPercDsb = QDoubleSpinBox(self.scenWgt)
+        self.ferGenScenPercDsb.setObjectName(u"ferGenScenPercDsb")
+        self.ferGenScenPercDsb.setMinimumSize(QSize(70, 0))
+        self.ferGenScenPercDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.ferGenScenPercDsb.setFont(font4)
+        self.ferGenScenPercDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.ferGenScenPercDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.ferGenScenPercDsb.setMaximum(100.000000000000000)
+        self.ferGenScenPercDsb.setSingleStep(0.100000000000000)
+        self.ferGenScenPercDsb.setValue(12.000000000000000)
+
+        self.gridLayout.addWidget(self.ferGenScenPercDsb, 9, 2, 1, 1)
 
         self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.gridLayout.addItem(self.verticalSpacer_5, 16, 0, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer_5, 13, 0, 1, 1)
+
+        self.h2ConsScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.h2ConsScenDsb.setObjectName(u"h2ConsScenDsb")
+        self.h2ConsScenDsb.setMinimumSize(QSize(70, 0))
+        self.h2ConsScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.h2ConsScenDsb.setFont(font1)
+        self.h2ConsScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(255, 255, 255);")
+        self.h2ConsScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.h2ConsScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.h2ConsScenDsb.setMaximum(999999.989999999990687)
+        self.h2ConsScenDsb.setSingleStep(0.100000000000000)
+        self.h2ConsScenDsb.setValue(0.000000000000000)
+
+        self.gridLayout.addWidget(self.h2ConsScenDsb, 3, 1, 1, 1)
+
+        self.h2ConsScenLbl = QLabel(self.scenWgt)
+        self.h2ConsScenLbl.setObjectName(u"h2ConsScenLbl")
+        font5 = QFont()
+        font5.setPointSize(9)
+        font5.setItalic(False)
+        self.h2ConsScenLbl.setFont(font5)
+        self.h2ConsScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.h2ConsScenLbl, 3, 0, 1, 1)
+
+        self.ferGenScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.ferGenScenDsb.setObjectName(u"ferGenScenDsb")
+        self.ferGenScenDsb.setMinimumSize(QSize(70, 0))
+        self.ferGenScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.ferGenScenDsb.setFont(font4)
+        self.ferGenScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(255, 255, 255);")
+        self.ferGenScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.ferGenScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.ferGenScenDsb.setMaximum(999999.989999999990687)
+        self.ferGenScenDsb.setSingleStep(0.100000000000000)
+        self.ferGenScenDsb.setValue(113.000000000000000)
+
+        self.gridLayout.addWidget(self.ferGenScenDsb, 9, 1, 1, 1)
+
+        self.enDutyScenLbl = QLabel(self.scenWgt)
+        self.enDutyScenLbl.setObjectName(u"enDutyScenLbl")
+        self.enDutyScenLbl.setFont(font2)
+        self.enDutyScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.enDutyScenLbl, 5, 0, 1, 1)
+
+        self.enImportScenLbl = QLabel(self.scenWgt)
+        self.enImportScenLbl.setObjectName(u"enImportScenLbl")
+        self.enImportScenLbl.setFont(font2)
+        self.enImportScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.enImportScenLbl, 6, 0, 1, 1)
+
+        self.solarCapScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.solarCapScenDsb.setObjectName(u"solarCapScenDsb")
+        self.solarCapScenDsb.setMinimumSize(QSize(70, 0))
+        self.solarCapScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.solarCapScenDsb.setFont(font1)
+        self.solarCapScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(255, 255, 255);")
+        self.solarCapScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.solarCapScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.solarCapScenDsb.setMaximum(999999.989999999990687)
+        self.solarCapScenDsb.setSingleStep(0.100000000000000)
+        self.solarCapScenDsb.setValue(21.000000000000000)
+
+        self.gridLayout.addWidget(self.solarCapScenDsb, 15, 1, 1, 1)
+
+        self.enProdScenLbl = QLabel(self.scenWgt)
+        self.enProdScenLbl.setObjectName(u"enProdScenLbl")
+        self.enProdScenLbl.setFont(font2)
+        self.enProdScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.enProdScenLbl, 7, 0, 1, 1)
+
+        self.totEnConsScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.totEnConsScenDsb.setObjectName(u"totEnConsScenDsb")
+        self.totEnConsScenDsb.setMinimumSize(QSize(70, 0))
+        self.totEnConsScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.totEnConsScenDsb.setFont(font1)
+        self.totEnConsScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(191, 127, 127);")
+        self.totEnConsScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.totEnConsScenDsb.setReadOnly(True)
+        self.totEnConsScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.totEnConsScenDsb.setMaximum(999999.989999999990687)
+        self.totEnConsScenDsb.setSingleStep(0.100000000000000)
+        self.totEnConsScenDsb.setValue(0.000000000000000)
+
+        self.gridLayout.addWidget(self.totEnConsScenDsb, 2, 1, 1, 1)
+
+        self.otherGenScenPercDsb = QDoubleSpinBox(self.scenWgt)
+        self.otherGenScenPercDsb.setObjectName(u"otherGenScenPercDsb")
+        self.otherGenScenPercDsb.setMinimumSize(QSize(70, 0))
+        self.otherGenScenPercDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.otherGenScenPercDsb.setFont(font1)
+        self.otherGenScenPercDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.otherGenScenPercDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.otherGenScenPercDsb.setMaximum(100.000000000000000)
+        self.otherGenScenPercDsb.setSingleStep(0.100000000000000)
+        self.otherGenScenPercDsb.setValue(12.000000000000000)
+
+        self.gridLayout.addWidget(self.otherGenScenPercDsb, 12, 2, 1, 1)
 
         self.ferCapScenPercDsb = QDoubleSpinBox(self.scenWgt)
         self.ferCapScenPercDsb.setObjectName(u"ferCapScenPercDsb")
@@ -693,11 +555,205 @@ class Ui_MainWindow(object):
         self.ferCapScenPercDsb.setSingleStep(0.100000000000000)
         self.ferCapScenPercDsb.setValue(12.000000000000000)
 
-        self.gridLayout.addWidget(self.ferCapScenPercDsb, 17, 2, 1, 1)
+        self.gridLayout.addWidget(self.ferCapScenPercDsb, 14, 2, 1, 1)
+
+        self.windCapScenPercDsb = QDoubleSpinBox(self.scenWgt)
+        self.windCapScenPercDsb.setObjectName(u"windCapScenPercDsb")
+        self.windCapScenPercDsb.setMinimumSize(QSize(70, 0))
+        self.windCapScenPercDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.windCapScenPercDsb.setFont(font1)
+        self.windCapScenPercDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.windCapScenPercDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.windCapScenPercDsb.setMaximum(100.000000000000000)
+        self.windCapScenPercDsb.setSingleStep(0.100000000000000)
+        self.windCapScenPercDsb.setValue(12.000000000000000)
+
+        self.gridLayout.addWidget(self.windCapScenPercDsb, 16, 2, 1, 1)
+
+        self.otherCapScenPercDsb = QDoubleSpinBox(self.scenWgt)
+        self.otherCapScenPercDsb.setObjectName(u"otherCapScenPercDsb")
+        self.otherCapScenPercDsb.setMinimumSize(QSize(70, 0))
+        self.otherCapScenPercDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.otherCapScenPercDsb.setFont(font1)
+        self.otherCapScenPercDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.otherCapScenPercDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.otherCapScenPercDsb.setMaximum(100.000000000000000)
+        self.otherCapScenPercDsb.setSingleStep(0.100000000000000)
+        self.otherCapScenPercDsb.setValue(12.000000000000000)
+
+        self.gridLayout.addWidget(self.otherCapScenPercDsb, 17, 2, 1, 1)
+
+        self.windGenScenLbl = QLabel(self.scenWgt)
+        self.windGenScenLbl.setObjectName(u"windGenScenLbl")
+        self.windGenScenLbl.setFont(font2)
+        self.windGenScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.windGenScenLbl, 11, 0, 1, 1)
+
+        self.solarCapScenLbl = QLabel(self.scenWgt)
+        self.solarCapScenLbl.setObjectName(u"solarCapScenLbl")
+        self.solarCapScenLbl.setFont(font2)
+        self.solarCapScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.solarCapScenLbl, 15, 0, 1, 1)
+
+        self.totEnConsScenLbl = QLabel(self.scenWgt)
+        self.totEnConsScenLbl.setObjectName(u"totEnConsScenLbl")
+        self.totEnConsScenLbl.setFont(font2)
+        self.totEnConsScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.totEnConsScenLbl, 1, 0, 1, 1)
+
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer_3, 9, 3, 1, 1)
+
+        self.solarGenScenLbl = QLabel(self.scenWgt)
+        self.solarGenScenLbl.setObjectName(u"solarGenScenLbl")
+        self.solarGenScenLbl.setFont(font2)
+        self.solarGenScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.solarGenScenLbl, 10, 0, 1, 1)
+
+        self.ferGenScenLbl = QLabel(self.scenWgt)
+        self.ferGenScenLbl.setObjectName(u"ferGenScenLbl")
+        font6 = QFont()
+        font6.setPointSize(9)
+        font6.setBold(True)
+        font6.setWeight(75)
+        self.ferGenScenLbl.setFont(font6)
+        self.ferGenScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.ferGenScenLbl, 9, 0, 1, 1)
+
+        self.solarCapScenPercDsb = QDoubleSpinBox(self.scenWgt)
+        self.solarCapScenPercDsb.setObjectName(u"solarCapScenPercDsb")
+        self.solarCapScenPercDsb.setMinimumSize(QSize(70, 0))
+        self.solarCapScenPercDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.solarCapScenPercDsb.setFont(font1)
+        self.solarCapScenPercDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.solarCapScenPercDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.solarCapScenPercDsb.setMaximum(100.000000000000000)
+        self.solarCapScenPercDsb.setSingleStep(0.100000000000000)
+        self.solarCapScenPercDsb.setValue(12.000000000000000)
+
+        self.gridLayout.addWidget(self.solarCapScenPercDsb, 15, 2, 1, 1)
+
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer_4, 8, 0, 1, 1)
+
+        self.windCapScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.windCapScenDsb.setObjectName(u"windCapScenDsb")
+        self.windCapScenDsb.setMinimumSize(QSize(70, 0))
+        self.windCapScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.windCapScenDsb.setFont(font1)
+        self.windCapScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(255, 255, 255);")
+        self.windCapScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.windCapScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.windCapScenDsb.setMaximum(999999.989999999990687)
+        self.windCapScenDsb.setSingleStep(0.100000000000000)
+        self.windCapScenDsb.setValue(11.000000000000000)
+
+        self.gridLayout.addWidget(self.windCapScenDsb, 16, 1, 1, 1)
+
+        self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer_9, 18, 0, 1, 1)
+
+        self.windCapScenLbl = QLabel(self.scenWgt)
+        self.windCapScenLbl.setObjectName(u"windCapScenLbl")
+        self.windCapScenLbl.setFont(font2)
+        self.windCapScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.windCapScenLbl, 16, 0, 1, 1)
 
         self.verticalSpacer_8 = QSpacerItem(20, 10, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.gridLayout.addItem(self.verticalSpacer_8, 7, 1, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer_8, 4, 1, 1, 1)
+
+        self.enImportScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.enImportScenDsb.setObjectName(u"enImportScenDsb")
+        self.enImportScenDsb.setMinimumSize(QSize(70, 0))
+        self.enImportScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.enImportScenDsb.setFont(font4)
+        self.enImportScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(255, 255, 255);")
+        self.enImportScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.enImportScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.enImportScenDsb.setMaximum(999999.989999999990687)
+        self.enImportScenDsb.setSingleStep(0.100000000000000)
+        self.enImportScenDsb.setValue(51.000000000000000)
+
+        self.gridLayout.addWidget(self.enImportScenDsb, 6, 1, 1, 1)
+
+        self.ferCapScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.ferCapScenDsb.setObjectName(u"ferCapScenDsb")
+        self.ferCapScenDsb.setMinimumSize(QSize(70, 0))
+        self.ferCapScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.ferCapScenDsb.setFont(font4)
+        self.ferCapScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(255, 255, 255);")
+        self.ferCapScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.ferCapScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.ferCapScenDsb.setMaximum(999999.989999999990687)
+        self.ferCapScenDsb.setSingleStep(0.100000000000000)
+        self.ferCapScenDsb.setValue(55.000000000000000)
+
+        self.gridLayout.addWidget(self.ferCapScenDsb, 14, 1, 1, 1)
+
+        self.co2EmisScenLbl = QLabel(self.scenWgt)
+        self.co2EmisScenLbl.setObjectName(u"co2EmisScenLbl")
+        self.co2EmisScenLbl.setFont(font6)
+        self.co2EmisScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.co2EmisScenLbl, 19, 0, 1, 1)
+
+        self.otherCapScenLbl = QLabel(self.scenWgt)
+        self.otherCapScenLbl.setObjectName(u"otherCapScenLbl")
+        self.otherCapScenLbl.setFont(font2)
+        self.otherCapScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.otherCapScenLbl, 17, 0, 1, 1)
+
+        self.ferCapScenLbl = QLabel(self.scenWgt)
+        self.ferCapScenLbl.setObjectName(u"ferCapScenLbl")
+        self.ferCapScenLbl.setFont(font6)
+        self.ferCapScenLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.ferCapScenLbl, 14, 0, 1, 1)
+
+        self.totEnConsMtepScenDsb = QDoubleSpinBox(self.scenWgt)
+        self.totEnConsMtepScenDsb.setObjectName(u"totEnConsMtepScenDsb")
+        self.totEnConsMtepScenDsb.setMinimumSize(QSize(70, 0))
+        self.totEnConsMtepScenDsb.setMaximumSize(QSize(16777215, 16777215))
+        self.totEnConsMtepScenDsb.setFont(font4)
+        self.totEnConsMtepScenDsb.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"border: solid;\n"
+"border-radius: 0px;\n"
+"border-width: 1px;\n"
+"boder-color: rgb(127, 127, 127);\n"
+"background-color: rgb(255, 255, 255);")
+        self.totEnConsMtepScenDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.totEnConsMtepScenDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.totEnConsMtepScenDsb.setMaximum(999999.989999999990687)
+        self.totEnConsMtepScenDsb.setSingleStep(0.100000000000000)
+        self.totEnConsMtepScenDsb.setValue(112.000000000000000)
+
+        self.gridLayout.addWidget(self.totEnConsMtepScenDsb, 1, 1, 1, 1)
 
 
         self.leftVL.addWidget(self.scenWgt)
@@ -773,6 +829,7 @@ class Ui_MainWindow(object):
         self.enImportResPerspDsb.setMaximumSize(QSize(110, 16777215))
         self.enImportResPerspDsb.setFont(font1)
         self.enImportResPerspDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.enImportResPerspDsb.setReadOnly(True)
         self.enImportResPerspDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.enImportResPerspDsb.setMaximum(999999.989999999990687)
         self.enImportResPerspDsb.setSingleStep(0.100000000000000)
@@ -795,6 +852,7 @@ class Ui_MainWindow(object):
         self.totEnConsResActDsb.setMaximumSize(QSize(110, 16777215))
         self.totEnConsResActDsb.setFont(font1)
         self.totEnConsResActDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.totEnConsResActDsb.setReadOnly(True)
         self.totEnConsResActDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.totEnConsResActDsb.setMaximum(999999.989999999990687)
         self.totEnConsResActDsb.setSingleStep(0.100000000000000)
@@ -846,6 +904,7 @@ class Ui_MainWindow(object):
         self.h2ConsResPerspDsb.setMaximumSize(QSize(110, 16777215))
         self.h2ConsResPerspDsb.setFont(font1)
         self.h2ConsResPerspDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.h2ConsResPerspDsb.setReadOnly(True)
         self.h2ConsResPerspDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.h2ConsResPerspDsb.setMaximum(999999.989999999990687)
         self.h2ConsResPerspDsb.setSingleStep(0.100000000000000)
@@ -861,6 +920,7 @@ class Ui_MainWindow(object):
         self.totEnConsMtepResActDsb.setMaximumSize(QSize(110, 16777215))
         self.totEnConsMtepResActDsb.setFont(font1)
         self.totEnConsMtepResActDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.totEnConsMtepResActDsb.setReadOnly(True)
         self.totEnConsMtepResActDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.totEnConsMtepResActDsb.setMaximum(999999.989999999990687)
         self.totEnConsMtepResActDsb.setSingleStep(0.100000000000000)
@@ -876,6 +936,7 @@ class Ui_MainWindow(object):
         self.enDutyResPerspDsb.setMaximumSize(QSize(110, 16777215))
         self.enDutyResPerspDsb.setFont(font1)
         self.enDutyResPerspDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.enDutyResPerspDsb.setReadOnly(True)
         self.enDutyResPerspDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.enDutyResPerspDsb.setMaximum(999999.989999999990687)
         self.enDutyResPerspDsb.setSingleStep(0.100000000000000)
@@ -891,6 +952,7 @@ class Ui_MainWindow(object):
         self.enProdResActDsb.setMaximumSize(QSize(110, 16777215))
         self.enProdResActDsb.setFont(font1)
         self.enProdResActDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.enProdResActDsb.setReadOnly(True)
         self.enProdResActDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.enProdResActDsb.setMaximum(999999.989999999990687)
         self.enProdResActDsb.setSingleStep(0.100000000000000)
@@ -906,6 +968,7 @@ class Ui_MainWindow(object):
         self.totEnConsResPerspDsb.setMaximumSize(QSize(110, 16777215))
         self.totEnConsResPerspDsb.setFont(font1)
         self.totEnConsResPerspDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.totEnConsResPerspDsb.setReadOnly(True)
         self.totEnConsResPerspDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.totEnConsResPerspDsb.setMaximum(999999.989999999990687)
         self.totEnConsResPerspDsb.setSingleStep(0.100000000000000)
@@ -921,6 +984,7 @@ class Ui_MainWindow(object):
         self.enDutyResActDsb.setMaximumSize(QSize(110, 16777215))
         self.enDutyResActDsb.setFont(font1)
         self.enDutyResActDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.enDutyResActDsb.setReadOnly(True)
         self.enDutyResActDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.enDutyResActDsb.setMaximum(999999.989999999990687)
         self.enDutyResActDsb.setSingleStep(0.100000000000000)
@@ -950,6 +1014,7 @@ class Ui_MainWindow(object):
         self.enProdResPerspDsb.setMaximumSize(QSize(110, 16777215))
         self.enProdResPerspDsb.setFont(font1)
         self.enProdResPerspDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.enProdResPerspDsb.setReadOnly(True)
         self.enProdResPerspDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.enProdResPerspDsb.setMaximum(999999.989999999990687)
         self.enProdResPerspDsb.setSingleStep(0.100000000000000)
@@ -965,6 +1030,7 @@ class Ui_MainWindow(object):
         self.h2ConsResActDsb.setMaximumSize(QSize(110, 16777215))
         self.h2ConsResActDsb.setFont(font1)
         self.h2ConsResActDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.h2ConsResActDsb.setReadOnly(True)
         self.h2ConsResActDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.h2ConsResActDsb.setMaximum(999999.989999999990687)
         self.h2ConsResActDsb.setSingleStep(0.100000000000000)
@@ -984,6 +1050,7 @@ class Ui_MainWindow(object):
         self.totEnConsMtepResPerspDsb.setMaximumSize(QSize(110, 16777215))
         self.totEnConsMtepResPerspDsb.setFont(font1)
         self.totEnConsMtepResPerspDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.totEnConsMtepResPerspDsb.setReadOnly(True)
         self.totEnConsMtepResPerspDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.totEnConsMtepResPerspDsb.setMaximum(999999.989999999990687)
         self.totEnConsMtepResPerspDsb.setSingleStep(0.100000000000000)
@@ -999,6 +1066,7 @@ class Ui_MainWindow(object):
         self.enImportResActDsb.setMaximumSize(QSize(110, 16777215))
         self.enImportResActDsb.setFont(font1)
         self.enImportResActDsb.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.enImportResActDsb.setReadOnly(True)
         self.enImportResActDsb.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.enImportResActDsb.setMaximum(999999.989999999990687)
         self.enImportResActDsb.setSingleStep(0.100000000000000)
@@ -1182,7 +1250,7 @@ class Ui_MainWindow(object):
 
         self.ferGenResLbl = QLabel(self.genResWgt)
         self.ferGenResLbl.setObjectName(u"ferGenResLbl")
-        self.ferGenResLbl.setFont(font5)
+        self.ferGenResLbl.setFont(font6)
         self.ferGenResLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout_4.addWidget(self.ferGenResLbl, 2, 0, 1, 1)
@@ -1388,7 +1456,7 @@ class Ui_MainWindow(object):
 
         self.hiOvergenResLbl = QLabel(self.overgenResWgt)
         self.hiOvergenResLbl.setObjectName(u"hiOvergenResLbl")
-        self.hiOvergenResLbl.setFont(font5)
+        self.hiOvergenResLbl.setFont(font6)
         self.hiOvergenResLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout_7.addWidget(self.hiOvergenResLbl, 2, 0, 1, 1)
@@ -1410,7 +1478,7 @@ class Ui_MainWindow(object):
 
         self.lowOvergenResLbl = QLabel(self.overgenResWgt)
         self.lowOvergenResLbl.setObjectName(u"lowOvergenResLbl")
-        self.lowOvergenResLbl.setFont(font5)
+        self.lowOvergenResLbl.setFont(font6)
         self.lowOvergenResLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout_7.addWidget(self.lowOvergenResLbl, 3, 0, 1, 1)
@@ -1601,7 +1669,7 @@ class Ui_MainWindow(object):
 
         self.ferCapResLbl = QLabel(self.capResWgt)
         self.ferCapResLbl.setObjectName(u"ferCapResLbl")
-        self.ferCapResLbl.setFont(font5)
+        self.ferCapResLbl.setFont(font6)
         self.ferCapResLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout_5.addWidget(self.ferCapResLbl, 3, 0, 1, 1)
@@ -1996,7 +2064,7 @@ class Ui_MainWindow(object):
         self.gridLayout_10.setObjectName(u"gridLayout_10")
         self.frnpCostsResLbl = QLabel(self.costsResWgt)
         self.frnpCostsResLbl.setObjectName(u"frnpCostsResLbl")
-        self.frnpCostsResLbl.setFont(font5)
+        self.frnpCostsResLbl.setFont(font6)
         self.frnpCostsResLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout_10.addWidget(self.frnpCostsResLbl, 2, 0, 1, 1)
@@ -2035,14 +2103,14 @@ class Ui_MainWindow(object):
 
         self.h2CostsResLbl = QLabel(self.costsResWgt)
         self.h2CostsResLbl.setObjectName(u"h2CostsResLbl")
-        self.h2CostsResLbl.setFont(font5)
+        self.h2CostsResLbl.setFont(font6)
         self.h2CostsResLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout_10.addWidget(self.h2CostsResLbl, 4, 0, 1, 1)
 
         self.capexCostsResLbl = QLabel(self.costsResWgt)
         self.capexCostsResLbl.setObjectName(u"capexCostsResLbl")
-        self.capexCostsResLbl.setFont(font5)
+        self.capexCostsResLbl.setFont(font6)
         self.capexCostsResLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout_10.addWidget(self.capexCostsResLbl, 3, 0, 1, 1)
@@ -2129,7 +2197,7 @@ class Ui_MainWindow(object):
 
         self.co2EmisResActLbl = QLabel(self.emisResWgt)
         self.co2EmisResActLbl.setObjectName(u"co2EmisResActLbl")
-        self.co2EmisResActLbl.setFont(font5)
+        self.co2EmisResActLbl.setFont(font6)
         self.co2EmisResActLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout_6.addWidget(self.co2EmisResActLbl, 2, 0, 1, 1)
@@ -2170,7 +2238,7 @@ class Ui_MainWindow(object):
 
         self.co2EmisRedResPerspLbl = QLabel(self.emisResWgt)
         self.co2EmisRedResPerspLbl.setObjectName(u"co2EmisRedResPerspLbl")
-        self.co2EmisRedResPerspLbl.setFont(font5)
+        self.co2EmisRedResPerspLbl.setFont(font6)
         self.co2EmisRedResPerspLbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout_6.addWidget(self.co2EmisRedResPerspLbl, 3, 0, 1, 1)
@@ -2216,6 +2284,91 @@ class Ui_MainWindow(object):
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        QWidget.setTabOrder(self.electrLevInputDsb, self.enConsGrowInputDsb)
+        QWidget.setTabOrder(self.enConsGrowInputDsb, self.ferGenInputDsb)
+        QWidget.setTabOrder(self.ferGenInputDsb, self.solarFerInputDsb)
+        QWidget.setTabOrder(self.solarFerInputDsb, self.h2ConsInputDsb)
+        QWidget.setTabOrder(self.h2ConsInputDsb, self.totEnConsMtepScenDsb)
+        QWidget.setTabOrder(self.totEnConsMtepScenDsb, self.h2ConsScenDsb)
+        QWidget.setTabOrder(self.h2ConsScenDsb, self.enDutyScenDsb)
+        QWidget.setTabOrder(self.enDutyScenDsb, self.enImportScenDsb)
+        QWidget.setTabOrder(self.enImportScenDsb, self.ferGenScenDsb)
+        QWidget.setTabOrder(self.ferGenScenDsb, self.solarGenScenDsb)
+        QWidget.setTabOrder(self.solarGenScenDsb, self.windGenScenDsb)
+        QWidget.setTabOrder(self.windGenScenDsb, self.ferCapScenDsb)
+        QWidget.setTabOrder(self.ferCapScenDsb, self.solarCapScenDsb)
+        QWidget.setTabOrder(self.solarCapScenDsb, self.windCapScenDsb)
+        QWidget.setTabOrder(self.windCapScenDsb, self.calcPb)
+        QWidget.setTabOrder(self.calcPb, self.windCapScenPercDsb)
+        QWidget.setTabOrder(self.windCapScenPercDsb, self.windGenScenPercDsb)
+        QWidget.setTabOrder(self.windGenScenPercDsb, self.co2EmisScenDsb)
+        QWidget.setTabOrder(self.co2EmisScenDsb, self.otherGenScenDsb)
+        QWidget.setTabOrder(self.otherGenScenDsb, self.otherGenScenPercDsb)
+        QWidget.setTabOrder(self.otherGenScenPercDsb, self.enProdScenDsb)
+        QWidget.setTabOrder(self.enProdScenDsb, self.otherCapScenPercDsb)
+        QWidget.setTabOrder(self.otherCapScenPercDsb, self.otherCapScenDsb)
+        QWidget.setTabOrder(self.otherCapScenDsb, self.totEnConsScenDsb)
+        QWidget.setTabOrder(self.totEnConsScenDsb, self.ferGenScenPercDsb)
+        QWidget.setTabOrder(self.ferGenScenPercDsb, self.solarGenScenPercDsb)
+        QWidget.setTabOrder(self.solarGenScenPercDsb, self.ferCapScenPercDsb)
+        QWidget.setTabOrder(self.ferCapScenPercDsb, self.solarCapScenPercDsb)
+        QWidget.setTabOrder(self.solarCapScenPercDsb, self.enImportResPerspDsb)
+        QWidget.setTabOrder(self.enImportResPerspDsb, self.totEnConsResActDsb)
+        QWidget.setTabOrder(self.totEnConsResActDsb, self.h2ConsResPerspDsb)
+        QWidget.setTabOrder(self.h2ConsResPerspDsb, self.totEnConsMtepResActDsb)
+        QWidget.setTabOrder(self.totEnConsMtepResActDsb, self.enDutyResPerspDsb)
+        QWidget.setTabOrder(self.enDutyResPerspDsb, self.enProdResActDsb)
+        QWidget.setTabOrder(self.enProdResActDsb, self.totEnConsResPerspDsb)
+        QWidget.setTabOrder(self.totEnConsResPerspDsb, self.enDutyResActDsb)
+        QWidget.setTabOrder(self.enDutyResActDsb, self.enProdResPerspDsb)
+        QWidget.setTabOrder(self.enProdResPerspDsb, self.h2ConsResActDsb)
+        QWidget.setTabOrder(self.h2ConsResActDsb, self.totEnConsMtepResPerspDsb)
+        QWidget.setTabOrder(self.totEnConsMtepResPerspDsb, self.enImportResActDsb)
+        QWidget.setTabOrder(self.enImportResActDsb, self.solarGenResActDsb)
+        QWidget.setTabOrder(self.solarGenResActDsb, self.windGenPercResPerspDsb)
+        QWidget.setTabOrder(self.windGenPercResPerspDsb, self.solarGenResPerspDsb)
+        QWidget.setTabOrder(self.solarGenResPerspDsb, self.otherGenPercResActDsb)
+        QWidget.setTabOrder(self.otherGenPercResActDsb, self.ferGenPercResPerspDsb)
+        QWidget.setTabOrder(self.ferGenPercResPerspDsb, self.ferGenResPerspDsb)
+        QWidget.setTabOrder(self.ferGenResPerspDsb, self.windGenResActDsb)
+        QWidget.setTabOrder(self.windGenResActDsb, self.solarGenPercResActDsb)
+        QWidget.setTabOrder(self.solarGenPercResActDsb, self.windGenPercResActDsb)
+        QWidget.setTabOrder(self.windGenPercResActDsb, self.otherGenPercResPerspDsb)
+        QWidget.setTabOrder(self.otherGenPercResPerspDsb, self.ferGenPercResActDsb)
+        QWidget.setTabOrder(self.ferGenPercResActDsb, self.ferGenResActDsb)
+        QWidget.setTabOrder(self.ferGenResActDsb, self.solarGenPercResPerspDsb)
+        QWidget.setTabOrder(self.solarGenPercResPerspDsb, self.windGenResPerspDsb)
+        QWidget.setTabOrder(self.windGenResPerspDsb, self.otherGenResActDsb)
+        QWidget.setTabOrder(self.otherGenResActDsb, self.otherGenResPerspDsb)
+        QWidget.setTabOrder(self.otherGenResPerspDsb, self.hiOvergenResActDsb)
+        QWidget.setTabOrder(self.hiOvergenResActDsb, self.lowOvergenResActDsb)
+        QWidget.setTabOrder(self.lowOvergenResActDsb, self.lowOvergenResPerspDsb)
+        QWidget.setTabOrder(self.lowOvergenResPerspDsb, self.hiOvergenResPerspDsb)
+        QWidget.setTabOrder(self.hiOvergenResPerspDsb, self.otherCapPercResPerspDsb)
+        QWidget.setTabOrder(self.otherCapPercResPerspDsb, self.windCapResPerspDsb)
+        QWidget.setTabOrder(self.windCapResPerspDsb, self.windCapPercResPerspDsb)
+        QWidget.setTabOrder(self.windCapPercResPerspDsb, self.solarCapPercResPerspDsb)
+        QWidget.setTabOrder(self.solarCapPercResPerspDsb, self.otherCapResActDsb)
+        QWidget.setTabOrder(self.otherCapResActDsb, self.solarCapResPerspDsb)
+        QWidget.setTabOrder(self.solarCapResPerspDsb, self.otherCapPercResActDsb)
+        QWidget.setTabOrder(self.otherCapPercResActDsb, self.ferCapResActDsb)
+        QWidget.setTabOrder(self.ferCapResActDsb, self.ferCapResPerspDsb)
+        QWidget.setTabOrder(self.ferCapResPerspDsb, self.solarCapPercResActDsb)
+        QWidget.setTabOrder(self.solarCapPercResActDsb, self.windCapPercResActDsb)
+        QWidget.setTabOrder(self.windCapPercResActDsb, self.solarCapResActDsb)
+        QWidget.setTabOrder(self.solarCapResActDsb, self.windCapResActDsb)
+        QWidget.setTabOrder(self.windCapResActDsb, self.otherCapResPerspDsb)
+        QWidget.setTabOrder(self.otherCapResPerspDsb, self.sysStorResPerspDsb)
+        QWidget.setTabOrder(self.sysStorResPerspDsb, self.toprodHiH2ResPerspDsb)
+        QWidget.setTabOrder(self.toprodHiH2ResPerspDsb, self.maxLowH2ResPerspDsb)
+        QWidget.setTabOrder(self.maxLowH2ResPerspDsb, self.maxHiH2ResPerspDsb)
+        QWidget.setTabOrder(self.maxHiH2ResPerspDsb, self.toprodLowH2ResPerspDsb)
+        QWidget.setTabOrder(self.toprodLowH2ResPerspDsb, self.h2CostsResPerspDsb)
+        QWidget.setTabOrder(self.h2CostsResPerspDsb, self.capexCostsResPerspDsb)
+        QWidget.setTabOrder(self.capexCostsResPerspDsb, self.frnpCostsResPerspDsb)
+        QWidget.setTabOrder(self.frnpCostsResPerspDsb, self.co2EmisResActDsb)
+        QWidget.setTabOrder(self.co2EmisResActDsb, self.co2EmisResPerspDsb)
+        QWidget.setTabOrder(self.co2EmisResPerspDsb, self.co2EmisRedResPerspDsb)
 
         self.retranslateUi(MainWindow)
 
@@ -2235,59 +2388,51 @@ class Ui_MainWindow(object):
         self.electrLevInputLbl.setText(QCoreApplication.translate("MainWindow", u"Livello di elettrificazione", None))
         self.enConsGrowInputLbl.setText(QCoreApplication.translate("MainWindow", u"Crescita annua dei consumi di energia finale t.m.a.", None))
         self.h2ConsInputLbl.setText(QCoreApplication.translate("MainWindow", u"Consumi per produzione H2", None))
-        self.scenTitleLbl.setText(QCoreApplication.translate("MainWindow", u"Scenario", None))
-        self.co2EmisScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" kg", None))
-        self.scenLbl.setText(QCoreApplication.translate("MainWindow", u"Scenario", None))
+        self.scenTitleLbl.setText(QCoreApplication.translate("MainWindow", u"Scenario iniziale", None))
         self.windGenScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
-        self.solarCapScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
-        self.enImportScenLbl.setText(QCoreApplication.translate("MainWindow", u"Energia importata", None))
-        self.enImportScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
-        self.totEnConsScenLbl.setText(QCoreApplication.translate("MainWindow", u"Consumi finali di energia", None))
-        self.scenCb.setItemText(0, QCoreApplication.translate("MainWindow", u"Consuntivo", None))
-
-        self.otherGenScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
-        self.otherCapScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Altre fonti", None))
-        self.solarCapScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" GW", None))
-        self.solarGenScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
-        self.ferGenScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
-        self.totEnConsMtepScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" Mtep", None))
-        self.windCapScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Eolico", None))
-        self.enProdScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
-        self.enDutyScenLbl.setText(QCoreApplication.translate("MainWindow", u"Fabbisogno di energia elettrica", None))
-        self.enDutyScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
-        self.solarCapScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Solalre", None))
-        self.windCapScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
         self.windGenScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
-        self.h2ConsScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
+        self.co2EmisScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u"Mt", None))
         self.otherGenScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
-        self.enProdScenLbl.setText(QCoreApplication.translate("MainWindow", u"Energia prodotta", None))
-        self.ferGenScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
-        self.windGenScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Eolico", None))
-        self.yearScenLbl.setText(QCoreApplication.translate("MainWindow", u"Anno Scenario", None))
-        self.ferCapScenLbl.setText(QCoreApplication.translate("MainWindow", u"Capacit\u00e0 installata FER", None))
-        self.h2ConsScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui consumi per produrre H2", None))
-        self.windCapScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" GW", None))
-        self.otherCapScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
-        self.otherCapScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" GW", None))
-        self.totEnConsScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
-        self.solarGenScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Solare", None))
-        self.yearScenCb.setItemText(0, QCoreApplication.translate("MainWindow", u"2019", None))
-        self.yearScenCb.setItemText(1, QCoreApplication.translate("MainWindow", u"2040", None))
-        self.yearScenCb.setItemText(2, QCoreApplication.translate("MainWindow", u"2040", None))
-
-        self.ferCapScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" GW", None))
-        self.ferGenScenLbl.setText(QCoreApplication.translate("MainWindow", u"Generazione da FER", None))
         self.otherGenScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Altre fonti", None))
+        self.enDutyScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
+        self.solarGenScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
+        self.enProdScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
         self.solarGenScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
-        self.co2EmisScenLbl.setText(QCoreApplication.translate("MainWindow", u"Emissioni di CO2", None))
+        self.otherCapScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" GW", None))
+        self.ferGenScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
+        self.h2ConsScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
+        self.h2ConsScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui consumi per produrre H2", None))
+        self.ferGenScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
+        self.enDutyScenLbl.setText(QCoreApplication.translate("MainWindow", u"Fabbisogno di energia elettrica", None))
+        self.enImportScenLbl.setText(QCoreApplication.translate("MainWindow", u"Energia importata", None))
+        self.solarCapScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" GW", None))
+        self.enProdScenLbl.setText(QCoreApplication.translate("MainWindow", u"Energia prodotta", None))
+        self.totEnConsScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
+        self.otherGenScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
         self.ferCapScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
+        self.windCapScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
+        self.otherCapScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
+        self.windGenScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Eolico", None))
+        self.solarCapScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Solalre", None))
+        self.totEnConsScenLbl.setText(QCoreApplication.translate("MainWindow", u"Consumi finali di energia", None))
+        self.solarGenScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Solare", None))
+        self.ferGenScenLbl.setText(QCoreApplication.translate("MainWindow", u"Generazione da FER", None))
+        self.solarCapScenPercDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
+        self.windCapScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" GW", None))
+        self.windCapScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Eolico", None))
+        self.enImportScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
+        self.ferCapScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" GW", None))
+        self.co2EmisScenLbl.setText(QCoreApplication.translate("MainWindow", u"Emissioni di CO2", None))
+        self.otherCapScenLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Altre fonti", None))
+        self.ferCapScenLbl.setText(QCoreApplication.translate("MainWindow", u"Capacit\u00e0 installata FER", None))
+        self.totEnConsMtepScenDsb.setSuffix(QCoreApplication.translate("MainWindow", u" Mtep", None))
         self.calcPb.setText(QCoreApplication.translate("MainWindow", u"Calcola", None))
         self.duttResLbl.setText(QCoreApplication.translate("MainWindow", u"Fabbisogno", None))
         self.enImportResPerspDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
         self.enImportResLbl.setText(QCoreApplication.translate("MainWindow", u"Energia importata", None))
         self.totEnConsResActDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
         self.perspDutyLbl.setText(QCoreApplication.translate("MainWindow", u"Valori prospettici ", None))
-        self.actDutyLbl.setText(QCoreApplication.translate("MainWindow", u"Valori attuali ", None))
+        self.actDutyLbl.setText(QCoreApplication.translate("MainWindow", u"Valori iniziali ", None))
         self.h2ConsResLbl.setText(QCoreApplication.translate("MainWindow", u"di cui consumi per produrre H2", None))
         self.h2ConsResPerspDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
         self.totEnConsMtepResActDsb.setSuffix(QCoreApplication.translate("MainWindow", u" Mtep", None))
@@ -2323,12 +2468,12 @@ class Ui_MainWindow(object):
         self.otherGenResLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Altre fonti", None))
         self.otherGenResActDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
         self.solarGenResLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Solare", None))
-        self.actGenLbl.setText(QCoreApplication.translate("MainWindow", u"Valori attuali ", None))
+        self.actGenLbl.setText(QCoreApplication.translate("MainWindow", u"Valori iniziali ", None))
         self.otherGenResPerspDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
         self.perspOvergenLbl.setText(QCoreApplication.translate("MainWindow", u"Valori prospettici ", None))
         self.hiOvergenResActDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
         self.hiOvergenResLbl.setText(QCoreApplication.translate("MainWindow", u"Overgeneration ALTA", None))
-        self.actOvergenResLbl.setText(QCoreApplication.translate("MainWindow", u"Valori attuali ", None))
+        self.actOvergenResLbl.setText(QCoreApplication.translate("MainWindow", u"Valori iniziali ", None))
         self.lowOvergenResLbl.setText(QCoreApplication.translate("MainWindow", u"Overgeneration Bassa", None))
         self.lowOvergenResActDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
         self.lowOvergenResPerspDsb.setSuffix(QCoreApplication.translate("MainWindow", u" TWh", None))
@@ -2337,7 +2482,7 @@ class Ui_MainWindow(object):
         self.windCapResPerspDsb.setSuffix(QCoreApplication.translate("MainWindow", u" GW", None))
         self.windCapPercResPerspDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
         self.solarCapPercResPerspDsb.setSuffix(QCoreApplication.translate("MainWindow", u"%", None))
-        self.actualLbl_3.setText(QCoreApplication.translate("MainWindow", u"Valori attuali ", None))
+        self.actualLbl_3.setText(QCoreApplication.translate("MainWindow", u"Valori iniziali ", None))
         self.otherCapResLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Altre fonti", None))
         self.solarCapResLbl.setText(QCoreApplication.translate("MainWindow", u"di cui Solalre", None))
         self.otherCapResActDsb.setSuffix(QCoreApplication.translate("MainWindow", u" GW", None))
@@ -2355,7 +2500,7 @@ class Ui_MainWindow(object):
         self.perspectLbl_3.setText(QCoreApplication.translate("MainWindow", u"Valori prospettici ", None))
         self.storResLbl.setText(QCoreApplication.translate("MainWindow", u"Accumuli", None))
         self.perspStorLbl.setText(QCoreApplication.translate("MainWindow", u"Valori prospettici ", None))
-        self.sysStorResLbl.setText(QCoreApplication.translate("MainWindow", u"Sistemi di stoccaggio (Ipotesi TERNA)", None))
+        self.sysStorResLbl.setText(QCoreApplication.translate("MainWindow", u"Sistemi di stoccaggio", None))
         self.sysStorResPerspDsb.setSuffix(QCoreApplication.translate("MainWindow", u" Gwh", None))
         self.h2ResLbl.setText(QCoreApplication.translate("MainWindow", u"Idrogeno", None))
         self.overgenH2Lbl.setText(QCoreApplication.translate("MainWindow", u"Ipotesi Overgenreation ", None))
@@ -2379,7 +2524,7 @@ class Ui_MainWindow(object):
         self.frnpCostsResPerspDsb.setSuffix("")
         self.perspCostsLbl.setText(QCoreApplication.translate("MainWindow", u"Valori prospettici ", None))
         self.inputLbl_7.setText(QCoreApplication.translate("MainWindow", u"Emissioni", None))
-        self.actualLbl_4.setText(QCoreApplication.translate("MainWindow", u"Valori attuali ", None))
+        self.actualLbl_4.setText(QCoreApplication.translate("MainWindow", u"Valori iniziali ", None))
         self.perspectLbl_4.setText(QCoreApplication.translate("MainWindow", u"Valori prospettici ", None))
         self.co2EmisResActLbl.setText(QCoreApplication.translate("MainWindow", u"Emissioni di CO2", None))
         self.co2EmisResActDsb.setSuffix(QCoreApplication.translate("MainWindow", u" Mt", None))

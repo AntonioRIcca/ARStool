@@ -22,17 +22,26 @@ class OptStorWGT(QMainWindow):
 
         self.ui.resultsWgt.setVisible(False)
 
-        # Popolazione della tendina "Anno"
-        self.ui.yearScenCb.clear()
-        self.ui.yearScenCb.addItems(list(s.keys()))
+        self.inp_var = list(s['2019']['Consuntivo'].keys())
+        print(self.inp_var)
 
-        self.year_selected()    # azioni conseguenti alla selezione dell'anno
-        self.scen_selected()    # azioni conseguenti alla selezione dello scenario
+
+        # # Popolazione della tendina "Anno"
+        # self.ui.yearScenCb.clear()
+        # self.ui.yearScenCb.addItems(list(s.keys()))
+        #
+        # self.year_selected()    # azioni conseguenti alla selezione dell'anno
+        # self.scen_selected()    # azioni conseguenti alla selezione dello scenario
 
         # -- Azioni dei pulsanti e dei menu a tendina --------------------------------
-        self.ui.yearScenCb.currentTextChanged.connect(self.year_selected)
-        self.ui.scenCb.currentTextChanged.connect(self.scen_selected)
+        # self.ui.yearScenCb.currentTextChanged.connect(self.year_selected)
+        # self.ui.scenCb.currentTextChanged.connect(self.scen_selected)
+        self.input_refresh()
+
         self.ui.calcPb.clicked.connect(self.calculation)
+
+        for k in self.inp_var:
+            self.ui.__getattribute__(k + 'ScenDsb').valueChanged.connect(self.input_refresh)
         # ----------------------------------------------------------------------------
 
     # Calcolo dei risultati
@@ -112,53 +121,101 @@ class OptStorWGT(QMainWindow):
         grid['name'] = 'Rete generica'
         grid['studies']['optstor'] = True
 
-    # Azioni conseguenti alla selezione dell'anno: popolazione della tendina dello scenario
-    def year_selected(self):
-        self.ui.scenCb.clear()
-        self.ui.scenCb.addItems(list(s[self.ui.yearScenCb.currentText()].keys()))
-        # self.ui.scenCb.currentTextChanged.connect(self.scen_selected)
+    def input_refresh(self):
+        for k in s['2019']['Consuntivo']:
+            self.__setattr__(k + 'Scen', self.ui.__getattribute__(k + 'ScenDsb').value())
 
-    # Azioni conseguenti alla selezione delo scenario
-    def scen_selected(self):
-        year = self.ui.yearScenCb.currentText()
-        scen = self.ui.scenCb.currentText()
+        # -- Calcolo e scrittura nelle caaselledi alcune variabili non presenti nello scenario ---
+        self.totEnConsScen = self.totEnConsMtepScen / 0.086
+        self.enProdScen = self.enDutyScen - self.enImportScen
 
-        if scen:    # evita azioni inutili durante la popolazione della tendina scenario
-            for k in s[year][scen]:
-                # Scrittura delle variabili di scenario
-                self.__setattr__(k + 'Scen', s[year][scen][k])
-                # Scrittura delle caselle di scenario
-                self.ui.__getattribute__(k + 'ScenDsb').setValue(s[year][scen][k])
+        self.otherGenScen = self.ferGenScen - self.solarGenScen - self.windGenScen
+        self.otherCapScen = self.ferCapScen - self.solarCapScen - self.windCapScen
+        self.co2EmisScen = 290 * self.enProdScen / 1000
 
-            # -- Calcolo e scrittura nelle caaselledi alcune variabili non presenti nello scenario ---
-            self.otherGenScen = self.ferGenScen - self.solarGenScen - self.windGenScen
-            self.otherCapScen = self.ferCapScen - self.solarCapScen - self.windCapScen
-            self.co2EmisScen = (self.enProdScen - self.solarGenScen - self.windGenScen) * 0.33
+        for p in ['otherGen', 'otherCap', 'co2Emis', 'totEnCons', 'enProd']:
+            self.ui.__getattribute__(p + 'ScenDsb').setValue(self.__getattribute__(p + 'Scen'))
+            print(p + 'ScenDsb = ' + p + 'Scen')
+        # ----------------------------------------------------------------------------------------
 
-            for p in ['otherGen', 'otherCap', 'co2Emis']:
-                self.ui.__getattribute__(p + 'ScenDsb').setValue(self.__getattribute__(p + 'Scen'))
-            # ----------------------------------------------------------------------------------------
+        # -- Calcolo delle variabili delle percentuali dei dati di scenario ----------------------
+        for c in ['Gen', 'Cap']:
+            self.__setattr__('fer' + c + 'PercScen',
+                             self.__getattribute__('fer' + c + 'Scen') / self.enDutyScen * 100)
+            self.ui.__getattribute__('fer' + c + 'ScenPercDsb').setValue(
+                self.__getattribute__('fer' + c + 'PercScen'))
 
-            # -- Calcolo delle variabili delle percentuali dei dati di scenario ----------------------
-            for c in ['Gen', 'Cap']:
-                self.__setattr__('fer' + c + 'PercScen',
-                                 self.__getattribute__('fer' + c + 'Scen') / self.enDutyScen * 100)
-                self.ui.__getattribute__('fer' + c + 'ScenPercDsb').setValue(
-                    self.__getattribute__('fer' + c + 'PercScen'))
+            for p in ['solar', 'wind', 'other']:
+                self.__setattr__(p + c + 'PercScen',
+                                 self.__getattribute__(p + c + 'Scen') /
+                                 self.__getattribute__('fer' + c + 'Scen') * 100)
+                self.ui.__getattribute__(p + c + 'ScenPercDsb').setValue(self.__getattribute__(p + c + 'PercScen'))
+        # ----------------------------------------------------------------------------------------
 
-                for p in ['solar', 'wind', 'other']:
-                    self.__setattr__(p + c + 'PercScen',
-                                     self.__getattribute__(p + c + 'Scen') /
-                                     self.__getattribute__('fer' + c + 'Scen') * 100)
-                    self.ui.__getattribute__(p + c + 'ScenPercDsb').setValue(self.__getattribute__(p + c + 'PercScen'))
-            # ----------------------------------------------------------------------------------------
+        # -- Calcolo OverGeneration --------------------------------------------------------------
+        self.hiOvergenResScen = 0.05 * (self.solarGenScen + self.windGenScen)
+        self.lowOvergenResScen = 0.027 * (self.solarGenScen + self.windGenScen)
+        self.ui.hiOvergenResActDsb.setValue(self.hiOvergenResScen)
+        self.ui.lowOvergenResActDsb.setValue(self.lowOvergenResScen)
+        # ----------------------------------------------------------------------------------------
 
-            # -- Calcolo OverGeneration --------------------------------------------------------------
-            self.hiOvergenResScen = 0.05 * (self.solarGenScen + self.windGenScen)
-            self.lowOvergenResScen = 0.027 * (self.solarGenScen + self.windGenScen)
-            self.ui.hiOvergenResActDsb.setValue(self.hiOvergenResScen)
-            self.ui.lowOvergenResActDsb.setValue(self.lowOvergenResScen)
-            # ----------------------------------------------------------------------------------------
+        # -- Settaggio dei limiti di alcune caselle ---------------------------------------------
+        self.ui.solarGenScenDsb.setMaximum(self.ferGenScen - self.windGenScen)
+        self.ui.windGenScenDsb.setMaximum(self.ferGenScen - self.solarGenScen)
+        self.ui.ferGenScenDsb.setMinimum(self.windGenScen + self.solarGenScen)
+        self.ui.solarCapScenDsb.setMaximum(self.ferCapScen - self.windCapScen)
+        self.ui.windCapScenDsb.setMaximum(self.ferCapScen - self.solarCapScen)
+        self.ui.ferCapScenDsb.setMinimum(self.windCapScen + self.solarCapScen)
+        # ----------------------------------------------------------------------------------------
+
+
+    ## Azioni conseguenti alla selezione dell'anno: popolazione della tendina dello scenario
+    # def year_selected(self):
+    #     self.ui.scenCb.clear()
+    #     self.ui.scenCb.addItems(list(s[self.ui.yearScenCb.currentText()].keys()))
+    #     # self.ui.scenCb.currentTextChanged.connect(self.scen_selected)
+    #
+    # # Azioni conseguenti alla selezione delo scenario
+    # def scen_selected(self):
+    #     year = self.ui.yearScenCb.currentText()
+    #     scen = self.ui.scenCb.currentText()
+    #
+    #     if scen:    # evita azioni inutili durante la popolazione della tendina scenario
+    #         for k in s[year][scen]:
+    #             # Scrittura delle variabili di scenario
+    #             self.__setattr__(k + 'Scen', s[year][scen][k])
+    #             # Scrittura delle caselle di scenario
+    #             self.ui.__getattribute__(k + 'ScenDsb').setValue(s[year][scen][k])
+    #
+    #         # -- Calcolo e scrittura nelle caaselledi alcune variabili non presenti nello scenario ---
+    #         self.otherGenScen = self.ferGenScen - self.solarGenScen - self.windGenScen
+    #         self.otherCapScen = self.ferCapScen - self.solarCapScen - self.windCapScen
+    #         self.co2EmisScen = (self.enProdScen - self.solarGenScen - self.windGenScen) * 0.33
+    #
+    #         for p in ['otherGen', 'otherCap', 'co2Emis']:
+    #             self.ui.__getattribute__(p + 'ScenDsb').setValue(self.__getattribute__(p + 'Scen'))
+    #         # ----------------------------------------------------------------------------------------
+    #
+    #         # -- Calcolo delle variabili delle percentuali dei dati di scenario ----------------------
+    #         for c in ['Gen', 'Cap']:
+    #             self.__setattr__('fer' + c + 'PercScen',
+    #                              self.__getattribute__('fer' + c + 'Scen') / self.enDutyScen * 100)
+    #             self.ui.__getattribute__('fer' + c + 'ScenPercDsb').setValue(
+    #                 self.__getattribute__('fer' + c + 'PercScen'))
+    #
+    #             for p in ['solar', 'wind', 'other']:
+    #                 self.__setattr__(p + c + 'PercScen',
+    #                                  self.__getattribute__(p + c + 'Scen') /
+    #                                  self.__getattribute__('fer' + c + 'Scen') * 100)
+    #                 self.ui.__getattribute__(p + c + 'ScenPercDsb').setValue(self.__getattribute__(p + c + 'PercScen'))
+    #         # ----------------------------------------------------------------------------------------
+    #
+    #         # -- Calcolo OverGeneration --------------------------------------------------------------
+    #         self.hiOvergenResScen = 0.05 * (self.solarGenScen + self.windGenScen)
+    #         self.lowOvergenResScen = 0.027 * (self.solarGenScen + self.windGenScen)
+    #         self.ui.hiOvergenResActDsb.setValue(self.hiOvergenResScen)
+    #         self.ui.lowOvergenResActDsb.setValue(self.lowOvergenResScen)
+    #         # ----------------------------------------------------------------------------------------
 
     # Calcolo dello storage
     def sysStor_calc(self):
@@ -306,8 +363,8 @@ class OptStorWGT(QMainWindow):
         self.ui.graphVL.addItem(bm_spacer)
 
     def data_storage(self):
-        opt_stor['par']['Scenario'][0]['year']['val'] = self.ui.yearScenCb.currentText()
-        opt_stor['par']['Scenario'][0]['scen']['val'] = self.ui.scenCb.currentText()
+        opt_stor['par']['Scenario'][0]['year']['val'] = 'Custom Year'
+        opt_stor['par']['Scenario'][0]['scen']['val'] = 'Custom Scen'
         for i in range(1, 5):
             for p in opt_stor['par']['Scenario'][i]:
                 opt_stor['par']['Scenario'][i][p]['val'] = self.__getattribute__(p + 'Scen')
