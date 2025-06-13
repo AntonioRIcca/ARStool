@@ -33,7 +33,7 @@ class OpenDSS:
         # TODO: da sostituire con la variabile di configurazione del percorso di OpenDSS
         self.dss.text(f"compile [{filename}]")
         # txt =
-        self.dss.text(f"Save Circuit dir=C:/cartella")     # scrittura della cartella degli elementi
+        # self.dss.text(f"Save Circuit dir=C:/cartella")     # scrittura della cartella degli elementi
         self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")     # scrittura della cartella degli elementi
         # print(mainpath + "/_temp/cartella")
         self.dss.solution.solve()

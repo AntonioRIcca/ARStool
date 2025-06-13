@@ -695,7 +695,7 @@ border-radius: 10px;
                 </font>
                </property>
                <property name="toolTip">
-                <string>Calcolo cell'adeguatezza</string>
+                <string>Calcolo dell'adeguatezza</string>
                </property>
                <property name="styleSheet">
                 <string notr="true"/>

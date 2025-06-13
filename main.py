@@ -362,21 +362,30 @@ class Main:
             name = filename.split('/')
             self.savepath = filename.removesuffix(name[len(name)-1])
             # self.gridname = name[len(name)-1].split('.')[0]
-            v0 = yaml.safe_load(open(filename))
+            try:
+                v0 = yaml.safe_load(open(filename))
 
-            for par in v0['_grid_']:
-                grid[par] = v0['_grid_'][par]
-            del v0['_grid_']
+                for par in v0['_grid_']:
+                    grid[par] = v0['_grid_'][par]
+                del v0['_grid_']
 
-            for p in grid0:
-                if p not in list(grid.keys()):
-                    grid[p] = copy.deepcopy(grid0[p])
+                for p in grid0:
+                    if p not in list(grid.keys()):
+                        grid[p] = copy.deepcopy(grid0[p])
 
-            for elem in v0:
-                v[elem] = v0[elem]
-            self.elementsTableWgtCreate()
-            # self.func_enabled()
-            self.func_check()
+                for elem in v0:
+                    v[elem] = v0[elem]
+                self.elementsTableWgtCreate()
+                # self.func_enabled()
+                self.func_check()
+            except:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Warning)
+                msg.setText('Modello di rete non valido o non compatibile')
+                msg.setWindowTitle('Attenzione!')
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec_()
+                pass
 
         # for el in v:
         #     dictInitialize.lf_initialize(el)
@@ -1445,12 +1454,23 @@ class Main:
     def anomRun(self):
         # print('run LCA')
         from Functionalities.Anomalies import launch_create_anomalies as lca
-        anome_elem = lca.lauch_create_anomalies()
-        grid['studies']['anom'] = True
-        # print(list(anome_elem.keys()))
-        print('Anom Run Done')
 
-        self.anomRes()
+        print(grid['studies']['lf'], grid['lf']['points'])
+
+        if grid['studies']['lf'] and grid['lf']['points'] and grid['lf']['points'] > 1:
+                anome_elem = lca.lauch_create_anomalies()
+                grid['studies']['anom'] = True
+                # print(list(anome_elem.keys()))
+                print('Anom Run Done')
+
+                self.anomRes()
+        else:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText('È necessario esegiuire un LoadFlow \nsu un profilo di carico/generazione')
+            msg.setWindowTitle('Attenzione!')
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec_()
 
     def anomRes(self):
         self.homeClear()
@@ -1679,63 +1699,71 @@ class Main:
 
     def relRun(self):
         print('rel cliccato')
-        if grid['rel']['prof_T']['name']:
-            from Functionalities.Adequacy.AffidabilitàV3 import Affidabilità
+        if grid['studies']['lf'] and grid['studies']['anom']:
+            if grid['rel']['prof_T']['name']:
+                from Functionalities.Adequacy.AffidabilitàV3 import Affidabilità
 
-            t = self.relPar.ui.missionTimeDsb.value()
-            # T0 = self.relPar.ui.T0Dsb.value()
-            # Ta = [20, 24, 26, 21, 18, 15, 25, 28, 31]
+                t = self.relPar.ui.missionTimeDsb.value()
+                # T0 = self.relPar.ui.T0Dsb.value()
+                # Ta = [20, 24, 26, 21, 18, 15, 25, 28, 31]
 
-            d0 = datetime.datetime(year=grid['lf']['start'][0], month=grid['lf']['start'][1],
-                                   day=grid['lf']['start'][2], hour=grid['lf']['start'][3],
-                                   minute=grid['lf']['start'][4])
-            d1 = datetime.datetime(year=grid['lf']['end'][0], month=grid['lf']['end'][1],
-                                   day=grid['lf']['end'][2], hour=grid['lf']['end'][3],
-                                   minute=grid['lf']['end'][4])
+                d0 = datetime.datetime(year=grid['lf']['start'][0], month=grid['lf']['start'][1],
+                                       day=grid['lf']['start'][2], hour=grid['lf']['start'][3],
+                                       minute=grid['lf']['start'][4])
+                d1 = datetime.datetime(year=grid['lf']['end'][0], month=grid['lf']['end'][1],
+                                       day=grid['lf']['end'][2], hour=grid['lf']['end'][3],
+                                       minute=grid['lf']['end'][4])
 
-            # # # TODO: Da eliminare:
-            # d0 = datetime.datetime(year=2025, month=1, day=1, hour=0, minute=0)
-            # d1 = d0 + datetime.timedelta(hours=self.relPar.ui.T0Dsb.value() - 1)
-            # for el in v:
-            #     print(el)
-            #     if v[el]['category'] not in mc['Line'] + mc['Transformer']:
-            #         v[el]['lf']['i'] = [v[el]['lf']['i'][0]] * int(self.relPar.ui.T0Dsb.value())
-            #     else:
-            #         v[el]['lf']['i'][0] = [v[el]['lf']['i'][0][0]] * int(self.relPar.ui.T0Dsb.value())
-            #         v[el]['lf']['i'][1] = [v[el]['lf']['i'][1][0]] * int(self.relPar.ui.T0Dsb.value())
+                # # # TODO: Da eliminare:
+                # d0 = datetime.datetime(year=2025, month=1, day=1, hour=0, minute=0)
+                # d1 = d0 + datetime.timedelta(hours=self.relPar.ui.T0Dsb.value() - 1)
+                # for el in v:
+                #     print(el)
+                #     if v[el]['category'] not in mc['Line'] + mc['Transformer']:
+                #         v[el]['lf']['i'] = [v[el]['lf']['i'][0]] * int(self.relPar.ui.T0Dsb.value())
+                #     else:
+                #         v[el]['lf']['i'][0] = [v[el]['lf']['i'][0][0]] * int(self.relPar.ui.T0Dsb.value())
+                #         v[el]['lf']['i'][1] = [v[el]['lf']['i'][1][0]] * int(self.relPar.ui.T0Dsb.value())
 
-            d = d0
-            Ta = []
-            i = 0
-            months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic']
-            while d <= d1:
-                year, month, day, hour, minute = d.year, d.month, d.day, d.hour, d.minute
-                try:
-                    Ta.append(grid['rel']['prof_T']['profile'][months[month - 1]]['prof'][day]['prof'][hour])
-                except: pass
-                d += datetime.timedelta(minutes=grid['profile']['step'])
+                d = d0
+                Ta = []
+                i = 0
+                months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic']
+                while d <= d1:
+                    year, month, day, hour, minute = d.year, d.month, d.day, d.hour, d.minute
+                    try:
+                        Ta.append(grid['rel']['prof_T']['profile'][months[month - 1]]['prof'][day]['prof'][hour])
+                    except: pass
+                    d += datetime.timedelta(minutes=grid['profile']['step'])
 
-            reliability = Affidabilità()
+                reliability = Affidabilità()
 
-            for el in v.keys():
-                # if element != '_grid_':
-                reliability.Norris_Landzberg(el, t + v[el]['rel']['par']['t_preg'], 298.15, Ta)
+                for el in v.keys():
+                    # if element != '_grid_':
+                    reliability.Norris_Landzberg(el, t + v[el]['rel']['par']['t_preg'], 298.15, Ta)
 
-            gruppi = reliability.raggruppa()
-            reliability.RBD(t, gruppi)
+                gruppi = reliability.raggruppa()
+                reliability.RBD(t, gruppi)
 
-            grid['studies']['rel'] = True
+                grid['studies']['rel'] = True
 
-            self.relRes()
-            # self.adeqRun()
+                self.relRes()
+                # self.adeqRun()
+            else:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Warning)
+                msg.setText('È necessario creare o caricare un profilo di temperatura')
+                msg.setWindowTitle('Attenzione!')
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec_()
+
         else:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
-            msg.setText('È necessario creare o caricare un profilo di temperatura')
+            msg.setText('È necessario eseguire il calcolo delle anomalie')
             msg.setWindowTitle('Attenzione!')
             msg.setStandardButtons(QMessageBox.Ok)
             msg.exec_()
-        pass
 
     def relRes(self):
         # if self.homeHBL.count() > 1:
@@ -1893,30 +1921,38 @@ class Main:
     def adeqRun(self):
         from Functionalities.Adequacy.Adeguatezza_V3 import Adeguatezza
 
-        adequacy = Adeguatezza()
+        if grid['studies']['lf'] and grid['studies']['anom'] and grid['studies']['rel']:
+            adequacy = Adeguatezza()
 
-        (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
-         external_grid, bilancio_potenza) = adequacy.generation_adequacy()
+            (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
+             external_grid, bilancio_potenza) = adequacy.generation_adequacy()
 
-        adequacy_result = (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
-                           external_grid, bilancio_potenza)
+            adequacy_result = (generazione_totale_distribuita, domanda_totale, DNS_somma, LOLP, EDNS, LOLE, DNS, generazione_interna_totale,
+                               external_grid, bilancio_potenza)
 
-        adequacy.generation_adequacy_plot(adequacy_result)
+            adequacy.generation_adequacy_plot(adequacy_result)
 
-        adequacy.state_sampling_plot(generazione_totale_distribuita, domanda_totale)
+            adequacy.state_sampling_plot(generazione_totale_distribuita, domanda_totale)
 
-        # self.x_gen_est = adequacy.x_gen_distr
-        # self.av_lole_funr_rel = adequacy.avLoleFunrRel
-        # self.av_lole_anom = adequacy.avLoleAnom
-        # self.av_eens_furn_rel = adequacy.avEensFurnrel
-        # self.av_eens_anom = adequacy.avEensAnom
+            # self.x_gen_est = adequacy.x_gen_distr
+            # self.av_lole_funr_rel = adequacy.avLoleFunrRel
+            # self.av_lole_anom = adequacy.avLoleAnom
+            # self.av_eens_furn_rel = adequacy.avEensFurnrel
+            # self.av_eens_anom = adequacy.avEensAnom
 
-        self.adeq_graps = adequacy.graphs
+            self.adeq_graps = adequacy.graphs
 
-        grid['studies']['adeq'] = True
+            grid['studies']['adeq'] = True
 
-        self.adeqRes()
-        pass
+            self.adeqRes()
+        else:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText('È necessario eseguire il calcolo delle anomalie\ned il calcolo della affidabilità')
+            msg.setWindowTitle('Attenzione!')
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec_()
+
 
     def adeqRes(self):
         # if self.homeHBL.count() > 1:
@@ -2391,7 +2427,14 @@ class Main:
         # lnk = mainpath + '/_functionalities\GridManagement/final_version_security.exe'
         # os.system(lnk)
         os.chdir(mainpath + '/_functionalities/GridManagement/')
-        os.system('final_version_security.exe')
+
+        import subprocess
+
+        subprocess.Popen(['notepad.exe', 'OPFguide.txt'])
+        # os.system('OPFguide.txt')
+
+        subprocess.Popen('UNIPA.exe')
+        # os.system('UNIPA.exe')
         os.chdir(mainpath)
 
         self.startWgtCreate()

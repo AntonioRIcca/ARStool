@@ -1,0 +1,28 @@
+===== Optimal Power Flow (OPF) Tool - User Guide =====
+
+    This tool runs an Optimal Power Flow (OPF) analysis with different network settings.
+
+    📌 **Steps Conducted in the OPF Tool:**
+    
+    1️⃣ **Import Data**: Required data for networks and elements are loaded from a YML file.
+    2️⃣ **Select Network**: User chooses a number (0-2) to indicate the network:
+       - 0️⃣ = Underground network
+       - 1️⃣ = EV parking lot
+       - 2️⃣ = Residential area
+    3️⃣ **Select Month**: User selects a month for the analysis.
+    4️⃣ **Select Day**: User selects a day for the analysis.
+    5️⃣ **Renewable Energy Prediction**: 
+       - The tool predicts renewable power generation for the selected network.
+       - It considers different external conditions: mean, high temperature, low solar, high wind, and low wind.
+    6️⃣ **Run OPF for 96 Time Steps**:
+       - Each time step represents a 15-minute interval (24 hours in total).
+       - The output includes:
+         ✅ Power imported from the grid
+         ✅ Discharging power & charging power
+         ✅ Battery SoC (State of Charge)
+         ✅ Charging/discharging state (binary)
+    7️⃣ **Islanding Operation Analysis**:
+       - The tool evaluates the **resilience** of the selected network in islanded mode.
+       - It calculates **reliability indices** to assess performance.
+
+    🔹 Developed for power system optimization and resilience assessment.

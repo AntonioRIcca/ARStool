@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt1
 import random as rand
 import numpy as np
 
-from variables import v, grid
+from variables import v, grid, mainpath
 
 
 class Adeguatezza:
@@ -124,7 +124,7 @@ class Adeguatezza:
     def State_Sampling(self, generazione_totale_distribuita, domanda_totale):
         durata_timestep = 1     # durata timestep in ore
         timehorizon = len(generazione_totale_distribuita) # orizzonte temporale in ore
-        numerotimestep = timehorizon/durata_timestep
+        numerotimestep = int(timehorizon/durata_timestep)
         SAIDI = 2.5     # ORE DI INTERRUZIONE MEDIE ANNUE PREVISTE DA ENEL NEL 2025
         LOLE = np.zeros(self.statesampling)
         LOLE_medio = np.zeros(self.statesampling)
@@ -157,7 +157,7 @@ class Adeguatezza:
                 for carico in self.domanda :
                     u = rand.uniform(0, 1)
                     ttr = (-1/SAIDI) * math.log(u) # tempo di ripristino in ore
-                    fraz, int = modf(ttr / durata_timestep)
+                    fraz, intero = modf(ttr / durata_timestep)
                     if v[self.PV[0]]['lf']['p'][timestep] > 0 : # siamo in ore diurne
                         load_rel = v[carico]['rel']['results']['load_rel']
                     else:
@@ -165,7 +165,10 @@ class Adeguatezza:
                         load_rel = v[carico]['rel']['results']['load_rel1']
                     if u > load_rel: # il carico non è alimentato
                         #calcolo le ore di mancata fornitura al carico
-                        if timestep+round(int) < numerotimestep:
+
+                        # TODO Da ripristinare
+                        # try:
+                        if timestep+round(intero) < numerotimestep:
                             LOLE_carico = LOLE_carico + ttr
                         else:
                             LOLE_carico = LOLE_carico + numerotimestep-timestep
@@ -173,19 +176,29 @@ class Adeguatezza:
                         if ttr <= durata_timestep:
                             EENS_carico = EENS_carico + v[carico]['lf']['p'][timestep]*ttr
                         else:
-                            if timestep + round(int)< numerotimestep:
-                                for t in range(0,round(int)):
+                            if timestep + round(intero)< numerotimestep:
+                                for t in range(0,round(intero)):
                                     EENS_carico = EENS_carico + v[carico]['lf']['p'][timestep+t] * durata_timestep
-                                EENS_carico = EENS_carico + v[carico]['lf']['p'][timestep + round(int)] * fraz
+                                EENS_carico = EENS_carico + v[carico]['lf']['p'][timestep + round(intero)] * fraz
                             else:
                                 for t in range(0, numerotimestep - 1):
-                                    EENS_carico = EENS_carico + v[carico]['lf']['p'][timestep + t] * durata_timestep
+                                    print('numerotimestep', numerotimestep)
+                                    t_obs = min(timestep + t, numerotimestep - 1)
+                                    # EENS_carico = EENS_carico + v[carico]['lf']['p'][timestep + t] * durata_timestep
+                                    EENS_carico = EENS_carico + v[carico]['lf']['p'][t_obs] * durata_timestep
+                        # except:
+                        #     print('Carico', carico)
+                        #     print("v[carico]['lf']['p']", v[carico]['lf']['p'])
+                        #     print("len(v[carico]['lf']['p'])", len(v[carico]['lf']['p']))
+                        #     print('timestep', timestep)
+                        #     print('t', t)
 
                 ##Valuto LOLE ed ENS considerando sia l'affidabilità della fornitura che le anomalie presenti
                 LOLE_carico_anomalies = LOLE_carico
                 EENS_carico_anomalies = EENS_carico
 
                 for generatore in self.generazione_distribuita_con_BESS:
+                    # print(generatore)
                     a_dict = v[generatore]['anom']['res']['a_dict']
                     a_vct = v[generatore]['anom']['res']['a_vct']
                     xi = v[generatore]['anom']['res']['xi']
@@ -273,7 +286,7 @@ class Adeguatezza:
 
         strFile = "generation_adequacy.png"
 
-        savepath = 'C:/Users/anton/PycharmProjects/ARStool/_temp/Functionalities/Adequacy/__images__/'
+        savepath = mainpath + '/_temp/Functionalities/Adequacy/__images__/'
 
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
@@ -431,7 +444,7 @@ class Adeguatezza:
 
         strFile = "LOLE&EENS.png"
 
-        savepath = 'C:/Users/anton/PycharmProjects/ARStool/_temp/Functionalities/Adequacy/__images__/'
+        savepath = mainpath + '/_temp/Functionalities/Adequacy/__images__/'
 
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)

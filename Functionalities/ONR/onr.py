@@ -38,7 +38,7 @@ import time
 # import win32com.client
 import yaml
 
-from variables import v
+from variables import v, mainpath
 
 import dictInitialize
 
@@ -49,7 +49,7 @@ class ONR:
         self.dss = OpenDSS()
         # self.indexes = dict()
         # self.indexes_post = dict()
-        self.filedir = 'C:/Users/anton/PycharmProjects/ARStool/_temp/Functionalities/ONR/__images__/'
+        self.filedir = mainpath + '_temp/Functionalities/ONR/__images__/'
         grid['onr'] = copy.deepcopy(grid0['onr'])
         # self.log_pre_grafos = ''
         # self.log_pre_solver = ''

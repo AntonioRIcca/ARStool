@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_uiGCRhAn.ui'
+## Form generated from reading UI file 'main_uiaFdANW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -1274,7 +1274,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.reliability_Btn.setText(QCoreApplication.translate("MainWindow", u"Affidabilit\u00e0", None))
 #if QT_CONFIG(tooltip)
-        self.adequacy_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"Calcolo cell'adeguatezza", None))
+        self.adequacy_Btn.setToolTip(QCoreApplication.translate("MainWindow", u"Calcolo dell'adeguatezza", None))
 #endif // QT_CONFIG(tooltip)
         self.adequacy_Btn.setText(QCoreApplication.translate("MainWindow", u"Adeguatezza", None))
 #if QT_CONFIG(tooltip)
