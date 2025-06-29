@@ -91,7 +91,6 @@ class OpenDSS:
 
             # lettura dei parametri dalle righe di dss
             par = self.readline(el)     # TODO: vedi commento in self.readline
-            # print(par)
 
             for p in new_par_dict[cat]['par'].keys() - ['others', 'linecode']:  # todo: forse da modificare in base al TODO precedente
 
@@ -99,7 +98,9 @@ class OpenDSS:
                     v[el]['par'][p] = par[new_par_dict[cat]['par'][p]['label']]
                 except:
                     # print('cat:', cat, '\tp:', p)
-                    v[el]['par'][p] = new_par_dict[cat]['par'][p]['default']
+                    if p in new_par_dict[cat]['par']:
+                        print(el,cat, p)
+                        v[el]['par'][p] = new_par_dict[cat]['par'][p]['default']
 
             # definisco la connessione degli elementi comye array
             if mcat == 'Line':
@@ -224,7 +225,7 @@ class OpenDSS:
         if 'out-of-service' in v[el]['par'].keys():
             serv = 'enabled=' + str(not bool(v[el]['par']['out-of-service']))
 
-        # Verifica sel le connessioni sono memorizzzate come array o come due voci singole
+        # Verifica sel le connessioni sono memorizzate come array o come due voci singole
         if len(new_par_dict[cat]['top']['conn']['label']) == len(v[el]['top']['conn']):
             for i in range(len(new_par_dict[cat]['top']['conn']['label'])):
                 buses = buses + new_par_dict[cat]['top']['conn']['label'][i] + '=' + v[el]['top']['conn'][i] + ' '
@@ -448,7 +449,8 @@ class OpenDSS:
                 self.dss.text(r)
 
         # self.solve()
-        self.dss.text(f"Save Circuit dir=C:/cartella")
+        # self.dss.text(f"Save Circuit dir=C:/cartella")
+        self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")
         # self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")
 
 
@@ -1161,8 +1163,8 @@ class OpenDSS:
             if v[el]['category'] in mc['Load']:
                 self.dss.circuit.set_active_element('load.' + el)
 
-        self.dss.text(f"Save Circuit dir=c:/cartella")     # scrittura della cartella degli elementi
-        # self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")     # scrittura della cartella degli elementi
+        # self.dss.text(f"Save Circuit dir=c:/cartella")     # scrittura della cartella degli elementi
+        self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")     # scrittura della cartella degli elementi
 
         # self.results_store_all()
 
@@ -1192,8 +1194,8 @@ class OpenDSS:
             for p in new_par_dict[cat]['top'].keys():
                 params = params + new_par_dict[cat]['top'][p]['label']
             # -----------------------------------------------------------------------------
-            # file = open(mainpath + '/_temp/cartella/' + mcat + '.dss', 'r')
-            file = open('C:/cartella/' + mcat + '.dss', 'r')
+            file = open(mainpath + '/_temp/cartella/' + mcat + '.dss', 'r')
+            # file = open('C:/cartella/' + mcat + '.dss', 'r')
             # file = open(mainpath + '/cartella/' + mcat + '.dss', 'r')
 
             # -- ricerca dei parametri dell'elemento selezionato -----------------------------------------------------

@@ -94,6 +94,8 @@ class PDF(FPDF):
         super(PDF, self).__init__()
 
         # elements = copy.deepcopy(v.elements)
+        if 'onr' in sel:
+            tlf=0
 
         self.page_name = ''
 
@@ -398,6 +400,7 @@ class PDF(FPDF):
 
         for elem in v.keys():
             if v[elem]['category'] in mc['Load']:
+                print(elem, v[elem]['lf']['p'][t])
                 p_loads += v[elem]['lf']['p'][t]
                 q_loads += v[elem]['lf']['q'][t]
 

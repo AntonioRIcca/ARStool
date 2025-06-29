@@ -47,7 +47,6 @@ class NewItem(QtWidgets.QDialog):
         while self.ui.nameLBL.text() in v:
         # if self.ui.nameLBL.text() in v:
             self.ui.nameLBL.setText(self.ui.nameLBL.text() + ' (1)')
-            # print('nome già esistente')
     def rename(self, event):
         self.ui.nameLBL.setVisible(False)
         self.ui.nameLE.setVisible(True)
@@ -105,9 +104,11 @@ class NewItem(QtWidgets.QDialog):
             self.ui.__getattribute__(par + 'ParDsb').setValue(el_format[self.cat][par]['default'])
 
             line += 1
+
+        self.ui.parWgt.setVisible(line > 0)
         # -------------------------------------------------------------------------------------------------------------
 
-        self.ui.parWgt.setVisible(True)
+        # self.ui.parWgt.setVisible(True)
         self.ui.nodeWgt.setVisible(self.cat not in ['AC-Node', 'DC-Node'])
         for elem in ['node2CB', 'node2Lbl', 'vnode2Lbl', 'vnode2Dsb']:
             self.ui.__getattribute__(elem).setVisible(self.cat not in prof_elem)
@@ -196,7 +197,7 @@ class NewItem(QtWidgets.QDialog):
                         v[n]['par']['Vn'][0] == max(list(v_ac.keys()))):
                     n2.remove(n)
 
-        elif cat == 'AC-Line':
+        elif cat in ['AC-Line', 'Switch']:
             n1 = copy.deepcopy(n_ac)
             n2 = copy.deepcopy(n_ac)
 
@@ -237,9 +238,9 @@ class NewItem(QtWidgets.QDialog):
             n1 = copy.deepcopy(n_ac)
             n2 = copy.deepcopy(n_dc)
 
-        elif cat in ['AC-Load', 'AC-Wind']:
+        elif cat in ['AC-Load', 'AC-Wind', 'AC-PV', 'AC-BESS', ]:
             n1 = copy.deepcopy(n_ac)
-        elif cat in ['DC-Load', 'DC-Wind']:
+        elif cat in ['DC-Load', 'DC-Wind', 'DC-PV', 'DC-BESS', ]:
             n1 = copy.deepcopy(n_dc)
 
         try:
@@ -247,15 +248,11 @@ class NewItem(QtWidgets.QDialog):
         except AttributeError:
             pass
 
-        # print(n1)
-        # print(n2)
-
         return n1, n2
 
     def prof_selected(self):
         self.ui.pictureProfWgt.setVisible(self.ui.profScaleProfRB.isChecked())
         self.ui.scaleProfDsb.setEnabled(not self.ui.profScaleProfRB.isChecked())
-        # print('Profilo')
 
     def prof_open(self):
         if '_temp' not in list(v.keys()):
@@ -263,10 +260,6 @@ class NewItem(QtWidgets.QDialog):
 
         prof_popup = ElementsProfile('_temp')
 
-        if prof_popup.exec_():
-            # print('popup')
-            pass
-        # print(v['_temp']['par']['profile']['curve'])
         if v['_temp']['par']['profile']['name']:
             self.profilePlotWgtCreate()
 
@@ -280,11 +273,6 @@ class NewItem(QtWidgets.QDialog):
         self.canvas1 = FigureCanvas(plt.Figure(figsize=(1.7, 1.4)))
         self.ax = self.canvas1.figure.subplots()
 
-        # a = range(0, 24)
-        # b = a/4
-        # print('operazione')
-        # print([a/4 for a in range(0, 96)])
-        # print(v[self.elem]['par']['profile']['curve'])
         self.ax.plot([a/4 for a in range(0, 96)], v['_temp']['par']['profile']['curve'])  # TODO: da correggere: inserire i dati reali
 
         self.ax.set_title('Profilo')
@@ -355,7 +343,6 @@ class NewItem(QtWidgets.QDialog):
         for n in v[self.el]['top']['conn']:
             v[n]['top']['conn'].append(self.el)
 
-        print(v[self.el])
         self.created = True
         self.close()
 

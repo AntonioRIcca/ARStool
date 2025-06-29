@@ -809,24 +809,26 @@ new_par_dict = {
                 'unit': 'kV',
                 'default': 0,
             },
-            'Rs': {
-                'label': '%Rs',
-                'unit': '%',
-                'default': 0
-            },
+            # 'Rs': {
+            #     'label': '%Rs',
+            #     'unit': '%',
+            #     'default': 0
+            # },
             'XHL': {
                 'label': 'XHL',
                 'unit': '',
                 'default': 1E-9
             },
-            'imag': {
-                'label': '%imag',
-                'unit': '%',
-                'default': 0,
-            },
+            # 'imag': {
+            #     'label': '%imag',
+            #     'unit': '%',
+            #     'default': 0,
+            # },
             'others': {
                 'windings': '2',
                 'conns': '[delta, wye, ]',
+                '%imag': '0',
+                '%Rs': '0',
             },
         },
     },
@@ -1366,18 +1368,18 @@ el_format = {
         'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
         'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
     },
-    'Turbine': {
-        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
-        # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
-        'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
-        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
-    },
-    'Diesel-Motor': {
-        'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
-        # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
-        'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
-        'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
-    },
+    # 'Turbine': {
+    #     'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
+    #     # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
+    #     'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+    #     'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+    # },
+    # 'Diesel-Motor': {
+    #     'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
+    #     # 'Q': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kVAr'},
+    #     'cosPhi': {'min': -1, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+    #     'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},
+    # },
     'DC-Wind': {
         'P': {'min': 0, 'max': 99999.999, 'decimal': 3, 'unit': 'kW', 'default': 100},
         'eff': {'min': 0, 'max': 1, 'decimal': 4, 'unit': '', 'default': 1},

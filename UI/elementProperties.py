@@ -205,7 +205,7 @@ class ElementProperties(QMainWindow):
             self.ui.lfParGL.addItem(spacer, line, 0)
             line += 1
 
-        # -- Preparazione delle caselle dei paramerti -----------------------------------------------------------------
+        # -- Preparazione delle caselle dei parametri -----------------------------------------------------------------
         for par in el_format[self.cat]:
             self.__setattr__(par + 'Lbl', QLabel(par))
             self.__setattr__(par + 'Dsb', QDoubleSpinBox(None))
@@ -241,6 +241,9 @@ class ElementProperties(QMainWindow):
 
                 line += 1
                 pass
+
+        print(self.cat)
+        self.ui.lfParWgt.setEnabled(not (self.cat == 'ExternalGrid' or self.elem=='sourcebus'))
         # -------------------------------------------------------------------------------------------------------------
 
         # -- creazione della parte dei profili, se previsto ----------------------------------------------------------
@@ -779,11 +782,12 @@ class ElementProperties(QMainWindow):
                     if v[bb]['category'] in mc['Transformer']:
                         for i in range(len(v[bb]['top']['conn'])):
                             if v[bb]['top']['conn'][i] == elem:
-                                v[bb]['par']['Vn' + str(i)] = self.VnDsb.value()
+                                v[bb]['par']['Vn'][i] = self.VnDsb.value()
+                                # v[bb]['par']['Vn' + str(i)] = self.VnDsb.value()
                                 # v[bb]['par']['Vn' + str(i)] = self.Vn_DSB.value()
                         pass
                     else:
-                        v[el]['par']['Vn'] = self.VnDsb.value()
+                        v[el]['par']['Vn'][0] = self.VnDsb.value()
                         # v[el]['par']['Vn'] = self.Vn_DSB.value()
                         pass
 
@@ -1029,10 +1033,12 @@ class ElementProperties(QMainWindow):
         for par in el_format[self.cat]:
             v[self.elem]['par'][par] = self.__getattribute__(par + 'Dsb').value()
 
-        if self.cat in mc['Load'] + mc['Generator'] + mc['Node']:
+        if self.cat in mc['Load'] + mc['Generator']:
             v[self.elem]['par']['Vn'] = [self.v0Dsb.value()]
         elif self.cat in mc['Transformer']:
             v[self.elem]['par']['Vn'] = [self.v0Dsb.value(), self.v1Dsb.value()]
+        elif self.cat in mc['Node']:
+            v[self.elem]['par']['Vn'] = [self.VnDsb.value()]
 
         # Salvataggio del profilo, dove previsto
         if self.cat in prof_elem:

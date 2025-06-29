@@ -2861,7 +2861,7 @@ class ONR:
         for el in v:
             dictInitialize.lf_initialize(el)
 
-        self.dss.full_parse_to_dss()
+        self.dss.full_parse_to_dss(time=0)
         self.dss.solve()
         self.dss.results_store_all()
 
@@ -3088,7 +3088,7 @@ class ONR:
         for el in v:
             dictInitialize.lf_initialize(el)
 
-        self.dss.full_parse_to_dss()
+        self.dss.full_parse_to_dss(time=0)
         self.dss.solve()
         self.dss.results_store_all()
         #

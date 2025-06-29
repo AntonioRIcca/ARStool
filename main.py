@@ -332,16 +332,16 @@ class Main:
             grid['benchmark'] = '_benchmark' in filename.split('/')
             # self.dss = opendss.OpenDSS()
 
-            # TODO: Da ripristinare
-            try:
-                print(filename)
-                self.dss.open(filename)
-                print('opened')
-                self.elementsTableWgtCreate()
-                # self.func_enabled()
-                self.func_check()
-            except:
-                QtWidgets.QMessageBox.warning(QtWidgets.QMessageBox(), 'Attenzione', 'Modello DSS non compatibile')
+            # # TODO: Da ripristinare
+            # try:
+            print(filename)
+            self.dss.open(filename)
+            print('opened')
+            self.elementsTableWgtCreate()
+            # self.func_enabled()
+            self.func_check()
+            # except:
+            #     QtWidgets.QMessageBox.warning(QtWidgets.QMessageBox(), 'Attenzione', 'Modello DSS non compatibile')
 
             # TODO: da eliminare
             # self.dss.open(filename)

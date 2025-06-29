@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'newGridDlgmZVEwb.ui'
+## Form generated from reading UI file 'newGridDlgUNZeyF.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -99,7 +99,7 @@ class Ui_newGridDlg(object):
     # setupUi
 
     def retranslateUi(self, newGridDlg):
-        newGridDlg.setWindowTitle(QCoreApplication.translate("newGridDlg", u"Dialog", None))
+        newGridDlg.setWindowTitle(QCoreApplication.translate("newGridDlg", u"Nuova Rete", None))
         self.newGridLbl.setText(QCoreApplication.translate("newGridDlg", u"Crea Nouva Rete", None))
         self.nameLbl.setText(QCoreApplication.translate("newGridDlg", u"Nome rete:", None))
         self.sourceVLbl.setText(QCoreApplication.translate("newGridDlg", u"V rete esterna", None))
