@@ -54,6 +54,7 @@ Data = namedtuple('Data', ['name', 'value', 'primary_color', 'secondary_color'])
 # noinspection PyBroadException,PyArgumentList,PyUnusedLocal
 class Main:
     def __init__(self):
+        # print('mia cartella', os.path.expanduser('~' + os.getlogin()))
         # variabili globali
         self.mainwindow = None
         self.ui = None
@@ -88,11 +89,16 @@ class Main:
         self.myform = None
         self.elemementTableWGT = None
 
+        self.temp_folder()      # Creazione della cartella temporanea
+
         self.dss = opendss.OpenDSS()
 
         self.app = QApplication()
         self.interface_open()       # TODO: da elimianre da questa posizione: va dopo la scelta della rete
 
+    def temp_folder(self):
+        if not os.path.isdir(tempfolder):
+            os.makedirs(tempfolder)
 
     def interface_open(self):
         os.chdir(mainpath)
@@ -334,9 +340,7 @@ class Main:
 
             # # TODO: Da ripristinare
             # try:
-            print(filename)
             self.dss.open(filename)
-            print('opened')
             self.elementsTableWgtCreate()
             # self.func_enabled()
             self.func_check()
@@ -872,7 +876,7 @@ class Main:
 
                     print('Elaboration time:', nts.total_seconds())
                 else:
-                    print('single')
+                    # print('single')
                     self.dss.full_parse_to_dss(time=lf_popup.i_start)
                     self.dss.solve()
                     self.dss.results_store_all()
@@ -885,7 +889,7 @@ class Main:
         else:
             for el in v:
                 dictInitialize.lf_initialize(el)
-            print('no-profile')
+            # print('no-profile')
             grid['current'] = None
             self.dss.full_parse_to_dss(time=None)
             self.dss.solve()
@@ -1002,7 +1006,7 @@ class Main:
 
         if self.elem:
             if v[self.elem]['category'] in (mc['Load'] + mc['Generator']) and v[self.elem]['par']['profile']['name']:
-                print('forse profili')
+                # print('forse profili')
                 self.elemPropWgt.scale_DSB.setValue(v[self.elem]['par']['profile']['curve'][i])
                 self.elemPropWgt.PeffDSB.setValue(v[self.elem]['par']['profile']['curve'][i] * v[self.elem]['par']['P'])
 
@@ -1199,7 +1203,7 @@ class Main:
         self.ui.home_VL.addWidget(self.home_WGT)
 
     def elemProfList(self):
-        print('lista')
+        # print('lista')
         # try:
         #     self.home2_WGT.deleteLater()
         # except RuntimeError:
@@ -1371,7 +1375,7 @@ class Main:
         if grid['benchmark']:
             filepath = mainpath + '/_benchmark/grid_models/' + grid['name'] + '_ProfCat.yml'
             if os.path.exists(filepath):
-                print(grid['name'])
+                # print(grid['name'])
                 pl = yaml.safe_load(open(filepath))
                 for el in pl:
                     # self.__getattribute__(el + 'CB').setCurrentText('Agricolo')
@@ -1389,8 +1393,8 @@ class Main:
                 pass
             prof = popup1.confirmed
 
-        print(grid['profile']['start'])
-        print(grid['profile']['end'])
+        # print(grid['profile']['start'])
+        # print(grid['profile']['end'])
 
         if prof:
             import defProfImport as dpi
@@ -1455,7 +1459,7 @@ class Main:
         # print('run LCA')
         from Functionalities.Anomalies import launch_create_anomalies as lca
 
-        print(grid['studies']['lf'], grid['lf']['points'])
+        # print(grid['studies']['lf'], grid['lf']['points'])
 
         if grid['studies']['lf'] and grid['lf']['points'] and grid['lf']['points'] > 1:
                 anome_elem = lca.lauch_create_anomalies()

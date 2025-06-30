@@ -16,6 +16,8 @@ from dictInitialize import *
 import copy
 from functools import partial
 
+from UI.gridProfPar_Dlg import GridProfParDlg
+
 
 class NewItem(QtWidgets.QDialog):
     def __init__(self):
@@ -45,7 +47,7 @@ class NewItem(QtWidgets.QDialog):
 
     def name_check(self):
         while self.ui.nameLBL.text() in v:
-        # if self.ui.nameLBL.text() in v:
+            # if self.ui.nameLBL.text() in v:
             self.ui.nameLBL.setText(self.ui.nameLBL.text() + ' (1)')
     def rename(self, event):
         self.ui.nameLBL.setVisible(False)
@@ -77,6 +79,7 @@ class NewItem(QtWidgets.QDialog):
     def type_selected(self):
         self.cat = self.ui.typeCB.currentText()
 
+        v['_temp'] = {'par': {}, 'category': self.cat}
         for item in range(self.ui.parGL.count()):
             try:
                 self.ui.parGL.itemAt(item).widget().deleteLater()
@@ -99,8 +102,8 @@ class NewItem(QtWidgets.QDialog):
             self.dsb_format(self.ui.__getattribute__(par + 'ParDsb'), minimum=el_format[self.cat][par]['min'],
                             maximum=el_format[self.cat][par]['max'], decimals=el_format[self.cat][par]['decimal'])
             self.ui.__getattribute__(par + 'ParLbl').setAlignment(QtCore.Qt.AlignRight |
-                                                               QtCore.Qt.AlignTrailing |
-                                                               QtCore.Qt.AlignVCenter)
+                                                                  QtCore.Qt.AlignTrailing |
+                                                                  QtCore.Qt.AlignVCenter)
             self.ui.__getattribute__(par + 'ParDsb').setValue(el_format[self.cat][par]['default'])
 
             line += 1
@@ -114,9 +117,15 @@ class NewItem(QtWidgets.QDialog):
             self.ui.__getattribute__(elem).setVisible(self.cat not in prof_elem)
         self.ui.servWgt.setVisible(True)
         self.ui.scaleProfWgt.setVisible(self.cat in prof_elem)
+        if not(self.cat in prof_elem and 'profile' in v['_temp']['par'] and
+               v['_temp']['par']['profile']['name'] is not None):
+            self.ui.pictureProfWgt.setVisible(False)
+            self.profilePlotWgtDelete()
+            self.ui.constScaleProfRB.setChecked(True)
 
-        self.bb_changed(j=1)
-        self.bb_changed(j=2)
+        if self.cat not in mc['Node']:
+            self.bb_changed(j=1)
+            self.bb_changed(j=2)
 
     def bb_changed(self, sel=0, j=0):
         nodes = [None, None]
@@ -253,6 +262,7 @@ class NewItem(QtWidgets.QDialog):
     def prof_selected(self):
         self.ui.pictureProfWgt.setVisible(self.ui.profScaleProfRB.isChecked())
         self.ui.scaleProfDsb.setEnabled(not self.ui.profScaleProfRB.isChecked())
+        self.profile_switch()
 
     def prof_open(self):
         if '_temp' not in list(v.keys()):
@@ -260,8 +270,76 @@ class NewItem(QtWidgets.QDialog):
 
         prof_popup = ElementsProfile('_temp')
 
+        if prof_popup.exec_():
+            pass
+
         if v['_temp']['par']['profile']['name']:
             self.profilePlotWgtCreate()
+
+    def profile_switch(self):
+        default, cat = False, None
+        gp = copy.deepcopy(grid['profile'])
+
+        v['_temp'] = {'par': {'profile': {'curve': 1, 'name': None, }}, 'category': self.cat}
+
+        if not grid['profile']['exist'] and self.ui.profScaleProfRB.isChecked():
+            prof, default, cat = True, True, None
+            popup1 = GridProfParDlg()
+
+            while prof and default and cat is None:
+                if popup1.exec_():
+                    pass
+                default = popup1.default
+                prof = popup1.confirmed
+
+                if default and grid['profile']['exist']:
+                    from UI.elemProfCat_Dlg import ElemProfCatDlg
+                    dlg = ElemProfCatDlg()
+                    if self.cat in mc['Load']:
+                        for pcat in bench['profiles']['load']:
+                            dlg.ui.profCatCB.addItem(bench['profiles']['load'][pcat])
+                    elif self.cat in ['AC-PV', 'DC-PV']:
+                        dlg.ui.profCatCB.addItem('Fotovoltaico')
+                    else:
+                        dlg.ui.profCatCB.addItem('Cogeneratore')
+                    dlg.exec_()
+                    if dlg.ok:
+                        cat = dlg.ui.profCatCB.currentText()
+                    else:
+                        default, cat = True, None
+                else:
+                    self.ui.constScaleProfRB.setChecked(True)
+
+        if self.ui.profScaleProfRB.isChecked() and grid['profile']['exist']:
+            # gp = copy.deepcopy(grid['profile'])
+
+            if not v['_temp']['par']['profile']['name']:
+                popup = ElementsProfile('_temp', default, cat)
+                if popup.exec_():
+                    pass
+
+                if popup.refresh:
+                    # self.elemPropWgt.profilePlotWgtCreate()
+                    # self.elemPropWgt.ui.lfVL.insertWidget(3, self.elemPropWgt.profileWidget)
+                    # self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
+                    self.profilePlotWgtCreate()
+                else:
+                    grid['profile'] = gp
+                    self.ui.constScaleProfRB.setChecked(True)
+
+            # else:
+            #     print('non dovrebbe arrivarci')
+            #     self.elemPropWgt.profilePlotWgtCreate()
+            #     # self.ui.lfVL.addWidget(self.profileWidget)
+            #     self.elemPropWgt.ui.lfVL.insertWidget(3, self.elemPropWgt.profileWidget)
+            #     self.elemPropWgt.profileBtn.clicked.connect(self.profile_open)
+        else:
+            try:
+                self.elemPropWgt.profileWidget.deleteLater()
+            except AttributeError:
+                pass
+        # self.elemPropWgt.profileCheck()
+        # self.elemPropWgt.scale_RB.setChecked(v[self.elem]['par']['profile']['name'] is None)
 
     def profilePlotWgtCreate(self):
         font = {
@@ -273,7 +351,7 @@ class NewItem(QtWidgets.QDialog):
         self.canvas1 = FigureCanvas(plt.Figure(figsize=(1.7, 1.4)))
         self.ax = self.canvas1.figure.subplots()
 
-        self.ax.plot([a/4 for a in range(0, 96)], v['_temp']['par']['profile']['curve'])  # TODO: da correggere: inserire i dati reali
+        self.ax.plot([a for a in range(0, grid['profile']['points'])], v['_temp']['par']['profile']['curve'])  # TODO: da correggere: inserire i dati reali
 
         self.ax.set_title('Profilo')
         self.ax.set_ylim([0, 1.05])
@@ -303,9 +381,18 @@ class NewItem(QtWidgets.QDialog):
         # self.pb_format(self.profileBtn, min_h=20)
         #
         # self.profWgtVBL.addWidget(self.profileBtn)
-        self.ui.pictureProfVL.itemAt(0).widget().deleteLater()
+        try:
+            self.ui.pictureProfVL.itemAt(0).widget().deleteLater()
+        except:
+            pass
         self.ui.pictureProfVL.insertWidget(0, self.profileLbl)
         # self.ui.pictureProfVL.add
+
+    def profilePlotWgtDelete(self):
+        try:
+            self.profileLbl.deleteLater()
+        except:
+            pass
 
     def save(self):
         self.el = self.ui.nameLBL.text()
@@ -346,8 +433,21 @@ class NewItem(QtWidgets.QDialog):
         self.created = True
         self.close()
 
-    # def close(self):
+    # def cancel(self):
+    #     # self.closing_check()
     #     self.close()
+    #
+    def keyPressEvent(self, event):
+        if event.key() == QtCore.Qt.Key.Key_Escape:
+            self.close()
+
+    def closeEvent(self, a0):
+        del v['_temp']
+        # try:
+        #     print('cancellato')
+        # except:
+        #     pass
+        # print('chiuso')
 
     # formattazione dei DoubleSPinBox
     def dsb_format(self, item, minimum=0, maximum=9999.99, decimals=2, step=0.1):

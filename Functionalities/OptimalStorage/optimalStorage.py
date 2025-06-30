@@ -23,7 +23,7 @@ class OptStorWGT(QMainWindow):
         self.ui.resultsWgt.setVisible(False)
 
         self.inp_var = list(s['2019']['Consuntivo'].keys())
-        print(self.inp_var)
+        # print(self.inp_var)
 
 
         # # Popolazione della tendina "Anno"
@@ -135,7 +135,7 @@ class OptStorWGT(QMainWindow):
 
         for p in ['otherGen', 'otherCap', 'co2Emis', 'totEnCons', 'enProd']:
             self.ui.__getattribute__(p + 'ScenDsb').setValue(self.__getattribute__(p + 'Scen'))
-            print(p + 'ScenDsb = ' + p + 'Scen')
+            # print(p + 'ScenDsb = ' + p + 'Scen')
         # ----------------------------------------------------------------------------------------
 
         # -- Calcolo delle variabili delle percentuali dei dati di scenario ----------------------
@@ -371,7 +371,7 @@ class OptStorWGT(QMainWindow):
                 try:
                     opt_stor['par']['Scenario'][i][p]['perc'] = self.__getattribute__(p + 'PercScen')
                 except:
-                    print(p + 'PercScen')
+                    # print(p + 'PercScen')
                     pass
 
         for p in opt_stor['res']['Fabbisogno'][0]:
@@ -387,7 +387,8 @@ class OptStorWGT(QMainWindow):
                         opt_stor['res']['Rinnovabili'][i][p]['perc_act'] = self.__getattribute__(p + 'PercScen')
                         opt_stor['res']['Rinnovabili'][i][p]['perc_prosp'] = self.__getattribute__(p + 'Perc')
                     except:
-                        print(p + 'PercScen')
+                        # print(p + 'PercScen')
+                        pass
                 else:
                     opt_stor['res']['Rinnovabili'][i][p]['val_act'] = self.__getattribute__(p + 'ResScen')
                     opt_stor['res']['Rinnovabili'][i][p]['val_prosp'] = self.__getattribute__(p)
@@ -406,7 +407,7 @@ class OptStorWGT(QMainWindow):
         opt_stor['res']['Emissioni']['co2EmisRed']['val_prosp'] = self.__getattribute__('co2EmisRed')
 
         filename = mainpath + '/_util/OptStor.yml'
-        print(filename)
+        # print(filename)
 
         with open(filename, 'w') as file:
             yaml.dump(opt_stor, file)
@@ -511,13 +512,13 @@ for y in s:
     for scen in s[y]:
         s[y][scen]['totEnCons'] = s[y][scen]['totEnConsMtep'] / 0.0863    # TODO: Questo fattore non sembra essere fisso
         s[y][scen]['enProd'] = s[y][scen]['enDuty'] - s[y][scen]['enImport']
-        print(y, scen)
+        # print(y, scen)
 
 
 # Lettura del dizionario della curva di riferimento dello storage
 storage = [[], []]
 
-print(mainpath)
+# print(mainpath)
 
 with open(mainpath + '/_temp/Functionalities/OptimalStorage/StorageTerna.csv', mode='r') as csv_file:
     for line in csv_file:

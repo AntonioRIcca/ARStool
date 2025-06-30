@@ -101,9 +101,9 @@ class GridProfParDlg(QtWidgets.QDialog):
         d0 = self.ui.startDte.dateTime().toPython()
         d1 = self.ui.endDte.dateTime().toPython()
 
-        print(d0, d1)
+        # print(d0, d1)
         dtime = d1 - d0
-        print(dtime.total_seconds() / 3600)
+        # print(dtime.total_seconds() / 3600)
 
         gap = (d1 - d0).total_seconds() / 60
 

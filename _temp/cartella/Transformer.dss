@@ -1,1 +1,1 @@
-New "Transformer.tx_mt_bt" buses=[mt_node_1, lv_bus, ] windings=2 conns=[delta, wye, ] %imag=0 %Rs=[0, 0.2, ] kVs=[20, 0.4, ] kVAs=[400, 400, ] XHL=4 enabled=true
+New "Transformer.tx_mt_bt" buses=[mt_node_1, lv_bus, ] windings=2 conns=[delta, wye, ] %imag=0 %Rs=[0, 0.2, ] kVAs=[400, 400, ] kVs=[20, 0.4, ] XHL=4 enabled=true

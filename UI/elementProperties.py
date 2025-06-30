@@ -242,7 +242,7 @@ class ElementProperties(QMainWindow):
                 line += 1
                 pass
 
-        print(self.cat)
+        # print(self.cat)
         self.ui.lfParWgt.setEnabled(not (self.cat == 'ExternalGrid' or self.elem=='sourcebus'))
         # -------------------------------------------------------------------------------------------------------------
 
@@ -994,7 +994,7 @@ class ElementProperties(QMainWindow):
 
     def test(self):
         self.anomWgt1.type_changed()
-        print('cliccato')
+        # print('cliccato')
 
         # an_dict = {'mainWgt': QWidget(), 'mainGL': QGridLayout(),
         #            'catCB': QComboBox(), 'catLbl': QLabel('Cat.:'),

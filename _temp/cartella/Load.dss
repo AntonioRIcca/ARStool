@@ -1,3 +1,3 @@
-New "Load.load_a" bus1=bt_node_b phases=3 NumCust=1 pf=1 kW=100 kV=0.4 enabled=true
-New "Load.load_b" bus1=bt_node_c phases=3 NumCust=1 pf=1 kW=15 kV=0.23 enabled=true
-New "Load.load_c" bus1=lv_bus phases=3 NumCust=1 pf=1 kW=80 kV=0.4 enabled=true
+New "Load.load_a" bus1=bt_node_b phases=3 pf=1 NumCust=1 kW=100 kV=0.4 enabled=true
+New "Load.load_b" bus1=bt_node_c phases=3 pf=1 NumCust=1 kW=15 kV=0.23 enabled=true
+New "Load.load_c" bus1=lv_bus phases=3 pf=1 NumCust=1 kW=80 kV=0.4 enabled=true

@@ -34,7 +34,7 @@ class OpenDSS:
         self.dss.text(f"compile [{filename}]")
         # txt =
         # self.dss.text(f"Save Circuit dir=C:/cartella")     # scrittura della cartella degli elementi
-        self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")     # scrittura della cartella degli elementi
+        self.dss.text(f"Save Circuit dir=" + tempfolder + "/cartella")     # scrittura della cartella degli elementi
         # print(mainpath + "/_temp/cartella")
         self.dss.solution.solve()
 
@@ -99,7 +99,7 @@ class OpenDSS:
                 except:
                     # print('cat:', cat, '\tp:', p)
                     if p in new_par_dict[cat]['par']:
-                        print(el,cat, p)
+                        # print(el,cat, p)
                         v[el]['par'][p] = new_par_dict[cat]['par'][p]['default']
 
             # definisco la connessione degli elementi comye array
@@ -450,7 +450,7 @@ class OpenDSS:
 
         # self.solve()
         # self.dss.text(f"Save Circuit dir=C:/cartella")
-        self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")
+        self.dss.text(f"Save Circuit dir=" + tempfolder + "/cartella")
         # self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")
 
 
@@ -1164,7 +1164,7 @@ class OpenDSS:
                 self.dss.circuit.set_active_element('load.' + el)
 
         # self.dss.text(f"Save Circuit dir=c:/cartella")     # scrittura della cartella degli elementi
-        self.dss.text(f"Save Circuit dir=" + mainpath + "/_temp/cartella")     # scrittura della cartella degli elementi
+        self.dss.text(f"Save Circuit dir=" + tempfolder + "/cartella")     # scrittura della cartella degli elementi
 
         # self.results_store_all()
 
@@ -1194,7 +1194,7 @@ class OpenDSS:
             for p in new_par_dict[cat]['top'].keys():
                 params = params + new_par_dict[cat]['top'][p]['label']
             # -----------------------------------------------------------------------------
-            file = open(mainpath + '/_temp/cartella/' + mcat + '.dss', 'r')
+            file = open(tempfolder + '/cartella/' + mcat + '.dss', 'r')
             # file = open('C:/cartella/' + mcat + '.dss', 'r')
             # file = open(mainpath + '/cartella/' + mcat + '.dss', 'r')
 

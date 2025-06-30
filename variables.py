@@ -2,6 +2,8 @@ import copy
 import os
 
 mainpath = os.getcwd()
+tempfolder = os.path.expanduser('~' + os.getlogin() + '/ARStool/_temp')
+
 
 
 def v_initialize():
