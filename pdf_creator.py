@@ -868,7 +868,7 @@ class PDF(FPDF):
         self.line(35, 38, 195, 38)
         self.line(35, 48, 195, 48)
 
-        img_path = mainpath + '/_temp/Functionalities/Adequacy/__images__/'
+        img_path = tempfolder + '/Functionalities/Adequacy/__images__/'
         x, y = 0, 32  # devono essere i margini della pagina
 
         self.set_font('Arial', t1_s, t1_c)
@@ -992,7 +992,7 @@ class PDF(FPDF):
         self.set_font('Arial', e_s, e_c)
         self.write(0, 'Grafo Nodale Zonale')
 
-        img_path = mainpath + '/_temp/Functionalities/ONR/__images__/'
+        img_path = tempfolder + '/Functionalities/ONR/__images__/'
         x, y = 0, 32  # devono essere i margini della pagina
         img = img_path + 'grafo_zonale_pre_ONR.png'
 

@@ -38,7 +38,7 @@ import time
 # import win32com.client
 import yaml
 
-from variables import v, mainpath
+from variables import v, mainpath, tempfolder
 
 import dictInitialize
 
@@ -49,7 +49,7 @@ class ONR:
         self.dss = OpenDSS()
         # self.indexes = dict()
         # self.indexes_post = dict()
-        self.filedir = mainpath + '_temp/Functionalities/ONR/__images__/'
+        self.filedir = tempfolder + '/Functionalities/ONR/__images__/'
         grid['onr'] = copy.deepcopy(grid0['onr'])
         # self.log_pre_grafos = ''
         # self.log_pre_solver = ''
@@ -75,7 +75,8 @@ class ONR:
             # dssCircuit.SetActiveElement(m)
             Nomi = m
             Bus_elemento = v[m]['top']['conn']
-            if '_s' in m or '_m' in m:
+            # if '_s' in m or '_m' in m:
+            if v[m]['category'] == 'Switch':
                 switch.append(Nomi)
                 bus_from_to_sw[m] = Bus_elemento
                 bus_switch_from[m] = Bus_elemento[0]

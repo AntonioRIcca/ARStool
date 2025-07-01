@@ -293,13 +293,13 @@ class OpenDSS:
             for el in v:
                 self.results_store_pl(el, i)
 
-        path = str(mainpath) + '/_temp/elements/'
+        path = str(tempfolder) + '/elements/'
         for el in v:
             self.__getattribute__(el + '_pl').write_csv(path + el + '.csv', separator='\t')
         # TODO ---------------------------------
 
     def full_parse_profil_to_dss_csv(self, t0=None, steps=None):
-        path = str(mainpath) + '/_temp/elements/'
+        path = str(tempfolder) + '/elements/'
 
         for el in v:
             # for p in ['i0', 'p0', 'q0', 'v0', 'i1', 'p1', 'q1', 'v1']:
@@ -340,7 +340,7 @@ class OpenDSS:
             for el in v:
                 self.results_store_np(el, i)
 
-        path = str(mainpath) + '/_temp/elements/'
+        path = str(tempfolder) + '/elements/'
         for el in v:
             np.savetxt(path + el + '.csv', self.__getattribute__(el + '_np'), delimiter='\t')
             # self.__getattribute__(el + '_np').savetxt(path + el + '.csv', separator='\t')
@@ -366,7 +366,7 @@ class OpenDSS:
             for el in v:
                 self.results_store_np_chatGPT(el, i)
 
-        path = str(mainpath) + '/_temp/elements/'
+        path = str(tempfolder) + '/elements/'
         for el in v:
             np.savetxt(path + el + '.csv', self.__getattribute__(el + '_np'), delimiter='\t')
             # self.__getattribute__(el + '_np').savetxt(path + el + '.csv', separator='\t')
@@ -392,7 +392,7 @@ class OpenDSS:
             for el in v:
                 self.results_store_np_chatGPT_nodata(el, i)
 
-        path = str(mainpath) + '/_temp/elements/'
+        path = str(tempfolder) + '/elements/'
         for el in v:
             np.savetxt(path + el + '.csv', self.__getattribute__(el + '_np'), delimiter='\t')
             # self.__getattribute__(el + '_np').savetxt(path + el + '.csv', separator='\t')

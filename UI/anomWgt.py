@@ -18,7 +18,7 @@ class AnomWgt(QtWidgets.QWidget):
 
         self.cat = cat
 
-        self.defdict = yaml.safe_load(open(mainpath + '/_temp/Functionalities/Anomalies/default.yml'))[self.cat]
+        self.defdict = yaml.safe_load(open(mainpath + '/_functionalities/Anomalies/default.yml'))[self.cat]
         self.defdict.pop('Hourly_Degradation')
         #
         # self.anom_typol_par = {

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt1
 import random as rand
 import numpy as np
 
-from variables import v, grid, mainpath
+from variables import v, grid, mainpath, tempfolder
 
 
 class Adeguatezza:
@@ -286,7 +286,9 @@ class Adeguatezza:
 
         strFile = "generation_adequacy.png"
 
-        savepath = mainpath + '/_temp/Functionalities/Adequacy/__images__/'
+        savepath = tempfolder + '/Functionalities/Adequacy/__images__/'
+        if not os.path.isdir(savepath):
+            os.makedirs(savepath)
 
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)
@@ -444,7 +446,7 @@ class Adeguatezza:
 
         strFile = "LOLE&EENS.png"
 
-        savepath = mainpath + '/_temp/Functionalities/Adequacy/__images__/'
+        savepath = tempfolder + '/Functionalities/Adequacy/__images__/'
 
         if os.path.isfile(savepath + strFile):
             os.remove(savepath + strFile)   # Opt.: os.system("rm "+strFile)

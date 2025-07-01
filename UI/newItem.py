@@ -29,6 +29,8 @@ class NewItem(QtWidgets.QDialog):
 
         self.name_check()
 
+        v['_temp'] = dict()
+
         self.ui.nameLE.setVisible(False)
         for w in ['node', 'par', 'pictureProf', 'scaleProf', 'serv']:
             self.ui.__getattribute__(w + 'Wgt').setVisible(False)
@@ -421,10 +423,11 @@ class NewItem(QtWidgets.QDialog):
             v[self.el]['par']['Vn'] = [v[self.el]['par']['Vn']]
 
         if '_temp' in list(v.keys()):
-            v[self.el]['par']['profile'] = copy.deepcopy(v['_temp']['par']['profile'])
-            if self.ui.constScaleProfRB.isChecked():
-                v[self.el]['par']['profile']['curve'] = self.ui.scaleProfDsb.value()
-            del v['_temp']
+            if 'profile' in v['_temp']['par']:
+                v[self.el]['par']['profile'] = copy.deepcopy(v['_temp']['par']['profile'])
+                if self.ui.constScaleProfRB.isChecked():
+                    v[self.el]['par']['profile']['curve'] = self.ui.scaleProfDsb.value()
+            # del v['_temp']
 
         # for self.cat in mc['Generator'] + mc['BESS'] + mc['Load']:
         for n in v[self.el]['top']['conn']:

@@ -16,7 +16,7 @@ from functools import partial
 
 from statistics import mean
 
-from variables import grid, mainpath
+from variables import grid, mainpath, tempfolder
 
 
 class YearProfile(QtWidgets.QDialog):
@@ -274,9 +274,9 @@ class YearProfile(QtWidgets.QDialog):
 
         self.ax.xaxis.set_tick_params(rotation=90, labelsize=8)
 
-        self.plot.savefig(mainpath + '/_temp/Tprof.jpg')
+        self.plot.savefig(tempfolder + '/Tprof.jpg')
 
-        self.plotLBL.setPixmap(QtGui.QPixmap(mainpath + '/_temp/Tprof.jpg'))
+        self.plotLBL.setPixmap(QtGui.QPixmap(tempfolder + '/Tprof.jpg'))
 
     #
     def plot_graph(self, y):

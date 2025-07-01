@@ -105,7 +105,7 @@ class Ui_mainDlg(object):
     # setupUi
 
     def retranslateUi(self, mainDlg):
-        mainDlg.setWindowTitle(QCoreApplication.translate("mainDlg", u"Dialog", None))
+        mainDlg.setWindowTitle(QCoreApplication.translate("mainDlg", u"Imposta Profilo", None))
         self.nameLbl.setText(QCoreApplication.translate("mainDlg", u"Nome Profilo", None))
         ___qtablewidgetitem = self.profileTW.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("mainDlg", u"Ora", None));

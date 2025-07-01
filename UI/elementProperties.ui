@@ -478,7 +478,7 @@ QPushButton:pressed {
              <item row="5" column="1">
               <widget class="QDoubleSpinBox" name="Pi_QDsb">
                <property name="toolTip">
-                <string>Fattore di Qialità</string>
+                <string>Fattore di Qualità</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -795,7 +795,7 @@ QPushButton:pressed {
              <item row="2" column="1">
               <widget class="QDoubleSpinBox" name="piSiRelDsb">
                <property name="toolTip">
-                <string>Affidabilità</string>
+                <string>Fattore di Stress Termico</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -914,7 +914,7 @@ QPushButton:pressed {
              <item row="1" column="1">
               <widget class="QDoubleSpinBox" name="rNightRelDsb">
                <property name="toolTip">
-                <string>Affidabilità</string>
+                <string>Affidabilità notturna</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -975,7 +975,7 @@ QPushButton:pressed {
                 <bool>true</bool>
                </property>
                <property name="toolTip">
-                <string>Tasso di guasto</string>
+                <string>Affidabilità diurna</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

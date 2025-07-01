@@ -628,6 +628,7 @@ class Main:
         default, cat = False, None
         gp = copy.deepcopy(grid['profile'])
 
+        print(v[self.elem]['par'])
         if not grid['profile']['exist'] and self.elemPropWgt.profile_RB.isChecked():
             prof, default, cat = True, True, None
             popup1 = GridProfParDlg()
@@ -637,6 +638,7 @@ class Main:
                     pass
                 default = popup1.default
                 prof = popup1.confirmed
+                print(v[self.elem]['par'])
 
                 if default and grid['profile']['exist']:
                     from UI.elemProfCat_Dlg import ElemProfCatDlg
@@ -649,10 +651,13 @@ class Main:
                     else:
                         default, cat = True, None
 
+        print(v[self.elem]['par'])
+
         if self.elemPropWgt.profile_RB.isChecked() and grid['profile']['exist']:
             # gp = copy.deepcopy(grid['profile'])
 
             if not v[self.elem]['par']['profile']['name']:
+                print(self.elem, default, cat)
                 popup = ElementsProfile(self.elem, default, cat)
                 if popup.exec_():
                     pass
@@ -1999,7 +2004,7 @@ class Main:
         self.adeqRefreshPls.setMaximumHeight(40)
         self.adeqRefreshPls.clicked.connect(self.adeqRes)
 
-        folder = mainpath + '/_temp/Functionalities/Adequacy/__images__/'
+        folder = tempfolder + '/Functionalities/Adequacy/__images__/'
 
         h_max = self.home_WGT.height() - 140
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
@@ -2188,7 +2193,7 @@ class Main:
         ax.legend(frameon=False, loc='upper center', bbox_to_anchor=(0.5, -0.2), fancybox=True, shadow=True, ncol=col,
                   fontsize=8, labelcolor='white')
 
-        filename = mainpath + '/_temp/Functionalities/Adequacy/__images__/' + str(fig) + '.png'
+        filename = tempfolder + '/Functionalities/Adequacy/__images__/' + str(fig) + '.png'
         # print(filename)
         figure.savefig(filename, transparent=True)
         pass
@@ -2196,39 +2201,53 @@ class Main:
     def onrStart(self):
         from Functionalities.ONR.onr import ONR
 
-        self.onr = ONR()
+        switch_exixts = False
+        for el in v:
+            if v[el]['category'] == 'Switch':
+                switch_exixts = True
+                break
 
-        self.onr.ONR_PRE()
+        try:
+            self.onr = ONR()
 
-        if self.myform.ui.verticalLayout.count() > 2:
-            for i in range(2, self.myform.ui.verticalLayout.count()):
-                self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
+            self.onr.ONR_PRE()
 
-        variables.visualpar = 'onr'
+            if self.myform.ui.verticalLayout.count() > 2:
+                for i in range(2, self.myform.ui.verticalLayout.count()):
+                    self.myform.ui.verticalLayout.itemAt(i).widget().deleteLater()
 
-        onrRunPls = pb_create(text='   Avvia Optimal Network Reconfiguration', height=50, font=14, border=2, radius=15,
-                              icon='anomaly.png')
+            variables.visualpar = 'onr'
 
-        self.myform.ui.verticalLayout.insertWidget(2, onrRunPls)
-        onrRunPls.clicked.connect(self.onrRun)
+            onrRunPls = pb_create(text='   Avvia Optimal Network Reconfiguration', height=50, font=14, border=2, radius=15,
+                                  icon='anomaly.png')
 
-        self.homeClear()
+            self.myform.ui.verticalLayout.insertWidget(2, onrRunPls)
+            onrRunPls.clicked.connect(self.onrRun)
 
-        from UI.onrResWgt import OnrResWgt
-        self.onr_res = OnrResWgt()
-        self.onr_wgt = self.onr_res.ui.onrMainWgt
+            self.homeClear()
 
-        self.homeHBL.addWidget(self.onr_wgt)
+            from UI.onrResWgt import OnrResWgt
+            self.onr_res = OnrResWgt()
+            self.onr_wgt = self.onr_res.ui.onrMainWgt
 
-        for i in range(3, 5):
-            self.onr_res.ui.onrTabWgt.setTabVisible(i, False)
+            self.homeHBL.addWidget(self.onr_wgt)
 
-        self.onr_res.ui.onrTabWgt.setCurrentIndex(0)
+            for i in range(3, 5):
+                self.onr_res.ui.onrTabWgt.setTabVisible(i, False)
 
-        self.onrBottomSpc = QSpacerItem(10, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.homeHBL.addItem(self.onrBottomSpc)
+            self.onr_res.ui.onrTabWgt.setCurrentIndex(0)
 
-        self.onrPrelOutput()
+            self.onrBottomSpc = QSpacerItem(10, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+            self.homeHBL.addItem(self.onrBottomSpc)
+
+            self.onrPrelOutput()
+        except:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText('Il modello di rete non è idoneo alla funzione ONR.\nFare riferimento al manuale utente.')
+            msg.setWindowTitle('Attenzione!')
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec_()
 
     def onrPrelOutput(self):
         from UI.onrParWgt import ONRParWgt
@@ -2240,7 +2259,7 @@ class Main:
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 60
         h_max = self.home_WGT.height() - 80
         ratio = 1.5
-        folder = mainpath + '/_temp/Functionalities/ONR/__images__/'
+        folder = tempfolder + '/Functionalities/ONR/__images__/'
 
         hav = h_max - 320
         wav = w_max * ratio / (ratio + 1)
@@ -2272,7 +2291,7 @@ class Main:
 
         w_max = self.home_WGT.width() - self.elemementTableWGT.width() - 20
         ratio = 1.5
-        folder = mainpath + '/_temp/Functionalities/ONR/__images__/'
+        folder = tempfolder + '/Functionalities/ONR/__images__/'
 
         wsx = 0.5 * w_max * (ratio / (ratio + 1))
 
@@ -2326,7 +2345,7 @@ class Main:
         h_max = self.home_WGT.height() - 80
 
         ratio = 1.8
-        folder = mainpath + '/_temp/Functionalities/ONR/__images__/'
+        folder = tempfolder + '/Functionalities/ONR/__images__/'
 
         wsx = w_max * (ratio / (ratio + 1))
         wdx = w_max * (1 / (ratio + 1))  # + 20

@@ -89,6 +89,7 @@ class ElementsProfile(QtWidgets.QDialog):
         # self.plotVBL.addWidget(self.canvas)
         self.plotVBL.addWidget(self.plotLbl)
 
+        # print(self.profile)
         self.table_fill()
         self.plot_profile()
         self.ui.nameLbl.setText(self.name)
@@ -100,7 +101,7 @@ class ElementsProfile(QtWidgets.QDialog):
         self.ui.saveBtn.clicked.connect(self.data_save)
         self.ui.cancelBtn.clicked.connect(self.cancel)
         self.ui.nameLbl.mouseDoubleClickEvent = self.rename
-        self.ui.defaultBtn.clicked.connect(self.default_import)
+        self.ui.defaultBtn.clicked.connect(self.default_click)
 
         self.default_check()
 
@@ -174,8 +175,8 @@ class ElementsProfile(QtWidgets.QDialog):
 
         # self.canvas.draw()
         # self.canvas.flush_events()
-        self.plot.savefig(mainpath + '/_temp/Tprof_red.jpg')
-        self.plotLbl.setPixmap(QtGui.QPixmap(mainpath + '/_temp/Tprof_red.jpg'))
+        self.plot.savefig(tempfolder + '/Tprof_red.jpg')
+        self.plotLbl.setPixmap(QtGui.QPixmap(tempfolder + '/Tprof_red.jpg'))
 
 
     def x_par(self):  # TODO: per il momento non serve
@@ -219,9 +220,35 @@ class ElementsProfile(QtWidgets.QDialog):
             q_item.setText(str(value))
             self.plot_profile()
 
+    def default_click(self):
+        cat = v[self.elem]['category']
+
+        print(self.elem, cat)
+
+        from UI.elemProfCat_Dlg import ElemProfCatDlg
+        dlg = ElemProfCatDlg()
+        if cat in mc['Load']:
+            for pcat in bench['profiles']['load']:
+                dlg.ui.profCatCB.addItem(bench['profiles']['load'][pcat])
+        elif cat in ['AC-PV', 'DC-PV']:
+            dlg.ui.profCatCB.addItem('Fotovoltaico')
+        else:
+            dlg.ui.profCatCB.addItem('Cogeneratore')
+        dlg.ui.profCatCB.setCurrentText(self.cat)
+
+        dlg.exec_()
+        if dlg.ok:
+            self.cat = dlg.ui.profCatCB.currentText()
+            print(v[self.elem]['par'])
+            self.default_import()
+
+        else:
+            default, self.cat = True, None
+
     def default_import(self):
         import datetime
         # from UI.elemProfCat_Dlg import ElemProfCatDlg
+        print('default', self.cat)
 
         if not self.cat:
             prof_cat = None
@@ -239,7 +266,7 @@ class ElementsProfile(QtWidgets.QDialog):
         # Seleziona la categoria del profilo
         if v[self.elem]['category'] in mc['Load']:
             mcat = 'Load'
-        elif v[self.elem]['category'] in mc['Load']:
+        else:
             mcat = 'Gen'
 
         file = open(mainpath + '/_benchmark/_data/_profiles/' + mcat + '_year.txt')
@@ -306,9 +333,11 @@ class ElementsProfile(QtWidgets.QDialog):
             if self.ui.profileTW.rowCount() > 0:
                 self.plot_profile()
                 self.table_fill()
-                self.cat = None
+                # self.cat = None
 
+            print(self.elem, self.cat)
             self.name = self.elem + '_' + self.cat
+            self.ui.nameLbl.setText(self.name)
 
 
 

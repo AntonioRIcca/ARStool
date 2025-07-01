@@ -9,7 +9,7 @@ from PySide2 import QtGui, QtWidgets
 
 from PySide2.QtCharts import *
 
-from variables import grid, mainpath, opt_stor
+from variables import grid, mainpath, opt_stor, tempfolder
 
 import yaml
 
@@ -520,7 +520,7 @@ storage = [[], []]
 
 # print(mainpath)
 
-with open(mainpath + '/_temp/Functionalities/OptimalStorage/StorageTerna.csv', mode='r') as csv_file:
+with open(mainpath + '/_functionalities/OptimalStorage/StorageTerna.csv', mode='r') as csv_file:
     for line in csv_file:
         storage[0].append(float(line.rstrip().split(';')[0]))
         storage[1].append(float(line.rstrip().split(';')[1]))

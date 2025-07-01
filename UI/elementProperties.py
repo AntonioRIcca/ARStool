@@ -53,7 +53,7 @@ class ElementProperties(QMainWindow):
 
         # self.ui.relWgt.setMaximumHeight(20)
 
-        all_an_def = yaml.safe_load(open(mainpath + '/_temp/Functionalities/Anomalies/default.yml'))
+        all_an_def = yaml.safe_load(open(mainpath + '/_functionalities/Anomalies/default.yml'))
 
         if self.cat in all_an_def.keys():
             self.anom_def = all_an_def[self.cat]

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'elementPropertiesgGplVs.ui'
+## Form generated from reading UI file 'elementPropertiesMFanRD.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -853,7 +853,7 @@ class Ui_Form(object):
         self.betaLbl.setText(QCoreApplication.translate("Form", u"beta", None))
         self.Pi_ELBL.setText(QCoreApplication.translate("Form", u"Pi_E", None))
 #if QT_CONFIG(tooltip)
-        self.Pi_QDsb.setToolTip(QCoreApplication.translate("Form", u"Fattore di Qialit\u00e0", None))
+        self.Pi_QDsb.setToolTip(QCoreApplication.translate("Form", u"Fattore di Qualit\u00e0", None))
 #endif // QT_CONFIG(tooltip)
         self.Pi_QUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
         self.alfaUnitLbl.setText(QCoreApplication.translate("Form", u"h", None))
@@ -880,7 +880,7 @@ class Ui_Form(object):
         self.mtbfHrsDsb.setToolTip(QCoreApplication.translate("Form", u"Tempo medio tra i guasti", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
-        self.piSiRelDsb.setToolTip(QCoreApplication.translate("Form", u"Affidabilit\u00e0", None))
+        self.piSiRelDsb.setToolTip(QCoreApplication.translate("Form", u"Fattore di Stress Termico", None))
 #endif // QT_CONFIG(tooltip)
         self.pSiRelUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
         self.piSiRelLbl.setText(QCoreApplication.translate("Form", u"Pi_Si", None))
@@ -892,13 +892,13 @@ class Ui_Form(object):
         self.rUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
         self.rNightRelLbl.setText(QCoreApplication.translate("Form", u"R (night)", None))
 #if QT_CONFIG(tooltip)
-        self.rNightRelDsb.setToolTip(QCoreApplication.translate("Form", u"Affidabilit\u00e0", None))
+        self.rNightRelDsb.setToolTip(QCoreApplication.translate("Form", u"Affidabilit\u00e0 notturna", None))
 #endif // QT_CONFIG(tooltip)
         self.rDayRelLbl.setText(QCoreApplication.translate("Form", u"R (day)", None))
         self.rNightRelUnitLbl.setText(QCoreApplication.translate("Form", u"-", None))
         self.rDayRelUniLbl.setText(QCoreApplication.translate("Form", u"-", None))
 #if QT_CONFIG(tooltip)
-        self.rDayRelDsb.setToolTip(QCoreApplication.translate("Form", u"Tasso di guasto", None))
+        self.rDayRelDsb.setToolTip(QCoreApplication.translate("Form", u"Affidabilit\u00e0 diurna", None))
 #endif // QT_CONFIG(tooltip)
         self.anomPls.setText(QCoreApplication.translate("Form", u"Anomalie", None))
         self.agingLbl.setText(QCoreApplication.translate("Form", u"Deterioramento", None))
