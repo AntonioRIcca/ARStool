@@ -336,6 +336,7 @@ class Main:
 
         if filename:
             grid['benchmark'] = '_benchmark' in filename.split('/')
+            grid['name'] = filename.split('/')[-1].replace('.dss', '')
             # self.dss = opendss.OpenDSS()
 
             # # TODO: Da ripristinare

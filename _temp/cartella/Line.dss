@@ -1,4 +1,19 @@
+<<<<<<< HEAD
+New "Line.ug_line" bus1=sourcebus bus2=ug_20kv_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=3
+New "Line.rs_line" bus1=sourcebus bus2=rs_20kv_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=3
+New "Line.ug-rs_line" bus1=ug_20kv_bb bus2=rs_20kv_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=3
+New "Line.ev-charge_line" bus1=rs_04kv_bb bus2=ev-charge_bb linecode=6-12_3x1x150cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.05
+New "Line.serv-rs_line" bus1=ug_serv_bb bus2=rs_04kv_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=1
+New "Line.res-wpg_line" bus1=sourcebus bus2=res-wpg_bb linecode=12-20_3x1x185al Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=2
+New "Line.user_line" bus1=res_bb bus2=user_bb linecode=6-12_3x1x150cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.1
+New "Line.pros_line" bus1=res_bb bus2=pros_bb linecode=6-12_3x1x150cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.05
+New "Line.pros-pros_dc-line" bus1=pros1_dc-bb bus2=pros2_dc-bb linecode=dc-line Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.02
+New "Line.pros-ev_dc-line" bus1=pros1_dc-bb bus2=ev-fast_dc-bb linecode=dc-line Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.02
+New "Line.wpg_line" bus1=wpg_1_bb bus2=wpg_2_bb linecode=3-6_3x1x240cu Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=1
+New "Line.pros-wpg_dc-line" bus1=pros1_dc-bb bus2=wpg_pv_dc-bb linecode=dc-line Seasons=1 Ratings=[400,] normamps=400 emergamps=600 length=0.02
+=======
 New "Line.line_mt" bus1=sourcebus bus2=mt_node_1 Seasons=1 Ratings=[400,] emergamps=600 normamps=400.0 r1=0 x0=1E-009 B1=1E-009 B0=1E-009 length=3.5 r0=0 x1=1E-009 enabled=true
 New "Line.line_bt_1" bus1=lv_bus bus2=bt_node_a Seasons=1 Ratings=[400,] emergamps=600 normamps=400.0 r1=0 x0=1E-009 B1=1E-009 B0=1E-009 length=0.2 r0=0 x1=1E-009 enabled=true
 New "Line.line_bt_2" bus1=bt_node_a bus2=bt_node_b Seasons=1 Ratings=[400,] emergamps=600 normamps=400.0 r1=0 x0=1E-009 B1=1E-009 B0=1E-009 length=0.15 r0=0 x1=1E-009 enabled=true
 New "Line.line_bt_3" bus1=bt_node_a bus2=bt_node_c Seasons=1 Ratings=[400,] emergamps=600 normamps=400.0 r1=0 x0=1E-009 B1=1E-009 B0=1E-009 length=0.3 r0=0 x1=1E-009 enabled=true
+>>>>>>> origin/master

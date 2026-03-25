@@ -1,8 +1,9 @@
 Clear
-New Circuit.dss_grid
+New Circuit.cityarea
 
 
 Redirect Vsource.dss
+Redirect LineCode.dss
 Redirect LoadShape.dss
 Redirect GrowthShape.dss
 Redirect TCC_Curve.dss
