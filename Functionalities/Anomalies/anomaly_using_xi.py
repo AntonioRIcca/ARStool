@@ -2,7 +2,8 @@ import numpy as np
 import Functionalities.Anomalies.utils_using_xi as ut
 import matplotlib.pyplot as plt
 
-N_MAX_ANOMALIES = 10000
+from variables import *
+N_MAX_ANOMALIES = grid['profile']['points']
 
 class Anomaly:
 

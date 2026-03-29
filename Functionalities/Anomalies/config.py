@@ -156,13 +156,16 @@ DEFAULT_PARAMS_BATTERY = {
         # 1.37% ogni anno 
         'rate': 0.0137 / (365 * 24)
     },  
+    
 }
 
 DEFAULT_PARAMS_CONVERTER = {
-    'Hourly_Degradation':
-    {
-        # 1.37% ogni anno 
-        'rate': 0.0137 / (365 * 24)
+    'Failure_Of_Internal_Components': {
+        'type': 'set_values',
+        'lambda_a': 1/(3*365*24),
+        'lambda_duration': -1,
+        'is_fixed': True,
+        'internal_params': {'value': 0}
     },  
 }
 
